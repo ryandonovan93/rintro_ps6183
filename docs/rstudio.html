@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Getting Started with RStudio | Introduction to R</title>
+  <title>Chapter 2 Getting Started with R and RStudio | Introduction to R</title>
   <meta name="description" content="This GitBook is for the R Workshops" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Getting Started with RStudio | Introduction to R" />
+  <meta property="og:title" content="Chapter 2 Getting Started with R and RStudio | Introduction to R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook is for the R Workshops" />
   <meta name="github-repo" content="ryandonovan93/rintro" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Getting Started with RStudio | Introduction to R" />
+  <meta name="twitter:title" content="Chapter 2 Getting Started with R and RStudio | Introduction to R" />
   
   <meta name="twitter:description" content="This GitBook is for the R Workshops" />
   
@@ -172,9 +172,24 @@ div.csl-indent {
 <li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#are-they-any-prerequisites-for-taking-this-course"><i class="fa fa-check"></i><b>1.6</b> Are they any prerequisites for taking this course?</a></li>
 <li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#do-i-need-to-bring-a-laptop-to-the-class"><i class="fa fa-check"></i><b>1.7</b> Do I need to bring a laptop to the class?</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2</b> Getting Started with RStudio</a>
+<li class="chapter" data-level="2" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2</b> Getting Started with R and RStudio</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html#lets-test-this-out"><i class="fa fa-check"></i><b>2.1</b> Let’s test this out</a></li>
+<li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html#what-actually-is-r"><i class="fa fa-check"></i><b>2.1</b> What actually is R?</a></li>
+<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#downloading-r"><i class="fa fa-check"></i><b>2.2</b> Downloading R</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-windows"><i class="fa fa-check"></i><b>2.2.1</b> Downloading R on Windows</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-mac"><i class="fa fa-check"></i><b>2.2.2</b> Downloading R on Mac</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#install-and-open-r-studio"><i class="fa fa-check"></i><b>2.3</b> Install and Open R Studio</a></li>
+<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#creating-an-r-project"><i class="fa fa-check"></i><b>2.4</b> Creating an R Project</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="rstudio.html"><a href="rstudio.html#navigating-rstudio"><i class="fa fa-check"></i><b>2.4.1</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="2.4.2" data-path="rstudio.html"><a href="rstudio.html#checking-our-working-directory"><i class="fa fa-check"></i><b>2.4.2</b> Checking our Working Directory</a></li>
+<li class="chapter" data-level="2.4.3" data-path="rstudio.html"><a href="rstudio.html#setting-up-a-new-working-directory"><i class="fa fa-check"></i><b>2.4.3</b> Setting up a new Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="rstudio.html"><a href="rstudio.html#writing-our-first-r-code"><i class="fa fa-check"></i><b>2.5</b> Writing our first R Code</a></li>
+<li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.6</b> Console vs Source Script</a></li>
+<li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.7</b> Let’s write some statistical code</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>3</b> Prerequisites</a></li>
 <li class="chapter" data-level="4" data-path="getgitbook.html"><a href="getgitbook.html"><i class="fa fa-check"></i><b>4</b> Get your GitBook</a></li>
@@ -221,11 +236,236 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="rstudio" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Getting Started with RStudio<a href="rstudio.html#rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="lets-test-this-out" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Let’s test this out<a href="rstudio.html#lets-test-this-out" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h1><span class="header-section-number">Chapter 2</span> Getting Started with R and RStudio<a href="rstudio.html#rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This workshop introduces the programming language R and the RStudio application. Today, we will download both R and RStudio, set up our RStudio environment, and write and run our first piece of R Code. This will set us up for the rest of the workshops.</p>
+<div id="what-actually-is-r" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> What actually is R?<a href="rstudio.html#what-actually-is-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R is a statistical programming language that enables us to directly ask our computer to carry out tasks. Typically, when we use our computers, we do not speak to it directly; instead we interact with “translators” (i.e., applications like SPSS), via button-click interfaces, to speak to our computer on our behalf. Such interfaces record and translate our instructions to our computers, who then carry out the instructions and return the results to the application, which then translates those results back to us.</p>
+<p>Applications like SPSS are convenient. They usually have a user-friendly button-click based interface and take away the heavy lifting of communicating with our computer. This makes them significantly easier to learn in the short term compared to programming languages.</p>
+<p>However, these apps also limit what we can do. For example, base SPSS is functional when it comes to creating visualizations, but it is difficult make major changes to your graph (e.g., making it interactive). If we want to create such visualizations, we will likely need to look elsewhere for it. Similarly, we might also be financially limited in our ability to use such apps, as proprietary software like SPSS is not cheap (<a href="https://www.ibm.com/products/spss-statistics/pricing">it can cost between $3830 - 25200 for a single licence depending on the version</a>)!</p>
+<p>In contrast, R is a free, open-source statistical programming language that enables us to conduct comprehensive statistical analysis and create highly elegant visualizations. By learning R we can cut out the middle man.</p>
+<p><a href="https://bbc.github.io/rcookbook/#:~:text=At%20the%20BBC%20data%20team,to%20R%20to%20create%20graphics."><img src="img/01-bbc.png" alt="Figure: BBC graphs created in R." /></a></p>
+<p>But why should we learn R and not a different programming language? In contrast to other programming languages (Python, JavaScript, C), R was developed by statisticians. Consequently, R contains an extensive vocabulary to enable us to carry out sophisticated and precise statistical analysis. I have used R and Python to conduct statistical analysis and anytime I wanted to use a less frequently used statistical test, there was significantly more support and information on how to conduct that analysis in R than in Python. For such reasons, R is typically used among statisticians, social scientists, data miners, and bioinformaticians - and will be used in this course<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+</div>
+<div id="downloading-r" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Downloading R<a href="rstudio.html#downloading-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Please follow the following instructions to download R on either Windows or Mac.</p>
+<div id="downloading-r-on-windows" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Downloading R on Windows<a href="rstudio.html#downloading-r-on-windows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Go to the website: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
+<li>Under the heading <em>Download and Install R,</em> click <em>Download R for Windows</em> <img src="img/01-cran.png" width="2804" /></li>
+<li>Click the hyperlink <strong><em>base</em></strong> or <strong><em>install R for the first Time</em></strong><img src="img/01-base.png" /></li>
+<li>Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That’s okay, you can download newer versions). Let the file download. <img src="img/01-download.png" alt="The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that’s okay!" /></li>
+<li>Once the file has been downloaded, open it, and click “Yes” if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like “R-4.3.2.-win”. The numbers will differ depending on the specific version that was downloaded.</li>
+<li>Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.</li>
+</ol>
+</div>
+<div id="downloading-r-on-mac" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Downloading R on Mac<a href="rstudio.html#downloading-r-on-mac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The instructions are largely the same for Windows. Please see this guide for more information <a href="https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac" class="uri">https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac</a></p>
+</div>
+</div>
+<div id="install-and-open-r-studio" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Install and Open R Studio<a href="rstudio.html#install-and-open-r-studio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once R is installed, we will install RStudio.</p>
+<p>RStudio is a front-end program that makes it it much more user-friendly to use R without sacrificing our ability to code in R. R Studio will enable us to write and save R code, generate plots, manage our files, and do other useful things. RStudio relationship to R is similar to the relationship between a basic text editor and Microsoft Word. We could write a paper in a text editor, but it is much quicker and more efficient to use Word.</p>
+<ol style="list-style-type: decimal">
+<li><strong>NB:</strong> Make sure that R is installed <strong><em>before</em></strong> trying to install R Studio.</li>
+<li>Go to the RStudio website: <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a></li>
+<li>The website should automatically detect your operating system. Click the <strong><em>Download RStudio Desktop</em></strong> button. <img src="img/01-rstudiodownload.png" width="690" /></li>
+</ol>
+<p>Once the file is downloaded, open it and allow it to make changes to your device. Then follow the instructions to download the program. I recommend going with all default options here.</p>
+<p>After downloading both R and RStudio, open RStudio on your computer. You do not have to open R as RStudio will work with R (if everything is working correctly).</p>
+<p>When you first open RStudio, you will see three panes or “windows” in R Studio: “Console” (left) “Environment” (top right), and “Files” (bottom right).</p>
+<p><img src="img/rstudio_first.png" /></p>
+</div>
+<div id="creating-an-r-project" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Creating an R Project<a href="rstudio.html#creating-an-r-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The first thing we will do in RStudio is create a <em>R Project</em>. R Projects are environments that will group together input files (e.g., data sets), analyses on those files (e.g., code), and any outputs (e.g., results or plots). Creating an R Project will set up a new directory (folder) on your computer. Any time you open that project, you are telling R to work within this particular directory.</p>
+<p><strong><em>Activity</em></strong></p>
+<p>Let’s create an R Project that we will use during these workshops.</p>
+<ol style="list-style-type: decimal">
+<li><p>Click “File” in the top left hand corner of RStudio-&gt; then click new “New Project”</p></li>
+<li><p>The “New Project Wizard” screen will pop up. Click “New Directory” -&gt; “New Project”</p></li>
+<li><p>In the “Create New Project” screen, there are four options.</p></li>
+</ol>
+<p><strong>Option 1</strong>: The “Directory name” options sets the name of the project and associated folder.</p>
+<ul>
+<li><p>You can set this to whatever you want. <strong><em>Just don’t set it to “R”,</em></strong> as this can create problems down the line.</p></li>
+<li><p>I <strong><em>recommend</em></strong> that you set the same directory name as me - <strong><em>introR_2024</em></strong></p></li>
+</ul>
+<p><strong>Option 2</strong>: The “Create project as sub-directory of” option selects a place to store this project on your computer.</p>
+<ul>
+<li><p>You can save this anywhere else you like (e.g., your Desktop). Just make sure to save somewhere you can find and somewhere that will not change location (e.g., if you save folders to your desktop, but then tend to move them elsewhere once it gets cluttered, then do not save it to your desktop).</p></li>
+<li><p>My recommendation would be to create a folder called “R_Programming” on your desktop. And then save your project in this folder.</p></li>
+<li><p>Regardless of where you save your project, copy the location and paste it somewhere you can check (e.g., into a text file)</p></li>
+</ul>
+<p><strong>Option 3</strong>: The “Use renv with this project” option enables you to create a virtual environment for this project that will be separate to other R projects. Don’t worry for now about what that means, it will be explained later on.</p>
+<ul>
+<li>Tick this option.</li>
+</ul>
+<p><strong>Option 4:</strong> The “Open in new session” just opens a new window on RStudio for this project.</p>
+<ul>
+<li>Tick this option.</li>
+</ul>
+<p>You can see my example below. Once you’re happy with your input for each option, click “Create Project” This will open up the project introR_2024.</p>
+<p><img src="img/01-newproject.png" /></p>
+<div id="navigating-rstudio" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Navigating RStudio<a href="rstudio.html#navigating-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In our new project, introR_2024, we are going to open the “Source” pane, which we will often use for writing code, and viewing datasets.</p>
+<p>There are a variety of ways to open the Source pane.</p>
+<p><strong>Button approach</strong>: Click the “File” tab in the top-left hand corner (not the File pane) -&gt; Click “New File” -&gt; “R Script”</p>
+<p><img src="img/rstudio_create_file.png" /></p>
+<p><strong><em>Button Shortcut</em></strong>: directly underneath the <em>File</em> tab, there is an icon of a white sheet with a green and white addition symbol. You can click that too.</p>
+<p><strong>Keyboard Shortcut:</strong> You can press “Ctrl” + “Shift” and “N” on Windows. Or “Cmd” + “Shift” + “N” on Mac.</p>
+<p>Now you should see your four panes: Source, Console, Environment, and Files.</p>
+<p><img src="img/01-four-panes.png" /></p>
+<div id="the-rstudio-workspace" class="section level4 hasAnchor" number="2.4.1.1">
+<h4><span class="header-section-number">2.4.1.1</span> The RStudio Workspace<a href="rstudio.html#the-rstudio-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now that we have each pane opened, let’s briefly describe what each pane is for.</p>
+<ul>
+<li><p>The <strong><em>Source Pane</em></strong> is where you will write R scripts. R scripts enable you to write, save, and run R code in a structured format. For example, you might have an R script titled “Descriptive” which contains the code you need to compute descriptive statistics on your data set. Similarly, you might have another R script titled “Regression” that contains the code for computing your regression analyses in R.</p></li>
+<li><p>The <strong><em>Console Pane</em></strong> is where you can write R code and where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.</p></li>
+<li><p>The <strong><em>Environment Pane</em></strong> is where you will find information on any data sets and variables that you import or create in R within a bespoke R project. The “History” tab will contain a history of any R code that you run during the project. This pane is really useful for getting a bird-eye’s view of a project (which can be really useful if you are returning to a project after a long period of time or you are looking at someone’s else code).</p></li>
+<li><p>The <strong><em>Files Pane</em></strong> is where you find your R project files (in the Files tab), the output of any plots that you create (Plots tab), the status of any downloaded packages (Packages tab), and information and helpful information about R functions and packages (Help).</p></li>
+</ul>
+<p>Each pane will be used extensively during these workshops.</p>
+</div>
+</div>
+<div id="checking-our-working-directory" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Checking our Working Directory<a href="rstudio.html#checking-our-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Everytime you open up a project or file in RStudio, it is good practice to check the working directory. The working directory is the environment on our computer that R is currently operating in.</p>
+<p>You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory.</p>
+<p>To check the working directory, type the following into the console pane</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rstudio.html#cb1-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro&quot;</code></pre>
+<p>What you get in return is the current working directory R is working in. Your working directory will not be the same as mine, that’s perfectly normal. Just check to make sure that is in the same location you specified when you created your project (<strong>Option 2</strong>).</p>
+</div>
+<div id="setting-up-a-new-working-directory" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Setting up a new Working Directory<a href="rstudio.html#setting-up-a-new-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We are going to slightly change our working directory. In our R Project, we are going to create a folder for week1 of the workshop. Anything that we create in R will then be saved into this week1 folder.</p>
+<ul>
+<li>Click “Session” on your RStudio toolbar -&gt; Set Working Directory -&gt; Choose Directory</li>
+</ul>
+<p><img src="img/01-wd.png" /></p>
+<ul>
+<li><p>By default you should be in your R Project (e.g., Rintro_2024).</p></li>
+<li><p>Within this R Project, create a new folder and call it “week1”</p></li>
+<li><p>Click “week1” and then click Open</p></li>
+</ul>
+<p><img src="img/01-new_wd.png" /></p>
+<p>You should see something like the following in your console</p>
+<pre><code>&gt; setwd(&quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week1&quot;)</code></pre>
+<p>Check whether this is actually the location you want to store your files for this course. If it is, we are good to go. If not, then let me know.</p>
+</div>
+</div>
+<div id="writing-our-first-r-code" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Writing our first R Code<a href="rstudio.html#writing-our-first-r-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s write our first line of R code. In the <strong><em>console</em></strong>, type in the each of the following instructions and press enter. Feel free to change the second line of code to add your own name.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rstudio.html#cb4-1" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Hello World&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="rstudio.html#cb6-1" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;My name is Ryan and I am learning to code in R&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;My name is Ryan and I am learning to code in R&quot;</code></pre>
+<p>Congratulations, you’ve written your first piece of code!</p>
+<p>Let’s describe what is going on here. We used a function called <code>print()</code> to print the words “Hello World” and “My name is Ryan and I am learning to code in R” in the console. Functions are equivalent to verbs in English language - they describe doing things. In this case, R sees the function print - then it looks inside the bracket to see what we want to print, and then it goes ahead and prints it. Pretty straightforward.</p>
+<p>Functions are a very important programming concept, and there is a lot more going on under the hood than I have described so far - so we will be returning to functions repeatedly and filling you in with more information. But in essence functions are verbs that enable us to tell our computer to carry out specific actions on objects.</p>
+</div>
+<div id="console-vs-source-script" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Console vs Source Script<a href="rstudio.html#console-vs-source-script" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You might have noticed that I asked you to write code in the console rather than in the source pane. It’s worth discussing here what the differences are between the console and the script when it comes to writing code.</p>
+<p>The console is like the immediate chat with R. It’s where you can type and execute single lines of code instantly. Imagine it as a friendly conversation where you ask R to do something, and it responds right away. The console The console is fantastic for experimenting and getting instant feedback. It’s your interactive playground, perfect for spontaneous interactions with R.</p>
+<p>The console is also really useful for performing quick calculations, testing functions or pieces of code, and for running code that should run once and only once.</p>
+<p>However, the console is cumbersome to use if we want to write code that is several lines long and/or when we want to structure or save our code. This is where R scripts come in.</p>
+<p>R scripts are text files where we can write R code in a structured manner. Scripts enable us to structure our code (e.g., with headings and instructions), write several pieces of code, and save and rerun code easily. If you think of your console as a draft, then your script is for the code that you want to keep.</p>
+<p>From now on, whenever we write code, we are going to be using R scripts by default. For the times we will write code in the console, I will let you know beforehand.</p>
+</div>
+<div id="lets-write-some-statistical-code" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Let’s write some statistical code<a href="rstudio.html#lets-write-some-statistical-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Okay we have talked a lot about R and RStudio. To finish off this session, let’s write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don’t worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it’s not open, click “File” -&gt; New File -&gt; RScript)</p>
+<p>When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type <code>?sleep</code> into the console. You will find more information on the data sets in the Files pane, under the Help tab.</p>
+<p>First let’s have a look at the sleep data set by writing and running the following code.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="rstudio.html#cb8-1" tabindex="-1"></a><span class="fu">View</span>(sleep) <span class="co">#this will open the dataset in your Source pane</span></span>
+<span id="cb8-2"><a href="rstudio.html#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="rstudio.html#cb8-3" tabindex="-1"></a><span class="co">#To run scripts in R, select the code and click the Run button with the green arrow in the top right corner of the script. </span></span></code></pre></div>
+<p>The <code>View()</code>function takes a data set and opens up a new window in the source pane where we can view that data set.</p>
+<p>Running it on sleep shows us there are 20 observations in the dataset (rows), with three difference variables (columns): extra (hours of extra sleep each participant had), group (which treatment they were taken), and ID (their participant ID).</p>
+<p>Let’s calculate some descriptive statistics. The summary() function takes in an object (e.g., like a data set) and summaries the data. Write the following in your R script and press run.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="rstudio.html#cb9-1" tabindex="-1"></a><span class="fu">summary</span>(sleep) <span class="co">#calculates descriptive statistics for each variable in our dataset</span></span></code></pre></div>
+<pre><code>##      extra        group        ID   
+##  Min.   :-1.600   1:10   1      :2  
+##  1st Qu.:-0.025   2:10   2      :2  
+##  Median : 0.950          3      :2  
+##  Mean   : 1.540          4      :2  
+##  3rd Qu.: 3.400          5      :2  
+##  Max.   : 5.500          6      :2  
+##                          (Other):8</code></pre>
+<p>Running the summary() function on our data set shows us that mean change in hours of sleep were +1.5, and that there was 10 participants within both the control and experimental condition.</p>
+<p>But it’s not perfect. Firstly, we don’t need summary descriptive on the participant ID. Secondly, it only tells us the mean across both groups, whereas we are more interested in the mean score per each group. Let’s fix this by using the <code>aggregate()</code> function, which enables us to split our data into subset and then compute summary statistics per group. Remember to press run after you written your code.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="rstudio.html#cb11-1" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="at">data =</span> sleep, extra <span class="sc">~</span> group, <span class="at">FUN =</span> mean)</span></code></pre></div>
+<pre><code>##   group extra
+## 1     1  0.75
+## 2     2  2.33</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="rstudio.html#cb13-1" tabindex="-1"></a><span class="co">#The code inside the aggregate bracket tells our computer to: </span></span>
+<span id="cb13-2"><a href="rstudio.html#cb13-2" tabindex="-1"></a><span class="co"># data = sleep -&gt; Go to the sleep data set</span></span>
+<span id="cb13-3"><a href="rstudio.html#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="rstudio.html#cb13-4" tabindex="-1"></a><span class="co">#extra ~ group -&gt; Take the variable &quot;extra&quot; and split it into subsets based on the variable &quot;group&quot;</span></span>
+<span id="cb13-5"><a href="rstudio.html#cb13-5" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="rstudio.html#cb13-6" tabindex="-1"></a><span class="co"># FUN = mean -&gt; Apply the mean() function (FUN) on each subset </span></span></code></pre></div>
+<p>That’s more like it. Now we can see that there does seem to a difference between treatment1 and treatment2. Participants slept an extra 2.33 hours on average when taking treatment 2, whereas they only slept .75 hours (e.g., 45 minutes) more on average when taking treatment 1. So treatment 2 does seem more effective.</p>
+<p>Now that we have some descriptive statistics, let’s run a paired-samples t-test to see if those differences are significant.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="rstudio.html#cb14-1" tabindex="-1"></a><span class="fu">t.test</span>(sleep<span class="sc">$</span>extra[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">1</span>],</span>
+<span id="cb14-2"><a href="rstudio.html#cb14-2" tabindex="-1"></a>       </span>
+<span id="cb14-3"><a href="rstudio.html#cb14-3" tabindex="-1"></a>                        sleep<span class="sc">$</span>extra[sleep<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">2</span>],</span>
+<span id="cb14-4"><a href="rstudio.html#cb14-4" tabindex="-1"></a>       </span>
+<span id="cb14-5"><a href="rstudio.html#cb14-5" tabindex="-1"></a>                        <span class="at">paired =</span> <span class="cn">TRUE</span>) <span class="co">#this setting means we will run a paired-samples t-test</span></span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  sleep$extra[sleep$group == 1] and sleep$extra[sleep$group == 2]
+## t = -4.0621, df = 9, p-value = 0.002833
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -2.4598858 -0.7001142
+## sample estimates:
+## mean difference 
+##           -1.58</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="rstudio.html#cb16-1" tabindex="-1"></a><span class="co">#the t.test function enables us to perform a t-test</span></span></code></pre></div>
+<p>Boom! We can see there is a statistically significant difference between the two groups. I know the code within the t-test might look a bit complicated, but we will break it down and explain it as we go on in further weeks.</p>
+<p>Finally let’s visualize our data with the plot() function.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="rstudio.html#cb17-1" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra)</span></code></pre></div>
+<p><img src="gitbook-demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The plot() function is an example of a generic function, which means it’s a function that will try to adapt to our code. In this case, the plot() function looks at the variables we wants to plot, and identifies that the box plot is the most appropriate way to plot it.</p>
+<p>Now this plot is perfectly adequate for a first viewing, but let’s make it a bit more instructive by adding labels to the x and y axis, and by adding a title to it.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="rstudio.html#cb18-1" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra, <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Hours of Sleep&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Effect of Treament on Sleep Duration&quot;</span>)  </span></code></pre></div>
+<p><img src="gitbook-demo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="rstudio.html#cb19-1" tabindex="-1"></a><span class="co">#xlab = creates a label for the x-axis  </span></span>
+<span id="cb19-2"><a href="rstudio.html#cb19-2" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="rstudio.html#cb19-3" tabindex="-1"></a><span class="co">#ylab = creates a title for the y-axis  </span></span>
+<span id="cb19-4"><a href="rstudio.html#cb19-4" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="rstudio.html#cb19-5" tabindex="-1"></a><span class="co">#main = creates a title for the plot  </span></span></code></pre></div>
+<p>Now let’s take this plot and save it to a PDF so that we could share our results with others. The standard way of doing this in R is a bit cumbersome. We have to tell R that we are about to create a plot that we want to make into a PDF. Then we have to generate the plot. Then we have to tell R we are done with creating the PDF. We’ll learn a MUCH simpler way to do this in future weeks, but this will do for now.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="rstudio.html#cb20-1" tabindex="-1"></a><span class="fu">pdf</span>(<span class="at">file =</span> <span class="st">&quot;myplot.pdf&quot;</span>) <span class="co">#Tells R that we will create a pdf file called &quot;my_plot&quot; in our working directory</span></span>
+<span id="cb20-2"><a href="rstudio.html#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="rstudio.html#cb20-3" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra, <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Hours of Sleep&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Effect of Treament on Sleep Duration&quot;</span>)  <span class="co">#this will save the plot to our pdf</span></span>
+<span id="cb20-4"><a href="rstudio.html#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="rstudio.html#cb20-5" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="rstudio.html#cb20-6" tabindex="-1"></a><span class="fu">dev.off</span>() <span class="co">#this tells R that we are done with adding stuff to our PDF</span></span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+<p>Go to the files pane, and open up the pdf “my_plot1.pdf”. It should be in your working directory. Open it up the PDF and have a look at your graph<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+<p>There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it’s given you a tiny glimpse into what R can do.</p>
+<p>Next week, we will go into more detail about programming concepts and how to import data.</p>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>There are always tradeoffs in selecting a language. Many programming concepts are easier to grasp in Python than in R. Similarly, there is a lot of resources available for conducting machine-learning analysis in Python.</p>
+<p>But if you are goal is conduct data cleaning, analysis, visualization, and reporting, then R is a excellent choice. The good thing is that once you achieve a certain level of competency in one programming language, you will find it significantly easier to pick up a following one.<a href="rstudio.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create “sexier” and more APA friendly type of graphs. But for one line of code, it’s not bad!<a href="rstudio.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -287,20 +527,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
