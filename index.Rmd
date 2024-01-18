@@ -84,4 +84,4 @@ None at all. This course is beginners friendly. You also do not need to purchase
 
 If you have a laptop that you work on, I strongly encourage you to bring it. That way we can get R and RStudio installed onto your laptop and you'll be able to run R outside of the classroom.
 
-If you work with a desktop, don't worry. The lab space will have computers that you can sign-in and work on.
+If you work with a desktop, don't worry. The lab space will have computers that you can sign-in and work on and use R. 
