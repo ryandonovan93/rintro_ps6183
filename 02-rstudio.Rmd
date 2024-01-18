@@ -207,7 +207,9 @@ First let's have a look at the sleep data set by writing and running the followi
 
 ```{r}
 
-View(sleep) #this will open the dataset in your Source pane
+print(sleep) 
+
+# Alternatively, you can write View(sleep) in the console. 
 
 #To run scripts in R, select the code and click the Run button with the green arrow in the top right corner of the script. 
 
