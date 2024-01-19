@@ -1,0 +1,68 @@
+# Basic R Programming (Part I)  {#programming1}
+
+Today we are going to learn some basic programming concepts. By the end of the session, you should be able to:
+
+-   Run and troubleshoot commands in the R console.
+
+-   Understand the different data types in R and how to create them.
+
+-   Write comments to your code to better structure it.
+
+-   Create and change variables.
+
+-   Create and use functions.
+
+-   Install R packages.
+
+-   To use the help function in R.
+
+## Using the R Console
+
+In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running "dirty" quick code to test ideas, or code that we would run one.
+
+That distinction is kinda true, but it's not completely true. In reality, when we write a script we are writing ***commands*** for R to ***execute*** in the R console. When we "run" a script, we are feeding that script to the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (R script) what we want to order, and then the waiter hands that order to the chef (R console).
+
+So even though we will primarily not use the R console in this class, it's important to know how to work with it. We do not want the chef spitting in our food.
+
+### Typing Commands in the Console
+
+The R console uses the operator "\>" to indicate that it is ready for a new command. We enter in our code after this operator and press enter to compute it.
+
+We can command the R console to compute calculations.
+
+```{r eval=FALSE}
+
+> 10 + 20
+
+[1] 30
+
+```
+
+```{r eval=FALSE}
+
+> 20 / 10
+
+[1] 2
+
+```
+
+If you are performing calculations in R, it's important to know that it follows the usual arithmetic convention of order of operations (remember [BIMDAS - Bracets, Indices, Multiplication, Division, Addition, and Subtraction?](https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction)).
+
+```{r eval = FALSE}
+
+
+> (20 + 10 / 10) * 4 
+
+[1] 84
+
+> ((20 + 10) / 10) * 4
+
+[1] 12
+
+```
+
+Now you'll have noticed that the output of every line of code we entered starts with a [1] before our actual result. What does this mean?
+
+Think of the square brackets with a number as a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like **`[1]`**, are like labels on each response, telling you which answer corresponds to which question. This is R ***indexing*** its answer.
+
+In each of the above examples, we asked R one question ***per each*** command, which is why the answer is always [1]. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.

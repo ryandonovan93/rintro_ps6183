@@ -3,14 +3,16 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">A GitBook for Teaching</a></li>
+        <li><a href="./">Introduction to R (University of Galway)</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/cjvanlissa/gitbook-demo/edit/master/%s
     download: ["pdf"]
+  fig_caption: true
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
   latex_engine: pdflatex
   citation_package: natbib
   keep_tex: yes
+  fig_caption: yes

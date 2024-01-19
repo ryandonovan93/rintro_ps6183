@@ -12,7 +12,16 @@ However, these apps also limit what we can do. For example, base SPSS is functio
 
 In contrast, R is a free, open-source statistical programming language that enables us to conduct comprehensive statistical analysis and create highly elegant visualizations. By learning R we can cut out the middle man.
 
-[![Figure: BBC graphs created in R.](img/01-bbc.png)](https://bbc.github.io/rcookbook/#:~:text=At%20the%20BBC%20data%20team,to%20R%20to%20create%20graphics.)
+```{r fig.cap = "BBC graphs created in R.", echo = FALSE, warning = FALSE}
+
+library(knitr)
+
+include_graphics("img/01-bbc.png")
+
+
+```
+
+
 
 But why should we learn R and not a different programming language? In contrast to other programming languages (Python, JavaScript, C), R was developed by statisticians. Consequently, R contains an extensive vocabulary to enable us to carry out sophisticated and precise statistical analysis. I have used R and Python to conduct statistical analysis and anytime I wanted to use a less frequently used statistical test, there was significantly more support and information on how to conduct that analysis in R than in Python. For such reasons, R is typically used among statisticians, social scientists, data miners, and bioinformaticians - and will be used in this course[^1].
 
@@ -93,7 +102,15 @@ Let's create an R Project that we will use during these workshops.
 
 You can see my example below. Once you're happy with your input for each option, click "Create Project" This will open up the project introR_2024.
 
-![](img/01-newproject.png)
+
+```{r fig.cap = "New Project Set Up", echo = FALSE, warning = FALSE}
+
+library(knitr)
+
+include_graphics("img/01-newproject.png")
+
+
+```
 
 ### Navigating RStudio
 
@@ -119,7 +136,9 @@ Now that we have each pane opened, let's briefly describe what each pane is for.
 
 -   The ***Source Pane*** is where you will write R scripts. R scripts enable you to write, save, and run R code in a structured format. For example, you might have an R script titled "Descriptive" which contains the code you need to compute descriptive statistics on your data set. Similarly, you might have another R script titled "Regression" that contains the code for computing your regression analyses in R.
 
--   The ***Console Pane*** is where you can write R code and where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.
+-   The ***Console Pane*** is where you can write R code or enter commands into R. The console is also where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.
+
+
 
 -   The ***Environment Pane*** is where you will find information on any data sets and variables that you import or create in R within a bespoke R project. The "History" tab will contain a history of any R code that you run during the project. This pane is really useful for getting a bird-eye's view of a project (which can be really useful if you are returning to a project after a long period of time or you are looking at someone's else code).
 
@@ -267,7 +286,7 @@ Boom! We can see there is a statistically significant difference between the two
 
 Finally let's visualize our data with the plot() function.
 
-```{r}
+```{r fig.cap="Generic Boxplot"}
 
 plot(sleep$group, sleep$extra)
 ```
@@ -276,7 +295,7 @@ The plot() function is an example of a generic function, which means it's a func
 
 Now this plot is perfectly adequate for a first viewing, but let's make it a bit more instructive by adding labels to the x and y axis, and by adding a title to it.
 
-```{r}
+```{r fig.cap="Generic Boxplot with appropriate labelling"}
 
 plot(sleep$group, sleep$extra, xlab = "Treatment", ylab = "Hours of Sleep", main = "Effect of Treament on Sleep Duration")  
 

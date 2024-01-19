@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-01-18" />
+<meta name="date" content="2024-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-
+<link rel="next" href="programming1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A GitBook for Teaching</a></li>
+<li><a href="./">Introduction to R (University of Galway)</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
@@ -169,6 +169,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.6</b> Console vs Source Script</a></li>
 <li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.7</b> Let’s write some statistical code</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="programming1.html"><a href="programming1.html"><i class="fa fa-check"></i><b>3</b> Basic R Programming (Part I)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#using-the-r-console"><i class="fa fa-check"></i><b>3.1</b> Using the R Console</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.1.1</b> Typing Commands in the Console</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -198,7 +205,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Applications like SPSS are convenient. They usually have a user-friendly button-click based interface and take away the heavy lifting of communicating with our computer. This makes them significantly easier to learn in the short term compared to programming languages.</p>
 <p>However, these apps also limit what we can do. For example, base SPSS is functional when it comes to creating visualizations, but it is difficult make major changes to your graph (e.g., making it interactive). If we want to create such visualizations, we will likely need to look elsewhere for it. Similarly, we might also be financially limited in our ability to use such apps, as proprietary software like SPSS is not cheap (<a href="https://www.ibm.com/products/spss-statistics/pricing">it can cost between $3830 - 25200 for a single licence depending on the version</a>)!</p>
 <p>In contrast, R is a free, open-source statistical programming language that enables us to conduct comprehensive statistical analysis and create highly elegant visualizations. By learning R we can cut out the middle man.</p>
-<p><a href="https://bbc.github.io/rcookbook/#:~:text=At%20the%20BBC%20data%20team,to%20R%20to%20create%20graphics."><img src="img/01-bbc.png" alt="Figure: BBC graphs created in R." /></a></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="img/01-bbc.png" alt="BBC graphs created in R."  />
+<p class="caption">
+Figure 2.1: BBC graphs created in R.
+</p>
+</div>
 <p>But why should we learn R and not a different programming language? In contrast to other programming languages (Python, JavaScript, C), R was developed by statisticians. Consequently, R contains an extensive vocabulary to enable us to carry out sophisticated and precise statistical analysis. I have used R and Python to conduct statistical analysis and anytime I wanted to use a less frequently used statistical test, there was significantly more support and information on how to conduct that analysis in R than in Python. For such reasons, R is typically used among statisticians, social scientists, data miners, and bioinformaticians - and will be used in this course<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 </div>
 <div id="downloading-r" class="section level2 hasAnchor" number="2.2">
@@ -264,7 +276,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Tick this option.</li>
 </ul>
 <p>You can see my example below. Once you’re happy with your input for each option, click “Create Project” This will open up the project introR_2024.</p>
-<p><img src="img/01-newproject.png" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="img/01-newproject.png" alt="New Project Set Up"  />
+<p class="caption">
+Figure 2.2: New Project Set Up
+</p>
+</div>
 <div id="navigating-rstudio" class="section level3 hasAnchor" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Navigating RStudio<a href="rstudio.html#navigating-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In our new project, introR_2024, we are going to open the “Source” pane, which we will often use for writing code, and viewing datasets.</p>
@@ -280,7 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now that we have each pane opened, let’s briefly describe what each pane is for.</p>
 <ul>
 <li><p>The <strong><em>Source Pane</em></strong> is where you will write R scripts. R scripts enable you to write, save, and run R code in a structured format. For example, you might have an R script titled “Descriptive” which contains the code you need to compute descriptive statistics on your data set. Similarly, you might have another R script titled “Regression” that contains the code for computing your regression analyses in R.</p></li>
-<li><p>The <strong><em>Console Pane</em></strong> is where you can write R code and where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.</p></li>
+<li><p>The <strong><em>Console Pane</em></strong> is where you can write R code or enter commands into R. The console is also where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.</p></li>
 <li><p>The <strong><em>Environment Pane</em></strong> is where you will find information on any data sets and variables that you import or create in R within a bespoke R project. The “History” tab will contain a history of any R code that you run during the project. This pane is really useful for getting a bird-eye’s view of a project (which can be really useful if you are returning to a project after a long period of time or you are looking at someone’s else code).</p></li>
 <li><p>The <strong><em>Files Pane</em></strong> is where you find your R project files (in the Files tab), the output of any plots that you create (Plots tab), the status of any downloaded packages (Packages tab), and information and helpful information about R functions and packages (Help).</p></li>
 </ul>
@@ -410,11 +427,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Boom! We can see there is a statistically significant difference between the two groups. I know the code within the t-test might look a bit complicated, but we will break it down and explain it as we go on in further weeks.</p>
 <p>Finally let’s visualize our data with the plot() function.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="rstudio.html#cb19-1" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra)</span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="gitbook-demo_files/figure-html/unnamed-chunk-8-1.png" alt="Generic Boxplot" width="672" />
+<p class="caption">
+Figure 2.3: Generic Boxplot
+</p>
+</div>
 <p>The plot() function is an example of a generic function, which means it’s a function that will try to adapt to our code. In this case, the plot() function looks at the variables we wants to plot, and identifies that the box plot is the most appropriate way to plot it.</p>
 <p>Now this plot is perfectly adequate for a first viewing, but let’s make it a bit more instructive by adding labels to the x and y axis, and by adding a title to it.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="rstudio.html#cb20-1" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra, <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Hours of Sleep&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Effect of Treament on Sleep Duration&quot;</span>)  </span></code></pre></div>
-<p><img src="gitbook-demo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="gitbook-demo_files/figure-html/unnamed-chunk-9-1.png" alt="Generic Boxplot with appropriate labelling" width="672" />
+<p class="caption">
+Figure 2.4: Generic Boxplot with appropriate labelling
+</p>
+</div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="rstudio.html#cb21-1" tabindex="-1"></a><span class="co">#xlab = creates a label for the x-axis  </span></span>
 <span id="cb21-2"><a href="rstudio.html#cb21-2" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="rstudio.html#cb21-3" tabindex="-1"></a><span class="co">#ylab = creates a title for the y-axis  </span></span>
@@ -435,14 +462,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
-
-
-
-
-
-
-
-
 <div class="footnotes">
 <hr />
 <ol start="1">
@@ -456,8 +475,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,6 +1,7 @@
 book_filename: "gitbook-demo"
 rmd_files: ["index.Rmd",
-            "02-rstudio.Rmd"]
+            "02-rstudio.Rmd",
+            "03-programming_p1.Rmd"]
 output_dir: "docs"
 language:
   ui:

@@ -127,7 +127,7 @@
 
 \title{Introduction to R}
 \author{Ryan Donovan}
-\date{2024-01-18}
+\date{2024-01-19}
 
 \begin{document}
 \maketitle
@@ -252,7 +252,11 @@ However, these apps also limit what we can do. For example, base SPSS is functio
 
 In contrast, R is a free, open-source statistical programming language that enables us to conduct comprehensive statistical analysis and create highly elegant visualizations. By learning R we can cut out the middle man.
 
-\href{https://bbc.github.io/rcookbook/\#:~:text=At\%20the\%20BBC\%20data\%20team,to\%20R\%20to\%20create\%20graphics.}{\includegraphics{img/01-bbc.png}}
+\begin{figure}
+\centering
+\includegraphics{img/01-bbc.png}
+\caption{\label{fig:unnamed-chunk-1}BBC graphs created in R.}
+\end{figure}
 
 But why should we learn R and not a different programming language? In contrast to other programming languages (Python, JavaScript, C), R was developed by statisticians. Consequently, R contains an extensive vocabulary to enable us to carry out sophisticated and precise statistical analysis. I have used R and Python to conduct statistical analysis and anytime I wanted to use a less frequently used statistical test, there was significantly more support and information on how to conduct that analysis in R than in Python. For such reasons, R is typically used among statisticians, social scientists, data miners, and bioinformaticians - and will be used in this course\footnote{There are always tradeoffs in selecting a language. Many programming concepts are easier to grasp in Python than in R. Similarly, there is a lot of resources available for conducting machine-learning analysis in Python.
 
@@ -371,7 +375,11 @@ Let's create an R Project that we will use during these workshops.
 
 You can see my example below. Once you're happy with your input for each option, click ``Create Project'' This will open up the project introR\_2024.
 
+\begin{figure}
+\centering
 \includegraphics{img/01-newproject.png}
+\caption{\label{fig:unnamed-chunk-2}New Project Set Up}
+\end{figure}
 
 \hypertarget{navigating-rstudio}{%
 \subsection{Navigating RStudio}\label{navigating-rstudio}}
@@ -401,7 +409,7 @@ Now that we have each pane opened, let's briefly describe what each pane is for.
 \item
   The \textbf{\emph{Source Pane}} is where you will write R scripts. R scripts enable you to write, save, and run R code in a structured format. For example, you might have an R script titled ``Descriptive'' which contains the code you need to compute descriptive statistics on your data set. Similarly, you might have another R script titled ``Regression'' that contains the code for computing your regression analyses in R.
 \item
-  The \textbf{\emph{Console Pane}} is where you can write R code and where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.
+  The \textbf{\emph{Console Pane}} is where you can write R code or enter commands into R. The console is also where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.
 \item
   The \textbf{\emph{Environment Pane}} is where you will find information on any data sets and variables that you import or create in R within a bespoke R project. The ``History'' tab will contain a history of any R code that you run during the project. This pane is really useful for getting a bird-eye's view of a project (which can be really useful if you are returning to a project after a long period of time or you are looking at someone's else code).
 \item
@@ -650,7 +658,11 @@ Finally let's visualize our data with the plot() function.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{gitbook-demo_files/figure-latex/unnamed-chunk-6-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{gitbook-demo_files/figure-latex/unnamed-chunk-8-1.pdf}
+\caption{\label{fig:unnamed-chunk-8}Generic Boxplot}
+\end{figure}
 
 The plot() function is an example of a generic function, which means it's a function that will try to adapt to our code. In this case, the plot() function looks at the variables we wants to plot, and identifies that the box plot is the most appropriate way to plot it.
 
@@ -662,7 +674,11 @@ Now this plot is perfectly adequate for a first viewing, but let's make it a bit
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{gitbook-demo_files/figure-latex/unnamed-chunk-7-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{gitbook-demo_files/figure-latex/unnamed-chunk-9-1.pdf}
+\caption{\label{fig:unnamed-chunk-9}Generic Boxplot with appropriate labelling}
+\end{figure}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -697,6 +713,80 @@ Go to the files pane, and open up the pdf ``my\_plot1.pdf''. It should be in you
 There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it's given you a tiny glimpse into what R can do.
 
 Next week, we will go into more detail about programming concepts and how to import data.
+
+\hypertarget{programming1}{%
+\chapter{Basic R Programming (Part I)}\label{programming1}}
+
+Today we are going to learn some basic programming concepts. By the end of the session, you should be able to:
+
+\begin{itemize}
+\item
+  Run and troubleshoot commands in the R console.
+\item
+  Understand the different data types in R and how to create them.
+\item
+  Write comments to your code to better structure it.
+\item
+  Create and change variables.
+\item
+  Create and use functions.
+\item
+  Install R packages.
+\item
+  To use the help function in R.
+\end{itemize}
+
+\hypertarget{using-the-r-console}{%
+\section{Using the R Console}\label{using-the-r-console}}
+
+In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running ``dirty'' quick code to test ideas, or code that we would run one.
+
+That distinction is kinda true, but it's not completely true. In reality, when we write a script we are writing \textbf{\emph{commands}} for R to \textbf{\emph{execute}} in the R console. When we ``run'' a script, we are feeding that script to the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (R script) what we want to order, and then the waiter hands that order to the chef (R console).
+
+So even though we will primarily not use the R console in this class, it's important to know how to work with it. We do not want the chef spitting in our food.
+
+\hypertarget{typing-commands-in-the-console}{%
+\subsection{Typing Commands in the Console}\label{typing-commands-in-the-console}}
+
+The R console uses the operator ``\textgreater{}'' to indicate that it is ready for a new command. We enter in our code after this operator and press enter to compute it.
+
+We can command the R console to compute calculations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \DecValTok{10} \SpecialCharTok{+} \DecValTok{20}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{30}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \DecValTok{20} \SpecialCharTok{/} \DecValTok{10}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+If you are performing calculations in R, it's important to know that it follows the usual arithmetic convention of order of operations (remember \href{https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272\#:~:text=\%E2\%80\%A2\%20BIMDAS\%20\%2D\%20Brackets\%2C\%20Indices\%2C,Multiplication\%2C\%20Division\%2C\%20Addition\%2C\%20Subtraction}{BIMDAS - Bracets, Indices, Multiplication, Division, Addition, and Subtraction?}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}}\NormalTok{ (}\DecValTok{20} \SpecialCharTok{+} \DecValTok{10} \SpecialCharTok{/} \DecValTok{10}\NormalTok{) }\SpecialCharTok{*} \DecValTok{4} 
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{84}
+
+\SpecialCharTok{\textgreater{}}\NormalTok{ ((}\DecValTok{20} \SpecialCharTok{+} \DecValTok{10}\NormalTok{) }\SpecialCharTok{/} \DecValTok{10}\NormalTok{) }\SpecialCharTok{*} \DecValTok{4}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+Now you'll have noticed that the output of every line of code we entered starts with a {[}1{]} before our actual result. What does this mean?
+
+Think of the square brackets with a number as a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like \textbf{\texttt{{[}1{]}}}, are like labels on each response, telling you which answer corresponds to which question. This is R \textbf{\emph{indexing}} its answer.
+
+In each of the above examples, we asked R one question \textbf{\emph{per each}} command, which is why the answer is always {[}1{]}. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.
 
   \bibliography{book.bib,packages.bib}
 
