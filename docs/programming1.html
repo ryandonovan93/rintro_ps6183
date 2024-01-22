@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-01-19" />
+<meta name="date" content="2024-01-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,6 +175,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.1.1</b> Typing Commands in the Console</a></li>
 </ul></li>
+<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#console-syntax"><i class="fa fa-check"></i><b>3.2</b> Console Syntax</a></li>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#data-types03-programming_p1-1"><i class="fa fa-check"></i><b>3.3</b> Data Types</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -231,21 +233,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb26-5"><a href="programming1.html#cb26-5" tabindex="-1"></a><span class="sc">&gt;</span> ((<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span>) <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span></span>
 <span id="cb26-6"><a href="programming1.html#cb26-6" tabindex="-1"></a></span>
 <span id="cb26-7"><a href="programming1.html#cb26-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">12</span></span></code></pre></div>
-<p>Now you’ll have noticed that the output of every line of code we entered starts with a [1] before our actual result. What does this mean?</p>
+<p>Now you’ll have noticed that the output of every line of code we entered starts with a <strong><code>[1]</code></strong> before our actual result. What does this mean?</p>
 <p>Think of the square brackets with a number as a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like <strong><code>[1]</code></strong>, are like labels on each response, telling you which answer corresponds to which question. This is R <strong><em>indexing</em></strong> its answer.</p>
-<p>In each of the above examples, we asked R one question <strong><em>per each</em></strong> command, which is why the answer is always [1]. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.</p>
+<p>In each of the above examples, we asked R one question <strong><em>per each</em></strong> command, which is why the answer is always <strong><code>[1]</code></strong>. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.</p>
+</div>
+</div>
+<div id="console-syntax" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Console Syntax<a href="programming1.html#console-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the most important concepts you need to understand when you are programming, is that you need to type exactly what you want R to do. If you make a mistake (e.g., a typo), R will not try and understand what you actually meant. For example, see what happens if you make the following:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="programming1.html#cb27-1" tabindex="-1"></a><span class="dv">10</span> <span class="ot">=</span> <span class="dv">20</span></span></code></pre></div>
+<pre><code>## Error in 10 = 20: invalid (do_set) left-hand side to assignment</code></pre>
+<p>R sees this as you making the claim that 10 is equal or equivalent to 20, panics, and refuses to run your command. Obviously, any person looking at this code would make the assumption that the <code>=</code> is a typo. Given that <code>+</code> and <code>=</code> are on the same key, we would make the assumption that the person probably meant to type <code>10 + 20</code>. To bring it back to Psychological terms, we can say that programming languages like R do not have a theory of mind. So be sure to be exact when you are typing out your commands. Otherwise, we will end up with <a href="https://www.youtube.com/watch?v=X3zfP14pLxc">a Ron Burgundy situation.</a></p>
+<p>Where this is really important to pay attention to is when you make a mistake or a typo in your code, but the code still makes sense to R. Let’s image you typed in <code>-</code> instead of <code>+</code> by mistake.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="programming1.html#cb29-1" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">20</span></span></code></pre></div>
+<pre><code>## [1] -10</code></pre>
+<p>R will run this code and output the result, because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. In short calculations like this, it will probably be clear and obvious to you what you typed wrong. However, if you run a long-block of connected code, but made a typo like this somewhere, the result you get might be significantly different from the intended result. So if in the future you run some code in R and the result is significantly different from what you expected, it might be this type of error causing it.</p>
+<p>Now there are times when the R console will try and help you. If R thinks that you haven’t finished a command it will print out <code>+</code> to allow you to finish it.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="programming1.html#cb31-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span></span>
+<span id="cb31-2"><a href="programming1.html#cb31-2" tabindex="-1"></a> </span>
+<span id="cb31-3"><a href="programming1.html#cb31-3" tabindex="-1"></a><span class="sc">+</span> )</span>
+<span id="cb31-4"><a href="programming1.html#cb31-4" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="programming1.html#cb31-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
+<p>So when you see “+” in the console, this is R telling you that something is missing. If nothing is missing, then this indicates that your code might not be correctly formatted. Overall, the moral of this section can be summarised as: proofread your code!</p>
+</div>
+<div id="data-types03-programming_p1-1" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Data Types<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a><a href="programming1.html#data-types03-programming_p1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Including the “&gt;” is a pain when formatting this book, so I won’t include “&gt;” in examples of code from this point onwards.<a href="programming1.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
-
-
-
-
-
-
-
-
             </section>
 
           </div>

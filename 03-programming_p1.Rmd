@@ -1,4 +1,4 @@
-# Basic R Programming (Part I)  {#programming1}
+# Basic R Programming (Part I) {#programming1}
 
 Today we are going to learn some basic programming concepts. By the end of the session, you should be able to:
 
@@ -61,8 +61,49 @@ If you are performing calculations in R, it's important to know that it follows 
 
 ```
 
-Now you'll have noticed that the output of every line of code we entered starts with a [1] before our actual result. What does this mean?
+Now you'll have noticed that the output of every line of code we entered starts with a **`[1]`** before our actual result. What does this mean?
 
 Think of the square brackets with a number as a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like **`[1]`**, are like labels on each response, telling you which answer corresponds to which question. This is R ***indexing*** its answer.
 
-In each of the above examples, we asked R one question ***per each*** command, which is why the answer is always [1]. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.
+In each of the above examples, we asked R one question ***per each*** command, which is why the answer is always **`[1]`**. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.
+
+## Console Syntax
+
+One of the most important concepts you need to understand when you are programming, is that you need to type exactly what you want R to do. If you make a mistake (e.g., a typo), R will not try and understand what you actually meant. For example, see what happens if you make the following:
+
+```{r error=TRUE}
+
+10 = 20
+
+```
+
+R sees this as you making the claim that 10 is equal or equivalent to 20, panics, and refuses to run your command. Obviously, any person looking at this code would make the assumption that the `=` is a typo. Given that `+` and `=` are on the same key, we would make the assumption that the person probably meant to type `10 + 20`. To bring it back to Psychological terms, we can say that programming languages like R do not have a theory of mind. So be sure to be exact when you are typing out your commands. Otherwise, we will end up with [a Ron Burgundy situation.](https://www.youtube.com/watch?v=X3zfP14pLxc)
+
+Where this is really important to pay attention to is when you make a mistake or a typo in your code, but the code still makes sense to R. Let's image you typed in `-` instead of `+` by mistake. 
+
+```{r}
+
+10 - 20
+
+```
+R will run this code and output the result, because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. In short calculations like this, it will probably be clear and obvious to you what you typed wrong. However, if you run a long-block of connected code, but made a typo like this somewhere, the result you get might be significantly different from the intended result. So if in the future you run some code in R and the result is significantly different from what you expected, it might be this type of error causing it. 
+
+Now there are times when the R console will try and help you. If R thinks that you haven't finished a command it will print out `+` to allow you to finish it. 
+
+```{r eval = FALSE}
+
+> (20 + 10
+ 
++ )
+
+[1] 30
+
+```
+
+So when you see "+" in the console, this is R telling you that something is missing. If nothing is missing, then this indicates that your code might not be correctly formatted. Overall, the moral of this section can be summarised as: proofread your code!
+
+## Data Types[^03-programming_p1-1]
+
+[^03-programming_p1-1]: Including the ">" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards. 
+
+
