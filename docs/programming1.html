@@ -171,12 +171,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="programming1.html"><a href="programming1.html"><i class="fa fa-check"></i><b>3</b> Basic R Programming (Part I)</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#using-the-r-console"><i class="fa fa-check"></i><b>3.1</b> Using the R Console</a>
+<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#using-the-console"><i class="fa fa-check"></i><b>3.1</b> Using the Console</a>
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.1.1</b> Typing Commands in the Console</a></li>
+<li class="chapter" data-level="3.1.2" data-path="programming1.html"><a href="programming1.html#console-syntax"><i class="fa fa-check"></i><b>3.1.2</b> Console Syntax</a></li>
+<li class="chapter" data-level="3.1.3" data-path="programming1.html"><a href="programming1.html#comments"><i class="fa fa-check"></i><b>3.1.3</b> Comments</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#console-syntax"><i class="fa fa-check"></i><b>3.2</b> Console Syntax</a></li>
-<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#data-types03-programming_p1-1"><i class="fa fa-check"></i><b>3.3</b> Data Types</a></li>
+<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#data-types03-programming_p1-1"><i class="fa fa-check"></i><b>3.2</b> Data Types</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="programming1.html"><a href="programming1.html#integers"><i class="fa fa-check"></i><b>3.2.1</b> Integers</a></li>
+<li class="chapter" data-level="3.2.2" data-path="programming1.html"><a href="programming1.html#doubles"><i class="fa fa-check"></i><b>3.2.2</b> Doubles</a></li>
+<li class="chapter" data-level="3.2.3" data-path="programming1.html"><a href="programming1.html#characters-strings"><i class="fa fa-check"></i><b>3.2.3</b> Characters (“strings”)</a></li>
+<li class="chapter" data-level="3.2.4" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.2.4</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.5" data-path="programming1.html"><a href="programming1.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
+<li class="chapter" data-level="3.2.6" data-path="programming1.html"><a href="programming1.html#dataframes"><i class="fa fa-check"></i><b>3.2.6</b> Dataframes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.3</b> Variables</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -210,60 +220,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Install R packages.</p></li>
 <li><p>To use the help function in R.</p></li>
 </ul>
-<div id="using-the-r-console" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Using the R Console<a href="programming1.html#using-the-r-console" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="using-the-console" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Using the Console<a href="programming1.html#using-the-console" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running “dirty” quick code to test ideas, or code that we would run one.</p>
-<p>That distinction is kinda true, but it’s not completely true. In reality, when we write a script we are writing <strong><em>commands</em></strong> for R to <strong><em>execute</em></strong> in the R console. When we “run” a script, we are feeding that script to the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (R script) what we want to order, and then the waiter hands that order to the chef (R console).</p>
+<p>That distinction is kinda true, but it’s not completely true. In reality, when we write a script we are preparing <strong><em>commands</em></strong> for R to <strong><em>execute</em></strong> in the console. When we “run” a script, we are feeding that script to the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).</p>
 <p>So even though we will primarily not use the R console in this class, it’s important to know how to work with it. We do not want the chef spitting in our food.</p>
 <div id="typing-commands-in-the-console" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Typing Commands in the Console<a href="programming1.html#typing-commands-in-the-console" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The R console uses the operator “&gt;” to indicate that it is ready for a new command. We enter in our code after this operator and press enter to compute it.</p>
 <p>We can command the R console to compute calculations.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="programming1.html#cb24-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">20</span></span>
-<span id="cb24-2"><a href="programming1.html#cb24-2" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="programming1.html#cb24-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="programming1.html#cb25-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">20</span> <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb25-2"><a href="programming1.html#cb25-2" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="programming1.html#cb25-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="programming1.html#cb1-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">20</span></span>
+<span id="cb1-2"><a href="programming1.html#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="programming1.html#cb1-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="programming1.html#cb2-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">20</span> <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb2-2"><a href="programming1.html#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="programming1.html#cb2-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
 <p>If you are performing calculations in R, it’s important to know that it follows the usual arithmetic convention of order of operations (remember <a href="https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction">BIMDAS - Bracets, Indices, Multiplication, Division, Addition, and Subtraction?</a>).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="programming1.html#cb26-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span> <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span> </span>
-<span id="cb26-2"><a href="programming1.html#cb26-2" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="programming1.html#cb26-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">84</span></span>
-<span id="cb26-4"><a href="programming1.html#cb26-4" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="programming1.html#cb26-5" tabindex="-1"></a><span class="sc">&gt;</span> ((<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span>) <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span></span>
-<span id="cb26-6"><a href="programming1.html#cb26-6" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="programming1.html#cb26-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="programming1.html#cb3-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span> <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span> </span>
+<span id="cb3-2"><a href="programming1.html#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="programming1.html#cb3-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">84</span></span>
+<span id="cb3-4"><a href="programming1.html#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="programming1.html#cb3-5" tabindex="-1"></a><span class="sc">&gt;</span> ((<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span>) <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb3-6"><a href="programming1.html#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="programming1.html#cb3-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">12</span></span></code></pre></div>
 <p>Now you’ll have noticed that the output of every line of code we entered starts with a <strong><code>[1]</code></strong> before our actual result. What does this mean?</p>
 <p>Think of the square brackets with a number as a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like <strong><code>[1]</code></strong>, are like labels on each response, telling you which answer corresponds to which question. This is R <strong><em>indexing</em></strong> its answer.</p>
 <p>In each of the above examples, we asked R one question <strong><em>per each</em></strong> command, which is why the answer is always <strong><code>[1]</code></strong>. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.</p>
 </div>
-</div>
-<div id="console-syntax" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Console Syntax<a href="programming1.html#console-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="console-syntax" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Console Syntax<a href="programming1.html#console-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>One of the most important concepts you need to understand when you are programming, is that you need to type exactly what you want R to do. If you make a mistake (e.g., a typo), R will not try and understand what you actually meant. For example, see what happens if you make the following:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="programming1.html#cb27-1" tabindex="-1"></a><span class="dv">10</span> <span class="ot">=</span> <span class="dv">20</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="programming1.html#cb4-1" tabindex="-1"></a><span class="dv">10</span> <span class="ot">=</span> <span class="dv">20</span></span></code></pre></div>
 <pre><code>## Error in 10 = 20: invalid (do_set) left-hand side to assignment</code></pre>
 <p>R sees this as you making the claim that 10 is equal or equivalent to 20, panics, and refuses to run your command. Obviously, any person looking at this code would make the assumption that the <code>=</code> is a typo. Given that <code>+</code> and <code>=</code> are on the same key, we would make the assumption that the person probably meant to type <code>10 + 20</code>. To bring it back to Psychological terms, we can say that programming languages like R do not have a theory of mind. So be sure to be exact when you are typing out your commands. Otherwise, we will end up with <a href="https://www.youtube.com/watch?v=X3zfP14pLxc">a Ron Burgundy situation.</a></p>
 <p>Where this is really important to pay attention to is when you make a mistake or a typo in your code, but the code still makes sense to R. Let’s image you typed in <code>-</code> instead of <code>+</code> by mistake.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="programming1.html#cb29-1" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">20</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="programming1.html#cb6-1" tabindex="-1"></a><span class="dv">10</span> <span class="sc">-</span> <span class="dv">20</span></span></code></pre></div>
 <pre><code>## [1] -10</code></pre>
 <p>R will run this code and output the result, because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. In short calculations like this, it will probably be clear and obvious to you what you typed wrong. However, if you run a long-block of connected code, but made a typo like this somewhere, the result you get might be significantly different from the intended result. So if in the future you run some code in R and the result is significantly different from what you expected, it might be this type of error causing it.</p>
 <p>Now there are times when the R console will try and help you. If R thinks that you haven’t finished a command it will print out <code>+</code> to allow you to finish it.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="programming1.html#cb31-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span></span>
-<span id="cb31-2"><a href="programming1.html#cb31-2" tabindex="-1"></a> </span>
-<span id="cb31-3"><a href="programming1.html#cb31-3" tabindex="-1"></a><span class="sc">+</span> )</span>
-<span id="cb31-4"><a href="programming1.html#cb31-4" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="programming1.html#cb31-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="programming1.html#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span></span>
+<span id="cb8-2"><a href="programming1.html#cb8-2" tabindex="-1"></a> </span>
+<span id="cb8-3"><a href="programming1.html#cb8-3" tabindex="-1"></a><span class="sc">+</span> )</span>
+<span id="cb8-4"><a href="programming1.html#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="programming1.html#cb8-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
 <p>So when you see “+” in the console, this is R telling you that something is missing. If nothing is missing, then this indicates that your code might not be correctly formatted. Overall, the moral of this section can be summarised as: proofread your code!</p>
 </div>
-<div id="data-types03-programming_p1-1" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Data Types<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a><a href="programming1.html#data-types03-programming_p1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="comments" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Comments<a href="programming1.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When you are using either scripts or the console, one of the most important tools in writing intelligent code is the use of comments.</p>
+<p>Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). Last week, you already saw several examples of comments. We indicate comments by using the <code>#</code> symbol. This symbol tells R to ignore whatever comes directly <strong><em>afterwards</em></strong>.</p>
+<p>There are various reasons for using comments.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="img/03-comments.png" alt="Four Examples of Comments Use"  />
+<p class="caption">
+Figure 3.1: Four Examples of Comments Use
+</p>
+</div>
+<p>In the above figure, you’ll see four different types of comments.</p>
+<ol style="list-style-type: decimal">
+<li><p>The first type of comment provides a quick introduction to the R script. It can be really useful here to provide a clear information on what this script is trying to do (e.g., run a paired samples t-test), what data it is working on (the sleep dataset), and who wrote or developed this script. This makes it significantly easier for anyone who might be reviewing your work or trying to apply your code to their own work to understand what is going on.</p></li>
+<li><p>The second type of comment structures the format of the script by providing headings or steps. Again, this just makes it easier to understand what is going on.</p></li>
+<li><p>The third type of comment is placed before the summary. This means that code <code>summary(sleep)</code> will not be executed in R. Why would we do this? If you remember last week, we wanted to compute the mean per each of our two treatment groups, which the summary function does not enable us to do, so it’s not part of our main analysis. So why keep it? Well it still provides us with valuable information (e.g., mean, median, min, max for the entire sample), so rather than delete it, we’ll just put a comment in front of it. And if anytime we want to check these descriptives, we can just remove the <code>#</code> and run that line of code.</p></li>
+<li><p>The fourth type of comment provides some context or information on what a specific line of code is doing, namely, what the <code>aggregate()</code> function does. Again, this is really useful, particularly if you are using functions that are now well known.</p></li>
+</ol>
+<p>We’ll talk more throughout the course of workshops about the console, but that’ll do for now.</p>
+</div>
+</div>
+<div id="data-types03-programming_p1-1" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Data Types<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a><a href="programming1.html#data-types03-programming_p1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="integers" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Integers<a href="programming1.html#integers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="doubles" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Doubles<a href="programming1.html#doubles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="characters-strings" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Characters (“strings”)<a href="programming1.html#characters-strings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="vectors" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Vectors<a href="programming1.html#vectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="lists" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Lists<a href="programming1.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="dataframes" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Dataframes<a href="programming1.html#dataframes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="variables" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Variables<a href="programming1.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
-
-
-
 
 
 
@@ -272,8 +320,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="footnotes">
 <hr />
-<ol start="3">
-<li id="fn3"><p>Including the “&gt;” is a pain when formatting this book, so I won’t include “&gt;” in examples of code from this point onwards.<a href="programming1.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<ol start="1">
+<li id="fn1"><p>Including the “&gt;” is a pain when formatting this book, so I won’t include “&gt;” in examples of code from this point onwards.<a href="programming1.html#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

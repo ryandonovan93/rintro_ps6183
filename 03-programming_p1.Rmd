@@ -16,11 +16,11 @@ Today we are going to learn some basic programming concepts. By the end of the s
 
 -   To use the help function in R.
 
-## Using the R Console
+## Using the Console
 
 In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running "dirty" quick code to test ideas, or code that we would run one.
 
-That distinction is kinda true, but it's not completely true. In reality, when we write a script we are writing ***commands*** for R to ***execute*** in the R console. When we "run" a script, we are feeding that script to the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (R script) what we want to order, and then the waiter hands that order to the chef (R console).
+That distinction is kinda true, but it's not completely true. In reality, when we write a script we are preparing ***commands*** for R to ***execute*** in the console. When we "run" a script, we are feeding that script to the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).
 
 So even though we will primarily not use the R console in this class, it's important to know how to work with it. We do not want the chef spitting in our food.
 
@@ -67,7 +67,7 @@ Think of the square brackets with a number as a way for R to label and organize 
 
 In each of the above examples, we asked R one question ***per each*** command, which is why the answer is always **`[1]`**. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.
 
-## Console Syntax
+### Console Syntax
 
 One of the most important concepts you need to understand when you are programming, is that you need to type exactly what you want R to do. If you make a mistake (e.g., a typo), R will not try and understand what you actually meant. For example, see what happens if you make the following:
 
@@ -79,16 +79,17 @@ One of the most important concepts you need to understand when you are programmi
 
 R sees this as you making the claim that 10 is equal or equivalent to 20, panics, and refuses to run your command. Obviously, any person looking at this code would make the assumption that the `=` is a typo. Given that `+` and `=` are on the same key, we would make the assumption that the person probably meant to type `10 + 20`. To bring it back to Psychological terms, we can say that programming languages like R do not have a theory of mind. So be sure to be exact when you are typing out your commands. Otherwise, we will end up with [a Ron Burgundy situation.](https://www.youtube.com/watch?v=X3zfP14pLxc)
 
-Where this is really important to pay attention to is when you make a mistake or a typo in your code, but the code still makes sense to R. Let's image you typed in `-` instead of `+` by mistake. 
+Where this is really important to pay attention to is when you make a mistake or a typo in your code, but the code still makes sense to R. Let's image you typed in `-` instead of `+` by mistake.
 
 ```{r}
 
 10 - 20
 
 ```
-R will run this code and output the result, because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. In short calculations like this, it will probably be clear and obvious to you what you typed wrong. However, if you run a long-block of connected code, but made a typo like this somewhere, the result you get might be significantly different from the intended result. So if in the future you run some code in R and the result is significantly different from what you expected, it might be this type of error causing it. 
 
-Now there are times when the R console will try and help you. If R thinks that you haven't finished a command it will print out `+` to allow you to finish it. 
+R will run this code and output the result, because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. In short calculations like this, it will probably be clear and obvious to you what you typed wrong. However, if you run a long-block of connected code, but made a typo like this somewhere, the result you get might be significantly different from the intended result. So if in the future you run some code in R and the result is significantly different from what you expected, it might be this type of error causing it.
+
+Now there are times when the R console will try and help you. If R thinks that you haven't finished a command it will print out `+` to allow you to finish it.
 
 ```{r eval = FALSE}
 
@@ -102,8 +103,54 @@ Now there are times when the R console will try and help you. If R thinks that y
 
 So when you see "+" in the console, this is R telling you that something is missing. If nothing is missing, then this indicates that your code might not be correctly formatted. Overall, the moral of this section can be summarised as: proofread your code!
 
+### Comments
+
+When you are using either scripts or the console, one of the most important tools in writing intelligent code is the use of comments.
+
+Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). Last week, you already saw several examples of comments. We indicate comments by using the `#` symbol. This symbol tells R to ignore whatever comes directly ***afterwards***.
+
+There are various reasons for using comments.
+
+
+```{r fig.cap = "Four Examples of Comments Use", echo = FALSE, warning = FALSE}
+
+library(knitr)
+
+include_graphics("img/03-comments.png")
+
+
+```
+
+In the above figure, you'll see four different types of comments. 
+
+1. The first type of comment provides a quick introduction to the R script. It can be really useful here to provide a clear information on what this script is trying to do (e.g., run a paired samples t-test), what data it is working on (the sleep dataset), and who wrote or developed this script. This makes it significantly easier for anyone who might be reviewing your work or trying to apply your code to their own work to understand what is going on. 
+
+1. The second type of comment structures the format of the script by providing headings or steps. Again, this just makes it easier to understand what is going on. 
+
+1. The third type of comment is placed before the summary. This means that code `summary(sleep)` will not be executed in R. Why would we do this? If you remember last week, we wanted to compute the mean per each of our two treatment groups, which the summary function does not enable us to do, so it's not part of our main analysis. So why keep it? Well it still provides us with valuable information (e.g., mean, median, min, max for the entire sample), so rather than delete it, we'll just put a comment in front of it. And if anytime we want to check these descriptives, we can just remove the `#` and run that line of code.
+
+1. The fourth type of comment provides some context or information on what a specific line of code is doing, namely, what the `aggregate()` function does. Again, this is really useful, particularly if you are using functions that are now well known. 
+
+Comments are extremely useful for orientating yourself to code. My advice would be to comment as much as your code as you. Anyone who has coded will have experience the following situation - You spend days/weeks writing a piece of code to clean a messy data set and run a specialized type of analysis. Several months go by and you need to return to your data set (pesky reviewer #2 wants you change something). You open up your R script and you are ***completely lost***. You have written no comments, so you have to spend days trying to remember what each piece of code was trying to do. 
+
+If you comment a lot, it will save you so much heartache in the future. And it will help you understand various code concepts better if you can explain them while you are using them. So comment, comment, comment!
+
+Okay, that's a lot about using the console. Let's move on to other programming concepts.
+
 ## Data Types[^03-programming_p1-1]
 
-[^03-programming_p1-1]: Including the ">" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards. 
+[^03-programming_p1-1]: Including the "\>" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards.
 
+### Integers
 
+### Doubles
+
+### Characters ("strings")
+
+### Vectors
+
+### Lists
+
+### Dataframes
+
+## Variables
