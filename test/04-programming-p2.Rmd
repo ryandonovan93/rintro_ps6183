@@ -16,14 +16,6 @@ Today we are going to learn some basic programming concepts. By the end of the s
 
 -   To use the help function in R.
 
-
-```{r echo = FALSE}
-
-library(webexercises)
-
-```
-
-
 ### Activity 1: Set up your Working Directory
 
 It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in this session. Last week I showed you how to do this using [a button-and-click interface](#set_wd).
@@ -133,9 +125,7 @@ I have been pretty mean to the console, but there are rare times it will be a go
 
 So when you see "+" in the console, this is R telling you that something is missing. If nothing is missing, then this indicates that your code might not be correctly formatted. Overall, the moral of this section can be summarized as: proofread your code!
 
-### Comments[^03-programming_p1-2]
-
-[^03-programming_p1-2]: Including the "\>" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards.
+### Comments
 
 When you are using either scripts or the console, one of the most important tools in writing intelligent code is the use of comments.
 
@@ -204,39 +194,13 @@ We can store multiple different types of information to variables, including int
 
 my_age <- 30
 
-my_height <- 175 #centimetre 
+my_height <- 5.9 #foot.inches
 
 print(my_age)
 
 print(my_height)
 
 ```
-We can use variable names to compute calculations with their information or to print certain results. 
-
-```{r}
-
-
-paste("My name is", my_name, "and I am", my_age, "years old.")
-
-
-
-
-
-
-```
-
-
-We can also store several pieces of information in the one variable. Let's say I wanted a variable that contains the name of everyone in the class. 
-
-```{r}
-
-class_names <- c("Ryan", "Gerry", "Eva", "Santi", "Molly", "Aoife")
-
-print(class_names)
-
-```
-
-
 
 ### What's in a name? (Conventions for Naming Variables)
 
@@ -270,9 +234,25 @@ I recommend that you use the `Snake_case` during this course, because it will ke
 
 Outside of this course, feel free to pick whichever style you prefer. Just be consistent with it.
 
+### Test Yourself! Are these examples of good or bad variable names?
+
+```{r variable-test, echo = FALSE}
+
+library(learnr)
+
+question("Which of these are examples of bad variable names? Click all that apply",
+         answer("1stname", correct = TRUE),
+         answer("dog_type"),
+         answer("first-name", correct = TRUE))
+
+```
 
 
-## Data Types
+
+## Data Types[^03-programming_p1-2]
+
+[^03-programming_p1-2]: Including the "\>" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards.
+
 ## 
 
 ### Integers

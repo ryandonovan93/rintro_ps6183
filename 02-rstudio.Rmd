@@ -150,8 +150,7 @@ Each pane will be used extensively during these workshops.
 
 Everytime you open up a project or file in RStudio, it is good practice to check the working directory. The working directory is the environment on our computer that R is currently operating in.
 
-You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory.
-
+You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory. 
 To check the working directory, type the following into the console pane
 
 ```{r}
@@ -160,7 +159,7 @@ getwd()
 
 What you get in return is the current working directory R is working in. Your working directory will not be the same as mine, that's perfectly normal. Just check to make sure that is in the same location you specified when you created your project (**Option 2**).
 
-### Setting up a new Working Directory
+### Setting up a new Working Directory {#set_wd}
 
 We are going to slightly change our working directory. In our R Project, we are going to create a folder for week1 of the workshop. Anything that we create in R will then be saved into this week1 folder.
 
@@ -222,7 +221,7 @@ Okay we have talked a lot about R and RStudio. To finish off this session, let's
 
 When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type `?sleep` into the console. You will find more information on the data sets in the Files pane, under the Help tab.
 
-First let's have a look at the sleep data set by writing and running the following code.
+First let's have a look at the sleep data set by writing the following code in the R script.
 
 ```{r}
 
@@ -230,11 +229,11 @@ print(sleep)
 
 # Alternatively, you can write View(sleep) in the console. 
 
-#To run scripts in R, select the code and click the Run button with the green arrow in the top right corner of the script. 
+#To run scripts in R, select the code you have written and click the Run button with the green arrow in the top right corner of the script. 
 
 ```
 
-The `View()`function takes a data set and opens up a new window in the source pane where we can view that data set.
+The `print()` function can be used to print out a data set in the console. There are also other ways to view a data set, such as using the functions `head()`, `tail()` `View()`, and `str()`. Type these in the console (make sure to put `sleep` inside the brackets) and see what results you get.
 
 Running it on sleep shows us there are 20 observations in the dataset (rows), with three difference variables (columns): extra (hours of extra sleep each participant had), group (which treatment they were taken), and ID (their participant ID).
 
@@ -322,10 +321,11 @@ dev.off() #this tells R that we are done with adding stuff to our PDF
 
 ```
 
-Go to the files pane, and open up the pdf "my_plot1.pdf". It should be in your working directory. Open it up the PDF and have a look at your graph[^2].
+Go to the files pane, and open up the pdf "myplot.pdf". It should be in your working directory. Open it up the PDF and have a look at your graph[^2].
 
 [^2]: This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create "sexier" and more APA friendly type of graphs. But for one line of code, it's not bad!
 
-There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it's given you a tiny glimpse into what R can do.
+
+There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it's given you a tiny glimpse into what R can do. 
 
 Next week, we will go into more detail about programming concepts and how to import data.
