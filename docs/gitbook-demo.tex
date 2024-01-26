@@ -1110,11 +1110,6 @@ The following functions enable you to convert one data type to another
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{data-structures}{%
-\section{Data Structures}\label{data-structures}}
-
-So we've talked about the different types of data that we experience in the world and how R classifies them. But in data analysis, we rarely ever just work individual pieces of data, one at a time. For example, we will often put
-
 \hypertarget{variables}{%
 \section{Variables}\label{variables}}
 
@@ -1260,6 +1255,134 @@ Variable names cannot include special words that R reserves (e.g., if, else, rep
 I recommend that you use the \texttt{Snake\_case} during this course, because it will keep your code consistent with my code. Additionally, this case is consistent with other programming languages, whereas \texttt{dot.notation} is not.
 
 Outside of this course, feel free to pick whichever style you prefer. Just be consistent with it.
+
+\hypertarget{data-structures}{%
+\section{Data Structures}\label{data-structures}}
+
+So we've talked about the different types of data that we experience in the world and how R classifies them. We've also talked about how we can store this type of data into variables. But in data analysis, we rarely work with individual variables. Typically we work with large collections of variables that have a particular order. For example, data sets are organised by rows and columns
+
+This also holds true in R, which has several different types of \textbf{\emph{data structures}} that organise and group together variables. Each data structure has specific rules and methods for creating or interacting with them. I'll briefly mention each data structure first, before we focus on two main data structures we'll use in this course: \texttt{vectors} and \texttt{data\ frames}.
+
+\hypertarget{vectors}{%
+\subsection{Vectors}\label{vectors}}
+
+The most basic and (probably) important data structure in R are \textbf{\emph{vectors}}. You can think of vectors as a list of data of R that are of the same data type.
+
+For example, I could create a character vector with names of people in the class.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Gerry"}\NormalTok{, }\StringTok{"Aoife"}\NormalTok{, }\StringTok{"Liam"}\NormalTok{, }\StringTok{"Eva"}\NormalTok{, }\StringTok{"Owen"}\NormalTok{, }\StringTok{"Ciara"}\NormalTok{)}
+
+
+\FunctionTok{print}\NormalTok{(rintro\_names)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Gerry" "Aoife" "Liam"  "Eva"   "Owen"  "Ciara"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.vector}\NormalTok{(rintro\_names) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+And I can create a numeric vector with their performance on the module.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 87 91 87 90 88 89
+\end{verbatim}
+
+And I can create a logical vectors that describes whether or not they like R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_satisfied }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, T, F, F, T) }\CommentTok{\#you can use T or F as shortcuts}
+
+\FunctionTok{print}\NormalTok{(rintro\_satisfied)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE
+\end{verbatim}
+
+Technically, we have been using vectors the entire class. Vectors can have as little as 1 piece of data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{instructor }\OtherTok{\textless{}{-}} \StringTok{"Ryan/Brendan"}
+
+\FunctionTok{is.vector}\NormalTok{(instructor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\emph{Activity}: Try create a vector with only integers. Call it ``int\_vector''. Check whether you have successfully created this vector with the code \texttt{class(int\_vector)}
+
+However, we can't include multiple data types in the one vector. Going back to our numeric grades vector, look what happens when we try mix in grades as characters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\StringTok{"A1"}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+
+
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "87" "A1" "87" "90" "88" "89"
+\end{verbatim}
+
+R has converted every element within the \texttt{rintro\_marks} vector into a character. If R sees an object that is a vector, but sees that its elements belong to different data types, it will try and convert every element to one data type. This is a strict rule in R - a vector can only be created if ever single element (i.e., thing) inside that vector is of the same data type.
+
+If we were to check the class of the \texttt{rintro\_marks}, it will show us this conversion
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{) }\CommentTok{\#original numeric vector}
+
+
+\FunctionTok{class}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\StringTok{"A1"}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+
+
+\FunctionTok{class}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into one row within that column, and then R converts the entire column into a string.
 
 \hypertarget{packages}{%
 \section{Packages}\label{packages}}
