@@ -182,15 +182,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.2" data-path="programming1.html"><a href="programming1.html#console-syntax-aka-im-ron-burgundy"><i class="fa fa-check"></i><b>3.1.2</b> Console Syntax (Aka “I’m Ron Burgundy?”)</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#data-types"><i class="fa fa-check"></i><b>3.2</b> Data Types</a></li>
-<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#basic-data-types-in-r"><i class="fa fa-check"></i><b>3.3</b> Basic Data types in R</a></li>
-<li class="chapter" data-level="3.4" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.4</b> Variables</a>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#basic-data-types-in-r"><i class="fa fa-check"></i><b>3.3</b> Basic Data types in R</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.4.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
-<li class="chapter" data-level="3.4.2" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.4.2</b> Vectors</a></li>
-<li class="chapter" data-level="3.4.3" data-path="programming1.html"><a href="programming1.html#lists"><i class="fa fa-check"></i><b>3.4.3</b> Lists</a></li>
-<li class="chapter" data-level="3.4.4" data-path="programming1.html"><a href="programming1.html#dataframes"><i class="fa fa-check"></i><b>3.4.4</b> Dataframes</a></li>
+<li class="chapter" data-level="3.3.1" data-path="programming1.html"><a href="programming1.html#character"><i class="fa fa-check"></i><b>3.3.1</b> Character</a></li>
+<li class="chapter" data-level="3.3.2" data-path="programming1.html"><a href="programming1.html#numeric-or-double"><i class="fa fa-check"></i><b>3.3.2</b> Numeric (or Double)</a></li>
+<li class="chapter" data-level="3.3.3" data-path="programming1.html"><a href="programming1.html#integer"><i class="fa fa-check"></i><b>3.3.3</b> Integer</a></li>
+<li class="chapter" data-level="3.3.4" data-path="programming1.html"><a href="programming1.html#logical-otherwise-know-as-boolean"><i class="fa fa-check"></i><b>3.3.4</b> Logical (otherwise know as Boolean)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#packages"><i class="fa fa-check"></i><b>3.5</b> Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.4</b> Data Structures</a></li>
+<li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.5.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#packages"><i class="fa fa-check"></i><b>3.6</b> Packages</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -287,78 +291,142 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-types" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Data Types<a href="programming1.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Our overall goal for this course is to give you the ability to import your data into R, select a subset of the data most of interest for a given analysis, carry out an analysis to summarize these data and create visualizations of the data. But it’s important to consider <strong><em>What is Data and how is it stored in R?</em></strong></p>
-<p>Data comes in many forms: Numbers (Integers and decimal values) or alphabetical (characters or lines of text). Clearly a computer (or R) needs a way of representing this wide range of data with it’s diverse properties.</p>
+<p>Data comes in many forms: Numbers (Integers and decimal values) or alphabetical (characters or lines of text). R has developed a system for classifying this range of data into different data types.</p>
 </div>
 <div id="basic-data-types-in-r" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Basic Data types in R<a href="programming1.html#basic-data-types-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>R has 4 basic data types that are used 99% of the time:</p>
-<ul>
-<li><strong>character</strong>
-<ul>
-<li>a “character” is nothing but a series of letters, numbers and punctuation marks. You will often see this referred to as a <em>string</em>.</li>
-<li>anything between two quotes (Single or double quotes): “a”, ‘cat’<br />
-</li>
-<li>Quoted numbers are character type: ‘3.14’<br />
-</li>
-</ul></li>
-<li><strong>double</strong>:
-<ul>
-<li>Set of all real numbers<br />
-</li>
-<li>Could be a integer or include a decimal: 10, 3.14, 1.45765, 5, 1000000<br />
-</li>
-</ul></li>
-<li><strong>integer</strong>: non-decimal whole numbers. 5L (the “L” tells R to store this as an integer - 5 -, otherwise it would be stored as 5.0)<br />
-</li>
-<li><strong>logical</strong>: TRUE, FALSE (Also known as Boolean data type)</li>
-</ul>
-<p>The main reason that there are different types of data in programming is that some commands can only be used on particular data types. For instance mathematical operations (+, -, x and /) are only meaningful for numbers.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="programming1.html#cb28-1" tabindex="-1"></a><span class="fl">11.00</span> <span class="sc">+</span> <span class="fl">3.23</span> <span class="co">#will work</span></span>
+<div id="character" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Character<a href="programming1.html#character" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A character is anything wrapped inside quotation marks. It is often referred to as a <em>string</em>.</p>
+<p>Strings can be anything inside single or double quotation marks.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="programming1.html#cb28-1" tabindex="-1"></a><span class="co">#we can use the class() function to check the data type of an object in R</span></span>
 <span id="cb28-2"><a href="programming1.html#cb28-2" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="programming1.html#cb28-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">14.23</span></span>
-<span id="cb28-4"><a href="programming1.html#cb28-4" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="programming1.html#cb28-5" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="programming1.html#cb28-6" tabindex="-1"></a><span class="dv">11</span> <span class="sc">*</span> <span class="dv">10</span> <span class="co">#will work</span></span>
-<span id="cb28-7"><a href="programming1.html#cb28-7" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="programming1.html#cb28-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">120</span></span>
-<span id="cb28-9"><a href="programming1.html#cb28-9" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="programming1.html#cb28-10" tabindex="-1"></a><span class="st">&quot;11&quot;</span> <span class="sc">+</span> <span class="dv">3</span> <span class="co"># gives error</span></span>
-<span id="cb28-11"><a href="programming1.html#cb28-11" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="programming1.html#cb28-12" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">&quot;11&quot;</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">:</span> non<span class="sc">-</span>numeric argument to binary operator</span></code></pre></div>
-<p>We’ll cover some other data types next week. The main thing to take away is that R can represent the same object in different ways (e.g., the number 11 as either a string “11”, or as an integer <code>11</code> or as a double <code>11.0</code>) . This is important to know when troubleshooting errors in R. Sometimes you might download a data set online that will have a “numeric” column that is actually considered a</p>
+<span id="cb28-3"><a href="programming1.html#cb28-3" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;a&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="programming1.html#cb30-1" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;cat&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Numbers in quotation marks are also recognized as a character type in R.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="programming1.html#cb32-1" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;3.14&quot;</span>) <span class="co">#recognized as a character</span></span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="programming1.html#cb34-1" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;2&quot;</span>) <span class="co">#recognized as a character</span></span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="programming1.html#cb36-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">2.13</span>) <span class="co">#not recognised as a character</span></span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
 </div>
-<div id="variables" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Variables<a href="programming1.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="numeric-or-double" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Numeric (or Double)<a href="programming1.html#numeric-or-double" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In R, the numeric data type represents all real numbers, with or without decimal value, such as:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="programming1.html#cb38-1" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">33</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="programming1.html#cb40-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">33.33</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="programming1.html#cb42-1" tabindex="-1"></a><span class="fu">class</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="integer" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Integer<a href="programming1.html#integer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An integer is any real whole number with no decimal points. We tell R to specify something as an integer by adding a capital “L” at the end.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="programming1.html#cb44-1" tabindex="-1"></a><span class="fu">class</span>(33L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="programming1.html#cb46-1" tabindex="-1"></a><span class="fu">class</span>(<span class="sc">-</span>1L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="programming1.html#cb48-1" tabindex="-1"></a><span class="fu">class</span>(0L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>It might seem weird that R has a separate data type for integers when the numeric/double character type contains integers. Why bother with the separate data type?</p>
+<p>The reason is that integers store less space in your computers memory than the numeric or double data type. There’s less information in “33” compared to “33.00”. So if you have a very large dataset (in the millions), and you know for certain the data will only be integer, using the integer data type will save you a lot of storage space.</p>
+<p>It’s unlikely that you will need to use integers over numeric/doubles for your own research, but its good to be aware of just in case.</p>
+</div>
+<div id="logical-otherwise-know-as-boolean" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Logical (otherwise know as Boolean)<a href="programming1.html#logical-otherwise-know-as-boolean" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Logical Data type has two potential values: <code>TRUE</code> and <code>FALSE</code>.</p>
+<p>In programming, we often need to deal with conditions and make decisions based on whether certain conditions are true or false. Did the student pass the exam? Is this p-value below <code>.05</code>?</p>
+<p>The Logical data type in R enables us to represent and work with these truth values.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="programming1.html#cb50-1" tabindex="-1"></a><span class="fu">class</span>(<span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="programming1.html#cb52-1" tabindex="-1"></a><span class="fu">class</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<p>One thing to note is that it case sensitive, so typing in any of the following will produce errors.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="programming1.html#cb54-1" tabindex="-1"></a><span class="fu">class</span>(True)</span>
+<span id="cb54-2"><a href="programming1.html#cb54-2" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="programming1.html#cb54-3" tabindex="-1"></a>Error<span class="sc">:</span> object <span class="st">&#39;True&#39;</span> not found</span>
+<span id="cb54-4"><a href="programming1.html#cb54-4" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="programming1.html#cb54-5" tabindex="-1"></a><span class="fu">class</span>(False)</span>
+<span id="cb54-6"><a href="programming1.html#cb54-6" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="programming1.html#cb54-7" tabindex="-1"></a>Error<span class="sc">:</span> object <span class="st">&#39;False&#39;</span> not found</span>
+<span id="cb54-8"><a href="programming1.html#cb54-8" tabindex="-1"></a></span>
+<span id="cb54-9"><a href="programming1.html#cb54-9" tabindex="-1"></a><span class="fu">class</span>(true)</span>
+<span id="cb54-10"><a href="programming1.html#cb54-10" tabindex="-1"></a></span>
+<span id="cb54-11"><a href="programming1.html#cb54-11" tabindex="-1"></a>Error<span class="sc">:</span> object <span class="st">&#39;true&#39;</span> not found</span>
+<span id="cb54-12"><a href="programming1.html#cb54-12" tabindex="-1"></a></span>
+<span id="cb54-13"><a href="programming1.html#cb54-13" tabindex="-1"></a><span class="fu">class</span>(false)</span>
+<span id="cb54-14"><a href="programming1.html#cb54-14" tabindex="-1"></a></span>
+<span id="cb54-15"><a href="programming1.html#cb54-15" tabindex="-1"></a>Error<span class="sc">:</span> object <span class="st">&#39;false&#39;</span> not found</span></code></pre></div>
+<p>The main reason that there are different types of data in programming is that some commands can only be used on particular data types. For instance mathematical operations (+, -, x and /) are only meaningful for numbers.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="programming1.html#cb55-1" tabindex="-1"></a><span class="fl">11.00</span> <span class="sc">+</span> <span class="fl">3.23</span> <span class="co">#will work</span></span>
+<span id="cb55-2"><a href="programming1.html#cb55-2" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="programming1.html#cb55-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">14.23</span></span>
+<span id="cb55-4"><a href="programming1.html#cb55-4" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="programming1.html#cb55-5" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="programming1.html#cb55-6" tabindex="-1"></a><span class="dv">11</span> <span class="sc">*</span> <span class="dv">10</span> <span class="co">#will work</span></span>
+<span id="cb55-7"><a href="programming1.html#cb55-7" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="programming1.html#cb55-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">120</span></span>
+<span id="cb55-9"><a href="programming1.html#cb55-9" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="programming1.html#cb55-10" tabindex="-1"></a><span class="st">&quot;11&quot;</span> <span class="sc">+</span> <span class="dv">3</span> <span class="co"># gives error</span></span>
+<span id="cb55-11"><a href="programming1.html#cb55-11" tabindex="-1"></a></span>
+<span id="cb55-12"><a href="programming1.html#cb55-12" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">&quot;11&quot;</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">:</span> non<span class="sc">-</span>numeric argument to binary operator</span></code></pre></div>
+<p>This is important to know when troubleshooting errors in R. It’s not uncommon that when you download a data set online that a column that should be numeric is actually saved as a character (e.g., the person entering the data might have a mistake in the excel file).</p>
+<p>If you wanted to perform a statistical operation on that column (e.g., mean), you would first have to convert it to the numeric data type. You can do this by using the following function</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="programming1.html#cb56-1" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;22&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 22</code></pre>
+<p>The following functions enable you to convert one data type to another</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="programming1.html#cb58-1" tabindex="-1"></a><span class="fu">as.character</span>() <span class="co">#will convert data type to character</span></span>
+<span id="cb58-2"><a href="programming1.html#cb58-2" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="programming1.html#cb58-3" tabindex="-1"></a><span class="fu">as.integer</span>() <span class="co">#will convert to integer</span></span>
+<span id="cb58-4"><a href="programming1.html#cb58-4" tabindex="-1"></a></span>
+<span id="cb58-5"><a href="programming1.html#cb58-5" tabindex="-1"></a><span class="fu">as.logical</span>() <span class="co">#will convert to logical</span></span></code></pre></div>
+</div>
+</div>
+<div id="data-structures" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Data Structures<a href="programming1.html#data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>So we’ve talked about the different types of data that we experience in the world and how R classifies them. But in data analysis, we rarely ever just work individual pieces of data, one at a time. For example, we will often put</p>
+</div>
+<div id="variables" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Variables<a href="programming1.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The code we have been using so far has been single-use code. Once we have typed out code, there is nothing else we can do but look at their output. But programming languages enable us to store information to objects called <strong><em>variables</em></strong>.</p>
-<p>Variables are labels for pieces of information. If we want to use that information or recall later on, instead of running the same code that produced the information, we can just refer to its label.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="programming1.html#cb29-1" tabindex="-1"></a>my_name <span class="ot">&lt;-</span> <span class="st">&quot;Ryan&quot;</span></span></code></pre></div>
-<p>To create a variable, we first type the name of the variable (`my_name<code>). We use the assignment operator to tell R that we will be assigning (i.e., storing) information to</code>my_name<code>. This information is the string "Ryan". Once we run this code, then whenever R sees the variable</code>my_name` it will replace it with Ryan.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="programming1.html#cb30-1" tabindex="-1"></a><span class="fu">print</span>(my_name)</span></code></pre></div>
+<p>Variables are labels for pieces of information. If we want to use that information or recall later on, instead of running the same code that produced the information, we can just refer to its label. Let’s say I have a character object that refers to my name. I can save that character object to a variable.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="programming1.html#cb59-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Ryan&quot;</span></span></code></pre></div>
+<p>To create a variable, we first type the name of the variable (<code>name</code>). We use the assignment operator to tell R that we will be assigning (i.e., storing) information to<code>name</code>. This information is the string “Ryan”. Once we run this code, then whenever R sees the variable<code>name</code> it will replace it with Ryan.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="programming1.html#cb60-1" tabindex="-1"></a><span class="fu">print</span>(name)</span></code></pre></div>
 <pre><code>## [1] &quot;Ryan&quot;</code></pre>
-<p>Now many of you who have seen my email will think <em>“Hold on a second, isn’t your first name Brendan? You fraud!”</em>. Now before you grab your pitchforks, yes, you are technically correct. And for the sake of civility, we can correct for this mistake. Thankfully, once we have set up a variable, it is not locked forever. We can reassign it to another piece of information. All we have to do is write out the variable label again and assign it to a different piece of information.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="programming1.html#cb32-1" tabindex="-1"></a>my_name <span class="ot">&lt;-</span> <span class="st">&quot;Brendan&quot;</span> <span class="co">#please don&#39;t call me this</span></span>
-<span id="cb32-2"><a href="programming1.html#cb32-2" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="programming1.html#cb32-3" tabindex="-1"></a><span class="fu">print</span>(my_name)</span></code></pre></div>
-<pre><code>## [1] &quot;Brendan&quot;</code></pre>
-<p>We can store multiple different types of information to variables, including integers and decimals.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="programming1.html#cb34-1" tabindex="-1"></a>my_age <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb34-2"><a href="programming1.html#cb34-2" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="programming1.html#cb34-3" tabindex="-1"></a>my_height <span class="ot">&lt;-</span> <span class="dv">175</span> <span class="co">#centimetre </span></span>
-<span id="cb34-4"><a href="programming1.html#cb34-4" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="programming1.html#cb34-5" tabindex="-1"></a><span class="fu">print</span>(my_age)</span></code></pre></div>
+<p>Now many of you who have seen my email will think <em>“Hold on a second, isn’t your first name Brendan? You fraud!”</em>. Now before you grab your pitchforks, yes, you are technically correct. Thankfully, we are able to reassign our variable labels to new information.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="programming1.html#cb62-1" tabindex="-1"></a>my_name <span class="ot">&lt;-</span> <span class="st">&quot;Brendan&quot;</span> <span class="co">#please don&#39;t call me this</span></span>
+<span id="cb62-2"><a href="programming1.html#cb62-2" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="programming1.html#cb62-3" tabindex="-1"></a><span class="fu">print</span>(name)</span></code></pre></div>
+<pre><code>## [1] &quot;Ryan&quot;</code></pre>
+<p>All data types can be stored as information to variables.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="programming1.html#cb64-1" tabindex="-1"></a>age <span class="ot">&lt;-</span> 30L</span>
+<span id="cb64-2"><a href="programming1.html#cb64-2" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="programming1.html#cb64-3" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="dv">175</span> <span class="co">#centimetre </span></span>
+<span id="cb64-4"><a href="programming1.html#cb64-4" tabindex="-1"></a></span>
+<span id="cb64-5"><a href="programming1.html#cb64-5" tabindex="-1"></a>live_in_hot_country <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb64-6"><a href="programming1.html#cb64-6" tabindex="-1"></a></span>
+<span id="cb64-7"><a href="programming1.html#cb64-7" tabindex="-1"></a><span class="fu">print</span>(age)</span></code></pre></div>
 <pre><code>## [1] 30</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="programming1.html#cb36-1" tabindex="-1"></a><span class="fu">print</span>(my_height)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="programming1.html#cb66-1" tabindex="-1"></a><span class="fu">print</span>(height)</span></code></pre></div>
 <pre><code>## [1] 175</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="programming1.html#cb68-1" tabindex="-1"></a><span class="fu">print</span>(live_in_hot_country)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="programming1.html#cb70-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;My name is&quot;</span>, name, <span class="st">&quot;and I am&quot;</span>, age, <span class="st">&quot;years old.&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;My name is Ryan and I am 30 years old.&quot;</code></pre>
 <p>We can use variable names to compute calculations with their information or to print certain results.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="programming1.html#cb38-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;My name is&quot;</span>, my_name, <span class="st">&quot;and I am&quot;</span>, my_age, <span class="st">&quot;years old.&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;My name is Brendan and I am 30 years old.&quot;</code></pre>
-<p>We can also store several pieces of information in the one variable. Let’s say I wanted a variable that contains the name of everyone in the class.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="programming1.html#cb40-1" tabindex="-1"></a>class_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ryan&quot;</span>, <span class="st">&quot;Gerry&quot;</span>, <span class="st">&quot;Eva&quot;</span>, <span class="st">&quot;Santi&quot;</span>, <span class="st">&quot;Molly&quot;</span>, <span class="st">&quot;Aoife&quot;</span>)</span>
-<span id="cb40-2"><a href="programming1.html#cb40-2" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="programming1.html#cb40-3" tabindex="-1"></a><span class="fu">print</span>(class_names)</span></code></pre></div>
+<p>We can also store data structures to variables.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="programming1.html#cb72-1" tabindex="-1"></a>class_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ryan&quot;</span>, <span class="st">&quot;Gerry&quot;</span>, <span class="st">&quot;Eva&quot;</span>, <span class="st">&quot;Santi&quot;</span>, <span class="st">&quot;Molly&quot;</span>, <span class="st">&quot;Aoife&quot;</span>)</span>
+<span id="cb72-2"><a href="programming1.html#cb72-2" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="programming1.html#cb72-3" tabindex="-1"></a><span class="fu">print</span>(class_names)</span></code></pre></div>
 <pre><code>## [1] &quot;Ryan&quot;  &quot;Gerry&quot; &quot;Eva&quot;   &quot;Santi&quot; &quot;Molly&quot; &quot;Aoife&quot;</code></pre>
-<div id="whats-in-a-name-conventions-for-naming-variables" class="section level3 hasAnchor" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> What’s in a name? (Conventions for Naming Variables)<a href="programming1.html#whats-in-a-name-conventions-for-naming-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="whats-in-a-name-conventions-for-naming-variables" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> What’s in a name? (Conventions for Naming Variables)<a href="programming1.html#whats-in-a-name-conventions-for-naming-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are hard and soft rules for naming variables that you should know.</p>
 <p><strong>Hard Rules (Follow these, otherwise R won’t create the variable for you)</strong></p>
 <p>Variable names can only include upper case alphabetic characters A-Z, lower-case a-z, numeric characters 0-9, as well period <code>.</code> and underscores <code>_</code>.</p>
@@ -380,24 +448,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>I recommend that you use the <code>Snake_case</code> during this course, because it will keep your code consistent with my code. Additionally, this case is consistent with other programming languages, whereas <code>dot.notation</code> is not.</p>
 <p>Outside of this course, feel free to pick whichever style you prefer. Just be consistent with it.</p>
 </div>
-<div id="vectors" class="section level3 hasAnchor" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Vectors<a href="programming1.html#vectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="atomic-vectors" class="section level4 hasAnchor" number="3.4.2.1">
-<h4><span class="header-section-number">3.4.2.1</span> Atomic Vectors<a href="programming1.html#atomic-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
-<div id="multi-object-vectors" class="section level4 hasAnchor" number="3.4.2.2">
-<h4><span class="header-section-number">3.4.2.2</span> Multi-object Vectors<a href="programming1.html#multi-object-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-</div>
-</div>
-<div id="lists" class="section level3 hasAnchor" number="3.4.3">
-<h3><span class="header-section-number">3.4.3</span> Lists<a href="programming1.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="dataframes" class="section level3 hasAnchor" number="3.4.4">
-<h3><span class="header-section-number">3.4.4</span> Dataframes<a href="programming1.html#dataframes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-</div>
-<div id="packages" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Packages<a href="programming1.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="packages" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Packages<a href="programming1.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
