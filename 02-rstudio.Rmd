@@ -221,37 +221,30 @@ Okay we have talked a lot about R and RStudio. To finish off this session, let's
 
 When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type `?sleep` into the console. You will find more information on the data sets in the Files pane, under the Help tab.
 
-First let's have a look at the sleep data set by writing the following code in the R script.
+First let's have a look at the sleep data set by writing the following code in the R script. To run scripts in R, select the code you have written and click the Run button with the green arrow in the top right corner of the script. 
 
 ```{r}
 
 print(sleep) 
 
-# Alternatively, you can write View(sleep) in the console. 
-
-#To run scripts in R, select the code you have written and click the Run button with the green arrow in the top right corner of the script. 
-
 ```
 
-The `print()` function can be used to print out a data set in the console. There are also other ways to view a data set, such as using the functions `head()`, `tail()` `View()`, and `str()`. Type these in the console (make sure to put `sleep` inside the brackets) and see what results you get.
+The `print()` function here prints out the sleep data set in the console. There are also other ways to view a data set, such as using the functions `head()`, `tail()` `View()`, and `str()`. Type these in the console (make sure to put `sleep` inside the brackets) and see what results you get.
 
-Running it on sleep shows us there are 20 observations in the dataset (rows), with three difference variables (columns): extra (hours of extra sleep each participant had), group (which treatment they were taken), and ID (their participant ID).
+The result of `print(sleep)` shows us there are 20 observations in the dataset (rows), with three difference variables (columns): extra (hours of extra sleep each participant had), group (which treatment they were taken), and ID (their participant ID).
 
-Let's calculate some descriptive statistics. The summary() function takes in an object (e.g., like a data set) and summaries the data. Write the following in your R script and press run.
+Now let's calculate some descriptive statistics. One we can do this is by using the summary() function. This function takes in an an object (e.g., like a data set) and summaries the data. Write the following in your R script and press run.
 
 ```{r}
 
-summary(sleep) #calculates descriptive statistics for each variable in our dataset
-
+summary(sleep) 
 ```
 
-Running the summary() function on our data set shows us that mean change in hours of sleep were +1.5, and that there was 10 participants within both the control and experimental condition.
+Running `summary(sleep)` shows us descriptive statistics for each of our variables. We can see that the mean change in hours of sleep were +1.5, and that there was 10 participants within both the control and experimental condition.
 
-But it's not perfect. Firstly, we don't need summary descriptive on the participant ID. Secondly, it only tells us the mean across both groups, whereas we are more interested in the mean score per each group. Let's fix this by using the `aggregate()` function, which enables us to split our data into subset and then compute summary statistics per group. Remember to press run after you written your code.
+But it's not perfect. Firstly, we don't need summary descriptive on the participant ID. Secondly, it only tells us the mean the entire sample, whereas we are more interested in the mean score per each treatment group. We can get this information by using the `aggregate()` function, which enables us to split our data into subset and then compute summary statistics per group. Remember to press run after you written your code.
 
 ```{r}
-
-aggregate(data = sleep, extra ~ group, FUN = mean)
 
 
 #The code inside the aggregate bracket tells our computer to: 
@@ -261,21 +254,22 @@ aggregate(data = sleep, extra ~ group, FUN = mean)
 
 # FUN = mean -> Apply the mean() function (FUN) on each subset 
 
+aggregate(data = sleep, extra ~ group, FUN = mean)
+
+
+
+
 ```
 
 That's more like it. Now we can see that there does seem to a difference between treatment1 and treatment2. Participants slept an extra 2.33 hours on average when taking treatment 2, whereas they only slept .75 hours (e.g., 45 minutes) more on average when taking treatment 1. So treatment 2 does seem more effective.
 
-Now that we have some descriptive statistics, let's run a paired-samples t-test to see if those differences are significant.
+Let's run a paired-samples t-test to see if those differences are significant (assuming all parametric assumptions are met, of course...).
 
 ```{r}
 
-t.test(sleep$extra[sleep$group == 1],
-       
-                        sleep$extra[sleep$group == 2],
-       
-                        paired = TRUE) #this setting means we will run a paired-samples t-test
-
-#the t.test function enables us to perform a t-test
+t.test(sleep$extra[sleep$group == 1], #this code extracts the group 1 scores
+       sleep$extra[sleep$group == 2], # this code extracts group 2 scores
+       paired = TRUE) #this code tells R to run a paired t-test, not between/independent t-test
 
 
 
@@ -296,13 +290,16 @@ Now this plot is perfectly adequate for a first viewing, but let's make it a bit
 
 ```{r fig.cap="Generic Boxplot with appropriate labelling"}
 
-plot(sleep$group, sleep$extra, xlab = "Treatment", ylab = "Hours of Sleep", main = "Effect of Treament on Sleep Duration")  
 
 #xlab = creates a label for the x-axis  
 
 #ylab = creates a title for the y-axis  
 
 #main = creates a title for the plot  
+
+
+
+plot(sleep$group, sleep$extra, xlab = "Treatment", ylab = "Hours of Sleep", main = "Effect of Treament on Sleep Duration")  
 
 
 
@@ -325,7 +322,42 @@ Go to the files pane, and open up the pdf "myplot.pdf". It should be in your wor
 
 [^2]: This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create "sexier" and more APA friendly type of graphs. But for one line of code, it's not bad!
 
+### Comments[^03-programming_p1-1]
+
+[^03-programming_p1-1]: Including the "\>" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards.
+
+Last concept before we finish. You might have noticed that I wrote several things with a `#` before them. These are known as comments. Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). They are fundamental to writing clear code. 
+
+We create comments using `#` symbol. This symbol tells R to ignore whatever comes directly ***afterwards***.
+
+There are various reasons for using comments.
+
+```{r fig.cap = "Four Examples of Comments Use", echo = FALSE, warning = FALSE}
+
+library(knitr)
+
+include_graphics("img/03-comments.png")
+
+
+```
+
+In the above figure, you'll see four different types of comments.
+
+1.  The first type of comment provides a quick introduction to the R script. It can be really useful here to provide a clear information on what this script is trying to do (e.g., run a paired samples t-test), what data it is working on (the sleep dataset), and who wrote or developed this script. This makes it significantly easier for anyone who might be reviewing your work or trying to apply your code to their own work to understand what is going on.
+
+2.  The second type of comment structures the format of the script by providing headings or steps. Again, this just makes it easier to understand what is going on.
+
+3.  The third type of comment is placed before the summary. This means that code `summary(sleep)` will not be executed in R. Why would we do this? If you remember last week, we wanted to compute the mean per each of our two treatment groups, which the summary function does not enable us to do, so it's not part of our main analysis. So why keep it? Well it still provides us with valuable information (e.g., mean, median, min, max for the entire sample), so rather than delete it, we'll just put a comment in front of it. And if anytime we want to check these descriptives, we can just remove the `#` and run that line of code.
+
+4.  The fourth type of comment provides some context or information on what a specific line of code is doing, namely, what the `aggregate()` function does. Again, this is really useful, particularly if you are using functions that are now well known.
+
+Comments are extremely useful for orientating yourself to code. My advice would be to comment as much as your code as you. Anyone who has coded will have experience the following situation - You spend days/weeks writing a piece of code to clean a messy data set and run a specialized type of analysis. Several months go by and you need to return to your data set (pesky reviewer #2 wants you change something). You open up your R script and you are ***completely lost***. You have written no comments, so you have to spend days trying to remember what each piece of code was trying to do.
+
+If you comment a lot, it will save you so much heartache in the future. And it will help you understand various code concepts better if you can explain them while you are using them. So comment, comment, comment!
+
+
+## Summary
 
 There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it's given you a tiny glimpse into what R can do. 
 
-Next week, we will go into more detail about programming concepts and how to import data.
+In the next two sessions, we will learn basic programming concepts and how to import data in R. 
