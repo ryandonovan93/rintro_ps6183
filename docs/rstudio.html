@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-01-26" />
+<meta name="date" content="2024-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.6</b> Console vs Source Script</a></li>
 <li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.7</b> Let’s write some statistical code</a>
 <ul>
-<li class="chapter" data-level="2.7.1" data-path="rstudio.html"><a href="rstudio.html#comments03-programming_p1-1"><i class="fa fa-check"></i><b>2.7.1</b> Comments</a></li>
+<li class="chapter" data-level="2.7.1" data-path="rstudio.html"><a href="rstudio.html#comments"><i class="fa fa-check"></i><b>2.7.1</b> Comments</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="rstudio.html"><a href="rstudio.html#summary"><i class="fa fa-check"></i><b>2.8</b> Summary</a></li>
 </ul></li>
@@ -245,7 +245,7 @@ Figure 2.1: BBC graphs created in R.
 <li>Go to the website: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
 <li>Under the heading <em>Download and Install R,</em> click <em>Download R for Windows</em> <img src="img/01-cran.png" width="2804" /></li>
 <li>Click the hyperlink <strong><em>base</em></strong> or <strong><em>install R for the first Time</em></strong><img src="img/01-base.png" /></li>
-<li>Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That’s okay, you can download newer versions). Let the file download. <img src="img/01-download.png" alt="The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that’s okay!" /></li>
+<li>Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That’s okay, you can download newer versions). Let the file download. <img src="img/01-download.png" alt="The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that&#39;s okay!" /></li>
 <li>Once the file has been downloaded, open it, and click “Yes” if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like “R-4.3.2.-win”. The numbers will differ depending on the specific version that was downloaded.</li>
 <li>Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.</li>
 </ol>
@@ -330,10 +330,9 @@ Figure 2.2: New Project Set Up
 <div id="checking-our-working-directory" class="section level3 hasAnchor" number="2.4.2">
 <h3><span class="header-section-number">2.4.2</span> Checking our Working Directory<a href="rstudio.html#checking-our-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Everytime you open up a project or file in RStudio, it is good practice to check the working directory. The working directory is the environment on our computer that R is currently operating in.</p>
-<p>You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory.
-To check the working directory, type the following into the console pane</p>
+<p>You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory. To check the working directory, type the following into the console pane</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rstudio.html#cb1-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro&quot;</code></pre>
+<pre><code>## [1] &quot;/Users/ryandonovan 1/Desktop/Teaching/R/rintro&quot;</code></pre>
 <p>What you get in return is the current working directory R is working in. Your working directory will not be the same as mine, that’s perfectly normal. Just check to make sure that is in the same location you specified when you created your project (<strong>Option 2</strong>).</p>
 </div>
 <div id="set_wd" class="section level3 hasAnchor" number="2.4.3">
@@ -356,7 +355,8 @@ To check the working directory, type the following into the console pane</p>
 </div>
 <div id="writing-our-first-r-code" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Writing our first R Code<a href="rstudio.html#writing-our-first-r-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let’s write our first line of R code. In the <strong><em>console</em></strong>, type in the each of the following instructions and press enter. Feel free to change the second line of code to add your own name.</p>
+<p>Let’s write our first line of R code in the <strong><em>console</em></strong>. The R console uses the operator “&gt;” to indicate that it is ready for a new line of code.</p>
+<p>Type in the each of the following instructions (after the ´&gt;´ operator) and press enter. Feel free to change the second line of code to add your own name.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rstudio.html#cb4-1" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Hello World&quot;</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="rstudio.html#cb6-1" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;My name is Ryan and I am learning to code in R&quot;</span>)</span></code></pre></div>
@@ -376,7 +376,7 @@ To check the working directory, type the following into the console pane</p>
 </div>
 <div id="lets-write-some-statistical-code" class="section level2 hasAnchor" number="2.7">
 <h2><span class="header-section-number">2.7</span> Let’s write some statistical code<a href="rstudio.html#lets-write-some-statistical-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Okay we have talked a lot about R and RStudio. To finish off this session, let’s write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don’t worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it’s not open, click “File” -&gt; New File -&gt; RScript)</p>
+<p>Okay we have talked a lot about R and RStudio. To finish off this session, let’s write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don’t worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it’s not open, click “File” -&gt; New File -&gt; RScript). Once you have created this script, save it as “01-paired-t-tests”.</p>
 <p>When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type <code>?sleep</code> into the console. You will find more information on the data sets in the Files pane, under the Help tab.</p>
 <p>First let’s have a look at the sleep data set by writing the following code in the R script. To run scripts in R, select the code you have written and click the Run button with the green arrow in the top right corner of the script.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="rstudio.html#cb8-1" tabindex="-1"></a><span class="fu">print</span>(sleep) </span></code></pre></div>
@@ -475,11 +475,11 @@ Figure 2.4: Generic Boxplot with appropriate labelling
 <span id="cb18-4"><a href="rstudio.html#cb18-4" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="rstudio.html#cb18-5" tabindex="-1"></a></span>
 <span id="cb18-6"><a href="rstudio.html#cb18-6" tabindex="-1"></a><span class="fu">dev.off</span>() <span class="co">#this tells R that we are done with adding stuff to our PDF</span></span></code></pre></div>
-<pre><code>## png 
-##   2</code></pre>
+<pre><code>## quartz_off_screen 
+##                 2</code></pre>
 <p>Go to the files pane, and open up the pdf “myplot.pdf”. It should be in your working directory. Open it up the PDF and have a look at your graph<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
-<div id="comments03-programming_p1-1" class="section level3 hasAnchor" number="2.7.1">
-<h3><span class="header-section-number">2.7.1</span> Comments<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a><a href="rstudio.html#comments03-programming_p1-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="comments" class="section level3 hasAnchor" number="2.7.1">
+<h3><span class="header-section-number">2.7.1</span> Comments<a href="rstudio.html#comments" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Last concept before we finish. You might have noticed that I wrote several things with a <code>#</code> before them. These are known as comments. Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). They are fundamental to writing clear code.</p>
 <p>We create comments using <code>#</code> symbol. This symbol tells R to ignore whatever comes directly <strong><em>afterwards</em></strong>.</p>
 <p>There are various reasons for using comments.</p>
@@ -513,7 +513,6 @@ Figure 2.5: Four Examples of Comments Use
 <li id="fn1"><p>There are always tradeoffs in selecting a language. Many programming concepts are easier to grasp in Python than in R. Similarly, there is a lot of resources available for conducting machine-learning analysis in Python.</p>
 <p>But if you are goal is conduct data cleaning, analysis, visualization, and reporting, then R is a excellent choice. The good thing is that once you achieve a certain level of competency in one programming language, you will find it significantly easier to pick up a following one.<a href="rstudio.html#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create “sexier” and more APA friendly type of graphs. But for one line of code, it’s not bad!<a href="rstudio.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence “I will drive to Dublin on Friday”, whereas German speakers tend to specify time near the beginning of the sentence “I will on Friday drive to Dublin” (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.<a href="rstudio.html#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
