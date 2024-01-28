@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.6</b> Console vs Source Script</a></li>
 <li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.7</b> Let’s write some statistical code</a>
 <ul>
-<li class="chapter" data-level="2.7.1" data-path="rstudio.html"><a href="rstudio.html#comments03-programming_p1-1"><i class="fa fa-check"></i><b>2.7.1</b> Comments</a></li>
+<li class="chapter" data-level="2.7.1" data-path="rstudio.html"><a href="rstudio.html#comments"><i class="fa fa-check"></i><b>2.7.1</b> Comments</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="rstudio.html"><a href="rstudio.html#summary"><i class="fa fa-check"></i><b>2.8</b> Summary</a></li>
 </ul></li>
@@ -223,26 +223,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Today we are going to learn some basic programming concepts. By the end of the session, you should be able to:</p>
 <ul>
 <li><p>Run and troubleshoot commands in the R console.</p></li>
-<li><p>Write comments to your code to better structure it.</p></li>
 <li><p>Understand the different data types and when they are used.</p></li>
 <li><p>Create and use variables.</p></li>
+<li><p>Understand data structures and how to create them.</p></li>
 <li><p>Load R packages and use their functions.</p></li>
 </ul>
 <div id="activity-1-set-up-your-working-directory" class="section level3 hasAnchor" number="3.0.1">
 <h3><span class="header-section-number">3.0.1</span> Activity 1: Set up your Working Directory<a href="programming1.html#activity-1-set-up-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>It’s good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you’ll work on in this session. Last week I showed you how to do this using <a href="rstudio.html#set_wd">a button-and-click interface</a>.</p>
-<p>Using those instructions, create a folder called “Week2” in the <code>rintro</code> project folder and set it as your working directory. Once you have done that, check to make sure it is your working directory (i.e., type <code>getwd()</code> into the console). Your should see something similar to this.</p>
+<p>It’s good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you’ll work on in a session. Last week I showed you how to do this using <a href="rstudio.html#set_wd">a button-and-click interface</a>.</p>
+<p>Using those instructions, create a folder called “Week2” in the <code>rintro</code> project folder and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="programming1.html#cb20-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">setwd</span>(<span class="st">&quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week2&quot;</span>)</span></code></pre></div>
 </div>
 <div id="using-the-console" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Using the Console<a href="programming1.html#using-the-console" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running “dirty” quick code to test ideas, or code that we would run one.</p>
+<p>In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running “dirty” quick code to test ideas, or code that we would run once.</p>
 <p>That distinction is kinda true, but it’s not completely true. In reality, when we write a script we are preparing <strong><em>commands</em></strong> for R to <strong><em>execute</em></strong> in the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).</p>
-<p>Even though we will mostly use R scripts in these classes, it’s important to know how to work the R console. We don’t want our waiter to spit into our food.</p>
+<p>It’s important to know how to work the R console, even if we mostly use scripts in these workshops. We don’t want the chef to spit into our food.</p>
 <div id="typing-commands-in-the-console" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Typing Commands in the Console<a href="programming1.html#typing-commands-in-the-console" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The R console uses the operator “&gt;” to indicate that it is ready for a new command. We enter in our code after this operator and press enter to compute it.</p>
-<p>We can command the R console to compute calculations.</p>
+<p>We enter in our code after this operator and press enter to compute it.</p>
+<p>We can command the R console to compute calculations. Remember not to type the operator ´&gt;´ if you are following along in RStudio, this just indicates that R is ready to execute a new command.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="programming1.html#cb21-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">20</span></span>
 <span id="cb21-2"><a href="programming1.html#cb21-2" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="programming1.html#cb21-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
@@ -436,7 +436,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Choose informative variable names that clearly describe the information they represent.</em> Someone should be able to look at your variable name and be able to reasonably guess what type of information it is storing. Variable names like “income”, “grades”, “height” are clear, whereas variables names like “money”, “performance”, or “cm” are ambiguous (e.g., what money - money received, spent, owed? performance on what? what was being measured in cm, height, width?). And for the love of God don’t name your variables “variable1”, “variable2”, “variable3”!</p>
 <p><em>Choose short variable names whenever possible.</em> Concise names like <code>dob</code> or <code>iq</code> are better than <code>date_of_birth</code> or <code>intelligence_quotient</code>. It’s much easier to work with shorter names as it avoids unnecessary and tedious typing thereby reducing the chance for making typos.</p>
 <p><em>But you should choose a long variable name that is clear over a short variable name that is unclear</em>. A long variable name like <code>total_exam_marks</code> is significantly better than a cryptic acronym like <code>tem</code>.</p>
-<p><em>Do not start your variables with a capital letter.</em> A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
+<p><em>Do not start your variables with a capital letter.</em><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users</p>
 <p><em>Use a conventional naming style and be consistent with it</em>. There are three conventional styles for handling variables that contain multiple words.</p>
 <ol style="list-style-type: decimal">
 <li><p>The first style separates each word with an underscore (e.g., my<strong>_</strong>age<strong><em>,</em></strong> my<strong>_</strong>name, my_height). This is called <code>Snake_case</code>.</p></li>
@@ -603,8 +603,9 @@ Figure 3.3: Indexing for Logical Vector
 
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence “I will drive to Dublin on Friday”, whereas German speakers tend to specify time near the beginning of the sentence “I will on Friday drive to Dublin” (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.<a href="programming1.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<ol start="3">
+<li id="fn3"><p>Including the “&gt;” is a pain when formatting this book, so I won’t include “&gt;” in examples of code from this point forward.<a href="programming1.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p><em>This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence “I will drive to Dublin on Friday”, whereas German speakers tend to specify time near the beginning of the sentence “I will on Friday drive to Dublin” (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.</em><a href="programming1.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

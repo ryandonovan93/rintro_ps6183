@@ -423,8 +423,7 @@ Each pane will be used extensively during these workshops.
 
 Everytime you open up a project or file in RStudio, it is good practice to check the working directory. The working directory is the environment on our computer that R is currently operating in.
 
-You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory.
-To check the working directory, type the following into the console pane
+You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory. To check the working directory, type the following into the console pane
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -433,7 +432,7 @@ To check the working directory, type the following into the console pane
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro"
+## [1] "/Users/ryandonovan 1/Desktop/Teaching/R/rintro"
 \end{verbatim}
 
 What you get in return is the current working directory R is working in. Your working directory will not be the same as mine, that's perfectly normal. Just check to make sure that is in the same location you specified when you created your project (\textbf{Option 2}).
@@ -473,7 +472,9 @@ Check whether this is actually the location you want to store your files for thi
 \hypertarget{writing-our-first-r-code}{%
 \section{Writing our first R Code}\label{writing-our-first-r-code}}
 
-Let's write our first line of R code. In the \textbf{\emph{console}}, type in the each of the following instructions and press enter. Feel free to change the second line of code to add your own name.
+Let's write our first line of R code in the \textbf{\emph{console}}. The R console uses the operator ``\textgreater{}'' to indicate that it is ready for a new line of code.
+
+Type in the each of the following instructions (after the ´\textgreater´ operator) and press enter. Feel free to change the second line of code to add your own name.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -519,7 +520,7 @@ From now on, whenever we write code, we are going to be using R scripts by defau
 \hypertarget{lets-write-some-statistical-code}{%
 \section{Let's write some statistical code}\label{lets-write-some-statistical-code}}
 
-Okay we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click ``File'' -\textgreater{} New File -\textgreater{} RScript)
+Okay we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click ``File'' -\textgreater{} New File -\textgreater{} RScript). Once you have created this script, save it as ``01-paired-t-tests''.
 
 When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type \texttt{?sleep} into the console. You will find more information on the data sets in the Files pane, under the Help tab.
 
@@ -687,8 +688,8 @@ Now let's take this plot and save it to a PDF so that we could share our results
 
 Go to the files pane, and open up the pdf ``myplot.pdf''. It should be in your working directory. Open it up the PDF and have a look at your graph\footnote{This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create ``sexier'' and more APA friendly type of graphs. But for one line of code, it's not bad!}.
 
-\hypertarget{comments03-programming_p1-1}{%
-\subsection[Comments]{\texorpdfstring{Comments\footnote{This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence ``I will drive to Dublin on Friday'', whereas German speakers tend to specify time near the beginning of the sentence ``I will on Friday drive to Dublin'' (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.}}{Comments}}\label{comments03-programming_p1-1}}
+\hypertarget{comments}{%
+\subsection{Comments}\label{comments}}
 
 Last concept before we finish. You might have noticed that I wrote several things with a \texttt{\#} before them. These are known as comments. Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). They are fundamental to writing clear code.
 
@@ -736,11 +737,11 @@ Today we are going to learn some basic programming concepts. By the end of the s
 \item
   Run and troubleshoot commands in the R console.
 \item
-  Write comments to your code to better structure it.
-\item
   Understand the different data types and when they are used.
 \item
   Create and use variables.
+\item
+  Understand data structures and how to create them.
 \item
   Load R packages and use their functions.
 \end{itemize}
@@ -748,9 +749,9 @@ Today we are going to learn some basic programming concepts. By the end of the s
 \hypertarget{activity-1-set-up-your-working-directory}{%
 \subsection{Activity 1: Set up your Working Directory}\label{activity-1-set-up-your-working-directory}}
 
-It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in this session. Last week I showed you how to do this using \protect\hyperlink{set_wd}{a button-and-click interface}.
+It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. Last week I showed you how to do this using \protect\hyperlink{set_wd}{a button-and-click interface}.
 
-Using those instructions, create a folder called ``Week2'' in the \texttt{rintro} project folder and set it as your working directory. Once you have done that, check to make sure it is your working directory (i.e., type \texttt{getwd()} into the console). Your should see something similar to this.
+Using those instructions, create a folder called ``Week2'' in the \texttt{rintro} project folder and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -761,18 +762,18 @@ Using those instructions, create a folder called ``Week2'' in the \texttt{rintro
 \hypertarget{using-the-console}{%
 \section{Using the Console}\label{using-the-console}}
 
-In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running ``dirty'' quick code to test ideas, or code that we would run one.
+In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running ``dirty'' quick code to test ideas, or code that we would run once.
 
 That distinction is kinda true, but it's not completely true. In reality, when we write a script we are preparing \textbf{\emph{commands}} for R to \textbf{\emph{execute}} in the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).
 
-Even though we will mostly use R scripts in these classes, it's important to know how to work the R console. We don't want our waiter to spit into our food.
+It's important to know how to work the R console, even if we mostly use scripts in these workshops. We don't want the chef to spit into our food.
 
 \hypertarget{typing-commands-in-the-console}{%
 \subsection{Typing Commands in the Console}\label{typing-commands-in-the-console}}
 
-The R console uses the operator ``\textgreater{}'' to indicate that it is ready for a new command. We enter in our code after this operator and press enter to compute it.
+We enter in our code after this operator and press enter to compute it.
 
-We can command the R console to compute calculations.
+We can command the R console to compute calculations. Remember not to type the operator ´\textgreater´ if you are following along in RStudio, this just indicates that R is ready to execute a new command.\footnote{Including the ``\textgreater{}'' is a pain when formatting this book, so I won't include ``\textgreater{}'' in examples of code from this point forward.}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1238,7 +1239,7 @@ Variable names cannot include special words that R reserves (e.g., if, else, rep
 
 \emph{But you should choose a long variable name that is clear over a short variable name that is unclear}. A long variable name like \texttt{total\_exam\_marks} is significantly better than a cryptic acronym like \texttt{tem}.
 
-\emph{Do not start your variables with a capital letter.} A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users \footnote{This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence ``I will drive to Dublin on Friday'', whereas German speakers tend to specify time near the beginning of the sentence ``I will on Friday drive to Dublin'' (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.}.
+\emph{Do not start your variables with a capital letter.}\footnote{\emph{This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence ``I will drive to Dublin on Friday'', whereas German speakers tend to specify time near the beginning of the sentence ``I will on Friday drive to Dublin'' (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.}} A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users
 
 \emph{Use a conventional naming style and be consistent with it}. There are three conventional styles for handling variables that contain multiple words.
 

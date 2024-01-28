@@ -21,11 +21,9 @@ include_graphics("img/01-bbc.png")
 
 ```
 
+But why should we learn R and not a different programming language? In contrast to other programming languages (Python, JavaScript, C), R was developed by statisticians. Consequently, R contains an extensive vocabulary to enable us to carry out sophisticated and precise statistical analysis. I have used R and Python to conduct statistical analysis and anytime I wanted to use a less frequently used statistical test, there was significantly more support and information on how to conduct that analysis in R than in Python. For such reasons, R is typically used among statisticians, social scientists, data miners, and bioinformaticians - and will be used in this course[^02-rstudio-1].
 
-
-But why should we learn R and not a different programming language? In contrast to other programming languages (Python, JavaScript, C), R was developed by statisticians. Consequently, R contains an extensive vocabulary to enable us to carry out sophisticated and precise statistical analysis. I have used R and Python to conduct statistical analysis and anytime I wanted to use a less frequently used statistical test, there was significantly more support and information on how to conduct that analysis in R than in Python. For such reasons, R is typically used among statisticians, social scientists, data miners, and bioinformaticians - and will be used in this course[^1].
-
-[^1]: There are always tradeoffs in selecting a language. Many programming concepts are easier to grasp in Python than in R. Similarly, there is a lot of resources available for conducting machine-learning analysis in Python.
+[^02-rstudio-1]: There are always tradeoffs in selecting a language. Many programming concepts are easier to grasp in Python than in R. Similarly, there is a lot of resources available for conducting machine-learning analysis in Python.
 
     But if you are goal is conduct data cleaning, analysis, visualization, and reporting, then R is a excellent choice. The good thing is that once you achieve a certain level of competency in one programming language, you will find it significantly easier to pick up a following one.
 
@@ -38,7 +36,7 @@ Please follow the following instructions to download R on either Windows or Mac.
 1.  Go to the website: <https://cran.r-project.org/>
 2.  Under the heading *Download and Install R,* click *Download R for Windows* ![](img/01-cran.png){width="2804"}
 3.  Click the hyperlink ***base*** or ***install R for the first Time***![](img/01-base.png)
-4.  Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That's okay, you can download newer versions). Let the file download. ![The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that's okay!](img/01-download.png)
+4.  Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That's okay, you can download newer versions). Let the file download. ![The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that\'s okay!](img/01-download.png)
 5.  Once the file has been downloaded, open it, and click "Yes" if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like "R-4.3.2.-win". The numbers will differ depending on the specific version that was downloaded.
 6.  Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.
 
@@ -102,7 +100,6 @@ Let's create an R Project that we will use during these workshops.
 
 You can see my example below. Once you're happy with your input for each option, click "Create Project" This will open up the project introR_2024.
 
-
 ```{r fig.cap = "New Project Set Up", echo = FALSE, warning = FALSE}
 
 library(knitr)
@@ -138,8 +135,6 @@ Now that we have each pane opened, let's briefly describe what each pane is for.
 
 -   The ***Console Pane*** is where you can write R code or enter commands into R. The console is also where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.
 
-
-
 -   The ***Environment Pane*** is where you will find information on any data sets and variables that you import or create in R within a bespoke R project. The "History" tab will contain a history of any R code that you run during the project. This pane is really useful for getting a bird-eye's view of a project (which can be really useful if you are returning to a project after a long period of time or you are looking at someone's else code).
 
 -   The ***Files Pane*** is where you find your R project files (in the Files tab), the output of any plots that you create (Plots tab), the status of any downloaded packages (Packages tab), and information and helpful information about R functions and packages (Help).
@@ -150,8 +145,7 @@ Each pane will be used extensively during these workshops.
 
 Everytime you open up a project or file in RStudio, it is good practice to check the working directory. The working directory is the environment on our computer that R is currently operating in.
 
-You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory. 
-To check the working directory, type the following into the console pane
+You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory. To check the working directory, type the following into the console pane
 
 ```{r}
 getwd()
@@ -185,7 +179,9 @@ Check whether this is actually the location you want to store your files for thi
 
 ## Writing our first R Code
 
-Let's write our first line of R code. In the ***console***, type in the each of the following instructions and press enter. Feel free to change the second line of code to add your own name.
+Let's write our first line of R code in the ***console***. The R console uses the operator "\>" to indicate that it is ready for a new line of code.
+
+Type in the each of the following instructions (after the ´\>´ operator) and press enter. Feel free to change the second line of code to add your own name.
 
 ```{r first piece of code}
 
@@ -217,11 +213,11 @@ From now on, whenever we write code, we are going to be using R scripts by defau
 
 ## Let's write some statistical code
 
-Okay we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click "File" -\> New File -\> RScript)
+Okay we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click "File" -\> New File -\> RScript). Once you have created this script, save it as "01-paired-t-tests".
 
 When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type `?sleep` into the console. You will find more information on the data sets in the Files pane, under the Help tab.
 
-First let's have a look at the sleep data set by writing the following code in the R script. To run scripts in R, select the code you have written and click the Run button with the green arrow in the top right corner of the script. 
+First let's have a look at the sleep data set by writing the following code in the R script. To run scripts in R, select the code you have written and click the Run button with the green arrow in the top right corner of the script.
 
 ```{r}
 
@@ -318,15 +314,13 @@ dev.off() #this tells R that we are done with adding stuff to our PDF
 
 ```
 
-Go to the files pane, and open up the pdf "myplot.pdf". It should be in your working directory. Open it up the PDF and have a look at your graph[^2].
+Go to the files pane, and open up the pdf "myplot.pdf". It should be in your working directory. Open it up the PDF and have a look at your graph[^02-rstudio-2].
 
-[^2]: This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create "sexier" and more APA friendly type of graphs. But for one line of code, it's not bad!
+[^02-rstudio-2]: This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create "sexier" and more APA friendly type of graphs. But for one line of code, it's not bad!
 
-### Comments[^03-programming_p1-1]
+### Comments
 
-[^03-programming_p1-1]: Including the "\>" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards.
-
-Last concept before we finish. You might have noticed that I wrote several things with a `#` before them. These are known as comments. Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). They are fundamental to writing clear code. 
+Last concept before we finish. You might have noticed that I wrote several things with a `#` before them. These are known as comments. Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). They are fundamental to writing clear code.
 
 We create comments using `#` symbol. This symbol tells R to ignore whatever comes directly ***afterwards***.
 
@@ -355,9 +349,8 @@ Comments are extremely useful for orientating yourself to code. My advice would 
 
 If you comment a lot, it will save you so much heartache in the future. And it will help you understand various code concepts better if you can explain them while you are using them. So comment, comment, comment!
 
-
 ## Summary
 
-There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it's given you a tiny glimpse into what R can do. 
+There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it's given you a tiny glimpse into what R can do.
 
-In the next two sessions, we will learn basic programming concepts and how to import data in R. 
+In the next two sessions, we will learn basic programming concepts and how to import data in R.

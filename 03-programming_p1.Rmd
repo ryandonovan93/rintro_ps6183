@@ -4,11 +4,11 @@ Today we are going to learn some basic programming concepts. By the end of the s
 
 -   Run and troubleshoot commands in the R console.
 
--   Write comments to your code to better structure it.
-
 -   Understand the different data types and when they are used.
 
 -   Create and use variables.
+
+-   Understand data structures and how to create them.
 
 -   Load R packages and use their functions.
 
@@ -20,9 +20,9 @@ library(webexercises)
 
 ### Activity 1: Set up your Working Directory
 
-It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in this session. Last week I showed you how to do this using [a button-and-click interface](#set_wd).
+It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. Last week I showed you how to do this using [a button-and-click interface](#set_wd).
 
-Using those instructions, create a folder called "Week2" in the `rintro` project folder and set it as your working directory. Once you have done that, check to make sure it is your working directory (i.e., type `getwd()` into the console). Your should see something similar to this.
+Using those instructions, create a folder called "Week2" in the `rintro` project folder and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:
 
 ```{r eval = F}
 
@@ -32,17 +32,19 @@ Using those instructions, create a folder called "Week2" in the `rintro` project
 
 ## Using the Console
 
-In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running "dirty" quick code to test ideas, or code that we would run one.
+In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running "dirty" quick code to test ideas, or code that we would run once.
 
 That distinction is kinda true, but it's not completely true. In reality, when we write a script we are preparing ***commands*** for R to ***execute*** in the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).
 
-Even though we will mostly use R scripts in these classes, it's important to know how to work the R console. We don't want our waiter to spit into our food.
+It's important to know how to work the R console, even if we mostly use scripts in these workshops. We don't want the chef to spit into our food.
 
 ### Typing Commands in the Console
 
-The R console uses the operator "\>" to indicate that it is ready for a new command. We enter in our code after this operator and press enter to compute it.
+We enter in our code after this operator and press enter to compute it.
 
-We can command the R console to compute calculations.
+We can command the R console to compute calculations. Remember not to type the operator ´\>´ if you are following along in RStudio, this just indicates that R is ready to execute a new command.[^03-programming_p1-1]
+
+[^03-programming_p1-1]: Including the "\>" is a pain when formatting this book, so I won't include "\>" in examples of code from this point forward.
 
 ```{r eval=FALSE}
 
@@ -139,8 +141,7 @@ Okay, that's a lot about using the console. Let's move on to other programming c
 
 Our overall goal for this course is to give you the ability to import your data into R, select a subset of the data most of interest for a given analysis, carry out an analysis to summarize these data and create visualizations of the data. But it's important to consider ***What is Data and how is it stored in R?***
 
-Data comes in many forms: Numbers (Integers and decimal values) or alphabetical (characters or lines of text). R has developed a system for classifying this range of data into different data types. 
-
+Data comes in many forms: Numbers (Integers and decimal values) or alphabetical (characters or lines of text). R has developed a system for classifying this range of data into different data types.
 
 ## Basic Data types in R
 
@@ -166,9 +167,7 @@ class("cat")
 
 ```
 
-
 Numbers in quotation marks are also recognized as a character type in R.
-
 
 ```{r}
 
@@ -178,10 +177,9 @@ class(2.13) #not recognised as a character
 
 ```
 
-
 ### Numeric (or Double)
 
-In R, the numeric data type represents all real numbers, with or without decimal value, such as: 
+In R, the numeric data type represents all real numbers, with or without decimal value, such as:
 
 ```{r}
 
@@ -195,7 +193,7 @@ class(-1)
 
 ### Integer
 
-An integer is any real whole number with no decimal points. We tell R to specify something as an integer by adding a capital "L" at the end. 
+An integer is any real whole number with no decimal points. We tell R to specify something as an integer by adding a capital "L" at the end.
 
 ```{r}
 
@@ -206,11 +204,12 @@ class(-1L)
 class(0L)
 
 ```
-It might seem weird that R has a separate data type for integers when the numeric/double character type contains integers. Why bother with the separate data type? 
 
-The reason is that integers store less space in your computers memory than the numeric or double data type. There's less information in "33" compared to "33.00". So if you have a very large dataset (in the millions), and you know for certain the data will only be integer, using the integer data type will save you a lot of storage space. 
+It might seem weird that R has a separate data type for integers when the numeric/double character type contains integers. Why bother with the separate data type?
 
-It's unlikely that you will need to use integers over numeric/doubles for your own research, but its good to be aware of just in case.  
+The reason is that integers store less space in your computers memory than the numeric or double data type. There's less information in "33" compared to "33.00". So if you have a very large dataset (in the millions), and you know for certain the data will only be integer, using the integer data type will save you a lot of storage space.
+
+It's unlikely that you will need to use integers over numeric/doubles for your own research, but its good to be aware of just in case.
 
 ### Logical (otherwise know as Boolean)
 
@@ -218,8 +217,7 @@ The Logical Data type has two potential values: `TRUE` and `FALSE`.
 
 In programming, we often need to deal with conditions and make decisions based on whether certain conditions are true or false. Did the student pass the exam? Is this p-value below `.05`?
 
-The Logical data type in R enables us to represent and work with these truth values. 
-
+The Logical data type in R enables us to represent and work with these truth values.
 
 ```{r}
 
@@ -230,7 +228,7 @@ class(FALSE)
 
 ```
 
-One thing to note is that it case sensitive, so typing in any of the following will produce errors. 
+One thing to note is that it case sensitive, so typing in any of the following will produce errors.
 
 ```{r eval = FALSE}
 
@@ -252,7 +250,6 @@ Error: object 'false' not found
 
 ```
 
-
 The main reason that there are different types of data in programming is that some commands can only be used on particular data types. For instance mathematical operations (+, -, x and /) are only meaningful for numbers.
 
 ```{r, eval=FALSE}
@@ -271,7 +268,7 @@ Error in "11" + 3 : non-numeric argument to binary operator
 
 ```
 
-This is important to know when troubleshooting errors in R. It's not uncommon that when you download a data set online that a column that should be numeric is actually saved as a character (e.g., the person entering the data might have a mistake in the excel file). 
+This is important to know when troubleshooting errors in R. It's not uncommon that when you download a data set online that a column that should be numeric is actually saved as a character (e.g., the person entering the data might have a mistake in the excel file).
 
 If you wanted to perform a statistical operation on that column (e.g., mean), you would first have to convert it to the numeric data type. You can do this by using the following function
 
@@ -280,6 +277,7 @@ If you wanted to perform a statistical operation on that column (e.g., mean), yo
 as.numeric("22")
 
 ```
+
 The following functions enable you to convert one data type to another
 
 ```{r eval=FALSE}
@@ -296,7 +294,7 @@ as.logical() #will convert to logical
 
 The code we have been using so far has been single-use code. Once we have typed out code, there is nothing else we can do but look at their output. But programming languages enable us to store information to objects called ***variables***.
 
-Variables are labels for pieces of information. If we want to use that information or recall later on, instead of running the same code that produced the information, we can just refer to its label. Let's say I have a character object that refers to my name. I can save that character object to a variable. 
+Variables are labels for pieces of information. If we want to use that information or recall later on, instead of running the same code that produced the information, we can just refer to its label. Let's say I have a character object that refers to my name. I can save that character object to a variable.
 
 ```{r}
 
@@ -314,7 +312,6 @@ print(name)
 
 Now many of you who have seen my email will think *"Hold on a second, isn't your first name Brendan? You fraud!"*. Now before you grab your pitchforks, yes, you are technically correct. Thankfully, we are able to reassign our variable labels to new information.
 
-
 ```{r}
 
 my_name <- "Brendan" #please don't call me this
@@ -323,7 +320,7 @@ print(name)
 
 ```
 
-All data types can be stored as information to variables. 
+All data types can be stored as information to variables.
 
 ```{r}
 
@@ -348,9 +345,10 @@ paste("My name is", name, "and I am", age, "years old.")
 
 
 ```
+
 We can use variable names to compute calculations with their information or to print certain results.
 
-We can also store data structures to variables. 
+We can also store data structures to variables.
 
 ```{r}
 
@@ -384,9 +382,9 @@ Variable names cannot include special words that R reserves (e.g., if, else, rep
 
 *But you should choose a long variable name that is clear over a short variable name that is unclear*. A long variable name like `total_exam_marks` is significantly better than a cryptic acronym like `tem`.
 
-*Do not start your variables with a capital letter.* A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users [^03-programming_p1-1].
+*Do not start your variables with a capital letter.*[^03-programming_p1-2] A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users
 
-[^03-programming_p1-1]: This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence "I will drive to Dublin on Friday", whereas German speakers tend to specify time near the beginning of the sentence "I will on Friday drive to Dublin " (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.
+[^03-programming_p1-2]: *This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence "I will drive to Dublin on Friday", whereas German speakers tend to specify time near the beginning of the sentence "I will on Friday drive to Dublin" (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.*
 
 *Use a conventional naming style and be consistent with it*. There are three conventional styles for handling variables that contain multiple words.
 
@@ -400,20 +398,17 @@ I recommend that you use the `Snake_case` during this course, because it will ke
 
 Outside of this course, feel free to pick whichever style you prefer. Just be consistent with it.
 
-
-
 ## Data Structures
 
+So we've talked about the different types of data that we experience in the world and how R classifies them. We've also talked about how we can store this type of data into variables. But in data analysis, we rarely work with individual variables. Typically we work with large collections of variables that have a particular order. For example, data sets are organised by rows and columns
 
-So we've talked about the different types of data that we experience in the world and how R classifies them. We've also talked about how we can store this type of data into variables. But in data analysis, we rarely work with individual variables. Typically we work with large collections of variables that have a particular order. For example, data sets are organised by rows and columns 
-
-This also holds true in R, which has several different types of ***data structures*** that organise and group together variables. Each data structure has specific rules and methods for creating or interacting with them. I'll briefly mention each data structure first, before we focus on two main data structures we'll use in this course: `vectors` and `data frames`. 
+This also holds true in R, which has several different types of ***data structures*** that organise and group together variables. Each data structure has specific rules and methods for creating or interacting with them. I'll briefly mention each data structure first, before we focus on two main data structures we'll use in this course: `vectors` and `data frames`.
 
 ### Vectors
 
-The most basic and (probably) important data structure in R are ***vectors***. You can think of vectors as a list of data of R that are of the same data type. 
+The most basic and (probably) important data structure in R are ***vectors***. You can think of vectors as a list of data of R that are of the same data type.
 
-For example, I could create a character vector with names of people in the class. 
+For example, I could create a character vector with names of people in the class.
 
 ```{r}
 
@@ -423,13 +418,14 @@ rintro_names <- c("Gerry", "Aoife", "Liam", "Eva", "Owen", "Ciara")
 print(rintro_names)
 
 ```
+
 ```{r}
 
 is.vector(rintro_names) 
 
 ```
 
-And I can create a numeric vector with their performance on the module. 
+And I can create a numeric vector with their performance on the module.
 
 ```{r}
 
@@ -439,8 +435,7 @@ print(rintro_marks)
 
 ```
 
-And I can create a logical vectors that describes whether or not they like R. 
-
+And I can create a logical vectors that describes whether or not they like R.
 
 ```{r}
 
@@ -459,9 +454,10 @@ instructor <- "Ryan/Brendan"
 is.vector(instructor)
 
 ```
+
 *Activity*: Try create a vector with only integers. Call it "int_vector". Check whether you have successfully created this vector with the code `class(int_vector)`
 
-However, we can't include multiple data types in the one vector. Going back to our numeric grades vector, look what happens when we try mix in grades as characters. 
+However, we can't include multiple data types in the one vector. Going back to our numeric grades vector, look what happens when we try mix in grades as characters.
 
 ```{r}
 
@@ -470,7 +466,8 @@ rintro_marks <- c(87, "A1", 87, 90, 88, 89)
 
 print(rintro_marks)
 ```
-R has converted every element within the `rintro_marks` vector into a character. If R sees an object that is a vector, but sees that its elements belong to different data types, it will try and convert every element to one data type. This is a strict rule in R - a vector can only be created if ever single element (i.e., thing) inside that vector is of the same data type. 
+
+R has converted every element within the `rintro_marks` vector into a character. If R sees an object that is a vector, but sees that its elements belong to different data types, it will try and convert every element to one data type. This is a strict rule in R - a vector can only be created if ever single element (i.e., thing) inside that vector is of the same data type.
 
 If we were to check the class of the `rintro_marks`, it will show us this conversion
 
@@ -488,6 +485,7 @@ rintro_marks <- c(87, "A1", 87, 90, 88, 89)
 class(rintro_marks)
 
 ```
+<<<<<<< HEAD
 
 Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters. 
 
@@ -516,7 +514,10 @@ A useful feature is that I can sort my numeric and integer vectors based on thei
 
 sort(rintro_marks) #this will take the original vector and arrange from lowest to highest scores
 
+=======
+>>>>>>> 07443d0fa96dcbf0c27aa162c244c2a13912f4e4
 
+Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into one row within that column, and then R converts the entire column into a string.
 
 ```
 The `sort()` function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest. 
