@@ -127,7 +127,7 @@
 
 \title{Introduction to R}
 \author{Ryan Donovan}
-\date{2024-01-26}
+\date{2024-01-28}
 
 \begin{document}
 \maketitle
@@ -1382,10 +1382,233 @@ If we were to check the class of the \texttt{rintro\_marks}, it will show us thi
 ## [1] "character"
 \end{verbatim}
 
-Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into one row within that column, and then R converts the entire column into a string.
+Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters.
 
-\hypertarget{packages}{%
-\section{Packages}\label{packages}}
+\hypertarget{working-with-vectors}{%
+\subsubsection{Working with Vectors}\label{working-with-vectors}}
+
+We can perform several types of operations on vectors to gain useful information.
+
+\textbf{Numeric and Integer Vectors}
+
+We can run functions on vectors. For example, we can run functions like \texttt{mean()}, \texttt{median}, or \texttt{sd()} to calculate descriptive statistics on numeric or integer-based vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{) }\CommentTok{\#original numeric vector}
+
+\FunctionTok{mean}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 88.66667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 88.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.632993
+\end{verbatim}
+
+A useful feature is that I can sort my numeric and integer vectors based on their scores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(rintro\_marks) }\CommentTok{\#this will take the original vector and arrange from lowest to highest scores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 87 87 88 89 90 91
+\end{verbatim}
+
+The \texttt{sort()} function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(rintro\_marks, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91 90 89 88 87 87
+\end{verbatim}
+
+\textbf{Character and Logical Vectors}
+
+We are more limited when it comes to operators with character and logical vectors. But we can use functions like \texttt{summary()} to describe properties of character or logical vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(rintro\_names)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Length     Class      Mode 
+##         6 character character
+\end{verbatim}
+
+The \texttt{summary()} functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
+
+\hypertarget{vector-indexing-and-subsetting}{%
+\subsubsection{Vector Indexing and Subsetting}\label{vector-indexing-and-subsetting}}
+
+A vector in R is like a list of items. To be more specifc, vectors in R are actually \emph{ordered} list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list.
+
+\begin{figure}
+\centering
+\includegraphics{img/03-index_numeric.png}
+\caption{\label{fig:unnamed-chunk-48}Indexing for Numeric Vector}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{img/03-index-character.png}
+\caption{\label{fig:unnamed-chunk-49}Indexing for Character Vector}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{img/03-index-logical.png}
+\caption{\label{fig:unnamed-chunk-50}Indexing for Logical Vector}
+\end{figure}
+
+This property in vectors mean we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using \texttt{{[}{]}} brackets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Gerry"
+\end{verbatim}
+
+Similarly, I could extract the 3rd element.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 87
+\end{verbatim}
+
+Or I could extract the last element.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_satisfied[}\DecValTok{8}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements.
+
+I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 8th elements. I just need to use \texttt{c()} to tell R that I am subsetting several elements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Aoife" "Eva"   NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91 90 NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_satisfied[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE    NA
+\end{verbatim}
+
+If the elements you are positioned right next to each other on a vector, you can use \texttt{:} as a shortcut.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)] }\CommentTok{\#this will extract the elements in index 1, 2, 3, 4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Gerry" "Aoife" "Liam"  "Eva"
+\end{verbatim}
+
+It's important to know however that when you perform an operation on a vector or you subset it, it does not actually change the original vector. For example, if you wanted to save the top three \texttt{rintro\_marks}, the following code would not work:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(rintro\_marks, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{91} \DecValTok{90} \DecValTok{89} \DecValTok{88} \DecValTok{87} \DecValTok{87}
+
+\NormalTok{rintro\_marks[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87}
+
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87} \DecValTok{90} \DecValTok{88} \DecValTok{89}
+\end{Highlighting}
+\end{Shaded}
+
+You can see that neither the \texttt{sort()} function or subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.
+
+Here's how I would extract and save the top three exam marks.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{marks\_sorted }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(rintro\_marks, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{marks\_top }\OtherTok{\textless{}{-}}\NormalTok{ marks\_sorted[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)]}
+
+\FunctionTok{print}\NormalTok{(marks\_top)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91 90 89
+\end{verbatim}
+
+Your turn: How could I extract the bottom 3 results? Give it a go.
 
   \bibliography{book.bib,packages.bib}
 

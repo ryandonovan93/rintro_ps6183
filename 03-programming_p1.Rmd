@@ -488,8 +488,183 @@ rintro_marks <- c(87, "A1", 87, 90, 88, 89)
 class(rintro_marks)
 
 ```
-Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into one row within that column, and then R converts the entire column into a string. 
+
+Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters. 
+
+#### Working with Vectors 
+
+We can perform several types of operations on vectors to gain useful information. 
+
+**Numeric and Integer Vectors**
+
+We can run functions on vectors. For example, we can run functions like `mean()`, `median`, or `sd()` to calculate descriptive statistics on numeric or integer-based vectors. 
+
+```{r}
+
+rintro_marks <- c(87, 91, 87, 90, 88, 89) #original numeric vector
+
+mean(rintro_marks)
+
+median(rintro_marks)
+
+sd(rintro_marks)
+
+```
+A useful feature is that I can sort my numeric and integer vectors based on their scores. 
+
+```{r}
+
+sort(rintro_marks) #this will take the original vector and arrange from lowest to highest scores
 
 
 
-## Packages
+```
+The `sort()` function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest. 
+
+```{r}
+
+sort(rintro_marks, decreasing = TRUE) 
+
+```
+
+**Character and Logical Vectors**
+
+We are more limited when it comes to operators with character and logical vectors. But we can use functions like `summary()` to describe properties of character or logical vectors. 
+
+
+```{r}
+
+
+summary(rintro_names)
+
+
+
+
+```
+The `summary()` functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector. 
+
+
+
+#### Vector Indexing and Subsetting
+
+A vector in R is like a list of items. To be more specifc, vectors in R are actually *ordered* list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list. 
+
+
+
+
+
+```{r fig.cap = "Indexing for Numeric Vector", echo = FALSE, warning = FALSE}
+
+
+library(knitr)
+
+include_graphics("img/03-index_numeric.png")
+
+```
+
+
+```{r fig.cap = "Indexing for Character Vector", echo = FALSE, warning = FALSE}
+
+
+library(knitr)
+
+include_graphics("img/03-index-character.png")
+
+```
+
+
+
+```{r fig.cap = "Indexing for Logical Vector", echo = FALSE, warning = FALSE}
+
+library(knitr)
+
+include_graphics("img/03-index-logical.png")
+
+
+```
+
+This property in vectors mean we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using `[]` brackets. 
+
+```{r}
+
+rintro_names[1]
+
+```
+Similarly, I could extract the 3rd element.
+
+```{r}
+
+rintro_marks[3]
+
+```
+Or I could extract the last element.
+
+```{r}
+
+rintro_satisfied[8]
+
+```
+
+This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements. 
+
+I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 8th elements. I just need to use `c()` to tell R that I am subsetting several elements.
+
+```{r}
+
+rintro_names[c(2, 4, 8)]
+
+```
+```{r}
+
+rintro_marks[c(2, 4, 8)]
+
+```
+
+```{r}
+
+rintro_satisfied[c(2, 4, 8)]
+
+```
+If the elements you are positioned right next to each other on a vector, you can use `:` as a shortcut. 
+
+```{r}
+
+rintro_names[c(1:4)] #this will extract the elements in index 1, 2, 3, 4
+
+```
+
+It's important to know however that when you perform an operation on a vector or you subset it, it does not actually change the original vector. For example, if you wanted to save the top three `rintro_marks`, the following code would not work:
+
+```{r warning = FALSE, eval = FALSE}
+
+sort(rintro_marks, decreasing = TRUE)
+
+
+[1] 91 90 89 88 87 87
+
+rintro_marks[c(1, 2, 3)]
+
+[1] 87 91 87
+
+print(rintro_marks)
+
+[1] 87 91 87 90 88 89
+
+```
+
+You can see that neither the `sort()` function or subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label. 
+
+Here's how I would extract and save the top three exam marks. 
+
+```{r}
+
+marks_sorted <- sort(rintro_marks, decreasing = TRUE)
+
+marks_top <- marks_sorted[c(1:3)]
+
+print(marks_top)
+
+```
+Your turn: How could I extract the bottom 3 results? Give it a go. 
+
+
