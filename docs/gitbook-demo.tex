@@ -1651,7 +1651,7 @@ Over to you! How could we extract and save the bottom 3 results from the \texttt
 Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
 
 \hypertarget{vectors---making-it-a-little-less-abstract.}{%
-\section{Vectors - making it a little less abstract.}\label{vectors---making-it-a-little-less-abstract.}}
+\subsubsection{Vectors - making it a little less abstract.}\label{vectors---making-it-a-little-less-abstract.}}
 
 You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called \texttt{lists} (we'll talk it more next week). That confused me.
 
@@ -1682,7 +1682,7 @@ So whenever you think of a vector, just remember that it refers to a line of dat
 So what happens we combine different vectors (columns and rows) together? We create a \texttt{data\ frame}.
 
 \hypertarget{data-frames}{%
-\section{Data frames}\label{data-frames}}
+\subsection{Data frames}\label{data-frames}}
 
 Data frames is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in excel.
 
@@ -1713,14 +1713,17 @@ Data frames are an excellent way to store and manage data in R because it can st
 ## 3 Charlie  22 75.33
 \end{verbatim}
 
+\hypertarget{selecting-data-from-a-data-frame}{%
+\subsubsection{Selecting Data from a Data Frame}\label{selecting-data-from-a-data-frame}}
+
 Once you have created or imported a data frame, you'll often need to access it and perform various tasks and analyses. Let's explore how to access data within a data frame effectively.
 
 \hypertarget{selecting-columns}{%
-\subsection{Selecting Columns}\label{selecting-columns}}
+\paragraph{Selecting Columns}\label{selecting-columns}}
 
 Columns in a data frame represent different variables or attributes of your data. Often in data analysis we want to select a specific column and then perform analyses on it. So how can we individual select columns? We can do so through a variety of tools:
 
-The **\(** Notation: You can use a dollar sign (\)) followed by the column to select a particular column in a data frame. For example, let's select the \texttt{Name} column in the \texttt{my\_df} data frame.
+The \textbf{\$} Notation: You can use a dollar sign (\$) followed by the column to select a particular column in a data frame. For example, let's select the \texttt{Name} column in the \texttt{my\_df} data frame.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1735,6 +1738,180 @@ The **\(** Notation: You can use a dollar sign (\)) followed by the column to se
 Square Brackets: This is similar approach to accessing elements from a vector. Inside the brackets you can specify both the row and columns that you want to extract
 
 In a data frame, every column has a name, similar to how each column in an excel spreadsheet has a header. These columns names enable you to access and manipulate specific columns or variables within your data frame.
+
+You can also use square brackets to access columns. Inside the brackets, you specify the row indices (or leave it empty for all rows) and the column name in quotes. For example, to access the ``Age'' column of my\_df:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[, }\StringTok{"Age"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25 30 22
+\end{verbatim}
+
+We can also use this approach to access multiple columns using the \texttt{c()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Score"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Score
+## 1  25 95.65
+## 2  30 88.12
+## 3  22 75.33
+\end{verbatim}
+
+\hypertarget{selecting-rows}{%
+\paragraph{Selecting Rows}\label{selecting-rows}}
+
+Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve. Here are some examples:
+
+To get the first row of your data frame (my\_df):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\DecValTok{1}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Name Age Score
+## 1 Alice  25 95.65
+\end{verbatim}
+
+To access the third row:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\DecValTok{3}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score
+## 3 Charlie  22 75.33
+\end{verbatim}
+
+If you want multiple rows, you can specify a range of row indices:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Name Age Score
+## 2      Bob  30 88.12
+## 3  Charlie  22 75.33
+## NA    <NA>  NA    NA
+\end{verbatim}
+
+These methods allow you to extract specific rows or subsets of rows from your data frame. You can combine row and column indexing to access specific elements within the data frame as needed.
+
+\hypertarget{selecting-rows-and-columns}{%
+\paragraph{Selecting Rows and Columns}\label{selecting-rows-and-columns}}
+
+Following on from these examples, we can select both rows and columns using \texttt{{[}{]}}.For example we could select the first and third rows for the \texttt{Age} and \texttt{Score} columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Score"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Score
+## 1  25 95.65
+## 3  22 75.33
+\end{verbatim}
+
+Similar to when we indexed vectors, this won't change the underlying data frame. To do that, we would need to assign the selection to a variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df2 }\OtherTok{\textless{}{-}}\NormalTok{ my\_df[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Score"}\NormalTok{)]}
+
+\NormalTok{my\_df2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Score
+## 1  25 95.65
+## 3  22 75.33
+\end{verbatim}
+
+\hypertarget{adding-data-to-your-data-frame}{%
+\subsubsection{Adding Data to your Data Frame}\label{adding-data-to-your-data-frame}}
+
+\hypertarget{adding-columns}{%
+\paragraph{Adding Columns}\label{adding-columns}}
+
+You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of \texttt{Gender} on the \texttt{Score} variable. The syntax for creating a new data frame is very straight forward
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{existing\_df}\SpecialCharTok{$}\NormalTok{NewColumn }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(Value1, Value2, Value3)}
+\end{Highlighting}
+\end{Shaded}
+
+Using this syntax, let's add a Gender column to our \texttt{my\_df} dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df}\SpecialCharTok{$}\NormalTok{Gender }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\StringTok{"Non{-}binary"}\NormalTok{)}
+
+\CommentTok{\#let\textquotesingle{}s see if we have successfully added a new column in}
+
+\NormalTok{my\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary
+\end{verbatim}
+
+Easy pease.
+
+\hypertarget{adding-rows}{%
+\paragraph{Adding Rows}\label{adding-rows}}
+
+What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!) This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.
+
+What we need to do is actually creating a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new\_row }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Name =} \StringTok{"John"}\NormalTok{, }\AttributeTok{Age =} \DecValTok{30}\NormalTok{, }\AttributeTok{Score =} \FloatTok{77.34}\NormalTok{, }\AttributeTok{Gender =} \StringTok{"Male"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then we can use the \texttt{rbind()} function to add the new row to your original data frame. \texttt{rbind} takes in two data frames and combines them together. The syntax is as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(my\_df, new\_row)}
+
+\NormalTok{my\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary
+## 4    John  30 77.34       Male
+\end{verbatim}
 
   \bibliography{book.bib,packages.bib}
 

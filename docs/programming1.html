@@ -196,11 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.5</b> Data Structures</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.5.1</b> Vectors</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#vectors---making-it-a-little-less-abstract."><i class="fa fa-check"></i><b>3.6</b> Vectors - making it a little less abstract.</a></li>
-<li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.7</b> Data frames</a>
-<ul>
-<li class="chapter" data-level="3.7.1" data-path="programming1.html"><a href="programming1.html#selecting-columns"><i class="fa fa-check"></i><b>3.7.1</b> Selecting Columns</a></li>
+<li class="chapter" data-level="3.5.2" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.5.2</b> Data frames</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -609,10 +605,8 @@ Figure 3.3: Indexing for Logical Vector
 <p>Over to you! How could we extract and save the bottom 3 results from the <code>rintro_marks</code>` vector? Give it a go.</p>
 <p>Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.</p>
 </div>
-</div>
-</div>
-<div id="vectors---making-it-a-little-less-abstract." class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> Vectors - making it a little less abstract.<a href="programming1.html#vectors---making-it-a-little-less-abstract." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="vectors---making-it-a-little-less-abstract." class="section level4 hasAnchor" number="3.5.1.3">
+<h4><span class="header-section-number">3.5.1.3</span> Vectors - making it a little less abstract.<a href="programming1.html#vectors---making-it-a-little-less-abstract." class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was was learning R. While the list analogy is helpful, it only works for so long - there’s another data structure called <code>lists</code> (we’ll talk it more next week). That confused me.</p>
 <p>But what helped me understand vectors was the realization that a vector is simply a “line of data”. Let’s say I was running a study and collected data on participants age. When I open the excel file, there will be a column called “age” will all the ages of my participants. That column is a vector of data with the variable label “age”.</p>
 <p>Creating that vector is the equivalent of creating a column in excel.</p>
@@ -624,8 +618,9 @@ Figure 3.3: Indexing for Logical Vector
 <p>So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row.</p>
 <p>So what happens we combine different vectors (columns and rows) together? We create a <code>data frame</code>.</p>
 </div>
-<div id="data-frames" class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> Data frames<a href="programming1.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="data-frames" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Data frames<a href="programming1.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Data frames is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in excel.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-65"></span>
 <img src="img/03-dataframes_vectors.png" alt="The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors"  />
@@ -645,16 +640,97 @@ Figure 3.4: The relationship between data frames and vectors. The different colo
 ## 1   Alice  25 95.65
 ## 2     Bob  30 88.12
 ## 3 Charlie  22 75.33</code></pre>
+<div id="selecting-data-from-a-data-frame" class="section level4 hasAnchor" number="3.5.2.1">
+<h4><span class="header-section-number">3.5.2.1</span> Selecting Data from a Data Frame<a href="programming1.html#selecting-data-from-a-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Once you have created or imported a data frame, you’ll often need to access it and perform various tasks and analyses. Let’s explore how to access data within a data frame effectively.</p>
-<div id="selecting-columns" class="section level3 hasAnchor" number="3.7.1">
-<h3><span class="header-section-number">3.7.1</span> Selecting Columns<a href="programming1.html#selecting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="selecting-columns" class="section level5 hasAnchor" number="3.5.2.1.1">
+<h5><span class="header-section-number">3.5.2.1.1</span> Selecting Columns<a href="programming1.html#selecting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Columns in a data frame represent different variables or attributes of your data. Often in data analysis we want to select a specific column and then perform analyses on it. So how can we individual select columns? We can do so through a variety of tools:</p>
-<p>The **<span class="math inline">\(** Notation: You can use a dollar sign (\)</span>) followed by the column to select a particular column in a data frame. For example, let’s select the <code>Name</code> column in the <code>my_df</code> data frame.</p>
+<p>The <strong>$</strong> Notation: You can use a dollar sign ($) followed by the column to select a particular column in a data frame. For example, let’s select the <code>Name</code> column in the <code>my_df</code> data frame.</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="programming1.html#cb127-1" tabindex="-1"></a>my_df<span class="sc">$</span>Name</span></code></pre></div>
 <pre><code>## [1] &quot;Alice&quot;   &quot;Bob&quot;     &quot;Charlie&quot;</code></pre>
 <p>Square Brackets: This is similar approach to accessing elements from a vector. Inside the brackets you can specify both the row and columns that you want to extract</p>
 <p>In a data frame, every column has a name, similar to how each column in an excel spreadsheet has a header. These columns names enable you to access and manipulate specific columns or variables within your data frame.</p>
+<p>You can also use square brackets to access columns. Inside the brackets, you specify the row indices (or leave it empty for all rows) and the column name in quotes. For example, to access the “Age” column of my_df:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="programming1.html#cb129-1" tabindex="-1"></a>my_df[, <span class="st">&quot;Age&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] 25 30 22</code></pre>
+<p>We can also use this approach to access multiple columns using the <code>c()</code> function.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="programming1.html#cb131-1" tabindex="-1"></a>my_df[, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Score&quot;</span>)]</span></code></pre></div>
+<pre><code>##   Age Score
+## 1  25 95.65
+## 2  30 88.12
+## 3  22 75.33</code></pre>
+</div>
+<div id="selecting-rows" class="section level5 hasAnchor" number="3.5.2.1.2">
+<h5><span class="header-section-number">3.5.2.1.2</span> Selecting Rows<a href="programming1.html#selecting-rows" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve. Here are some examples:</p>
+<p>To get the first row of your data frame (my_df):</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="programming1.html#cb133-1" tabindex="-1"></a>my_df[<span class="dv">1</span>, ]</span></code></pre></div>
+<pre><code>##    Name Age Score
+## 1 Alice  25 95.65</code></pre>
+<p>To access the third row:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="programming1.html#cb135-1" tabindex="-1"></a>my_df[<span class="dv">3</span>, ]</span></code></pre></div>
+<pre><code>##      Name Age Score
+## 3 Charlie  22 75.33</code></pre>
+<p>If you want multiple rows, you can specify a range of row indices:</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="programming1.html#cb137-1" tabindex="-1"></a>my_df[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code></pre></div>
+<pre><code>##       Name Age Score
+## 2      Bob  30 88.12
+## 3  Charlie  22 75.33
+## NA    &lt;NA&gt;  NA    NA</code></pre>
+<p>These methods allow you to extract specific rows or subsets of rows from your data frame. You can combine row and column indexing to access specific elements within the data frame as needed.</p>
+</div>
+<div id="selecting-rows-and-columns" class="section level5 hasAnchor" number="3.5.2.1.3">
+<h5><span class="header-section-number">3.5.2.1.3</span> Selecting Rows and Columns<a href="programming1.html#selecting-rows-and-columns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Following on from these examples, we can select both rows and columns using <code>[]</code>.For example we could select the first and third rows for the <code>Age</code> and <code>Score</code> columns.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="programming1.html#cb139-1" tabindex="-1"></a>my_df[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Score&quot;</span>)]</span></code></pre></div>
+<pre><code>##   Age Score
+## 1  25 95.65
+## 3  22 75.33</code></pre>
+<p>Similar to when we indexed vectors, this won’t change the underlying data frame. To do that, we would need to assign the selection to a variable.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="programming1.html#cb141-1" tabindex="-1"></a>my_df2 <span class="ot">&lt;-</span> my_df[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Score&quot;</span>)]</span>
+<span id="cb141-2"><a href="programming1.html#cb141-2" tabindex="-1"></a></span>
+<span id="cb141-3"><a href="programming1.html#cb141-3" tabindex="-1"></a>my_df2</span></code></pre></div>
+<pre><code>##   Age Score
+## 1  25 95.65
+## 3  22 75.33</code></pre>
+</div>
+</div>
+<div id="adding-data-to-your-data-frame" class="section level4 hasAnchor" number="3.5.2.2">
+<h4><span class="header-section-number">3.5.2.2</span> Adding Data to your Data Frame<a href="programming1.html#adding-data-to-your-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="adding-columns" class="section level5 hasAnchor" number="3.5.2.2.1">
+<h5><span class="header-section-number">3.5.2.2.1</span> Adding Columns<a href="programming1.html#adding-columns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of <code>Gender</code> on the <code>Score</code> variable. The syntax for creating a new data frame is very straight forward</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="programming1.html#cb143-1" tabindex="-1"></a>existing_df<span class="sc">$</span>NewColumn <span class="ot">&lt;-</span> <span class="fu">c</span>(Value1, Value2, Value3)</span></code></pre></div>
+<p>Using this syntax, let’s add a Gender column to our <code>my_df</code> dataframe.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="programming1.html#cb144-1" tabindex="-1"></a>my_df<span class="sc">$</span>Gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Non-binary&quot;</span>)</span>
+<span id="cb144-2"><a href="programming1.html#cb144-2" tabindex="-1"></a></span>
+<span id="cb144-3"><a href="programming1.html#cb144-3" tabindex="-1"></a><span class="co">#let&#39;s see if we have successfully added a new column in</span></span>
+<span id="cb144-4"><a href="programming1.html#cb144-4" tabindex="-1"></a></span>
+<span id="cb144-5"><a href="programming1.html#cb144-5" tabindex="-1"></a>my_df</span></code></pre></div>
+<pre><code>##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary</code></pre>
+<p>Easy pease.</p>
+</div>
+<div id="adding-rows" class="section level5 hasAnchor" number="3.5.2.2.2">
+<h5><span class="header-section-number">3.5.2.2.2</span> Adding Rows<a href="programming1.html#adding-rows" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!) This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.</p>
+<p>What we need to do is actually creating a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="programming1.html#cb146-1" tabindex="-1"></a>new_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">Age =</span> <span class="dv">30</span>, <span class="at">Score =</span> <span class="fl">77.34</span>, <span class="at">Gender =</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
+<p>Then we can use the <code>rbind()</code> function to add the new row to your original data frame. <code>rbind</code> takes in two data frames and combines them together. The syntax is as follows:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="programming1.html#cb147-1" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(my_df, new_row)</span>
+<span id="cb147-2"><a href="programming1.html#cb147-2" tabindex="-1"></a></span>
+<span id="cb147-3"><a href="programming1.html#cb147-3" tabindex="-1"></a>my_df</span></code></pre></div>
+<pre><code>##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary
+## 4    John  30 77.34       Male</code></pre>
 
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -735,20 +811,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
