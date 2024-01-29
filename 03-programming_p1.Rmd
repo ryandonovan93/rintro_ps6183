@@ -1,18 +1,14 @@
 # Basic R Programming (Part I) {#programming1}
 
-Today we are going to learn some basic programming concepts. By the end of the session, you should be able to:
+Today, we are going to explore fundamental programming concepts in R. By the end of this session, you should be capable of the following:
 
--   Run and troubleshoot commands in the R console.
+-   Running and troubleshooting commands in the R console.
+-   Understanding different data types and when to use them.
+-   Creating and utilizing variables.
+-   Grasping data structures and how to construct them.
+-   Loading R packages and utilizing their functions.
 
--   Understand the different data types and when they are used.
-
--   Create and use variables.
-
--   Understand data structures and how to create them.
-
--   Load R packages and use their functions.
-
-```{r echo = FALSE, warning = FALSE}
+```{r echo=FALSE, warning=FALSE}
 
 library(webexercises)
 
@@ -39,8 +35,6 @@ That distinction is kinda true, but it's not completely true. In reality, when w
 It's important to know how to work the R console, even if we mostly use scripts in these workshops. We don't want the chef to spit into our food.
 
 ### Typing Commands in the Console
-
-We enter in our code after this operator and press enter to compute it.
 
 We can command the R console to compute calculations. Remember not to type the operator ´\>´ if you are following along in RStudio, this just indicates that R is ready to execute a new command.[^03-programming_p1-1]
 
@@ -79,15 +73,24 @@ If you are performing calculations in R, it's important to know that it follows 
 
 Now you'll have noticed that the output of every line of code we entered starts with a **`[1]`** before our actual result. What does this mean?
 
-Think of the square brackets with a number as a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like **`[1]`**, are like labels on each response, telling you which answer corresponds to which question. This is R ***indexing*** its answer.
+This is a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like **`[1]`**, are like labels on each response, telling you which answer corresponds to which question. This is R ***indexing*** its answer. 
 
-In each of the above examples, we asked R one question ***per each*** command, which is why the answer is always **`[1]`**. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.
+In each of the above examples, we asked R a question that only has only 1 answer, which is why the output is always **`[1]`**. Look what happens when I ask to print out multiple answers. 
+
+```{r}
+
+print(sleep$extra) #this will print out the extra sleep column in the sleep dataset we used last week
+
+```
+Here R tells us that the first answer (i.e., value) corresponds to `0.1`. The next label is [17], which tells us that the 17th answer corresponds to 5.5. The reason that R does this is that R only prints out the index in the console each time it needs to make a new row. This helps us orient ourselves to answers, without adding a lot more data (e.g., if there was an index for every single answer that would double the number of data we were looking at). 
+
+We will come back to indexing later in this session. It is an extremely useful concept in R. 
 
 ### Console Syntax (Aka "I'm Ron Burgundy?")
 
 #### R Console and Typos
 
-One of the most important concepts you need to understand when you are programming, is that you need to type exactly what you want R to do. If you make a mistake (e.g., a typo), R will not try and understand what you actually meant. For example, see what happens if you make the following mistake:
+One of the most important things you need to know when you are programming, is that you need to type *exactly* what you want R to do. If you make a mistake (e.g., a typo), R will not try and understand what you actually meant. For example, see what happens if you write the following code:
 
 ```{r eval=F}
 
@@ -101,11 +104,13 @@ One of the most important concepts you need to understand when you are programmi
 
 ```
 
-R thinks you making the claim that 10 equals 20. Since this is not true, R panics and refuses to run your command. Now any person looking at that code would guess that since `+` and `=` are on the same key on our keyboards, the person probably meant to type `10 + 20`. But we have a strong theory of mind whereas programming languages do not.
+R thinks you making the claim that 10 equals 20. Since this is not true, R panics and refuses to run your command. Now any person looking at your code would guess that since `+` and `=` are on the same key on our keyboards, you probably meant to type `10 + 20`. But that's because we have a strong theory of mind, whereas programming languages do not. 
 
-So be exact with your code or else be Ron Burgundy(?) [a Ron Burgundy situation.](https://www.youtube.com/watch?v=X3zfP14pLxc).
+So be exact with your code or else be [Ron Burgundy?](https://www.youtube.com/watch?v=X3zfP14pLxc).
 
-This type of mistakes are pretty benign, as R will tell us immediately that something is wrong. However, there can be a more silent type of mistake that can be more damaging. Let's image that you typed in `-` instead of `+` by mistake.
+On the grand scheme of mistakes though, this mistake is not that costly because R will tell us immediately that something is wrong and stop us from doing anything. 
+
+However, there are silent type of mistakes that are harder to solve. Let's image that you typed in `-` instead of `+`.
 
 ```{r eval= FALSE}
 
@@ -115,9 +120,13 @@ This type of mistakes are pretty benign, as R will tell us immediately that some
 
 ```
 
-In this scenario, R will run this code and output the result. This is because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. R can't read your mind, so it sees three symbols in a perfectly logical order, and carries out the command. It assumes you're the adult here.
+In this scenario, R will run this code and output the result. This is because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. R doesn't know you meant to add `10` to `20`. All it can see is three objects `10`, `-`, and `20` in a logical order, so it carries out the command. You're the leader in this relationship.  
 
-In short calculations like this, it will clear what you typed wrong. However, if you run a long-block of connected code and made a typo like this somewhere, the result you get be significantly different from the intended result. The main way to check for this is to always view the output of your code. If it looks significantly different from what you expected, then this type of silent error might be causing it.
+In short calculations like this, it's clear what you typed wrong. But if you run a long-block of connected code and made a typo like this somewhere, the result you get can be significantly different from the intended result and it might be difficult to spot. 
+
+The main way to check for this is to always view the output of your code. If it looks significantly different from what you expected, then this type of silent error might be causing it.
+
+I am not highlighting these issues to scare you, it's just important to know that big problems (R code not running or inaccurate results) can be easily fixed by tiny changes. 
 
 #### R Console and Incomplete Commands
 
@@ -543,7 +552,6 @@ summary(rintro_names)
 
 
 
-
 ```
 
 The `summary()` functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
@@ -711,5 +719,52 @@ include_graphics("img/03-row-vector.png")
 So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row. 
 
 So what happens we combine different vectors (columns and rows) together? We create a `data frame`.
+
+## Data frames
+
+Data frames is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in excel. 
+
+```{r fig.cap = "The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors", warning = FALSE, echo = FALSE}
+
+library(knitr)
+
+include_graphics("img/03-dataframes_vectors.png")
+
+```
+
+Data frames are an excellent way to store and manage data in R because it can store different types data (e.g., character, numeric, integer) all within the same structure. Let's create such a data frame using the `data.frame()` function. 
+
+```{r}
+
+
+my_df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"), #a character vector
+  Age = c(25L, 30L, 22L), #an integer vector
+  Score = c(95.65, 88.12, 75.33) #a numeric vector
+)
+
+my_df
+
+```
+
+Once you have created or imported a data frame, you'll often need to access it and perform various tasks and analyses. Let's explore how to access data within a data frame effectively. 
+
+### Selecting Columns
+
+Columns in a data frame represent different variables or attributes of your data. Often in data analysis we want to select a specific column and then perform analyses on it. So how can we individual select columns? We can do so through a variety of tools:
+
+The **$** Notation: You can use a dollar sign ($) followed by the column to select a particular column in a data frame. For example, let's select the `Name` column in the `my_df` data frame. 
+
+```{r}
+
+my_df$Name
+
+```
+Square Brackets: This is similar approach to accessing elements from a vector. Inside the brackets you can specify both the row and columns that you want to extract 
+
+In a data frame, every column has a name, similar to how each column in an excel spreadsheet has a header. These columns names enable you to access and manipulate specific columns or variables within your data frame. 
+
+
+
 
 
