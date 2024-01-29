@@ -432,7 +432,7 @@ You want the working directory to be in the same location as your R project. Tha
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "/Users/ryandonovan 1/Desktop/Teaching/R/rintro"
+## [1] "C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro"
 \end{verbatim}
 
 What you get in return is the current working directory R is working in. Your working directory will not be the same as mine, that's perfectly normal. Just check to make sure that is in the same location you specified when you created your project (\textbf{Option 2}).
@@ -1140,14 +1140,14 @@ Now many of you who have seen my email will think \emph{``Hold on a second, isn'
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{my\_name }\OtherTok{\textless{}{-}} \StringTok{"Brendan"} \CommentTok{\#please don\textquotesingle{}t call me this}
+\NormalTok{name }\OtherTok{\textless{}{-}} \StringTok{"Brendan"} \CommentTok{\#please don\textquotesingle{}t call me this}
 
 \FunctionTok{print}\NormalTok{(name)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Ryan"
+## [1] "Brendan"
 \end{verbatim}
 
 All data types can be stored as information to variables.
@@ -1190,29 +1190,47 @@ All data types can be stored as information to variables.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{paste}\NormalTok{(}\StringTok{"My name is"}\NormalTok{, name, }\StringTok{"and I am"}\NormalTok{, age, }\StringTok{"years old."}\NormalTok{)}
+\FunctionTok{paste}\NormalTok{(}\StringTok{"My name is"}\NormalTok{, name, }\StringTok{"I am"}\NormalTok{, age, }\StringTok{"years old and I am"}\NormalTok{, height, }\StringTok{"cm tall. It is"}\NormalTok{, live\_in\_hot\_country, }\StringTok{"that I was born in a hot country"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "My name is Ryan and I am 30 years old."
+## [1] "My name is Brendan I am 30 years old and I am 175 cm tall. It is FALSE that I was born in a hot country"
 \end{verbatim}
 
-We can use variable names to compute calculations with their information or to print certain results.
-
-We can also store data structures to variables.
+We can use variables compute calculations with their information. Let's say I have several variables relating to my scores on five items measuring Extraversion (which I will label with the variable names \texttt{extra1} to \texttt{extra5}). I can use the variable names to calculate my total Extraversion score.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{class\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Ryan"}\NormalTok{, }\StringTok{"Gerry"}\NormalTok{, }\StringTok{"Eva"}\NormalTok{, }\StringTok{"Santi"}\NormalTok{, }\StringTok{"Molly"}\NormalTok{, }\StringTok{"Aoife"}\NormalTok{)}
+\NormalTok{extra1 }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{extra2 }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{extra3 }\OtherTok{\textless{}{-}} \DecValTok{4}
+\NormalTok{extra4 }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{extra5 }\OtherTok{\textless{}{-}} \DecValTok{3}
 
-\FunctionTok{print}\NormalTok{(class\_names)}
+\NormalTok{total\_extra }\OtherTok{\textless{}{-}}\NormalTok{ extra1 }\SpecialCharTok{+}\NormalTok{ extra2 }\SpecialCharTok{+}\NormalTok{ extra3 }\SpecialCharTok{+}\NormalTok{ extra4 }\SpecialCharTok{+}\NormalTok{ extra5}
+
+\FunctionTok{print}\NormalTok{(total\_extra)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Ryan"  "Gerry" "Eva"   "Santi" "Molly" "Aoife"
+## [1] 12
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean\_extra }\OtherTok{\textless{}{-}}\NormalTok{  total\_extra}\SpecialCharTok{/}\DecValTok{5}
+
+\FunctionTok{print}\NormalTok{(mean\_extra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.4
+\end{verbatim}
+
+Variables are an extremely powerful tool in programming that enable us to create code that work across a variety of situations.
 
 \hypertarget{whats-in-a-name-conventions-for-naming-variables}{%
 \subsection{What's in a name? (Conventions for Naming Variables)}\label{whats-in-a-name-conventions-for-naming-variables}}
@@ -1239,7 +1257,7 @@ Variable names cannot include special words that R reserves (e.g., if, else, rep
 
 \emph{But you should choose a long variable name that is clear over a short variable name that is unclear}. A long variable name like \texttt{total\_exam\_marks} is significantly better than a cryptic acronym like \texttt{tem}.
 
-\emph{Do not start your variables with a capital letter.}\footnote{\emph{This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence ``I will drive to Dublin on Friday'', whereas German speakers tend to specify time near the beginning of the sentence ``I will on Friday drive to Dublin'' (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.}} A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users
+\emph{Do not start your variables with a capital letter.}\footnote{This rule is the most ``soft'', but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence ``I will drive to Dublin on Friday'', whereas German speakers tend to specify time near the beginning of the sentence ``I will on Friday drive to Dublin'' (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.} A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users
 
 \emph{Use a conventional naming style and be consistent with it}. There are three conventional styles for handling variables that contain multiple words.
 
@@ -1584,7 +1602,6 @@ It's important to know however that when you perform an operation on a vector or
 \NormalTok{rintro\_marks[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
 
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87}
-
 \FunctionTok{print}\NormalTok{(rintro\_marks)}
 
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87} \DecValTok{90} \DecValTok{88} \DecValTok{89}
@@ -1609,7 +1626,40 @@ Here's how I would extract and save the top three exam marks.
 ## [1] 91 90 89
 \end{verbatim}
 
-Your turn: How could I extract the bottom 3 results? Give it a go.
+Over to you! How could we extract and save the bottom 3 results from the \texttt{rintro\_marks}` vector? Give it a go.
+
+Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
+
+\hypertarget{vectors---making-it-a-little-less-abstract.}{%
+\section{Vectors - making it a little less abstract.}\label{vectors---making-it-a-little-less-abstract.}}
+
+You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called \texttt{lists} (we'll talk it more next week). That confused me.
+
+But what helped me understand vectors was the realization that a vector is simply a ``line of data''. Let's say I was running a study and collected data on participants age. When I open the excel file, there will be a column called ``age'' will all the ages of my participants. That column is a vector of data with the variable label ``age''.
+
+Creating that vector is the equivalent of creating a column in excel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{18}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{44}\NormalTok{,}\DecValTok{32}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{23}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{img/03-column-vector.png}
+
+Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am create a new row (line) of data. In R this is the equivalent of doing this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p11 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{175}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{img/03-row-vector.png}
+
+So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row.
+
+So what happens we combine different vectors (columns and rows) together? We create a \texttt{data\ frame}.
 
   \bibliography{book.bib,packages.bib}
 

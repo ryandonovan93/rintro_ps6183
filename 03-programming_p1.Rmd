@@ -314,7 +314,7 @@ Now many of you who have seen my email will think *"Hold on a second, isn't your
 
 ```{r}
 
-my_name <- "Brendan" #please don't call me this
+name <- "Brendan" #please don't call me this
 
 print(name)
 
@@ -341,22 +341,30 @@ print(live_in_hot_country)
 ```{r}
 
 
-paste("My name is", name, "and I am", age, "years old.")
+paste("My name is", name, "I am", age, "years old and I am", height, "cm tall. It is", live_in_hot_country, "that I was born in a hot country")
 
 
 ```
-
-We can use variable names to compute calculations with their information or to print certain results.
-
-We can also store data structures to variables.
+We can use variables compute calculations with their information. Let's say I have several variables relating to my scores on five items measuring Extraversion (which I will label with the variable names `extra1` to `extra5`). I can use the variable names to calculate my total Extraversion score. 
 
 ```{r}
 
-class_names <- c("Ryan", "Gerry", "Eva", "Santi", "Molly", "Aoife")
+extra1 <- 1
+extra2 <- 2
+extra3 <- 4
+extra4 <- 2
+extra5 <- 3
 
-print(class_names)
+total_extra <- extra1 + extra2 + extra3 + extra4 + extra5
 
+print(total_extra)
+
+mean_extra <-  total_extra/5
+
+print(mean_extra)
 ```
+
+Variables are an extremely powerful tool in programming that enable us to create code that work across a variety of situations. 
 
 ### What's in a name? (Conventions for Naming Variables)
 
@@ -384,7 +392,7 @@ Variable names cannot include special words that R reserves (e.g., if, else, rep
 
 *Do not start your variables with a capital letter.*[^03-programming_p1-2] A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users
 
-[^03-programming_p1-2]: *This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence "I will drive to Dublin on Friday", whereas German speakers tend to specify time near the beginning of the sentence "I will on Friday drive to Dublin" (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.*
+[^03-programming_p1-2]: This rule is the most "soft", but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence "I will drive to Dublin on Friday", whereas German speakers tend to specify time near the beginning of the sentence "I will on Friday drive to Dublin" (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.
 
 *Use a conventional naming style and be consistent with it*. There are three conventional styles for handling variables that contain multiple words.
 
@@ -485,17 +493,16 @@ rintro_marks <- c(87, "A1", 87, 90, 88, 89)
 class(rintro_marks)
 
 ```
-<<<<<<< HEAD
 
-Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters. 
+Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters.
 
-#### Working with Vectors 
+#### Working with Vectors
 
-We can perform several types of operations on vectors to gain useful information. 
+We can perform several types of operations on vectors to gain useful information.
 
 **Numeric and Integer Vectors**
 
-We can run functions on vectors. For example, we can run functions like `mean()`, `median`, or `sd()` to calculate descriptive statistics on numeric or integer-based vectors. 
+We can run functions on vectors. For example, we can run functions like `mean()`, `median`, or `sd()` to calculate descriptive statistics on numeric or integer-based vectors.
 
 ```{r}
 
@@ -508,19 +515,16 @@ median(rintro_marks)
 sd(rintro_marks)
 
 ```
-A useful feature is that I can sort my numeric and integer vectors based on their scores. 
+
+A useful feature is that I can sort my numeric and integer vectors based on their scores.
 
 ```{r}
 
 sort(rintro_marks) #this will take the original vector and arrange from lowest to highest scores
 
-=======
->>>>>>> 07443d0fa96dcbf0c27aa162c244c2a13912f4e4
-
-Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into one row within that column, and then R converts the entire column into a string.
-
 ```
-The `sort()` function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest. 
+
+The `sort()` function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.
 
 ```{r}
 
@@ -530,8 +534,7 @@ sort(rintro_marks, decreasing = TRUE)
 
 **Character and Logical Vectors**
 
-We are more limited when it comes to operators with character and logical vectors. But we can use functions like `summary()` to describe properties of character or logical vectors. 
-
+We are more limited when it comes to operators with character and logical vectors. But we can use functions like `summary()` to describe properties of character or logical vectors.
 
 ```{r}
 
@@ -542,17 +545,12 @@ summary(rintro_names)
 
 
 ```
-The `summary()` functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector. 
 
-
+The `summary()` functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
 
 #### Vector Indexing and Subsetting
 
-A vector in R is like a list of items. To be more specifc, vectors in R are actually *ordered* list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list. 
-
-
-
-
+A vector in R is like a list of items. To be more specifc, vectors in R are actually *ordered* list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list.
 
 ```{r fig.cap = "Indexing for Numeric Vector", echo = FALSE, warning = FALSE}
 
@@ -563,7 +561,6 @@ include_graphics("img/03-index_numeric.png")
 
 ```
 
-
 ```{r fig.cap = "Indexing for Character Vector", echo = FALSE, warning = FALSE}
 
 
@@ -572,8 +569,6 @@ library(knitr)
 include_graphics("img/03-index-character.png")
 
 ```
-
-
 
 ```{r fig.cap = "Indexing for Logical Vector", echo = FALSE, warning = FALSE}
 
@@ -584,13 +579,14 @@ include_graphics("img/03-index-logical.png")
 
 ```
 
-This property in vectors mean we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using `[]` brackets. 
+This property in vectors mean we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using `[]` brackets.
 
 ```{r}
 
 rintro_names[1]
 
 ```
+
 Similarly, I could extract the 3rd element.
 
 ```{r}
@@ -598,6 +594,7 @@ Similarly, I could extract the 3rd element.
 rintro_marks[3]
 
 ```
+
 Or I could extract the last element.
 
 ```{r}
@@ -606,7 +603,7 @@ rintro_satisfied[8]
 
 ```
 
-This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements. 
+This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements.
 
 I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 8th elements. I just need to use `c()` to tell R that I am subsetting several elements.
 
@@ -615,6 +612,7 @@ I can ask R even to subset several elements from my vector based on their positi
 rintro_names[c(2, 4, 8)]
 
 ```
+
 ```{r}
 
 rintro_marks[c(2, 4, 8)]
@@ -626,7 +624,8 @@ rintro_marks[c(2, 4, 8)]
 rintro_satisfied[c(2, 4, 8)]
 
 ```
-If the elements you are positioned right next to each other on a vector, you can use `:` as a shortcut. 
+
+If the elements you are positioned right next to each other on a vector, you can use `:` as a shortcut.
 
 ```{r}
 
@@ -646,16 +645,15 @@ sort(rintro_marks, decreasing = TRUE)
 rintro_marks[c(1, 2, 3)]
 
 [1] 87 91 87
-
 print(rintro_marks)
 
 [1] 87 91 87 90 88 89
 
 ```
 
-You can see that neither the `sort()` function or subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label. 
+You can see that neither the `sort()` function or subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.
 
-Here's how I would extract and save the top three exam marks. 
+Here's how I would extract and save the top three exam marks.
 
 ```{r}
 
@@ -666,6 +664,52 @@ marks_top <- marks_sorted[c(1:3)]
 print(marks_top)
 
 ```
-Your turn: How could I extract the bottom 3 results? Give it a go. 
+
+Over to you! How could we extract and save the bottom 3 results from the `rintro_marks`\` vector? Give it a go.
+
+Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
+
+
+## Vectors - making it a little less abstract. 
+
+You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called `lists` (we'll talk it more next week). That confused me. 
+
+But what helped me understand vectors was the realization that a vector is simply a "line of data". Let's say I was running a study and collected data on participants age. When I open the excel file, there will be a column called "age" will all the ages of my participants. That column is a vector of data with the variable label "age". 
+
+Creating that vector is the equivalent of creating a column in excel. 
+
+```{r}
+
+age <- c(18, 23, 43, 23, 44,32, 56, 67, 32, 23)
+
+```
+
+```{r echo = FALSE}
+
+include_graphics("img/03-column-vector.png")
+
+```
+
+
+Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am create a new row (line) of data. In R this is the equivalent of doing this:
+
+
+```{r}
+p11 <- c(30, 175)
+```
+
+
+```{r echo=FALSE}
+
+include_graphics("img/03-row-vector.png")
+
+
+
+```
+
+
+So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row. 
+
+So what happens we combine different vectors (columns and rows) together? We create a `data frame`.
 
 
