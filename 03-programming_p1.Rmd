@@ -4,9 +4,8 @@ Today, we are going to explore fundamental programming concepts in R. By the end
 
 -   Running and troubleshooting commands in the R console.
 -   Understanding different data types and when to use them.
--   Creating and utilizing variables.
+-   Creating and using variables, and understanding best practices in naming variables.
 -   Grasping data structures and how to construct them.
--   Loading R packages and utilizing their functions.
 
 ```{r echo=FALSE, warning=FALSE}
 
@@ -32,7 +31,7 @@ In the previous chapter, I made a distinction between the script and the console
 
 That distinction is kinda true, but it's not completely true. In reality, when we write a script we are preparing ***commands*** for R to ***execute*** in the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).
 
-It's important to know how to work the R console, even if we mostly use scripts in these workshops. We don't want the chef to spit into our food.
+It's important to know how to work the R console, even if we mostly use scripts in these workshops. We don't want the chef to spit on our food.
 
 ### Typing Commands in the Console
 
@@ -83,9 +82,11 @@ print(sleep$extra) #this will print out the extra sleep column in the sleep data
 
 ```
 
-Here R tells us that the first answer (i.e., value) corresponds to `0.1`. The next label is [16], which tells us that the 17th answer corresponds to 5.5.
+Here R tells us that the first answer (i.e., value) corresponds to `0.1`. The next label is `[16]`. which tells us that the 16th answer corresponds to 5.5.
 
-Now, you might wonder why it shows [16] and doesn't show any of the previous or following numbers. This is because R only prints out the index when a new row of data is needed in the console. If there were indexes for every single answer, it would clutter the console with unnecessary information. So R uses new rows as a method for deciding when to show us another index.
+But why does it only show the `[1]` and `[16]`th index? If you run this code in your console, you might actually see a different number than `[16]` depending on wide your console is on your device.
+
+This is because R only prints out the index when a new row of data is needed in the console. If there were indexes for every single answer, it would clutter the console with unnecessary information. So R uses new rows as a method for deciding when to show us another index.
 
 We'll delve deeper into indexing later in this session; it's a highly useful concept in R.
 
@@ -145,19 +146,30 @@ I've been pretty mean to the console, but there are rare times it will be a good
 
 ```
 
-So when you see "+" in the console, this is R telling you that something is missing. If nothing is missing, then this indicates that your code might not be correctly formatted. Overall, the moral of this section can be summarized as: proofread your code!
+So when you see "+" in the console, this is R telling you that something is missing. R won't let you enter a new command until you have finished with it.
+
+```{r eval = FALSE}
+
+(20 + 10
+
++ #if I press enter, it will keep appearing until I finish the code
++
++
++
++
+
+```
+
+If nothing is missing, then this indicates that your code might not be correctly formatted. To break out of the endless loops of "+", press the ***Esc*** key on your keyboard.
 
 ### Exercises
 
 1.  Practice performing basic calculations in R console. Calculate the following:
-
--   25 multiplied by 4
--   72 divided by 8
--   30 multiplied by 4, and then divided by 2
-
-1.  Imagine you want to calculate the average/mean of the following 5 numbers 15, 22, 18, 30, and 25. Use the R console to find the average.
-
-2.  When I type this code into the R console, I get the `+` operator, how can I fix it?
+    1.  25 multiplied by 4
+    2.  72 divided by 8 3
+    3.  0 multiplied by 4, and then divided by 2
+2.  Imagine you want to calculate the average/mean of the following 5 numbers 15, 22, 18, 30, and 25. Use the R console to find the average.
+3.  If I type the following code, then I get the `+` operator, how can I fix it?
 
 ```{r eval = FALSE}
 
@@ -413,21 +425,10 @@ There are strict and recommended rules for naming variables that you should be a
 
 For the purposes of this course, I recommend using **`snake_case`** to maintain consistency with my code. Feel free to choose your preferred style outside of this course, but always maintain consistency.
 
-
 ```{r}
 
-library(quizdown)
-
-
-question(
-  type = "multiple_choice",
-  text = "What is the capital of France?",
-  answers = c("London", "Berlin", "Paris", "Madrid"),
-  correct = "Paris"
-)
 
 ```
-
 
 ## Data Structures
 
