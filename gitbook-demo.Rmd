@@ -1,3 +1,57 @@
+---
+title: "Introduction to R"
+author: "Ryan Donovan"
+date: "`r Sys.Date()`"
+description: This GitBook is for the R Workshops
+documentclass: book
+github-repo: ryandonovan93/rintro
+link-citations: yes
+bibliography:
+- book.bib
+- packages.bib
+site: bookdown::bookdown_site
+biblio-style: apalike
+---
+
+# Introduction
+
+Placeholder
+
+
+## Who is this resource for?
+## Should I learn R?
+## What will I learn to do in R?
+## What will I not learn to do in R?
+## Where and when will the workshops take place?
+## Are there any prerequisites for taking this course?
+## Do I need to bring a laptop to the class?
+
+<!--chapter:end:index.Rmd-->
+
+
+# Getting Started with R and RStudio {#rstudio}
+
+Placeholder
+
+
+## What actually is R?
+## Downloading R
+### Downloading R on Windows
+### Downloading R on Mac
+## Install and Open R Studio
+## Creating an R Project
+### Navigating RStudio
+#### The RStudio Workspace
+### Checking our Working Directory
+### Setting up a new Working Directory {#set_wd}
+## Writing our first R Code
+## Console vs Source Script
+## Let's write some statistical code
+### Comments
+## Summary
+
+<!--chapter:end:02-rstudio.Rmd-->
+
 # Basic R Programming (Part I) {#programming1}
 
 Today, we are going to explore fundamental programming concepts in R. By the end of this session, you should be capable of the following:
@@ -312,20 +366,6 @@ as.logical()    # Converts to logical
 
 ```
 
-### Exercises
-
-1.  Have a look at each of the following pieces of code and guess what data type it is. Check whether you are correct by using the `class()` function.
-    1.  `"Hello World!"`
-    2.  `43`
-    3.  `"42.34"`
-    4.  `FALSE`
-    5.  `44.4`
-2.  The following data types have been erroneously entered in R. Use the appropriate converting function to correct for it.
-    1.  Convert "42.34" from character to numeric.
-    2.  Convert "FALSE" from logical to character.
-    3.  Convert 2024 from numeric to string.
-    4.  Convert 1 from integer to logical (see what happens!). For bonus points, convert 0 from numerical to logical as well.
-
 ## Variables
 
 Until now, the code we've used has been disposable; once you type it, you can only view its output. However, programming languages allow us to store information in objects called ***variables.***
@@ -439,21 +479,10 @@ There are strict and recommended rules for naming variables that you should be a
 
 For the purposes of this course, I recommend using **`snake_case`** to maintain consistency with my code. Feel free to choose your preferred style outside of this course, but always maintain consistency.
 
+
 ### Exercises
 
-1.  Create a variable called `favourite_colour` and assign your favourite colour to this `favourite_colour`. What data type is this variable? Check it with `class()`.
 
-2.  Create two numeric variables, `num1` and `num2`, and assign them any two different numeric values.
-
-3.  Calculate the sum of `num1` and `num2` and store it in a new variable called `sum_result`
-
-4.  Print the value of `sum_result`.
-
-5.  Create a variable named `height_cm` and assign it your height in centimeters (a numeric value).
-
-6.  Create another variable named `height_m` and assign it the height in meters by dividing `height_cm` by 100.
-
-7.  Print the value of `height_m.`
 
 ## Data Structures
 
@@ -995,3 +1024,32 @@ my_df[my_df$Gender != "Male", c("Name", "Age", "Nationality")]
 That concludes this session. Well done, we did a lot of work today. We learnt more about the relationship between the console and the script, and how we need to be precise when writing commands. We introduced the different types of data that R stores and how those data types can be stored in single lines of data in vectors or combined together to a table in a `data frame`.
 
 Don't feel like you need to have mastered or even remember all the material that we covered today. Even though these concepts are labelled as "basic", that does not mean they are intuitive. It will take time for them to sink in and that's normal. We'll drill these concepts a bit further next week. We'll also learn how to import `data frames`, which will set us up nicely for working with real-life data sets.
+
+<!--chapter:end:03-programming_p1.Rmd-->
+
+---
+title: "Week 2 Exercises"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Variables
+
+
+```{r letter-a, echo=FALSE}
+question("What number is the letter A in the English alphabet?",
+  answer("8"),
+  answer("14"),
+  answer("1", correct = TRUE),
+  answer("23")
+)
+```
+
+
+<!--chapter:end:quiz-test.Rmd-->
+

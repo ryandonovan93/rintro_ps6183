@@ -189,10 +189,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.2" data-path="programming1.html"><a href="programming1.html#numeric-or-double"><i class="fa fa-check"></i><b>3.4.2</b> Numeric (or Double)</a></li>
 <li class="chapter" data-level="3.4.3" data-path="programming1.html"><a href="programming1.html#integer"><i class="fa fa-check"></i><b>3.4.3</b> Integer</a></li>
 <li class="chapter" data-level="3.4.4" data-path="programming1.html"><a href="programming1.html#logical-otherwise-know-as-boolean"><i class="fa fa-check"></i><b>3.4.4</b> Logical (otherwise know as Boolean)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="programming1.html"><a href="programming1.html#exercises-1"><i class="fa fa-check"></i><b>3.4.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.5</b> Variables</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.5.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="programming1.html"><a href="programming1.html#exercises-2"><i class="fa fa-check"></i><b>3.5.2</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.6</b> Data Structures</a>
 <ul>
@@ -406,6 +408,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb62-2"><a href="programming1.html#cb62-2" tabindex="-1"></a><span class="fu">as.integer</span>()    <span class="co"># Converts to integer</span></span>
 <span id="cb62-3"><a href="programming1.html#cb62-3" tabindex="-1"></a><span class="fu">as.logical</span>()    <span class="co"># Converts to logical</span></span></code></pre></div>
 </div>
+<div id="exercises-1" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> Exercises<a href="programming1.html#exercises-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Have a look at each of the following pieces of code and guess what data type it is. Check whether you are correct by using the <code>class()</code> function.
+<ol style="list-style-type: decimal">
+<li><code>"Hello World!"</code></li>
+<li><code>43</code></li>
+<li><code>"42.34"</code></li>
+<li><code>FALSE</code></li>
+<li><code>44.4</code></li>
+</ol></li>
+<li>The following data types have been erroneously entered in R. Use the appropriate converting function to correct for it.
+<ol style="list-style-type: decimal">
+<li>Convert “42.34” from character to numeric.</li>
+<li>Convert “FALSE” from logical to character.</li>
+<li>Convert 2024 from numeric to string.</li>
+<li>Convert 1 from integer to logical (see what happens!). For bonus points, convert 0 from numerical to logical as well.</li>
+</ol></li>
+</ol>
+</div>
 </div>
 <div id="variables" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Variables<a href="programming1.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -476,6 +498,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol></li>
 </ul>
 <p>For the purposes of this course, I recommend using <strong><code>snake_case</code></strong> to maintain consistency with my code. Feel free to choose your preferred style outside of this course, but always maintain consistency.</p>
+</div>
+<div id="exercises-2" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Exercises<a href="programming1.html#exercises-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Create a variable called <code>favourite_colour</code> and assign your favourite colour to this <code>favourite_colour</code>. What data type is this variable? Check it with <code>class()</code>.</p></li>
+<li><p>Create two numeric variables, <code>num1</code> and <code>num2</code>, and assign them any two different numeric values.</p></li>
+<li><p>Calculate the sum of <code>num1</code> and <code>num2</code> and store it in a new variable called <code>sum_result</code></p></li>
+<li><p>Print the value of <code>sum_result</code>.</p></li>
+<li><p>Create a variable named <code>height_cm</code> and assign it your height in centimeters (a numeric value).</p></li>
+<li><p>Create another variable named <code>height_m</code> and assign it the height in meters by dividing <code>height_cm</code> by 100.</p></li>
+<li><p>Print the value of <code>height_m.</code></p></li>
+</ol>
 </div>
 </div>
 <div id="data-structures" class="section level2 hasAnchor" number="3.6">
@@ -557,19 +591,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="vector-indexing-and-subsetting" class="section level4 hasAnchor" number="3.6.1.2">
 <h4><span class="header-section-number">3.6.1.2</span> Vector Indexing and Subsetting<a href="programming1.html#vector-indexing-and-subsetting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A vector in R is like a list of items. To be more specifc, vectors in R are actually <em>ordered</em> list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-52"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-51"></span>
 <img src="img/03-index_numeric.png" alt="Indexing for Numeric Vector"  />
 <p class="caption">
 Figure 3.1: Indexing for Numeric Vector
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-53"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-52"></span>
 <img src="img/03-index-character.png" alt="Indexing for Character Vector"  />
 <p class="caption">
 Figure 3.2: Indexing for Character Vector
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-54"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-53"></span>
 <img src="img/03-index-logical.png" alt="Indexing for Logical Vector"  />
 <p class="caption">
 Figure 3.3: Indexing for Logical Vector
@@ -635,7 +669,7 @@ Figure 3.3: Indexing for Logical Vector
 <div id="data-frames" class="section level3 hasAnchor" number="3.6.2">
 <h3><span class="header-section-number">3.6.2</span> Data frames<a href="programming1.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Data frames is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in excel.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-68"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-67"></span>
 <img src="img/03-dataframes_vectors.png" alt="The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors"  />
 <p class="caption">
 Figure 3.4: The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors
@@ -866,7 +900,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["gitbook-demo.pdf"],
+"download": ["rintro_demo.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

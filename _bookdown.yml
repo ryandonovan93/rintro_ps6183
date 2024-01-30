@@ -1,4 +1,4 @@
-book_filename: "gitbook-demo"
+book_filename: "rintro_demo"
 rmd_files: ["index.Rmd",
             "02-rstudio.Rmd",
             "03-programming_p1.Rmd"]
