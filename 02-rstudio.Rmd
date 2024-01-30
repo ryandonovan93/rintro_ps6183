@@ -201,7 +201,7 @@ Functions are a very important programming concept, and there is a lot more goin
 
 You might have noticed that I asked you to write code in the console rather than in the source pane. It's worth discussing here what the differences are between the console and the script when it comes to writing code.
 
-The console is like the immediate chat with R. It's where you can type and execute single lines of code instantly. Imagine it as a friendly conversation where you ask R to do something, and it responds right away. The console The console is fantastic for experimenting and getting instant feedback. It's your interactive playground, perfect for spontaneous interactions with R.
+The console is like the immediate chat with R. It's where you can type and execute single lines of code instantly. Imagine it as a friendly conversation where you ask R to do something, and it responds right away.  The console is great for experimenting and getting instant feedback. It's your interactive playground, perfect for spontaneous interactions with R.
 
 The console is also really useful for performing quick calculations, testing functions or pieces of code, and for running code that should run once and only once.
 
@@ -213,7 +213,7 @@ From now on, whenever we write code, we are going to be using R scripts by defau
 
 ## Let's write some statistical code
 
-Okay we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click "File" -\> New File -\> RScript). Once you have created this script, save it as "01-paired-t-tests".
+Okay we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click "File" -\> "New File" -\> "RScript"). Once you have created this script, save it as "01-paired-t-tests".
 
 When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type `?sleep` into the console. You will find more information on the data sets in the Files pane, under the Help tab.
 
@@ -238,7 +238,7 @@ summary(sleep)
 
 Running `summary(sleep)` shows us descriptive statistics for each of our variables. We can see that the mean change in hours of sleep were +1.5, and that there was 10 participants within both the control and experimental condition.
 
-But it's not perfect. Firstly, we don't need summary descriptive on the participant ID. Secondly, it only tells us the mean the entire sample, whereas we are more interested in the mean score per each treatment group. We can get this information by using the `aggregate()` function, which enables us to split our data into subset and then compute summary statistics per group. Remember to press run after you written your code.
+But it's not exactly what we need. Firstly, we don't need summary descriptive on the participant ID. Secondly, it only tells us the mean the entire sample, whereas we want the mean score per each treatment group. To get this information we can use the `aggregate()` function, which enables us to split our data into subset and then compute summary statistics per group. Remember to press run after you written your code.
 
 ```{r}
 
@@ -259,7 +259,7 @@ aggregate(data = sleep, extra ~ group, FUN = mean)
 
 That's more like it. Now we can see that there does seem to a difference between treatment1 and treatment2. Participants slept an extra 2.33 hours on average when taking treatment 2, whereas they only slept .75 hours (e.g., 45 minutes) more on average when taking treatment 1. So treatment 2 does seem more effective.
 
-Let's run a paired-samples t-test to see if those differences are significant (assuming all parametric assumptions are met, of course...).
+Let's run a paired-samples t-test to see if those differences are significant (I have assumed all parametric assumptions are correct).
 
 ```{r}
 
