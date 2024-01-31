@@ -5,7 +5,7 @@ Today, we are going to explore fundamental programming concepts in R. By the end
 -   Running and troubleshooting commands in the R console.
 -   Understanding different data types and when to use them.
 -   Creating and using variables, and understanding best practices in naming variables.
--   Grasping data structures and how to construct them.
+-   Grasping key data structures and how to construct them.
 
 ```{r echo=FALSE, warning=FALSE}
 
@@ -457,19 +457,19 @@ For the purposes of this course, I recommend using **`snake_case`** to maintain 
 
 ## Data Structures
 
-So we've talked about the different types of data that we experience in the world and how R classifies them. We've also talked about how we can store this type of data into variables. But in data analysis, we rarely work with individual variables. Typically we work with large collections of variables that have a particular order. For example, data sets are organised by rows and columns
+So, we've talked about the different types of data that we encounter in the world and how R classifies them. We've also discussed how we can store this type of data in variables. However, in data analysis, we rarely work with individual variables. Typically, we work with large collections of variables that have a particular order. For example, datasets are organized by rows and columns.
 
-This also holds true in R, which has several different types of ***data structures*** that organise and group together variables. Each data structure has specific rules and methods for creating or interacting with them. I'll briefly mention each data structure first, before we focus on two main data structures we'll use in this course: `vectors` and `data frames`.
+This also holds true in R, which has several different types of **data structures** that organize and group together variables. Each data structure has specific rules and methods for creating or interacting with them. Today we are going to focus on the two main data structures we'll use in this course: **`vectors`** and **`data frames`**.
 
 ### Vectors
 
-The most basic and (probably) important data structure in R are ***vectors***. You can think of vectors as a list of data of R that are of the same data type.
+The most basic and (probably) important data structure in R is ***vectors***. You can think of vectors as a list of data in R that are of the same data type.
 
-For example, I could create a character vector with names of people in the class.
+For example, I could create a character vector with names of people in the class:
 
 ```{r}
 
-rintro_names <- c("Gerry", "Aoife", "Liam", "Eva", "Owen", "Ciara")
+rintro_names <- c("Gerry", "Aoife", "Liam", "Eva", "Helena", "Ciara", "Niamh", "Owen")
 
 
 print(rintro_names)
@@ -482,27 +482,29 @@ is.vector(rintro_names)
 
 ```
 
-And I can create a numeric vector with their performance on the module.
+And I can create a numeric vector with their (totally randomly generated!)[^03-programming_p1-2]
+
+[^03-programming_p1-2]: I used the function `rnorm()` to generate these values. If you want to read more about this very handy function, type `?rnorm` into the console, or follow this [link](https://www.statology.org/r-runif-vs-rnorm/).
 
 ```{r}
 
-rintro_marks <- c(87, 91, 87, 90, 88, 89)
+rintro_marks <- c(69, 65, 80, 77, 86, 88, 92, 71)
 
 print(rintro_marks)
 
 ```
 
-And I can create a logical vectors that describes whether or not they like R.
+And I can create a logical vectors that describes whether or not they were satisfied with the course (again randomly generated!):
 
 ```{r}
 
-rintro_satisfied <- c(TRUE, FALSE, T, F, F, T) #you can use T or F as shortcuts
+rintro_satisfied <- c(FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE) 
 
 print(rintro_satisfied)
 
 ```
 
-Technically, we have been using vectors the entire class. Vectors can have as little as 1 piece of data.
+Technically, we have been using vectors the entire class. Vectors can have as little as 1 piece of data:
 
 ```{r}
 
@@ -512,38 +514,35 @@ is.vector(instructor)
 
 ```
 
-*Activity*: Try create a vector with only integers. Call it "int_vector". Check whether you have successfully created this vector with the code `class(int_vector)`
-
-However, we can't include multiple data types in the one vector. Going back to our numeric grades vector, look what happens when we try mix in grades as characters.
+However, we can't include multiple data types in the same vector. Going back to our numeric grades vector, look what happens when we try to mix in grades as characters:
 
 ```{r}
 
-rintro_marks <- c(87, "A1", 87, 90, 88, 89)
+rintro_grades <- c(69, 65, 80, 77, 86, 88, "A1", 71)
 
 
-print(rintro_marks)
+print(rintro_grades)
 ```
 
-R has converted every element within the `rintro_marks` vector into a character. If R sees an object that is a vector, but sees that its elements belong to different data types, it will try and convert every element to one data type. This is a strict rule in R - a vector can only be created if ever single element (i.e., thing) inside that vector is of the same data type.
+R has converted every element within the `rintro_grades` vector into a character. If R sees an object that is a vector but sees that its elements belong to different data types, it will try to convert every element to one data type. This is a strict rule in R - a vector can only be created if every single element (i.e., thing) inside that vector is of the same data type.
 
-If we were to check the class of the `rintro_marks`, it will show us this conversion
+If we were to check the class of `rintro_marks` and `rintro_grades`, it will show us this conversion
 
-```{r}
-
-rintro_marks <- c(87, 91, 87, 90, 88, 89) #original numeric vector
+```{r eval=FALSE}
 
 
-class(rintro_marks)
+class(rintro_marks) 
+
+[1] "numeric"
 
 
-rintro_marks <- c(87, "A1", 87, 90, 88, 89)
+class(rintro_grades)
 
-
-class(rintro_marks)
+[1] "character"
 
 ```
 
-Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters.
+Remember how I mentioned that you might download a dataset with a column that has numeric data but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When R reads this column, it sees the text, and then R converts the entire column into characters.
 
 #### Working with Vectors
 
@@ -551,11 +550,10 @@ We can perform several types of operations on vectors to gain useful information
 
 **Numeric and Integer Vectors**
 
-We can run functions on vectors. For example, we can run functions like `mean()`, `median`, or `sd()` to calculate descriptive statistics on numeric or integer-based vectors.
+We can run functions on vectors. For example, we can run functions like **`mean()`**, **`median`**, or **`sd()`** to calculate descriptive statistics on numeric or integer-based vectors:
 
 ```{r}
 
-rintro_marks <- c(87, 91, 87, 90, 88, 89) #original numeric vector
 
 mean(rintro_marks)
 
@@ -565,7 +563,7 @@ sd(rintro_marks)
 
 ```
 
-A useful feature is that I can sort my numeric and integer vectors based on their scores.
+A useful feature is that I can sort my numeric and integer vectors based on their scores:
 
 ```{r}
 
@@ -573,7 +571,7 @@ sort(rintro_marks) #this will take the original vector and arrange from lowest t
 
 ```
 
-The `sort()` function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.
+The **`sort()`** function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.
 
 ```{r}
 
@@ -589,16 +587,17 @@ We are more limited when it comes to operators with character and logical vector
 
 
 summary(rintro_names)
+summary(rintro_satisfied)
 
 
 
 ```
 
-The `summary()` functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
+The **`summary()`** function tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
 
 #### Vector Indexing and Subsetting
 
-A vector in R is like a list of items. To be more specifc, vectors in R are actually *ordered* list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list.
+A vector in R is like a list of items. To be more specific, vectors in R are actually *ordered* lists of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list:
 
 ```{r fig.cap = "Indexing for Numeric Vector", echo = FALSE, warning = FALSE}
 
@@ -627,7 +626,7 @@ include_graphics("img/03-index-logical.png")
 
 ```
 
-This property in vectors mean we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using `[]` brackets.
+This property in vectors means we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using **`[]`** brackets:
 
 ```{r}
 
@@ -653,7 +652,7 @@ rintro_satisfied[8]
 
 This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements.
 
-I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 8th elements. I just need to use `c()` to tell R that I am subsetting several elements.
+I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 6th elements. I just need to use **`c()`** to tell R that I am subsetting several elements:
 
 ```{r}
 
@@ -673,7 +672,7 @@ rintro_satisfied[c(2, 4, 8)]
 
 ```
 
-If the elements you are positioned right next to each other on a vector, you can use `:` as a shortcut.
+If the elements you are positioned right next to each other on a vector, you can use **`:`** as a shortcut:
 
 ```{r}
 
@@ -681,27 +680,29 @@ rintro_names[c(1:4)] #this will extract the elements in index 1, 2, 3, 4
 
 ```
 
-It's important to know however that when you perform an operation on a vector or you subset it, it does not actually change the original vector. For example, if you wanted to save the top three `rintro_marks`, the following code would not work:
+It's important to know, however, that when you perform an operation on a vector or you subset it, it does not actually change the original vector. None of these following code will actually change rintro_marks.
 
 ```{r warning = FALSE, eval = FALSE}
 
 sort(rintro_marks, decreasing = TRUE)
 
-
 [1] 91 90 89 88 87 87
+
+print(rintro_marks)
+[1] 69 65 80 77 86 88 92 71
 
 rintro_marks[c(1, 2, 3)]
 
 [1] 87 91 87
-print(rintro_marks)
 
-[1] 87 91 87 90 88 89
+print(rintro_marks)
+[1] 69 65 80 77 86 88 92 71
 
 ```
 
-You can see that neither the `sort()` function or subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.
+You can see that neither the **`sort()`** function nor subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.
 
-Here's how I would extract and save the top three exam marks.
+Here's how I would extract and save the top three exam marks:
 
 ```{r}
 
@@ -713,17 +714,13 @@ print(marks_top)
 
 ```
 
-Over to you! How could we extract and save the bottom 3 results from the `rintro_marks`\` vector? Give it a go.
-
-Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
-
 #### Vectors - making it a little less abstract.
 
-You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called `lists` (we'll talk it more next week). That confused me.
+You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called **`lists`** (we'll talk more about it next week). That confused me.
 
-But what helped me understand vectors was the realization that a vector is simply a "line of data". Let's say I was running a study and collected data on participants age. When I open the excel file, there will be a column called "age" will all the ages of my participants. That column is a vector of data with the variable label "age".
+But what helped me understand vectors was the realization that a vector is simply a "line of data." Let's say I was running a study and collected data on participants' age. When I open the Excel file, there will be a column called "age" with all the ages of my participants. That column is a vector of data with the variable label "age."
 
-Creating that vector is the equivalent of creating a column in excel.
+Creating that vector is the equivalent of creating a column in Excel:
 
 ```{r}
 
@@ -737,7 +734,7 @@ include_graphics("img/03-column-vector.png")
 
 ```
 
-Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am create a new row (line) of data. In R this is the equivalent of doing this:
+Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am creating a new row (line) of data. In R, this is the equivalent of doing this:
 
 ```{r}
 p11 <- c(30, 175)
@@ -753,11 +750,11 @@ include_graphics("img/03-row-vector.png")
 
 So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row.
 
-So what happens we combine different vectors (columns and rows) together? We create a `data frame`.
+So what happens when we combine different vectors (columns and rows) together? We create a **`data frame`**.
 
 ### Data frames
 
-Data frames is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in excel.
+A data frame is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in Excel:
 
 ```{r fig.cap = "The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors", warning = FALSE, echo = FALSE}
 
@@ -767,7 +764,7 @@ include_graphics("img/03-dataframes_vectors.png")
 
 ```
 
-Data frames are an excellent way to store and manage data in R because it can store different types data (e.g., character, numeric, integer) all within the same structure. Let's create such a data frame using the `data.frame()` function.
+Data frames are an excellent way to store and manage data in R because they can store different types of data (e.g., character, numeric, integer) all within the same structure. Let's create such a data frame using the **`data.frame()`** function:
 
 ```{r}
 
@@ -788,11 +785,11 @@ Once you have created or imported a data frame, you'll often need to access it a
 
 ##### Selecting Columns
 
-Columns in a data frame represent different variables or attributes of your data. Often in data analysis we want to select a specific column and then perform analyses on it. So how can we individual select columns? Well In a data frame, every column has a name, similar to how each column in an excel spreadsheet has a header. These columns names enable you to access and manipulate specific columns or variables within your data frame.
+Columns in a data frame represent different variables or attributes of your data. Often in data analysis, we want to select a specific column and then perform analyses on it. So how can we individually select columns? Well, in a data frame, every column has a name, similar to how each column in an Excel spreadsheet has a header. These column names enable you to access and manipulate specific columns or variables within your data frame.
 
 We select columns based on their names via two tools:
 
-The **\$** Notation: You can use a dollar sign (\$) followed by the column to select ***an individual column*** in a data frame. For example, let's select the `Name` column in the `my_df` data frame.
+The **\$** Notation: You can use a dollar sign (\$) followed by the column name to select **an individual column** in a data frame. For example, let's select the **`Name`** column in the **`my_df`** data frame:
 
 ```{r}
 
@@ -800,9 +797,9 @@ my_df$Name
 
 ```
 
-**Square Brackets** `[]`: This is similar approach to accessing elements from a vector. Inside the brackets you can specify both the row and columns that you want to extract. The syntax for selecting rows and columns is: `the dataframe[the rows we want, the columns we want]`.
+**Square Brackets** **`[]`**: This is a similar approach to accessing elements from a vector. Inside the brackets, you can specify both the row and columns that you want to extract. The syntax for selecting rows and columns is: **`the dataframe[the rows we want, the columns we want]`**.
 
-So if we wanted to access the "Age" column of my_df, we could run the following code:
+So if we wanted to access the "Age" column of **`my_df`**, we could run the following code:
 
 ```{r}
 
@@ -810,9 +807,9 @@ my_df[, "Age"]
 
 ```
 
-You'll notice that we left the "rows" part empty in the square brackets. This tells R "keep all the rows for this column".
+You'll notice that we left the "rows" part empty in the square brackets. This tells R "keep all the rows for this column."
 
-We can also use this approach to access multiple columns using the `c()` function.
+We can also use this approach to access multiple columns using the **`c()`** function:
 
 ```{r}
 
@@ -822,15 +819,15 @@ my_df[, c("Age", "Score")]
 
 ##### Selecting Rows
 
-Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve, following the syntax: `the dataframe[the rows we want, the columns we want]`.
+Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve, following the syntax: **`the dataframe[the rows we want, the columns we want]`**.
 
-To get the first row of your data frame (my_df), you can type the following.
+To get the first row of your data frame (**`my_df`**), you can type the following:
 
 ```{r}
 my_df[1, ]
 ```
 
-This time I left the columns part blank, this tells R "please keep all the columns for each row".
+This time I left the columns part blank; this tells R "please keep all the columns for each row."
 
 To access the third row:
 
@@ -838,7 +835,7 @@ To access the third row:
 my_df[3, ]
 ```
 
-If you want multiple rows, you can use the \`c()\` function to select multiple rows. Let's select the 1st and 3rd row.
+If you want multiple rows, you can use the **`c()`** function to select multiple rows. Let's select the 1st and 3rd rows:
 
 ```{r}
 
@@ -846,7 +843,7 @@ my_df[c(1, 3), ]
 
 ```
 
-If you wanted to select a range of rows, you can use the \`:\` operator:
+If you wanted to select a range of rows, you can use the : operator:
 
 ```{r}
 my_df[2:4, ]
@@ -856,16 +853,16 @@ These methods allow you to extract specific rows or subsets of rows from your da
 
 ##### Selecting Rows and Columns
 
-We can also select both rows and columns using `[]` and our syntax: `the dataframe[the rows we want, the columns we want]`.
+We can also select both rows and columns using **`[]`** and our syntax: **`the dataframe[the rows we want, the columns we want]`**.
 
-For example we could select the first and third rows for the `Age` and `Score` columns.
+For example, we could select the first and third rows for the **`Age`** and **`Score`** columns:
 
 ```{r}
 
 my_df[c(1,3), c("Age", "Score")]
 ```
 
-Similar to when we indexed vectors, this won't change the underlying data frame. To do that, we would need to assign the selection to a variable.
+Similar to when we indexed vectors, this won't change the underlying data frame. To do that, we would need to assign the selection to a variable:
 
 ```{r}
 
@@ -879,7 +876,7 @@ my_df2
 
 ##### Adding Columns
 
-You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of `Gender` on the `Score` variable. The syntax for creating a new data frame is very straight forward
+You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of **`Gender`** on the **`Score`** variable. The syntax for creating a new data frame is very straightforward:
 
 ```{r eval = FALSE, warning = FALSE}
 
@@ -887,7 +884,7 @@ existing_df$NewColumn <- c(Value1, Value2, Value3)
 
 ```
 
-Using this syntax, let's add a Gender column to our `my_df` dataframe.
+Using this syntax, let's add a **`Gender`** column to our **`my_df`** dataframe:.
 
 ```{r}
 
@@ -899,7 +896,7 @@ my_df
 
 ```
 
-Let's say I noticed I mixed up the genders, and that Bob is Male and Charlie is Non-Binary. Just like we can rewrite a variable, we can also rewrite a column using this approach.
+Let's say I noticed I mixed up the genders, and that Bob is Male and Charlie is Non-Binary. Just like we can rewrite a variable, we can also rewrite a column using this approach:
 
 ```{r}
 
@@ -913,9 +910,9 @@ my_df
 
 ##### Adding Rows
 
-What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!) This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.
+What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!)? This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.
 
-What we need to do is actually creating a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.
+What we need to do is actually create a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.
 
 ```{r}
 
@@ -923,7 +920,7 @@ new_row <- data.frame(Name = "John", Age = 30, Score = 77.34, Gender = "Male")
 
 ```
 
-Then we can use the `rbind()` function to add the new row to your original data frame. `rbind` takes in two data frames and combines them together. The syntax is as follows:
+Then we can use the **`rbind()`** function to add the new row to your original data frame. **`rbind`** takes in two data frames and combines them together. The syntax is as follows:
 
 ```{r}
 
@@ -932,7 +929,7 @@ my_df <- rbind(my_df, new_row)
 my_df
 ```
 
-### Exercises - Data Structures
+### Exercises
 
 1.  Create one vector of each data type:
 
@@ -958,7 +955,9 @@ my_df
 
     ```
 
-3.  Write code that adds a column to the `my_df` data frame called `Nationality`. The values for the column should be `"Irish"`, `"American"`, `"English"`, `"Irish"`.
+3.  How could we extract and save the bottom 3 results from the `rintro_marks`vector? Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
+
+4.  Write code that adds a column to the `my_df` data frame called `Nationality`. The values for the column should be `"Irish"`, `"American"`, `"English"`, `"Irish"`.
 
 ```{r echo = FALSE}
 
@@ -992,6 +991,6 @@ my_df[my_df$Gender != "Male", c("Name", "Age", "Nationality")]
 
 ## Summary
 
-That concludes this session. Well done, we did a lot of work today. We learnt more about the relationship between the console and the script, and how we need to be precise when writing commands. We introduced the different types of data that R stores and how those data types can be stored in single lines of data in vectors or combined together to a table in a `data frame`.
+That concludes this session. Well done, we did a lot of work today. We learned more about the relationship between the console and the script and how we need to be precise when writing commands. We introduced the different types of data that R stores and how those data types can be stored in single lines of data in vectors or combined together in a table in a **`data frame`**.
 
-Don't feel like you need to have mastered or even remember all the material that we covered today. Even though these concepts are labelled as "basic", that does not mean they are intuitive. It will take time for them to sink in and that's normal. We'll drill these concepts a bit further next week. We'll also learn how to import `data frames`, which will set us up nicely for working with real-life data sets.
+Don't feel like you need to have mastered or even remember all the material that we covered today. Even though these concepts are labeled as "basic," that does not mean they are intuitive. It will take time for them to sink in, and that's normal. We'll drill these concepts a bit further next week. We'll also learn how to import **`data frames`**, which will set us up nicely for working with the type of data sets we see in Psychological research.

@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Getting Started with R and RStudio {#rstudio}
 
 This workshop introduces the programming language R and the RStudio application. Today, we will download both R and RStudio, set up our RStudio environment, and write and run our first piece of R Code. This will set us up for the rest of the workshops.
@@ -34,15 +39,61 @@ Please follow the following instructions to download R on either Windows or Mac.
 ### Downloading R on Windows
 
 1.  Go to the website: <https://cran.r-project.org/>
-2.  Under the heading *Download and Install R,* click *Download R for Windows* ![](img/01-cran.png){width="2804"}
-3.  Click the hyperlink ***base*** or ***install R for the first Time***![](img/01-base.png)
-4.  Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That's okay, you can download newer versions). Let the file download. ![The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that\'s okay!](img/01-download.png)
+2.  Under the heading *Download and Install R,* click *Download R for Windows*
+```{r echo = FALSE}
+include_graphics("img/01-cran.png")
+```
+
+3.  Click the hyperlink ***base*** or ***install R for the first Time***
+```{r echo = FALSE}
+include_graphics("img/01-base.png")
+```
+
+4.  Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That's okay, you can download newer versions). Let the file download.
+
+```{r fig.cap = "The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that\'s okay!", echo = FALSE}
+
+include_graphics("img/01-base.png")
+```
 5.  Once the file has been downloaded, open it, and click "Yes" if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like "R-4.3.2.-win". The numbers will differ depending on the specific version that was downloaded.
 6.  Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.
 
 ### Downloading R on Mac
 
-The instructions are largely the same for Windows. Please see this guide for more information <https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac>
+The instructions are largely the same for Mac.
+
+1. Go to the website: <https://cran.r-project.org/>
+
+1. Click Download R for (Mac) OS X.
+```{r echo=FALSE}
+
+include_graphics("img/01-rstudiodownload-mac.png")
+
+```
+1. Check the Latest release: section for the appropriate version and follow the directions for download. If you are unsure about this, please ask me.
+
+```{r echo=FALSE}
+
+include_graphics("img/01-rversion-mac.png")
+
+```
+
+
+1. Once the file download is complete, click to open the installer. Click Continue and proceed through the installer, I recommend going with all default options. 
+```{r fig.cap= "Depending on your version of Mac OS, this might look slightly different. But you should still be able to install it.", echo=FALSE}
+
+include_graphics("img/01-mac_installer.png")
+
+```
+1. Once the R installer has finished, click Close.
+
+```{r echo=FALSE}
+
+include_graphics("img/01-install_finish_mac.png")
+
+```
+
+
 
 ## Install and Open R Studio
 
@@ -60,7 +111,12 @@ After downloading both R and RStudio, open RStudio on your computer. You do not 
 
 When you first open RStudio, you will see three panes or "windows" in R Studio: "Console" (left) "Environment" (top right), and "Files" (bottom right).
 
-![](img/rstudio_first.png)
+```{r echo = FALSE}
+
+include_graphics("img/rstudio_first.png")
+
+```
+
 
 ## Creating an R Project
 
@@ -80,7 +136,7 @@ Let's create an R Project that we will use during these workshops.
 
 -   You can set this to whatever you want. ***Just don't set it to "R",*** as this can create problems down the line.
 
--   I ***recommend*** that you set the same directory name as me - ***introR_2024***
+-   I ***recommend*** that you set the same directory name as me - ***rintro***
 
 **Option 2**: The "Create project as sub-directory of" option selects a place to store this project on your computer.
 
@@ -98,7 +154,7 @@ Let's create an R Project that we will use during these workshops.
 
 -   Tick this option.
 
-You can see my example below. Once you're happy with your input for each option, click "Create Project" This will open up the project introR_2024.
+You can see my example below. Once you're happy with your input for each option, click "Create Project" This will open up the project ***rintro***.
 
 ```{r fig.cap = "New Project Set Up", echo = FALSE, warning = FALSE}
 
@@ -111,13 +167,16 @@ include_graphics("img/01-newproject.png")
 
 ### Navigating RStudio
 
-In our new project, introR_2024, we are going to open the "Source" pane, which we will often use for writing code, and viewing datasets.
+In our new project, ***rintro***, we are going to open the "Source" pane, which we will often use for writing code, and viewing datasets.
 
 There are a variety of ways to open the Source pane.
 
 **Button approach**: Click the "File" tab in the top-left hand corner (not the File pane) -\> Click "New File" -\> "R Script"
 
-![](img/rstudio_create_file.png)
+```{r echo = FALSE}
+include_graphics("img/rstudio_create_file.png")
+```
+
 
 ***Button Shortcut***: directly underneath the *File* tab, there is an icon of a white sheet with a green and white addition symbol. You can click that too.
 
@@ -125,7 +184,12 @@ There are a variety of ways to open the Source pane.
 
 Now you should see your four panes: Source, Console, Environment, and Files.
 
-![](img/01-four-panes.png)
+```{r echo = FALSE}
+
+include_graphics("img/01-four-panes.png")
+
+```
+
 
 #### The RStudio Workspace
 
@@ -159,20 +223,32 @@ We are going to slightly change our working directory. In our R Project, we are 
 
 -   Click "Session" on your RStudio toolbar -\> Set Working Directory -\> Choose Directory
 
-![](img/01-wd.png)
+```{r echo = FALSE}
 
--   By default you should be in your R Project (e.g., Rintro_2024).
+include_graphics("img/01-wd.png")
+
+```
+
+
+
+-   By default you should be in your R Project (e.g., ***rintro***).
 
 -   Within this R Project, create a new folder and call it "week1"
 
 -   Click "week1" and then click Open
 
-![](img/01-new_wd.png)
+```{r echo=FALSE}
+
+include_graphics("img/01-new_wd.png")
+
+```
+
+
 
 You should see something like the following in your console
 
 ```         
-> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week1")
+> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro/week1")
 ```
 
 Check whether this is actually the location you want to store your files for this course. If it is, we are good to go. If not, then let me know.

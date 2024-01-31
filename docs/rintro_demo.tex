@@ -127,7 +127,7 @@
 
 \title{Introduction to R}
 \author{Ryan Donovan}
-\date{2024-01-30}
+\date{2024-01-31}
 
 \begin{document}
 \maketitle
@@ -272,25 +272,51 @@ Please follow the following instructions to download R on either Windows or Mac.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Go to the website: \url{https://cran.r-project.org/}
 \item
-  Under the heading \emph{Download and Install R,} click \emph{Download R for Windows} \includegraphics[width=29.20833in,height=\textheight]{img/01-cran.png}
+  Under the heading \emph{Download and Install R,} click \emph{Download R for Windows}
+  \includegraphics{img/01-cran.png}
 \item
-  Click the hyperlink \textbf{\emph{base}} or \textbf{\emph{install R for the first Time}}\includegraphics{img/01-base.png}
+  Click the hyperlink \textbf{\emph{base}} or \textbf{\emph{install R for the first Time}}
+  \includegraphics{img/01-base.png}
 \item
-  Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That's okay, you can download newer versions). Let the file download. \includegraphics{img/01-download.png}
-\item
-  Once the file has been downloaded, open it, and click ``Yes'' if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like ``R-4.3.2.-win''. The numbers will differ depending on the specific version that was downloaded.
-\item
-  Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.
+  Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That's okay, you can download newer versions). Let the file download.
 \end{enumerate}
+
+\includegraphics{img/01-base.png}
+5. Once the file has been downloaded, open it, and click ``Yes'' if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like ``R-4.3.2.-win''. The numbers will differ depending on the specific version that was downloaded.
+6. Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.
 
 \hypertarget{downloading-r-on-mac}{%
 \subsection{Downloading R on Mac}\label{downloading-r-on-mac}}
 
-The instructions are largely the same for Windows. Please see this guide for more information \url{https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac}
+The instructions are largely the same for Mac.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Go to the website: \url{https://cran.r-project.org/}
+\item
+  Click Download R for (Mac) OS X.
+  \includegraphics{img/01-rstudiodownload-mac.png}
+\item
+  Check the Latest release: section for the appropriate version and follow the directions for download. If you are unsure about this, please ask me.
+\end{enumerate}
+
+\includegraphics{img/01-rversion-mac.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Once the file download is complete, click to open the installer. Click Continue and proceed through the installer, I recommend going with all default options.
+  \includegraphics{img/01-mac_installer.png}
+\item
+  Once the R installer has finished, click Close.
+\end{enumerate}
+
+\includegraphics{img/01-install_finish_mac.png}
 
 \hypertarget{install-and-open-r-studio}{%
 \section{Install and Open R Studio}\label{install-and-open-r-studio}}
@@ -343,7 +369,7 @@ Let's create an R Project that we will use during these workshops.
 \item
   You can set this to whatever you want. \textbf{\emph{Just don't set it to ``R'',}} as this can create problems down the line.
 \item
-  I \textbf{\emph{recommend}} that you set the same directory name as me - \textbf{\emph{introR\_2024}}
+  I \textbf{\emph{recommend}} that you set the same directory name as me - \textbf{\emph{rintro}}
 \end{itemize}
 
 \textbf{Option 2}: The ``Create project as sub-directory of'' option selects a place to store this project on your computer.
@@ -373,18 +399,18 @@ Let's create an R Project that we will use during these workshops.
   Tick this option.
 \end{itemize}
 
-You can see my example below. Once you're happy with your input for each option, click ``Create Project'' This will open up the project introR\_2024.
+You can see my example below. Once you're happy with your input for each option, click ``Create Project'' This will open up the project \textbf{\emph{rintro}}.
 
 \begin{figure}
 \centering
 \includegraphics{img/01-newproject.png}
-\caption{\label{fig:unnamed-chunk-2}New Project Set Up}
+\caption{\label{fig:unnamed-chunk-10}New Project Set Up}
 \end{figure}
 
 \hypertarget{navigating-rstudio}{%
 \subsection{Navigating RStudio}\label{navigating-rstudio}}
 
-In our new project, introR\_2024, we are going to open the ``Source'' pane, which we will often use for writing code, and viewing datasets.
+In our new project, \textbf{\emph{rintro}}, we are going to open the ``Source'' pane, which we will often use for writing code, and viewing datasets.
 
 There are a variety of ways to open the Source pane.
 
@@ -452,7 +478,7 @@ We are going to slightly change our working directory. In our R Project, we are 
 
 \begin{itemize}
 \item
-  By default you should be in your R Project (e.g., Rintro\_2024).
+  By default you should be in your R Project (e.g., \textbf{\emph{rintro}}).
 \item
   Within this R Project, create a new folder and call it ``week1''
 \item
@@ -464,7 +490,7 @@ We are going to slightly change our working directory. In our R Project, we are 
 You should see something like the following in your console
 
 \begin{verbatim}
-> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week1")
+> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro/week1")
 \end{verbatim}
 
 Check whether this is actually the location you want to store your files for this course. If it is, we are good to go. If not, then let me know.
@@ -640,8 +666,8 @@ Finally let's visualize our data with the plot() function.
 
 \begin{figure}
 \centering
-\includegraphics{rintro_demo_files/figure-latex/unnamed-chunk-8-1.pdf}
-\caption{\label{fig:unnamed-chunk-8}Generic Boxplot}
+\includegraphics{rintro_demo_files/figure-latex/unnamed-chunk-20-1.pdf}
+\caption{\label{fig:unnamed-chunk-20}Generic Boxplot}
 \end{figure}
 
 The plot() function is an example of a generic function, which means it's a function that will try to adapt to our code. In this case, the plot() function looks at the variables we wants to plot, and identifies that the box plot is the most appropriate way to plot it.
@@ -664,8 +690,8 @@ Now this plot is perfectly adequate for a first viewing, but let's make it a bit
 
 \begin{figure}
 \centering
-\includegraphics{rintro_demo_files/figure-latex/unnamed-chunk-9-1.pdf}
-\caption{\label{fig:unnamed-chunk-9}Generic Boxplot with appropriate labelling}
+\includegraphics{rintro_demo_files/figure-latex/unnamed-chunk-21-1.pdf}
+\caption{\label{fig:unnamed-chunk-21}Generic Boxplot with appropriate labelling}
 \end{figure}
 
 Now let's take this plot and save it to a PDF so that we could share our results with others. The standard way of doing this in R is a bit cumbersome. We have to tell R that we are about to create a plot that we want to make into a PDF. Then we have to generate the plot. Then we have to tell R we are done with creating the PDF. We'll learn a MUCH simpler way to do this in future weeks, but this will do for now.
@@ -700,7 +726,7 @@ There are various reasons for using comments.
 \begin{figure}
 \centering
 \includegraphics{img/03-comments.png}
-\caption{\label{fig:unnamed-chunk-11}Four Examples of Comments Use}
+\caption{\label{fig:unnamed-chunk-23}Four Examples of Comments Use}
 \end{figure}
 
 In the above figure, you'll see four different types of comments.
@@ -742,7 +768,7 @@ Today, we are going to explore fundamental programming concepts in R. By the end
 \item
   Creating and using variables, and understanding best practices in naming variables.
 \item
-  Grasping data structures and how to construct them.
+  Grasping key data structures and how to construct them.
 \end{itemize}
 
 \hypertarget{activity-1-set-up-your-working-directory}{%
@@ -1389,20 +1415,20 @@ For the purposes of this course, I recommend using \textbf{\texttt{snake\_case}}
 \hypertarget{data-structures}{%
 \section{Data Structures}\label{data-structures}}
 
-So we've talked about the different types of data that we experience in the world and how R classifies them. We've also talked about how we can store this type of data into variables. But in data analysis, we rarely work with individual variables. Typically we work with large collections of variables that have a particular order. For example, data sets are organised by rows and columns
+So, we've talked about the different types of data that we encounter in the world and how R classifies them. We've also discussed how we can store this type of data in variables. However, in data analysis, we rarely work with individual variables. Typically, we work with large collections of variables that have a particular order. For example, datasets are organized by rows and columns.
 
-This also holds true in R, which has several different types of \textbf{\emph{data structures}} that organise and group together variables. Each data structure has specific rules and methods for creating or interacting with them. I'll briefly mention each data structure first, before we focus on two main data structures we'll use in this course: \texttt{vectors} and \texttt{data\ frames}.
+This also holds true in R, which has several different types of \textbf{data structures} that organize and group together variables. Each data structure has specific rules and methods for creating or interacting with them. Today we are going to focus on the two main data structures we'll use in this course: \textbf{\texttt{vectors}} and \textbf{\texttt{data\ frames}}.
 
 \hypertarget{vectors}{%
 \subsection{Vectors}\label{vectors}}
 
-The most basic and (probably) important data structure in R are \textbf{\emph{vectors}}. You can think of vectors as a list of data of R that are of the same data type.
+The most basic and (probably) important data structure in R is \textbf{\emph{vectors}}. You can think of vectors as a list of data in R that are of the same data type.
 
-For example, I could create a character vector with names of people in the class.
+For example, I could create a character vector with names of people in the class:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rintro\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Gerry"}\NormalTok{, }\StringTok{"Aoife"}\NormalTok{, }\StringTok{"Liam"}\NormalTok{, }\StringTok{"Eva"}\NormalTok{, }\StringTok{"Owen"}\NormalTok{, }\StringTok{"Ciara"}\NormalTok{)}
+\NormalTok{rintro\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Gerry"}\NormalTok{, }\StringTok{"Aoife"}\NormalTok{, }\StringTok{"Liam"}\NormalTok{, }\StringTok{"Eva"}\NormalTok{, }\StringTok{"Helena"}\NormalTok{, }\StringTok{"Ciara"}\NormalTok{, }\StringTok{"Niamh"}\NormalTok{, }\StringTok{"Owen"}\NormalTok{)}
 
 
 \FunctionTok{print}\NormalTok{(rintro\_names)}
@@ -1410,7 +1436,7 @@ For example, I could create a character vector with names of people in the class
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Gerry" "Aoife" "Liam"  "Eva"   "Owen"  "Ciara"
+## [1] "Gerry"  "Aoife"  "Liam"   "Eva"    "Helena" "Ciara"  "Niamh"  "Owen"
 \end{verbatim}
 
 \begin{Shaded}
@@ -1423,35 +1449,35 @@ For example, I could create a character vector with names of people in the class
 ## [1] TRUE
 \end{verbatim}
 
-And I can create a numeric vector with their performance on the module.
+And I can create a numeric vector with their (totally randomly generated!)\footnote{I used the function \texttt{rnorm()} to generate these values. If you want to read more about this very handy function, type \texttt{?rnorm} into the console, or follow this \href{https://www.statology.org/r-runif-vs-rnorm/}{link}.}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{69}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{77}\NormalTok{, }\DecValTok{86}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{92}\NormalTok{, }\DecValTok{71}\NormalTok{)}
 
 \FunctionTok{print}\NormalTok{(rintro\_marks)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 87 91 87 90 88 89
+## [1] 69 65 80 77 86 88 92 71
 \end{verbatim}
 
-And I can create a logical vectors that describes whether or not they like R.
+And I can create a logical vectors that describes whether or not they were satisfied with the course (again randomly generated!):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rintro\_satisfied }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, T, F, F, T) }\CommentTok{\#you can use T or F as shortcuts}
+\NormalTok{rintro\_satisfied }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{) }
 
 \FunctionTok{print}\NormalTok{(rintro\_satisfied)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE
+## [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE
 \end{verbatim}
 
-Technically, we have been using vectors the entire class. Vectors can have as little as 1 piece of data.
+Technically, we have been using vectors the entire class. Vectors can have as little as 1 piece of data:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1465,54 +1491,39 @@ Technically, we have been using vectors the entire class. Vectors can have as li
 ## [1] TRUE
 \end{verbatim}
 
-\emph{Activity}: Try create a vector with only integers. Call it ``int\_vector''. Check whether you have successfully created this vector with the code \texttt{class(int\_vector)}
-
-However, we can't include multiple data types in the one vector. Going back to our numeric grades vector, look what happens when we try mix in grades as characters.
+However, we can't include multiple data types in the same vector. Going back to our numeric grades vector, look what happens when we try to mix in grades as characters:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\StringTok{"A1"}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+\NormalTok{rintro\_grades }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{69}\NormalTok{, }\DecValTok{65}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{77}\NormalTok{, }\DecValTok{86}\NormalTok{, }\DecValTok{88}\NormalTok{, }\StringTok{"A1"}\NormalTok{, }\DecValTok{71}\NormalTok{)}
 
 
-\FunctionTok{print}\NormalTok{(rintro\_marks)}
+\FunctionTok{print}\NormalTok{(rintro\_grades)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "87" "A1" "87" "90" "88" "89"
+## [1] "69" "65" "80" "77" "86" "88" "A1" "71"
 \end{verbatim}
 
-R has converted every element within the \texttt{rintro\_marks} vector into a character. If R sees an object that is a vector, but sees that its elements belong to different data types, it will try and convert every element to one data type. This is a strict rule in R - a vector can only be created if ever single element (i.e., thing) inside that vector is of the same data type.
+R has converted every element within the \texttt{rintro\_grades} vector into a character. If R sees an object that is a vector but sees that its elements belong to different data types, it will try to convert every element to one data type. This is a strict rule in R - a vector can only be created if every single element (i.e., thing) inside that vector is of the same data type.
 
-If we were to check the class of the \texttt{rintro\_marks}, it will show us this conversion
+If we were to check the class of \texttt{rintro\_marks} and \texttt{rintro\_grades}, it will show us this conversion
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{) }\CommentTok{\#original numeric vector}
+\FunctionTok{class}\NormalTok{(rintro\_marks) }
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"numeric"}
 
 
-\FunctionTok{class}\NormalTok{(rintro\_marks)}
+\FunctionTok{class}\NormalTok{(rintro\_grades)}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"character"}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## [1] "numeric"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\StringTok{"A1"}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
-
-
-\FunctionTok{class}\NormalTok{(rintro\_marks)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "character"
-\end{verbatim}
-
-Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters.
+Remember how I mentioned that you might download a dataset with a column that has numeric data but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When R reads this column, it sees the text, and then R converts the entire column into characters.
 
 \hypertarget{working-with-vectors}{%
 \subsubsection{Working with Vectors}\label{working-with-vectors}}
@@ -1521,18 +1532,16 @@ We can perform several types of operations on vectors to gain useful information
 
 \textbf{Numeric and Integer Vectors}
 
-We can run functions on vectors. For example, we can run functions like \texttt{mean()}, \texttt{median}, or \texttt{sd()} to calculate descriptive statistics on numeric or integer-based vectors.
+We can run functions on vectors. For example, we can run functions like \textbf{\texttt{mean()}}, \textbf{\texttt{median}}, or \textbf{\texttt{sd()}} to calculate descriptive statistics on numeric or integer-based vectors:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{) }\CommentTok{\#original numeric vector}
-
 \FunctionTok{mean}\NormalTok{(rintro\_marks)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 88.66667
+## [1] 78.5
 \end{verbatim}
 
 \begin{Shaded}
@@ -1542,7 +1551,7 @@ We can run functions on vectors. For example, we can run functions like \texttt{
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 88.5
+## [1] 78.5
 \end{verbatim}
 
 \begin{Shaded}
@@ -1552,10 +1561,10 @@ We can run functions on vectors. For example, we can run functions like \texttt{
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1.632993
+## [1] 9.724784
 \end{verbatim}
 
-A useful feature is that I can sort my numeric and integer vectors based on their scores.
+A useful feature is that I can sort my numeric and integer vectors based on their scores:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1564,10 +1573,10 @@ A useful feature is that I can sort my numeric and integer vectors based on thei
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 87 87 88 89 90 91
+## [1] 65 69 71 77 80 86 88 92
 \end{verbatim}
 
-The \texttt{sort()} function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.
+The \textbf{\texttt{sort()}} function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1576,7 +1585,7 @@ The \texttt{sort()} function by default arranges from lowest to highest, but we 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 91 90 89 88 87 87
+## [1] 92 88 86 80 77 71 69 65
 \end{verbatim}
 
 \textbf{Character and Logical Vectors}
@@ -1591,35 +1600,46 @@ We are more limited when it comes to operators with character and logical vector
 
 \begin{verbatim}
 ##    Length     Class      Mode 
-##         6 character character
+##         8 character character
 \end{verbatim}
 
-The \texttt{summary()} functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(rintro\_satisfied)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Mode   FALSE    TRUE 
+## logical       4       4
+\end{verbatim}
+
+The \textbf{\texttt{summary()}} function tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
 
 \hypertarget{vector-indexing-and-subsetting}{%
 \subsubsection{Vector Indexing and Subsetting}\label{vector-indexing-and-subsetting}}
 
-A vector in R is like a list of items. To be more specifc, vectors in R are actually \emph{ordered} list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list.
+A vector in R is like a list of items. To be more specific, vectors in R are actually \emph{ordered} lists of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list:
 
 \begin{figure}
 \centering
 \includegraphics{img/03-index_numeric.png}
-\caption{\label{fig:unnamed-chunk-51}Indexing for Numeric Vector}
+\caption{\label{fig:unnamed-chunk-63}Indexing for Numeric Vector}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics{img/03-index-character.png}
-\caption{\label{fig:unnamed-chunk-52}Indexing for Character Vector}
+\caption{\label{fig:unnamed-chunk-64}Indexing for Character Vector}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics{img/03-index-logical.png}
-\caption{\label{fig:unnamed-chunk-53}Indexing for Logical Vector}
+\caption{\label{fig:unnamed-chunk-65}Indexing for Logical Vector}
 \end{figure}
 
-This property in vectors mean we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using \texttt{{[}{]}} brackets.
+This property in vectors means we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using \textbf{\texttt{{[}{]}}} brackets:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1640,7 +1660,7 @@ Similarly, I could extract the 3rd element.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 87
+## [1] 80
 \end{verbatim}
 
 Or I could extract the last element.
@@ -1652,12 +1672,12 @@ Or I could extract the last element.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] NA
+## [1] FALSE
 \end{verbatim}
 
 This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements.
 
-I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 8th elements. I just need to use \texttt{c()} to tell R that I am subsetting several elements.
+I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 6th elements. I just need to use \textbf{\texttt{c()}} to tell R that I am subsetting several elements:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1666,7 +1686,7 @@ I can ask R even to subset several elements from my vector based on their positi
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Aoife" "Eva"   NA
+## [1] "Aoife" "Eva"   "Owen"
 \end{verbatim}
 
 \begin{Shaded}
@@ -1676,7 +1696,7 @@ I can ask R even to subset several elements from my vector based on their positi
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 91 90 NA
+## [1] 65 77 71
 \end{verbatim}
 
 \begin{Shaded}
@@ -1686,10 +1706,10 @@ I can ask R even to subset several elements from my vector based on their positi
 \end{Shaded}
 
 \begin{verbatim}
-## [1] FALSE FALSE    NA
+## [1]  TRUE FALSE FALSE
 \end{verbatim}
 
-If the elements you are positioned right next to each other on a vector, you can use \texttt{:} as a shortcut.
+If the elements you are positioned right next to each other on a vector, you can use \textbf{\texttt{:}} as a shortcut:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1701,27 +1721,29 @@ If the elements you are positioned right next to each other on a vector, you can
 ## [1] "Gerry" "Aoife" "Liam"  "Eva"
 \end{verbatim}
 
-It's important to know however that when you perform an operation on a vector or you subset it, it does not actually change the original vector. For example, if you wanted to save the top three \texttt{rintro\_marks}, the following code would not work:
+It's important to know, however, that when you perform an operation on a vector or you subset it, it does not actually change the original vector. None of these following code will actually change rintro\_marks.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{sort}\NormalTok{(rintro\_marks, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
 
-
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{91} \DecValTok{90} \DecValTok{89} \DecValTok{88} \DecValTok{87} \DecValTok{87}
+
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{69} \DecValTok{65} \DecValTok{80} \DecValTok{77} \DecValTok{86} \DecValTok{88} \DecValTok{92} \DecValTok{71}
 
 \NormalTok{rintro\_marks[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
 
 \NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87}
-\FunctionTok{print}\NormalTok{(rintro\_marks)}
 
-\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87} \DecValTok{90} \DecValTok{88} \DecValTok{89}
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{69} \DecValTok{65} \DecValTok{80} \DecValTok{77} \DecValTok{86} \DecValTok{88} \DecValTok{92} \DecValTok{71}
 \end{Highlighting}
 \end{Shaded}
 
-You can see that neither the \texttt{sort()} function or subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.
+You can see that neither the \textbf{\texttt{sort()}} function nor subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.
 
-Here's how I would extract and save the top three exam marks.
+Here's how I would extract and save the top three exam marks:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1734,21 +1756,17 @@ Here's how I would extract and save the top three exam marks.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 91 90 89
+## [1] 92 88 86
 \end{verbatim}
-
-Over to you! How could we extract and save the bottom 3 results from the \texttt{rintro\_marks}` vector? Give it a go.
-
-Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
 
 \hypertarget{vectors---making-it-a-little-less-abstract.}{%
 \subsubsection{Vectors - making it a little less abstract.}\label{vectors---making-it-a-little-less-abstract.}}
 
-You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called \texttt{lists} (we'll talk it more next week). That confused me.
+You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called \textbf{\texttt{lists}} (we'll talk more about it next week). That confused me.
 
-But what helped me understand vectors was the realization that a vector is simply a ``line of data''. Let's say I was running a study and collected data on participants age. When I open the excel file, there will be a column called ``age'' will all the ages of my participants. That column is a vector of data with the variable label ``age''.
+But what helped me understand vectors was the realization that a vector is simply a ``line of data.'' Let's say I was running a study and collected data on participants' age. When I open the Excel file, there will be a column called ``age'' with all the ages of my participants. That column is a vector of data with the variable label ``age.''
 
-Creating that vector is the equivalent of creating a column in excel.
+Creating that vector is the equivalent of creating a column in Excel:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1758,7 +1776,7 @@ Creating that vector is the equivalent of creating a column in excel.
 
 \includegraphics{img/03-column-vector.png}
 
-Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am create a new row (line) of data. In R this is the equivalent of doing this:
+Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am creating a new row (line) of data. In R, this is the equivalent of doing this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1770,20 +1788,20 @@ Similarly, rows are also lines of data going horizontally. If I add data to colu
 
 So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row.
 
-So what happens we combine different vectors (columns and rows) together? We create a \texttt{data\ frame}.
+So what happens when we combine different vectors (columns and rows) together? We create a \textbf{\texttt{data\ frame}}.
 
 \hypertarget{data-frames}{%
 \subsection{Data frames}\label{data-frames}}
 
-Data frames is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in excel.
+A data frame is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in Excel:
 
 \begin{figure}
 \centering
 \includegraphics{img/03-dataframes_vectors.png}
-\caption{\label{fig:unnamed-chunk-67}The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors}
+\caption{\label{fig:unnamed-chunk-79}The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors}
 \end{figure}
 
-Data frames are an excellent way to store and manage data in R because it can store different types data (e.g., character, numeric, integer) all within the same structure. Let's create such a data frame using the \texttt{data.frame()} function.
+Data frames are an excellent way to store and manage data in R because they can store different types of data (e.g., character, numeric, integer) all within the same structure. Let's create such a data frame using the \textbf{\texttt{data.frame()}} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1812,11 +1830,11 @@ Once you have created or imported a data frame, you'll often need to access it a
 \hypertarget{selecting-columns}{%
 \paragraph{Selecting Columns}\label{selecting-columns}}
 
-Columns in a data frame represent different variables or attributes of your data. Often in data analysis we want to select a specific column and then perform analyses on it. So how can we individual select columns? Well In a data frame, every column has a name, similar to how each column in an excel spreadsheet has a header. These columns names enable you to access and manipulate specific columns or variables within your data frame.
+Columns in a data frame represent different variables or attributes of your data. Often in data analysis, we want to select a specific column and then perform analyses on it. So how can we individually select columns? Well, in a data frame, every column has a name, similar to how each column in an Excel spreadsheet has a header. These column names enable you to access and manipulate specific columns or variables within your data frame.
 
 We select columns based on their names via two tools:
 
-The \textbf{\$} Notation: You can use a dollar sign (\$) followed by the column to select \textbf{\emph{an individual column}} in a data frame. For example, let's select the \texttt{Name} column in the \texttt{my\_df} data frame.
+The \textbf{\$} Notation: You can use a dollar sign (\$) followed by the column name to select \textbf{an individual column} in a data frame. For example, let's select the \textbf{\texttt{Name}} column in the \textbf{\texttt{my\_df}} data frame:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1828,9 +1846,9 @@ The \textbf{\$} Notation: You can use a dollar sign (\$) followed by the column 
 ## [1] "Alice"   "Bob"     "Charlie"
 \end{verbatim}
 
-\textbf{Square Brackets} \texttt{{[}{]}}: This is similar approach to accessing elements from a vector. Inside the brackets you can specify both the row and columns that you want to extract. The syntax for selecting rows and columns is: \texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}.
+\textbf{Square Brackets} \textbf{\texttt{{[}{]}}}: This is a similar approach to accessing elements from a vector. Inside the brackets, you can specify both the row and columns that you want to extract. The syntax for selecting rows and columns is: \textbf{\texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}}.
 
-So if we wanted to access the ``Age'' column of my\_df, we could run the following code:
+So if we wanted to access the ``Age'' column of \textbf{\texttt{my\_df}}, we could run the following code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1842,9 +1860,9 @@ So if we wanted to access the ``Age'' column of my\_df, we could run the followi
 ## [1] 25 30 22
 \end{verbatim}
 
-You'll notice that we left the ``rows'' part empty in the square brackets. This tells R ``keep all the rows for this column''.
+You'll notice that we left the ``rows'' part empty in the square brackets. This tells R ``keep all the rows for this column.''
 
-We can also use this approach to access multiple columns using the \texttt{c()} function.
+We can also use this approach to access multiple columns using the \textbf{\texttt{c()}} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1862,9 +1880,9 @@ We can also use this approach to access multiple columns using the \texttt{c()} 
 \hypertarget{selecting-rows}{%
 \paragraph{Selecting Rows}\label{selecting-rows}}
 
-Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve, following the syntax: \texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}.
+Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve, following the syntax: \textbf{\texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}}.
 
-To get the first row of your data frame (my\_df), you can type the following.
+To get the first row of your data frame (\textbf{\texttt{my\_df}}), you can type the following:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1877,7 +1895,7 @@ To get the first row of your data frame (my\_df), you can type the following.
 ## 1 Alice  25 95.65
 \end{verbatim}
 
-This time I left the columns part blank, this tells R ``please keep all the columns for each row''.
+This time I left the columns part blank; this tells R ``please keep all the columns for each row.''
 
 To access the third row:
 
@@ -1892,7 +1910,7 @@ To access the third row:
 ## 3 Charlie  22 75.33
 \end{verbatim}
 
-If you want multiple rows, you can use the `c()` function to select multiple rows. Let's select the 1st and 3rd row.
+If you want multiple rows, you can use the \textbf{\texttt{c()}} function to select multiple rows. Let's select the 1st and 3rd rows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1906,7 +1924,7 @@ If you want multiple rows, you can use the `c()` function to select multiple row
 ## 3 Charlie  22 75.33
 \end{verbatim}
 
-If you wanted to select a range of rows, you can use the `:` operator:
+If you wanted to select a range of rows, you can use the : operator:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1926,9 +1944,9 @@ These methods allow you to extract specific rows or subsets of rows from your da
 \hypertarget{selecting-rows-and-columns}{%
 \paragraph{Selecting Rows and Columns}\label{selecting-rows-and-columns}}
 
-We can also select both rows and columns using \texttt{{[}{]}} and our syntax: \texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}.
+We can also select both rows and columns using \textbf{\texttt{{[}{]}}} and our syntax: \textbf{\texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}}.
 
-For example we could select the first and third rows for the \texttt{Age} and \texttt{Score} columns.
+For example, we could select the first and third rows for the \textbf{\texttt{Age}} and \textbf{\texttt{Score}} columns:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1942,7 +1960,7 @@ For example we could select the first and third rows for the \texttt{Age} and \t
 ## 3  22 75.33
 \end{verbatim}
 
-Similar to when we indexed vectors, this won't change the underlying data frame. To do that, we would need to assign the selection to a variable.
+Similar to when we indexed vectors, this won't change the underlying data frame. To do that, we would need to assign the selection to a variable:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1964,7 +1982,7 @@ Similar to when we indexed vectors, this won't change the underlying data frame.
 \hypertarget{adding-columns}{%
 \paragraph{Adding Columns}\label{adding-columns}}
 
-You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of \texttt{Gender} on the \texttt{Score} variable. The syntax for creating a new data frame is very straight forward
+You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of \textbf{\texttt{Gender}} on the \textbf{\texttt{Score}} variable. The syntax for creating a new data frame is very straightforward:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1972,7 +1990,7 @@ You may often need to add new information to your data frame. For example, we mi
 \end{Highlighting}
 \end{Shaded}
 
-Using this syntax, let's add a Gender column to our \texttt{my\_df} dataframe.
+Using this syntax, let's add a \textbf{\texttt{Gender}} column to our \textbf{\texttt{my\_df}} dataframe:.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1991,7 +2009,7 @@ Using this syntax, let's add a Gender column to our \texttt{my\_df} dataframe.
 ## 3 Charlie  22 75.33       Male
 \end{verbatim}
 
-Let's say I noticed I mixed up the genders, and that Bob is Male and Charlie is Non-Binary. Just like we can rewrite a variable, we can also rewrite a column using this approach.
+Let's say I noticed I mixed up the genders, and that Bob is Male and Charlie is Non-Binary. Just like we can rewrite a variable, we can also rewrite a column using this approach:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2013,9 +2031,9 @@ Let's say I noticed I mixed up the genders, and that Bob is Male and Charlie is 
 \hypertarget{adding-rows}{%
 \paragraph{Adding Rows}\label{adding-rows}}
 
-What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!) This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.
+What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!)? This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.
 
-What we need to do is actually creating a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.
+What we need to do is actually create a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2023,7 +2041,7 @@ What we need to do is actually creating a new data frame that has the same colum
 \end{Highlighting}
 \end{Shaded}
 
-Then we can use the \texttt{rbind()} function to add the new row to your original data frame. \texttt{rbind} takes in two data frames and combines them together. The syntax is as follows:
+Then we can use the \textbf{\texttt{rbind()}} function to add the new row to your original data frame. \textbf{\texttt{rbind}} takes in two data frames and combines them together. The syntax is as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2041,8 +2059,8 @@ Then we can use the \texttt{rbind()} function to add the new row to your origina
 ## 4    John  30 77.34       Male
 \end{verbatim}
 
-\hypertarget{exercises---data-structures}{%
-\subsection{Exercises - Data Structures}\label{exercises---data-structures}}
+\hypertarget{exercises-3}{%
+\subsection{Exercises}\label{exercises-3}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2074,6 +2092,8 @@ Then we can use the \texttt{rbind()} function to add the new row to your origina
 \NormalTok{vect3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"FALSE"}\NormalTok{, }\StringTok{"TRUE"}\NormalTok{, }\StringTok{"FALSE"}\NormalTok{, }\StringTok{"TRUE"}\NormalTok{, }\StringTok{"FALSE"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+\item
+  How could we extract and save the bottom 3 results from the \texttt{rintro\_marks}vector? Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
 \item
   Write code that adds a column to the \texttt{my\_df} data frame called \texttt{Nationality}. The values for the column should be \texttt{"Irish"}, \texttt{"American"}, \texttt{"English"}, \texttt{"Irish"}.
 \item
@@ -2115,9 +2135,9 @@ Then we can use the \texttt{rbind()} function to add the new row to your origina
 \hypertarget{summary-1}{%
 \section{Summary}\label{summary-1}}
 
-That concludes this session. Well done, we did a lot of work today. We learnt more about the relationship between the console and the script, and how we need to be precise when writing commands. We introduced the different types of data that R stores and how those data types can be stored in single lines of data in vectors or combined together to a table in a \texttt{data\ frame}.
+That concludes this session. Well done, we did a lot of work today. We learned more about the relationship between the console and the script and how we need to be precise when writing commands. We introduced the different types of data that R stores and how those data types can be stored in single lines of data in vectors or combined together in a table in a \textbf{\texttt{data\ frame}}.
 
-Don't feel like you need to have mastered or even remember all the material that we covered today. Even though these concepts are labelled as ``basic'', that does not mean they are intuitive. It will take time for them to sink in and that's normal. We'll drill these concepts a bit further next week. We'll also learn how to import \texttt{data\ frames}, which will set us up nicely for working with real-life data sets.
+Don't feel like you need to have mastered or even remember all the material that we covered today. Even though these concepts are labeled as ``basic,'' that does not mean they are intuitive. It will take time for them to sink in, and that's normal. We'll drill these concepts a bit further next week. We'll also learn how to import \textbf{\texttt{data\ frames}}, which will set us up nicely for working with the type of data sets we see in Psychological research.
 
   \bibliography{book.bib,packages.bib}
 

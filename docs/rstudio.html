@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-01-30" />
+<meta name="date" content="2024-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -200,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.6.1" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.6.1</b> Vectors</a></li>
 <li class="chapter" data-level="3.6.2" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.6.2</b> Data frames</a></li>
-<li class="chapter" data-level="3.6.3" data-path="programming1.html"><a href="programming1.html#exercises---data-structures"><i class="fa fa-check"></i><b>3.6.3</b> Exercises - Data Structures</a></li>
+<li class="chapter" data-level="3.6.3" data-path="programming1.html"><a href="programming1.html#exercises-3"><i class="fa fa-check"></i><b>3.6.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#summary-1"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 </ul></li>
@@ -247,17 +247,45 @@ Figure 2.1: BBC graphs created in R.
 <div id="downloading-r-on-windows" class="section level3 hasAnchor" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> Downloading R on Windows<a href="rstudio.html#downloading-r-on-windows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
-<li>Go to the website: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
-<li>Under the heading <em>Download and Install R,</em> click <em>Download R for Windows</em> <img src="img/01-cran.png" width="2804" /></li>
-<li>Click the hyperlink <strong><em>base</em></strong> or <strong><em>install R for the first Time</em></strong><img src="img/01-base.png" /></li>
-<li>Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That’s okay, you can download newer versions). Let the file download. <img src="img/01-download.png" alt="The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that&#39;s okay!" /></li>
+<li><p>Go to the website: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p></li>
+<li><p>Under the heading <em>Download and Install R,</em> click <em>Download R for Windows</em>
+<img src="img/01-cran.png" /><!-- --></p></li>
+<li><p>Click the hyperlink <strong><em>base</em></strong> or <strong><em>install R for the first Time</em></strong>
+<img src="img/01-base.png" /><!-- --></p></li>
+<li><p>Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That’s okay, you can download newer versions). Let the file download.</p></li>
+</ol>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="img/01-base.png" alt="The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that's okay!"  />
+<p class="caption">
+Figure 2.2: The R programming language is occasionally updated, so the specific version of R that you see might be different than mine. But that’s okay!
+</p>
+</div>
+<ol start="5" style="list-style-type: decimal">
 <li>Once the file has been downloaded, open it, and click “Yes” if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like “R-4.3.2.-win”. The numbers will differ depending on the specific version that was downloaded.</li>
 <li>Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.</li>
 </ol>
 </div>
 <div id="downloading-r-on-mac" class="section level3 hasAnchor" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Downloading R on Mac<a href="rstudio.html#downloading-r-on-mac" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The instructions are largely the same for Windows. Please see this guide for more information <a href="https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac" class="uri">https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac</a></p>
+<p>The instructions are largely the same for Mac.</p>
+<ol style="list-style-type: decimal">
+<li><p>Go to the website: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p></li>
+<li><p>Click Download R for (Mac) OS X.
+<img src="img/01-rstudiodownload-mac.png" /><!-- --></p></li>
+<li><p>Check the Latest release: section for the appropriate version and follow the directions for download. If you are unsure about this, please ask me.</p></li>
+</ol>
+<p><img src="img/01-rversion-mac.png" /><!-- --></p>
+<ol style="list-style-type: decimal">
+<li>Once the file download is complete, click to open the installer. Click Continue and proceed through the installer, I recommend going with all default options.
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="img/01-mac_installer.png" alt="Depending on your version of Mac OS, this might look slightly different. But you should still be able to install it."  />
+<p class="caption">
+Figure 2.3: Depending on your version of Mac OS, this might look slightly different. But you should still be able to install it.
+</p>
+</div></li>
+<li>Once the R installer has finished, click Close.</li>
+</ol>
+<p><img src="img/01-install_finish_mac.png" /><!-- --></p>
 </div>
 </div>
 <div id="install-and-open-r-studio" class="section level2 hasAnchor" number="2.3">
@@ -272,7 +300,7 @@ Figure 2.1: BBC graphs created in R.
 <p>Once the file is downloaded, open it and allow it to make changes to your device. Then follow the instructions to download the program. I recommend going with all default options here.</p>
 <p>After downloading both R and RStudio, open RStudio on your computer. You do not have to open R as RStudio will work with R (if everything is working correctly).</p>
 <p>When you first open RStudio, you will see three panes or “windows” in R Studio: “Console” (left) “Environment” (top right), and “Files” (bottom right).</p>
-<p><img src="img/rstudio_first.png" /></p>
+<p><img src="img/rstudio_first.png" /><!-- --></p>
 </div>
 <div id="creating-an-r-project" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Creating an R Project<a href="rstudio.html#creating-an-r-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -287,7 +315,7 @@ Figure 2.1: BBC graphs created in R.
 <p><strong>Option 1</strong>: The “Directory name” options sets the name of the project and associated folder.</p>
 <ul>
 <li><p>You can set this to whatever you want. <strong><em>Just don’t set it to “R”,</em></strong> as this can create problems down the line.</p></li>
-<li><p>I <strong><em>recommend</em></strong> that you set the same directory name as me - <strong><em>introR_2024</em></strong></p></li>
+<li><p>I <strong><em>recommend</em></strong> that you set the same directory name as me - <strong><em>rintro</em></strong></p></li>
 </ul>
 <p><strong>Option 2</strong>: The “Create project as sub-directory of” option selects a place to store this project on your computer.</p>
 <ul>
@@ -303,23 +331,23 @@ Figure 2.1: BBC graphs created in R.
 <ul>
 <li>Tick this option.</li>
 </ul>
-<p>You can see my example below. Once you’re happy with your input for each option, click “Create Project” This will open up the project introR_2024.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<p>You can see my example below. Once you’re happy with your input for each option, click “Create Project” This will open up the project <strong><em>rintro</em></strong>.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
 <img src="img/01-newproject.png" alt="New Project Set Up"  />
 <p class="caption">
-Figure 2.2: New Project Set Up
+Figure 2.4: New Project Set Up
 </p>
 </div>
 <div id="navigating-rstudio" class="section level3 hasAnchor" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Navigating RStudio<a href="rstudio.html#navigating-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In our new project, introR_2024, we are going to open the “Source” pane, which we will often use for writing code, and viewing datasets.</p>
+<p>In our new project, <strong><em>rintro</em></strong>, we are going to open the “Source” pane, which we will often use for writing code, and viewing datasets.</p>
 <p>There are a variety of ways to open the Source pane.</p>
 <p><strong>Button approach</strong>: Click the “File” tab in the top-left hand corner (not the File pane) -&gt; Click “New File” -&gt; “R Script”</p>
-<p><img src="img/rstudio_create_file.png" /></p>
+<p><img src="img/rstudio_create_file.png" /><!-- --></p>
 <p><strong><em>Button Shortcut</em></strong>: directly underneath the <em>File</em> tab, there is an icon of a white sheet with a green and white addition symbol. You can click that too.</p>
 <p><strong>Keyboard Shortcut:</strong> You can press “Ctrl” + “Shift” and “N” on Windows. Or “Cmd” + “Shift” + “N” on Mac.</p>
 <p>Now you should see your four panes: Source, Console, Environment, and Files.</p>
-<p><img src="img/01-four-panes.png" /></p>
+<p><img src="img/01-four-panes.png" /><!-- --></p>
 <div id="the-rstudio-workspace" class="section level4 hasAnchor" number="2.4.1.1">
 <h4><span class="header-section-number">2.4.1.1</span> The RStudio Workspace<a href="rstudio.html#the-rstudio-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Now that we have each pane opened, let’s briefly describe what each pane is for.</p>
@@ -346,15 +374,15 @@ Figure 2.2: New Project Set Up
 <ul>
 <li>Click “Session” on your RStudio toolbar -&gt; Set Working Directory -&gt; Choose Directory</li>
 </ul>
-<p><img src="img/01-wd.png" /></p>
+<p><img src="img/01-wd.png" /><!-- --></p>
 <ul>
-<li><p>By default you should be in your R Project (e.g., Rintro_2024).</p></li>
+<li><p>By default you should be in your R Project (e.g., <strong><em>rintro</em></strong>).</p></li>
 <li><p>Within this R Project, create a new folder and call it “week1”</p></li>
 <li><p>Click “week1” and then click Open</p></li>
 </ul>
-<p><img src="img/01-new_wd.png" /></p>
+<p><img src="img/01-new_wd.png" /><!-- --></p>
 <p>You should see something like the following in your console</p>
-<pre><code>&gt; setwd(&quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week1&quot;)</code></pre>
+<pre><code>&gt; setwd(&quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro/week1&quot;)</code></pre>
 <p>Check whether this is actually the location you want to store your files for this course. If it is, we are good to go. If not, then let me know.</p>
 </div>
 </div>
@@ -450,10 +478,10 @@ Figure 2.2: New Project Set Up
 <p>Boom! We can see there is a statistically significant difference between the two groups. I know the code within the t-test might look a bit complicated, but we will break it down and explain it as we go on in further weeks.</p>
 <p>Finally let’s visualize our data with the plot() function.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="rstudio.html#cb16-1" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
-<img src="rintro_demo_files/figure-html/unnamed-chunk-8-1.png" alt="Generic Boxplot" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<img src="rintro_demo_files/figure-html/unnamed-chunk-20-1.png" alt="Generic Boxplot" width="672" />
 <p class="caption">
-Figure 2.3: Generic Boxplot
+Figure 2.5: Generic Boxplot
 </p>
 </div>
 <p>The plot() function is an example of a generic function, which means it’s a function that will try to adapt to our code. In this case, the plot() function looks at the variables we wants to plot, and identifies that the box plot is the most appropriate way to plot it.</p>
@@ -467,10 +495,10 @@ Figure 2.3: Generic Boxplot
 <span id="cb17-7"><a href="rstudio.html#cb17-7" tabindex="-1"></a></span>
 <span id="cb17-8"><a href="rstudio.html#cb17-8" tabindex="-1"></a></span>
 <span id="cb17-9"><a href="rstudio.html#cb17-9" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra, <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Hours of Sleep&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Effect of Treament on Sleep Duration&quot;</span>)  </span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
-<img src="rintro_demo_files/figure-html/unnamed-chunk-9-1.png" alt="Generic Boxplot with appropriate labelling" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
+<img src="rintro_demo_files/figure-html/unnamed-chunk-21-1.png" alt="Generic Boxplot with appropriate labelling" width="672" />
 <p class="caption">
-Figure 2.4: Generic Boxplot with appropriate labelling
+Figure 2.6: Generic Boxplot with appropriate labelling
 </p>
 </div>
 <p>Now let’s take this plot and save it to a PDF so that we could share our results with others. The standard way of doing this in R is a bit cumbersome. We have to tell R that we are about to create a plot that we want to make into a PDF. Then we have to generate the plot. Then we have to tell R we are done with creating the PDF. We’ll learn a MUCH simpler way to do this in future weeks, but this will do for now.</p>
@@ -488,10 +516,10 @@ Figure 2.4: Generic Boxplot with appropriate labelling
 <p>Last concept before we finish. You might have noticed that I wrote several things with a <code>#</code> before them. These are known as comments. Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). They are fundamental to writing clear code.</p>
 <p>We create comments using <code>#</code> symbol. This symbol tells R to ignore whatever comes directly <strong><em>afterwards</em></strong>.</p>
 <p>There are various reasons for using comments.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
 <img src="img/03-comments.png" alt="Four Examples of Comments Use"  />
 <p class="caption">
-Figure 2.5: Four Examples of Comments Use
+Figure 2.7: Four Examples of Comments Use
 </p>
 </div>
 <p>In the above figure, you’ll see four different types of comments.</p>
