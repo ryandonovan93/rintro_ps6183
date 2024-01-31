@@ -466,3 +466,24 @@ If you comment a lot, it will save you so much heartache in the future. And it w
 There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully, it's given you a tiny glimpse into what R can do.
 
 In the next two sessions, we will learn basic programming concepts and how to import data in R.
+
+## Glossary
+
+This glossary defines key terms introduced in Chapter 2.
+
+| Term                  | Definition                                                   |
+|-----------------------|--------------------------------------------------------------|
+| Comment               | Text in an R script that is ignored by R. Comments are preceded by the `#` symbol and are used to add explanations, headings, or disable code temporarily. |
+| Console               | The interactive interface in RStudio where you can type and execute R commands and see their immediate output. |
+| Environment Pane      | The pane in RStudio that displays information about data sets, variables, and the history of R commands used in the current R session. |
+| Files Pane            | The pane in RStudio that displays the files and folders in your current working directory, as well as other useful tabs like Plots, Packages, and Help. |
+| Function              | A fundamental programming concept in R, representing a reusable block of code that performs a specific task. Functions are like verbs in English; they describe actions. |
+| R                     | A programming language and environment for statistical analysis and data visualization. |
+| R Project             | An environment created in RStudio that groups together input files, code, and outputs. It helps organize and manage your work in a specific directory. |
+| RStudio               | An integrated development environment (IDE) for R, providing a user-friendly interface and tools for coding, data analysis, and visualization. |
+| Script                | A file containing a sequence of R commands that can be saved, executed, and reused. |
+| Source Pane           | The pane in RStudio where you can write and edit R scripts. |
+| Term                  | Definition                                                   |
+| Working Directory     | The directory or folder on your computer where R is currently operating. It is important for managing file paths and organizing project files. |
+
+
