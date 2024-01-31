@@ -1,4 +1,4 @@
-# Basic R Programming (Part I) {#programming1}
+# **R Programming (Part I)** {#programming1}
 
 Today, we are going to explore fundamental programming concepts in R. By the end of this session, you should be capable of the following:
 
