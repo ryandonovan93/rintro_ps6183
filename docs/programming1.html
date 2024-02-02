@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-01-31" />
+<meta name="date" content="2024-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to R (University of Galway)</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#who-is-this-resource-for"><i class="fa fa-check"></i><b>1.1</b> Who is this resource for?</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#should-i-learn-r"><i class="fa fa-check"></i><b>1.2</b> Should I learn R?</a></li>
@@ -206,6 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#summary-1"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
 <li class="chapter" data-level="3.8" data-path="programming1.html"><a href="programming1.html#glossary-1"><i class="fa fa-check"></i><b>3.8</b> Glossary</a></li>
+<li class="chapter" data-level="3.9" data-path="programming1.html"><a href="programming1.html#variable-name-table"><i class="fa fa-check"></i><b>3.9</b> Variable Name Table</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -827,9 +828,6 @@ Figure 3.4: The relationship between data frames and vectors. The different colo
 <ol start="6" style="list-style-type: decimal">
 <li>Write code that adds a row to the <code>my_df</code> data frame with your information for each of the columns (e.g., my data would be: <code>"Ryan"</code>, <code>30L</code>, <code>100</code>, <code>"Male"</code>). The <code>score</code> variable is a fake exam, so give yourself whatever score you want!</li>
 </ol>
-<pre><code>##      Name Age Nationality
-## 1   Alice  25     English
-## 3 Charlie  22       Irish</code></pre>
 </div>
 </div>
 <div id="summary-1" class="section level2 hasAnchor" number="3.7">
@@ -907,6 +905,87 @@ Figure 3.4: The relationship between data frames and vectors. The different colo
 <tr class="even">
 <td>Vector</td>
 <td>A one-dimensional data structure in R that can hold multiple elements of the same data type.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="variable-name-table" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> Variable Name Table<a href="programming1.html#variable-name-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="14%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rule</th>
+<th>Type</th>
+<th>Incorrect Example</th>
+<th>Correct Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variable names can only contain uppercase alphabetic characters A-Z, lowercase a-z, numeric characters 0-9, periods ., and underscores _.</td>
+<td>Strict</td>
+<td>1st_name</td>
+<td>first_name</td>
+</tr>
+<tr class="even">
+<td>Variable names must begin with a letter or a period.</td>
+<td>Strict</td>
+<td>_1stname</td>
+<td>.firstname</td>
+</tr>
+<tr class="odd">
+<td>Avoid using spaces in variable names.</td>
+<td>Strict</td>
+<td>my name</td>
+<td>my_name</td>
+</tr>
+<tr class="even">
+<td>Variable names are case-sensitive.</td>
+<td>Strict</td>
+<td>my_name == my_Name</td>
+<td>my_Name == my_Name</td>
+</tr>
+<tr class="odd">
+<td>Variable names cannot include special words reserved by R.</td>
+<td>Strict</td>
+<td>print</td>
+<td>to_print</td>
+</tr>
+<tr class="even">
+<td>Choose informative variable names that clearly describe the information they represent.</td>
+<td>Recommended</td>
+<td>money</td>
+<td>income</td>
+</tr>
+<tr class="odd">
+<td>Opt for short variable names when possible.</td>
+<td>Recommended</td>
+<td>date_of_birth</td>
+<td>dob</td>
+</tr>
+<tr class="even">
+<td>Prioritize clarity over brevity.</td>
+<td>Recommended</td>
+<td>tem</td>
+<td>total_exam_marks</td>
+</tr>
+<tr class="odd">
+<td>Avoid starting variable names with a capital letter.</td>
+<td>Recommended</td>
+<td>FirstName</td>
+<td>firstName</td>
+</tr>
+<tr class="even">
+<td>Choose a consistent naming style and stick to it.</td>
+<td>Recommended</td>
+<td>myName, last_Name</td>
+<td>my_name, last_name or myName and lastName</td>
 </tr>
 </tbody>
 </table>

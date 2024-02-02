@@ -982,12 +982,6 @@ my_df[my_df$Gender != "Male", c("Name", "Age", "Nationality")]
 
 6.  Write code that adds a row to the `my_df` data frame with your information for each of the columns (e.g., my data would be: `"Ryan"`, `30L`, `100`, `"Male"`). The `score` variable is a fake exam, so give yourself whatever score you want!
 
-```{r echo = FALSE}
-
-my_df[my_df$Gender != "Male", c("Name", "Age", "Nationality")]
-
-
-```
 
 ## Summary
 
@@ -1015,3 +1009,19 @@ This glossary defines key terms introduced in Chapter 3.
 | Subsetting            | The technique of selecting a subset of elements from a data structure, such as a vector or data frame, based on specific criteria. |
 | Variable              | A named storage location in R that holds data or values. It can represent different types of information. |
 | Vector                | A one-dimensional data structure in R that can hold multiple elements of the same data type. |
+
+
+## Variable Name Table
+
+| Rule                            | Type         | Incorrect Example        | Correct Example          |
+|---------------------------------|--------------|--------------------------|--------------------------|
+| Variable names can only contain uppercase alphabetic characters A-Z, lowercase a-z, numeric characters 0-9, periods ., and underscores _. | Strict | 1st_name                 | first_name               |
+| Variable names must begin with a letter or a period. | Strict | _1stname                | .firstname               |
+| Avoid using spaces in variable names. | Strict | my name                 | my_name                  |
+| Variable names are case-sensitive. | Strict | my_name == my_Name                | my_Name == my_Name                 |
+| Variable names cannot include special words reserved by R. | Strict |print         | to_print             |
+| Choose informative variable names that clearly describe the information they represent. | Recommended | money                  | income                   |
+| Opt for short variable names when possible. | Recommended | date_of_birth          | dob                      |
+| Prioritize clarity over brevity. | Recommended | tem                    | total_exam_marks         |
+| Avoid starting variable names with a capital letter. | Recommended | FirstName            | firstName                |
+| Choose a consistent naming style and stick to it. | Recommended | myName, last_Name               | my_name, last_name or myName and lastName                  |
