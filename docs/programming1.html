@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-02-02" />
+<meta name="date" content="2024-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -257,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="programming1.html#cb22-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">20</span> <span class="sc">/</span> <span class="dv">10</span></span>
 <span id="cb22-2"><a href="programming1.html#cb22-2" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="programming1.html#cb22-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
-<p>When performing calculations in R, it’s important to know that it follows the usual arithmetic convention of the order of operations (remember <a href="https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction">BIMDAS - Bracets, Indices, Multiplication, Division, Addition, and Subtraction?</a>).</p>
+<p>When performing calculations in R, it’s important to know that it follows the usual arithmetic convention of the order of operations (remember <a href="https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction">BEDMAS - Bracets, Exponents, Division, Multiplication, Addition, and Subtraction?</a>).</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="programming1.html#cb23-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span> <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span> </span>
 <span id="cb23-2"><a href="programming1.html#cb23-2" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="programming1.html#cb23-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">84</span></span>
@@ -271,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="programming1.html#cb24-1" tabindex="-1"></a><span class="fu">print</span>(sleep<span class="sc">$</span>extra) <span class="co">#this will print out the extra sleep column in the sleep dataset we used last week</span></span></code></pre></div>
 <pre><code>##  [1]  0.7 -1.6 -0.2 -1.2 -0.1  3.4  3.7  0.8  0.0  2.0  1.9  0.8  1.1  0.1 -0.1
 ## [16]  4.4  5.5  1.6  4.6  3.4</code></pre>
-<p>Here R tells us that the first answer (i.e., value) corresponds to <code>0.1</code>. The next label is <code>[16]</code>. which tells us that the 16th answer corresponds to 5.5.</p>
+<p>Here R tells us that the first answer (i.e., value) corresponds to <code>0.1</code>. The next label is <code>[16]</code>. which tells us that the 16th answer corresponds to 4.4.</p>
 <p>But why does it only show the <code>[1]</code> and <code>[16]</code>th index? If you run this code in your console, you might actually see a different number than <code>[16]</code> depending on wide your console is on your device.</p>
 <p>This is because R only prints out the index when a new row of data is needed in the console. If there were indexes for every single answer, it would clutter the console with unnecessary information. So R uses new rows as a method for deciding when to show us another index.</p>
 <p>We’ll delve deeper into indexing later in this session; it’s a highly useful concept in R.</p>
@@ -1046,7 +1046,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/03-programming_p1.Rmd",
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/03-programming-p1.Rmd",
 "text": "Edit"
 },
 "history": {

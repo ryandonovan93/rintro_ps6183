@@ -55,7 +55,7 @@ We can command the R console to perform calculations. When following along in RS
 
 ```
 
-When performing calculations in R, it's important to know that it follows the usual arithmetic convention of the order of operations (remember [BIMDAS - Bracets, Indices, Multiplication, Division, Addition, and Subtraction?](https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction)).
+When performing calculations in R, it's important to know that it follows the usual arithmetic convention of the order of operations (remember [BEDMAS - Bracets, Exponents, Division, Multiplication, Addition, and Subtraction?](https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction)).
 
 ```{r eval = FALSE}
 
@@ -82,7 +82,7 @@ print(sleep$extra) #this will print out the extra sleep column in the sleep data
 
 ```
 
-Here R tells us that the first answer (i.e., value) corresponds to `0.1`. The next label is `[16]`. which tells us that the 16th answer corresponds to 5.5.
+Here R tells us that the first answer (i.e., value) corresponds to `0.1`. The next label is `[16]`. which tells us that the 16th answer corresponds to 4.4.
 
 But why does it only show the `[1]` and `[16]`th index? If you run this code in your console, you might actually see a different number than `[16]` depending on wide your console is on your device.
 

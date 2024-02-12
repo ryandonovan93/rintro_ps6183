@@ -1,0 +1,187 @@
+---
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# **R Programming (Part II)** {#programming2}
+
+Today, we are going to build upon on the foundation concepts introduced last week and delve deeper into the world of R programming.
+
+By the end of this session, you should be capable of the following:
+
+-   Understanding the logic of functions, including how and why they are created.
+-   Performing operations on vectors and data frames to pull the data we want.
+-   Creating the "factor" data type and the list data structure.
+-   Importing a data set into R using both code and button-click interfaces.
+-   Be capable of spicing up your RStudio by installing and loading packages.\
+-   Understand how to use the help function effectively and how to search for help online.
+
+```{r echo=FALSE, warning=FALSE}
+
+library(webexercises)
+
+```
+
+## Functions
+
+Explain the concept of functions and their role in programming.
+
+We have used several functions in the previous two sessions including: `print()`, `head(), View()`, `mean()`, `sd(), summary(), aggregate(), plot(), pdf(), t.test(), class(), and c().` But the only thing I have told you about them is that they are similar to verbs, in that they are words that do things.
+In particular, they do things to whatever we put inside parentheses and spits out a result.
+
+However, you might have noticed that doesn't fully explain the full story, because we sometimes put other information inside functions, like `FUN = mean` in `aggregate()` or `paired = TRUE` in `t.test()` that fundamentally changes the result of a function.
+This indicates that there is a degree of customization with functions.
+You might assume that being good at programming is about learning as many functions as you can so that whenever you face a challenging situation in R, you know what tool to use.
+
+There is some truth to this.
+As you get better at programming, you will know more functions and how to use them effectively.
+But what really predicts your ability as a programmer is your ability to grasp the logic of functions, because once you understand that you'll be able to pick them up significantly faster, use them more effectively, and you'll also be able to create your own functions.
+
+This final point is critical.
+***You can create your own functions***.
+Let's create our function to demonstrate what functions actually are.
+
+### Creating a Function
+
+Show how to define custom functions in R using the function() keyword.
+Discuss function parameters and return values.
+Cover the scope of variables inside and outside of functions.
+Highlight the importance of functions in code modularity and reusability.
+
+
+### Creating an even bigger function
+
+In week 1, we conducted descriptive and inferential analysis on the sleep data set. In particular, we called the aggregate() function to calculate the mean score per group. The code looked like this
+
+```{r}
+
+aggregate(data = sleep, extra ~ group, FUN = mean)
+
+```
+This code is useful, but at the same time it is limited. It only tells us the mean. What if we wanted the mean and standard deviation. Well the internal logic of the aggregate function does not allow us to ask for more than function at a time. 
+
+```{r eval = FALSE}
+
+aggregate(data = sleep, extra ~ group, FUN = c(mean, sd))
+
+
+```
+
+This just doesn't work. To get the sd, then we would need to write a separate line of code. 
+
+```{r}
+
+aggregate(data = sleep, extra ~ group, FUN = sd)
+
+
+```
+What if we wanted to get the median? You guessed it, we would need another line of code. 
+
+```{r}
+
+aggregate(data = sleep, extra ~ group, FUN = median)
+
+
+```
+And if we wanted to get the interquartile range, we would need another line of code using the SQR() function. 
+
+
+```{r}
+
+aggregate(data = sleep, extra ~ group, FUN = IQR)
+
+```
+
+
+That leaves us with four lines of code. 
+
+```{r}
+
+aggregate(data = sleep, extra ~ group, FUN = mean)
+aggregate(data = sleep, extra ~ group, FUN = median)
+aggregate(data = sleep, extra ~ group, FUN = sd)
+aggregate(data = sleep, extra ~ group, FUN = IQR)
+
+
+
+
+```
+
+Which isn't very efficient is it? In SPSS, you can click a few buttons and get all these descriptive statistics and more easily. 
+
+
+```{r}
+get_mean_sd <- function(df, x, y) {
+  mean_x <- aggregate(data = df, x ~ y, FUN = mean)
+  sd_x <- aggregate(data = df, x ~ y, FUN = sd)
+  median_x <- aggregate(data = df, x ~ y, FUN = median)
+  
+  
+  # Assign names to columns in the data frames
+  names(mean_x) <- c("group", "mean")
+  names(sd_x) <- c("group", "sd")
+  names(median_x) <- c("group", "median")
+  
+  
+  return(list(mean_x = mean_x[[2]], sd_x = sd_x[[2]], median_x = median_x[[2]]))
+}
+
+
+get_mean_sd(sleep, sleep$extra, sleep$group)
+```
+
+
+Practice Activities:
+
+Ask students to create their own custom functions for simple tasks, such as calculating the mean, median, or standard deviation of a vector.
+Challenge them to write a function that takes a dataset and performs a specific data transformation or analysis task.
+Provide exercises where students need to identify when and why using a function would improve their code.
+
+Data Types: What to Cover:
+
+Explain the fundamental data types in R, including numeric, logical, integer, character, and complex.
+Introduce additional data types like factors, dates, and times.
+Describe the characteristics and appropriate use cases for each data type.
+Show how to convert between different data types using functions like as.numeric(), as.character(), etc.
+Practice Activities:
+
+Provide a dataset with mixed data types and ask students to identify and convert them appropriately.
+Have students create variables of different data types and perform operations on them to observe how data types affect the results.
+Show real-world examples where data types play a crucial role in data analysis and visualization.
+
+Data Structures: What to Cover:
+
+Introduce more complex data structures like matrices, arrays, and lists.
+Explain how to create and initialize these data structures.
+Show how to access and manipulate elements within matrices, arrays, and lists.
+Discuss the differences between one-dimensional and multi-dimensional data structures.
+Practice Activities:
+
+Assign students tasks involving the creation and manipulation of matrices, arrays, and lists.
+Challenge them to perform calculations or transformations on multi-dimensional data structures.
+Provide scenarios where choosing the appropriate data structure is essential for efficient data storage and retrieval.
+
+Reading and Writing Data: What to Cover:
+
+Explain how to import data from various sources, including CSV files, Excel spreadsheets, and databases using functions like read.csv(), read.xlsx(), and readRDS().
+Cover options for specifying data types, headers, and encoding during data import.
+Show how to export data to different formats, such as CSV, Excel, and R data files using functions like write.csv(), write.xlsx(), and saveRDS().
+Practice Activities:
+
+Provide datasets in different formats and ask students to import and perform basic data analysis tasks on them.
+Have students export analysis results to different file formats for reporting purposes.
+Encourage students to explore data import options for handling special cases like missing values and dates.
+
+Vectorization: What to Cover:
+
+Emphasize the concept of vectorized operations in R and its efficiency.
+Show how to perform element-wise operations on vectors and matrices without explicit loops.
+Explain the benefits of vectorization for code readability and performance.
+Cover functions like sapply(), lapply(), and apply() for applying functions to data structures.
+Practice Activities:
+
+Provide tasks that involve performing operations on large datasets and compare the execution time with and without vectorization.
+Challenge students to rewrite non-vectorized code to utilize vectorization techniques.
+Ask them to identify scenarios where vectorization can significantly improve code efficiency and readability.
+These topics and practice activities should help students deepen their understanding of R programming and become proficient in using functions, handling different data types and structures, managing data import and export, gracefully handling errors, and optimizing code with vectorization.
