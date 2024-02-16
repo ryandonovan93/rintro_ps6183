@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-02-09" />
+<meta name="date" content="2024-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,70 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
@@ -148,7 +212,12 @@
 <ul>
 <li class="chapter" data-level="4.1" data-path="programming2.html"><a href="programming2.html#functions"><i class="fa fa-check"></i><b>4.1</b> Functions</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="programming2.html"><a href="programming2.html#creating-a-function"><i class="fa fa-check"></i><b>4.1.1</b> Creating a Function</a></li>
+<li class="chapter" data-level="4.1.1" data-path="programming2.html"><a href="programming2.html#the-syntax-for-creating-a-function"><i class="fa fa-check"></i><b>4.1.1</b> The Syntax for Creating a Function</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming2.html"><a href="programming2.html#creating-a-simple-function-1-argument"><i class="fa fa-check"></i><b>4.1.2</b> Creating a Simple Function (1-Argument)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="programming2.html"><a href="programming2.html#creating-a-multi-argument-function"><i class="fa fa-check"></i><b>4.1.3</b> Creating a Multi-Argument Function</a></li>
+<li class="chapter" data-level="4.1.4" data-path="programming2.html"><a href="programming2.html#functions-inside-functions"><i class="fa fa-check"></i><b>4.1.4</b> Functions inside Functions</a></li>
+<li class="chapter" data-level="4.1.5" data-path="programming2.html"><a href="programming2.html#returning-multiple-objects-from-a-function"><i class="fa fa-check"></i><b>4.1.5</b> Returning Multiple Objects from a Function</a></li>
+<li class="chapter" data-level="4.1.6" data-path="programming2.html"><a href="programming2.html#some-important-features-about-functions"><i class="fa fa-check"></i><b>4.1.6</b> Some Important Features about Functions</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -186,68 +255,323 @@
 </ul>
 <div id="functions" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Functions<a href="programming2.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Explain the concept of functions and their role in programming.</p>
-<p>We have used several functions in the previous two sessions including: <code>print()</code>, <code>head(), View()</code>, <code>mean()</code>, <code>sd(), summary(), aggregate(), plot(), pdf(), t.test(), class(), and c().</code> But the only thing I have told you about them is that they are similar to verbs, in that they are words that do things.
-In particular, they do things to whatever we put inside parentheses and spits out a result.</p>
-<p>However, you might have noticed that doesn’t fully explain the full story, because we sometimes put other information inside functions, like <code>FUN = mean</code> in <code>aggregate()</code> or <code>paired = TRUE</code> in <code>t.test()</code> that fundamentally changes the result of a function.
-This indicates that there is a degree of customization with functions.
-You might assume that being good at programming is about learning as many functions as you can so that whenever you face a challenging situation in R, you know what tool to use.</p>
-<p>There is some truth to this.
-As you get better at programming, you will know more functions and how to use them effectively.
-But what really predicts your ability as a programmer is your ability to grasp the logic of functions, because once you understand that you’ll be able to pick them up significantly faster, use them more effectively, and you’ll also be able to create your own functions.</p>
-<p>This final point is critical.
-<strong><em>You can create your own functions</em></strong>.
-Let’s create our function to demonstrate what functions actually are.</p>
-<div id="creating-a-function" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Creating a Function<a href="programming2.html#creating-a-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Show how to define custom functions in R using the function() keyword.
-Discuss function parameters and return values.
-Cover the scope of variables inside and outside of functions.
-Highlight the importance of functions in code modularity and reusability.</p>
-<p>Practice Activities:</p>
-<p>Ask students to create their own custom functions for simple tasks, such as calculating the mean, median, or standard deviation of a vector.
-Challenge them to write a function that takes a dataset and performs a specific data transformation or analysis task.
-Provide exercises where students need to identify when and why using a function would improve their code.</p>
-<p>Data Types: What to Cover:</p>
-<p>Explain the fundamental data types in R, including numeric, logical, integer, character, and complex.
-Introduce additional data types like factors, dates, and times.
-Describe the characteristics and appropriate use cases for each data type.
-Show how to convert between different data types using functions like as.numeric(), as.character(), etc.
-Practice Activities:</p>
-<p>Provide a dataset with mixed data types and ask students to identify and convert them appropriately.
-Have students create variables of different data types and perform operations on them to observe how data types affect the results.
-Show real-world examples where data types play a crucial role in data analysis and visualization.</p>
+<p>In the previous two sessions, we have used several functions including: <strong><code>print()</code></strong>, <strong><code>head()</code></strong>, <strong><code>View()</code></strong>, <strong><code>mean()</code></strong>, <strong><code>sd()</code></strong>, <strong><code>summary()</code></strong>, <strong><code>aggregate()</code></strong>, <strong><code>plot()</code></strong>, <strong><code>pdf()</code></strong>, <strong><code>t.test()</code></strong>, <strong><code>class()</code></strong>, and <strong><code>c()</code></strong>. Each of these functions has served a particular purpose. All of them have taken in an input object (e.g., a variable, data type, and/or data structure), performed some operation on it, and produced some output.</p>
+<p>But we haven’t really talked about what functions actually are. I have told you they are similar to verbs in that they are “words” that do things. This makes them sound like some magical words.</p>
+<p>You might assume that being good at programming is about learning as many functions as you can, and learning in detail what they can do, so that whenever you face a challenging situation in R, you know what tool to use.</p>
+<p>There is some truth to this. You will inevitably learn more functions as you get better and more comfortable with R. This will make you more adept at using them. But what actually predicts becoming good at programming is your ability to understand the logic of functions and how they are created. If you grasp that, you’ll be able to learn them quicker, use them more effectively, and even create your own functions.</p>
+<p>This final point is critical. You can create your own functions. Let’s create our own function to demonstrate what functions actually are.</p>
+<div id="the-syntax-for-creating-a-function" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> The Syntax for Creating a Function<a href="programming2.html#the-syntax-for-creating-a-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Functions are somewhat similar to variables. We create variable names as labels for information. That way when we want to access that information or perform operations on it we can use the variable name rather than recreating the information in R again.</p>
+<p>Similarly, functions are like labels for code. We come up with a name for a function (e.g., <strong><code>mean()</code></strong>) and we assign code instructions to that function. So when we call a function, we can give it information (e.g., variables), and it will take information and run that code on it. This way we don’t have to write out code instructions over and over again - we can just call the function. This increases the scalability of our code.</p>
+<p>The syntax for creating a function looks like this:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="programming2.html#cb157-1" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>(argument) {</span>
+<span id="cb157-2"><a href="programming2.html#cb157-2" tabindex="-1"></a>  instruction_1</span>
+<span id="cb157-3"><a href="programming2.html#cb157-3" tabindex="-1"></a>  instructions_2</span>
+<span id="cb157-4"><a href="programming2.html#cb157-4" tabindex="-1"></a>  ....</span>
+<span id="cb157-5"><a href="programming2.html#cb157-5" tabindex="-1"></a>  instruction_n</span>
+<span id="cb157-6"><a href="programming2.html#cb157-6" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb157-7"><a href="programming2.html#cb157-7" tabindex="-1"></a>}</span></code></pre></div>
+<p>What’s going on here?</p>
+<ol style="list-style-type: decimal">
+<li><p>First, we created a name, <strong><code>my_function</code></strong>, and used the assignment operator <strong><code>&lt;-</code></strong> to tell R we are going to be storing some piece of information to that name.</p></li>
+<li><p>Then, we wrote <strong><code>function()</code></strong> to tell R that we are going to be creating a function and storing it to our name <strong><code>my_function</code></strong>. Inside <strong><code>function()</code></strong>, we specified an <strong><code>argument</code></strong>, which is just a fancy word for <strong><code>input</code></strong>.</p></li>
+<li><p>Inside the curly brackets <strong><code>{}</code></strong>, we write the code for <strong><code>my_function</code></strong>. This code comprises instructions (i.e., operations) that R will execute on our argument (i.e., input). We could have 1 instruction here, or we could have several hundred lines of instructions. That depends on the complexity of the function we are creating.</p></li>
+<li><p>We want the function to provide us with some output information. To ensure that it does that, we tell R to <strong><code>return()</code></strong> the information (<strong><code>output</code></strong>) that we want.</p></li>
+</ol>
+</div>
+<div id="creating-a-simple-function-1-argument" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Creating a Simple Function (1-Argument)<a href="programming2.html#creating-a-simple-function-1-argument" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It may come as a shock to you to learn that I am not much of a chef. One of the reasons I’m not a chef is my irritation with reading recipes that include instructions like “1 cup,” “10 ounces,” or “17 eagle feet,” or require preheating the oven to “1000 degrees Fahrenheit.” What I could really use is a function that would help me convert those values automatically. Let’s take the cup example. Let’s create a function that will take in the number of cups we need and convert that to grams.</p>
+<p>To do this, let’s create a function called <strong><code>cup_to_grams</code></strong> (note: the naming conventions for functions are similar to the naming conventions for variables. The main rule is that your function name should describe the action it is carrying out.)</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="programming2.html#cb158-1" tabindex="-1"></a>cups_to_grams <span class="ot">&lt;-</span> <span class="cf">function</span>(cups) {</span>
+<span id="cb158-2"><a href="programming2.html#cb158-2" tabindex="-1"></a>  </span>
+<span id="cb158-3"><a href="programming2.html#cb158-3" tabindex="-1"></a>}</span></code></pre></div>
+<p>Inside the <strong><code>function()</code></strong>, I have given it the argument <strong><code>cups</code></strong>. In this scenario, <strong><code>cups</code></strong> acts as a placeholder variable. Inside the function, we are going to write instructions on what to do with that variable. But we have not yet defined what that variable is yet. We do that when we use the function. So don’t worry about that for now.</p>
+<p>Now inside our function (i.e., inside the {}), we need to write instructions to enable R to convert cups to grams. When I googled this, several different answers popped up. But I am just going to follow the first website I found which said: “According to the metric system, there are 250 grams in 1 cup.”</p>
+<p>Let’s write that instruction inside our function. We are going to save the result of that calculation to a variable called <strong><code>grams</code></strong></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="programming2.html#cb159-1" tabindex="-1"></a>cups_to_grams <span class="ot">&lt;-</span> <span class="cf">function</span>(cups) {</span>
+<span id="cb159-2"><a href="programming2.html#cb159-2" tabindex="-1"></a>  grams <span class="ot">&lt;-</span> cups <span class="sc">*</span> <span class="dv">250</span></span>
+<span id="cb159-3"><a href="programming2.html#cb159-3" tabindex="-1"></a>}</span></code></pre></div>
+<p>Now we are nearly done. But if we want R to provide us with the result of this function, we need to ask it to <strong><code>return()</code></strong> it to us. We can do that easily by:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="programming2.html#cb160-1" tabindex="-1"></a>cups_to_grams <span class="ot">&lt;-</span> <span class="cf">function</span>(cups) {</span>
+<span id="cb160-2"><a href="programming2.html#cb160-2" tabindex="-1"></a>  grams <span class="ot">&lt;-</span> cups <span class="sc">*</span> <span class="dv">250</span></span>
+<span id="cb160-3"><a href="programming2.html#cb160-3" tabindex="-1"></a>  <span class="fu">return</span>(grams)</span>
+<span id="cb160-4"><a href="programming2.html#cb160-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>There we have it, we have created our first function! Now let’s see if it works. In programming lingo, we say that we <strong><code>call</code></strong> a function when we use it. To call <strong><code>cups_to_grams</code></strong> it is the same process as the other functions we have used, we type out the name and then we insert our input inside the parentheses.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="programming2.html#cb161-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 250</code></pre>
+<p>It works! We can see here what I mean that <strong><code>cups</code></strong> is a placeholder variable. We want our function to be generalizable, so we don’t tell it ahead of time what cups equals. All it knows is that it will receive some information that will equate to <strong><code>cups</code></strong>, and then it will multiply that information by <strong><code>250</code></strong>.</p>
+<p>This enables us to call our function several times with several different values.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="programming2.html#cb163-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 1000</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="programming2.html#cb165-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 500</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="programming2.html#cb167-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="fl">1.5</span>)</span></code></pre></div>
+<pre><code>## [1] 375</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="programming2.html#cb169-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> 5L)</span></code></pre></div>
+<pre><code>## [1] 1250</code></pre>
+<p>We can also define what <code>cups</code> is outside of the function.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="programming2.html#cb171-1" tabindex="-1"></a>cups <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb171-2"><a href="programming2.html#cb171-2" tabindex="-1"></a><span class="fu">cups_to_grams</span>(cups)</span></code></pre></div>
+<pre><code>## [1] 500</code></pre>
+<p>This is an example of a 1-argument function, as it only takes in 1 input. But we can also create functions that have multiple arguments.</p>
+</div>
+<div id="creating-a-multi-argument-function" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Creating a Multi-Argument Function<a href="programming2.html#creating-a-multi-argument-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You might have noticed previously that sometimes we put additional information inside functions, like <strong><code>paired = TRUE</code></strong> in <strong><code>t.test()</code></strong>, or <strong><code>descending = FALSE</code></strong> in <strong><code>sort()</code></strong>. This additional information represents other arguments that we can insert inside a function.</p>
+<p>The process for creating a multi-argument function is the same as for a single-argument function. Let’s create a function called <strong><code>calculate_z_score</code></strong> that calculates the z-score of a value.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="programming2.html#cb173-1" tabindex="-1"></a>calculate_z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb173-2"><a href="programming2.html#cb173-2" tabindex="-1"></a>  <span class="co"># Calculate the z-score</span></span>
+<span id="cb173-3"><a href="programming2.html#cb173-3" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb173-4"><a href="programming2.html#cb173-4" tabindex="-1"></a>  </span>
+<span id="cb173-5"><a href="programming2.html#cb173-5" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb173-6"><a href="programming2.html#cb173-6" tabindex="-1"></a>  <span class="fu">return</span>(z_score)</span>
+<span id="cb173-7"><a href="programming2.html#cb173-7" tabindex="-1"></a>}</span></code></pre></div>
+<p>In this function:</p>
+<ul>
+<li><p><strong><code>x</code></strong> is the value for which we want to calculate the z-score.</p></li>
+<li><p><strong><code>mean_val</code></strong> is the mean score of the variable within our dataset.</p></li>
+<li><p><strong><code>sd_val</code></strong> is the standard deviation of the variable within our dataset.</p></li>
+</ul>
+<p>Inside the function, we calculate the z-score using the formula <strong><code>(x - mean_val) / sd_val</code></strong>. The calculated z-score is returned as the output of the function.</p>
+<p>Just like before, none of the placeholder arguments (<strong><code>x</code></strong>, <strong><code>mean_val</code></strong>, and <strong><code>sd_val</code></strong>) are defined beforehand. We will define them in our script or when we call our function.</p>
+<p>To test this function, let’s use an example of an IQ score since we know the population mean (100) and standard deviation (15). Let’s see what the z-score is for someone with an IQ of 130.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="programming2.html#cb174-1" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> <span class="dv">130</span>, <span class="at">mean_val =</span> <span class="dv">100</span>, <span class="at">sd_val =</span> <span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Just as we would expect, a person with an IQ of 130 is 2 standard deviations away from the mean. This shows that our function is working as expected.</p>
+<p>What if we had a vector of IQ scores? Could we use our function to calculate the z-score of each element in our vector? Absolutely!</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="programming2.html#cb176-1" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">130</span>, <span class="dv">85</span>), <span class="at">mean_val =</span> <span class="dv">100</span>, <span class="at">sd_val =</span> <span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## [1]  0  2 -1</code></pre>
+<p>Sticking with this example, let’s say we had a data frame with participant IDs, their age, and their IQ scores. We could feed the vector <strong><code>iq_scores</code></strong> into our <strong><code>calculate_z_score</code></strong> function, calculate their z-scores, and create a column based on those scores.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="programming2.html#cb178-1" tabindex="-1"></a><span class="co">#first let&#39;s make that data frame</span></span>
+<span id="cb178-2"><a href="programming2.html#cb178-2" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="programming2.html#cb178-3" tabindex="-1"></a>iq_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb178-4"><a href="programming2.html#cb178-4" tabindex="-1"></a>  <span class="at">ID =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
+<span id="cb178-5"><a href="programming2.html#cb178-5" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">41</span>, <span class="dv">45</span>, <span class="dv">18</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">45</span>),</span>
+<span id="cb178-6"><a href="programming2.html#cb178-6" tabindex="-1"></a>  <span class="at">iq =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">123</span>, <span class="dv">111</span>, <span class="dv">130</span>, <span class="dv">90</span>, <span class="dv">102</span>, <span class="dv">88</span>, <span class="dv">109</span>)</span>
+<span id="cb178-7"><a href="programming2.html#cb178-7" tabindex="-1"></a>)</span>
+<span id="cb178-8"><a href="programming2.html#cb178-8" tabindex="-1"></a></span>
+<span id="cb178-9"><a href="programming2.html#cb178-9" tabindex="-1"></a><span class="co">#now let&#39;s feed that IQ vector into our function and save it to a variable</span></span>
+<span id="cb178-10"><a href="programming2.html#cb178-10" tabindex="-1"></a></span>
+<span id="cb178-11"><a href="programming2.html#cb178-11" tabindex="-1"></a>iq_z_scores <span class="ot">&lt;-</span>  <span class="fu">calculate_z_score</span>(<span class="at">x =</span> iq_df<span class="sc">$</span>iq, <span class="at">mean_val =</span> <span class="dv">100</span>, <span class="at">sd_val =</span> <span class="dv">15</span>) <span class="co">#this will create a vector called iq_z_scores that is the output of our calculate_z_score</span></span>
+<span id="cb178-12"><a href="programming2.html#cb178-12" tabindex="-1"></a></span>
+<span id="cb178-13"><a href="programming2.html#cb178-13" tabindex="-1"></a></span>
+<span id="cb178-14"><a href="programming2.html#cb178-14" tabindex="-1"></a><span class="co">#if we want to add that column, we use the syntax </span></span>
+<span id="cb178-15"><a href="programming2.html#cb178-15" tabindex="-1"></a></span>
+<span id="cb178-16"><a href="programming2.html#cb178-16" tabindex="-1"></a><span class="co">#dataframe$newColumnName &lt;- #new_vector</span></span>
+<span id="cb178-17"><a href="programming2.html#cb178-17" tabindex="-1"></a></span>
+<span id="cb178-18"><a href="programming2.html#cb178-18" tabindex="-1"></a>iq_df<span class="sc">$</span>iq_z_scores <span class="ot">&lt;-</span> iq_z_scores</span>
+<span id="cb178-19"><a href="programming2.html#cb178-19" tabindex="-1"></a></span>
+<span id="cb178-20"><a href="programming2.html#cb178-20" tabindex="-1"></a></span>
+<span id="cb178-21"><a href="programming2.html#cb178-21" tabindex="-1"></a><span class="co">#now let&#39;s check our data frame</span></span>
+<span id="cb178-22"><a href="programming2.html#cb178-22" tabindex="-1"></a></span>
+<span id="cb178-23"><a href="programming2.html#cb178-23" tabindex="-1"></a><span class="fu">head</span>(iq_df)</span></code></pre></div>
+<pre><code>##   ID age  iq iq_z_scores
+## 1  1  22 100   0.0000000
+## 2  2  30 123   1.5333333
+## 3  3  41 111   0.7333333
+## 4  4  45 130   2.0000000
+## 5  5  18  90  -0.6666667
+## 6  6  21 102   0.1333333</code></pre>
+<p>While <strong><code>calculate_z_score</code></strong> is pretty handy, it’s not perfect. It requires us to calculate the mean and standard deviation functions separately and then feed that into our function. That’s okay if we are dealing with variables that have a known mean and standard deviation. Outside of those examples, we would need to do some extra work. But one of the virtues about functions is that it enables us to be lazy - we want to write functions that will automate boring tasks for us. So how could we improve this function? Well luckily, we can include functions inside functions.</p>
+</div>
+<div id="functions-inside-functions" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Functions inside Functions<a href="programming2.html#functions-inside-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s say that we add a column in our <strong><code>iq_df</code></strong> dataframe that contains participants’ mean scores on Beck’s Depression Inventory. We’ll call this column <strong><code>total_depression_beck</code></strong>.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="programming2.html#cb180-1" tabindex="-1"></a>iq_df<span class="sc">$</span>total_depression_beck <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">36</span>, <span class="dv">34</span>, <span class="dv">46</span>, </span>
+<span id="cb180-2"><a href="programming2.html#cb180-2" tabindex="-1"></a>                                <span class="dv">30</span>, <span class="dv">53</span>, <span class="dv">40</span>, <span class="dv">15</span>) <span class="co">#adds the mean_depression beck vector to our dataframe</span></span>
+<span id="cb180-3"><a href="programming2.html#cb180-3" tabindex="-1"></a></span>
+<span id="cb180-4"><a href="programming2.html#cb180-4" tabindex="-1"></a><span class="fu">head</span>(iq_df) <span class="co">#check to see if it was added correctly.</span></span></code></pre></div>
+<pre><code>##   ID age  iq iq_z_scores total_depression_beck
+## 1  1  22 100   0.0000000                    32
+## 2  2  30 123   1.5333333                    36
+## 3  3  41 111   0.7333333                    34
+## 4  4  45 130   2.0000000                    46
+## 5  5  18  90  -0.6666667                    30
+## 6  6  21 102   0.1333333                    53</code></pre>
+<p>Since we do not know the mean and standard deviation of the Beck Inventory, we will need to calculate them using the <strong><code>mean()</code></strong> and <strong><code>sd()</code></strong> functions. Luckily, we can use those functions within <strong><code>calculate_z_score</code></strong> to enable this for us. Let’s add this to our function and call it.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="programming2.html#cb182-1" tabindex="-1"></a>calculate_z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb182-2"><a href="programming2.html#cb182-2" tabindex="-1"></a>  <span class="co"># Calculate the z-score</span></span>
+<span id="cb182-3"><a href="programming2.html#cb182-3" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb182-4"><a href="programming2.html#cb182-4" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb182-5"><a href="programming2.html#cb182-5" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb182-6"><a href="programming2.html#cb182-6" tabindex="-1"></a>  </span>
+<span id="cb182-7"><a href="programming2.html#cb182-7" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb182-8"><a href="programming2.html#cb182-8" tabindex="-1"></a>  <span class="fu">return</span>(z_score)</span>
+<span id="cb182-9"><a href="programming2.html#cb182-9" tabindex="-1"></a>}</span>
+<span id="cb182-10"><a href="programming2.html#cb182-10" tabindex="-1"></a></span>
+<span id="cb182-11"><a href="programming2.html#cb182-11" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">110</span>))</span></code></pre></div>
+<pre><code>## Error in calculate_z_score(x = c(100, 90, 110)): object &#39;mean_val&#39; not found</code></pre>
+<p>Uh-oh! Why is it telling us that the object <strong><code>mean_val</code></strong> was not found? The reason for this is that the order of your code within a function matters. The order of your code is the order in which R will compute that instruction. Currently, I have asked R to compute <strong><code>z_score</code></strong> before defining what <strong><code>mean_val</code></strong> or <strong><code>sd_val</code></strong> are.</p>
+<p>So when R sees <strong><code>mean_val</code></strong>, it looks everywhere for what that value could mean, doesn’t find anything, and then panics and stops working. Again, humans have a theory of mind, so we would assume that we could provide this information. But R needs to do everything literally step-by-step.</p>
+<p>To rectify this, we just need to fix the order of our instructions inside R.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="programming2.html#cb184-1" tabindex="-1"></a>calculate_z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb184-2"><a href="programming2.html#cb184-2" tabindex="-1"></a>  <span class="co">#compute mean_val, and sd_val first</span></span>
+<span id="cb184-3"><a href="programming2.html#cb184-3" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb184-4"><a href="programming2.html#cb184-4" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb184-5"><a href="programming2.html#cb184-5" tabindex="-1"></a>  </span>
+<span id="cb184-6"><a href="programming2.html#cb184-6" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb184-7"><a href="programming2.html#cb184-7" tabindex="-1"></a>  </span>
+<span id="cb184-8"><a href="programming2.html#cb184-8" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb184-9"><a href="programming2.html#cb184-9" tabindex="-1"></a>  <span class="fu">return</span>(z_score)</span>
+<span id="cb184-10"><a href="programming2.html#cb184-10" tabindex="-1"></a>}</span>
+<span id="cb184-11"><a href="programming2.html#cb184-11" tabindex="-1"></a></span>
+<span id="cb184-12"><a href="programming2.html#cb184-12" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> iq_df<span class="sc">$</span>total_depression_beck)</span></code></pre></div>
+<pre><code>## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491</code></pre>
+<p>Wahey, it worked! Try to add the z-scores for the <strong><code>total_depression_beck</code></strong> to the dataframe yourself (look at the end of the previous subsection for advice on how if you are stuck).</p>
+</div>
+<div id="returning-multiple-objects-from-a-function" class="section level3 hasAnchor" number="4.1.5">
+<h3><span class="header-section-number">4.1.5</span> Returning Multiple Objects from a Function<a href="programming2.html#returning-multiple-objects-from-a-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What if we wanted to return not only the <code>z_score</code> variable from calculate_z_score, but also <code>mean_val</code> and <code>sd_val</code> as well?</p>
+<p>Luckily, we can also tell our functions to return multiple different objects at the same time. We can do this by using lists.</p>
+<p>As discussed earlier, lists are versatile data structures in R that can hold elements of different types. We can create a list within a function, populate it with the values we want to return, and then return the list itself.</p>
+<p>We can create a variable within our function that is a list containing all the information we want to return. But since this changes the nature of the function, we are going to change its name to: `calculate_mean_sd_z`</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="programming2.html#cb186-1" tabindex="-1"></a>calculate_mean_sd_z <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb186-2"><a href="programming2.html#cb186-2" tabindex="-1"></a>  <span class="co">#compute mean_val, and sd_val first</span></span>
+<span id="cb186-3"><a href="programming2.html#cb186-3" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb186-4"><a href="programming2.html#cb186-4" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb186-5"><a href="programming2.html#cb186-5" tabindex="-1"></a>  </span>
+<span id="cb186-6"><a href="programming2.html#cb186-6" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb186-7"><a href="programming2.html#cb186-7" tabindex="-1"></a>  </span>
+<span id="cb186-8"><a href="programming2.html#cb186-8" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">list</span>(z_score, mean_val, sd_val)</span>
+<span id="cb186-9"><a href="programming2.html#cb186-9" tabindex="-1"></a>  </span>
+<span id="cb186-10"><a href="programming2.html#cb186-10" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb186-11"><a href="programming2.html#cb186-11" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb186-12"><a href="programming2.html#cb186-12" tabindex="-1"></a>}</span>
+<span id="cb186-13"><a href="programming2.html#cb186-13" tabindex="-1"></a></span>
+<span id="cb186-14"><a href="programming2.html#cb186-14" tabindex="-1"></a><span class="fu">calculate_mean_sd_z</span>(iq_df<span class="sc">$</span>total_depression_beck)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+## 
+## [[2]]
+## [1] 35.75
+## 
+## [[3]]
+## [1] 11.34838</code></pre>
+<p>This produces the results that we want, but the output leaves a lot to be desired. If someone else was calling our function, but was not aware of the instructions inside it, they might not know what each value from the output corresponds to. We can correct this by using the following syntax inside the list to label each value: <code>name_of_value = value</code></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="programming2.html#cb188-1" tabindex="-1"></a>calculate_mean_sd_z <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb188-2"><a href="programming2.html#cb188-2" tabindex="-1"></a>  <span class="co">#compute mean_val, and sd_val first</span></span>
+<span id="cb188-3"><a href="programming2.html#cb188-3" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb188-4"><a href="programming2.html#cb188-4" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb188-5"><a href="programming2.html#cb188-5" tabindex="-1"></a>  </span>
+<span id="cb188-6"><a href="programming2.html#cb188-6" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb188-7"><a href="programming2.html#cb188-7" tabindex="-1"></a>  </span>
+<span id="cb188-8"><a href="programming2.html#cb188-8" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">z =</span> z_score, <span class="at">mean =</span> mean_val, <span class="at">sd =</span> sd_val)</span>
+<span id="cb188-9"><a href="programming2.html#cb188-9" tabindex="-1"></a>  </span>
+<span id="cb188-10"><a href="programming2.html#cb188-10" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb188-11"><a href="programming2.html#cb188-11" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb188-12"><a href="programming2.html#cb188-12" tabindex="-1"></a>}</span>
+<span id="cb188-13"><a href="programming2.html#cb188-13" tabindex="-1"></a></span>
+<span id="cb188-14"><a href="programming2.html#cb188-14" tabindex="-1"></a><span class="fu">calculate_mean_sd_z</span>(iq_df<span class="sc">$</span>total_depression_beck)</span></code></pre></div>
+<pre><code>## $z
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+## 
+## $mean
+## [1] 35.75
+## 
+## $sd
+## [1] 11.34838</code></pre>
+<p>Now if we wanted to extract certain features from the function, we can use the `$` operator.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="programming2.html#cb190-1" tabindex="-1"></a>scores <span class="ot">&lt;-</span>  <span class="fu">calculate_mean_sd_z</span>(iq_df<span class="sc">$</span>total_depression_beck)</span>
+<span id="cb190-2"><a href="programming2.html#cb190-2" tabindex="-1"></a></span>
+<span id="cb190-3"><a href="programming2.html#cb190-3" tabindex="-1"></a>scores<span class="sc">$</span>mean</span></code></pre></div>
+<pre><code>## [1] 35.75</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="programming2.html#cb192-1" tabindex="-1"></a>scores<span class="sc">$</span>sd</span></code></pre></div>
+<pre><code>## [1] 11.34838</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="programming2.html#cb194-1" tabindex="-1"></a>scores<span class="sc">$</span>z</span></code></pre></div>
+<pre><code>## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491</code></pre>
+</div>
+<div id="some-important-features-about-functions" class="section level3 hasAnchor" number="4.1.6">
+<h3><span class="header-section-number">4.1.6</span> Some Important Features about Functions<a href="programming2.html#some-important-features-about-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There is some important features about Functions that you should know.</p>
+<div id="global-vs-local-variables" class="section level4 hasAnchor" number="4.1.6.1">
+<h4><span class="header-section-number">4.1.6.1</span> Global vs Local Variables<a href="programming2.html#global-vs-local-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is important to note that R treats variables you define in a function differently than variables you define outside of a function. Any variable you define within a function will only exist within the scope of that function. Variables defined in a function are called local variables whereas variables defined outside of a function are called global variables.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="programming2.html#cb196-1" tabindex="-1"></a>num1 <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co">#this is a global variable</span></span>
+<span id="cb196-2"><a href="programming2.html#cb196-2" tabindex="-1"></a></span>
+<span id="cb196-3"><a href="programming2.html#cb196-3" tabindex="-1"></a>local_global <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb196-4"><a href="programming2.html#cb196-4" tabindex="-1"></a>  num1 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="co">#this is a local variable</span></span>
+<span id="cb196-5"><a href="programming2.html#cb196-5" tabindex="-1"></a>  <span class="fu">print</span>(num1)  <span class="co"># This will print 10</span></span>
+<span id="cb196-6"><a href="programming2.html#cb196-6" tabindex="-1"></a>}</span>
+<span id="cb196-7"><a href="programming2.html#cb196-7" tabindex="-1"></a></span>
+<span id="cb196-8"><a href="programming2.html#cb196-8" tabindex="-1"></a><span class="fu">local_global</span>()</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="programming2.html#cb198-1" tabindex="-1"></a><span class="fu">print</span>(num1)  <span class="co"># Error: object &#39;local_var&#39; not found</span></span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<p>We start this code chunk by assigning the value 20 to the variable <code>num1</code>. This is a global variable, it will exist across our R environment unless we change it to a different value.</p>
+<p>Within the <code>local_global()</code> function, we create another variable called <code>num1</code> and assign it the value of 10. But this is an example of a local variable, as it only exists inside of our function. When we run our function, it will print out 10, but the function will not change the global value of the variable.</p>
+</div>
+<div id="default-arguments" class="section level4 hasAnchor" number="4.1.6.2">
+<h4><span class="header-section-number">4.1.6.2</span> Default Arguments<a href="programming2.html#default-arguments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In R, functions can have default arguments, which are pre-defined values assigned to arguments in the function definition. Default arguments allow functions to be called with fewer arguments than specified in the function definition, as the default values are used when the arguments are not explicitly provided.</p>
+</div>
+<div id="syntax-for-default-arguments" class="section level4 hasAnchor" number="4.1.6.3">
+<h4><span class="header-section-number">4.1.6.3</span> Syntax for Default Arguments<a href="programming2.html#syntax-for-default-arguments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The syntax for defining default arguments in R functions is straightforward. When defining the function, you can assign default values to specific arguments using the <strong><code>argument = default_value</code></strong> format.</p>
+<p>Imagine I wanted to write a function that greeted someone. I could write the following function, <strong><code>greet</code></strong>:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="programming2.html#cb200-1" tabindex="-1"></a><span class="co"># Function with default argument</span></span>
+<span id="cb200-2"><a href="programming2.html#cb200-2" tabindex="-1"></a>greet <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">name =</span> <span class="st">&quot;World&quot;</span>) {</span>
+<span id="cb200-3"><a href="programming2.html#cb200-3" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Hello,&quot;</span>, name))</span>
+<span id="cb200-4"><a href="programming2.html#cb200-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>Within this function, I set the default value for the argument name as “World”. So if I were to call the function but not specify the argument, the following would happen:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="programming2.html#cb201-1" tabindex="-1"></a><span class="co"># Calling the function without providing arguments</span></span>
+<span id="cb201-2"><a href="programming2.html#cb201-2" tabindex="-1"></a><span class="fu">greet</span>() </span></code></pre></div>
+<pre><code>## [1] &quot;Hello, World&quot;</code></pre>
+<p>However, we can also override the default value of a function.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="programming2.html#cb203-1" tabindex="-1"></a><span class="fu">greet</span>(<span class="at">name =</span> <span class="st">&quot;Ryan&quot;</span>) <span class="co">#please feel free to type in your own name</span></span></code></pre></div>
+<pre><code>## [1] &quot;Hello, Ryan&quot;</code></pre>
+<p>Having default values in a function enables them to be called with fewer arguments, making code more readable. But since default values can be overridden, it also provides them with a degree of combustibility.</p>
+<p>Exercises</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a function called <code>fahrenheit_to_celsius</code> that converts a temperature from Fahrenheit to Celsius.</p>
+<ol style="list-style-type: decimal">
+<li><p>Include in the definition of the function the argument fahrenheit</p></li>
+<li><p>Create a variable inside the function called celsius</p></li>
+<li><p>The formula for calculating it is: fahrenheit- 32 / 1.8</p></li>
+<li><p>Return the celsius variable</p></li>
+</ol></li>
+<li><p>Create a function called <strong><code>calculate_discount</code></strong> that calculates the discounted price of an item.</p>
+<ol style="list-style-type: decimal">
+<li><p>The function should take two arguments: <strong><code>price</code></strong> and <strong><code>discount_percent</code></strong>.</p></li>
+<li><p>Create a variable called discount_price inside your function.</p></li>
+<li><p>Assign the following formula to that variable: (price * discount_percent) * 100</p></li>
+<li><p>Create a variable called final price, using the formula:</p></li>
+<li><p>Return the final price</p></li>
+</ol></li>
+<li><p>Add the z-scores for the Beck scale back into the iq_df data frame.</p></li>
+<li><p>Look up the t.test function - what is the default value for the `paired` argument?</p></li>
+</ol>
+<p>Explain the fundamental data types in R, including numeric, logical, integer, character, and complex. Introduce additional data types like factors, dates, and times. Describe the characteristics and appropriate use cases for each data type. Show how to convert between different data types using functions like as.numeric(), as.character(), etc. Practice Activities:</p>
+<p>Provide a dataset with mixed data types and ask students to identify and convert them appropriately. Have students create variables of different data types and perform operations on them to observe how data types affect the results. Show real-world examples where data types play a crucial role in data analysis and visualization.</p>
 <p>Data Structures: What to Cover:</p>
-<p>Introduce more complex data structures like matrices, arrays, and lists.
-Explain how to create and initialize these data structures.
-Show how to access and manipulate elements within matrices, arrays, and lists.
-Discuss the differences between one-dimensional and multi-dimensional data structures.
-Practice Activities:</p>
-<p>Assign students tasks involving the creation and manipulation of matrices, arrays, and lists.
-Challenge them to perform calculations or transformations on multi-dimensional data structures.
-Provide scenarios where choosing the appropriate data structure is essential for efficient data storage and retrieval.</p>
+<p>Introduce more complex data structures like matrices, arrays, and lists. Explain how to create and initialize these data structures. Show how to access and manipulate elements within matrices, arrays, and lists. Discuss the differences between one-dimensional and multi-dimensional data structures. Practice Activities:</p>
+<p>Assign students tasks involving the creation and manipulation of matrices, arrays, and lists. Challenge them to perform calculations or transformations on multi-dimensional data structures. Provide scenarios where choosing the appropriate data structure is essential for efficient data storage and retrieval.</p>
 <p>Reading and Writing Data: What to Cover:</p>
-<p>Explain how to import data from various sources, including CSV files, Excel spreadsheets, and databases using functions like read.csv(), read.xlsx(), and readRDS().
-Cover options for specifying data types, headers, and encoding during data import.
-Show how to export data to different formats, such as CSV, Excel, and R data files using functions like write.csv(), write.xlsx(), and saveRDS().
-Practice Activities:</p>
-<p>Provide datasets in different formats and ask students to import and perform basic data analysis tasks on them.
-Have students export analysis results to different file formats for reporting purposes.
-Encourage students to explore data import options for handling special cases like missing values and dates.</p>
+<p>Explain how to import data from various sources, including CSV files, Excel spreadsheets, and databases using functions like read.csv(), read.xlsx(), and readRDS(). Cover options for specifying data types, headers, and encoding during data import. Show how to export data to different formats, such as CSV, Excel, and R data files using functions like write.csv(), write.xlsx(), and saveRDS(). Practice Activities:</p>
+<p>Provide datasets in different formats and ask students to import and perform basic data analysis tasks on them. Have students export analysis results to different file formats for reporting purposes. Encourage students to explore data import options for handling special cases like missing values and dates.</p>
 <p>Vectorization: What to Cover:</p>
-<p>Emphasize the concept of vectorized operations in R and its efficiency.
-Show how to perform element-wise operations on vectors and matrices without explicit loops.
-Explain the benefits of vectorization for code readability and performance.
-Cover functions like sapply(), lapply(), and apply() for applying functions to data structures.
-Practice Activities:</p>
-<p>Provide tasks that involve performing operations on large datasets and compare the execution time with and without vectorization.
-Challenge students to rewrite non-vectorized code to utilize vectorization techniques.
-Ask them to identify scenarios where vectorization can significantly improve code efficiency and readability.
-These topics and practice activities should help students deepen their understanding of R programming and become proficient in using functions, handling different data types and structures, managing data import and export, gracefully handling errors, and optimizing code with vectorization.</p>
+<p>Emphasize the concept of vectorized operations in R and its efficiency. Show how to perform element-wise operations on vectors and matrices without explicit loops. Explain the benefits of vectorization for code readability and performance. Cover functions like sapply(), lapply(), and apply() for applying functions to data structures. Practice Activities:</p>
+<p>Provide tasks that involve performing operations on large datasets and compare the execution time with and without vectorization. Challenge students to rewrite non-vectorized code to utilize vectorization techniques. Ask them to identify scenarios where vectorization can significantly improve code efficiency and readability. These topics and practice activities should help students deepen their understanding of R programming and become proficient in using functions, handling different data types and structures, managing data import and export, gracefully handling errors, and optimizing code with vectorization.</p>
 
 </div>
 </div>
 </div>
+</div>
+
+
+
+
+
+
+
+
+
+
             </section>
 
           </div>
