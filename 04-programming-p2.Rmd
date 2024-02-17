@@ -431,24 +431,98 @@ Exercises
 
 4.   Look up the t.test function - what is the default value for the \`paired\` argument?
 
-Explain the fundamental data types in R, including numeric, logical, integer, character, and complex. Introduce additional data types like factors, dates, and times. Describe the characteristics and appropriate use cases for each data type. Show how to convert between different data types using functions like as.numeric(), as.character(), etc. Practice Activities:
 
-Provide a dataset with mixed data types and ask students to identify and convert them appropriately. Have students create variables of different data types and perform operations on them to observe how data types affect the results. Show real-world examples where data types play a crucial role in data analysis and visualization.
 
-Data Structures: What to Cover:
+## The Factor Data Type
+
+-   When we run empirical studies, we often classify data based on their roles in the study.
+
+-   Typically, the DV (dependent variable) is either continuous numerical data that we are interested in studying.
+
+-   But if we are running an experimental or differential study, we might also consider the effect of a categorical independent variable and its different levels on that dependent variable
+
+-   How do we capture the distinction between nominal, ordinal, interval, and ratio scale data in R?
+
+-   This is captured in the R factor data type - it enables us to identify data as being categorical and as having different levels within that category. We have ordered categories
+
+-   Factors enables us to sort data in a useful way, that isn't alphabetical
+
+-   They are special vectors - they are important when we are running anovas, regression, and plots in R
+
+-   base R factor() function takes in a vector
+
+### Sort Character Data
+
+Factors enable us to sort character data in an ordered-way that is not alphabetical. For example, let's say I had a vector called `degree` that specified participants highest level of education completed. 
+
+```{r}
+
+degree <- c("PhD", "Secondary School", "Masters", "Bachelors", "Bachelors", "Masters", "Bachelors", "Secondary School", "Secondary School", "Secondary School")
+
+```
+
+If we wanted to count the number of participants per each category, then we can use the `table()` function. We can then visualise the data using the `barplot()` function. 
+
+```{r}
+
+count <- table(degree)
+count
+
+barplot(count)
+
+```
+
+Now that gives us the information we need, but it's not ordered in the best way. Currently it's ordered in alphabetically order. Whereas if we are handling ordinal data like this, we would want the order to match the hierarchical nature of the data. We would want it to be "Secondary School", "Bachelors", "Masters", and then "PhD". 
+
+The `factor()` function enables us to do this. We call the function and give it the vector `degree`. 
+
+```{r}
+
+degree_ordered <- factor(degree)
+degree_ordered
+
+```
+
+You can now see that the output prints out both the elements of the vector, but also its levels. Now it recognizes this variable as an ordinal variable. But the order of its level is still in alphabetical order. Luckily, within the `factor()` function there is an argument called `levels` that enables us to specify the order of the levels. Let's do this now and save it to a variable called `degree_ordered`. 
+
+
+```{r}
+
+degree_ordered <- factor(degree, levels = c("Secondary School", "Bachelors",
+                                            "Masters", "PhD"))
+
+
+degree_ordered
+```
+That's more like it. Now if call the `table()` and `barplot()` functions again our data looks cleaner. 
+
+```{r}
+
+count_ordered <- table(degree_ordered)
+
+barplot(count_ordered)
+
+```
+
+
+
+
+## The List Data Structure
 
 Introduce more complex data structures like matrices, arrays, and lists. Explain how to create and initialize these data structures. Show how to access and manipulate elements within matrices, arrays, and lists. Discuss the differences between one-dimensional and multi-dimensional data structures. Practice Activities:
 
 Assign students tasks involving the creation and manipulation of matrices, arrays, and lists. Challenge them to perform calculations or transformations on multi-dimensional data structures. Provide scenarios where choosing the appropriate data structure is essential for efficient data storage and retrieval.
 
-Reading and Writing Data: What to Cover:
+## Importing and Exporting Data
 
-Explain how to import data from various sources, including CSV files, Excel spreadsheets, and databases using functions like read.csv(), read.xlsx(), and readRDS(). Cover options for specifying data types, headers, and encoding during data import. Show how to export data to different formats, such as CSV, Excel, and R data files using functions like write.csv(), write.xlsx(), and saveRDS(). Practice Activities:
+Explain how to import data from various sources, including CSV files, Excel spreadsheets, and spss files using functions like read.csv(), read.xlsx(), and read(). Cover options for specifying data types, headers, and encoding during data import. Show how to export data to different formats, such as CSV, Excel, and R data files using functions like write.csv(), write.xlsx(), and saveRDS(). Practice Activities:
 
 Provide datasets in different formats and ask students to import and perform basic data analysis tasks on them. Have students export analysis results to different file formats for reporting purposes. Encourage students to explore data import options for handling special cases like missing values and dates.
 
-Vectorization: What to Cover:
+## Vectorisation
 
 Emphasize the concept of vectorized operations in R and its efficiency. Show how to perform element-wise operations on vectors and matrices without explicit loops. Explain the benefits of vectorization for code readability and performance. Cover functions like sapply(), lapply(), and apply() for applying functions to data structures. Practice Activities:
 
 Provide tasks that involve performing operations on large datasets and compare the execution time with and without vectorization. Challenge students to rewrite non-vectorized code to utilize vectorization techniques. Ask them to identify scenarios where vectorization can significantly improve code efficiency and readability. These topics and practice activities should help students deepen their understanding of R programming and become proficient in using functions, handling different data types and structures, managing data import and export, gracefully handling errors, and optimizing code with vectorization.
+
+## Searching for Help 
