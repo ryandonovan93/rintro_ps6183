@@ -731,7 +731,7 @@ In summary, the list data structure in R is incredibly useful for organizing and
 
 Throughout this course, we've been exploring the capabilities of base R, which offers a rich set of functions and data structures for data analysis and statistical computing. However, the power of R extends far beyond its base functionality, thanks to its vibrant ecosystem of user-contributed packages.
 
-### **Understanding R Packages**
+### Understanding R Packages
 
 R packages are collections of R functions, data, and documentation that extend the capabilities of R. These packages are developed and shared by the R community to address various needs in data analysis, visualization, machine learning, and more. By leveraging packages, R users can access a vast array of specialized tools and algorithms without reinventing the wheel.
 
@@ -747,9 +747,9 @@ First, I will show you two ways to install packages in R. Then I will show you t
 
 ### Installation
 
-We are going to install three packages called `Haven`, `praise` and `fortunes`. The praise package provide users with, well, praise. And the fortunes package will spit statistic and programming quotes at you. Neither of them are particularly useful, other than demonstrating the process of loading packages.
+We are going to install three packages called `rio`, `praise` and `fortunes`. The praise package provide users with, well, praise. And the fortunes package will spit statistic and programming quotes at you. Neither of them are particularly useful, other than demonstrating the process of loading packages.
 
-The `Haven` package enables you to load in SPSS data. 
+The \`rio\`\` package enables you to load in multiple types of data into R.
 
 #### Installation using RStudio Interface
 
@@ -759,9 +759,19 @@ In the Files pane on the bottom right hand corner of R, you will see a tab calle
 -   Description (describes what the package does)
 -   Version (the version of the package currently installed on your computer)
 
-To install a package, click the "Install" button above the "Name" column. Once you click that, you should see a small pop-up window. In the textbox, type in the word `Haven` Make sure the box "Install dependencies" is clicked. After that, you can click Install. You should get something like the following output, which looks scary with all the red text, but means it has worked correctly.
+To install a package, click the "Install" button above the "Name" column. Once you click that, you should see a small pop-up window. In the textbox, type in the word `rio` Make sure the box "Install dependencies" is clicked. After that, you can click Install. You should get something like the following output in the console, which looks scary with all the red text, but means it has worked correctly.
 
-INSERT IMAGE
+```{r eval = FALSE}
+> install.packages("rio")
+trying URL 'https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/rio_1.0.1.tgz'
+Content type 'application/x-gzip' length 591359 bytes (577 KB)
+==================================================
+downloaded 577 KB
+
+
+The downloaded binary packages are in
+	/var/folders/h8/8sb24v_x2lg51cg2z7q8fk3w0000gp/T//RtmpvaY1Ue/downloaded_packages
+```
 
 #### Installation using Commands
 
@@ -781,7 +791,7 @@ install.packages(c("praise", "fortunes"))
 
 ```
 
-Again the output is rather scary but the sentences "package ‘praise’ successfully unpacked and MD5 sums checked" and "package ‘fortunes’ successfully unpacked and MD5 sums checked" mean that they are successfully installed onto your computer.
+Again the output is rather scary but the sentences "package 'praise' successfully unpacked and MD5 sums checked" and "package 'fortunes' successfully unpacked and MD5 sums checked" mean that they are successfully installed onto your computer.
 
 ### Loading Packages
 
@@ -811,11 +821,12 @@ package ‘praise’ was built under R version 4.3.2
 
 ### Loading using the R Console Command
 
-We can use the same syntax from that R console output to load in packages there. To load in the `fortunes` package, you can type in the following into the console or script:
+We can use the same syntax from that R console output to load in packages there. To load in the `fortunes` and \`rio\`\` packages, you can type in the following into the console or script one at a time:
 
 ```{r}
 
 library(fortunes)
+library(rio)
 
 ```
 
@@ -860,7 +871,6 @@ Secondly, you should type the command "install.packages("packages")" in the cons
 
 Thirdly, if you do have the command "install.packages()" in the script, make sure it is commented out. That way if they accidentally run it, R won't run that command.
 
-
 ```{r fig.cap = "Conventions for Installing and Loading Packages in R Script", echo = FALSE}
 
 include_graphics("img/04-packages_convetion.png")
@@ -872,5 +882,35 @@ include_graphics("img/04-packages_convetion.png")
 There you have it. You have successfully installed and loaded in your first packages in R. Are they particularly useful packages? No! For the rest of this course, we will be loading in packages more regularly, and loading in packages that will make our lives significantly easier than if they were not around. In fact, we will load a package in the next section that will enable us to import SPSS data.
 
 ## Importing and Exporting Data
+
+In this section, we'll explore how to import and export data using the graphical user interface (GUI) provided by RStudio. The GUI offers a convenient and intuitive way to handle data files without writing any code. Let's dive into the process of importing and exporting data using the RStudio GUI.
+
+First you are going to need to download two files: psycho.csv and burnout.sav. You can download both files here.
+
+## Importing CSV files.
+
+Comma-Separated Values (CSV) files are a common format used for storing tabular data. As the name suggests, data in CSV files is organized in rows and columns, with each row representing a single record and each column representing a different attribute or variable. In this regard, CSV files are vey similar to excel file.
+
+In a CSV file, each value in the table is separated by a comma (,), hence the name "comma-separated values." However, depending on the locale settings, other delimiters such as semicolons (;) or tabs (\t) may be used instead.
+
+CSV files are plain text files, which means they can be easily created, edited, and viewed using a simple text editor. This simplicity and universality make CSV files a popular choice for data exchange between different applications and platforms.
+
+One of the key advantages of CSV files is their compatibility with a wide range of software and programming languages, including R. They can be easily imported into statistical software for analysis, making them a versatile and widely adopted format for data storage and sharing.
+
+To import the psycho.csv file, please follow these steps:
+
+1.  Open RStudio.
+
+2.  Navigate to the Environment pane (top left hand corner) and make the Environment tab is clicked.
+
+3.  Click on the "Import Dataset" button.
+
+4.  Select "From Text (base)".
+
+5.  Browse your folder and select the "psycho.csv" to import.
+
+6.  Click "Import".
+
+7.  You should see that the file is now
 
 ## Searching for Help
