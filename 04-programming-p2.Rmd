@@ -5,7 +5,6 @@ Today, we are going to build upon on the foundation concepts introduced last wee
 By the end of this session, you should be capable of the following:
 
 -   Understanding the logic of functions, including how and why they are created.
--   Performing operations on vectors and data frames to pull the data we want.
 -   Creating the "factor" data type and the list data structure.
 -   Importing a data set into R using both code and button-click interfaces.
 -   Be capable of spicing up your RStudio by installing and loading packages.\
@@ -281,7 +280,7 @@ What if we wanted to return not only the `z_score` variable from calculate_z_sco
 
 Luckily, we can also tell our functions to return multiple different objects at the same time. We can do this by using lists.
 
-As discussed earlier, lists are versatile data structures in R that can hold elements of different types. We can create a list within a function, populate it with the values we want to return, and then return the list itself.
+We will discuss lists in more detail later in this chapter. For now, all you need to know is that lists are versatile data structures in R that can hold elements of different types. We can create a list within a function, populate it with the values we want to return, and then return the list itself.
 
 We can create a variable within our function that is a list containing all the information we want to return. But since this changes the nature of the function, we are going to change its name to: \`calculate_mean_sd_z\`
 
@@ -340,7 +339,7 @@ scores$z
 
 ### Some Important Features about Functions
 
-There is some important features about Functions that you should know.
+There are some important features about functions that you should know. Namely, the difference between Global and Local Variables and the ability to set and override Default Arguments.
 
 #### Global vs Local Variables
 
@@ -427,33 +426,94 @@ Exercises
 
     5.  Return the final price
 
-3.   Add the z-scores for the Beck scale back into the iq_df data frame.
+3.  Add the z-scores for the Beck scale back into the iq_df data frame.
 
-4.   Look up the t.test function - what is the default value for the \`paired\` argument?
-
-
+4.  Look up the t.test function - what is the default value for the \`paired\` argument?
 
 ## The Factor Data Type
 
--   When we run empirical studies, we often classify data based on their roles in the study.
+In Chapter 3, we introduced the four fundamental data types in R: character, integer, numeric, and logical. We learned that these data types can constitute vectors, which can then be aggregated in data frames. These data types cover a significant proportion of the information we encounter in psychological research. In terms of NOIR data types in Psychology, nominal data can be represented through the character type, ordinal data can be represented through character or integer/numeric data types, and scale data (interval and ratio) can be represented through the integer/numeric data type. Additionally, the logical data type can handle either/or cases.
 
--   Typically, the DV (dependent variable) is either continuous numerical data that we are interested in studying.
+However, there's an additional consideration. When dealing with datasets common in psychological research, particularly experimental or differential research, we often encounter columns consisting of categorical data representing our independent variable(s). The responses in these columns signify differences in categories for each participant (e.g., whether they were assigned to the control or experimental group, whether they belong to different categories across some domain). In software like SPSS, we typically label this categorical data using normal language (e.g., "control" or "experimental") or numerically (1 = "control", 2 = "experimental"). While we could categorize it as character data or numerically/integer data in R, this approach doesn't capture the fact that the data in this column represents something distinct - namely, that it is a ***factor*** used to understand differences across other variables.
 
--   But if we are running an experimental or differential study, we might also consider the effect of a categorical independent variable and its different levels on that dependent variable
+Fortunately, R offers a data type called ***factors*** to address this need.
 
--   How do we capture the distinction between nominal, ordinal, interval, and ratio scale data in R?
+### Creating a Factor
 
--   This is captured in the R factor data type - it enables us to identify data as being categorical and as having different levels within that category. We have ordered categories
+Consider a hypothetical experimental study investigating the effect of caffeine on sleep duration. Participants are randomly assigned to three experimental conditions: **`No Caffeine`**, **`Low Caffeine (200 mg)`**, and **`High Caffeine (400 mg)`**. Our data frame might resemble the following, where **`1`** = **`No Caffeine`**, **`2 = Low Caffeine`**, and **`3 = High Caffeine`**:
 
--   Factors enables us to sort data in a useful way, that isn't alphabetical
+```{r}
 
--   They are special vectors - they are important when we are running anovas, regression, and plots in R
+caffeine_df <- data.frame(
+  id = c(1:12),
+  sleep_duration = c(7.89, 8.37, 7.46, 5.86, 5.25, 7.23, 6.05, 5.78, 6.77, 2.13, 5.78,  6.54),
+  group = c(1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3)
+)
 
--   base R factor() function takes in a vector
+head(caffeine_df)
+
+```
+
+Although the **`group`** column is currently stored as numeric data, it actually represents categorical information. It wouldn't make sense to compute the mean, median, or standard deviation for this column. However, since it's numeric data, R allows us to do so.
+
+```{r}
+
+mean(caffeine_df$group)
+
+```
+
+While this might not cause immediate problems, it could lead to issues later when conducting inferential statistical tests like ANOVAs or regressions, where R expects a factor data type.
+
+To address this, we can use the **`factor`** function to convert the **`group`** column:
+
+```{r}
+
+factor(caffeine_df$group)
+
+```
+
+Now, R recognizes that each distinct value in the column represents a different level of our independent variable. If we attempt to calculate the mean now, it will result in an error:
+
+```{r}
+
+mean(caffeine_df$group)
+
+```
+
+Whoops! What wrong here? Well when we called the `factor()` function, we never reassigned that information back to `group` vector in our `caffeine_df` data frame. So while R ran our command, it did not save it. To fix this, we just follow the syntax for creating a new column we learned last week `data.frame$newcolum <- vector`.
+
+```{r}
+
+caffeine_df$group <- factor(caffeine_df$group)
+
+```
+
+Now, attempting to compute the mean will result in an error, as expected:
+
+```{r}
+
+mean(caffeine_df$group)
+
+```
+
+But I am not completely satisfied yet. Although right now we can remember that `1` = `No Caffeine`, `2 = Low Caffeine`, and `3 = High Caffeine`, we might forget that information in six months time if we return to our data set.
+
+Luckily we can label the levels of our factor through the `levels()` function.
+
+```{r}
+
+
+levels(caffeine_df$group) <- c("No Caffeine", "Low Caffeine", "High Caffeine")
+
+print(caffeine_df$group)
+
+```
+
+That's better!
 
 ### Sort Character Data
 
-Factors enable us to sort character data in an ordered-way that is not alphabetical. For example, let's say I had a vector called `degree` that specified participants highest level of education completed. 
+Factors also enable us to sort character data in an ordered manner that isn't alphabetical. For example, consider a vector called **`degree`** that denotes participants' highest level of education completed:
 
 ```{r}
 
@@ -461,40 +521,33 @@ degree <- c("PhD", "Secondary School", "Masters", "Bachelors", "Bachelors", "Mas
 
 ```
 
-If we wanted to count the number of participants per each category, then we can use the `table()` function. We can then visualise the data using the `barplot()` function. 
+Using the **`table()`** function, we can count the number of participants per category:
 
 ```{r}
 
 count <- table(degree)
 count
 
+```
+
+And we can use the `barplot()` function to visualize those counts.
+
+```{r}
 barplot(count)
-
 ```
 
-Now that gives us the information we need, but it's not ordered in the best way. Currently it's ordered in alphabetically order. Whereas if we are handling ordinal data like this, we would want the order to match the hierarchical nature of the data. We would want it to be "Secondary School", "Bachelors", "Masters", and then "PhD". 
+Now that gives us the information we need, but it's not ordered in an intuitive manner. Ideally, we would want the order of the bar plots to match the hierarchical order of the data, so that it would be: "Secondary School", "Bachelors", "Masters", and then "PhD". However, unless you specify the order of your levels, R will specify their order alphabetically.
 
-The `factor()` function enables us to do this. We call the function and give it the vector `degree`. 
+There is an argument called `levels` in the `factor` function that we can use to rectify this. In the levels argument, we specify the order of the levels.
 
 ```{r}
 
-degree_ordered <- factor(degree)
+degree_ordered <- factor(degree, levels = c("Secondary School", "Bachelors", "Masters", "PhD"))
 degree_ordered
 
 ```
 
-You can now see that the output prints out both the elements of the vector, but also its levels. Now it recognizes this variable as an ordinal variable. But the order of its level is still in alphabetical order. Luckily, within the `factor()` function there is an argument called `levels` that enables us to specify the order of the levels. Let's do this now and save it to a variable called `degree_ordered`. 
-
-
-```{r}
-
-degree_ordered <- factor(degree, levels = c("Secondary School", "Bachelors",
-                                            "Masters", "PhD"))
-
-
-degree_ordered
-```
-That's more like it. Now if call the `table()` and `barplot()` functions again our data looks cleaner. 
+That's more like it. Now we can call the `table()` and `barplot()` functions again to visualise the number of participants per group.
 
 ```{r}
 
@@ -504,25 +557,320 @@ barplot(count_ordered)
 
 ```
 
+As you can see, our data looks much cleaner and more intuitive.
 
-
+There is a lot more we can do with factors, but this covers the main points. Now let's talk about the last data type/structure we are going to be using in this course, which is the `list` data structure.
 
 ## The List Data Structure
 
-Introduce more complex data structures like matrices, arrays, and lists. Explain how to create and initialize these data structures. Show how to access and manipulate elements within matrices, arrays, and lists. Discuss the differences between one-dimensional and multi-dimensional data structures. Practice Activities:
+The two data structures we have discussed so far, vectors and data frame, are excellent ways to store data. But each data structure has it limitations. The limitations of both the vector and data frame is that they only enable us to store one object of data at a time.
 
-Assign students tasks involving the creation and manipulation of matrices, arrays, and lists. Challenge them to perform calculations or transformations on multi-dimensional data structures. Provide scenarios where choosing the appropriate data structure is essential for efficient data storage and retrieval.
+What do I mean by one object of data? Well, when we create a vector, we are only storing information on one single vector in R. Now I can store multiple vectors in the one place in R by combining them into a data frame. However, I am only able to do that if each vector has the same number of data points Based on what I have taught you so far, there is no way to store 2 independent and separate vectors in the same place in R.
+
+Similarly, when I create a data frame, I am only storing information on one data frame. But sometimes we would want to keep data frames saved in a similar location. This would be like an excel file that has multiple worksheets saved onto it.
+
+Finally, what if I wanted to store a vector and a data frame together? For example, imagine I had a data frame that was cleaned data set. And I wanted to store a vector with results form the analysis. Based on what I have taught you so far, there is no to store both a vector and a separate data frame in a single space in R.
+
+That's where the list data structure comes into play.
+
+### Understanding Lists
+
+A list in R is a versatile data structure that can hold elements of different types, such as vectors, matrices, data frames, or even other lists. Think of it as a container that can store various objects together, similar to a bag where you can put in items of different shapes and sizes.
+
+### Creating Lists
+
+Suppose we're conducting a study where we collect various information about each participant, such as their demographic details, test scores, and responses to questionnaires. We can store this information for each participant in a list. Here's how we can create a list for three participants:
+
+```{r}
+
+participant1 <- list(
+  ID = 1,
+  age = 25,
+  gender = "Male",
+  test_scores = c(80, 75, 90),
+  questionnaire_responses = c("Agree", "Disagree", "Neutral", "Agree")
+)
+
+participant2 <- list(
+  ID = 2,
+  age = 30,
+  gender = "Female",
+  test_scores = c(85, 70, 88),
+  questionnaire_responses = c("Neutral", "Agree", "Disagree", "Strongly Disagree")
+)
+
+participant3 <- list(
+  ID = 3,
+  age = 28,
+  gender = "Non-binary",
+  test_scores = c(78, 82, 85),
+  questionnaire_responses = c("Disagree", "Neutral", "Agree", "Neutral")
+)
+
+
+```
+
+The list for each participant is made up of separate vectors made up of different lengths (e.g., there is only 1 element in ID, age, and gender, whereas they are 3 in test_scores, and 4 in questionnaire_responses).
+
+Let's print out `participant1` list and break down the output.
+
+```{r}
+
+print(participant1)
+
+```
+
+When we print out the list, what R does in the console is print out the name of each object and then print out each element in that object. One thing that you might notice is the return of the `$` which we use to access elements from vectors or columns from data frames. Luckily, we can also use the `$` symbol to access objects and their elements from a list. So I wanted to extract `test_scores` from a list, I could type the following code:
+
+```{r}
+
+participant1$test_scores
+
+```
+
+I could also do this numerically using the [] notation we used when accessing vectors.
+
+```{r}
+
+participant1[4]
+
+```
+
+Because `test_scores` is the fourth object within the list (the first three are ID, age, and gender), `test_scores[4]` is needed to extract it.
+
+Regardless of which way you extract data, doesn't the output should look familiar? It is essential the same output when we print out a vector. That's not accidental, because we have in fact extracted a vector!
+
+So what could we do if wanted to access the 1st and 3rd element from this vector? We just follow the same convention that we used last week `vectorname[elementswewant]`
+
+```{r}
+
+participant1$test_scores[c(1, 3)]
+
+```
+
+This illustrates a key point about lists. Once you first access an object (e.g., vector or dataframe) within that list, then you can use the specific indexing criteria for accessing elements within that object. For example, let's look at a list with a vector and a data frame.
+
+```{r}
+
+df_v <- list(
+  iq_df = iq_df, 
+  p_values = c(.001, .10, .05)
+)
+
+print(df_v)
+
+```
+
+We can see that the first object in our list is the iq_df data frame, and the second contains (totally made up) p-values. So if wanted to access the `iq` and `total_depression_beck` columns from this data frame, and the first five rows, we can use the same subsetting techniques we learned last week: `dataframe[rows_we_want, columns_we_want]`
+
+```{r}
+
+df_v$iq_df[1:5, c("iq", "total_depression_beck")]
+
+```
+
+### Lists within Lists (Indexing)
+
+What happens if we combine lists together? Well we can do that by putting lists inside lists. But if we do that, the output is pretty ugly.
+
+```{r}
+
+participant_data <- list(participant1, participant2, participant3)
+ 
+print(participant_data)
+```
+
+Right now your eyes might be glazing over and that SPSS icon on your desktop has never looked so good. But just relax, while what you might be seeing here is **ugly**, I promise you it's not complicated.
+
+Let's break down the first part of this output
+
+```{r eval = FALSE}
+
+[[1]]
+
+```
+
+So we know from indexing vectors that `vector_name[1]` would print out the first element of a vector. The same thing is happening here. If we had only 1 list, we could access the first thing from that list using `list[1]`
+
+But when we are dealing with multiple lists, we need a convention to extract each list.That's why we have the double `[[]]` notation.
+
+The output \``[[1]]` basically says "This is the information from the first first list". So anytime you see "[[]]", the number inside the central bracket indicates the list we are dealing with. So the code output
+
+```{r eval=FALSE}
+
+[[1]]$ID
+
+[[1]]$age
+
+[[1]]$test_scores
+
+[[1]]$questionnaire_responses
+
+```
+
+Basically translates to "participant 1's data for ID, age, test_scores and questionnaire_responses".
+
+There is a way we can make this code output neater. When we are creating a list, we can specify the index term for that list. The syntax for doing is: new index term = current_list
+
+```{r}
+
+participant_data <- list(p1 = participant1, #new index term = current list
+                         p2 = participant2, #new index term = current list
+                         p3 = participant3 #new index term = current list
+                         )
+
+print(participant_data)
+
+```
+
+### Summary
+
+In summary, the list data structure in R is incredibly useful for organizing and managing diverse types of data in psychological research. Whether it's participant information, experimental conditions, or any other heterogeneous data, lists provide a flexible and efficient way to store and access this information.
+
+## R Packages
+
+Throughout this course, we've been exploring the capabilities of base R, which offers a rich set of functions and data structures for data analysis and statistical computing. However, the power of R extends far beyond its base functionality, thanks to its vibrant ecosystem of user-contributed packages.
+
+### **Understanding R Packages**
+
+R packages are collections of R functions, data, and documentation that extend the capabilities of R. These packages are developed and shared by the R community to address various needs in data analysis, visualization, machine learning, and more. By leveraging packages, R users can access a vast array of specialized tools and algorithms without reinventing the wheel.
+
+## Installing and Loading R Package
+
+One of the most important to know about R packages is that you first need to install them on to your computer. Once they are installed, you will not need to install them again.
+
+However, if you want to use a package, then you will need to load it while you are RStudio. Every time you open RStudio after closing it, you will need to load that package in again if you want to use.
+
+In this way, R packages are like applications on your phone. Once you download Spotify on your phone, then you won't need to install it again. But everytime you want to use Spotify, you will need to open the application.
+
+First, I will show you two ways to install packages in R. Then I will show you two ways to load packages in R.
+
+### Installation
+
+We are going to install three packages called `Haven`, `praise` and `fortunes`. The praise package provide users with, well, praise. And the fortunes package will spit statistic and programming quotes at you. Neither of them are particularly useful, other than demonstrating the process of loading packages.
+
+The `Haven` package enables you to load in SPSS data. 
+
+#### Installation using RStudio Interface
+
+In the Files pane on the bottom right hand corner of R, you will see a tab called "Packages". Click that tab. You will already see a list of packages that are currently. You will see three columns:
+
+-   Name (the name of the R package)
+-   Description (describes what the package does)
+-   Version (the version of the package currently installed on your computer)
+
+To install a package, click the "Install" button above the "Name" column. Once you click that, you should see a small pop-up window. In the textbox, type in the word `Haven` Make sure the box "Install dependencies" is clicked. After that, you can click Install. You should get something like the following output, which looks scary with all the red text, but means it has worked correctly.
+
+INSERT IMAGE
+
+#### Installation using Commands
+
+If we want to install packages using the console, you can use the **`install.packages()`** function followed by the name of the package you wish to install. The syntax would looks like this
+
+```{r eval = FALSE}
+
+install.packages("package name")
+
+```
+
+The important thing here is that whatever goes inside the parentheses is inside quotation marks. Let's use this syntax to install the `praise` and `fortunes` packages.
+
+```{r}
+
+install.packages(c("praise", "fortunes"))
+
+```
+
+Again the output is rather scary but the sentences "package ‘praise’ successfully unpacked and MD5 sums checked" and "package ‘fortunes’ successfully unpacked and MD5 sums checked" mean that they are successfully installed onto your computer.
+
+### Loading Packages
+
+Okay, now to actually use those packages we will need to load them. Again I will show you two ways to load packages.
+
+#### Loading using RStudio Interface
+
+Go back to the Packages tab in the File pane. On the left hand side of the package name, you will see a tick box. If the box is ticked, that means the package is currently loaded. If it is unticked, it is not loaded.
+
+Scroll down to find the package `praise` and load it in by ticking the box.
+
+```{r fig.cap = "Loading Packages through RStudio Interface", echo = FALSE}
+
+include_graphics("img/04-praise-loaded.png")
+
+```
+
+You should see something like the following in your R console (don't worry if you get a warning message like mine, or if you don't receive a warning message)
+
+```{r eval = FALSE}
+
+> library(praise)
+Warning message:
+package ‘praise’ was built under R version 4.3.2 
+
+```
+
+### Loading using the R Console Command
+
+We can use the same syntax from that R console output to load in packages there. To load in the `fortunes` package, you can type in the following into the console or script:
+
+```{r}
+
+library(fortunes)
+
+```
+
+There is one significant difference between installing and loading packages through code. When you are installing packages, you can install multiple packages in the one command. However, you can only load in one package at a time.
+
+```{r}
+
+#will work
+install.packages(c("package1", "package2", "package3")) 
+
+
+#will not work
+library(c("package1", "package2", "package3")) 
+
+#the following will work
+library(package1)
+library(package2)
+library(package3)
+
+```
+
+### Testing our New Functions
+
+To make sure the following functions are working, run the following code to check:
+
+```{r}
+
+praise() #everytime you run this line of code it gives you a different line of praise
+#so don't be worried if your result is different than mine
+
+fortune() #this will print out something so incredibly nerdy 
+
+```
+
+### Function Convetnions if Using Code
+
+There is an important rule of thumb if you are writing the code to install and load packages in R.
+
+Firstly, any packages that you install and load onto R should be at the top of the R script you are working on. This way anyone following your analysis can easily spot what packages that they will need.
+
+Secondly, you should type the command "install.packages("packages")" in the console rather than the script. Because if someone downloads your script and accidentally runs it, it will automatically install the packages on their computer, which we want to avoid, as it might interfere with other aspects of their operating system (this is really rare, but it's better to be cautious)
+
+Thirdly, if you do have the command "install.packages()" in the script, make sure it is commented out. That way if they accidentally run it, R won't run that command.
+
+
+```{r fig.cap = "Conventions for Installing and Loading Packages in R Script", echo = FALSE}
+
+include_graphics("img/04-packages_convetion.png")
+
+```
+
+### Summary
+
+There you have it. You have successfully installed and loaded in your first packages in R. Are they particularly useful packages? No! For the rest of this course, we will be loading in packages more regularly, and loading in packages that will make our lives significantly easier than if they were not around. In fact, we will load a package in the next section that will enable us to import SPSS data.
 
 ## Importing and Exporting Data
 
-Explain how to import data from various sources, including CSV files, Excel spreadsheets, and spss files using functions like read.csv(), read.xlsx(), and read(). Cover options for specifying data types, headers, and encoding during data import. Show how to export data to different formats, such as CSV, Excel, and R data files using functions like write.csv(), write.xlsx(), and saveRDS(). Practice Activities:
-
-Provide datasets in different formats and ask students to import and perform basic data analysis tasks on them. Have students export analysis results to different file formats for reporting purposes. Encourage students to explore data import options for handling special cases like missing values and dates.
-
-## Vectorisation
-
-Emphasize the concept of vectorized operations in R and its efficiency. Show how to perform element-wise operations on vectors and matrices without explicit loops. Explain the benefits of vectorization for code readability and performance. Cover functions like sapply(), lapply(), and apply() for applying functions to data structures. Practice Activities:
-
-Provide tasks that involve performing operations on large datasets and compare the execution time with and without vectorization. Challenge students to rewrite non-vectorized code to utilize vectorization techniques. Ask them to identify scenarios where vectorization can significantly improve code efficiency and readability. These topics and practice activities should help students deepen their understanding of R programming and become proficient in using functions, handling different data types and structures, managing data import and export, gracefully handling errors, and optimizing code with vectorization.
-
-## Searching for Help 
+## Searching for Help
