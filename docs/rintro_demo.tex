@@ -2924,6 +2924,8 @@ Having default values in a function enables them to be called with fewer argumen
     Use the \textbf{\texttt{?head}} command to access the documentation for the \textbf{\texttt{head()}} function.
   \item
     Identify the default value for the \textbf{\texttt{n}} argument in the documentation.
+  \item
+    Call the head() function on the sleep dataframe, but override the default argument with a different number
   \end{enumerate}
 \end{enumerate}
 
@@ -3523,7 +3525,7 @@ We are going to install three packages called Haven, praise, and fortunes. The p
 The Haven package enables you to load SPSS data into R.
 
 \hypertarget{installation-using-rstudio-interface}{%
-\paragraph{Installation using RStudio Interface}\label{installation-using-rstudio-interface}}
+\subsubsection{Installation using RStudio Interface}\label{installation-using-rstudio-interface}}
 
 In the Files pane on the bottom right-hand corner of R, you will see a tab called ``Packages''. Click that tab. You will already see a list of packages that are currently installed. You will see three columns:
 
@@ -3553,7 +3555,7 @@ To install a package, click the ``Install'' button above the ``Name'' column. On
 \end{Shaded}
 
 \hypertarget{installation-using-commands}{%
-\paragraph{Installation using Commands}\label{installation-using-commands}}
+\subsubsection{Installation using Commands}\label{installation-using-commands}}
 
 If we want to install packages using the console, you can use the \textbf{\texttt{install.packages()}} function followed by the name of the package you wish to install. The syntax would looks like this
 
@@ -3589,12 +3591,12 @@ The important thing here is that whatever goes inside the parentheses is inside 
 Again the output is rather scary but the sentences ``package `praise' successfully unpacked and MD5 sums checked'' and ``package `fortunes' successfully unpacked and MD5 sums checked'' mean that they are successfully installed onto your computer.
 
 \hypertarget{loading-packages}{%
-\subsubsection{Loading Packages}\label{loading-packages}}
+\subsection{Loading Packages}\label{loading-packages}}
 
 Okay, now to actually use those packages, we will need to load them. Again, I will show you two ways to load packages.
 
 \hypertarget{loading-using-rstudio-interface}{%
-\paragraph{Loading using RStudio Interface}\label{loading-using-rstudio-interface}}
+\subsubsection{Loading using RStudio Interface}\label{loading-using-rstudio-interface}}
 
 Go back to the Packages tab in the File pane. On the left-hand side of the package name, you will see a tick box. If the box is ticked, that means the package is currently loaded. If it is unticked, it is not loaded.
 
@@ -3617,7 +3619,7 @@ You should see something like the following in your R console (don't worry if yo
 \end{Shaded}
 
 \hypertarget{loading-using-the-r-console-command}{%
-\paragraph{Loading using the R Console Command}\label{loading-using-the-r-console-command}}
+\subsubsection{Loading using the R Console Command}\label{loading-using-the-r-console-command}}
 
 We can use the same syntax from that R console output to load in packages there. To load in the \texttt{fortunes} and \texttt{Haven} packages, you can type in the following into the console or script one at a time:
 
@@ -3651,7 +3653,7 @@ There is one significant difference between installing and loading packages thro
 \end{Shaded}
 
 \hypertarget{testing-our-new-functions}{%
-\subsubsection{Testing our New Functions}\label{testing-our-new-functions}}
+\subsection{Testing our New Functions}\label{testing-our-new-functions}}
 
 To make sure the following functions are working, run the following code to check:
 
@@ -3660,17 +3662,16 @@ To make sure the following functions are working, run the following code to chec
 \end{verbatim}
 
 \begin{verbatim}
-## [1] "You are bee's knees!"
+## [1] "You are tiptop!"
 \end{verbatim}
 
 \begin{verbatim}
 ## 
-## It is becoming apparent that you do not know how to use the results from either
-## system. The progress of science would be safer if you get some advice from a
-## person that knows what they are doing.
-##    -- David Winsemius (in response to a user that obtained different linear
-##       regression results in R and SPSS and wanted to know which one to use)
-##       R-help (July 2011)
+## I strongly suggest you collaborate with a local statistician. I can think of no
+## circumstance where multiple regression on "hundreds of thousands of variables"
+## is anything more than a fancy random number generator.
+##    -- Berton Gunter
+##       R-help (February 2008)
 \end{verbatim}
 
 \begin{Shaded}
@@ -3683,7 +3684,7 @@ To make sure the following functions are working, run the following code to chec
 \end{Shaded}
 
 \hypertarget{error-loading-packages}{%
-\subsubsection{Error Loading Packages}\label{error-loading-packages}}
+\subsection{Error Loading Packages}\label{error-loading-packages}}
 
 If you ever encounter the following error when trying to load a package:
 
@@ -3693,10 +3694,14 @@ If you ever encounter the following error when trying to load a package:
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## Error in library(madeuppackage): there is no package called 'madeuppackage'
+\end{verbatim}
+
 This means that you have either made a typo in writing the name of the package or you have not installed the package. You need to install packages before R will be able to load them.
 
 \hypertarget{package-conventions-if-using-code}{%
-\subsubsection{Package Conventions if Using Code}\label{package-conventions-if-using-code}}
+\subsection{Package Conventions if Using Code}\label{package-conventions-if-using-code}}
 
 There are important rules to follow when writing code to install and load packages in R.
 

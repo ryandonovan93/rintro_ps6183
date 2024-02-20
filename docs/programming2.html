@@ -237,7 +237,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="programming2.html"><a href="programming2.html#understanding-r-packages"><i class="fa fa-check"></i><b>4.4.1</b> Understanding R Packages</a></li>
 <li class="chapter" data-level="4.4.2" data-path="programming2.html"><a href="programming2.html#installing-and-loading-r-package"><i class="fa fa-check"></i><b>4.4.2</b> Installing and Loading R Package</a></li>
-<li class="chapter" data-level="4.4.3" data-path="programming2.html"><a href="programming2.html#summary-3"><i class="fa fa-check"></i><b>4.4.3</b> Summary</a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming2.html"><a href="programming2.html#loading-packages"><i class="fa fa-check"></i><b>4.4.3</b> Loading Packages</a></li>
+<li class="chapter" data-level="4.4.4" data-path="programming2.html"><a href="programming2.html#testing-our-new-functions"><i class="fa fa-check"></i><b>4.4.4</b> Testing our New Functions</a></li>
+<li class="chapter" data-level="4.4.5" data-path="programming2.html"><a href="programming2.html#error-loading-packages"><i class="fa fa-check"></i><b>4.4.5</b> Error Loading Packages</a></li>
+<li class="chapter" data-level="4.4.6" data-path="programming2.html"><a href="programming2.html#package-conventions-if-using-code"><i class="fa fa-check"></i><b>4.4.6</b> Package Conventions if Using Code</a></li>
+<li class="chapter" data-level="4.4.7" data-path="programming2.html"><a href="programming2.html#summary-3"><i class="fa fa-check"></i><b>4.4.7</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="programming2.html"><a href="programming2.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>4.5</b> Importing and Exporting Data</a>
 <ul>
@@ -583,6 +587,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><p>Use the <strong><code>?head</code></strong> command to access the documentation for the <strong><code>head()</code></strong> function.</p></li>
 <li><p>Identify the default value for the <strong><code>n</code></strong> argument in the documentation.</p></li>
+<li><p>Call the head() function on the sleep dataframe, but override the default argument with a different number</p></li>
 </ol></li>
 </ol>
 </div>
@@ -937,8 +942,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">4.4.2.1</span> Installation<a href="programming2.html#installation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We are going to install three packages called Haven, praise, and fortunes. The praise package provides users with, well, praise. And the fortunes package will spit out statistic and programming quotes at you. Neither of them is particularly useful, other than demonstrating the process of loading packages.</p>
 <p>The Haven package enables you to load SPSS data into R.</p>
-<div id="installation-using-rstudio-interface" class="section level5 hasAnchor" number="4.4.2.1.1">
-<h5><span class="header-section-number">4.4.2.1.1</span> Installation using RStudio Interface<a href="programming2.html#installation-using-rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="installation-using-rstudio-interface" class="section level4 hasAnchor" number="4.4.2.2">
+<h4><span class="header-section-number">4.4.2.2</span> Installation using RStudio Interface<a href="programming2.html#installation-using-rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In the Files pane on the bottom right-hand corner of R, you will see a tab called “Packages”. Click that tab. You will already see a list of packages that are currently installed. You will see three columns:</p>
 <ul>
 <li><p>Name (the name of the R package)</p></li>
@@ -956,8 +962,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb246-8"><a href="programming2.html#cb246-8" tabindex="-1"></a>The downloaded binary packages are <span class="cf">in</span></span>
 <span id="cb246-9"><a href="programming2.html#cb246-9" tabindex="-1"></a>    <span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span>h8<span class="sc">/</span>8sb24v_x2lg51cg2z7q8fk3w0000gp<span class="sc">/</span>T<span class="sc">/</span><span class="er">/</span>RtmpvaY1Ue<span class="sc">/</span>downloaded_packages</span></code></pre></div>
 </div>
-<div id="installation-using-commands" class="section level5 hasAnchor" number="4.4.2.1.2">
-<h5><span class="header-section-number">4.4.2.1.2</span> Installation using Commands<a href="programming2.html#installation-using-commands" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="installation-using-commands" class="section level4 hasAnchor" number="4.4.2.3">
+<h4><span class="header-section-number">4.4.2.3</span> Installation using Commands<a href="programming2.html#installation-using-commands" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If we want to install packages using the console, you can use the <strong><code>install.packages()</code></strong> function followed by the name of the package you wish to install. The syntax would looks like this</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="programming2.html#cb247-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;package name&quot;</span>)</span></code></pre></div>
 <p>The important thing here is that whatever goes inside the parentheses is inside quotation marks. Let’s use this syntax to install the <code>praise</code> and <code>fortunes</code> packages.</p>
@@ -980,11 +986,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Again the output is rather scary but the sentences “package ‘praise’ successfully unpacked and MD5 sums checked” and “package ‘fortunes’ successfully unpacked and MD5 sums checked” mean that they are successfully installed onto your computer.</p>
 </div>
 </div>
-<div id="loading-packages" class="section level4 hasAnchor" number="4.4.2.2">
-<h4><span class="header-section-number">4.4.2.2</span> Loading Packages<a href="programming2.html#loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="loading-packages" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Loading Packages<a href="programming2.html#loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Okay, now to actually use those packages, we will need to load them. Again, I will show you two ways to load packages.</p>
-<div id="loading-using-rstudio-interface" class="section level5 hasAnchor" number="4.4.2.2.1">
-<h5><span class="header-section-number">4.4.2.2.1</span> Loading using RStudio Interface<a href="programming2.html#loading-using-rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="loading-using-rstudio-interface" class="section level4 hasAnchor" number="4.4.3.1">
+<h4><span class="header-section-number">4.4.3.1</span> Loading using RStudio Interface<a href="programming2.html#loading-using-rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Go back to the Packages tab in the File pane. On the left-hand side of the package name, you will see a tick box. If the box is ticked, that means the package is currently loaded. If it is unticked, it is not loaded.</p>
 <p>Scroll down to find the package “praise” and load it by ticking the box.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-152"></span>
@@ -998,8 +1004,8 @@ Figure 4.1: Loading Packages through RStudio Interface
 <span id="cb249-2"><a href="programming2.html#cb249-2" tabindex="-1"></a>Warning message<span class="sc">:</span></span>
 <span id="cb249-3"><a href="programming2.html#cb249-3" tabindex="-1"></a>package ‘praise’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span> </span></code></pre></div>
 </div>
-<div id="loading-using-the-r-console-command" class="section level5 hasAnchor" number="4.4.2.2.2">
-<h5><span class="header-section-number">4.4.2.2.2</span> Loading using the R Console Command<a href="programming2.html#loading-using-the-r-console-command" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="loading-using-the-r-console-command" class="section level4 hasAnchor" number="4.4.3.2">
+<h4><span class="header-section-number">4.4.3.2</span> Loading using the R Console Command<a href="programming2.html#loading-using-the-r-console-command" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can use the same syntax from that R console output to load in packages there. To load in the <code>fortunes</code> and <code>Haven</code> packages, you can type in the following into the console or script one at a time:</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="programming2.html#cb250-1" tabindex="-1"></a><span class="fu">library</span>(fortunes)</span>
 <span id="cb250-2"><a href="programming2.html#cb250-2" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code></pre></div>
@@ -1018,30 +1024,33 @@ Figure 4.1: Loading Packages through RStudio Interface
 <span id="cb252-11"><a href="programming2.html#cb252-11" tabindex="-1"></a><span class="fu">library</span>(package3)</span></code></pre></div>
 </div>
 </div>
-<div id="testing-our-new-functions" class="section level4 hasAnchor" number="4.4.2.3">
-<h4><span class="header-section-number">4.4.2.3</span> Testing our New Functions<a href="programming2.html#testing-our-new-functions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="testing-our-new-functions" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Testing our New Functions<a href="programming2.html#testing-our-new-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To make sure the following functions are working, run the following code to check:</p>
 <pre><code>## Warning: package &#39;praise&#39; was built under R version 4.3.2</code></pre>
-<pre><code>## [1] &quot;You are astounding!&quot;</code></pre>
+<pre><code>## [1] &quot;You are first-class!&quot;</code></pre>
 <pre><code>## 
-## If &#39;fools rush in where angels fear to tread&#39;, then Bayesians &#39;jump&#39; in where
-## frequentists fear to &#39;step&#39;.
-##    -- Charles C. Berry (about Bayesian model selection as an alternative to
-##       stepwise regression)
-##       R-help (November 2009)</code></pre>
+## Welcome to the wonderful world of heterogeneity (tau^2) estimators in
+## meta-analysis. The question of which estimator to choose never fails to provide
+## fun and entertainment for the entire family and I predict that it will do so
+## for generations to come. Please quote me on that!
+##    -- Wolfgang Viechtbauer (in response to a request for the appropriate
+##       heterogeneity estimator)
+##       R-SIG-Mixed-Models (May 2015)</code></pre>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="programming2.html#cb256-1" tabindex="-1"></a><span class="fu">praise</span>() <span class="co">#everytime you run this line of code it gives you a different line of praise</span></span>
 <span id="cb256-2"><a href="programming2.html#cb256-2" tabindex="-1"></a><span class="co">#so don&#39;t be worried if your result is different than mine</span></span>
 <span id="cb256-3"><a href="programming2.html#cb256-3" tabindex="-1"></a></span>
 <span id="cb256-4"><a href="programming2.html#cb256-4" tabindex="-1"></a><span class="fu">fortune</span>() <span class="co">#this will print out something so incredibly nerdy </span></span></code></pre></div>
 </div>
-<div id="error-loading-packages" class="section level4 hasAnchor" number="4.4.2.4">
-<h4><span class="header-section-number">4.4.2.4</span> Error Loading Packages<a href="programming2.html#error-loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="error-loading-packages" class="section level3 hasAnchor" number="4.4.5">
+<h3><span class="header-section-number">4.4.5</span> Error Loading Packages<a href="programming2.html#error-loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If you ever encounter the following error when trying to load a package:</p>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="programming2.html#cb257-1" tabindex="-1"></a><span class="fu">library</span>(madeuppackage)</span></code></pre></div>
+<pre><code>## Error in library(madeuppackage): there is no package called &#39;madeuppackage&#39;</code></pre>
 <p>This means that you have either made a typo in writing the name of the package or you have not installed the package. You need to install packages before R will be able to load them.</p>
 </div>
-<div id="package-conventions-if-using-code" class="section level4 hasAnchor" number="4.4.2.5">
-<h4><span class="header-section-number">4.4.2.5</span> Package Conventions if Using Code<a href="programming2.html#package-conventions-if-using-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="package-conventions-if-using-code" class="section level3 hasAnchor" number="4.4.6">
+<h3><span class="header-section-number">4.4.6</span> Package Conventions if Using Code<a href="programming2.html#package-conventions-if-using-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are important rules to follow when writing code to install and load packages in R.</p>
 <p>Firstly, any packages you install and load onto R should be placed at the top of the R script you are working on. This way, anyone following your analysis can easily spot the packages they will need.</p>
 <p>Secondly, you should type the command <strong><code>install.packages("package_name")</code></strong> in the console rather than the script. If someone downloads your script and accidentally runs it, it will automatically install the packages on their computer. We want to avoid this as it might interfere with other aspects of their operating system (this is rare, but it’s better to be cautious).</p>
@@ -1053,9 +1062,8 @@ Figure 4.2: Conventions for Installing and Loading Packages in R Script
 </p>
 </div>
 </div>
-</div>
-<div id="summary-3" class="section level3 hasAnchor" number="4.4.3">
-<h3><span class="header-section-number">4.4.3</span> Summary<a href="programming2.html#summary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="summary-3" class="section level3 hasAnchor" number="4.4.7">
+<h3><span class="header-section-number">4.4.7</span> Summary<a href="programming2.html#summary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There you have it. You have successfully installed and loaded your first packages in R. Are they particularly useful packages? No! In the rest of this course, we will be loading packages more regularly, and these packages will make our lives significantly easier than if they were not around. In fact, we will use the <code>haven</code> package in the next section that will enable us to import SPSS data.</p>
 </div>
 </div>
@@ -1086,9 +1094,9 @@ Figure 4.2: Conventions for Installing and Loading Packages in R Script
 <li><p>The “Data Frame” box displays a preview of how the data frame will look once the CSV is imported into R.</p></li>
 </ul></li>
 </ol>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="programming2.html#cb258-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb258-2"><a href="programming2.html#cb258-2" tabindex="-1"></a></span>
-<span id="cb258-3"><a href="programming2.html#cb258-3" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;img/04-import-csv.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="programming2.html#cb259-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb259-2"><a href="programming2.html#cb259-2" tabindex="-1"></a></span>
+<span id="cb259-3"><a href="programming2.html#cb259-3" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;img/04-import-csv.png&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-160"></span>
 <img src="img/04-import-csv.png" alt="Pop-up window for importing CSV files"  />
 <p class="caption">
@@ -1099,7 +1107,7 @@ Figure 4.3: Pop-up window for importing CSV files
 <li>Click Import. A tab in the source pane called “psycho” should now open showing the data frame. Additionally, you should also see the data frame in the Environment pane. You should see under value that it has “60 obs. of 3 variables” which means there are 60 rows of data and 3 columns of data.</li>
 <li>Once you have imported your data in R, it is always good practice to briefly check that it has been imported successfully and you have imported the correct data set. Two ways you can do this is by calling the <code>head()</code> and <code>summary()</code> functions on the data frame.</li>
 </ol>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="programming2.html#cb259-1" tabindex="-1"></a><span class="fu">head</span>(psycho) <span class="co">#this will print out the first six rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="programming2.html#cb260-1" tabindex="-1"></a><span class="fu">head</span>(psycho) <span class="co">#this will print out the first six rows</span></span></code></pre></div>
 <pre><code>##   Participant_ID Treatment Neuroticism
 ## 1              1   Placebo    39.39524
 ## 2              2   Placebo    42.69823
@@ -1107,7 +1115,7 @@ Figure 4.3: Pop-up window for importing CSV files
 ## 4              4   Placebo    45.70508
 ## 5              5   Placebo    46.29288
 ## 6              6   Placebo    62.15065</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="programming2.html#cb261-1" tabindex="-1"></a><span class="fu">summary</span>(psycho) <span class="co">#print out summary stats for each column</span></span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="programming2.html#cb262-1" tabindex="-1"></a><span class="fu">summary</span>(psycho) <span class="co">#print out summary stats for each column</span></span></code></pre></div>
 <pre><code>##  Participant_ID   Treatment          Neuroticism   
 ##  Min.   : 1.00   Length:60          Min.   :25.33  
 ##  1st Qu.:15.75   Class :character   1st Qu.:41.75  
@@ -1128,7 +1136,7 @@ Figure 4.3: Pop-up window for importing CSV files
 <li><p>Select “From SPSS”.</p></li>
 <li><p>A pop-up window will open.</p></li>
 </ol>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="programming2.html#cb263-1" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;img/04-import-sav.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="programming2.html#cb264-1" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;img/04-import-sav.png&quot;</span>)</span></code></pre></div>
 <p><img src="img/04-import-sav.png" /><!-- --></p>
 <ol start="6" style="list-style-type: decimal">
 <li><p>Browse your folder and select the <strong><code>burnout.sav</code></strong> file to import.</p></li>
@@ -1138,7 +1146,7 @@ Figure 4.3: Pop-up window for importing CSV files
 </ol>
 <p>After importing, a tab in the source pane called “burnout” should open, displaying the data frame. Additionally, you should see the data frame in the Environment pane. Under the “value” column, it should indicate “467 obs. of 6 variables,” indicating there are 467 rows and 6 columns of data.</p>
 <p>Once imported, use the <strong><code>head()</code></strong> and <strong><code>summary()</code></strong> functions to check that the data has been imported correctly:</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="programming2.html#cb264-1" tabindex="-1"></a><span class="fu">head</span>(Burnout)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="programming2.html#cb265-1" tabindex="-1"></a><span class="fu">head</span>(Burnout)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##   burnout             loc  cope teaching research pastoral
 ##   &lt;dbl+lbl&gt;         &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -1148,7 +1156,7 @@ Figure 4.3: Pop-up window for importing CSV files
 ## 4 0 [Not Burnt Out] 20     9.16     52.7     62.5     50  
 ## 5 0 [Not Burnt Out]  6.47 19.1      43.6     79.2     40.7
 ## 6 0 [Not Burnt Out]  7.06 16.0      38.2     52.1     48.1</code></pre>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="programming2.html#cb266-1" tabindex="-1"></a><span class="fu">summary</span>(Burnout)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="programming2.html#cb267-1" tabindex="-1"></a><span class="fu">summary</span>(Burnout)</span></code></pre></div>
 <pre><code>##     burnout            loc               cope            teaching     
 ##  Min.   :0.0000   Min.   :  6.471   Min.   :  3.817   Min.   : 16.36  
 ##  1st Qu.:0.0000   1st Qu.:  9.412   1st Qu.: 12.214   1st Qu.: 47.27  
@@ -1171,23 +1179,23 @@ Figure 4.3: Pop-up window for importing CSV files
 <div id="exporting-to-csv-files" class="section level4 hasAnchor" number="4.5.3.1">
 <h4><span class="header-section-number">4.5.3.1</span> Exporting to CSV Files<a href="programming2.html#exporting-to-csv-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To export a dataset to a CSV file, you can use the write.csv() function:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="programming2.html#cb268-1" tabindex="-1"></a><span class="co"># Export dataset to a CSV file using the following syntax</span></span>
-<span id="cb268-2"><a href="programming2.html#cb268-2" tabindex="-1"></a><span class="fu">write.csv</span>(my_dataset, <span class="at">file =</span> <span class="st">&quot;output.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="programming2.html#cb269-1" tabindex="-1"></a><span class="co"># Export dataset to a CSV file using the following syntax</span></span>
+<span id="cb269-2"><a href="programming2.html#cb269-2" tabindex="-1"></a><span class="fu">write.csv</span>(my_dataset, <span class="at">file =</span> <span class="st">&quot;output.csv&quot;</span>)</span></code></pre></div>
 <p>The argument <code>file</code> will create the name of the file and enable you to change the location of the file. The way this is currently written, it will save your file to your working directory. If you need a reminder on how to set and check your working directory <a href="rstudio.html#set_wd">click here</a>. Make sure it is set to the location you want your file to go.</p>
 <p>Let’s write the <code>iq_df</code> as a CSV file.</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="programming2.html#cb269-1" tabindex="-1"></a><span class="fu">write.csv</span>(iq_df, <span class="at">file =</span> <span class="st">&quot;iq_df.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="programming2.html#cb270-1" tabindex="-1"></a><span class="fu">write.csv</span>(iq_df, <span class="at">file =</span> <span class="st">&quot;iq_df.csv&quot;</span>)</span></code></pre></div>
 <p>In your working directory (check the Files pane), you should see the file <code>iq_df.csv</code>. If you go to your file manager system on your computer, find the file, and open it, the file should open in either a text or Excel file.</p>
 </div>
 <div id="exporting-to-spss-files" class="section level4 hasAnchor" number="4.5.3.2">
 <h4><span class="header-section-number">4.5.3.2</span> Exporting to SPSS Files<a href="programming2.html#exporting-to-spss-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To export a dataset to an SPSS file, you can use the <strong><code>write.foreign()</code></strong> function from the <strong><code>foreign</code></strong> package. First, make sure you have installed and loaded the <strong><code>foreign</code></strong> package:</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="programming2.html#cb270-1" tabindex="-1"></a><span class="co">#install.packages(&quot;foreign&quot;)</span></span>
-<span id="cb270-2"><a href="programming2.html#cb270-2" tabindex="-1"></a><span class="fu">library</span>(foreign)</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="programming2.html#cb271-1" tabindex="-1"></a><span class="co">#install.packages(&quot;foreign&quot;)</span></span>
+<span id="cb271-2"><a href="programming2.html#cb271-2" tabindex="-1"></a><span class="fu">library</span>(foreign)</span></code></pre></div>
 <p>Then, use the following syntax to export data frames to SPSS:</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="programming2.html#cb271-1" tabindex="-1"></a><span class="fu">write.foreign</span>(my_dataset, <span class="co">#the dataset you are exporting</span></span>
-<span id="cb271-2"><a href="programming2.html#cb271-2" tabindex="-1"></a>              <span class="at">datafile =</span> <span class="st">&quot;output.sav&quot;</span>, <span class="co">#the location you will export your data</span></span>
-<span id="cb271-3"><a href="programming2.html#cb271-3" tabindex="-1"></a>              <span class="at">codefile =</span> <span class="st">&quot;output.sps&quot;</span>, <span class="co">#this creates the syntax for converting your file to SPSS</span></span>
-<span id="cb271-4"><a href="programming2.html#cb271-4" tabindex="-1"></a>              <span class="at">package =</span> <span class="st">&quot;SPSS&quot;</span>) <span class="co">#this specifies the package the exported file will work for</span></span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="programming2.html#cb272-1" tabindex="-1"></a><span class="fu">write.foreign</span>(my_dataset, <span class="co">#the dataset you are exporting</span></span>
+<span id="cb272-2"><a href="programming2.html#cb272-2" tabindex="-1"></a>              <span class="at">datafile =</span> <span class="st">&quot;output.sav&quot;</span>, <span class="co">#the location you will export your data</span></span>
+<span id="cb272-3"><a href="programming2.html#cb272-3" tabindex="-1"></a>              <span class="at">codefile =</span> <span class="st">&quot;output.sps&quot;</span>, <span class="co">#this creates the syntax for converting your file to SPSS</span></span>
+<span id="cb272-4"><a href="programming2.html#cb272-4" tabindex="-1"></a>              <span class="at">package =</span> <span class="st">&quot;SPSS&quot;</span>) <span class="co">#this specifies the package the exported file will work for</span></span></code></pre></div>
 <p>You might be wondering why there is both a datafile and a codefile argument. Let’s break each down:</p>
 <ul>
 <li><p>datafile: This argument specifies the file path where the data will be saved in the desired format (e.g., SPSS data file). The datafile argument is used to store the actual data values from the R dataset.</p></li>
@@ -1195,10 +1203,10 @@ Figure 4.3: Pop-up window for importing CSV files
 </ul>
 <p>So, in simple terms, the datafile is where your data is saved, while the codefile contains the instructions for using that data in another program. They work together to make sure your data can be easily used in different software programs.</p>
 <p>Now let’s export the <code>psycho</code> data frame (we imported from CSV) to SPSS!</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="programming2.html#cb272-1" tabindex="-1"></a><span class="fu">write.foreign</span>(psycho, <span class="co">#the dataset you are exporting</span></span>
-<span id="cb272-2"><a href="programming2.html#cb272-2" tabindex="-1"></a>              <span class="at">datafile =</span> <span class="st">&quot;psycho.sav&quot;</span>, <span class="co">#the location you will export your data</span></span>
-<span id="cb272-3"><a href="programming2.html#cb272-3" tabindex="-1"></a>              <span class="at">codefile =</span> <span class="st">&quot;psycho.sps&quot;</span>, <span class="co">#this creates the syntax for converting your file to SPSS</span></span>
-<span id="cb272-4"><a href="programming2.html#cb272-4" tabindex="-1"></a>              <span class="at">package =</span> <span class="st">&quot;SPSS&quot;</span>) <span class="co">#this specifies the package the exported file will work for</span></span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="programming2.html#cb273-1" tabindex="-1"></a><span class="fu">write.foreign</span>(psycho, <span class="co">#the dataset you are exporting</span></span>
+<span id="cb273-2"><a href="programming2.html#cb273-2" tabindex="-1"></a>              <span class="at">datafile =</span> <span class="st">&quot;psycho.sav&quot;</span>, <span class="co">#the location you will export your data</span></span>
+<span id="cb273-3"><a href="programming2.html#cb273-3" tabindex="-1"></a>              <span class="at">codefile =</span> <span class="st">&quot;psycho.sps&quot;</span>, <span class="co">#this creates the syntax for converting your file to SPSS</span></span>
+<span id="cb273-4"><a href="programming2.html#cb273-4" tabindex="-1"></a>              <span class="at">package =</span> <span class="st">&quot;SPSS&quot;</span>) <span class="co">#this specifies the package the exported file will work for</span></span></code></pre></div>
 <p>Again this will save the file in your working directory. If you go to your file explorer system and open up the file, it should open SPSS for you.</p>
 </div>
 </div>
