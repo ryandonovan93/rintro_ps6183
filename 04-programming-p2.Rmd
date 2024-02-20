@@ -1,14 +1,18 @@
 # **R Programming (Part II)** {#programming2}
 
-Today, we are going to build upon on the foundation concepts introduced last week and delve deeper into the world of R programming.
+Today, we are going to build upon the foundational concepts introduced last week and delve deeper into the world of R programming.
 
 By the end of this session, you should be capable of the following:
 
 -   Understanding the logic of functions, including how and why they are created.
+
 -   Creating the "factor" data type and the list data structure.
--   Importing a data set into R using both code and button-click interfaces.
--   Be capable of spicing up your RStudio by installing and loading packages.\
--   Understand how to use the help function effectively and how to search for help online.
+
+-   Being capable of enhancing your RStudio experience by installing and loading packages.
+
+-   Importing a dataset into R using both code and button-click interfaces from CSV and SPSS files.
+
+-   Exporting data to CSV and SPSS files.
 
 ```{r echo=FALSE, warning=FALSE}
 
@@ -62,7 +66,7 @@ What's going on here?
 
 It may come as a shock to you to learn that I am not much of a chef. One of the reasons I'm not a chef is my irritation with reading recipes that include instructions like "1 cup," "10 ounces," or "17 eagle feet," or require preheating the oven to "1000 degrees Fahrenheit." What I could really use is a function that would help me convert those values automatically. Let's take the cup example. Let's create a function that will take in the number of cups we need and convert that to grams.
 
-To do this, let's create a function called **`cup_to_grams`** (note: the naming conventions for functions are similar to the naming conventions for variables. The main rule is that your function name should describe the action it is carrying out.)
+To do this, let's create a function called **`cups_to_grams`** (note: the naming conventions for functions are similar to the naming conventions for variables. The main rule is that your function name should describe the action it is carrying out.)
 
 ```{r eval = FALSE}
 
@@ -74,9 +78,9 @@ cups_to_grams <- function(cups) {
 
 Inside the **`function()`**, I have given it the argument **`cups`**. In this scenario, **`cups`** acts as a placeholder variable. Inside the function, we are going to write instructions on what to do with that variable. But we have not yet defined what that variable is yet. We do that when we use the function. So don't worry about that for now.
 
-Now inside our function (i.e., inside the {}), we need to write instructions to enable R to convert cups to grams. When I googled this, several different answers popped up. But I am just going to follow the first website I found which said: "According to the metric system, there are 250 grams in 1 cup."
+Now inside our function (i.e., inside the **`{}`**), we need to write instructions to enable R to convert cups to grams. When I googled this, several different answers popped up. But I am just going to follow the first website I found which said: "According to the metric system, there are 250 grams in 1 cup."
 
-Let's write that instruction inside our function. We are going to save the result of that calculation to a variable called **`grams`**
+Let's write that instruction inside our function. We are going to save the result of that calculation to a variable called **`grams`**.
 
 ```{r eval = FALSE}
 
@@ -106,7 +110,7 @@ cups_to_grams(cups = 1)
 
 ```
 
-It works! We can see here what I mean that **`cups`** is a placeholder variable. We want our function to be generalizable, so we don't tell it ahead of time what cups equals. All it knows is that it will receive some information that will equate to **`cups`**, and then it will multiply that information by **`250`**.
+It works! We can see here what I mean that **`cups`** is a placeholder variable. We want our function to be generalizable, so we don't tell it ahead of time what **`cups`** equals. All it knows is that it will receive some information that will equate to cups, and then it will multiply that information by 250.
 
 This enables us to call our function several times with several different values.
 
@@ -402,33 +406,45 @@ greet(name = "Ryan") #please feel free to type in your own name
 
 Having default values in a function enables them to be called with fewer arguments, making code more readable. But since default values can be overridden, it also provides them with a degree of combustibility.
 
-Exercises
+### Exercises
 
-1.  Create a function called `fahrenheit_to_celsius` that converts a temperature from Fahrenheit to Celsius.
+1.  Create a function named **`fahrenheit_to_celsius`** that converts a temperature from Fahrenheit to Celsius.
 
-    1.  Include in the definition of the function the argument fahrenheit
+    Instructions:
 
-    2.  Create a variable inside the function called celsius
+    1.  Define the function **`fahrenheit_to_celsius`** with an argument named **`fahrenheit`**.
 
-    3.  The formula for calculating it is: fahrenheit- 32 / 1.8
+    2.  Inside the function, create a variable named **`celsius`** to store the converted temperature.
 
-    4.  Return the celsius variable
+    3.  Calculate the Celsius temperature using the formula: **`(fahrenheit - 32) / 1.8`**.
+
+    4.  Return the **`celsius`** variable.
 
 2.  Create a function called **`calculate_discount`** that calculates the discounted price of an item.
 
-    1.  The function should take two arguments: **`price`** and **`discount_percent`**.
+    1.  Define the function **`calculate_discount`** with two arguments: **`price`** and **`discount_percent`**.
 
-    2.  Create a variable called discount_price inside your function.
+    2.  Inside the function, create a variable named **`discount_price`** to store the discounted price.
 
-    3.  Assign the following formula to that variable: (price \* discount_percent) \* 100
+    3.  Calculate the discounted price using the formula: **`price * (1 - discount_percent)`**.
 
-    4.  Create a variable called final price, using the formula:
-
-    5.  Return the final price
+    4.  Return the **`discount_price`**.
 
 3.  Add the z-scores for the Beck scale back into the iq_df data frame.
 
-4.  Look up the t.test function - what is the default value for the \`paired\` argument?
+    Instructions:
+
+    1.  Use the **`calculate_z_score`** function you created earlier to calculate the z-scores for the Beck scale.
+
+    2.  Add the calculated z-scores to the **`iq_df`** data frame as a new column.
+
+4.  Look up help on the head() function - what is the default value for the number (n) of rows it prints argument?
+
+    Instructions:
+
+    1.  Use the **`?head`** command to access the documentation for the **`head()`** function.
+
+    2.  Identify the default value for the **`n`** argument in the documentation.
 
 ## The Factor Data Type
 
@@ -440,7 +456,7 @@ Fortunately, R offers a data type called ***factors*** to address this need.
 
 ### Creating a Factor
 
-Consider a hypothetical experimental study investigating the effect of caffeine on sleep duration. Participants are randomly assigned to three experimental conditions: **`No Caffeine`**, **`Low Caffeine (200 mg)`**, and **`High Caffeine (400 mg)`**. Our data frame might resemble the following, where **`1`** = **`No Caffeine`**, **`2 = Low Caffeine`**, and **`3 = High Caffeine`**:
+Let's say we run an experimental study investigating the effect of caffeine on sleep duration. Participants are randomly assigned to three experimental conditions: **`No Caffeine`**, **`Low Caffeine (200 mg)`**, and **`High Caffeine (400 mg)`**. Our data frame might resemble the following, where **`1`** = **`No Caffeine`**, **`2 = Low Caffeine`**, and **`3 = High Caffeine`**:
 
 ```{r}
 
@@ -464,7 +480,7 @@ mean(caffeine_df$group)
 
 While this might not cause immediate problems, it could lead to issues later when conducting inferential statistical tests like ANOVAs or regressions, where R expects a factor data type.
 
-To address this, we can use the **`factor`** function to convert the **`group`** column:
+To address this, we can use the **`factor`** function to convert the group column:
 
 ```{r}
 
@@ -472,7 +488,7 @@ factor(caffeine_df$group)
 
 ```
 
-Now, R recognizes that each distinct value in the column represents a different level of our independent variable. If we attempt to calculate the mean now, it will result in an error:
+Now, R recognizes that each distinct value in the column represents a different level of our independent variable. If we attempt to calculate the mean now, it will result in an erro:
 
 ```{r}
 
@@ -480,7 +496,7 @@ mean(caffeine_df$group)
 
 ```
 
-Whoops! What wrong here? Well when we called the `factor()` function, we never reassigned that information back to `group` vector in our `caffeine_df` data frame. So while R ran our command, it did not save it. To fix this, we just follow the syntax for creating a new column we learned last week `data.frame$newcolum <- vector`.
+Whoops! What's wrong here? Well, when we called the **`factor()`** function, we never reassigned that information back to the 'group' vector in our **`caffeine_df`** data frame. So while R ran our command, it did not save it. To fix this, we just follow the syntax for creating a new column we learned last week **`data.frame$newcolumn <- vector`**.
 
 ```{r}
 
@@ -496,9 +512,9 @@ mean(caffeine_df$group)
 
 ```
 
-But I am not completely satisfied yet. Although right now we can remember that `1` = `No Caffeine`, `2 = Low Caffeine`, and `3 = High Caffeine`, we might forget that information in six months time if we return to our data set.
+But I am not completely satisfied yet. Although right now we can remember that 1 = No Caffeine, 2 = Low Caffeine, and 3 = High Caffeine, we might forget that information in six months' time if we return to our dataset.
 
-Luckily we can label the levels of our factor through the `levels()` function.
+Luckily, we can label the levels of our factor through the **`levels()`** function.
 
 ```{r}
 
@@ -511,7 +527,7 @@ print(caffeine_df$group)
 
 That's better!
 
-### Sort Character Data
+### Using Factors to Sort Character Data
 
 Factors also enable us to sort character data in an ordered manner that isn't alphabetical. For example, consider a vector called **`degree`** that denotes participants' highest level of education completed:
 
@@ -561,15 +577,52 @@ As you can see, our data looks much cleaner and more intuitive.
 
 There is a lot more we can do with factors, but this covers the main points. Now let's talk about the last data type/structure we are going to be using in this course, which is the `list` data structure.
 
+### Exercises
+
+**Exercise 1 - Convert Numeric Data to Factor:**
+
+-   Create a vector called **`personality`** containing personality types: "Introverted", "Extroverted", "Introverted", "Introverted", "Extroverted", "Extroverted".
+
+-   Convert the **`personality`** vector to a factor and store it in a new variable called **`personality_factor`**.
+
+-   Display the levels of the **`personality_factor`** variable.
+
+**Exercise 2 - Count and Visualize Factor Levels:**
+
+-   Using the created **`personality`** vector from Exercise 1, create a table to count the number of occurrences of each Personality trait.
+
+-   Visualize the counts using a bar plot to show the distribution of genders.
+
+**Exercise 3 - Modify Factor Levels:**
+
+```{r}
+
+# Treatment conditions vector
+treatment <- c("Control", "Placebo", "Therapy", "Medication", "Therapy", "Placebo", "Control", "Medication")
+
+```
+
+-   Reorder the levels of the **`treatment`** vector so that "Therapy" becomes the first level, followed by "Control", "Placebo", and "Medication".
+
+-   Print the modified levels of the **`treatment`** variable to verify the order.
+
+**Exercise 4 - Factor Conversion with Levels:**
+
+-   Create a vector called **`coping_strategy`** with the following values: "Problem-focused", "Emotion-focused", "Avoidant", "Problem-focused", "Emotion-focused", "Avoidant", "Problem-focused".
+
+-   Convert the **`coping_strategy`** vector to a factor with levels specified as "Problem-focused", "Emotion-focused", "Avoidant", and store it in a new variable called **`coping_strategy_factor`**.
+
+-   Display the levels of the **`coping_strategy_factor`** variable.
+
 ## The List Data Structure
 
-The two data structures we have discussed so far, vectors and data frame, are excellent ways to store data. But each data structure has it limitations. The limitations of both the vector and data frame is that they only enable us to store one object of data at a time.
+The two data structures we have discussed so far, vectors and data frames, are excellent ways to store data. However, each data structure has its limitations. Both vectors and data frames only allow us to store one object of data at a time.
 
-What do I mean by one object of data? Well, when we create a vector, we are only storing information on one single vector in R. Now I can store multiple vectors in the one place in R by combining them into a data frame. However, I am only able to do that if each vector has the same number of data points Based on what I have taught you so far, there is no way to store 2 independent and separate vectors in the same place in R.
+What do I mean by one object of data? Well, when we create a vector, we are only storing information for one single vector in R. While we can store multiple vectors in one place in R by combining them into a data frame, this is only possible if each vector has the same number of data points. Based on what I have taught you so far, there is no way to store two independent and separate vectors in the same place in R.
 
-Similarly, when I create a data frame, I am only storing information on one data frame. But sometimes we would want to keep data frames saved in a similar location. This would be like an excel file that has multiple worksheets saved onto it.
+Similarly, when I create a data frame, I am only storing information for one data frame. But sometimes we would want to keep multiple data frames saved in a similar location, similar to an Excel file that has multiple worksheets saved onto it.
 
-Finally, what if I wanted to store a vector and a data frame together? For example, imagine I had a data frame that was cleaned data set. And I wanted to store a vector with results form the analysis. Based on what I have taught you so far, there is no to store both a vector and a separate data frame in a single space in R.
+Finally, what if I wanted to store a vector and a data frame together? For example, imagine I had a data frame that was a cleaned data set, and I wanted to store a vector with results from the analysis. Based on what I have taught you so far, there is no way to store both a vector and a separate data frame in a single space in R.
 
 That's where the list data structure comes into play.
 
@@ -610,9 +663,9 @@ participant3 <- list(
 
 ```
 
-The list for each participant is made up of separate vectors made up of different lengths (e.g., there is only 1 element in ID, age, and gender, whereas they are 3 in test_scores, and 4 in questionnaire_responses).
+The list for each participant is made up of separate vectors with varying lengths (e.g., there is only 1 element in ID, age, and gender, whereas there are 3 elements in test_scores and 4 in questionnaire_responses).
 
-Let's print out `participant1` list and break down the output.
+Let's print out the **`participant1`** list and break down the output:
 
 ```{r}
 
@@ -671,7 +724,7 @@ df_v$iq_df[1:5, c("iq", "total_depression_beck")]
 
 ### Lists within Lists (Indexing)
 
-What happens if we combine lists together? Well we can do that by putting lists inside lists. But if we do that, the output is pretty ugly.
+What happens if we combine lists together? Well, we can do that by putting lists inside lists. However, if we do that, the output might seem a bit overwhelming at first.
 
 ```{r}
 
@@ -690,21 +743,17 @@ Let's break down the first part of this output
 
 ```
 
-So we know from indexing vectors that `vector_name[1]` would print out the first element of a vector. The same thing is happening here. If we had only 1 list, we could access the first thing from that list using `list[1]`
-
-But when we are dealing with multiple lists, we need a convention to extract each list.That's why we have the double `[[]]` notation.
-
-The output \``[[1]]` basically says "This is the information from the first first list". So anytime you see "[[]]", the number inside the central bracket indicates the list we are dealing with. So the code output
+This notation **`[[1]]`** extracts and indicates the first list within our combined list **`participant_data`** (in this case participant1). Similarly, **`[[2]]`** would indicate the second list (participant2), and so on. It's similar to how we index elements in vectors.
 
 ```{r eval=FALSE}
 
-[[1]]$ID
+[[1]]$ID #this translates to from participant data, pick participant 1 and then extract ID
 
-[[1]]$age
+[[1]]$age #this translates to from participant data, pick participant 1 and then extract age
 
-[[1]]$test_scores
+[[1]]$test_scores #this translates to from participant data, pick participant 1 and then extract test scores
 
-[[1]]$questionnaire_responses
+[[1]]$questionnaire_responses #this translates to from participant data, pick participant 1 and then questionnaire_responses
 
 ```
 
@@ -735,31 +784,31 @@ Throughout this course, we've been exploring the capabilities of base R, which o
 
 R packages are collections of R functions, data, and documentation that extend the capabilities of R. These packages are developed and shared by the R community to address various needs in data analysis, visualization, machine learning, and more. By leveraging packages, R users can access a vast array of specialized tools and algorithms without reinventing the wheel.
 
-## Installing and Loading R Package
+### Installing and Loading R Package
 
-One of the most important to know about R packages is that you first need to install them on to your computer. Once they are installed, you will not need to install them again.
+One of the most important things to know about R packages is that you first need to install them on your computer. Once installed, you will not need to install them again.
 
-However, if you want to use a package, then you will need to load it while you are RStudio. Every time you open RStudio after closing it, you will need to load that package in again if you want to use.
+However, if you want to use a package, then you will need to load it while you are in RStudio. Every time you open RStudio after closing it, you will need to load that package again if you want to use it.
 
-In this way, R packages are like applications on your phone. Once you download Spotify on your phone, then you won't need to install it again. But everytime you want to use Spotify, you will need to open the application.
+In this way, R packages are like applications on your phone. Once you download Spotify on your phone, then you won't need to install it again. But every time you want to use Spotify, you will need to open the application.
 
-First, I will show you two ways to install packages in R. Then I will show you two ways to load packages in R.
+#### Installation
 
-### Installation
+We are going to install three packages called Haven, praise, and fortunes. The praise package provides users with, well, praise. And the fortunes package will spit out statistic and programming quotes at you. Neither of them is particularly useful, other than demonstrating the process of loading packages.
 
-We are going to install three packages called `Haven`, `praise` and `fortunes`. The praise package provide users with, well, praise. And the fortunes package will spit statistic and programming quotes at you. Neither of them are particularly useful, other than demonstrating the process of loading packages.
+The Haven package enables you to load SPSS data into R.
 
-The `Haven` package enables you to load in SPSS data into R. 
+##### Installation using RStudio Interface
 
-#### Installation using RStudio Interface
-
-In the Files pane on the bottom right hand corner of R, you will see a tab called "Packages". Click that tab. You will already see a list of packages that are currently. You will see three columns:
+In the Files pane on the bottom right-hand corner of R, you will see a tab called "Packages". Click that tab. You will already see a list of packages that are currently installed. You will see three columns:
 
 -   Name (the name of the R package)
+
 -   Description (describes what the package does)
+
 -   Version (the version of the package currently installed on your computer)
 
-To install a package, click the "Install" button above the "Name" column. Once you click that, you should see a small pop-up window. In the textbox, type in the word `Haven` Make sure the box "Install dependencies" is clicked. After that, you can click Install. You should get something like the following output in the console, which looks scary with all the red text, but means it has worked correctly.
+To install a package, click the "Install" button above the "Name" column. Once you click that, you should see a small pop-up window. In the textbox, type in the word Haven. Make sure the box "Install dependencies" is clicked. After that, you can click Install. You should get something like the following output in the console, which looks scary with all the red text, but means it has worked correctly.
 
 ```{r eval = FALSE}
 > install.packages("Haven")
@@ -773,7 +822,7 @@ The downloaded binary packages are in
 	/var/folders/h8/8sb24v_x2lg51cg2z7q8fk3w0000gp/T//RtmpvaY1Ue/downloaded_packages
 ```
 
-#### Installation using Commands
+##### Installation using Commands
 
 If we want to install packages using the console, you can use the **`install.packages()`** function followed by the name of the package you wish to install. The syntax would looks like this
 
@@ -808,15 +857,15 @@ The downloaded binary packages are in
 
 Again the output is rather scary but the sentences "package 'praise' successfully unpacked and MD5 sums checked" and "package 'fortunes' successfully unpacked and MD5 sums checked" mean that they are successfully installed onto your computer.
 
-### Loading Packages
+#### Loading Packages
 
-Okay, now to actually use those packages we will need to load them. Again I will show you two ways to load packages.
+Okay, now to actually use those packages, we will need to load them. Again, I will show you two ways to load packages.
 
-#### Loading using RStudio Interface
+##### Loading using RStudio Interface
 
-Go back to the Packages tab in the File pane. On the left hand side of the package name, you will see a tick box. If the box is ticked, that means the package is currently loaded. If it is unticked, it is not loaded.
+Go back to the Packages tab in the File pane. On the left-hand side of the package name, you will see a tick box. If the box is ticked, that means the package is currently loaded. If it is unticked, it is not loaded.
 
-Scroll down to find the package `praise` and load it in by ticking the box.
+Scroll down to find the package "praise" and load it by ticking the box.
 
 ```{r fig.cap = "Loading Packages through RStudio Interface", echo = FALSE}
 
@@ -836,7 +885,7 @@ package ‘praise’ was built under R version 4.3.2
 
 ```
 
-### Loading using the R Console Command
+##### Loading using the R Console Command
 
 We can use the same syntax from that R console output to load in packages there. To load in the `fortunes` and `Haven` packages, you can type in the following into the console or script one at a time:
 
@@ -847,7 +896,7 @@ library(haven)
 
 ```
 
-There is one significant difference between installing and loading packages through code. When you are installing packages, you can install multiple packages in the one command. However, you can only load in one package at a time.
+There is one significant difference between installing and loading packages through code. When you are installing packages, you can install multiple packages in one command. However, you can only load one package at a time
 
 ```{r eval = FALSE}
 
@@ -865,10 +914,9 @@ library(package3)
 
 ```
 
-### Testing our New Functions
+#### Testing our New Functions
 
 To make sure the following functions are working, run the following code to check:
-
 
 ```{r echo = FALSE}
 
@@ -881,8 +929,6 @@ fortune() #this will print out something so incredibly nerdy
 
 ```
 
-
-
 ```{r eval = FALSE}
 
 praise() #everytime you run this line of code it gives you a different line of praise
@@ -892,10 +938,9 @@ fortune() #this will print out something so incredibly nerdy
 
 ```
 
+#### Error Loading Packages
 
-### Error Loading Packages
-
-If you ever encounter the following error when trying to load in a package
+If you ever encounter the following error when trying to load a package:
 
 ```{r eval = FALSE, warning=TRUE}
 
@@ -903,18 +948,17 @@ library(madeuppackage)
 
 ```
 
-This means that you have either made a typo in writing the name of the package or you have not installed the package. You need to install packages before R will be able to load them. 
+This means that you have either made a typo in writing the name of the package or you have not installed the package. You need to install packages before R will be able to load them.
 
-### Package Conventions if Using Code
+#### Package Conventions if Using Code
 
-There is an important rule of thumb if you are writing the code to install and load packages in R.
+There are important rules to follow when writing code to install and load packages in R.
 
-Firstly, any packages that you install and load onto R should be at the top of the R script you are working on. This way anyone following your analysis can easily spot what packages that they will need.
+Firstly, any packages you install and load onto R should be placed at the top of the R script you are working on. This way, anyone following your analysis can easily spot the packages they will need.
 
-Secondly, you should type the command "install.packages("packages")" in the console rather than the script. Because if someone downloads your script and accidentally runs it, it will automatically install the packages on their computer, which we want to avoid, as it might interfere with other aspects of their operating system (this is really rare, but it's better to be cautious)
+Secondly, you should type the command **`install.packages("package_name")`** in the console rather than the script. If someone downloads your script and accidentally runs it, it will automatically install the packages on their computer. We want to avoid this as it might interfere with other aspects of their operating system (this is rare, but it's better to be cautious).
 
-Thirdly, if you do have the command "install.packages()" in the script, make sure it is commented out. That way if they accidentally run it, R won't run that command.
-
+Thirdly, if you do include the command **`install.packages()`** in the script, make sure it is commented out. This way, if it is accidentally run, R won't execute that command.
 
 ```{r fig.cap = "Conventions for Installing and Loading Packages in R Script", echo = FALSE}
 
@@ -924,27 +968,27 @@ include_graphics("img/04-packages-convention.png")
 
 ### Summary
 
-There you have it. You have successfully installed and loaded in your first packages in R. Are they particularly useful packages? No! For the rest of this course, we will be loading in packages more regularly, and loading in packages that will make our lives significantly easier than if they were not around. In fact, we will load a package in the next section that will enable us to import SPSS data.
+There you have it. You have successfully installed and loaded your first packages in R. Are they particularly useful packages? No! In the rest of this course, we will be loading packages more regularly, and these packages will make our lives significantly easier than if they were not around. In fact, we will use the `haven` package in the next section that will enable us to import SPSS data.
 
 ## Importing and Exporting Data
 
-While it's great to know how to create data frames and lists in R, realistically most of the data you will be analyzing in R will be with imported data. Similarly it is important to know how to export your data after you have cleaned it in R.
+While creating data frames and lists in R is valuable, the majority of the data you'll work with in R will likely come from external sources. Therefore, it's essential to know how to import data into R. Similarly, once you've processed and analyzed your data in R, you'll often need to export it for further use or sharing.
 
-We'll explore how to import and export data using the graphical user interface (GUI) provided by RStudio in this section. The GUI offers a convenient and intuitive way to handle data files without writing any code. Let's dive into the process of importing and exporting data using the RStudio GUI.
+In this section, we'll explore how to import and export data using the graphical user interface (GUI) provided by RStudio. The GUI offers a user-friendly and intuitive way to manage data files without requiring you to write any code. Let's delve into the process of importing and exporting data using the RStudio GUI.
 
-First you are going to need to download two files: `psycho.csv` and `burnout.sav.` Both files are available in the `rintro` Teams channel. If you are accessing this resource and are not a member of the Teams channel, please contact me (ryan.donovan\@universityofgalway.ie).
+First, you'll need to download two files: `psycho.csv` and `burnout.sav`. Both files are available in the rintro Teams channel. If you don't have access to the Teams channel, please contact me at ryan.donovan\@universityofgalway.ie.
 
 ### Importing CSV files.
 
-Comma-Separated Values (CSV) files are a common format used for storing tabular data. As the name suggests, data in CSV files is organized in rows and columns, with each row representing a single record and each column representing a different attribute or variable. In this regard, CSV files are very similar to excel file.
+Comma-Separated Values (CSV) files are a prevalent format for storing tabular data. Similar to Excel files, data in CSV files is organized into rows and columns, with each row representing a single record and each column representing a different attribute or variable.
 
-CSV files are plain text files, which means they can be easily created, edited, and viewed using a simple text editor. This simplicity and universality make CSV files a popular choice for data exchange between different applications and platforms.
+CSV files are plain text files, making them easy to create, edit, and view using a simple text editor. This simplicity and universality make CSV files a popular choice for data exchange across various applications and platforms.
 
-In a CSV file, each value in the table is separated by a comma (,), hence the name "comma-separated values." However, depending on the locale settings, other delimiters such as semicolons (;) or tabs (\t) may be used instead.
+In a CSV file, each value in the table is separated by a comma (,), hence the name "comma-separated values." However, depending on locale settings, other delimiters such as semicolons (;) or tabs (\\t) may be used instead.
 
-One of the key advantages of CSV files is their compatibility with a wide range of software and programming languages, including R. They can be easily imported into statistical software for analysis, making them a versatile and widely adopted format for data storage and sharing.
+One of the key advantages of CSV files is their compatibility with a wide range of software and programming languages, including R. They can be effortlessly imported into statistical software for analysis, making them a versatile and widely adopted format for data storage and sharing.
 
-To import the psycho.csv file, please follow these steps:
+To import the "psycho.csv" file, please follow these steps:
 
 1.  Open RStudio.
 
@@ -960,13 +1004,13 @@ To import the psycho.csv file, please follow these steps:
 
 7.  A pop-up window should now open. There is a lot of different information here, so let's unpack it.
 
-    1.  The Name text box enables you to specify the variable name that will be assigned to the data frame. Leave it as psycho.
+    -   The "Name" text box enables you to specify the variable name assigned to the data frame. Leave it as "psycho."
 
-    2.  Underneath the text box, there are several different options for influencing how the CSV file will be read. Most of the time, you can leave this with the default settings.
+    -   Most of the time, you can leave the options with the default settings.
 
-    3.  The Input File box shows you a preview of the CSV file that is being imported, which is useful just to make sure it is the correct file.
+    -   The "Input File" box shows a preview of the CSV file being imported.
 
-    4.  The Data Frame box shows you a preview of how the data frame will look like once the CSV is imported into R. Everything looks fine here, so we are good to go.
+    -   The "Data Frame" box displays a preview of how the data frame will look once the CSV is imported into R.
 
 ```{r fig.cap="Pop-up window for importing CSV files"}
 
@@ -986,7 +1030,6 @@ Burnout <- read_sav("datasets/Burnout.sav")
 
 ```
 
-
 ```{r}
 
 head(psycho) #this will print out the first six rows
@@ -995,7 +1038,7 @@ summary(psycho) #print out summary stats for each column
 
 ```
 
-If your results are the same as mine then that means you have correctly imported the data.
+If your results match mine, it means you have correctly imported the data.
 
 ### Importing SPSS (.sav files).
 
@@ -1027,18 +1070,17 @@ include_graphics("img/04-import-sav.png")
 
 9.  To import the dataframe, click "Import".
 
-Click Import. A tab in the source pane called "burnout" should now open showing the data frame. Additionally, you should also see the data frame in the Environment pane. You should see under value that it has "467 obs. of 6 variables," indicating there are 467 rows of data and 6 columns of data.
+After importing, a tab in the source pane called "burnout" should open, displaying the data frame. Additionally, you should see the data frame in the Environment pane. Under the "value" column, it should indicate "467 obs. of 6 variables," indicating there are 467 rows and 6 columns of data.
 
 Once imported, use the **`head()`** and **`summary()`** functions to check that the data has been imported correctly:
 
-```{r}         
+```{r}
 
 head(Burnout)
 
 summary(Burnout)
 
 ```
-
 
 If your results match mine, then you have successfully imported the SPSS data into R.
 
@@ -1057,9 +1099,9 @@ write.csv(my_dataset, file = "output.csv")
 
 ```
 
-The argument `file` will create the name of the file and enable you to change the location of the file. The way this is currently written, it will save your file to your working directory. If you need a reminder on how to set and check your working directory [click here](#set_wd). Make sure it is set to the location you want your file to go. 
+The argument `file` will create the name of the file and enable you to change the location of the file. The way this is currently written, it will save your file to your working directory. If you need a reminder on how to set and check your working directory [click here](#set_wd). Make sure it is set to the location you want your file to go.
 
-Let's write the `iq_df` as a CSV file. 
+Let's write the `iq_df` as a CSV file.
 
 ```{r}
 
@@ -1067,18 +1109,18 @@ write.csv(iq_df, file = "iq_df.csv")
 
 ```
 
-In your working directory (check the Files pane), you should see the file `iq_df.csv`. If you go to your file manager system on your computer, find the file, and open it, the file should open in either a text or Excel file. 
+In your working directory (check the Files pane), you should see the file `iq_df.csv`. If you go to your file manager system on your computer, find the file, and open it, the file should open in either a text or Excel file.
 
 #### Exporting to SPSS Files
 
-To export a dataset to an SPSS file, you can use the write.foreign() function from the foreign package. First, make sure you have installed and loaded the foreign package:
+To export a dataset to an SPSS file, you can use the **`write.foreign()`** function from the **`foreign`** package. First, make sure you have installed and loaded the **`foreign`** package:
 
 ```{r}
 #install.packages("foreign")
 library(foreign)
 ```
 
-Once you have done that, the syntax for exporting data frames to SPSS is:
+Then, use the following syntax to export data frames to SPSS:
 
 ```{r eval = FALSE}
 write.foreign(my_dataset, #the dataset you are exporting
@@ -1090,13 +1132,13 @@ write.foreign(my_dataset, #the dataset you are exporting
 
 You might be wondering why there is both a datafile and a codefile argument. Let's break each down:
 
-- datafile: This argument specifies the file path where the data will be saved in the desired format (e.g., SPSS data file). The datafile argument is used to store the actual data values from the R dataset.
+-   datafile: This argument specifies the file path where the data will be saved in the desired format (e.g., SPSS data file). The datafile argument is used to store the actual data values from the R dataset.
 
-- codefile: This is where the instructions on how to use your data are saved. When you specify a file path for the codefile argument, R will create a file containing commands or instructions that another program (like SPSS) can use to understand and import your data correctly. It's like writing down step-by-step directions for SPSS to follow.
+-   codefile: This is where the instructions on how to use your data are saved. When you specify a file path for the codefile argument, R will create a file containing commands or instructions that another program (like SPSS) can use to understand and import your data correctly. It's like writing down step-by-step directions for SPSS to follow.
 
 So, in simple terms, the datafile is where your data is saved, while the codefile contains the instructions for using that data in another program. They work together to make sure your data can be easily used in different software programs.
 
-Now let's export the `psycho` data frame (we imported from CSV) to SPSS! 
+Now let's export the `psycho` data frame (we imported from CSV) to SPSS!
 
 ```{r}
 
@@ -1107,15 +1149,22 @@ write.foreign(psycho, #the dataset you are exporting
 
 ```
 
-Again this will save the file in your working directory. If you go to your file explorer system and open up the file, it should open SPSS for you. 
+Again this will save the file in your working directory. If you go to your file explorer system and open up the file, it should open SPSS for you.
 
 ## Summary
 
-Well done, you've gotten through Programming Part I and II. We covered a lot of useful (but let's be honest, not exactly riveting) concepts in programming in R. We've learnt how R categorises data, stores in data structures, learn how to convert data types and create those structures. Additionally, we learnt how to create variables and functions, install and load in packages to spice up R, and how to import and export data. 
+Congratulations, you've made it through Programming Part I and II! We've covered a lot of useful (but let's be honest, not exactly riveting) concepts in programming with R. Throughout these sections, we've learned how R categorizes data, stores it in data structures, converts data types, and creates variables and functions. Additionally, we've explored how to install and load packages to enhance R's capabilities, and how to import and export data.
 
-This sets us up nicely to start actually data processing next week when we will look at ways to clean our data. 
+With this foundation, we're now well-equipped to move on to the next phase: data processing. In the upcoming week, we'll dive into methods for cleaning our data, setting the stage for more advanced analyses.
 
+## Glossary 
 
-
-
-
+| **Term**        | **Definition**                                                                                                                  |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| CSV             | Comma-Separated Values: a common file format for storing tabular data, where each value is separated by a comma.                |
+| SPSS            | Statistical Package for the Social Sciences: software commonly used for statistical analysis, often associated with .sav files. |
+| Dataframe       | A two-dimensional data structure in R that resembles a table with rows and columns. It can store mixed data types.              |
+| Importing       | The process of bringing data from external sources into R for analysis or manipulation.                                         |
+| Exporting       | The process of saving data from R to external files or formats for use in other applications.                                   |
+| write.csv()     | A function in R used to export a dataset to a CSV file.                                                                         |
+| write.foreign() | A function in R used to export a dataset to other formats, such as SPSS files.                                                  |
