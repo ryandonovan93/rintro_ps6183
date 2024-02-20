@@ -127,7 +127,7 @@
 
 \title{Introduction to R}
 \author{Ryan Donovan}
-\date{2024-02-19}
+\date{2024-02-20}
 
 \begin{document}
 \maketitle
@@ -535,7 +535,7 @@ Ideally, you want the working directory to match the location of your R project.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro"
+## [1] "/Users/ryandonovan 1/Desktop/Teaching/R/rintro"
 \end{verbatim}
 
 This will display the current working directory where R is operating. Your working directory will likely differ from mine, which is normal. Just confirm that it matches the location you specified when creating your project (\textbf{Option 2}).
@@ -2309,6 +2309,1622 @@ Prioritize clarity over brevity. & Recommended & tem & total\_exam\_marks \\
 Avoid starting variable names with a capital letter. & Recommended & FirstName & firstName \\
 Choose a consistent naming style and stick to it. & Recommended & myName, last\_Name & my\_name, last\_name or myName and lastName \\
 \end{longtable}
+
+\hypertarget{programming2}{%
+\chapter{\texorpdfstring{\textbf{R Programming (Part II)}}{R Programming (Part II)}}\label{programming2}}
+
+Today, we are going to build upon on the foundation concepts introduced last week and delve deeper into the world of R programming.
+
+By the end of this session, you should be capable of the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Understanding the logic of functions, including how and why they are created.
+\item
+  Creating the ``factor'' data type and the list data structure.
+\item
+  Importing a data set into R using both code and button-click interfaces.
+\item
+  Be capable of spicing up your RStudio by installing and loading packages.\\
+\item
+  Understand how to use the help function effectively and how to search for help online.
+\end{itemize}
+
+\hypertarget{functions}{%
+\section{Functions}\label{functions}}
+
+In the previous two sessions, we have used several functions including: \textbf{\texttt{print()}}, \textbf{\texttt{head()}}, \textbf{\texttt{View()}}, \textbf{\texttt{mean()}}, \textbf{\texttt{sd()}}, \textbf{\texttt{summary()}}, \textbf{\texttt{aggregate()}}, \textbf{\texttt{plot()}}, \textbf{\texttt{pdf()}}, \textbf{\texttt{t.test()}}, \textbf{\texttt{class()}}, and \textbf{\texttt{c()}}. Each of these functions has served a particular purpose. All of them have taken in an input object (e.g., a variable, data type, and/or data structure), performed some operation on it, and produced some output.
+
+But we haven't really talked about what functions actually are. I have told you they are similar to verbs in that they are ``words'' that do things. This makes them sound like some magical words.
+
+You might assume that being good at programming is about learning as many functions as you can, and learning in detail what they can do, so that whenever you face a challenging situation in R, you know what tool to use.
+
+There is some truth to this. You will inevitably learn more functions as you get better and more comfortable with R. This will make you more adept at using them. But what actually predicts becoming good at programming is your ability to understand the logic of functions and how they are created. If you grasp that, you'll be able to learn them quicker, use them more effectively, and even create your own functions.
+
+This final point is critical. You can create your own functions. Let's create our own function to demonstrate what functions actually are.
+
+\hypertarget{the-syntax-for-creating-a-function}{%
+\subsection{The Syntax for Creating a Function}\label{the-syntax-for-creating-a-function}}
+
+Functions are somewhat similar to variables. We create variable names as labels for information. That way when we want to access that information or perform operations on it we can use the variable name rather than recreating the information in R again.
+
+Similarly, functions are like labels for code. We come up with a name for a function (e.g., \textbf{\texttt{mean()}}) and we assign code instructions to that function. So when we call a function, we can give it information (e.g., variables), and it will take information and run that code on it. This way we don't have to write out code instructions over and over again - we can just call the function. This increases the scalability of our code.
+
+The syntax for creating a function looks like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(argument) \{}
+\NormalTok{  instruction\_1}
+\NormalTok{  instructions\_2}
+\NormalTok{  ....}
+\NormalTok{  instruction\_n}
+  \FunctionTok{return}\NormalTok{(output)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+What's going on here?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  First, we created a name, \textbf{\texttt{my\_function}}, and used the assignment operator \textbf{\texttt{\textless{}-}} to tell R we are going to be storing some piece of information to that name.
+\item
+  Then, we wrote \textbf{\texttt{function()}} to tell R that we are going to be creating a function and storing it to our name \textbf{\texttt{my\_function}}. Inside \textbf{\texttt{function()}}, we specified an \textbf{\texttt{argument}}, which is just a fancy word for \textbf{\texttt{input}}.
+\item
+  Inside the curly brackets \textbf{\texttt{\{\}}}, we write the code for \textbf{\texttt{my\_function}}. This code comprises instructions (i.e., operations) that R will execute on our argument (i.e., input). We could have 1 instruction here, or we could have several hundred lines of instructions. That depends on the complexity of the function we are creating.
+\item
+  We want the function to provide us with some output information. To ensure that it does that, we tell R to \textbf{\texttt{return()}} the information (\textbf{\texttt{output}}) that we want.
+\end{enumerate}
+
+\hypertarget{creating-a-simple-function-1-argument}{%
+\subsection{Creating a Simple Function (1-Argument)}\label{creating-a-simple-function-1-argument}}
+
+It may come as a shock to you to learn that I am not much of a chef. One of the reasons I'm not a chef is my irritation with reading recipes that include instructions like ``1 cup,'' ``10 ounces,'' or ``17 eagle feet,'' or require preheating the oven to ``1000 degrees Fahrenheit.'' What I could really use is a function that would help me convert those values automatically. Let's take the cup example. Let's create a function that will take in the number of cups we need and convert that to grams.
+
+To do this, let's create a function called \textbf{\texttt{cup\_to\_grams}} (note: the naming conventions for functions are similar to the naming conventions for variables. The main rule is that your function name should describe the action it is carrying out.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cups\_to\_grams }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(cups) \{}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Inside the \textbf{\texttt{function()}}, I have given it the argument \textbf{\texttt{cups}}. In this scenario, \textbf{\texttt{cups}} acts as a placeholder variable. Inside the function, we are going to write instructions on what to do with that variable. But we have not yet defined what that variable is yet. We do that when we use the function. So don't worry about that for now.
+
+Now inside our function (i.e., inside the \{\}), we need to write instructions to enable R to convert cups to grams. When I googled this, several different answers popped up. But I am just going to follow the first website I found which said: ``According to the metric system, there are 250 grams in 1 cup.''
+
+Let's write that instruction inside our function. We are going to save the result of that calculation to a variable called \textbf{\texttt{grams}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cups\_to\_grams }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(cups) \{}
+\NormalTok{  grams }\OtherTok{\textless{}{-}}\NormalTok{ cups }\SpecialCharTok{*} \DecValTok{250}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Now we are nearly done. But if we want R to provide us with the result of this function, we need to ask it to \textbf{\texttt{return()}} it to us. We can do that easily by:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cups\_to\_grams }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(cups) \{}
+\NormalTok{  grams }\OtherTok{\textless{}{-}}\NormalTok{ cups }\SpecialCharTok{*} \DecValTok{250}
+  \FunctionTok{return}\NormalTok{(grams)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+There we have it, we have created our first function! Now let's see if it works. In programming lingo, we say that we \textbf{\texttt{call}} a function when we use it. To call \textbf{\texttt{cups\_to\_grams}} it is the same process as the other functions we have used, we type out the name and then we insert our input inside the parentheses.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cups\_to\_grams}\NormalTok{(}\AttributeTok{cups =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 250
+\end{verbatim}
+
+It works! We can see here what I mean that \textbf{\texttt{cups}} is a placeholder variable. We want our function to be generalizable, so we don't tell it ahead of time what cups equals. All it knows is that it will receive some information that will equate to \textbf{\texttt{cups}}, and then it will multiply that information by \textbf{\texttt{250}}.
+
+This enables us to call our function several times with several different values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cups\_to\_grams}\NormalTok{(}\AttributeTok{cups =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cups\_to\_grams}\NormalTok{(}\AttributeTok{cups =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 500
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cups\_to\_grams}\NormalTok{(}\AttributeTok{cups =} \FloatTok{1.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 375
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cups\_to\_grams}\NormalTok{(}\AttributeTok{cups =}\NormalTok{ 5L)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1250
+\end{verbatim}
+
+We can also define what \texttt{cups} is outside of the function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cups }\OtherTok{=} \DecValTok{2}
+\FunctionTok{cups\_to\_grams}\NormalTok{(cups)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 500
+\end{verbatim}
+
+This is an example of a 1-argument function, as it only takes in 1 input. But we can also create functions that have multiple arguments.
+
+\hypertarget{creating-a-multi-argument-function}{%
+\subsection{Creating a Multi-Argument Function}\label{creating-a-multi-argument-function}}
+
+You might have noticed previously that sometimes we put additional information inside functions, like \textbf{\texttt{paired\ =\ TRUE}} in \textbf{\texttt{t.test()}}, or \textbf{\texttt{descending\ =\ FALSE}} in \textbf{\texttt{sort()}}. This additional information represents other arguments that we can insert inside a function.
+
+The process for creating a multi-argument function is the same as for a single-argument function. Let's create a function called \textbf{\texttt{calculate\_z\_score}} that calculates the z-score of a value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_z\_score }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, mean\_val, sd\_val) \{}
+  \CommentTok{\# Calculate the z{-}score}
+\NormalTok{  z\_score }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}}\NormalTok{ mean\_val) }\SpecialCharTok{/}\NormalTok{ sd\_val}
+  
+  \CommentTok{\# Return the z{-}score}
+  \FunctionTok{return}\NormalTok{(z\_score)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+In this function:
+
+\begin{itemize}
+\item
+  \textbf{\texttt{x}} is the value for which we want to calculate the z-score.
+\item
+  \textbf{\texttt{mean\_val}} is the mean score of the variable within our dataset.
+\item
+  \textbf{\texttt{sd\_val}} is the standard deviation of the variable within our dataset.
+\end{itemize}
+
+Inside the function, we calculate the z-score using the formula \textbf{\texttt{(x\ -\ mean\_val)\ /\ sd\_val}}. The calculated z-score is returned as the output of the function.
+
+Just like before, none of the placeholder arguments (\textbf{\texttt{x}}, \textbf{\texttt{mean\_val}}, and \textbf{\texttt{sd\_val}}) are defined beforehand. We will define them in our script or when we call our function.
+
+To test this function, let's use an example of an IQ score since we know the population mean (100) and standard deviation (15). Let's see what the z-score is for someone with an IQ of 130.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{calculate\_z\_score}\NormalTok{(}\AttributeTok{x =} \DecValTok{130}\NormalTok{, }\AttributeTok{mean\_val =} \DecValTok{100}\NormalTok{, }\AttributeTok{sd\_val =} \DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+Just as we would expect, a person with an IQ of 130 is 2 standard deviations away from the mean. This shows that our function is working as expected.
+
+What if we had a vector of IQ scores? Could we use our function to calculate the z-score of each element in our vector? Absolutely!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{calculate\_z\_score}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{85}\NormalTok{), }\AttributeTok{mean\_val =} \DecValTok{100}\NormalTok{, }\AttributeTok{sd\_val =} \DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  0  2 -1
+\end{verbatim}
+
+Sticking with this example, let's say we had a data frame with participant IDs, their age, and their IQ scores. We could feed the vector \textbf{\texttt{iq\_scores}} into our \textbf{\texttt{calculate\_z\_score}} function, calculate their z-scores, and create a column based on those scores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#first let\textquotesingle{}s make that data frame}
+
+\NormalTok{iq\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{ID =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{),}
+  \AttributeTok{age =} \FunctionTok{c}\NormalTok{(}\DecValTok{22}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{41}\NormalTok{, }\DecValTok{45}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{45}\NormalTok{),}
+  \AttributeTok{iq =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{123}\NormalTok{, }\DecValTok{111}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{102}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{109}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\#now let\textquotesingle{}s feed that IQ vector into our function and save it to a variable}
+
+\NormalTok{iq\_z\_scores }\OtherTok{\textless{}{-}}  \FunctionTok{calculate\_z\_score}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iq\_df}\SpecialCharTok{$}\NormalTok{iq, }\AttributeTok{mean\_val =} \DecValTok{100}\NormalTok{, }\AttributeTok{sd\_val =} \DecValTok{15}\NormalTok{) }\CommentTok{\#this will create a vector called iq\_z\_scores that is the output of our calculate\_z\_score}
+
+
+\CommentTok{\#if we want to add that column, we use the syntax }
+
+\CommentTok{\#dataframe$newColumnName \textless{}{-} \#new\_vector}
+
+\NormalTok{iq\_df}\SpecialCharTok{$}\NormalTok{iq\_z\_scores }\OtherTok{\textless{}{-}}\NormalTok{ iq\_z\_scores}
+
+
+\CommentTok{\#now let\textquotesingle{}s check our data frame}
+
+\FunctionTok{head}\NormalTok{(iq\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ID age  iq iq_z_scores
+## 1  1  22 100   0.0000000
+## 2  2  30 123   1.5333333
+## 3  3  41 111   0.7333333
+## 4  4  45 130   2.0000000
+## 5  5  18  90  -0.6666667
+## 6  6  21 102   0.1333333
+\end{verbatim}
+
+While \textbf{\texttt{calculate\_z\_score}} is pretty handy, it's not perfect. It requires us to calculate the mean and standard deviation functions separately and then feed that into our function. That's okay if we are dealing with variables that have a known mean and standard deviation. Outside of those examples, we would need to do some extra work. But one of the virtues about functions is that it enables us to be lazy - we want to write functions that will automate boring tasks for us. So how could we improve this function? Well luckily, we can include functions inside functions.
+
+\hypertarget{functions-inside-functions}{%
+\subsection{Functions inside Functions}\label{functions-inside-functions}}
+
+Let's say that we add a column in our \textbf{\texttt{iq\_df}} dataframe that contains participants' mean scores on Beck's Depression Inventory. We'll call this column \textbf{\texttt{total\_depression\_beck}}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iq\_df}\SpecialCharTok{$}\NormalTok{total\_depression\_beck }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{32}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{34}\NormalTok{, }\DecValTok{46}\NormalTok{, }
+                                \DecValTok{30}\NormalTok{, }\DecValTok{53}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{15}\NormalTok{) }\CommentTok{\#adds the mean\_depression beck vector to our dataframe}
+
+\FunctionTok{head}\NormalTok{(iq\_df) }\CommentTok{\#check to see if it was added correctly.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ID age  iq iq_z_scores total_depression_beck
+## 1  1  22 100   0.0000000                    32
+## 2  2  30 123   1.5333333                    36
+## 3  3  41 111   0.7333333                    34
+## 4  4  45 130   2.0000000                    46
+## 5  5  18  90  -0.6666667                    30
+## 6  6  21 102   0.1333333                    53
+\end{verbatim}
+
+Since we do not know the mean and standard deviation of the Beck Inventory, we will need to calculate them using the \textbf{\texttt{mean()}} and \textbf{\texttt{sd()}} functions. Luckily, we can use those functions within \textbf{\texttt{calculate\_z\_score}} to enable this for us. Let's add this to our function and call it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_z\_score }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \CommentTok{\# Calculate the z{-}score}
+\NormalTok{  z\_score }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}}\NormalTok{ mean\_val) }\SpecialCharTok{/}\NormalTok{ sd\_val}
+\NormalTok{  mean\_val }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x)}
+\NormalTok{  sd\_val }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(x)}
+  
+  \CommentTok{\# Return the z{-}score}
+  \FunctionTok{return}\NormalTok{(z\_score)}
+\NormalTok{\}}
+
+\FunctionTok{calculate\_z\_score}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{110}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in calculate_z_score(x = c(100, 90, 110)): object 'mean_val' not found
+\end{verbatim}
+
+Uh-oh! Why is it telling us that the object \textbf{\texttt{mean\_val}} was not found? The reason for this is that the order of your code within a function matters. The order of your code is the order in which R will compute that instruction. Currently, I have asked R to compute \textbf{\texttt{z\_score}} before defining what \textbf{\texttt{mean\_val}} or \textbf{\texttt{sd\_val}} are.
+
+So when R sees \textbf{\texttt{mean\_val}}, it looks everywhere for what that value could mean, doesn't find anything, and then panics and stops working. Again, humans have a theory of mind, so we would assume that we could provide this information. But R needs to do everything literally step-by-step.
+
+To rectify this, we just need to fix the order of our instructions inside R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_z\_score }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, mean\_val, sd\_val) \{}
+  \CommentTok{\#compute mean\_val, and sd\_val first}
+\NormalTok{  mean\_val }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x)}
+\NormalTok{  sd\_val }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(x)}
+  
+\NormalTok{  z\_score }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}}\NormalTok{ mean\_val) }\SpecialCharTok{/}\NormalTok{ sd\_val}
+  
+  \CommentTok{\# Return the z{-}score}
+  \FunctionTok{return}\NormalTok{(z\_score)}
+\NormalTok{\}}
+
+\FunctionTok{calculate\_z\_score}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iq\_df}\SpecialCharTok{$}\NormalTok{total\_depression\_beck)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+\end{verbatim}
+
+Wahey, it worked! Try to add the z-scores for the \textbf{\texttt{total\_depression\_beck}} to the dataframe yourself (look at the end of the previous subsection for advice on how if you are stuck).
+
+\hypertarget{returning-multiple-objects-from-a-function}{%
+\subsection{Returning Multiple Objects from a Function}\label{returning-multiple-objects-from-a-function}}
+
+What if we wanted to return not only the \texttt{z\_score} variable from calculate\_z\_score, but also \texttt{mean\_val} and \texttt{sd\_val} as well?
+
+Luckily, we can also tell our functions to return multiple different objects at the same time. We can do this by using lists.
+
+We will discuss lists in more detail later in this chapter. For now, all you need to know is that lists are versatile data structures in R that can hold elements of different types. We can create a list within a function, populate it with the values we want to return, and then return the list itself.
+
+We can create a variable within our function that is a list containing all the information we want to return. But since this changes the nature of the function, we are going to change its name to: `calculate\_mean\_sd\_z`
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_mean\_sd\_z }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, mean\_val, sd\_val) \{}
+  \CommentTok{\#compute mean\_val, and sd\_val first}
+\NormalTok{  mean\_val }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x)}
+\NormalTok{  sd\_val }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(x)}
+  
+\NormalTok{  z\_score }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}}\NormalTok{ mean\_val) }\SpecialCharTok{/}\NormalTok{ sd\_val}
+  
+\NormalTok{  results }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(z\_score, mean\_val, sd\_val)}
+  
+  \CommentTok{\# Return the z{-}score}
+  \FunctionTok{return}\NormalTok{(results)}
+\NormalTok{\}}
+
+\FunctionTok{calculate\_mean\_sd\_z}\NormalTok{(iq\_df}\SpecialCharTok{$}\NormalTok{total\_depression\_beck)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+## 
+## [[2]]
+## [1] 35.75
+## 
+## [[3]]
+## [1] 11.34838
+\end{verbatim}
+
+This produces the results that we want, but the output leaves a lot to be desired. If someone else was calling our function, but was not aware of the instructions inside it, they might not know what each value from the output corresponds to. We can correct this by using the following syntax inside the list to label each value: \texttt{name\_of\_value\ =\ value}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_mean\_sd\_z }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, mean\_val, sd\_val) \{}
+  \CommentTok{\#compute mean\_val, and sd\_val first}
+\NormalTok{  mean\_val }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(x)}
+\NormalTok{  sd\_val }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(x)}
+  
+\NormalTok{  z\_score }\OtherTok{\textless{}{-}}\NormalTok{ (x }\SpecialCharTok{{-}}\NormalTok{ mean\_val) }\SpecialCharTok{/}\NormalTok{ sd\_val}
+  
+\NormalTok{  results }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{z =}\NormalTok{ z\_score, }\AttributeTok{mean =}\NormalTok{ mean\_val, }\AttributeTok{sd =}\NormalTok{ sd\_val)}
+  
+  \CommentTok{\# Return the z{-}score}
+  \FunctionTok{return}\NormalTok{(results)}
+\NormalTok{\}}
+
+\FunctionTok{calculate\_mean\_sd\_z}\NormalTok{(iq\_df}\SpecialCharTok{$}\NormalTok{total\_depression\_beck)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $z
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+## 
+## $mean
+## [1] 35.75
+## 
+## $sd
+## [1] 11.34838
+\end{verbatim}
+
+Now if we wanted to extract certain features from the function, we can use the `\$` operator.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scores }\OtherTok{\textless{}{-}}  \FunctionTok{calculate\_mean\_sd\_z}\NormalTok{(iq\_df}\SpecialCharTok{$}\NormalTok{total\_depression\_beck)}
+
+\NormalTok{scores}\SpecialCharTok{$}\NormalTok{mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 35.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scores}\SpecialCharTok{$}\NormalTok{sd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 11.34838
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{scores}\SpecialCharTok{$}\NormalTok{z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+\end{verbatim}
+
+\hypertarget{some-important-features-about-functions}{%
+\subsection{Some Important Features about Functions}\label{some-important-features-about-functions}}
+
+There are some important features about functions that you should know. Namely, the difference between Global and Local Variables and the ability to set and override Default Arguments.
+
+\hypertarget{global-vs-local-variables}{%
+\subsubsection{Global vs Local Variables}\label{global-vs-local-variables}}
+
+It is important to note that R treats variables you define in a function differently than variables you define outside of a function. Any variable you define within a function will only exist within the scope of that function. Variables defined in a function are called local variables whereas variables defined outside of a function are called global variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num1 }\OtherTok{\textless{}{-}} \DecValTok{20} \CommentTok{\#this is a global variable}
+
+\NormalTok{local\_global }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{() \{}
+\NormalTok{  num1 }\OtherTok{\textless{}{-}} \DecValTok{10}\CommentTok{\#this is a local variable}
+  \FunctionTok{print}\NormalTok{(num1)  }\CommentTok{\# This will print 10}
+\NormalTok{\}}
+
+\FunctionTok{local\_global}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(num1)  }\CommentTok{\# Error: object \textquotesingle{}local\_var\textquotesingle{} not found}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+We start this code chunk by assigning the value 20 to the variable \texttt{num1}. This is a global variable, it will exist across our R environment unless we change it to a different value.
+
+Within the \texttt{local\_global()} function, we create another variable called \texttt{num1} and assign it the value of 10. But this is an example of a local variable, as it only exists inside of our function. When we run our function, it will print out 10, but the function will not change the global value of the variable.
+
+\hypertarget{default-arguments}{%
+\subsubsection{Default Arguments}\label{default-arguments}}
+
+In R, functions can have default arguments, which are pre-defined values assigned to arguments in the function definition. Default arguments allow functions to be called with fewer arguments than specified in the function definition, as the default values are used when the arguments are not explicitly provided.
+
+\hypertarget{syntax-for-default-arguments}{%
+\subsubsection{Syntax for Default Arguments}\label{syntax-for-default-arguments}}
+
+The syntax for defining default arguments in R functions is straightforward. When defining the function, you can assign default values to specific arguments using the \textbf{\texttt{argument\ =\ default\_value}} format.
+
+Imagine I wanted to write a function that greeted someone. I could write the following function, \textbf{\texttt{greet}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Function with default argument}
+\NormalTok{greet }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{name =} \StringTok{"World"}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Hello,"}\NormalTok{, name))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Within this function, I set the default value for the argument name as ``World''. So if I were to call the function but not specify the argument, the following would happen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calling the function without providing arguments}
+\FunctionTok{greet}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Hello, World"
+\end{verbatim}
+
+However, we can also override the default value of a function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{greet}\NormalTok{(}\AttributeTok{name =} \StringTok{"Ryan"}\NormalTok{) }\CommentTok{\#please feel free to type in your own name}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Hello, Ryan"
+\end{verbatim}
+
+Having default values in a function enables them to be called with fewer arguments, making code more readable. But since default values can be overridden, it also provides them with a degree of combustibility.
+
+Exercises
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Create a function called \texttt{fahrenheit\_to\_celsius} that converts a temperature from Fahrenheit to Celsius.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Include in the definition of the function the argument fahrenheit
+  \item
+    Create a variable inside the function called celsius
+  \item
+    The formula for calculating it is: fahrenheit- 32 / 1.8
+  \item
+    Return the celsius variable
+  \end{enumerate}
+\item
+  Create a function called \textbf{\texttt{calculate\_discount}} that calculates the discounted price of an item.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    The function should take two arguments: \textbf{\texttt{price}} and \textbf{\texttt{discount\_percent}}.
+  \item
+    Create a variable called discount\_price inside your function.
+  \item
+    Assign the following formula to that variable: (price * discount\_percent) * 100
+  \item
+    Create a variable called final price, using the formula:
+  \item
+    Return the final price
+  \end{enumerate}
+\item
+  Add the z-scores for the Beck scale back into the iq\_df data frame.
+\item
+  Look up the t.test function - what is the default value for the `paired` argument?
+\end{enumerate}
+
+\hypertarget{the-factor-data-type}{%
+\section{The Factor Data Type}\label{the-factor-data-type}}
+
+In Chapter 3, we introduced the four fundamental data types in R: character, integer, numeric, and logical. We learned that these data types can constitute vectors, which can then be aggregated in data frames. These data types cover a significant proportion of the information we encounter in psychological research. In terms of NOIR data types in Psychology, nominal data can be represented through the character type, ordinal data can be represented through character or integer/numeric data types, and scale data (interval and ratio) can be represented through the integer/numeric data type. Additionally, the logical data type can handle either/or cases.
+
+However, there's an additional consideration. When dealing with datasets common in psychological research, particularly experimental or differential research, we often encounter columns consisting of categorical data representing our independent variable(s). The responses in these columns signify differences in categories for each participant (e.g., whether they were assigned to the control or experimental group, whether they belong to different categories across some domain). In software like SPSS, we typically label this categorical data using normal language (e.g., ``control'' or ``experimental'') or numerically (1 = ``control'', 2 = ``experimental''). While we could categorize it as character data or numerically/integer data in R, this approach doesn't capture the fact that the data in this column represents something distinct - namely, that it is a \textbf{\emph{factor}} used to understand differences across other variables.
+
+Fortunately, R offers a data type called \textbf{\emph{factors}} to address this need.
+
+\hypertarget{creating-a-factor}{%
+\subsection{Creating a Factor}\label{creating-a-factor}}
+
+Consider a hypothetical experimental study investigating the effect of caffeine on sleep duration. Participants are randomly assigned to three experimental conditions: \textbf{\texttt{No\ Caffeine}}, \textbf{\texttt{Low\ Caffeine\ (200\ mg)}}, and \textbf{\texttt{High\ Caffeine\ (400\ mg)}}. Our data frame might resemble the following, where \textbf{\texttt{1}} = \textbf{\texttt{No\ Caffeine}}, \textbf{\texttt{2\ =\ Low\ Caffeine}}, and \textbf{\texttt{3\ =\ High\ Caffeine}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{caffeine\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{id =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{),}
+  \AttributeTok{sleep\_duration =} \FunctionTok{c}\NormalTok{(}\FloatTok{7.89}\NormalTok{, }\FloatTok{8.37}\NormalTok{, }\FloatTok{7.46}\NormalTok{, }\FloatTok{5.86}\NormalTok{, }\FloatTok{5.25}\NormalTok{, }\FloatTok{7.23}\NormalTok{, }\FloatTok{6.05}\NormalTok{, }\FloatTok{5.78}\NormalTok{, }\FloatTok{6.77}\NormalTok{, }\FloatTok{2.13}\NormalTok{, }\FloatTok{5.78}\NormalTok{,  }\FloatTok{6.54}\NormalTok{),}
+  \AttributeTok{group =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)}
+\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(caffeine\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   id sleep_duration group
+## 1  1           7.89     1
+## 2  2           8.37     2
+## 3  3           7.46     3
+## 4  4           5.86     1
+## 5  5           5.25     2
+## 6  6           7.23     3
+\end{verbatim}
+
+Although the \textbf{\texttt{group}} column is currently stored as numeric data, it actually represents categorical information. It wouldn't make sense to compute the mean, median, or standard deviation for this column. However, since it's numeric data, R allows us to do so.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(caffeine\_df}\SpecialCharTok{$}\NormalTok{group)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+While this might not cause immediate problems, it could lead to issues later when conducting inferential statistical tests like ANOVAs or regressions, where R expects a factor data type.
+
+To address this, we can use the \textbf{\texttt{factor}} function to convert the \textbf{\texttt{group}} column:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{factor}\NormalTok{(caffeine\_df}\SpecialCharTok{$}\NormalTok{group)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 2 3 1 2 3 1 2 3 1 2 3
+## Levels: 1 2 3
+\end{verbatim}
+
+Now, R recognizes that each distinct value in the column represents a different level of our independent variable. If we attempt to calculate the mean now, it will result in an error:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(caffeine\_df}\SpecialCharTok{$}\NormalTok{group)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+Whoops! What wrong here? Well when we called the \texttt{factor()} function, we never reassigned that information back to \texttt{group} vector in our \texttt{caffeine\_df} data frame. So while R ran our command, it did not save it. To fix this, we just follow the syntax for creating a new column we learned last week \texttt{data.frame\$newcolum\ \textless{}-\ vector}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{caffeine\_df}\SpecialCharTok{$}\NormalTok{group }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(caffeine\_df}\SpecialCharTok{$}\NormalTok{group)}
+\end{Highlighting}
+\end{Shaded}
+
+Now, attempting to compute the mean will result in an error, as expected:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(caffeine\_df}\SpecialCharTok{$}\NormalTok{group)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in mean.default(caffeine_df$group): argument is not numeric or logical:
+## returning NA
+\end{verbatim}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+But I am not completely satisfied yet. Although right now we can remember that \texttt{1} = \texttt{No\ Caffeine}, \texttt{2\ =\ Low\ Caffeine}, and \texttt{3\ =\ High\ Caffeine}, we might forget that information in six months time if we return to our data set.
+
+Luckily we can label the levels of our factor through the \texttt{levels()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(caffeine\_df}\SpecialCharTok{$}\NormalTok{group) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"No Caffeine"}\NormalTok{, }\StringTok{"Low Caffeine"}\NormalTok{, }\StringTok{"High Caffeine"}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(caffeine\_df}\SpecialCharTok{$}\NormalTok{group)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] No Caffeine   Low Caffeine  High Caffeine No Caffeine   Low Caffeine 
+##  [6] High Caffeine No Caffeine   Low Caffeine  High Caffeine No Caffeine  
+## [11] Low Caffeine  High Caffeine
+## Levels: No Caffeine Low Caffeine High Caffeine
+\end{verbatim}
+
+That's better!
+
+\hypertarget{sort-character-data}{%
+\subsection{Sort Character Data}\label{sort-character-data}}
+
+Factors also enable us to sort character data in an ordered manner that isn't alphabetical. For example, consider a vector called \textbf{\texttt{degree}} that denotes participants' highest level of education completed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{degree }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"PhD"}\NormalTok{, }\StringTok{"Secondary School"}\NormalTok{, }\StringTok{"Masters"}\NormalTok{, }\StringTok{"Bachelors"}\NormalTok{, }\StringTok{"Bachelors"}\NormalTok{, }\StringTok{"Masters"}\NormalTok{, }\StringTok{"Bachelors"}\NormalTok{, }\StringTok{"Secondary School"}\NormalTok{, }\StringTok{"Secondary School"}\NormalTok{, }\StringTok{"Secondary School"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Using the \textbf{\texttt{table()}} function, we can count the number of participants per category:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(degree)}
+\NormalTok{count}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## degree
+##        Bachelors          Masters              PhD Secondary School 
+##                3                2                1                4
+\end{verbatim}
+
+And we can use the \texttt{barplot()} function to visualize those counts.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(count)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{rintro_demo_files/figure-latex/unnamed-chunk-134-1.pdf}
+
+Now that gives us the information we need, but it's not ordered in an intuitive manner. Ideally, we would want the order of the bar plots to match the hierarchical order of the data, so that it would be: ``Secondary School'', ``Bachelors'', ``Masters'', and then ``PhD''. However, unless you specify the order of your levels, R will specify their order alphabetically.
+
+There is an argument called \texttt{levels} in the \texttt{factor} function that we can use to rectify this. In the levels argument, we specify the order of the levels.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{degree\_ordered }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(degree, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Secondary School"}\NormalTok{, }\StringTok{"Bachelors"}\NormalTok{, }\StringTok{"Masters"}\NormalTok{, }\StringTok{"PhD"}\NormalTok{))}
+\NormalTok{degree\_ordered}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] PhD              Secondary School Masters          Bachelors       
+##  [5] Bachelors        Masters          Bachelors        Secondary School
+##  [9] Secondary School Secondary School
+## Levels: Secondary School Bachelors Masters PhD
+\end{verbatim}
+
+That's more like it. Now we can call the \texttt{table()} and \texttt{barplot()} functions again to visualise the number of participants per group.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count\_ordered }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(degree\_ordered)}
+
+\FunctionTok{barplot}\NormalTok{(count\_ordered)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{rintro_demo_files/figure-latex/unnamed-chunk-136-1.pdf}
+
+As you can see, our data looks much cleaner and more intuitive.
+
+There is a lot more we can do with factors, but this covers the main points. Now let's talk about the last data type/structure we are going to be using in this course, which is the \texttt{list} data structure.
+
+\hypertarget{the-list-data-structure}{%
+\section{The List Data Structure}\label{the-list-data-structure}}
+
+The two data structures we have discussed so far, vectors and data frame, are excellent ways to store data. But each data structure has it limitations. The limitations of both the vector and data frame is that they only enable us to store one object of data at a time.
+
+What do I mean by one object of data? Well, when we create a vector, we are only storing information on one single vector in R. Now I can store multiple vectors in the one place in R by combining them into a data frame. However, I am only able to do that if each vector has the same number of data points Based on what I have taught you so far, there is no way to store 2 independent and separate vectors in the same place in R.
+
+Similarly, when I create a data frame, I am only storing information on one data frame. But sometimes we would want to keep data frames saved in a similar location. This would be like an excel file that has multiple worksheets saved onto it.
+
+Finally, what if I wanted to store a vector and a data frame together? For example, imagine I had a data frame that was cleaned data set. And I wanted to store a vector with results form the analysis. Based on what I have taught you so far, there is no to store both a vector and a separate data frame in a single space in R.
+
+That's where the list data structure comes into play.
+
+\hypertarget{understanding-lists}{%
+\subsection{Understanding Lists}\label{understanding-lists}}
+
+A list in R is a versatile data structure that can hold elements of different types, such as vectors, matrices, data frames, or even other lists. Think of it as a container that can store various objects together, similar to a bag where you can put in items of different shapes and sizes.
+
+\hypertarget{creating-lists}{%
+\subsection{Creating Lists}\label{creating-lists}}
+
+Suppose we're conducting a study where we collect various information about each participant, such as their demographic details, test scores, and responses to questionnaires. We can store this information for each participant in a list. Here's how we can create a list for three participants:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{participant1 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{ID =} \DecValTok{1}\NormalTok{,}
+  \AttributeTok{age =} \DecValTok{25}\NormalTok{,}
+  \AttributeTok{gender =} \StringTok{"Male"}\NormalTok{,}
+  \AttributeTok{test\_scores =} \FunctionTok{c}\NormalTok{(}\DecValTok{80}\NormalTok{, }\DecValTok{75}\NormalTok{, }\DecValTok{90}\NormalTok{),}
+  \AttributeTok{questionnaire\_responses =} \FunctionTok{c}\NormalTok{(}\StringTok{"Agree"}\NormalTok{, }\StringTok{"Disagree"}\NormalTok{, }\StringTok{"Neutral"}\NormalTok{, }\StringTok{"Agree"}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{participant2 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{ID =} \DecValTok{2}\NormalTok{,}
+  \AttributeTok{age =} \DecValTok{30}\NormalTok{,}
+  \AttributeTok{gender =} \StringTok{"Female"}\NormalTok{,}
+  \AttributeTok{test\_scores =} \FunctionTok{c}\NormalTok{(}\DecValTok{85}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{88}\NormalTok{),}
+  \AttributeTok{questionnaire\_responses =} \FunctionTok{c}\NormalTok{(}\StringTok{"Neutral"}\NormalTok{, }\StringTok{"Agree"}\NormalTok{, }\StringTok{"Disagree"}\NormalTok{, }\StringTok{"Strongly Disagree"}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{participant3 }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{ID =} \DecValTok{3}\NormalTok{,}
+  \AttributeTok{age =} \DecValTok{28}\NormalTok{,}
+  \AttributeTok{gender =} \StringTok{"Non{-}binary"}\NormalTok{,}
+  \AttributeTok{test\_scores =} \FunctionTok{c}\NormalTok{(}\DecValTok{78}\NormalTok{, }\DecValTok{82}\NormalTok{, }\DecValTok{85}\NormalTok{),}
+  \AttributeTok{questionnaire\_responses =} \FunctionTok{c}\NormalTok{(}\StringTok{"Disagree"}\NormalTok{, }\StringTok{"Neutral"}\NormalTok{, }\StringTok{"Agree"}\NormalTok{, }\StringTok{"Neutral"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The list for each participant is made up of separate vectors made up of different lengths (e.g., there is only 1 element in ID, age, and gender, whereas they are 3 in test\_scores, and 4 in questionnaire\_responses).
+
+Let's print out \texttt{participant1} list and break down the output.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(participant1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $ID
+## [1] 1
+## 
+## $age
+## [1] 25
+## 
+## $gender
+## [1] "Male"
+## 
+## $test_scores
+## [1] 80 75 90
+## 
+## $questionnaire_responses
+## [1] "Agree"    "Disagree" "Neutral"  "Agree"
+\end{verbatim}
+
+When we print out the list, what R does in the console is print out the name of each object and then print out each element in that object. One thing that you might notice is the return of the \texttt{\$} which we use to access elements from vectors or columns from data frames. Luckily, we can also use the \texttt{\$} symbol to access objects and their elements from a list. So I wanted to extract \texttt{test\_scores} from a list, I could type the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{participant1}\SpecialCharTok{$}\NormalTok{test\_scores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80 75 90
+\end{verbatim}
+
+I could also do this numerically using the {[}{]} notation we used when accessing vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{participant1[}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $test_scores
+## [1] 80 75 90
+\end{verbatim}
+
+Because \texttt{test\_scores} is the fourth object within the list (the first three are ID, age, and gender), \texttt{test\_scores{[}4{]}} is needed to extract it.
+
+Regardless of which way you extract data, doesn't the output should look familiar? It is essential the same output when we print out a vector. That's not accidental, because we have in fact extracted a vector!
+
+So what could we do if wanted to access the 1st and 3rd element from this vector? We just follow the same convention that we used last week \texttt{vectorname{[}elementswewant{]}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{participant1}\SpecialCharTok{$}\NormalTok{test\_scores[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 80 90
+\end{verbatim}
+
+This illustrates a key point about lists. Once you first access an object (e.g., vector or dataframe) within that list, then you can use the specific indexing criteria for accessing elements within that object. For example, let's look at a list with a vector and a data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_v }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{iq\_df =}\NormalTok{ iq\_df, }
+  \AttributeTok{p\_values =} \FunctionTok{c}\NormalTok{(.}\DecValTok{001}\NormalTok{, .}\DecValTok{10}\NormalTok{, .}\DecValTok{05}\NormalTok{)}
+\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(df\_v)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $iq_df
+##   ID age  iq iq_z_scores total_depression_beck
+## 1  1  22 100   0.0000000                    32
+## 2  2  30 123   1.5333333                    36
+## 3  3  41 111   0.7333333                    34
+## 4  4  45 130   2.0000000                    46
+## 5  5  18  90  -0.6666667                    30
+## 6  6  21 102   0.1333333                    53
+## 7  7  23  88  -0.8000000                    40
+## 8  8  45 109   0.6000000                    15
+## 
+## $p_values
+## [1] 0.001 0.100 0.050
+\end{verbatim}
+
+We can see that the first object in our list is the iq\_df data frame, and the second contains (totally made up) p-values. So if wanted to access the \texttt{iq} and \texttt{total\_depression\_beck} columns from this data frame, and the first five rows, we can use the same subsetting techniques we learned last week: \texttt{dataframe{[}rows\_we\_want,\ columns\_we\_want{]}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_v}\SpecialCharTok{$}\NormalTok{iq\_df[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"iq"}\NormalTok{, }\StringTok{"total\_depression\_beck"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    iq total_depression_beck
+## 1 100                    32
+## 2 123                    36
+## 3 111                    34
+## 4 130                    46
+## 5  90                    30
+\end{verbatim}
+
+\hypertarget{lists-within-lists-indexing}{%
+\subsection{Lists within Lists (Indexing)}\label{lists-within-lists-indexing}}
+
+What happens if we combine lists together? Well we can do that by putting lists inside lists. But if we do that, the output is pretty ugly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{participant\_data }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(participant1, participant2, participant3)}
+ 
+\FunctionTok{print}\NormalTok{(participant\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [[1]]$ID
+## [1] 1
+## 
+## [[1]]$age
+## [1] 25
+## 
+## [[1]]$gender
+## [1] "Male"
+## 
+## [[1]]$test_scores
+## [1] 80 75 90
+## 
+## [[1]]$questionnaire_responses
+## [1] "Agree"    "Disagree" "Neutral"  "Agree"   
+## 
+## 
+## [[2]]
+## [[2]]$ID
+## [1] 2
+## 
+## [[2]]$age
+## [1] 30
+## 
+## [[2]]$gender
+## [1] "Female"
+## 
+## [[2]]$test_scores
+## [1] 85 70 88
+## 
+## [[2]]$questionnaire_responses
+## [1] "Neutral"           "Agree"             "Disagree"         
+## [4] "Strongly Disagree"
+## 
+## 
+## [[3]]
+## [[3]]$ID
+## [1] 3
+## 
+## [[3]]$age
+## [1] 28
+## 
+## [[3]]$gender
+## [1] "Non-binary"
+## 
+## [[3]]$test_scores
+## [1] 78 82 85
+## 
+## [[3]]$questionnaire_responses
+## [1] "Disagree" "Neutral"  "Agree"    "Neutral"
+\end{verbatim}
+
+Right now your eyes might be glazing over and that SPSS icon on your desktop has never looked so good. But just relax, while what you might be seeing here is \textbf{ugly}, I promise you it's not complicated.
+
+Let's break down the first part of this output
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+So we know from indexing vectors that \texttt{vector\_name{[}1{]}} would print out the first element of a vector. The same thing is happening here. If we had only 1 list, we could access the first thing from that list using \texttt{list{[}1{]}}
+
+But when we are dealing with multiple lists, we need a convention to extract each list.That's why we have the double \texttt{{[}{[}{]}{]}} notation.
+
+The output `\texttt{{[}{[}1{]}{]}} basically says ``This is the information from the first first list''. So anytime you see ``{[}{[}{]}{]}'', the number inside the central bracket indicates the list we are dealing with. So the code output
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{ID}
+
+\NormalTok{[[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{age}
+
+\NormalTok{[[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{test\_scores}
+
+\NormalTok{[[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{questionnaire\_responses}
+\end{Highlighting}
+\end{Shaded}
+
+Basically translates to ``participant 1's data for ID, age, test\_scores and questionnaire\_responses''.
+
+There is a way we can make this code output neater. When we are creating a list, we can specify the index term for that list. The syntax for doing is: new index term = current\_list
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{participant\_data }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{p1 =}\NormalTok{ participant1, }\CommentTok{\#new index term = current list}
+                         \AttributeTok{p2 =}\NormalTok{ participant2, }\CommentTok{\#new index term = current list}
+                         \AttributeTok{p3 =}\NormalTok{ participant3 }\CommentTok{\#new index term = current list}
+\NormalTok{                         )}
+
+\FunctionTok{print}\NormalTok{(participant\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $p1
+## $p1$ID
+## [1] 1
+## 
+## $p1$age
+## [1] 25
+## 
+## $p1$gender
+## [1] "Male"
+## 
+## $p1$test_scores
+## [1] 80 75 90
+## 
+## $p1$questionnaire_responses
+## [1] "Agree"    "Disagree" "Neutral"  "Agree"   
+## 
+## 
+## $p2
+## $p2$ID
+## [1] 2
+## 
+## $p2$age
+## [1] 30
+## 
+## $p2$gender
+## [1] "Female"
+## 
+## $p2$test_scores
+## [1] 85 70 88
+## 
+## $p2$questionnaire_responses
+## [1] "Neutral"           "Agree"             "Disagree"         
+## [4] "Strongly Disagree"
+## 
+## 
+## $p3
+## $p3$ID
+## [1] 3
+## 
+## $p3$age
+## [1] 28
+## 
+## $p3$gender
+## [1] "Non-binary"
+## 
+## $p3$test_scores
+## [1] 78 82 85
+## 
+## $p3$questionnaire_responses
+## [1] "Disagree" "Neutral"  "Agree"    "Neutral"
+\end{verbatim}
+
+\hypertarget{summary-2}{%
+\subsection{Summary}\label{summary-2}}
+
+In summary, the list data structure in R is incredibly useful for organizing and managing diverse types of data in psychological research. Whether it's participant information, experimental conditions, or any other heterogeneous data, lists provide a flexible and efficient way to store and access this information.
+
+\hypertarget{r-packages}{%
+\section{R Packages}\label{r-packages}}
+
+Throughout this course, we've been exploring the capabilities of base R, which offers a rich set of functions and data structures for data analysis and statistical computing. However, the power of R extends far beyond its base functionality, thanks to its vibrant ecosystem of user-contributed packages.
+
+\hypertarget{understanding-r-packages}{%
+\subsection{Understanding R Packages}\label{understanding-r-packages}}
+
+R packages are collections of R functions, data, and documentation that extend the capabilities of R. These packages are developed and shared by the R community to address various needs in data analysis, visualization, machine learning, and more. By leveraging packages, R users can access a vast array of specialized tools and algorithms without reinventing the wheel.
+
+\hypertarget{installing-and-loading-r-package}{%
+\section{Installing and Loading R Package}\label{installing-and-loading-r-package}}
+
+One of the most important to know about R packages is that you first need to install them on to your computer. Once they are installed, you will not need to install them again.
+
+However, if you want to use a package, then you will need to load it while you are RStudio. Every time you open RStudio after closing it, you will need to load that package in again if you want to use.
+
+In this way, R packages are like applications on your phone. Once you download Spotify on your phone, then you won't need to install it again. But everytime you want to use Spotify, you will need to open the application.
+
+First, I will show you two ways to install packages in R. Then I will show you two ways to load packages in R.
+
+\hypertarget{installation}{%
+\subsection{Installation}\label{installation}}
+
+We are going to install three packages called \texttt{Haven}, \texttt{praise} and \texttt{fortunes}. The praise package provide users with, well, praise. And the fortunes package will spit statistic and programming quotes at you. Neither of them are particularly useful, other than demonstrating the process of loading packages.
+
+The \texttt{Haven} package enables you to load in SPSS data into R.
+
+\hypertarget{installation-using-rstudio-interface}{%
+\subsubsection{Installation using RStudio Interface}\label{installation-using-rstudio-interface}}
+
+In the Files pane on the bottom right hand corner of R, you will see a tab called ``Packages''. Click that tab. You will already see a list of packages that are currently. You will see three columns:
+
+\begin{itemize}
+\tightlist
+\item
+  Name (the name of the R package)
+\item
+  Description (describes what the package does)
+\item
+  Version (the version of the package currently installed on your computer)
+\end{itemize}
+
+To install a package, click the ``Install'' button above the ``Name'' column. Once you click that, you should see a small pop-up window. In the textbox, type in the word \texttt{Haven} Make sure the box ``Install dependencies'' is clicked. After that, you can click Install. You should get something like the following output in the console, which looks scary with all the red text, but means it has worked correctly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \FunctionTok{install.packages}\NormalTok{(}\StringTok{"Haven"}\NormalTok{)}
+\NormalTok{trying URL }\StringTok{\textquotesingle{}https://cran.rstudio.com/bin/macosx/big{-}sur{-}x86\_64/contrib/4.3/rio\_1.0.1.tgz\textquotesingle{}}
+\NormalTok{Content type }\StringTok{\textquotesingle{}application/x{-}gzip\textquotesingle{}}\NormalTok{ length }\DecValTok{591359} \FunctionTok{bytes}\NormalTok{ (}\DecValTok{577}\NormalTok{ KB)}
+\SpecialCharTok{==}\ErrorTok{================================================}
+\NormalTok{downloaded }\DecValTok{577}\NormalTok{ KB}
+
+
+\NormalTok{The downloaded binary packages are }\ControlFlowTok{in}
+    \SpecialCharTok{/}\NormalTok{var}\SpecialCharTok{/}\NormalTok{folders}\SpecialCharTok{/}\NormalTok{h8}\SpecialCharTok{/}\NormalTok{8sb24v\_x2lg51cg2z7q8fk3w0000gp}\SpecialCharTok{/}\NormalTok{T}\SpecialCharTok{/}\ErrorTok{/}\NormalTok{RtmpvaY1Ue}\SpecialCharTok{/}\NormalTok{downloaded\_packages}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{installation-using-commands}{%
+\subsubsection{Installation using Commands}\label{installation-using-commands}}
+
+If we want to install packages using the console, you can use the \textbf{\texttt{install.packages()}} function followed by the name of the package you wish to install. The syntax would looks like this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"package name"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The important thing here is that whatever goes inside the parentheses is inside quotation marks. Let's use this syntax to install the \texttt{praise} and \texttt{fortunes} packages.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"praise"}\NormalTok{, }\StringTok{"fortunes"}\NormalTok{))}
+
+
+\NormalTok{trying URL }\StringTok{\textquotesingle{}https://cran.rstudio.com/bin/macosx/big{-}sur{-}x86\_64/contrib/4.3/praise\_1.0.0.tgz\textquotesingle{}}
+\NormalTok{Content type }\StringTok{\textquotesingle{}application/x{-}gzip\textquotesingle{}}\NormalTok{ length }\DecValTok{16537} \FunctionTok{bytes}\NormalTok{ (}\DecValTok{16}\NormalTok{ KB)}
+\SpecialCharTok{==}\ErrorTok{================================================}
+\NormalTok{downloaded }\DecValTok{16}\NormalTok{ KB}
+
+\NormalTok{trying URL }\StringTok{\textquotesingle{}https://cran.rstudio.com/bin/macosx/big{-}sur{-}x86\_64/contrib/4.3/fortunes\_1.5{-}4.tgz\textquotesingle{}}
+\NormalTok{Content type }\StringTok{\textquotesingle{}application/x{-}gzip\textquotesingle{}}\NormalTok{ length }\DecValTok{208808} \FunctionTok{bytes}\NormalTok{ (}\DecValTok{203}\NormalTok{ KB)}
+\SpecialCharTok{==}\ErrorTok{================================================}
+\NormalTok{downloaded }\DecValTok{203}\NormalTok{ KB}
+
+
+\NormalTok{The downloaded binary packages are }\ControlFlowTok{in}
+    \SpecialCharTok{/}\NormalTok{var}\SpecialCharTok{/}\NormalTok{folders}\SpecialCharTok{/}\NormalTok{h8}\SpecialCharTok{/}\NormalTok{8sb24v\_x2lg51cg2z7q8fk3w0000gp}\SpecialCharTok{/}\NormalTok{T}\SpecialCharTok{/}\ErrorTok{/}\NormalTok{RtmpvaY1Ue}\SpecialCharTok{/}\NormalTok{downloaded\_packages}
+\end{Highlighting}
+\end{Shaded}
+
+Again the output is rather scary but the sentences ``package `praise' successfully unpacked and MD5 sums checked'' and ``package `fortunes' successfully unpacked and MD5 sums checked'' mean that they are successfully installed onto your computer.
+
+\hypertarget{loading-packages}{%
+\subsection{Loading Packages}\label{loading-packages}}
+
+Okay, now to actually use those packages we will need to load them. Again I will show you two ways to load packages.
+
+\hypertarget{loading-using-rstudio-interface}{%
+\subsubsection{Loading using RStudio Interface}\label{loading-using-rstudio-interface}}
+
+Go back to the Packages tab in the File pane. On the left hand side of the package name, you will see a tick box. If the box is ticked, that means the package is currently loaded. If it is unticked, it is not loaded.
+
+Scroll down to find the package \texttt{praise} and load it in by ticking the box.
+
+\begin{figure}
+\centering
+\includegraphics{img/04-praise-loaded.png}
+\caption{\label{fig:unnamed-chunk-151}Loading Packages through RStudio Interface}
+\end{figure}
+
+You should see something like the following in your R console (don't worry if you get a warning message like mine, or if you don't receive a warning message)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \FunctionTok{library}\NormalTok{(praise)}
+\NormalTok{Warning message}\SpecialCharTok{:}
+\NormalTok{package ‘praise’ was built under R version }\DecValTok{4}\NormalTok{.}\FloatTok{3.2} 
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{loading-using-the-r-console-command}{%
+\subsection{Loading using the R Console Command}\label{loading-using-the-r-console-command}}
+
+We can use the same syntax from that R console output to load in packages there. To load in the \texttt{fortunes} and \texttt{Haven} packages, you can type in the following into the console or script one at a time:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(fortunes)}
+\FunctionTok{library}\NormalTok{(haven)}
+\end{Highlighting}
+\end{Shaded}
+
+There is one significant difference between installing and loading packages through code. When you are installing packages, you can install multiple packages in the one command. However, you can only load in one package at a time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#will work}
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"package1"}\NormalTok{, }\StringTok{"package2"}\NormalTok{, }\StringTok{"package3"}\NormalTok{)) }
+
+
+\CommentTok{\#will not work}
+\FunctionTok{library}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"package1"}\NormalTok{, }\StringTok{"package2"}\NormalTok{, }\StringTok{"package3"}\NormalTok{)) }
+
+\CommentTok{\#the following will work}
+\FunctionTok{library}\NormalTok{(package1)}
+\FunctionTok{library}\NormalTok{(package2)}
+\FunctionTok{library}\NormalTok{(package3)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{testing-our-new-functions}{%
+\subsection{Testing our New Functions}\label{testing-our-new-functions}}
+
+To make sure the following functions are working, run the following code to check:
+
+\begin{verbatim}
+## [1] "You are super!"
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## hist(rnorm(1e6), col = colors()[grep("grey", colors())], nclass = 108, main =
+## "R's 108 Shades of Grey")
+##    -- Fritz Scholz (proving R has more than 50 Shades of Grey)
+##       private communication (March 2015)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{praise}\NormalTok{() }\CommentTok{\#everytime you run this line of code it gives you a different line of praise}
+\CommentTok{\#so don\textquotesingle{}t be worried if your result is different than mine}
+
+\FunctionTok{fortune}\NormalTok{() }\CommentTok{\#this will print out something so incredibly nerdy }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{error-loading-packages}{%
+\subsection{Error Loading Packages}\label{error-loading-packages}}
+
+If you ever encounter the following error when trying to load in a package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(madeuppackage)}
+\end{Highlighting}
+\end{Shaded}
+
+This means that you have either made a typo in writing the name of the package or you have not installed the package. You need to install packages before R will be able to load them.
+
+\hypertarget{package-conventions-if-using-code}{%
+\subsection{Package Conventions if Using Code}\label{package-conventions-if-using-code}}
+
+There is an important rule of thumb if you are writing the code to install and load packages in R.
+
+Firstly, any packages that you install and load onto R should be at the top of the R script you are working on. This way anyone following your analysis can easily spot what packages that they will need.
+
+Secondly, you should type the command ``install.packages(''packages'')'' in the console rather than the script. Because if someone downloads your script and accidentally runs it, it will automatically install the packages on their computer, which we want to avoid, as it might interfere with other aspects of their operating system (this is really rare, but it's better to be cautious)
+
+Thirdly, if you do have the command ``install.packages()'' in the script, make sure it is commented out. That way if they accidentally run it, R won't run that command.
+
+\begin{figure}
+\centering
+\includegraphics{img/04-packages-convention.png}
+\caption{\label{fig:unnamed-chunk-158}Conventions for Installing and Loading Packages in R Script}
+\end{figure}
+
+\hypertarget{summary-3}{%
+\subsection{Summary}\label{summary-3}}
+
+There you have it. You have successfully installed and loaded in your first packages in R. Are they particularly useful packages? No! For the rest of this course, we will be loading in packages more regularly, and loading in packages that will make our lives significantly easier than if they were not around. In fact, we will load a package in the next section that will enable us to import SPSS data.
+
+\hypertarget{importing-and-exporting-data}{%
+\section{Importing and Exporting Data}\label{importing-and-exporting-data}}
+
+While it's great to know how to create data frames and lists in R, realistically most of the data you will be analyzing in R will be with imported data. Similarly it is important to know how to export your data after you have cleaned it in R.
+
+We'll explore how to import and export data using the graphical user interface (GUI) provided by RStudio in this section. The GUI offers a convenient and intuitive way to handle data files without writing any code. Let's dive into the process of importing and exporting data using the RStudio GUI.
+
+First you are going to need to download two files: \texttt{psycho.csv} and \texttt{burnout.sav.} Both files are available in the \texttt{rintro} Teams channel. If you are accessing this resource and are not a member of the Teams channel, please contact me (ryan.donovan@universityofgalway.ie).
+
+\hypertarget{importing-csv-files.}{%
+\subsection{Importing CSV files.}\label{importing-csv-files.}}
+
+Comma-Separated Values (CSV) files are a common format used for storing tabular data. As the name suggests, data in CSV files is organized in rows and columns, with each row representing a single record and each column representing a different attribute or variable. In this regard, CSV files are very similar to excel file.
+
+CSV files are plain text files, which means they can be easily created, edited, and viewed using a simple text editor. This simplicity and universality make CSV files a popular choice for data exchange between different applications and platforms.
+
+In a CSV file, each value in the table is separated by a comma (,), hence the name ``comma-separated values.'' However, depending on the locale settings, other delimiters such as semicolons (;) or tabs (\t) may be used instead.
+
+One of the key advantages of CSV files is their compatibility with a wide range of software and programming languages, including R. They can be easily imported into statistical software for analysis, making them a versatile and widely adopted format for data storage and sharing.
+
+To import the psycho.csv file, please follow these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Open RStudio.
+\item
+  Navigate to the Environment pane (top right hand corner) and make sure the Environment tab is clicked.
+\item
+  Click on the ``Import Dataset'' button.
+\item
+  Select ``From Text (base)''.
+\item
+  Browse your folder and select the ``psycho.csv'' to import.
+\item
+  Click ``Open''.
+\item
+  A pop-up window should now open. There is a lot of different information here, so let's unpack it.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    The Name text box enables you to specify the variable name that will be assigned to the data frame. Leave it as psycho.
+  \item
+    Underneath the text box, there are several different options for influencing how the CSV file will be read. Most of the time, you can leave this with the default settings.
+  \item
+    The Input File box shows you a preview of the CSV file that is being imported, which is useful just to make sure it is the correct file.
+  \item
+    The Data Frame box shows you a preview of how the data frame will look like once the CSV is imported into R. Everything looks fine here, so we are good to go.
+  \end{enumerate}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(knitr)}
+
+\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"img/04{-}import{-}csv.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{img/04-import-csv.png}
+\caption{\label{fig:unnamed-chunk-159}Pop-up window for importing CSV files}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Click Import. A tab in the source pane called ``psycho'' should now open showing the data frame. Additionally, you should also see the data frame in the Environment pane. You should see under value that it has ``60 obs. of 3 variables'' which means there are 60 rows of data and 3 columns of data.
+\item
+  Once you have imported your data in R, it is always good practice to briefly check that it has been imported successfully and you have imported the correct data set. Two ways you can do this is by calling the \texttt{head()} and \texttt{summary()} functions on the data frame.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(psycho) }\CommentTok{\#this will print out the first six rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Participant_ID Treatment Neuroticism
+## 1              1   Placebo    39.39524
+## 2              2   Placebo    42.69823
+## 3              3   Placebo    60.58708
+## 4              4   Placebo    45.70508
+## 5              5   Placebo    46.29288
+## 6              6   Placebo    62.15065
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(psycho) }\CommentTok{\#print out summary stats for each column}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  Participant_ID   Treatment          Neuroticism   
+##  Min.   : 1.00   Length:60          Min.   :25.33  
+##  1st Qu.:15.75   Class :character   1st Qu.:41.75  
+##  Median :30.50   Mode  :character   Median :49.44  
+##  Mean   :30.50                      Mean   :48.99  
+##  3rd Qu.:45.25                      3rd Qu.:54.61  
+##  Max.   :60.00                      Max.   :76.69
+\end{verbatim}
+
+If your results are the same as mine then that means you have correctly imported the data.
+
+\hypertarget{importing-spss-.sav-files.}{%
+\subsection{Importing SPSS (.sav files).}\label{importing-spss-.sav-files.}}
+
+SPSS (Statistical Package for the Social Sciences) is another popular software used for statistical analysis, particularly in the social sciences. SPSS data files are typically saved with a \textbf{\texttt{.sav}} extension. These files can contain data, variable names, variable labels, and other metadata.
+
+To import an SPSS file (\textbf{\texttt{burnout.sav}}), follow these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Open RStudio.
+\item
+  Navigate to the Environment pane (top right-hand corner) and make sure the Environment tab is clicked.
+\item
+  Click on the ``Import Dataset'' button.
+\item
+  Select ``From SPSS''.
+\item
+  A pop-up window will open.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"img/04{-}import{-}sav.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{img/04-import-sav.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\item
+  Browse your folder and select the \textbf{\texttt{burnout.sav}} file to import.
+\item
+  Under Import Options, you can set the name of the data frame variable in R for the SPSS data set. Leave it as \texttt{burnout.sav}.
+\item
+  The Code Preview shows you the written code commands that you could type out to import the data frame instead of using the RStudio interface.
+\item
+  To import the dataframe, click ``Import''.
+\end{enumerate}
+
+Click Import. A tab in the source pane called ``burnout'' should now open showing the data frame. Additionally, you should also see the data frame in the Environment pane. You should see under value that it has ``467 obs. of 6 variables,'' indicating there are 467 rows of data and 6 columns of data.
+
+Once imported, use the \textbf{\texttt{head()}} and \textbf{\texttt{summary()}} functions to check that the data has been imported correctly:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(Burnout)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 6
+##   burnout             loc  cope teaching research pastoral
+##   <dbl+lbl>         <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+## 1 0 [Not Burnt Out]  7.65  9.16     32.7     87.5     31.5
+## 2 0 [Not Burnt Out]  6.47 13.0      52.7     66.7     68.5
+## 3 0 [Not Burnt Out]  8.82  9.16     49.1     60.4     53.7
+## 4 0 [Not Burnt Out] 20     9.16     52.7     62.5     50  
+## 5 0 [Not Burnt Out]  6.47 19.1      43.6     79.2     40.7
+## 6 0 [Not Burnt Out]  7.06 16.0      38.2     52.1     48.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(Burnout)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     burnout            loc               cope            teaching     
+##  Min.   :0.0000   Min.   :  6.471   Min.   :  3.817   Min.   : 16.36  
+##  1st Qu.:0.0000   1st Qu.:  9.412   1st Qu.: 12.214   1st Qu.: 47.27  
+##  Median :0.0000   Median : 14.118   Median : 19.084   Median : 54.55  
+##  Mean   :0.2548   Mean   : 17.900   Mean   : 23.919   Mean   : 55.43  
+##  3rd Qu.:1.0000   3rd Qu.: 22.353   3rd Qu.: 31.298   3rd Qu.: 61.82  
+##  Max.   :1.0000   Max.   :100.000   Max.   :100.000   Max.   :100.00  
+##     research         pastoral     
+##  Min.   : 20.83   Min.   : 18.52  
+##  1st Qu.: 52.08   1st Qu.: 46.30  
+##  Median : 62.50   Median : 53.70  
+##  Mean   : 61.91   Mean   : 55.25  
+##  3rd Qu.: 72.92   3rd Qu.: 62.96  
+##  Max.   :100.00   Max.   :100.00
+\end{verbatim}
+
+If your results match mine, then you have successfully imported the SPSS data into R.
+
+\hypertarget{exporting-datasets-in-r}{%
+\subsection{Exporting Datasets in R}\label{exporting-datasets-in-r}}
+
+After analyzing and processing your data in R, you may need to export the results to share them with others or use them in other applications. R provides several functions for exporting data to various file formats, including CSV, Excel, and R data files. In this section, we'll explore how to export datasets using these functions.
+
+\hypertarget{exporting-to-csv-files}{%
+\subsubsection{Exporting to CSV Files}\label{exporting-to-csv-files}}
+
+To export a dataset to a CSV file, you can use the write.csv() function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Export dataset to a CSV file using the following syntax}
+\FunctionTok{write.csv}\NormalTok{(my\_dataset, }\AttributeTok{file =} \StringTok{"output.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The argument \texttt{file} will create the name of the file and enable you to change the location of the file. The way this is currently written, it will save your file to your working directory. If you need a reminder on how to set and check your working directory \protect\hyperlink{set_wd}{click here}. Make sure it is set to the location you want your file to go.
+
+Let's write the \texttt{iq\_df} as a CSV file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.csv}\NormalTok{(iq\_df, }\AttributeTok{file =} \StringTok{"iq\_df.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+In your working directory (check the Files pane), you should see the file \texttt{iq\_df.csv}. If you go to your file manager system on your computer, find the file, and open it, the file should open in either a text or Excel file.
+
+\hypertarget{exporting-to-spss-files}{%
+\subsubsection{Exporting to SPSS Files}\label{exporting-to-spss-files}}
+
+To export a dataset to an SPSS file, you can use the write.foreign() function from the foreign package. First, make sure you have installed and loaded the foreign package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#install.packages("foreign")}
+\FunctionTok{library}\NormalTok{(foreign)}
+\end{Highlighting}
+\end{Shaded}
+
+Once you have done that, the syntax for exporting data frames to SPSS is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.foreign}\NormalTok{(my\_dataset, }\CommentTok{\#the dataset you are exporting}
+              \AttributeTok{datafile =} \StringTok{"output.sav"}\NormalTok{, }\CommentTok{\#the location you will export your data}
+              \AttributeTok{codefile =} \StringTok{"output.sps"}\NormalTok{, }\CommentTok{\#this creates the syntax for converting your file to SPSS}
+              \AttributeTok{package =} \StringTok{"SPSS"}\NormalTok{) }\CommentTok{\#this specifies the package the exported file will work for}
+\end{Highlighting}
+\end{Shaded}
+
+You might be wondering why there is both a datafile and a codefile argument. Let's break each down:
+
+\begin{itemize}
+\item
+  datafile: This argument specifies the file path where the data will be saved in the desired format (e.g., SPSS data file). The datafile argument is used to store the actual data values from the R dataset.
+\item
+  codefile: This is where the instructions on how to use your data are saved. When you specify a file path for the codefile argument, R will create a file containing commands or instructions that another program (like SPSS) can use to understand and import your data correctly. It's like writing down step-by-step directions for SPSS to follow.
+\end{itemize}
+
+So, in simple terms, the datafile is where your data is saved, while the codefile contains the instructions for using that data in another program. They work together to make sure your data can be easily used in different software programs.
+
+Now let's export the \texttt{psycho} data frame (we imported from CSV) to SPSS!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.foreign}\NormalTok{(psycho, }\CommentTok{\#the dataset you are exporting}
+              \AttributeTok{datafile =} \StringTok{"psycho.sav"}\NormalTok{, }\CommentTok{\#the location you will export your data}
+              \AttributeTok{codefile =} \StringTok{"psycho.sps"}\NormalTok{, }\CommentTok{\#this creates the syntax for converting your file to SPSS}
+              \AttributeTok{package =} \StringTok{"SPSS"}\NormalTok{) }\CommentTok{\#this specifies the package the exported file will work for}
+\end{Highlighting}
+\end{Shaded}
+
+Again this will save the file in your working directory. If you go to your file explorer system and open up the file, it should open SPSS for you.
+
+\hypertarget{summary-4}{%
+\section{Summary}\label{summary-4}}
+
+Well done, you've gotten through Programming Part I and II. We covered a lot of useful (but let's be honest, not exactly riveting) concepts in programming in R. We've learnt how R categorises data, stores in data structures, learn how to convert data types and create those structures. Additionally, we learnt how to create variables and functions, install and load in packages to spice up R, and how to import and export data.
+
+This sets us up nicely to start actually data processing next week when we will look at ways to clean our data.
 
   \bibliography{book.bib,packages.bib}
 

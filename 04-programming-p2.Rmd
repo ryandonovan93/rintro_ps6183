@@ -747,9 +747,9 @@ First, I will show you two ways to install packages in R. Then I will show you t
 
 ### Installation
 
-We are going to install three packages called `rio`, `praise` and `fortunes`. The praise package provide users with, well, praise. And the fortunes package will spit statistic and programming quotes at you. Neither of them are particularly useful, other than demonstrating the process of loading packages.
+We are going to install three packages called `Haven`, `praise` and `fortunes`. The praise package provide users with, well, praise. And the fortunes package will spit statistic and programming quotes at you. Neither of them are particularly useful, other than demonstrating the process of loading packages.
 
-The \`rio\`\` package enables you to load in multiple types of data into R.
+The `Haven` package enables you to load in SPSS data into R. 
 
 #### Installation using RStudio Interface
 
@@ -759,10 +759,10 @@ In the Files pane on the bottom right hand corner of R, you will see a tab calle
 -   Description (describes what the package does)
 -   Version (the version of the package currently installed on your computer)
 
-To install a package, click the "Install" button above the "Name" column. Once you click that, you should see a small pop-up window. In the textbox, type in the word `rio` Make sure the box "Install dependencies" is clicked. After that, you can click Install. You should get something like the following output in the console, which looks scary with all the red text, but means it has worked correctly.
+To install a package, click the "Install" button above the "Name" column. Once you click that, you should see a small pop-up window. In the textbox, type in the word `Haven` Make sure the box "Install dependencies" is clicked. After that, you can click Install. You should get something like the following output in the console, which looks scary with all the red text, but means it has worked correctly.
 
 ```{r eval = FALSE}
-> install.packages("rio")
+> install.packages("Haven")
 trying URL 'https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/rio_1.0.1.tgz'
 Content type 'application/x-gzip' length 591359 bytes (577 KB)
 ==================================================
@@ -785,9 +785,24 @@ install.packages("package name")
 
 The important thing here is that whatever goes inside the parentheses is inside quotation marks. Let's use this syntax to install the `praise` and `fortunes` packages.
 
-```{r}
+```{r eval = FALSE}
 
 install.packages(c("praise", "fortunes"))
+
+
+trying URL 'https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/praise_1.0.0.tgz'
+Content type 'application/x-gzip' length 16537 bytes (16 KB)
+==================================================
+downloaded 16 KB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/fortunes_1.5-4.tgz'
+Content type 'application/x-gzip' length 208808 bytes (203 KB)
+==================================================
+downloaded 203 KB
+
+
+The downloaded binary packages are in
+	/var/folders/h8/8sb24v_x2lg51cg2z7q8fk3w0000gp/T//RtmpvaY1Ue/downloaded_packages
 
 ```
 
@@ -805,6 +820,8 @@ Scroll down to find the package `praise` and load it in by ticking the box.
 
 ```{r fig.cap = "Loading Packages through RStudio Interface", echo = FALSE}
 
+library(knitr)
+
 include_graphics("img/04-praise-loaded.png")
 
 ```
@@ -821,18 +838,18 @@ package ‘praise’ was built under R version 4.3.2
 
 ### Loading using the R Console Command
 
-We can use the same syntax from that R console output to load in packages there. To load in the `fortunes` and \`rio\`\` packages, you can type in the following into the console or script one at a time:
+We can use the same syntax from that R console output to load in packages there. To load in the `fortunes` and `Haven` packages, you can type in the following into the console or script one at a time:
 
 ```{r}
 
 library(fortunes)
-library(rio)
+library(haven)
 
 ```
 
 There is one significant difference between installing and loading packages through code. When you are installing packages, you can install multiple packages in the one command. However, you can only load in one package at a time.
 
-```{r}
+```{r eval = FALSE}
 
 #will work
 install.packages(c("package1", "package2", "package3")) 
@@ -852,7 +869,10 @@ library(package3)
 
 To make sure the following functions are working, run the following code to check:
 
-```{r}
+
+```{r echo = FALSE}
+
+library(praise)
 
 praise() #everytime you run this line of code it gives you a different line of praise
 #so don't be worried if your result is different than mine
@@ -861,7 +881,31 @@ fortune() #this will print out something so incredibly nerdy
 
 ```
 
-### Function Convetnions if Using Code
+
+
+```{r eval = FALSE}
+
+praise() #everytime you run this line of code it gives you a different line of praise
+#so don't be worried if your result is different than mine
+
+fortune() #this will print out something so incredibly nerdy 
+
+```
+
+
+### Error Loading Packages
+
+If you ever encounter the following error when trying to load in a package
+
+```{r eval = FALSE, warning=TRUE}
+
+library(madeuppackage)
+
+```
+
+This means that you have either made a typo in writing the name of the package or you have not installed the package. You need to install packages before R will be able to load them. 
+
+### Package Conventions if Using Code
 
 There is an important rule of thumb if you are writing the code to install and load packages in R.
 
@@ -871,9 +915,10 @@ Secondly, you should type the command "install.packages("packages")" in the cons
 
 Thirdly, if you do have the command "install.packages()" in the script, make sure it is commented out. That way if they accidentally run it, R won't run that command.
 
+
 ```{r fig.cap = "Conventions for Installing and Loading Packages in R Script", echo = FALSE}
 
-include_graphics("img/04-packages_convetion.png")
+include_graphics("img/04-packages-convention.png")
 
 ```
 
@@ -883,17 +928,19 @@ There you have it. You have successfully installed and loaded in your first pack
 
 ## Importing and Exporting Data
 
-In this section, we'll explore how to import and export data using the graphical user interface (GUI) provided by RStudio. The GUI offers a convenient and intuitive way to handle data files without writing any code. Let's dive into the process of importing and exporting data using the RStudio GUI.
+While it's great to know how to create data frames and lists in R, realistically most of the data you will be analyzing in R will be with imported data. Similarly it is important to know how to export your data after you have cleaned it in R.
 
-First you are going to need to download two files: psycho.csv and burnout.sav. You can download both files here.
+We'll explore how to import and export data using the graphical user interface (GUI) provided by RStudio in this section. The GUI offers a convenient and intuitive way to handle data files without writing any code. Let's dive into the process of importing and exporting data using the RStudio GUI.
 
-## Importing CSV files.
+First you are going to need to download two files: `psycho.csv` and `burnout.sav.` Both files are available in the `rintro` Teams channel. If you are accessing this resource and are not a member of the Teams channel, please contact me (ryan.donovan\@universityofgalway.ie).
 
-Comma-Separated Values (CSV) files are a common format used for storing tabular data. As the name suggests, data in CSV files is organized in rows and columns, with each row representing a single record and each column representing a different attribute or variable. In this regard, CSV files are vey similar to excel file.
+### Importing CSV files.
 
-In a CSV file, each value in the table is separated by a comma (,), hence the name "comma-separated values." However, depending on the locale settings, other delimiters such as semicolons (;) or tabs (\t) may be used instead.
+Comma-Separated Values (CSV) files are a common format used for storing tabular data. As the name suggests, data in CSV files is organized in rows and columns, with each row representing a single record and each column representing a different attribute or variable. In this regard, CSV files are very similar to excel file.
 
 CSV files are plain text files, which means they can be easily created, edited, and viewed using a simple text editor. This simplicity and universality make CSV files a popular choice for data exchange between different applications and platforms.
+
+In a CSV file, each value in the table is separated by a comma (,), hence the name "comma-separated values." However, depending on the locale settings, other delimiters such as semicolons (;) or tabs (\t) may be used instead.
 
 One of the key advantages of CSV files is their compatibility with a wide range of software and programming languages, including R. They can be easily imported into statistical software for analysis, making them a versatile and widely adopted format for data storage and sharing.
 
@@ -901,7 +948,7 @@ To import the psycho.csv file, please follow these steps:
 
 1.  Open RStudio.
 
-2.  Navigate to the Environment pane (top left hand corner) and make the Environment tab is clicked.
+2.  Navigate to the Environment pane (top right hand corner) and make sure the Environment tab is clicked.
 
 3.  Click on the "Import Dataset" button.
 
@@ -909,8 +956,166 @@ To import the psycho.csv file, please follow these steps:
 
 5.  Browse your folder and select the "psycho.csv" to import.
 
-6.  Click "Import".
+6.  Click "Open".
 
-7.  You should see that the file is now
+7.  A pop-up window should now open. There is a lot of different information here, so let's unpack it.
 
-## Searching for Help
+    1.  The Name text box enables you to specify the variable name that will be assigned to the data frame. Leave it as psycho.
+
+    2.  Underneath the text box, there are several different options for influencing how the CSV file will be read. Most of the time, you can leave this with the default settings.
+
+    3.  The Input File box shows you a preview of the CSV file that is being imported, which is useful just to make sure it is the correct file.
+
+    4.  The Data Frame box shows you a preview of how the data frame will look like once the CSV is imported into R. Everything looks fine here, so we are good to go.
+
+```{r fig.cap="Pop-up window for importing CSV files"}
+
+library(knitr)
+
+include_graphics("img/04-import-csv.png")
+
+```
+
+8.  Click Import. A tab in the source pane called "psycho" should now open showing the data frame. Additionally, you should also see the data frame in the Environment pane. You should see under value that it has "60 obs. of 3 variables" which means there are 60 rows of data and 3 columns of data.
+9.  Once you have imported your data in R, it is always good practice to briefly check that it has been imported successfully and you have imported the correct data set. Two ways you can do this is by calling the `head()` and `summary()` functions on the data frame.
+
+```{r echo = FALSE}
+
+psycho <- read.csv("datasets/psycho.csv")
+Burnout <- read_sav("datasets/Burnout.sav")
+
+```
+
+
+```{r}
+
+head(psycho) #this will print out the first six rows
+
+summary(psycho) #print out summary stats for each column
+
+```
+
+If your results are the same as mine then that means you have correctly imported the data.
+
+### Importing SPSS (.sav files).
+
+SPSS (Statistical Package for the Social Sciences) is another popular software used for statistical analysis, particularly in the social sciences. SPSS data files are typically saved with a **`.sav`** extension. These files can contain data, variable names, variable labels, and other metadata.
+
+To import an SPSS file (**`burnout.sav`**), follow these steps:
+
+1.  Open RStudio.
+
+2.  Navigate to the Environment pane (top right-hand corner) and make sure the Environment tab is clicked.
+
+3.  Click on the "Import Dataset" button.
+
+4.  Select "From SPSS".
+
+5.  A pop-up window will open.
+
+```{r}
+
+include_graphics("img/04-import-sav.png")
+
+```
+
+6.  Browse your folder and select the **`burnout.sav`** file to import.
+
+7.  Under Import Options, you can set the name of the data frame variable in R for the SPSS data set. Leave it as `burnout.sav`.
+
+8.  The Code Preview shows you the written code commands that you could type out to import the data frame instead of using the RStudio interface.
+
+9.  To import the dataframe, click "Import".
+
+Click Import. A tab in the source pane called "burnout" should now open showing the data frame. Additionally, you should also see the data frame in the Environment pane. You should see under value that it has "467 obs. of 6 variables," indicating there are 467 rows of data and 6 columns of data.
+
+Once imported, use the **`head()`** and **`summary()`** functions to check that the data has been imported correctly:
+
+```{r}         
+
+head(Burnout)
+
+summary(Burnout)
+
+```
+
+
+If your results match mine, then you have successfully imported the SPSS data into R.
+
+### Exporting Datasets in R
+
+After analyzing and processing your data in R, you may need to export the results to share them with others or use them in other applications. R provides several functions for exporting data to various file formats, including CSV, Excel, and R data files. In this section, we'll explore how to export datasets using these functions.
+
+#### Exporting to CSV Files
+
+To export a dataset to a CSV file, you can use the write.csv() function:
+
+```{r eval = FALSE}
+
+# Export dataset to a CSV file using the following syntax
+write.csv(my_dataset, file = "output.csv")
+
+```
+
+The argument `file` will create the name of the file and enable you to change the location of the file. The way this is currently written, it will save your file to your working directory. If you need a reminder on how to set and check your working directory [click here](#set_wd). Make sure it is set to the location you want your file to go. 
+
+Let's write the `iq_df` as a CSV file. 
+
+```{r}
+
+write.csv(iq_df, file = "iq_df.csv")
+
+```
+
+In your working directory (check the Files pane), you should see the file `iq_df.csv`. If you go to your file manager system on your computer, find the file, and open it, the file should open in either a text or Excel file. 
+
+#### Exporting to SPSS Files
+
+To export a dataset to an SPSS file, you can use the write.foreign() function from the foreign package. First, make sure you have installed and loaded the foreign package:
+
+```{r}
+#install.packages("foreign")
+library(foreign)
+```
+
+Once you have done that, the syntax for exporting data frames to SPSS is:
+
+```{r eval = FALSE}
+write.foreign(my_dataset, #the dataset you are exporting
+              datafile = "output.sav", #the location you will export your data
+              codefile = "output.sps", #this creates the syntax for converting your file to SPSS
+              package = "SPSS") #this specifies the package the exported file will work for
+
+```
+
+You might be wondering why there is both a datafile and a codefile argument. Let's break each down:
+
+- datafile: This argument specifies the file path where the data will be saved in the desired format (e.g., SPSS data file). The datafile argument is used to store the actual data values from the R dataset.
+
+- codefile: This is where the instructions on how to use your data are saved. When you specify a file path for the codefile argument, R will create a file containing commands or instructions that another program (like SPSS) can use to understand and import your data correctly. It's like writing down step-by-step directions for SPSS to follow.
+
+So, in simple terms, the datafile is where your data is saved, while the codefile contains the instructions for using that data in another program. They work together to make sure your data can be easily used in different software programs.
+
+Now let's export the `psycho` data frame (we imported from CSV) to SPSS! 
+
+```{r}
+
+write.foreign(psycho, #the dataset you are exporting
+              datafile = "psycho.sav", #the location you will export your data
+              codefile = "psycho.sps", #this creates the syntax for converting your file to SPSS
+              package = "SPSS") #this specifies the package the exported file will work for
+
+```
+
+Again this will save the file in your working directory. If you go to your file explorer system and open up the file, it should open SPSS for you. 
+
+## Summary
+
+Well done, you've gotten through Programming Part I and II. We covered a lot of useful (but let's be honest, not exactly riveting) concepts in programming in R. We've learnt how R categorises data, stores in data structures, learn how to convert data types and create those structures. Additionally, we learnt how to create variables and functions, install and load in packages to spice up R, and how to import and export data. 
+
+This sets us up nicely to start actually data processing next week when we will look at ways to clean our data. 
+
+
+
+
+

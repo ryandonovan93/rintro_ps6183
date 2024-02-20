@@ -1,7 +1,8 @@
 book_filename: "rintro_demo"
 rmd_files: ["index.Rmd",
             "02-rstudio.Rmd",
-            "03-programming-p1.Rmd"]
+            "03-programming-p1.Rmd",
+            "04-programming-p2.Rmd"]
 output_dir: "docs"
 language:
   ui:
