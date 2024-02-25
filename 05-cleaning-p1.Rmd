@@ -1,5 +1,11 @@
 # **Data Wrangling and Cleaning (Part I)** {#programming2}
 
+```{r setup, include=FALSE}
+
+library(tidyverse)
+
+```
+
 In this session, we are going to learn how to use key packages and functions that enable you to conduct data cleaning in R.
 
 By the end of this session, you should be capable of the following:
@@ -217,6 +223,8 @@ Now there are several issues with this data set.
 
 5.  X number of participants completed the experiment when it was live, but the data set says there are X + 1.
 
+6.  The data set contains both responses from when the study was being previewed and when it was live. We will need to remove the preview data.
+
 [^05-cleaning-p1-2]: Sometimes when you import or export data, the software you are using will take row numbers in excel as being its own column. This has happened here. If you look at the original csv file in excel, you will see that there is no name for this column in the file. R has just given it the name `X` here by default. 2. `Participant.Private`
 
 ### Cleaning the Remote Associations Data Set
@@ -233,3 +241,143 @@ There are six key functions that we are going to use to help clean this data set
 |                   [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)                    | Create summary variables for groups of observations |
 | [disinct()](https://dplyr.tidyverse.org/articles/base.html?q=distinct#distinct-select-distinctunique-rows) | Select unique observations (rows)                   |
 |    [rename()](https://dplyr.tidyverse.org/articles/base.html?q=rename#rename-rename-variables-by-name)     | Rename variables (columns)                          |
+
+### Choosing our Columns of Interest with `Select()`
+
+When you are first cleaning a data set, the first thing you should do is identify the columns that you might need in your analysis or hold important information. In our cases, these columns would be `Participant.Private.ID`, `Experiment.Status`, the response, remote associations, openness, and demographic columns. We can select those columns by using the `select()` function. 
+
+The formula for this function is: `select(dataframe, c(col1name, col2name, col3name))`
+
+```{r}
+
+df_select <- select(df_raw, c(Participant.Private.ID, Experiment.Status, order,
+                              remote.assocotations.1, remote.assocotations.2,   Remote.association.3, Response, response1, open1: gender))
+
+head(df_select)
+
+```
+
+Instantly, that is immediately better. Now there is a couple of things you might have noticed in my code. 
+
+The first is that the order in which I put columns in `select()` is the order in which the columns appear in the `df_select`. This is a very useful feature of `select()` as it means we can reorder our dataframe and select the columns at the same time. Just to demonstrate this further. 
+
+```{r}
+
+df_select <- select(df_select, Participant.Private.ID, Experiment.Status, age, gender, order, remote.assocotations.1:open5)
+
+head(df_select)
+
+```
+The second thing you might notice is that inside the `c` function I go from naming each column one at a time to using the `:` operator. If you remember from Chapters 3 & 4, when you are selecting elements from a data structure, the `:` operator enables you to select anything between those elements. So the code `remote.assoctations.1:open5` selects every column starting from `remote.assoctations1` and ending with `open5`. This saves us from having to type out every column. 
+
+What if we wanted to remove one or two columns? Is there an easier way to remove them then by specifying the columns we want? Yes! We can use `select()` to remove columns. All we need to do is put the `-` operator before the column we want to remove. 
+
+If you look at the `Response` column, it doesn't really provide us with any genuinely useful information - we already have their performance on the task. So let's get rid of it. 
+
+```{r}
+
+df_select <- select(df_select, -Response)
+head(df_select)
+```
+
+### Renaming our Columns of Interest with `rename()`
+
+Our data set is definitely looking cleaner after having shedding those columns, but good grief are those names still ugly. Luckily, we can change their name using the `rename()` function. The syntax for this function is slightly counter intuitive in its order, as it goes like this: `rename(df, newcolumnane = oldcolumnname)`
+
+```{r}
+
+df_rename <- rename(df_select, 
+                    ID = Participant.Private.ID,
+                    status = Experiment.Status,
+                    remote_pos = remote.assocotations.1,
+                    remote_neg = remote.assocotations.2,
+                    remote_neut = Remote.association.3,
+                    total_mood = response1,
+                    condition = order)
+
+head(df_rename)
+
+```
+### Creating new Columns using the `mutate()` function
+
+Okay so we have gotten rid of superfluous columns and cleaned up the names of the ones we have left. But there are still a column "missing". At the moment, we have participants scores on individual items for Openness to Experience. But unless we are running a reliability or factor analysis, we actually want participants total level of openness. 
+
+The `mutate()` function will help us create that column. This function takes existing column(s) and performs operations on them to create new columns in our data set. 
+
+Let's use `mutate()` to create a column called `total_openness`. The syntax for this function is: `mutate(df, new_column_name = instructions on what to do with current columns)`
+
+```{r}
+
+df_mutate <- mutate(df_rename, total_openness = open1 + open2 + open3 + open4 + open5)
+
+df_mutate$total_openness
+
+```
+If we wanted to calculate the mean of these items, then the process is slightly more complicated. First we would need to tell R that we want mean per observation rather than per column (e.g., we need the mean score of open1 to open5 per participant, rather than across the entire dataset) by using the `rowMeans()` function. Then we would need to `select()` the columns that we want the row means from. 
+
+Let's do this and save the operation to a new column called `mean_openness`
+
+```{r}
+
+df_mutate <- mutate(df_mutate, 
+                    mean_openness = rowMeans(select(df_mutate, 
+                                                    c(open1, open2, open3,
+                                                      open4, open5))))
+
+head(df_mutate)
+
+```
+If we do not need the individual items then, there is an argument in `mutate()` called `.keep`. This specifies what should be done with the columns that were operated on to create the new column. If this argument is set to `unused`, then R will only keep columns that were not used to create the new column. In other words, it will remove any column used to calculate the new column. 
+
+```{r}
+
+df_mutate <- mutate(df_rename, 
+                    total_openness = open1 + open2 + open3 + open4 + open5,
+                    .keep = "unused")
+
+head(df_mutate)
+```
+
+### Rewriting existing columns using `mutate()`
+
+If we have a column that contains mistakes, we can use `mutate()` to rewrite that column's values. The syntax for this is the same as when you are creating new columns with mutate: `mutate(df, existing_column_name = instructions on what to do with current columns)`
+
+If you look at our columns `remote_pos`, `remote_neg`, and `remote_neut`, there is a mistake. Each column should represent the participants scores (out of a maximum score of 9) on the remote associations task after engaging with either positive, negative, or neutral stimuli. However, while `remote_pos` scoring looks correct, the scores for `remote_neg` are going up to 18, and the scores for `remote_neut` are going up to 27. So what is going on?
+
+What happened here is that Gorilla Research added participants scores on each task to each other. So the `remote_neg` column is really the participants correct answers on `remote_pos` plus their correct answers on `remote_neg`. Similarly, the `remote_net` contains their scores on the `remote_neg` column plus their scores on the `remote_neut` task. 
+
+To fix this the formula we need to use is the following: 
+
+1.remote_neg = remote_neg - remote_pos
+1. remote_neut = remote_neut - remote_neg
+
+
+We can fix this error using the `mutate()` function
+
+```{r}
+
+df_mutate_ra <- mutate(df_mutate, 
+                    remote_neg = remote_neg - remote_pos,
+                    remote_neut = remote_neut - remote_neg)
+
+head(df_mutate)
+```
+
+Hold on, what happened here - the `remote_neut` scores are still 9+? Well, we first changed the column `remote_neg` to get out correct scores on this task. However, the new values of `remote_neg` are then inserted in the next line of the formula. To fix for this error, we need to put the `remote_neut` first. 
+
+```{r}
+
+df_mutate_ra_fixed <- mutate(df_mutate,
+                    remote_neut =  remote_neg - remote_pos,
+                    remote_neg = remote_neut - remote_neg)
+
+df_mutate_ra_fixed$remote_neut
+
+```
+Better! 
+
+### Removing Rows using the `filter()` function
+
+Okay, we've done a lot of operations on columns, but how can we clean up our rows? For example, while it's really useful to have `preview` data in our first pass at a clean data set, we want to get rid of any rows that were in the preview condition before we conduct any genuine analysis. 
+
+We can remove rows in a data set based on their values through the `filter()` function. 
