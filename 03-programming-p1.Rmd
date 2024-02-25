@@ -17,13 +17,15 @@ library(webexercises)
 
 It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. Last week I showed you how to do this using [a button-and-click interface](#set_wd).
 
-Using those instructions, create a folder called "Week2" in the `rintro` project folder and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:
+Using those instructions, create a folder called "Week2" in the `rintro` project folder and set it as your working directory.  Your output should be something like this:
 
 ```{r eval = F}
 
 > setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week2")
 
 ```
+
+Use the ´getwd()´ to check that it has been set as your working directory.
 
 ## Using the Console
 

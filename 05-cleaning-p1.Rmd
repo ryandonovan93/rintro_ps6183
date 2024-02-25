@@ -1,0 +1,235 @@
+# **Data Wrangling and Cleaning (Part I)** {#programming2}
+
+In this session, we are going to learn how to use key packages and functions that enable you to conduct data cleaning in R.
+
+By the end of this session, you should be capable of the following:
+
+-   Understand the concept of `tidy data` and `tidy principles`
+
+-   Using the functions `select()`, `mutate()`, `rename()`, and `relocate` to perform key operations on columns.
+
+-   Using the functions `filter()`, `arrange()`, and `distinct()` to perform key operations on rows
+
+-   Understand how to group information and perform calculations on those groupings.
+
+-   Understand how to pipe together functions to enable efficient data cleaning analysis.
+
+## What is Data Wrangling and Cleaning?
+
+If you read the literature on data science and data analytics, you will see terms like `data cleaning`, `data munging`, `data wrangling`, `data transformation`, `data preprocessing`, and `data transponding`[^05-cleaning-p1-1] . Often, when I see these words, I feel like Monica Bing in that one episode of friends and scream ["THAT'S NOT EVEN A WORD!"](https://youtu.be/uYM1uQ7QrTc?si=ZPZp2h3CiruqHh-m&t=93).
+
+[^05-cleaning-p1-1]: I made this one up. But it looks like [Chandler Bing was actually some type of data scientist](https://kaplan.co.uk/insights/article-detail/insights/2023/03/01/reasons-why-you-should-be-more-like-chandler-bing).
+
+I am going to break down three of these terms
+
+1.  Data cleaning refers to the process of identifying and corrects errors in your data set. This could involve fixing errors in your data set like duplicates or typos, fixing formatting errors, and handling missing values.
+2.  Data wrangling refers to preparing raw data for statistical analysis. It includes data cleaning, but also may involve changing the structure of your data, merging different data sets together, creating new variables, and getting your data in a structure that enables you to conduct whatever statistical analysis you intend to carry out.
+3.  Data munging is mostly synonymous with data wrangling. You "munge" data when you take it from a raw form and transform it into a format that enables data analysis.
+4.  Data preprocessing is an umbrella term for each of these processes. It's anything you do to your data before you analyse it.
+
+To give you a concrete example. If you download data from Qualtrics or Gorilla Research then it is not ready for statistical analysis right away. It will have rows and columns that you won't need and will interfere with your data analysis (e.g., when you download SPSS data from Qualtrics, it will contain both data collected from when you previewed the study and when it went live).
+
+The process of changing that data into a format that you can use (e.g., by removing preview rows, removing columns, changing column names) that is data wrangling. However, if you run your descriptive and inferential statistical analysis and you notice that you have missing data in columns, or some rows are duplicated, or there are typos (e.g., Mal instead of Male) and you fix those errors, then that is data cleaning.
+
+Data wrangling takes raw materials and builds a specific structure (e.g., like taking wood and cement and building a house you can live in). Data cleaning makes sure that structure looks its absolute best.
+
+### Naming Conventions in this Book
+
+I will often say `data cleaning` as a catch all term for any process involved in getting data ready for statistical analysis. While it's good to know the different meaning of these words when you are searching for specific information, it doesn't affect your day-to-day analysis if you use them `incorrectly`. This might make a heretic in the data science community, but I can live with that.
+
+So we will use `data cleaning` from this point out.
+
+### Why is Data Cleaning Important?
+
+It's estimated that 80% of your time working with data is actually focused on data cleaning. That's partially because once your data is ready for statistical analysis, it only takes a few lines of code/button clicks to run the analysis. Since most of your time working with data will be on cleaning it, it's really worthwhile to do it effectively and efficiently. By doing so you will decrease the amount of time cleaning data (which let's be honest, is dull) and spend more time on the interesting part - interpreting your results.
+
+### How can R help you with Data Cleaning?
+
+Before I learned R, I used to clean my data manually in Excel. This was not ideal for two reasons, namely:
+
+1.  It was easy to make mistakes but difficult to spot when I made mistakes. It's easy to accidentally overwrite a value in a cell, delete rows, or make some small mistake when doing it by hand.
+2.  I would need to repeat the process over and over again whenever I reran the study, collected more data, or noticed a mistake in my data but could not identify when or how I made the mistake.
+
+This made the process excruciating time-consuming and stressful.
+
+R can significantly increase the speed that you can conduct data cleaning. You can write code instructions to import the raw data (e.g., from Gorilla or Qualtrics), clean it step-by-step, and save the cleaned data in a consistent manner. This significantly reduces the amount of errors you can make. Additionally, if you collect any more participants, you don't need to even have to look at the excel files. Just download them into your working directory, run the same R script, and you will have your cleaned data. Finally, in times you notice that you did make a mistake (e.g., you excluded an important variable column) you just make that change in your R script and rerun the analysis.
+
+### Tidyverse (and Base R)
+
+The **`tidyverse`** package is a set of packages designed to enable consistent and intuitive data cleaning in R. The idea behind the **`tidyverse`** package is that there are 3 golden principles for creating **`tidy`** (clean) data sets. These 3 principles are:
+
+1.  Every variable should be in a separate column.
+
+2.  Every observation (e.g., participant) should be in a separate row.
+
+3.  Your value in your data set should have its own cell.
+
+```{r fig.cap= "Tidy Data principles ", echo = F, warning = F}
+
+library(knitr)
+
+include_graphics(path = "img/05-tidy-principles.PNG")
+
+```
+
+Tidyverse is probably the most well-known package in the R community, but there is controversy behind it. High-profile people in the R community debate about whether **`tidyverse`** is actually appropriate for beginners to learn and whether it really is more effective and efficient than base R. Similarly, some of the R community dislike the idea that the **`tidyverse`** is the only "real" way to conduct data cleaning.
+
+We will be using both base R and tidyverse in this course. The main thing that you should know is that tidyverse and Base R are like two different dialects in R. If in the future you search for help on R code, the code might be written from one perspective or the other. If the code looks more like what you saw in Chapters 2-4, then it is in base R. If you search for help and looks more like the code in the rest of the course, it's probably tidyverse.
+
+Understanding both approaches will empower you to choose the one that aligns with your preferences and needs, ensuring you can find the right solution more effectively. Whether you are more comfortable with base R or tidyverse, knowing both approaches will enable you to navigate and utilize the wealth of resources available in the R community.
+
+## Let's Get Set Up
+
+Okay, that's enough conceptual information for now - let's learn how to actually clean some data. First, we are going to need to get our RStudio or PositCloud environment ready. We'll do this by setting up our working directory, downloading and importing our data files, and then installing and loading the `tidyverse` packages.
+
+### Activity 1.1: Set up your WD
+
+Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. In Chapter 2 I showed you how to do this using [a button-and-click interface](#set_wd).
+
+Using those instructions, create a folder called "Week4" in the `rintro` project folder (or whatever folder you created) and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:
+
+```{r eval = F}
+
+> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week4")
+
+```
+
+### Activity 1.3: Import your CSV files and R script
+
+There are several files that you are going to import:
+
+To download those files, please navigate to the Teams channel for this course and go to the channel "Week 4 - Data Cleaning (Part I)". Once downloaded, use your file management system (whether File Explorer on Windows or Finder on Mac) please copy and paste those files to the Week4 folder you created in Activity 1.1.
+
+If you are on RStudio now, you should sees those files in your working directory within your Files pane. Open the R script.
+
+Now we want to import the CSV files and R script into the R environment. Run the following code in your R script
+
+```{r eval = F}
+
+df_raw <- read.csv("raw_remote_associations.csv") 
+
+  
+```
+
+```{r echo = F}
+setwd("datasets")
+df_raw <- read.csv("raw_remote_associations.csv") 
+```
+
+### Activity 1.2: Install and load the tidyverse package
+
+A good rule of practice in R is to load your packages at the start of your R script. In the R script that you just downloaded, you will see the the following lines commented out in the script. Copy and paste the code `install.packages("tidyverse")` into your console and press enter. This will download the tidyverse package which consists of several packages, so it may take a few seconds to complete and you may get a long sequence of red text in your console.
+
+```{r}
+
+#install.packages("tidyverse")
+#library(tidyverse)
+
+```
+
+If you see something along the lines of this, then tidyverse should be installed.
+
+```{r fig.cap = "Tidyverse Installation", echo = FALSE, warning = FALSE}
+library(knitr)
+
+include_graphics("img/05-tidyverse-install.PNG")
+```
+
+To check if it is installed correctly, remove the `#` symbol from `library(tidyverse)` in your script and press run. Since tidyverse contains multiple packages, it will load them all at once. So if you see the following then you are good to go.
+
+```{r eval = FALSE}
+
+library(tidyverse)
+
+
+Warning: package ‘tidyverse’ was built under R version 4.3.2
+Warning: package ‘ggplot2’ was built under R version 4.3.2
+Warning: package ‘tibble’ was built under R version 4.3.2
+Warning: package ‘tidyr’ was built under R version 4.3.2
+Warning: package ‘readr’ was built under R version 4.3.2
+Warning: package ‘purrr’ was built under R version 4.3.2
+Warning: package ‘dplyr’ was built under R version 4.3.2
+Warning: package ‘stringr’ was built under R version 4.3.2
+Warning: package ‘forcats’ was built under R version 4.3.2
+Warning: package ‘lubridate’ was built under R version 4.3.2── Attaching core tidyverse packages
+
+────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     ── Conflicts ──────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package to force all conflicts to become errors
+
+```
+
+## Cleaning the Remote Associates Data set.
+
+### Context and Viewing it in RStudio
+
+The data set we imported and are cleaning today came from a study that investigated the effect of mood induction on convergent thinking. Participants were asked to read three emotional vignette (one positive, one negative, and one neutral) before completing a remote associations test (e.g., what is the link between these words (e.g., Square / Cardboard / Open. Answer = Box). The order of the vignettes were counterbalanced across participants. Participants also completed five items on Openness from the Big Five Aspects, as it is known to positive correlate with convergent thinking.
+
+The first thing we should after importing a data set into is check it to make sure have imported the correct data set. We can do this through using the `head()` function.
+
+```{r}
+
+#View(df_raw) to open a new tab in Source and look at the entire dataset
+head(df_raw) #this will load the first six rows into the console
+
+
+```
+
+Ouch! Now that is a data set only a parent could love. Here is what each column is telling us about each participant
+
+-   X: An empty column that counts the row number.
+
+-   Participant.Private.ID: Experiment ID
+
+-   Local.Timestamp: When they took part in the study.
+
+-   Experiment.Status: Whether the study was published (live) or not (preview) for that participant.
+
+-   Remote-Associations1-3: Their scores on each remote associations task
+
+-   order: Their order of watching the vignettes, where A = "positive", B = "negative", and C = "neutral".
+
+-   Response: Their answer on the remote associations task
+
+-   Participant.OS: Their operating system
+
+-   response1: Their aggregated mood score
+
+-   open1-open5: Their scores on Openness items.
+
+-   age and gender: Their age and gender.
+
+Now there are several issues with this data set.
+
+1.  Meaningless columns. We should only have columns that we want to include in descriptive or inferential analysis, but this data sets has several unnecessary columns like "Local.Timestamp", "Participant.OS" (referring to the participants operating system when they completed the study), and "X"[^05-cleaning-p1-2]).
+
+2.  Awkward, misspelled, or ambiguous column names like "Participant.Private.ID", "remote.assocotations.2", and "response1" / "Response".
+
+3.  Column order is all over the place. Ideally, you would want columns you would use in your analysis (e.g., age, gender, remote tasks, and openness scores) closer to the beginning of the data set.
+
+4.  Improper scoring on the remote associations task (the maximum score for each task is 9).
+
+5.  X number of participants completed the experiment when it was live, but the data set says there are X + 1.
+
+[^05-cleaning-p1-2]: Sometimes when you import or export data, the software you are using will take row numbers in excel as being its own column. This has happened here. If you look at the original csv file in excel, you will see that there is no name for this column in the file. R has just given it the name `X` here by default. 2. `Participant.Private`
+
+### Cleaning the Remote Associations Data Set
+
+There are six key functions that we are going to use to help clean this data set. These functions are:
+
+|                                                  Function                                                  | Description                                         |
+|:---------------------------------------:|:------------------------------|
+|                      [`select()`](https://dplyr.tidyverse.org/reference/select.html)                       | Include or exclude certain variables (columns)      |
+|                      [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)                       | Include or exclude certain observations (rows)      |
+|                      [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html)                       | Create new variables (columns)                      |
+|                     [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html)                      | Change the order of observations (rows)             |
+|                    [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html)                     | Organize the observations (rows) into groups        |
+|                   [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)                    | Create summary variables for groups of observations |
+| [disinct()](https://dplyr.tidyverse.org/articles/base.html?q=distinct#distinct-select-distinctunique-rows) | Select unique observations (rows)                   |
+|    [rename()](https://dplyr.tidyverse.org/articles/base.html?q=rename#rename-rename-variables-by-name)     | Rename variables (columns)                          |
