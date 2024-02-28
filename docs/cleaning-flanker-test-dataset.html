@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction to R</title>
+  <title>6 Cleaning Flanker Test Dataset | Introduction to R</title>
   <meta name="description" content="This GitBook is for the R Workshops" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction to R" />
+  <meta property="og:title" content="6 Cleaning Flanker Test Dataset | Introduction to R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook is for the R Workshops" />
   <meta name="github-repo" content="ryandonovan93/rintro" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction to R" />
+  <meta name="twitter:title" content="6 Cleaning Flanker Test Dataset | Introduction to R" />
   
   <meta name="twitter:description" content="This GitBook is for the R Workshops" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="rstudio.html"/>
+<link rel="prev" href="datacleaning1.html"/>
+<link rel="next" href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -290,21 +290,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.12.1" data-path="datacleaning1.html"><a href="datacleaning1.html#using-a-pipe-operator-on-the-remote-associations-data-frame"><i class="fa fa-check"></i><b>5.12.1</b> Using a Pipe Operator on the Remote Associations Data Frame</a></li>
 </ul></li>
-<li class="chapter" data-level="5.13" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-clean-the-flanker-dataset"><i class="fa fa-check"></i><b>5.13</b> Activity: Clean the Flanker Dataset</a>
-<ul>
-<li class="chapter" data-level="5.13.1" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-flanker-test-dataset"><i class="fa fa-check"></i><b>5.13.1</b> <strong>Cleaning Flanker Test Dataset</strong></a></li>
-<li class="chapter" data-level="5.13.2" data-path="datacleaning1.html"><a href="datacleaning1.html#load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.13.2</b> <strong>Load the “Tidyverse” Package</strong></a></li>
-<li class="chapter" data-level="5.13.3" data-path="datacleaning1.html"><a href="datacleaning1.html#reset-your-environment"><i class="fa fa-check"></i><b>5.13.3</b> <strong>Reset Your Environment</strong></a></li>
-<li class="chapter" data-level="5.13.4" data-path="datacleaning1.html"><a href="datacleaning1.html#import-the-data"><i class="fa fa-check"></i><b>5.13.4</b> <strong>Import the Data</strong></a></li>
-<li class="chapter" data-level="5.13.5" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-instructions"><i class="fa fa-check"></i><b>5.13.5</b> Cleaning Instructions</a></li>
+<li class="chapter" data-level="5.13" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-clean-the-flanker-dataset"><i class="fa fa-check"></i><b>5.13</b> Activity: Clean the Flanker Dataset</a></li>
 </ul></li>
-<li class="chapter" data-level="5.14" data-path="datacleaning1.html"><a href="datacleaning1.html#summary-5"><i class="fa fa-check"></i><b>5.14</b> Summary</a></li>
+<li class="chapter" data-level="6" data-path="cleaning-flanker-test-dataset.html"><a href="cleaning-flanker-test-dataset.html"><i class="fa fa-check"></i><b>6</b> <strong>Cleaning Flanker Test Dataset</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="cleaning-flanker-test-dataset.html"><a href="cleaning-flanker-test-dataset.html#load-the-tidyverse-package"><i class="fa fa-check"></i><b>6.1</b> <strong>Load the “Tidyverse” Package</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="cleaning-flanker-test-dataset.html"><a href="cleaning-flanker-test-dataset.html#reset-your-environment"><i class="fa fa-check"></i><b>6.2</b> <strong>Reset Your Environment</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="cleaning-flanker-test-dataset.html"><a href="cleaning-flanker-test-dataset.html#import-the-data"><i class="fa fa-check"></i><b>6.3</b> <strong>Import the Data</strong></a></li>
+<li class="chapter" data-level="6.4" data-path="cleaning-flanker-test-dataset.html"><a href="cleaning-flanker-test-dataset.html#summary-5"><i class="fa fa-check"></i><b>6.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>6</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<li class="chapter" data-level="7" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>7</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>6.1</b> How Boolean Operators Work:</a>
+<li class="chapter" data-level="7.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>7.1</b> How Boolean Operators Work:</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>6.1.1</b> Understanding R’s Evaluation Process:</a></li>
+<li class="chapter" data-level="7.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>7.1.1</b> Understanding R’s Evaluation Process:</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -327,71 +326,92 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introduction to R</h1>
-<p class="author"><em>Ryan Donovan</em></p>
-<p class="date"><em>2024-02-28</em></p>
+<div id="cleaning-flanker-test-dataset" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> <strong>Cleaning Flanker Test Dataset</strong><a href="cleaning-flanker-test-dataset.html#cleaning-flanker-test-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This exercise involves cleaning the Flanker Test Dataset, which was collected as part of a study investigating the effect of alcohol consumption on inhibiting incongruent responses (e.g., flanker effect). The dataset includes responses from 50 participants who took part in the study when it was made live. Participants answered questions related to their age, gender, and neuroticism. Additionally, participants were split into two conditions: control (no alcohol) and experiment (high alcohol).</p>
+<p>Download the files <code>cleaning-exercise.R</code> and <code>flanker.csv</code> to run this exercise.</p>
+<div id="load-the-tidyverse-package" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> <strong>Load the “Tidyverse” Package</strong><a href="cleaning-flanker-test-dataset.html#load-the-tidyverse-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="cleaning-flanker-test-dataset.html#cb357-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 </div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> <strong>Introduction</strong><a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This series of workshops describes how to use R to import, clean, and process psychological data. All materials, data, and information in these workshops are used for educational purposes only. This document should only be shared within the University of Galway’s School of Psychology and is not intended for widespread dissemination. The workshop’s e-book is very much in its draft stages and will be updated and refined in the future. Several materials are adapted from various online resources on teaching R.</p>
-<div id="who-is-this-resource-for" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Who is this resource for?<a href="index.html#who-is-this-resource-for" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>These workshops are designed to help people who come from a psychology or social science background learn the necessary programming skills to use R effectively in their research. These workshops are intended for individuals with no programming experience whatsoever, teaching the necessary programming skills and ideas required to conduct statistical techniques in psychology (e.g., Power Analyses, Correlation, ANOVA, Regression, Mediation, Moderation).</p>
-<p>These workshops are <strong>not</strong> for people interested in learning about statistical theory or the who, what, where’s of any of the aforementioned statistical techniques. I want these workshops to focus entirely on how to perform statistical analyses in R; I assume you know the rest or know how to access that information.</p>
+<div id="reset-your-environment" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> <strong>Reset Your Environment</strong><a href="cleaning-flanker-test-dataset.html#reset-your-environment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before starting, it’s recommended to clear your environment to prevent any accidental use of variables from previous tasks. You can do this by clicking the brush icon in the environment tab.</p>
 </div>
-<div id="should-i-learn-r" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Should I learn R?<a href="index.html#should-i-learn-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are many reasons to learn R.</p>
-<p>Psychological research is increasingly moving towards open-science practices. One of the key principles of open-science is that all aspects of data handling - including data wrangling, pre-processing, processing, and output generation - are openly accessible. This is not only an abstract want or desire; several top-tier journals require that you submit R scripts along with any manuscripts. If you don’t know how to use R (or at least no one in your lab does), then this may put you at a disadvantage.</p>
-<p>R enables you to import, clean, analyse, and publish manuscripts from R itself. You do not have to switch between SPSS, Excel, and Word or any other software. You can conduct your statistical analysis directly in R and have that “uploaded” directly to your manuscript. In the long run, this will save you so much time and energy.</p>
-<p>R is capable of more than statistical analysis. You can create websites, documents, and books in R. This e-book was developed in R! While these initial workshops will not be discussing how to do this (although it is something that I would like to do in the future), I wanted to mention it as an example of how powerful R can be.</p>
-</div>
-<div id="what-will-i-learn-to-do-in-r" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> What will I learn to do in R?<a href="index.html#what-will-i-learn-to-do-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The following workshops will teach you how to conduct statistical analysis in R.</p>
-<p>R is a statistical programming language that enables you to wrangle, process, and analyse data. By the end of these workshops, you should be able to import a data file into R, do some processing and cleaning, compute descriptive and inferential statistics, generate nice visualisations, and output your results.</p>
-<p>The learning objectives of this course are:</p>
+<div id="import-the-data" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> <strong>Import the Data</strong><a href="cleaning-flanker-test-dataset.html#import-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="cleaning-flanker-test-dataset.html#cb358-1" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;flanker.csv&quot;</span>) <span class="co">#make sure you have this in your working directory  </span></span>
+<span id="cb358-2"><a href="cleaning-flanker-test-dataset.html#cb358-2" tabindex="-1"></a><span class="co"># Check the structure and first few rows of the dataframe </span></span>
+<span id="cb358-3"><a href="cleaning-flanker-test-dataset.html#cb358-3" tabindex="-1"></a></span>
+<span id="cb358-4"><a href="cleaning-flanker-test-dataset.html#cb358-4" tabindex="-1"></a><span class="fu">View</span>(df_raw) </span>
+<span id="cb358-5"><a href="cleaning-flanker-test-dataset.html#cb358-5" tabindex="-1"></a></span>
+<span id="cb358-6"><a href="cleaning-flanker-test-dataset.html#cb358-6" tabindex="-1"></a><span class="fu">head</span>(df_raw)  </span>
+<span id="cb358-7"><a href="cleaning-flanker-test-dataset.html#cb358-7" tabindex="-1"></a></span>
+<span id="cb358-8"><a href="cleaning-flanker-test-dataset.html#cb358-8" tabindex="-1"></a>(df_raw)</span></code></pre></div>
+<p>Now that we’ve loaded the necessary package and imported our data, we can proceed with cleaning the data set.</p>
+<p><strong>Instructions</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Select Relevant Columns:</strong></p>
 <ul>
-<li><p>Learn how to import and create datasets in R.</p></li>
-<li><p>Learn and apply basic programming concepts such as data types, functions, and loops.</p></li>
-<li><p>Learn key techniques for data cleaning in R to enable statistical analysis.</p></li>
-<li><p>Learn how to create APA-standard graphs in R.</p></li>
-<li><p>Learn how to deal with errors or bugs with R code.</p></li>
-<li><p>Learn how to export data.</p></li>
-</ul>
-</div>
-<div id="what-will-i-not-learn-to-do-in-r" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> What will I not learn to do in R?<a href="index.html#what-will-i-not-learn-to-do-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This is not an exhaustive introduction to R. Similar to human languages, programming languages like R are vast and will take years to master. After this course, you will still be considered a “newbie” in R. But the material covered here will at least provide you a solid foundation in R, enabling you to go ahead and pick up further skills if required as you go on.</p>
-<p>This course will teach you data cleaning and wrangling skills that will enable you to wrangle and clean a lot of data collected on Gorilla or Qualtrics. But you will not be able to easily handle all data cleaning problems you are likely to find out in the “wild” world of messy data. Such datasets can be uniquely messy, and even experienced R programmers will need to bash their head against the wall a few times to figure out a way to clean that dataset entirely in R. If you have a particularly messy dataset, you might still need to use other programmes (e.g., Excel) to clean it up first before importing it to R.</p>
-<p>Similarly, do not expect to be fluent in the concepts you learn here after these workshops. It will take practice to become fluent. You might need to refer to these materials or look up help repeatedly when using R on real-life datasets. That’s normal.</p>
-<p>This workshop is heavily focused on the tidyverse approach to R. The tidyverse is a particular philosophical approach to how to use R (more on that later). The other approach would be to use base R. This can incite violent debates in R communities on which approach is better. We will focus mainly on tidyverse and use some base R.</p>
-<p>This workshop does not teach you how to use R Markdown. R Markdown is a package in R that enables you to write reproducible and dynamic reports with R that can be converted into Word documents, PDFs, websites, PowerPoint presentations, books, and much more. That will be covered in the intermediate workshop programme.</p>
-</div>
-<div id="where-and-when-will-the-workshops-take-place" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Where and when will the workshops take place?<a href="index.html#where-and-when-will-the-workshops-take-place" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The sessions will take place in <strong>AMB-G035</strong> (Psychology PC Suite). The schedule for the sessions is as follows:</p>
+<li><p>Create a variable called <strong><code>df_select</code></strong>.</p></li>
+<li><p>Use the <strong><code>select()</code></strong> function to choose the columns relating to participant ID, experiment status (live or preview), age, gender, study condition (control versus experiment), the flanker tasks, and neuroticism items.</p></li>
+</ul></li>
+<li><p><strong>Rename Columns:</strong></p>
 <ul>
-<li><p>Feb 7th: Introduction to R and RStudio</p></li>
-<li><p>Feb 14th: R Programming (Part I)</p></li>
-<li><p>Feb 21st: R Programming (Part II)</p></li>
-<li><p>Feb 28th: Data Cleaning in R (Part I)</p></li>
-<li><p>March 6th: Data Cleaning in R (Part II)</p></li>
-<li><p>March 13th: Data Visualization</p></li>
-<li><p>March 20th: Running Inferential Statistical Tests in R (Part I)</p></li>
-<li><p>March 27th: Running Inferential Statistical Tests in R (Part II)</p></li>
-</ul>
-<p>Each session is on a Wednesday and will run between 11:00 - 13:00.</p>
+<li><p>Create a variable called <strong><code>df_rename</code></strong>.</p></li>
+<li><p>Rename the messy columns to the following names:</p>
+<ul>
+<li><p>ID</p></li>
+<li><p>status</p></li>
+<li><p>age</p></li>
+<li><p>gender</p></li>
+<li><p>condition</p></li>
+<li><p>flanker_congruent</p></li>
+<li><p>neuro1</p></li>
+<li><p>neuro2</p></li>
+<li><p>neuro3</p></li>
+<li><p>neuro4</p></li>
+<li><p>neuro5</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Create Total Neuroticism Score:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_mutate</code></strong>.</p></li>
+<li><p>Use the <strong><code>mutate()</code></strong> function to create a variable called <strong><code>neuro_total</code></strong> that is the sum of each neuroticism item. Remove the neuro items using <strong><code>.keep = "unused"</code></strong>.</p></li>
+</ul></li>
+<li><p><strong>Calculate Flanker Effect:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_mutate_flanker</code></strong>.</p></li>
+<li><p>Use the <strong><code>mutate()</code></strong> function to create a variable called <strong><code>flanker_effect</code></strong>. The formula for the flanker effect is: <strong><code>flanker_effect = flanker_congruent - flanker_incongruent</code></strong>.</p></li>
+</ul></li>
+<li><p><strong>Filter Participants:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_filter</code></strong>.</p></li>
+<li><p>Use the <strong><code>filter()</code></strong> function to select only the participants that took the live experiment AND (&amp;) are older than 18.</p></li>
+</ul></li>
+<li><p><strong>Remove Duplicates:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_distinct</code></strong>.</p></li>
+<li><p>Use the <strong><code>distinct()</code></strong> function to remove any duplicate participants.</p></li>
+</ul></li>
+<li><p><strong>Convert Factors:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_factor</code></strong>.</p></li>
+<li><p>Use the <strong><code>mutate()</code></strong> function to convert the columns relating to experimental condition and gender to factors using <strong><code>as.factor()</code></strong>.</p></li>
+</ul></li>
+<li><p><strong>Finalize Cleaning:</strong></p>
+<ul>
+<li>Create a variable called <strong><code>df_clean</code></strong> with the following code: <strong><code>df_clean &lt;- df_factor</code></strong>.</li>
+</ul></li>
+<li><p><strong>Chaining with Pipe Operator:</strong></p>
+<ul>
+<li>Create a variable called <strong><code>df_clean_pipe</code></strong> and chain your code together using the pipe operator (<strong><code>%&gt;%</code></strong>).</li>
+</ul></li>
+</ol>
 </div>
-<div id="are-there-any-prerequisites-for-taking-this-course" class="section level2 hasAnchor" number="1.6">
-<h2><span class="header-section-number">1.6</span> Are there any prerequisites for taking this course?<a href="index.html#are-there-any-prerequisites-for-taking-this-course" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>None at all. This course is beginner-friendly. You also do not need to purchase anything (e.g., textbooks or software).</p>
-</div>
-<div id="do-i-need-to-bring-a-laptop-to-the-class" class="section level2 hasAnchor" number="1.7">
-<h2><span class="header-section-number">1.7</span> Do I need to bring a laptop to the class?<a href="index.html#do-i-need-to-bring-a-laptop-to-the-class" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>If you have a laptop that you work on, I strongly encourage you to bring it. That way, we can get R and RStudio installed onto your laptop, and you’ll be able to run R outside of the classroom.</p>
-<p>If you work with a desktop, don’t worry. The lab space will have computers that you can sign in and work on and use R.</p>
+<div id="summary-5" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Summary<a href="cleaning-flanker-test-dataset.html#summary-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Well done. You have cleaned your first data sets in R. The functions that we used today will cover 70-80% of the functions that you would need to handle most data cleaning problems. In the next chapter, we will look at situations where we need to transform the shape of our data, handle missing values, join together datasets, and identify problematic patterns in our data.</p>
 
 </div>
 </div>
@@ -400,8 +420,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="rstudio.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="datacleaning1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -432,7 +452,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/index.Rmd",
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/05-cleaning-p1.Rmd",
 "text": "Edit"
 },
 "history": {

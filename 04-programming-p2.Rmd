@@ -972,7 +972,7 @@ include_graphics("img/04-packages-convention.png")
 
 There you have it. You have successfully installed and loaded your first packages in R. Are they particularly useful packages? No! In the rest of this course, we will be loading packages more regularly, and these packages will make our lives significantly easier than if they were not around. In fact, we will use the `haven` package in the next section that will enable us to import SPSS data.
 
-## Importing and Exporting Data
+## Importing and Exporting Data {#importing}
 
 While creating data frames and lists in R is valuable, the majority of the data you'll work with in R will likely come from external sources. Therefore, it's essential to know how to import data into R. Similarly, once you've processed and analyzed your data in R, you'll often need to export it for further use or sharing.
 
