@@ -4,6 +4,7 @@ rmd_files: ["index.Rmd",
             "03-programming-p1.Rmd",
             "04-programming-p2.Rmd",
             "05-cleaning-p1.Rmd",
+            "06-cleaning-p2.Rmd",
             "appendix_boolean.Rmd"]
 output_dir: "docs"
 language:

@@ -1,0 +1,354 @@
+---
+title: "Introduction to R"
+author: "Ryan Donovan"
+date: "`r Sys.Date()`"
+description: This GitBook is for the R Workshops
+documentclass: book
+github-repo: ryandonovan93/rintro
+link-citations: yes
+bibliography:
+- book.bib
+- packages.bib
+site: bookdown::bookdown_site
+biblio-style: apalike
+---
+
+# **Introduction**
+
+Placeholder
+
+
+## Who is this resource for?
+## Should I learn R?
+## What will I learn to do in R?
+## What will I not learn to do in R?
+## Where and when will the workshops take place?
+## Are there any prerequisites for taking this course?
+## Do I need to bring a laptop to the class?
+
+<!--chapter:end:index.Rmd-->
+
+
+# **Getting Started with R and RStudio** {#rstudio}
+
+Placeholder
+
+
+## What is R?
+## Create a Posit Cloud Account.
+## Downloading R on to your Computer
+### Downloading R on Windows
+### Downloading R on Mac
+## Install and Open R Studio
+## Creating an R Project
+### Navigating RStudio
+#### The RStudio Workspace
+### Checking our Working Directory
+### Setting up a new Working Directory {#set_wd}
+## Writing our first R Code
+## Console vs Source Script
+## Let's write some statistical code
+### Comments
+## Summary
+## Glossary
+
+<!--chapter:end:02-rstudio.Rmd-->
+
+
+# **R Programming (Part I)** {#programming1}
+
+Placeholder
+
+
+## Activity 1: Set up your Working Directory
+## Using the Console
+### Typing Commands in the Console
+### Console Syntax (Aka "I'm Ron Burgundy?")
+#### R Console and Typos
+#### R Console and Incomplete Commands
+### Exercises
+## Data Types
+## Basic Data types in R
+### Character
+### Numeric (or Double)
+### Integer
+### Logical (otherwise know as Boolean)
+### Exercises
+## Variables
+### What's in a name? (Conventions for Naming Variables)
+### Exercises
+## Data Structures
+### Vectors
+#### Working with Vectors
+#### Vector Indexing and Subsetting
+#### Vectors - making it a little less abstract.
+### Data frames
+#### Selecting Data from a Data Frame
+##### Selecting Columns
+##### Selecting Rows
+##### Selecting Rows and Columns
+#### Adding Data to your Data Frame
+##### Adding Columns
+##### Adding Rows
+### Exercises
+## Summary
+## Glossary
+## Variable Name Table
+
+<!--chapter:end:03-programming-p1.Rmd-->
+
+
+# **R Programming (Part II)** {#programming2}
+
+Placeholder
+
+
+## Functions
+### The Syntax for Creating a Function
+### Creating a Simple Function (1-Argument)
+### Creating a Multi-Argument Function
+### Functions inside Functions
+### Returning Multiple Objects from a Function
+### Some Important Features about Functions
+#### Global vs Local Variables
+#### Default Arguments
+#### Syntax for Default Arguments
+### Exercises
+## The Factor Data Type
+### Creating a Factor
+### Using Factors to Sort Character Data
+### Exercises
+## The List Data Structure
+### Understanding Lists
+### Creating Lists
+### Lists within Lists (Indexing)
+### Summary
+## R Packages
+### Understanding R Packages
+### Installing and Loading R Package
+#### Installation
+#### Installation using RStudio Interface
+#### Installation using Commands
+### Loading Packages
+#### Loading using RStudio Interface
+#### Loading using the R Console Command
+### Testing our New Functions
+### Error Loading Packages
+### Package Conventions if Using Code
+### Summary
+## Importing and Exporting Data {#importing}
+### Importing CSV files.
+### Importing SPSS (.sav files).
+### Exporting Datasets in R
+#### Exporting to CSV Files
+#### Exporting to SPSS Files
+## Summary
+## Glossary 
+
+<!--chapter:end:04-programming-p2.Rmd-->
+
+
+# **Data Wrangling and Cleaning (Part I)** {#datacleaning1}
+
+Placeholder
+
+
+## **What is Data Wrangling and Cleaning?**
+### **Naming Conventions in this Book**
+### **Why is Data Cleaning Important?**
+### **How can R help you with Data Cleaning?**
+### Tidyverse (and Base R)
+## Let's Get Set Up
+### Activity 1.1: Set up your WD
+### Activity 1.2: Import your CSV files and R script
+### Activity 1.3: Install and load the tidyverse package
+## Cleaning the Remote Associates Data set.
+### Context and Viewing it in RStudio
+### Key Functions That Will Help You Clean Most Datasets
+## Choosing our Columns of Interest with `Select()`
+## Renaming our Columns of Interest with `rename()`
+## Creating new Columns using the `mutate()` function
+### Rewriting existing columns using `mutate()`
+## Checking in on our data set
+## Removing Duplicates using `distinct()`
+## Removing Rows using the `filter()` Function
+### Removing Rows Using Multiple Conditions with `filter()`
+## Identifying the Factors in our Data Frame
+## Summarising our Data by Groups using `group_by()` and `summarise()`
+## Chaining it All Together with the Pipe Operator
+### Using a Pipe Operator on the Remote Associations Data Frame
+## Activity: Clean the Flanker Dataset
+### **Cleaning Flanker Test Dataset**
+### **Load the "Tidyverse" Package**
+### **Reset Your Environment**
+### **Import the Data**
+### Cleaning Instructions
+## Summary
+
+<!--chapter:end:05-cleaning-p1.Rmd-->
+
+# Data Wrangling and Cleaning (Part II) {#datacleaning2}
+
+In this session, we are going to learn how to clean more challenging data than what we encountered in [Chapter 5](#datacleaning1).
+
+By the end of this session, you should be capable of the following:
+
+-   Understand the concepts of **wide** and **long** data and be capable of `pivoting` (i.e., transforming) from one format to another.
+
+-   Know how to merge together separate data frames into one file that you can clean.
+
+-   Identifying and handling missing data (`NA` values).
+
+-   Handle character data by knowing how to detect, substitute, or extract pattern in text.
+
+## Data Formats (Long and Wide Data)
+
+The vast majority of data that we will encounter in Psychological research will be found in tables (aka `Data Frames`). However, the format in which that table will be structured can significantly differ in two ways. Namely, the table might be `wide` or it could be `long`. Depending on the research software that you use, the raw data that you might download from a study might be in either `wide` or `long` table format.
+
+It is important to understand the differences between these formats because each format will enable you to conduct certain tasks more easily. Similarly, it is important to know how to effectively and efficiently `pivot` (i.e., transform or convert) one format into another so that you can perform the specific tasks you need to do on that data. Luckily, R and the tidyverse package is extremely equipped at handling both types of data and at converting from one type to another.
+
+In this section, we will first describe what constitutes `wide` and `long` data and what advantages each format has over its counterpart. We will then discuss how we can pivot from one data type into another in R.
+
+### Defining Long and Wide Data
+
+**Wide Data**
+
+In wide data, each row is a unique participant and each column is a separate variable. Table 6.1 shows an example of data in wide format. If I look at each row in the table, it contains all the information on that specific participant across each variable that I collected. I can see that participant 2 is female, 25 years old, is 165 centimeters tall, and weighs 60kg.
+
+```{=html}
+<table>
+  <caption>Table 6.1: Data in Wide Format</caption>
+
+| ID | Gender | Age | Height | Weight |
+|----|--------|-----|--------|--------|
+| 1  | Male   | 30  | 175    | 76     |
+| 2  | Female | 25  | 165    | 60     |
+| 3  | Non-Binary   | 35  | 185    | 80     |
+
+</table>
+```
+If you are like most psychologists, you are probably used to seeing data in wide formats. The advantage of this format is that it's easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because every participant is in a single row, you minimise the amount of repetition in your data set, again making it easier to read.
+
+In terms of statistical analysis, wide data is useful when you want to calculate descriptive statistics (e.g., mean, standard deviations) on the variables (e.g., columns) that you have collected. If the data is in wide format, it is easy to quickly isolate target columns and calculate the mean (e.g., mean(df\$Height) would give you the mean of the height column). Similarly, if you are performing statistical tests like ANOVA, Linear Regression, Correlation, then it is more convenient for your data to be in wide format.
+
+**Long Data**
+
+In long data, each row contains a participant single response to a single variable. Table 6.2 shows an example of data in wide format. Instead of having a column for each variable, we have a column that identifies which variable is being measured and the next column identifies their response to that variable. If we collect data on multiple variables, then you have several rows for that participant, with each row telling you a single response to a single variable.
+
+```{=html}
+<table>
+  <caption>Table 6.2: Data in Long Format</caption>
+
+| ID | Variable | Value |
+|----|----------|-------|
+| 1  | Gender   | Male  |
+| 1  | Age      | 30    |
+| 1  | Height   | 175   |
+| 1  | Weight   | 76    |
+| 2  | Gender   | Female|
+| 2  | Age      | 25    |
+| 2  | Height   | 165   |
+| 2  | Weight   | 60    |
+| 3  | Gender   | Non-Binary  |
+| 3  | Age      | 35    |
+| 3  | Height   | 185   |
+| 3  | Weight   | 80    |
+
+</table>
+```
+In Table 6.2, if I look at the first row, I can see that participant 1 was asked their gender (`Variable`) and their answer was male (`Value`). If I want to find out what their answers to the variables `Age`, `Height`, and `Weight` were, then I would need to look at the rows where `ID` was equal to 1.
+
+It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data, depending on the type of analysis that is being conducted. If you are analyzing data in R that is repeated measures or involves longitudinal designs, then long data is often more suitable. The long-format is easier for computers to work with then we are interested in within-subject variability over time. Additionally, a lot of packages used in data visualization require that your data is in long format.
+
+### Converting the Format of Our Data
+
+While it's important to know the differences between wide and long data formats, don't feel you have to memories every detail or will need to memories which test or which functions requires long or wide data. If you are running a statistical test it'll be pretty easy to find out what type of format your data needs to be in.
+
+Additionally, the process of converting your data from one format to another is straightforward thanks to two functions called: `pivot_longer()` and `pivot_wider()`.
+
+**Pivoting from Wide to Long**
+
+The `pivot_longer()` function enables us to take in a wide data frame and convert it into long format. If you type in the following into your console, information about the function will appear in the Help pane in RStudio[^06-cleaning-p2-1].
+
+[^06-cleaning-p2-1]: You can use this syntax with every function in R. We haven't used so far in the course because I personally think the "helpful information" that R gives you is absolute GARBAGE if you are beginner. It tends to be highly technical, minimal, and will often confuse more people than it will help inform.
+
+```{r}
+
+?pivot_longer
+
+```
+
+There is a lot of information that will appear in the help section. I want to draw your attention to the **Usage** section, which contains the arguments (inputs) that we can specify in the `pivot_longer()` function.
+
+There is a lot of potential inputs we can throw in, but I want to highlight the key arguments that you will use most of the time when you use this function
+
+| Argument      | Meaning                                                                                                                               |
+|------------------------------------|------------------------------------|
+| `data`        | The wide data frame that you want to convert to long format                                                                           |
+| `cols`        | The column(s) that will be moved or altered when you pivot the data frame.                                                            |
+| `names_to`    | So when we pivot from wide to long, any variable that was a column in the wide data frame, will become a value in the long data frame |
+| `values_from` |                                                                                                                                       |
+|               |                                                                                                                                       |
+
+Last week, we cleaned the `raw_remote_associations.csv` data frame to a variable called `df_clean.`If we used head(), we'll see that it is in wide format
+
+```{r}
+
+head(df_clean)
+
+```
+
+Let's convert `df_clean` to the long data format and let's call it `df_clean_long`. We are going to put every variable inside the `cols` function except for `ID`, `condition`, and `gender`.
+
+```{r}
+
+
+df_clean_long <- pivot_longer(df_clean,
+  cols = c(age, remote_pos:mean_openness), #we select age, and then we select everything from remote_pos to mean_openness in df_clean
+  names_to = "variables", #this creates a column called `variables` that will tell us the the variable the participant provided data for
+  values_to = "answer"#this creates a column called `answer` that will tell us participants actual answer to each variable
+)
+
+
+print(df_clean_long)
+```
+
+There we have it! Now our data is long-format. Each row contains a participant's individuals score on a particular variable.
+
+#### Long to Wide
+
+```{r fig.cap = "The arguments that we can pass to the pivot_longer() function", echo = FALSE, warning = FALSE}
+
+library(knitr)
+
+include_graphics("img/06-pivotwider.png")
+
+```
+
+| Argument      | Meaning                                                                                                                                                                                                                                                                  |
+|------------------------------------|------------------------------------|
+| `data`        | The wide data frame that you want to convert to long format                                                                                                                                                                                                              |
+| `cols`        | The column that will be pivoted from wide to long. This will be nearly every column in your data frame. The only columns that you would avoid pivoting are the participant ID (if you have it) and any factor (e.g., like the independent variable(s) in your study).    |
+| `names_from`  | So when we pivot from wide to long, any variable that was a column in the wide data frame, will become a value in the long data frame                                                                                                                                    |
+| `values_from` |                                                                                                                                                                                                                                                                          |
+|               |                                                                                                                                                                                                                                                                          |
+
+## Merging or Joining Data
+
+## Handling Missing Values
+
+## Dealing with Tricky Character Data
+
+<!--chapter:end:06-cleaning-p2.Rmd-->
+
+
+# Appendix - Understanding Boolean Operators in the Context of `filter()`
+
+Placeholder
+
+
+## How Boolean Operators Work:
+### Understanding R's Evaluation Process:
+
+<!--chapter:end:appendix_boolean.Rmd-->
+

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Introduction to R</title>
+  <title>6 Data Wrangling and Cleaning (Part II) | Introduction to R</title>
   <meta name="description" content="This GitBook is for the R Workshops" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Introduction to R" />
+  <meta property="og:title" content="6 Data Wrangling and Cleaning (Part II) | Introduction to R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook is for the R Workshops" />
   <meta name="github-repo" content="ryandonovan93/rintro" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Introduction to R" />
+  <meta name="twitter:title" content="6 Data Wrangling and Cleaning (Part II) | Introduction to R" />
   
   <meta name="twitter:description" content="This GitBook is for the R Workshops" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="datacleaning1.html"/>
+<link rel="next" href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -338,19 +338,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="datacleaning2" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Data Wrangling and Cleaning (Part II)<a href="datacleaning2.html#datacleaning2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this session, we are going to learn how to clean more challenging data than what we encountered in <a href="datacleaning1.html#datacleaning1">Chapter 5</a>.</p>
+<p>By the end of this session, you should be capable of the following:</p>
+<ul>
+<li><p>Understand the concepts of <strong>wide</strong> and <strong>long</strong> data and be capable of <code>pivoting</code> (i.e., transforming) from one format to another.</p></li>
+<li><p>Know how to merge together separate data frames into one file that you can clean.</p></li>
+<li><p>Identifying and handling missing data (<code>NA</code> values).</p></li>
+<li><p>Handle character data by knowing how to detect, substitute, or extract pattern in text.</p></li>
+</ul>
+<div id="data-formats-long-and-wide-data" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Data Formats (Long and Wide Data)<a href="datacleaning2.html#data-formats-long-and-wide-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The vast majority of data that we will encounter in Psychological research will be found in tables (aka <code>Data Frames</code>). However, the format in which that table will be structured can significantly differ in two ways. Namely, the table might be <code>wide</code> or it could be <code>long</code>. Depending on the research software that you use, the raw data that you might download from a study might be in either <code>wide</code> or <code>long</code> table format.</p>
+<p>It is important to understand the differences between these formats because each format will enable you to conduct certain tasks more easily. Similarly, it is important to know how to effectively and efficiently <code>pivot</code> (i.e., transform or convert) one format into another so that you can perform the specific tasks you need to do on that data. Luckily, R and the tidyverse package is extremely equipped at handling both types of data and at converting from one type to another.</p>
+<p>In this section, we will first describe what constitutes <code>wide</code> and <code>long</code> data and what advantages each format has over its counterpart. We will then discuss how we can pivot from one data type into another in R.</p>
+<div id="defining-long-and-wide-data" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Defining Long and Wide Data<a href="datacleaning2.html#defining-long-and-wide-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Wide Data</strong></p>
+<p>In wide data, each row is a unique participant and each column is a separate variable. Table 6.1 shows an example of data in wide format. If I look at each row in the table, it contains all the information on that specific participant across each variable that I collected. I can see that participant 2 is female, 25 years old, is 165 centimeters tall, and weighs 60kg.</p>
+<table>
+  <caption>Table 6.1: Data in Wide Format</caption>
+
+| ID | Gender | Age | Height | Weight |
+|----|--------|-----|--------|--------|
+| 1  | Male   | 30  | 175    | 76     |
+| 2  | Female | 25  | 165    | 60     |
+| 3  | Non-Binary   | 35  | 185    | 80     |
+
+</table>
+<p>If you are like most psychologists, you are probably used to seeing data in wide formats. The advantage of this format is that it’s easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because every participant is in a single row, you minimise the amount of repetition in your data set, again making it easier to read.</p>
+<p>In terms of statistical analysis, wide data is useful when you want to calculate descriptive statistics (e.g., mean, standard deviations) on the variables (e.g., columns) that you have collected. If the data is in wide format, it is easy to quickly isolate target columns and calculate the mean (e.g., mean(df$Height) would give you the mean of the height column). Similarly, if you are performing statistical tests like ANOVA, Linear Regression, Correlation, then it is more convenient for your data to be in wide format.</p>
+<p><strong>Long Data</strong></p>
+<p>In long data, each row contains a participant single response to a single variable. Table 6.2 shows an example of data in wide format. Instead of having a column for each variable, we have a column that identifies which variable is being measured and the next column identifies their response to that variable. If we collect data on multiple variables, then you have several rows for that participant, with each row telling you a single response to a single variable.</p>
+<table>
+  <caption>Table 6.2: Data in Long Format</caption>
+
+| ID | Variable | Value |
+|----|----------|-------|
+| 1  | Gender   | Male  |
+| 1  | Age      | 30    |
+| 1  | Height   | 175   |
+| 1  | Weight   | 76    |
+| 2  | Gender   | Female|
+| 2  | Age      | 25    |
+| 2  | Height   | 165   |
+| 2  | Weight   | 60    |
+| 3  | Gender   | Non-Binary  |
+| 3  | Age      | 35    |
+| 3  | Height   | 185   |
+| 3  | Weight   | 80    |
+
+</table>
+<p>In Table 6.2, if I look at the first row, I can see that participant 1 was asked their gender (<code>Variable</code>) and their answer was male (<code>Value</code>). If I want to find out what their answers to the variables <code>Age</code>, <code>Height</code>, and <code>Weight</code> were, then I would need to look at the rows where <code>ID</code> was equal to 1.</p>
+<p>It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data, depending on the type of analysis that is being conducted. If you are analyzing data in R that is repeated measures or involves longitudinal designs, then long data is often more suitable. The long-format is easier for computers to work with then we are interested in within-subject variability over time. Additionally, a lot of packages used in data visualization require that your data is in long format.</p>
+</div>
+<div id="converting-the-format-of-our-data" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Converting the Format of Our Data<a href="datacleaning2.html#converting-the-format-of-our-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>While it’s important to know the differences between wide and long data formats, don’t feel you have to memories every detail or will need to memories which test or which functions requires long or wide data. If you are running a statistical test it’ll be pretty easy to find out what type of format your data needs to be in.</p>
+<p>Additionally, the process of converting your data from one format to another is straightforward thanks to two functions called: <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
+<p><strong>Pivoting from Wide to Long</strong></p>
+<p>The <code>pivot_wider()</code> function enables us to take in a wide data frame and convert it into long format. If you type in the following into your console, information about the function will appear in the Help pane in RStudio<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="datacleaning2.html#cb1-1" tabindex="-1"></a>?pivot_wider</span></code></pre></div>
+<pre><code>## No documentation for &#39;pivot_wider&#39; in specified packages and libraries:
+## you could try &#39;??pivot_wider&#39;</code></pre>
+<p>There is a lot of information that will appear in the help section. I want to draw your attention to the <strong>Usage</strong> section, which contains the arguments (inputs) that we can specify in the <code>pivot_wider()</code> function.</p>
+<pre><code>## Warning: package &#39;knitr&#39; was built under R version 4.3.2</code></pre>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="img/06-pivotwider.png" alt="the arguments that we can pass to the pivot_wider() function"  />
+<p class="caption">
+Figure 6.1: the arguments that we can pass to the pivot_wider() function
+</p>
+</div>
+</div>
+</div>
+<div id="merging-or-joining-data" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Merging or Joining Data<a href="datacleaning2.html#merging-or-joining-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="handling-missing-values" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Handling Missing Values<a href="datacleaning2.html#handling-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="dealing-with-tricky-character-data" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Dealing with Tricky Character Data<a href="datacleaning2.html#dealing-with-tricky-character-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>You can use this syntax with every function in R. We haven’t used so far in the course because I personally think the “helpful information” that R gives you is absolute GARBAGE if you are beginner. It tends to be highly technical, minimal, and will often confuse more people than it will help inform.<a href="datacleaning2.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="datacleaning1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -381,7 +466,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/%s",
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/06-cleaning-p2.Rmd",
 "text": "Edit"
 },
 "history": {

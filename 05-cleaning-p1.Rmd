@@ -123,7 +123,7 @@ Alternatively, you can run the following command within the **data_cleaning_scri
 
 ```{r eval = F}
 
-df_raw <- read.csv("raw_remote_associations.csv") 
+df_raw <- read.csv("datasets/raw_remote_associations.csv") 
 
   
 ```

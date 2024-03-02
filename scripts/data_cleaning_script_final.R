@@ -435,7 +435,7 @@ df_clean_pipe <- df_raw %>%  #we take our raw dataframe AND THEN ( %>% )
 
 
 
-
+#now we can use the pipe to generate descriptive statistics
 
 df_clean_pipe %>%
   group_by(condition, gender) %>%
