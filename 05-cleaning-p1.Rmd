@@ -4,6 +4,8 @@
 
 library(tidyverse)
 
+df_clean <- read.csv("datasets/raw_remote_clean.csv")
+
 ```
 
 In this session, we are going to learn how to use key packages and functions that enable you to conduct data cleaning in R.
@@ -126,6 +128,7 @@ Alternatively, you can run the following command within the **data_cleaning_scri
 df_raw <- read.csv("datasets/raw_remote_associations.csv") 
 
   
+
 ```
 
 ```{r echo = F}
@@ -143,7 +146,6 @@ A good practice in R is to load packages at the start of your script. In the dow
 #library(tidyverse)
 
 ```
-
 
 ```{r fig.cap = "Tidyverse Installation", echo = FALSE, warning = FALSE}
 library(knitr)
@@ -167,7 +169,7 @@ include_graphics("img/05-tidyverse-message.PNG")
 
 ```
 
-You might also get the following warnings when you load in R. If you do, that just means you are using an older version of R. At the beginning of the class, we downloaded version 4.2 onto our own computers, but in the meantime version 4.3 has been released. We can stick with our current version for now. 
+You might also get the following warnings when you load in R. If you do, that just means you are using an older version of R. At the beginning of the class, we downloaded version 4.2 onto our own computers, but in the meantime version 4.3 has been released. We can stick with our current version for now.
 
 ```{r eval = F}
 
@@ -184,8 +186,6 @@ Warning: package ‘lubridate’ was built under R version 4.3.2
 
 
 ```
-
-
 
 ## Cleaning the Remote Associates Data set.
 
@@ -206,7 +206,7 @@ head(df_raw) #this will load the first six rows into the console
 Ouch! Now that is a data set only a parent could love. Here is what each column is telling us about each participant
 
 | Column                 | Description                                                                             |
-|-----------------|------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | X                      | An empty column that counts the row number.                                             |
 | Participant.Private.ID | Experiment ID.                                                                          |
 | Local.Timestamp        | Timestamp indicating when participants took part in the study.                          |
@@ -238,7 +238,7 @@ However, several issues are evident in this dataset:
 The following functions are extremely useful for cleaning data frame in R. They all come from the `tidyverse` package. The following table defines each package and what it does. We will use each function in this chapter to clean the `remote_associations` data frame, so you will get to practice each one.
 
 |                                                  Function                                                  | Description                                         |
-|:----------------------------------------------:|:-----------------------|
+|:---------------------------------------------:|:-----------------------|
 |                      [`select()`](https://dplyr.tidyverse.org/reference/select.html)                       | Include or exclude certain variables (columns)      |
 |                      [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)                       | Include or exclude certain observations (rows)      |
 |                      [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html)                       | Create new variables (columns)                      |
@@ -841,12 +841,9 @@ My advice, clean your data frames first using the approach we used here. Once it
 
 This exercise involves cleaning the Flanker Test Dataset, which was collected as part of a study investigating the effect of alcohol consumption on inhibiting incongruent responses (e.g., flanker effect). The dataset includes responses from 50 participants who took part in the study when it was made live. Participants answered questions related to their age, gender, and neuroticism. Additionally, participants were split into two conditions: control (no alcohol) and experiment (high alcohol).
 
-Download the files `cleaning-exercise.R` and `flanker.csv` to run this exercise. 
-
-
+Download the files `cleaning-exercise.R` and `flanker.csv` to run this exercise.
 
 ### **Load the "Tidyverse" Package**
-
 
 ```{r eval = F}
 library(tidyverse)
@@ -857,7 +854,6 @@ library(tidyverse)
 Before starting, it's recommended to clear your environment to prevent any accidental use of variables from previous tasks. You can do this by clicking the brush icon in the environment tab.
 
 ### **Import the Data**
-
 
 ```{r eval = F}
 df_raw <- read.csv("flanker.csv") #make sure you have this in your working directory  

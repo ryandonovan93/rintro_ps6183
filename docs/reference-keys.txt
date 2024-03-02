@@ -148,3 +148,12 @@ long-data
 pivoting-wide-to-long
 converting-the-format-of-our-data
 fig:unnamed-chunk-2
+fig:unnamed-chunk-1
+fig:unnamed-chunk-6
+pivoting-from-wide-to-long
+slightly-more-complicated-example
+long-to-wide
+fig:unnamed-chunk-7
+fig:unnamed-chunk-8
+fig:unnamed-chunk-9
+pivoting-our-remote-associations-data-frame
