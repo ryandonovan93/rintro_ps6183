@@ -11,8 +11,7 @@ df_clean <- df_clean %>% select(-X)
 
 ```
 
-
-In this session, we are going to learn how to clean more challenging data than what we encountered in [Chapter 5](#datacleaning1).
+In this session, we are going to learn how to clean more challenging data than what we encountered in [Chapter 5](#datacleaning1). In contrast to the last chapter, this section is more of a reference guide than an end-to-end cleaning example. That's because the tools you learn here might not always pop-up, or at least are unlikely to all pop-up in the one data frame. Nonetheless, when you combine the functions you learn here to clean data with the functions from last week, you will be able to handle an impressive amount (probably around 80%) of any data cleaning challenges you will encounter in your research.
 
 By the end of this session, you should be capable of the following:
 
@@ -26,17 +25,17 @@ By the end of this session, you should be capable of the following:
 
 ## Data Formats (Long and Wide Data)
 
-The vast majority of data that we will encounter in Psychological research will be found in tables (aka `Data Frames`). However, the format in which that table will be structured can significantly differ in two ways. Namely, the table might be `wide` or it could be `long`. Depending on the research software that you use, the raw data that you might download from a study might be in either `wide` or `long` table format.
+The majority of data encountered in Psychological research exists in tables, also known as **`Data Frames`**. These tables can be structured in two primary formats: **`wide`** or **`long`**. Depending on the research software used, the raw data downloaded from a study might be in either **`wide`** or **`long`** table format.
 
-It is important to understand the differences between these formats because each format will enable you to conduct certain tasks more easily. Similarly, it is important to know how to effectively and efficiently `pivot` (i.e., transform or convert) one format into another so that you can perform the specific tasks you need to do on that data. Luckily, R and the tidyverse package is extremely equipped at handling both types of data and at converting from one type to another.
+Understanding the differences between these formats is important because each format facilitates certain tasks more easily. Similarly, knowing how to effectively and efficiently **`pivot`** (i.e., transform or convert) between these formats is essential for performing specific tasks on the data. Fortunately, R and the tidyverse package are well-equipped to handle both types of data and to convert between them painlessly.
 
-In this section, we will first describe what constitutes `wide` and `long` data and what advantages each format has over its counterpart. We will then discuss how we can pivot from one data type into another in R.
+In this section, we will first describe what constitutes **`wide`** and **`long`** data formats and the advantages of each format over its counterpart. We will then discuss how to pivot between these formats using R.
 
 ### Defining Long and Wide Data
 
 **Wide Data**
 
-In wide data, each row is a unique participant and each column is a separate variable. Table 6.1 shows an example of data in wide format. If I look at each row in the table, it contains all the information on that specific participant across each variable that I collected. I can see that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.
+In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, I can see in one row of information that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.
 
 
 <table>
@@ -50,13 +49,13 @@ In wide data, each row is a unique participant and each column is a separate var
 
 </table>
 
-If you are like most psychologists, you are used to seeing data in wide formats in either Excel or SPSS. The advantage of this format is that it's easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because every participant is in a single row, you minimise the amount of repetition in your data set, again making it easier to read.
+If you are like most psychologists, you are used to seeing data in wide formats in either Excel or SPSS. The advantage of this format is that it's easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because each participant is in a single row, repetition in the dataset is minimised, making it easier to read.
 
-In terms of statistical analysis, wide data is useful when you want to calculate descriptive statistics (e.g. mean, standard deviations) on the variables (i.e. columns) that you have collected. If the data is in wide format, it is easy to quickly isolate target columns and calculate the mean (e.g., mean(df\$Height) would give you the mean of the height column). Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R if your data is in wide format. 
+In terms of statistical analysis, wide data is useful for calculating descriptive statistics (e.g., mean, standard deviations) on variables. Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R when the data is in wide format.
 
 **Long Data**
 
-In long data, each row contains a participant's single response to a single variable. Table 6.2 shows an example of data in wide format. Instead of having a column for each variable, we have one column that identifies which variable is being measured and the next column identifies their response to that variable. If we collect data on multiple variables, then you have several rows for that participant, with each row telling you a single response to a single variable.
+In long data, each row contains a participant's single response to a single variable. Table 6.2 illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant's response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.
 
 
 <table>
@@ -79,19 +78,19 @@ In long data, each row contains a participant's single response to a single vari
 
 </table>
 
+Each row in Table 6.2 represents a participant's response to a single variable. If I look at row 1, I can see that participant 1 was asked their age (`Variable`) and their answer was 30 (`Value`). I have to scan other rows where ID is 1 to find out more information about this participant.
 
-In Table 6.2, if I look at the first row, I can see that participant 1 was asked their age (`Variable`) and their answer was 30 (`Value`). If I want to find out what their answers to the variables `Height`, `Weight`, and `BMI` were, then I would need to look at the rows where `ID` was equal to 1.
+It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data. This is one of the reasons why the concept of `Tidy Data` discussed in the previous chapter prefers data in the long format - every row contains the minimum amount of information needed rather than "cluttering" rows with lots of information.
 
-It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data. This is one of the reasons why the concept of `Tidy Data` discussed in the previous chapter prefers data in the long format - every row contains the minimum amount of information needed rather than "cluttering" rows with lots of information. The preference for long data isn't only stylistic, long-data format is more suitable for certain forms of analyses. Long data is often more suitable if you are analyzing data in R that involves repeated measures or longitudinal designs, basically any test where we are interested in within-subject variability over time. Similarly, a lot of the packages/functions developed to enable high quality data visualizations were built with the assumption that your data is in long-format. 
-
+This preference for long data isn't only stylistic, long-data format is more suitable for certain forms of analyses. Long data is often more suitable if you are analyzing data in R that involves repeated measures or longitudinal designs, basically any test where we are interested in within-subject variability over time. Similarly, a lot of the packages/functions developed to enable high quality data visualizations were built with the assumption that your data is in long-format.
 
 ## Converting the Format of Our Data
 
-While it's important to know the differences between wide and long data formats, do not feel you have to memories every detail or will need to memories which test or which functions requires long or wide data. If you are running a statistical test it'll be pretty easy to find out what type of format your data needs to be in. If your data is not in the correct format, then the tidyverse package makes it straightforward to convert one format to another, thanks to two functions called: `pivot_longer()` and `pivot_wider()`.
+While it's important to know the differences between wide and long data formats, do not feel you have to memories every detail. If you are running a statistical test it'll be pretty easy to find out what type of format your data needs to be in. If the data is not in the correct format, then the tidyverse package makes it straightforward to convert one format to another, thanks to two functions called: **`pivot_longer()`** and **`pivot_wider()`**.
 
 ### Pivoting from Wide to Long
 
-The `pivot_longer()` function enables us to take in a wide data frame and convert it into long format. If you type in the following into your console, information about the function will appear in the Help pane in RStudio[^06-cleaning-p2-1].
+The **`pivot_longer()`** function converts a wide data frame into long format. Typing **`?pivot_longer`** into the console provides detailed information about this function in RStudio through the Help tab in the Files Pane[^06-cleaning-p2-1].
 
 [^06-cleaning-p2-1]: You can use this syntax with every function in R. We haven't used so far in the course because I personally think the "helpful information" that R gives you is absolute GARBAGE if you are beginner. It tends to be highly technical, minimal, and will often confuse more people than it will help inform.
 
@@ -105,14 +104,13 @@ There is a lot of information that will appear in the help section. I want to dr
 
 There is a lot of potential inputs we can throw in, but I want to highlight the key arguments that you will use most of the time when you use this function
 
-| Argument     | Meaning                                                                                                                                                                          |
+| Argument    | Meaning                                                                                                                                                                          |
 |------------------------------------|------------------------------------|
-| `data`       | The wide data frame that you want to convert to long format                                                                                                                      |
-| `cols`       | The column(s) that will be moved or altered when you pivot the data frame.                                                                                                       |
-| `names_to`   | The names of each variable identified in cols will be stored in a new column in our long data frame. The names_to argument specifies the name(s) of that new column(s).          |
-| `values_to`  | The values associated with each variable identified in cols will be stored in a new column in our long data frame. The values_to argument specifies the name of that new column. |
-| names_prefix |                                                                                                                                                                                  |
-| names_sep    |                                                                                                                                                                                  |
+| `data`      | Here you specify the wide data frame that you want to convert to long format                                                                                                     |
+| `cols`      | The column(s) that will be moved or altered when you pivot the data frame.                                                                                                       |
+| `names_to`  | The names of each variable identified in cols will be stored in a new column in our long data frame. The names_to argument specifies the name(s) of that new column(s).          |
+| `values_to` | The values associated with each variable identified in cols will be stored in a new column in our long data frame. The values_to argument specifies the name of that new column. |
+|             |                                                                                                                                                                                  |
 
 Let's simulate an example data frame to use `pivot_longer`. Copy and paste the code below to your R script and run it to create the data frame
 
@@ -131,7 +129,9 @@ wide_df <- data.frame(
 head(wide_df)
 ```
 
-So we've created a wide data frame with 10 participants (5 male, 5 female) with scores on their Extraversion and Neuroticism. Now let's pivot it to a long data format and create a variable called `long_df`
+So we've created a wide data frame with 10 participants (5 male, 5 female) with scores on each of the Big Five personality traits. We know the data frame is wide because every variable is a separate column and each row tells us a participant's response to each variable.
+
+Let's see how we can convert this data frame from wide to long using `pivot_longer()`. We'll call the long data frame `long_df`:
 
 ```{r}
 
@@ -146,7 +146,9 @@ head(long_df)
 
 ```
 
-Nice, we have successfully converted our data from wide to long. We typically do not pivot the ID column, because that enables us to identify which participant's score each variable. Let's look at what happens if we do include `ID` in the `cols argument`
+Now we have the same data frame but in a different format.
+
+The figure below gives an example of the pivot process. We typically do not pivot the ID column, because that enables us to identify which participant's score each variable. Let's look at what happens if we do include `ID` in the `cols argument`
 
 ```{r}
 
@@ -158,15 +160,22 @@ pivot_longer(
 
 ```
 
-Now we have lost our record for identifying which participant contributed to which data point. 
+Now we have lost our record for identifying which participant contributed to which data point. This identifies a key about using `pivot_longer()` in that not EVERYTHING needs to pivoted, it depends on our analytical needs. Let's go through a slightly more complicated data frame to illustrate what I mean by this.
+
+```{r fig.cap="Visual representation of what is pivoted", echo = F}
+
+include_graphics("img/06-pivot-visualisation.png")
+
+```
 
 ### Pivoting our Remote Associations Data Frame
 
-Last week, we cleaned the `raw_remote_associations.csv` data frame to a variable called `df_clean.` If we used head(), we'll see that it is in wide format
+Last week, we cleaned the `raw_remote_associations.csv` data frame to a variable called `df_clean.` If we used `head()`, we'll see that it is in wide format
 
 ```{r}
 
 #if you do not have df_clean in your environment, download the dataset `raw_remote_clean.csv` from the Teams channel, and put in the week 5 folder. 
+
 #Run the following code to load it in 
 #df_clean <- read.csv("raw_remote_clean.csv") 
 
@@ -174,27 +183,26 @@ head(df_clean)
 
 ```
 
-
-Let's convert `df_clean` to the long data format and let's call it `df_clean_long`. We are going to put every variable inside the `cols` function except for `ID`, `condition`, and `gender`.
+Let's convert `df_clean` to the long data format and let's call it `df_clean_long`. But we are not going to follow the same protocol as the last example, where we pivoted everything except `ID`. For this data frame, we are going put every variable inside the `cols` argument except for `ID`, `condition`, and `gender`.
 
 ```{r}
 
 
 df_clean_long <- pivot_longer(df_clean,
   cols = c(age, remote_pos:mean_openness), #we select age, and then we select everything from remote_pos to mean_openness in df_clean
-  names_to = "variables", #this creates a column called `variables` that will tell us the the variable the participant provided data for
-  values_to = "answer"#this creates a column called `answer` that will tell us participants actual answer to each variable
+  names_to = "Variable", #this creates a column called `variables` that will tell us the the variable the participant provided data for
+  values_to = "Response"#this creates a column called `answer` that will tell us participants actual answer to each variable
 )
 
 
 print(df_clean_long)
 ```
 
-There we have it! Now our data is long-format. Each row contains a participant's individuals score on a particular variable. 
+There we have it! Now our data is long-format. Each row contains a participant's individuals score on a particular variable. But this time, the participant's information on `condition` and `gender` also gets replicated for row created for that participant.
 
-You might be wondering why we did not include the variables `condition` and `gender` in our conversion. There is both a technical reason and an data analysis reason for why we did not do this. 
+But why did we not include the variables `condition` and `gender` in our conversion? There is both a technical reason and an data analysis reason for why we did not do this. Let's address the boring technical reason first.
 
-The technical reason is that we would not be able to have a column that included the values for `condition` and `gender` with the values for are other columns like `age` and `total_openness`. This is because the data types for these variables are different, as the `condition` and `gender` variables include the `factor` data type, and the other variables are `numerical`. If you remember from when we discussed vectors (e.g., and remember that every column in a data frame is a lucky vector that found a home), we mentioned that vectors are lines of data where everything in the vector is of the same data type. 
+Technically, we actually can't create the `Answer` column by combining participants responses on variables like `condition` and `gender` with their answers on the other variables. This is because the data type for both `condition` and `gender` are `factors`, whereas the data type for every other variable is `numeric`. If you remember from our vector discussion (and remember everything that every column is just a lucky vector who found a home) we mentioned that vectors are lines of data where everything in the line is of the same data type. You can have character vectors, factor vectors, numerical vectors, logical vectors, integer vectors, but you cannot have a single vector with multiple data types.
 
 So if we try `pivot_longer` on our `df_clean` data frame, including the `gender` and `condition` columns, we get the following error:
 
@@ -202,31 +210,42 @@ So if we try `pivot_longer` on our `df_clean` data frame, including the `gender`
 
 pivot_longer(df_clean,
   cols = c(condition:mean_openness), #we try to select everything except ID
-  names_to = "variables", #this creates a column called `variables` that will tell us the the variable the participant provided data for
-  values_to = "answer"#this creates a column called `answer` that will tell us participants actual answer to each variable
+  names_to = "Variable", #this creates a column called `variables` that will tell us the the variable the participant provided data for
+  values_to = "Response"#this creates a column called `answer` that will tell us participants actual answer to each variable
 )
 
 
 ```
 
-If we wanted to convert every column, then we would need to convert all our columns (except ID) to the same data type. Since it is way easier to convert numeric data to character than vice versa, we could include the argument `values_transform` to convert everything in our `answer` column to a character.
+If you're stubborn and you insist on pivoting everything, then you would need to convert all of our columns to the same data type. There is an argument in the `pivot_longer()` function that enables us to do this and it is called `values_transform`. The easiest solution would be to transform everything that will go in our `Answer` vector/column into a `character`.
 
 ```{r}
 
 pivot_longer(df_clean,
   cols = condition:mean_openness, 
-  names_to = "variables", 
-  values_to = "answer",
-  values_transform = list(answer = as.character)
+  names_to = "Variable", 
+  values_to = "Response",
+  values_transform = list(Response = as.character)
   )
 
 
 ```
-I really would not recommend this approach, as this would you would not be able to actually run descriptive and inferential statistical analysis on the answer column without first transforming them back into the numeric data type. 
 
-#### Long to Wide
+That is an example of a long data frame, which looks neater on the eye than our earlier attempt. BUT - I really do not recommend this approach. Since everything inside `answer` is not a character, we actually can't conduct any quantitative analysis. So it defeats the purpose!
 
-```{r fig.cap = "The arguments that we can pass to the pivot_longer() function", echo = FALSE, warning = FALSE}
+This leads me on to the analytical reason why we don't want to pivot our `condition` and `gender` columns. Since `condition` and `gender` are factors, we will want to investigate the extent to which participants scores on `Wellbeing` and our Big Five traits are influenced by differences in each factor. In other words, we want to investigate the effect of our independent variables on our dependent variables. If you look at `df_clean_long`, the data frame keeps a record of a participant's score on each dependent variable in relation to our two independent variables. This sets us up nicely for conducting statistical analysis.
+
+```{r echo = F}
+
+head(df_clean_long, 10)
+
+```
+
+### Pivoting from Long to Wide
+
+Okay, so we know how to convert data frames from wide to long, but how can we convert from long to wide? Well we can use the `pivot_wider()` function. The figure below shows the results of typing `?pivot_wider` into the console. The table below it shows the key arguments of this function.
+
+```{r fig.cap = "The arguments that we can pass to the pivot_wider() function", echo = FALSE, warning = FALSE}
 
 library(knitr)
 
@@ -234,16 +253,217 @@ include_graphics("img/06-pivotwider.png")
 
 ```
 
-| Argument      | Meaning                                                                                                                                                                                                                                                               |
-|------------------------------------|------------------------------------|
-| `data`        | The wide data frame that you want to convert to long format                                                                                                                                                                                                           |
-| `cols`        | The column that will be pivoted from wide to long. This will be nearly every column in your data frame. The only columns that you would avoid pivoting are the participant ID (if you have it) and any factor (e.g., like the independent variable(s) in your study). |
-| `names_from`  | So when we pivot from wide to long, any variable that was a column in the wide data frame, will become a value in the long data frame                                                                                                                                 |
-| `values_from` |                                                                                                                                                                                                                                                                       |
-|               |                                                                                                                                                                                                                                                                       |
+| Argument      | Meaning                                                                                                                                                                       |
+|------------------|------------------------------------------------------|
+| `data`        | The long data frame that you want to convert to wide format                                                                                                                   |
+| `id_cols`     | The columns that help identify each participant. This is often the values that are repeated in each row within a long data frame (e.g., like ID or any independent variables) |
+| `names_from`  | When we pivot from long to wide, we will be creating new columns for each variable that we collected data on. We need to tell R where to find the names for those variables.  |
+| `values_from` | We need to tell R where to find the values for the new columns that we are creating.                                                                                          |
 
-## Merging or Joining Data
+Let's convert our `long_df` back into wide format.
+
+```{r}
+
+pivot_wider(long_df, 
+            id_cols = ID, 
+            names_from = Variable,
+            values_from = Response)
+
+```
+
+Look familiar? If you compare it to our original `wide_df`, you'll notice they look exactly the same.
+
+Now let's do the same thing with the long version of `remote_associations` data frame.
+
+```{r}
+
+df_clean_wide <- pivot_wider(df_clean_long,
+                             id_cols = ID:gender,
+                             names_from = Variable,
+                             values_from = Response)
+
+head(df_clean_wide)
+
+```
+
+If you compare that to the head of `df_clean`, you'll see that its back to the format we cleaned it to last week.
+
+#### Summary
+
+That covers basic pivoting from long to wide and wide to long using `pivot_long()` and `pivot_wide()`. However, both functions enable you to handle much more complicated data frames and clean them up as you go. We won't cover that in this version of the textbook, but [I highly recommend reading the `Advanced Pivoting` section from the `Data Wrangling` Standford ebook if your pivoting needs are more complicated than the examples here](https://dcl-wrangle.stanford.edu/pivot-advanced.html).
 
 ## Handling Missing Values
+
+In psychological research, dealing with missing data is a common challenge that requires careful consideration to ensure the integrity and validity of analyses. In this section, we'll explore how to handle missing values (NA) in R using the tidyverse package. We'll cover techniques for identifying missing values, strategies for handling them, and best practices for addressing missing data in psychological research studies.
+
+### **Introduction to Missing Values**
+
+Missing values, often represented as NA in R, occur when data is not available or cannot be recorded for certain observations. This can occur due to various reasons such as non-response in surveys, data entry errors, or incomplete data collection processes. It's essential to understand and address missing values appropriately to avoid biased or misleading results in data analysis.
+
+### **Identifying Missing Values**
+
+Detecting missing values in datasets is the first step towards handling them effectively. In R, we can use functions like **`is.na()`** or **`complete.cases()`** to identify missing values. Let's illustrate this with an example using a hypothetical psychological research dataset:
+
+```{r}
+
+
+# Example dataset with missing values
+data <- tibble(
+  id = 1:10,
+  age = c(25, NA, 30, 28, 35, NA, 40, 22, NA, 29),
+  gender = c("Male", "Female", "Male", NA, "Female", "Male", NA, "Male", "Female", NA)
+)
+
+# Check for missing values
+missing_values <- data %>%
+  summarise_all(~sum(is.na(.)))
+
+print(missing_values)
+
+```
+
+In this example, we've created a dataset **`data`** with variables **`age`** and **`gender`**, some of which contain missing values. We then used **`summarise_all()`** along with **`is.na()`** to count the number of missing values in each column.
+
+### **Dealing with Missing Values**
+
+Once missing values are identified, we can employ various strategies to handle them effectively. Common approaches include removing rows or columns with missing values, imputing missing values with estimates, or using more advanced imputation methods.
+
+#### Removing Missing Values
+
+To remove rows or columns with missing values, we can use functions like **`drop_na()`** or **`filter()`** in the tidyverse. Here's how we can remove rows with missing values in the **`age`** column:
+
+```{r}
+
+# Remove rows with missing values in the age column
+clean_data <- data %>%
+  drop_na(age)
+
+print(clean_data)
+
+#filter
+
+```
+
+#### Imputing Missing Values
+
+Imputing missing values involves replacing them with estimates such as mean, median, or mode. Let's impute missing values in the **`age`** column with the mean age:
+
+```{r}
+
+
+# Impute missing values in the age column with mean age
+imputed_data <- data %>%
+  mutate(age = if_else(is.na(age), mean(age, na.rm = TRUE), age))
+
+print(imputed_data)
+```
+
+### **Best Practices and Considerations**
+
+When handling missing values, it's important to adhere to best practices and consider the following:
+
+-   Document the handling of missing values in data preprocessing steps.
+
+-   Conduct sensitivity analyses to assess the robustness of results to different missing data handling approaches.
+
+-   Consider potential biases introduced by missing data and address them in the interpretation of results.
+
+### **Summary**
+
+Handling missing values is a critical aspect of data preprocessing in psychological research. By using the tidyverse package in R, researchers can effectively identify and handle missing values, ensuring the integrity and validity of their data analysis. In this section, we've covered techniques for identifying missing values, strategies for handling them, and best practices for addressing missing data. Through practical examples and considerations, researchers can confidently manage missing values in their research studies.
+
+## Merging Data (i.e., Joining Different Datasets Together)
+
+In psychological research, we'll often encounter situations where data from multiple sources or studies need to be combined for analysis. We might have collected demographic information separately from participants answers on experimental tasks. We may have collected data using a variety of platforms (e.g., survey data using Qualtrics and response data using PsychoPy). Additionally, the research software tools we use might modulate the data. For example, if we run a study in Gorilla Research, then each separate task and questionnaire gets downloaded as separate files.
+
+Whatever the reason, you will often need to merge or join data together from different sources in order to conduct the analysis you need. Luckily, R is quite capable at facilitating data merging. In this subsection, we will look at ways you can merge different data frames together.
+
+### Introduction to Merging Data
+
+Merging data involves combining data frames based on their common variables. Let's image we have two data frames called `df_demographics` and `df_rt`. These data frames contain information on both participants demographic information and their reaction time on a specific task and which condition they were randomly assigned to. Let's load both of these data frames into R (make sure you have downloaded them and put them into your working directory before running the following code).
+
+```{r eval = FALSE}
+
+df_demographics <- read.csv("demographics.csv")
+df_rt <- read.csv("reaction_time.csv")
+
+head(df_demographics)
+head(df_rt)
+
+```
+
+```{r echo = F}
+
+
+
+df_demographics <- read.csv("datasets/demographics.csv")
+df_rt <- read.csv("datasets/reaction_time.csv")
+
+head(df_demographics)
+head(df_rt)
+
+
+```
+
+Ideally, we would have one merged data frame that would contain a participant's response on all our variables. Luckily, there are a multitude in ways we can do this through the `tidyverse package`.
+
+These types of join are:
+
+-   **Inner Join**: Includes only the rows that have matching values in both datasets. This type of join retains only the observations that exist in both datasets, excluding unmatched rows.
+
+-   **Left Join**: Includes all rows from the left dataset and matching rows from the right dataset. Unmatched rows from the right dataset are filled with NA values.
+
+-   **Right Join**: Includes all rows from the right dataset and matching rows from the left dataset. Unmatched rows from the left dataset are filled with NA values.
+
+-   **Outer Join (or Full Join)**: Includes all rows from both datasets, filling in missing values with NA where there are no matches.
+
+Using our `df_demographics` and `df_rt` data frames, lets show you the result of each of these joins and why/when you would use them. 
+
+### Inner_Join
+
+The `inner_join()` function will join together two data frames, but it will only keep the rows that have matching values in both data frames, 
+
+
+#### Key Variables for Merging
+
+In merging data, researchers identify key variables or columns that serve as the basis for combining datasets. These key variables are typically common identifiers shared between datasets, such as participant ID, study ID, or other relevant identifiers. Ensuring consistency in key variables is crucial to accurately merge datasets and avoid errors in the analysis.
+
+#### Methods for Merging Data
+
+R provides several methods or functions for merging data, each offering different capabilities and performance characteristics. These include the **`merge()`** function and various join functions available in the **`dplyr`** package, such as **`left_join()`**, **`right_join()`**, **`inner_join()`**, and **`full_join()`**.
+
+Researchers can choose the appropriate method based on factors such as the size of the datasets, the desired type of join, and personal preference. Experimenting with different merging techniques allows researchers to determine the most suitable approach for their specific research needs.
+
+#### Example Merging Scenarios
+
+To illustrate the merging process in psychological research, consider the following scenarios:
+
+1.  **Merging Survey Responses with Demographic Information**: Researchers conducting a survey study may need to merge participants' responses with demographic data, such as age, gender, and education level. This merging process enables researchers to analyze how demographic factors influence survey outcomes.
+
+2.  **Combining Intervention Data from Multiple Studies**: In a meta-analysis or systematic review, researchers may merge data from multiple intervention studies to evaluate the effectiveness of interventions across diverse populations. By combining intervention outcomes and participant characteristics, researchers can identify common trends or disparities in treatment effects.
+
+#### Handling Missing Values and Duplicates
+
+During the merging process, researchers should be mindful of handling missing values and duplicate records to ensure the integrity of the merged dataset. Strategies for addressing missing values and duplicates include imputation techniques, data cleaning procedures, and careful examination of merged data to identify inconsistencies.
+
+#### Best Practices and Tips
+
+To optimize the merging process, researchers should follow best practices such as:
+
+-   Checking for data consistency and completeness before merging.
+
+-   Documenting the merging process and rationale behind choosing specific join types.
+
+-   Testing the merged dataset to ensure it meets the requirements of downstream analysis.
+
+#### Exercises
+
+To reinforce understanding of data merging concepts, consider the following exercises:
+
+1.  Merge two datasets containing survey responses and demographic information using different join types (e.g., inner join, left join).
+
+2.  Combine data from multiple experimental studies to compare intervention effects across different participant groups.
+
+3.  Practice handling missing values and duplicates during the merging process and evaluate the impact on the merged dataset.
 
 ## Dealing with Tricky Character Data

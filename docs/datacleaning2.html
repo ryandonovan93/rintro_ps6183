@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-03-02" />
+<meta name="date" content="2024-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -310,9 +310,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-wide-to-long"><i class="fa fa-check"></i><b>6.2.1</b> Pivoting from Wide to Long</a></li>
 <li class="chapter" data-level="6.2.2" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-our-remote-associations-data-frame"><i class="fa fa-check"></i><b>6.2.2</b> Pivoting our Remote Associations Data Frame</a></li>
+<li class="chapter" data-level="6.2.3" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-long-to-wide"><i class="fa fa-check"></i><b>6.2.3</b> Pivoting from Long to Wide</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-or-joining-data"><i class="fa fa-check"></i><b>6.3</b> Merging or Joining Data</a></li>
-<li class="chapter" data-level="6.4" data-path="datacleaning2.html"><a href="datacleaning2.html#handling-missing-values"><i class="fa fa-check"></i><b>6.4</b> Handling Missing Values</a></li>
+<li class="chapter" data-level="6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#handling-missing-values"><i class="fa fa-check"></i><b>6.3</b> Handling Missing Values</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-missing-values"><i class="fa fa-check"></i><b>6.3.1</b> <strong>Introduction to Missing Values</strong></a></li>
+<li class="chapter" data-level="6.3.2" data-path="datacleaning2.html"><a href="datacleaning2.html#identifying-missing-values"><i class="fa fa-check"></i><b>6.3.2</b> <strong>Identifying Missing Values</strong></a></li>
+<li class="chapter" data-level="6.3.3" data-path="datacleaning2.html"><a href="datacleaning2.html#dealing-with-missing-values"><i class="fa fa-check"></i><b>6.3.3</b> <strong>Dealing with Missing Values</strong></a></li>
+<li class="chapter" data-level="6.3.4" data-path="datacleaning2.html"><a href="datacleaning2.html#best-practices-and-considerations"><i class="fa fa-check"></i><b>6.3.4</b> <strong>Best Practices and Considerations</strong></a></li>
+<li class="chapter" data-level="6.3.5" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-7"><i class="fa fa-check"></i><b>6.3.5</b> <strong>Summary</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-data-i.e.-joining-different-datasets-together"><i class="fa fa-check"></i><b>6.4</b> Merging Data (i.e., Joining Different Datasets Together)</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-merging-data"><i class="fa fa-check"></i><b>6.4.1</b> Introduction to Merging Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="datacleaning2.html"><a href="datacleaning2.html#types-of-joins"><i class="fa fa-check"></i><b>6.4.2</b> Types of Joins</a></li>
+</ul></li>
 <li class="chapter" data-level="6.5" data-path="datacleaning2.html"><a href="datacleaning2.html#dealing-with-tricky-character-data"><i class="fa fa-check"></i><b>6.5</b> Dealing with Tricky Character Data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>7</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
@@ -344,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="datacleaning2" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">6</span> Data Wrangling and Cleaning (Part II)<a href="datacleaning2.html#datacleaning2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In this session, we are going to learn how to clean more challenging data than what we encountered in <a href="datacleaning1.html#datacleaning1">Chapter 5</a>.</p>
+<p>In this session, we are going to learn how to clean more challenging data than what we encountered in <a href="datacleaning1.html#datacleaning1">Chapter 5</a>. In contrast to the last chapter, this section is more of a reference guide than an end-to-end cleaning example. That’s because the tools you learn here might not always pop-up, or at least are unlikely to all pop-up in the one data frame. Nonetheless, when you combine the functions you learn here to clean data with the functions from last week, you will be able to handle an impressive amount (probably around 80%) of any data cleaning challenges you will encounter in your research.</p>
 <p>By the end of this session, you should be capable of the following:</p>
 <ul>
 <li><p>Understand the concepts of <strong>wide</strong> and <strong>long</strong> data and be capable of <code>pivoting</code> (i.e., transforming) from one format to another.</p></li>
@@ -354,13 +366,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="data-formats-long-and-wide-data" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Data Formats (Long and Wide Data)<a href="datacleaning2.html#data-formats-long-and-wide-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The vast majority of data that we will encounter in Psychological research will be found in tables (aka <code>Data Frames</code>). However, the format in which that table will be structured can significantly differ in two ways. Namely, the table might be <code>wide</code> or it could be <code>long</code>. Depending on the research software that you use, the raw data that you might download from a study might be in either <code>wide</code> or <code>long</code> table format.</p>
-<p>It is important to understand the differences between these formats because each format will enable you to conduct certain tasks more easily. Similarly, it is important to know how to effectively and efficiently <code>pivot</code> (i.e., transform or convert) one format into another so that you can perform the specific tasks you need to do on that data. Luckily, R and the tidyverse package is extremely equipped at handling both types of data and at converting from one type to another.</p>
-<p>In this section, we will first describe what constitutes <code>wide</code> and <code>long</code> data and what advantages each format has over its counterpart. We will then discuss how we can pivot from one data type into another in R.</p>
+<p>The majority of data encountered in Psychological research exists in tables, also known as <strong><code>Data Frames</code></strong>. These tables can be structured in two primary formats: <strong><code>wide</code></strong> or <strong><code>long</code></strong>. Depending on the research software used, the raw data downloaded from a study might be in either <strong><code>wide</code></strong> or <strong><code>long</code></strong> table format.</p>
+<p>Understanding the differences between these formats is important because each format facilitates certain tasks more easily. Similarly, knowing how to effectively and efficiently <strong><code>pivot</code></strong> (i.e., transform or convert) between these formats is essential for performing specific tasks on the data. Fortunately, R and the tidyverse package are well-equipped to handle both types of data and to convert between them painlessly.</p>
+<p>In this section, we will first describe what constitutes <strong><code>wide</code></strong> and <strong><code>long</code></strong> data formats and the advantages of each format over its counterpart. We will then discuss how to pivot between these formats using R.</p>
 <div id="defining-long-and-wide-data" class="section level3 hasAnchor" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Defining Long and Wide Data<a href="datacleaning2.html#defining-long-and-wide-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Wide Data</strong></p>
-<p>In wide data, each row is a unique participant and each column is a separate variable. Table 6.1 shows an example of data in wide format. If I look at each row in the table, it contains all the information on that specific participant across each variable that I collected. I can see that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.</p>
+<p>In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, I can see in one row of information that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.</p>
 <table>
 <caption>
 Table 6.1: Data in Wide Format
@@ -400,10 +412,10 @@ Table 6.1: Data in Wide Format
 </tbody>
 </table>
 </table>
-<p>If you are like most psychologists, you are used to seeing data in wide formats in either Excel or SPSS. The advantage of this format is that it’s easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because every participant is in a single row, you minimise the amount of repetition in your data set, again making it easier to read.</p>
-<p>In terms of statistical analysis, wide data is useful when you want to calculate descriptive statistics (e.g. mean, standard deviations) on the variables (i.e. columns) that you have collected. If the data is in wide format, it is easy to quickly isolate target columns and calculate the mean (e.g., mean(df$Height) would give you the mean of the height column). Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R if your data is in wide format.</p>
+<p>If you are like most psychologists, you are used to seeing data in wide formats in either Excel or SPSS. The advantage of this format is that it’s easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because each participant is in a single row, repetition in the dataset is minimised, making it easier to read.</p>
+<p>In terms of statistical analysis, wide data is useful for calculating descriptive statistics (e.g., mean, standard deviations) on variables. Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R when the data is in wide format.</p>
 <p><strong>Long Data</strong></p>
-<p>In long data, each row contains a participant’s single response to a single variable. Table 6.2 shows an example of data in wide format. Instead of having a column for each variable, we have one column that identifies which variable is being measured and the next column identifies their response to that variable. If we collect data on multiple variables, then you have several rows for that participant, with each row telling you a single response to a single variable.</p>
+<p>In long data, each row contains a participant’s single response to a single variable. Table 6.2 illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant’s response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.</p>
 <table>
 <caption>
 Table 6.2: Data in Long Format
@@ -480,16 +492,17 @@ Table 6.2: Data in Long Format
 </tbody>
 </table>
 </table>
-<p>In Table 6.2, if I look at the first row, I can see that participant 1 was asked their age (<code>Variable</code>) and their answer was 30 (<code>Value</code>). If I want to find out what their answers to the variables <code>Height</code>, <code>Weight</code>, and <code>BMI</code> were, then I would need to look at the rows where <code>ID</code> was equal to 1.</p>
-<p>It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data. This is one of the reasons why the concept of <code>Tidy Data</code> discussed in the previous chapter prefers data in the long format - every row contains the minimum amount of information needed rather than “cluttering” rows with lots of information. The preference for long data isn’t only stylistic, long-data format is more suitable for certain forms of analyses. Long data is often more suitable if you are analyzing data in R that involves repeated measures or longitudinal designs, basically any test where we are interested in within-subject variability over time. Similarly, a lot of the packages/functions developed to enable high quality data visualizations were built with the assumption that your data is in long-format.</p>
+<p>Each row in Table 6.2 represents a participant’s response to a single variable. If I look at row 1, I can see that participant 1 was asked their age (<code>Variable</code>) and their answer was 30 (<code>Value</code>). I have to scan other rows where ID is 1 to find out more information about this participant.</p>
+<p>It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data. This is one of the reasons why the concept of <code>Tidy Data</code> discussed in the previous chapter prefers data in the long format - every row contains the minimum amount of information needed rather than “cluttering” rows with lots of information.</p>
+<p>This preference for long data isn’t only stylistic, long-data format is more suitable for certain forms of analyses. Long data is often more suitable if you are analyzing data in R that involves repeated measures or longitudinal designs, basically any test where we are interested in within-subject variability over time. Similarly, a lot of the packages/functions developed to enable high quality data visualizations were built with the assumption that your data is in long-format.</p>
 </div>
 </div>
 <div id="converting-the-format-of-our-data" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Converting the Format of Our Data<a href="datacleaning2.html#converting-the-format-of-our-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While it’s important to know the differences between wide and long data formats, do not feel you have to memories every detail or will need to memories which test or which functions requires long or wide data. If you are running a statistical test it’ll be pretty easy to find out what type of format your data needs to be in. If your data is not in the correct format, then the tidyverse package makes it straightforward to convert one format to another, thanks to two functions called: <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
+<p>While it’s important to know the differences between wide and long data formats, do not feel you have to memories every detail. If you are running a statistical test it’ll be pretty easy to find out what type of format your data needs to be in. If the data is not in the correct format, then the tidyverse package makes it straightforward to convert one format to another, thanks to two functions called: <strong><code>pivot_longer()</code></strong> and <strong><code>pivot_wider()</code></strong>.</p>
 <div id="pivoting-from-wide-to-long" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Pivoting from Wide to Long<a href="datacleaning2.html#pivoting-from-wide-to-long" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <code>pivot_longer()</code> function enables us to take in a wide data frame and convert it into long format. If you type in the following into your console, information about the function will appear in the Help pane in RStudio<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>The <strong><code>pivot_longer()</code></strong> function converts a wide data frame into long format. Typing <strong><code>?pivot_longer</code></strong> into the console provides detailed information about this function in RStudio through the Help tab in the Files Pane<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="datacleaning2.html#cb1-1" tabindex="-1"></a>?pivot_longer</span></code></pre></div>
 <p>There is a lot of information that will appear in the help section. I want to draw your attention to the <strong>Usage</strong> section, which contains the arguments (inputs) that we can specify in the <code>pivot_longer()</code> function.</p>
 <p>There is a lot of potential inputs we can throw in, but I want to highlight the key arguments that you will use most of the time when you use this function</p>
@@ -507,7 +520,7 @@ Table 6.2: Data in Long Format
 <tbody>
 <tr class="odd">
 <td><code>data</code></td>
-<td>The wide data frame that you want to convert to long format</td>
+<td>Here you specify the wide data frame that you want to convert to long format</td>
 </tr>
 <tr class="even">
 <td><code>cols</code></td>
@@ -522,11 +535,7 @@ Table 6.2: Data in Long Format
 <td>The values associated with each variable identified in cols will be stored in a new column in our long data frame. The values_to argument specifies the name of that new column.</td>
 </tr>
 <tr class="odd">
-<td>names_prefix</td>
 <td></td>
-</tr>
-<tr class="even">
-<td>names_sep</td>
 <td></td>
 </tr>
 </tbody>
@@ -551,7 +560,8 @@ Table 6.2: Data in Long Format
 ## 4  4      4.06         3.09        2.42              3.70     4.74
 ## 5  5      4.10         2.56        2.50              3.66     3.97
 ## 6  6      5.37         4.43        1.65              3.55     2.10</code></pre>
-<p>So we’ve created a wide data frame with 10 participants (5 male, 5 female) with scores on their Extraversion and Neuroticism. Now let’s pivot it to a long data format and create a variable called <code>long_df</code></p>
+<p>So we’ve created a wide data frame with 10 participants (5 male, 5 female) with scores on each of the Big Five personality traits. We know the data frame is wide because every variable is a separate column and each row tells us a participant’s response to each variable.</p>
+<p>Let’s see how we can convert this data frame from wide to long using <code>pivot_longer()</code>. We’ll call the long data frame <code>long_df</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="datacleaning2.html#cb4-1" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
 <span id="cb4-2"><a href="datacleaning2.html#cb4-2" tabindex="-1"></a>  wide_df,</span>
 <span id="cb4-3"><a href="datacleaning2.html#cb4-3" tabindex="-1"></a>  <span class="at">cols =</span> Wellbeing<span class="sc">:</span>Openness, <span class="co">#we will pivot everything except ID</span></span>
@@ -569,7 +579,8 @@ Table 6.2: Data in Long Format
 ## 4     1 Conscientiousness     3.34
 ## 5     1 Openness              2.44
 ## 6     2 Wellbeing             3.82</code></pre>
-<p>Nice, we have successfully converted our data from wide to long. We typically do not pivot the ID column, because that enables us to identify which participant’s score each variable. Let’s look at what happens if we do include <code>ID</code> in the <code>cols argument</code></p>
+<p>Now we have the same data frame but in a different format.</p>
+<p>The figure below gives an example of the pivot process. We typically do not pivot the ID column, because that enables us to identify which participant’s score each variable. Let’s look at what happens if we do include <code>ID</code> in the <code>cols argument</code></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="datacleaning2.html#cb6-1" tabindex="-1"></a><span class="fu">pivot_longer</span>(</span>
 <span id="cb6-2"><a href="datacleaning2.html#cb6-2" tabindex="-1"></a>  wide_df,</span>
 <span id="cb6-3"><a href="datacleaning2.html#cb6-3" tabindex="-1"></a>  <span class="at">cols =</span> ID<span class="sc">:</span>Openness, <span class="co">#pivot everything</span></span>
@@ -589,16 +600,23 @@ Table 6.2: Data in Long Format
 ##  9 Extraversion          3.29
 ## 10 Neuroticism           2.83
 ## # ℹ 50 more rows</code></pre>
-<p>Now we have lost our record for identifying which participant contributed to which data point.</p>
+<p>Now we have lost our record for identifying which participant contributed to which data point. This identifies a key about using <code>pivot_longer()</code> in that not EVERYTHING needs to pivoted, it depends on our analytical needs. Let’s go through a slightly more complicated data frame to illustrate what I mean by this.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="img/06-pivot-visualisation.png" alt="Visual representation of what is pivoted"  />
+<p class="caption">
+Figure 6.1: Visual representation of what is pivoted
+</p>
+</div>
 </div>
 <div id="pivoting-our-remote-associations-data-frame" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Pivoting our Remote Associations Data Frame<a href="datacleaning2.html#pivoting-our-remote-associations-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Last week, we cleaned the <code>raw_remote_associations.csv</code> data frame to a variable called <code>df_clean.</code> If we used head(), we’ll see that it is in wide format</p>
+<p>Last week, we cleaned the <code>raw_remote_associations.csv</code> data frame to a variable called <code>df_clean.</code> If we used <code>head()</code>, we’ll see that it is in wide format</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="datacleaning2.html#cb8-1" tabindex="-1"></a><span class="co">#if you do not have df_clean in your environment, download the dataset `raw_remote_clean.csv` from the Teams channel, and put in the week 5 folder. </span></span>
-<span id="cb8-2"><a href="datacleaning2.html#cb8-2" tabindex="-1"></a><span class="co">#Run the following code to load it in </span></span>
-<span id="cb8-3"><a href="datacleaning2.html#cb8-3" tabindex="-1"></a><span class="co">#df_clean &lt;- read.csv(&quot;raw_remote_clean.csv&quot;) </span></span>
-<span id="cb8-4"><a href="datacleaning2.html#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="datacleaning2.html#cb8-5" tabindex="-1"></a><span class="fu">head</span>(df_clean)</span></code></pre></div>
+<span id="cb8-2"><a href="datacleaning2.html#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="datacleaning2.html#cb8-3" tabindex="-1"></a><span class="co">#Run the following code to load it in </span></span>
+<span id="cb8-4"><a href="datacleaning2.html#cb8-4" tabindex="-1"></a><span class="co">#df_clean &lt;- read.csv(&quot;raw_remote_clean.csv&quot;) </span></span>
+<span id="cb8-5"><a href="datacleaning2.html#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="datacleaning2.html#cb8-6" tabindex="-1"></a><span class="fu">head</span>(df_clean)</span></code></pre></div>
 <pre><code>##         ID condition age gender remote_pos remote_neg remote_neut total_mood
 ## 1 10229436       CAB  26   male          0          2           4         61
 ## 2 10230533       CAB  36 female          0          4           4         62
@@ -613,74 +631,90 @@ Table 6.2: Data in Long Format
 ## 4             14           2.8
 ## 5             16           3.2
 ## 6             14           2.8</code></pre>
-<p>Let’s convert <code>df_clean</code> to the long data format and let’s call it <code>df_clean_long</code>. We are going to put every variable inside the <code>cols</code> function except for <code>ID</code>, <code>condition</code>, and <code>gender</code>.</p>
+<p>Let’s convert <code>df_clean</code> to the long data format and let’s call it <code>df_clean_long</code>. But we are not going to follow the same protocol as the last example, where we pivoted everything except <code>ID</code>. For this data frame, we are going put every variable inside the <code>cols</code> argument except for <code>ID</code>, <code>condition</code>, and <code>gender</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="datacleaning2.html#cb10-1" tabindex="-1"></a>df_clean_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_clean,</span>
 <span id="cb10-2"><a href="datacleaning2.html#cb10-2" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(age, remote_pos<span class="sc">:</span>mean_openness), <span class="co">#we select age, and then we select everything from remote_pos to mean_openness in df_clean</span></span>
-<span id="cb10-3"><a href="datacleaning2.html#cb10-3" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;variables&quot;</span>, <span class="co">#this creates a column called `variables` that will tell us the the variable the participant provided data for</span></span>
-<span id="cb10-4"><a href="datacleaning2.html#cb10-4" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;answer&quot;</span><span class="co">#this creates a column called `answer` that will tell us participants actual answer to each variable</span></span>
+<span id="cb10-3"><a href="datacleaning2.html#cb10-3" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;Variable&quot;</span>, <span class="co">#this creates a column called `variables` that will tell us the the variable the participant provided data for</span></span>
+<span id="cb10-4"><a href="datacleaning2.html#cb10-4" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;Response&quot;</span><span class="co">#this creates a column called `answer` that will tell us participants actual answer to each variable</span></span>
 <span id="cb10-5"><a href="datacleaning2.html#cb10-5" tabindex="-1"></a>)</span>
 <span id="cb10-6"><a href="datacleaning2.html#cb10-6" tabindex="-1"></a></span>
 <span id="cb10-7"><a href="datacleaning2.html#cb10-7" tabindex="-1"></a></span>
 <span id="cb10-8"><a href="datacleaning2.html#cb10-8" tabindex="-1"></a><span class="fu">print</span>(df_clean_long)</span></code></pre></div>
 <pre><code>## # A tibble: 266 × 5
-##          ID condition gender variables      answer
-##       &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;           &lt;dbl&gt;
-##  1 10229436 CAB       male   age              26  
-##  2 10229436 CAB       male   remote_pos        0  
-##  3 10229436 CAB       male   remote_neg        2  
-##  4 10229436 CAB       male   remote_neut       4  
-##  5 10229436 CAB       male   total_mood       61  
-##  6 10229436 CAB       male   total_openness   16  
-##  7 10229436 CAB       male   mean_openness     3.2
-##  8 10230533 CAB       female age              36  
-##  9 10230533 CAB       female remote_pos        0  
-## 10 10230533 CAB       female remote_neg        4  
+##          ID condition gender Variable       Response
+##       &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;
+##  1 10229436 CAB       male   age                26  
+##  2 10229436 CAB       male   remote_pos          0  
+##  3 10229436 CAB       male   remote_neg          2  
+##  4 10229436 CAB       male   remote_neut         4  
+##  5 10229436 CAB       male   total_mood         61  
+##  6 10229436 CAB       male   total_openness     16  
+##  7 10229436 CAB       male   mean_openness       3.2
+##  8 10230533 CAB       female age                36  
+##  9 10230533 CAB       female remote_pos          0  
+## 10 10230533 CAB       female remote_neg          4  
 ## # ℹ 256 more rows</code></pre>
-<p>There we have it! Now our data is long-format. Each row contains a participant’s individuals score on a particular variable.</p>
-<p>You might be wondering why we did not include the variables <code>condition</code> and <code>gender</code> in our conversion. There is both a technical reason and an data analysis reason for why we did not do this.</p>
-<p>The technical reason is that we would not be able to have a column that included the values for <code>condition</code> and <code>gender</code> with the values for are other columns like <code>age</code> and <code>total_openness</code>. This is because the data types for these variables are different, as the <code>condition</code> and <code>gender</code> variables include the <code>factor</code> data type, and the other variables are <code>numerical</code>. If you remember from when we discussed vectors (e.g., and remember that every column in a data frame is a lucky vector that found a home), we mentioned that vectors are lines of data where everything in the vector is of the same data type.</p>
+<p>There we have it! Now our data is long-format. Each row contains a participant’s individuals score on a particular variable. But this time, the participant’s information on <code>condition</code> and <code>gender</code> also gets replicated for row created for that participant.</p>
+<p>But why did we not include the variables <code>condition</code> and <code>gender</code> in our conversion? There is both a technical reason and an data analysis reason for why we did not do this. Let’s address the boring technical reason first.</p>
+<p>Technically, we actually can’t create the <code>Answer</code> column by combining participants responses on variables like <code>condition</code> and <code>gender</code> with their answers on the other variables. This is because the data type for both <code>condition</code> and <code>gender</code> are <code>factors</code>, whereas the data type for every other variable is <code>numeric</code>. If you remember from our vector discussion (and remember everything that every column is just a lucky vector who found a home) we mentioned that vectors are lines of data where everything in the line is of the same data type. You can have character vectors, factor vectors, numerical vectors, logical vectors, integer vectors, but you cannot have a single vector with multiple data types.</p>
 <p>So if we try <code>pivot_longer</code> on our <code>df_clean</code> data frame, including the <code>gender</code> and <code>condition</code> columns, we get the following error:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="datacleaning2.html#cb12-1" tabindex="-1"></a><span class="fu">pivot_longer</span>(df_clean,</span>
 <span id="cb12-2"><a href="datacleaning2.html#cb12-2" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(condition<span class="sc">:</span>mean_openness), <span class="co">#we try to select everything except ID</span></span>
-<span id="cb12-3"><a href="datacleaning2.html#cb12-3" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;variables&quot;</span>, <span class="co">#this creates a column called `variables` that will tell us the the variable the participant provided data for</span></span>
-<span id="cb12-4"><a href="datacleaning2.html#cb12-4" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;answer&quot;</span><span class="co">#this creates a column called `answer` that will tell us participants actual answer to each variable</span></span>
+<span id="cb12-3"><a href="datacleaning2.html#cb12-3" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;Variable&quot;</span>, <span class="co">#this creates a column called `variables` that will tell us the the variable the participant provided data for</span></span>
+<span id="cb12-4"><a href="datacleaning2.html#cb12-4" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;Response&quot;</span><span class="co">#this creates a column called `answer` that will tell us participants actual answer to each variable</span></span>
 <span id="cb12-5"><a href="datacleaning2.html#cb12-5" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Error in `pivot_longer()`:
 ## ! Can&#39;t combine `condition` &lt;character&gt; and `age` &lt;integer&gt;.</code></pre>
-<p>If we wanted to convert every column, then we would need to convert all our columns (except ID) to the same data type. Since it is way easier to convert numeric data to character than vice versa, we could include the argument <code>values_transform</code> to convert everything in our <code>answer</code> column to a character.</p>
+<p>If you’re stubborn and you insist on pivoting everything, then you would need to convert all of our columns to the same data type. There is an argument in the <code>pivot_longer()</code> function that enables us to do this and it is called <code>values_transform</code>. The easiest solution would be to transform everything that will go in our <code>Answer</code> vector/column into a <code>character</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="datacleaning2.html#cb14-1" tabindex="-1"></a><span class="fu">pivot_longer</span>(df_clean,</span>
 <span id="cb14-2"><a href="datacleaning2.html#cb14-2" tabindex="-1"></a>  <span class="at">cols =</span> condition<span class="sc">:</span>mean_openness, </span>
-<span id="cb14-3"><a href="datacleaning2.html#cb14-3" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;variables&quot;</span>, </span>
-<span id="cb14-4"><a href="datacleaning2.html#cb14-4" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;answer&quot;</span>,</span>
-<span id="cb14-5"><a href="datacleaning2.html#cb14-5" tabindex="-1"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">answer =</span> as.character)</span>
+<span id="cb14-3"><a href="datacleaning2.html#cb14-3" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;Variable&quot;</span>, </span>
+<span id="cb14-4"><a href="datacleaning2.html#cb14-4" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;Response&quot;</span>,</span>
+<span id="cb14-5"><a href="datacleaning2.html#cb14-5" tabindex="-1"></a>  <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">Response =</span> as.character)</span>
 <span id="cb14-6"><a href="datacleaning2.html#cb14-6" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 342 × 3
-##          ID variables      answer
-##       &lt;int&gt; &lt;chr&gt;          &lt;chr&gt; 
-##  1 10229436 condition      CAB   
-##  2 10229436 age            26    
-##  3 10229436 gender         male  
-##  4 10229436 remote_pos     0     
-##  5 10229436 remote_neg     2     
-##  6 10229436 remote_neut    4     
-##  7 10229436 total_mood     61    
-##  8 10229436 total_openness 16    
-##  9 10229436 mean_openness  3.2   
-## 10 10230533 condition      CAB   
+##          ID Variable       Response
+##       &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;   
+##  1 10229436 condition      CAB     
+##  2 10229436 age            26      
+##  3 10229436 gender         male    
+##  4 10229436 remote_pos     0       
+##  5 10229436 remote_neg     2       
+##  6 10229436 remote_neut    4       
+##  7 10229436 total_mood     61      
+##  8 10229436 total_openness 16      
+##  9 10229436 mean_openness  3.2     
+## 10 10230533 condition      CAB     
 ## # ℹ 332 more rows</code></pre>
-<p>I really would not recommend this approach, as this would you would not be able to actually run descriptive and inferential statistical analysis on the answer column without first transforming them back into the numeric data type.</p>
-<div id="long-to-wide" class="section level4 hasAnchor" number="6.2.2.1">
-<h4><span class="header-section-number">6.2.2.1</span> Long to Wide<a href="datacleaning2.html#long-to-wide" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
-<img src="img/06-pivotwider.png" alt="The arguments that we can pass to the pivot_longer() function"  />
+<p>That is an example of a long data frame, which looks neater on the eye than our earlier attempt. BUT - I really do not recommend this approach. Since everything inside <code>answer</code> is not a character, we actually can’t conduct any quantitative analysis. So it defeats the purpose!</p>
+<p>This leads me on to the analytical reason why we don’t want to pivot our <code>condition</code> and <code>gender</code> columns. Since <code>condition</code> and <code>gender</code> are factors, we will want to investigate the extent to which participants scores on <code>Wellbeing</code> and our Big Five traits are influenced by differences in each factor. In other words, we want to investigate the effect of our independent variables on our dependent variables. If you look at <code>df_clean_long</code>, the data frame keeps a record of a participant’s score on each dependent variable in relation to our two independent variables. This sets us up nicely for conducting statistical analysis.</p>
+<pre><code>## # A tibble: 10 × 5
+##          ID condition gender Variable       Response
+##       &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;
+##  1 10229436 CAB       male   age                26  
+##  2 10229436 CAB       male   remote_pos          0  
+##  3 10229436 CAB       male   remote_neg          2  
+##  4 10229436 CAB       male   remote_neut         4  
+##  5 10229436 CAB       male   total_mood         61  
+##  6 10229436 CAB       male   total_openness     16  
+##  7 10229436 CAB       male   mean_openness       3.2
+##  8 10230533 CAB       female age                36  
+##  9 10230533 CAB       female remote_pos          0  
+## 10 10230533 CAB       female remote_neg          4</code></pre>
+</div>
+<div id="pivoting-from-long-to-wide" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Pivoting from Long to Wide<a href="datacleaning2.html#pivoting-from-long-to-wide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Okay, so we know how to convert data frames from wide to long, but how can we convert from long to wide? Well we can use the <code>pivot_wider()</code> function. The figure below shows the results of typing <code>?pivot_wider</code> into the console. The table below it shows the key arguments of this function.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="img/06-pivotwider.png" alt="The arguments that we can pass to the pivot_wider() function"  />
 <p class="caption">
-Figure 6.1: The arguments that we can pass to the pivot_longer() function
+Figure 6.2: The arguments that we can pass to the pivot_wider() function
 </p>
 </div>
 <table>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="25%" />
+<col width="75%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -691,34 +725,231 @@ Figure 6.1: The arguments that we can pass to the pivot_longer() function
 <tbody>
 <tr class="odd">
 <td><code>data</code></td>
-<td>The wide data frame that you want to convert to long format</td>
+<td>The long data frame that you want to convert to wide format</td>
 </tr>
 <tr class="even">
-<td><code>cols</code></td>
-<td>The column that will be pivoted from wide to long. This will be nearly every column in your data frame. The only columns that you would avoid pivoting are the participant ID (if you have it) and any factor (e.g., like the independent variable(s) in your study).</td>
+<td><code>id_cols</code></td>
+<td>The columns that help identify each participant. This is often the values that are repeated in each row within a long data frame (e.g., like ID or any independent variables)</td>
 </tr>
 <tr class="odd">
 <td><code>names_from</code></td>
-<td>So when we pivot from wide to long, any variable that was a column in the wide data frame, will become a value in the long data frame</td>
+<td>When we pivot from long to wide, we will be creating new columns for each variable that we collected data on. We need to tell R where to find the names for those variables.</td>
 </tr>
 <tr class="even">
 <td><code>values_from</code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
+<td>We need to tell R where to find the values for the new columns that we are creating.</td>
 </tr>
 </tbody>
 </table>
+<p>Let’s convert our <code>long_df</code> back into wide format.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="datacleaning2.html#cb17-1" tabindex="-1"></a><span class="fu">pivot_wider</span>(long_df, </span>
+<span id="cb17-2"><a href="datacleaning2.html#cb17-2" tabindex="-1"></a>            <span class="at">id_cols =</span> ID, </span>
+<span id="cb17-3"><a href="datacleaning2.html#cb17-3" tabindex="-1"></a>            <span class="at">names_from =</span> Variable,</span>
+<span id="cb17-4"><a href="datacleaning2.html#cb17-4" tabindex="-1"></a>            <span class="at">values_from =</span> Response)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 6
+##       ID Wellbeing Extraversion Neuroticism Conscientiousness Openness
+##    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;    &lt;dbl&gt;
+##  1     1      3.55         3.98        2.15              3.34     2.44
+##  2     2      3.82         3.29        2.83              2.76     2.83
+##  3     3      5.25         3.32        2.18              3.72     1.99
+##  4     4      4.06         3.09        2.42              3.7      4.74
+##  5     5      4.1          2.56        2.5               3.66     3.97
+##  6     6      5.37         4.43        1.65              3.55     2.1 
+##  7     7      4.37         3.4         3.67              3.44     2.68
+##  8     8      2.99         1.43        3.12              2.95     2.63
+##  9     9      3.45         3.56        2.09              2.76     3.62
+## 10    10      3.64         2.62        4                 2.7      2.93</code></pre>
+<p>Look familiar? If you compare it to our original <code>wide_df</code>, you’ll notice they look exactly the same.</p>
+<p>Now let’s do the same thing with the long version of <code>remote_associations</code> data frame.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="datacleaning2.html#cb19-1" tabindex="-1"></a>df_clean_wide <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(df_clean_long,</span>
+<span id="cb19-2"><a href="datacleaning2.html#cb19-2" tabindex="-1"></a>                             <span class="at">id_cols =</span> ID<span class="sc">:</span>gender,</span>
+<span id="cb19-3"><a href="datacleaning2.html#cb19-3" tabindex="-1"></a>                             <span class="at">names_from =</span> Variable,</span>
+<span id="cb19-4"><a href="datacleaning2.html#cb19-4" tabindex="-1"></a>                             <span class="at">values_from =</span> Response)</span>
+<span id="cb19-5"><a href="datacleaning2.html#cb19-5" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="datacleaning2.html#cb19-6" tabindex="-1"></a><span class="fu">head</span>(df_clean_wide)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 10
+##         ID condition gender   age remote_pos remote_neg remote_neut total_mood
+##      &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
+## 1 10229436 CAB       male      26          0          2           4         61
+## 2 10230533 CAB       female    36          0          4           4         62
+## 3 10230659 ABC       female    45          0          5           0         74
+## 4 10428518 BCA       male      37          0          9           9         68
+## 5 10229522 CAB       female    30          1          1           0         59
+## 6 10229414 ABC       female    36          1          1           1         63
+## # ℹ 2 more variables: total_openness &lt;dbl&gt;, mean_openness &lt;dbl&gt;</code></pre>
+<p>If you compare that to the head of <code>df_clean</code>, you’ll see that its back to the format we cleaned it to last week.</p>
+<div id="summary-6" class="section level4 hasAnchor" number="6.2.3.1">
+<h4><span class="header-section-number">6.2.3.1</span> Summary<a href="datacleaning2.html#summary-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>That covers basic pivoting from long to wide and wide to long using <code>pivot_long()</code> and <code>pivot_wide()</code>. However, both functions enable you to handle much more complicated data frames and clean them up as you go. We won’t cover that in this version of the textbook, but <a href="https://dcl-wrangle.stanford.edu/pivot-advanced.html">I highly recommend reading the <code>Advanced Pivoting</code> section from the <code>Data Wrangling</code> Standford ebook if your pivoting needs are more complicated than the examples here</a>.</p>
 </div>
 </div>
 </div>
-<div id="merging-or-joining-data" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Merging or Joining Data<a href="datacleaning2.html#merging-or-joining-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="handling-missing-values" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Handling Missing Values<a href="datacleaning2.html#handling-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In psychological research, dealing with missing data is a common challenge that requires careful consideration to ensure the integrity and validity of analyses. In this section, we’ll explore how to handle missing values (NA) in R using the tidyverse package. We’ll cover techniques for identifying missing values, strategies for handling them, and best practices for addressing missing data in psychological research studies.</p>
+<div id="introduction-to-missing-values" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> <strong>Introduction to Missing Values</strong><a href="datacleaning2.html#introduction-to-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Missing values, often represented as NA in R, occur when data is not available or cannot be recorded for certain observations. This can occur due to various reasons such as non-response in surveys, data entry errors, or incomplete data collection processes. It’s essential to understand and address missing values appropriately to avoid biased or misleading results in data analysis.</p>
 </div>
-<div id="handling-missing-values" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Handling Missing Values<a href="datacleaning2.html#handling-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="identifying-missing-values" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> <strong>Identifying Missing Values</strong><a href="datacleaning2.html#identifying-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Detecting missing values in datasets is the first step towards handling them effectively. In R, we can use functions like <strong><code>is.na()</code></strong> or <strong><code>complete.cases()</code></strong> to identify missing values. Let’s illustrate this with an example using a hypothetical psychological research dataset:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="datacleaning2.html#cb21-1" tabindex="-1"></a><span class="co"># Example dataset with missing values</span></span>
+<span id="cb21-2"><a href="datacleaning2.html#cb21-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb21-3"><a href="datacleaning2.html#cb21-3" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb21-4"><a href="datacleaning2.html#cb21-4" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="cn">NA</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">35</span>, <span class="cn">NA</span>, <span class="dv">40</span>, <span class="dv">22</span>, <span class="cn">NA</span>, <span class="dv">29</span>),</span>
+<span id="cb21-5"><a href="datacleaning2.html#cb21-5" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="cn">NA</span>)</span>
+<span id="cb21-6"><a href="datacleaning2.html#cb21-6" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="datacleaning2.html#cb21-7" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="datacleaning2.html#cb21-8" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
+<span id="cb21-9"><a href="datacleaning2.html#cb21-9" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb21-10"><a href="datacleaning2.html#cb21-10" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.)))</span>
+<span id="cb21-11"><a href="datacleaning2.html#cb21-11" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="datacleaning2.html#cb21-12" tabindex="-1"></a><span class="fu">print</span>(missing_values)</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##      id   age gender
+##   &lt;int&gt; &lt;int&gt;  &lt;int&gt;
+## 1     0     3      3</code></pre>
+<p>In this example, we’ve created a dataset <strong><code>data</code></strong> with variables <strong><code>age</code></strong> and <strong><code>gender</code></strong>, some of which contain missing values. We then used <strong><code>summarise_all()</code></strong> along with <strong><code>is.na()</code></strong> to count the number of missing values in each column.</p>
+</div>
+<div id="dealing-with-missing-values" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> <strong>Dealing with Missing Values</strong><a href="datacleaning2.html#dealing-with-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once missing values are identified, we can employ various strategies to handle them effectively. Common approaches include removing rows or columns with missing values, imputing missing values with estimates, or using more advanced imputation methods.</p>
+<div id="removing-missing-values" class="section level4 hasAnchor" number="6.3.3.1">
+<h4><span class="header-section-number">6.3.3.1</span> Removing Missing Values<a href="datacleaning2.html#removing-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To remove rows or columns with missing values, we can use functions like <strong><code>drop_na()</code></strong> or <strong><code>filter()</code></strong> in the tidyverse. Here’s how we can remove rows with missing values in the <strong><code>age</code></strong> column:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="datacleaning2.html#cb23-1" tabindex="-1"></a><span class="co"># Remove rows with missing values in the age column</span></span>
+<span id="cb23-2"><a href="datacleaning2.html#cb23-2" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="datacleaning2.html#cb23-3" tabindex="-1"></a>  <span class="fu">drop_na</span>(age)</span>
+<span id="cb23-4"><a href="datacleaning2.html#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="datacleaning2.html#cb23-5" tabindex="-1"></a><span class="fu">print</span>(clean_data)</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##      id   age gender
+##   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; 
+## 1     1    25 Male  
+## 2     3    30 Male  
+## 3     4    28 &lt;NA&gt;  
+## 4     5    35 Female
+## 5     7    40 &lt;NA&gt;  
+## 6     8    22 Male  
+## 7    10    29 &lt;NA&gt;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="datacleaning2.html#cb25-1" tabindex="-1"></a><span class="co">#filter</span></span></code></pre></div>
+</div>
+<div id="imputing-missing-values" class="section level4 hasAnchor" number="6.3.3.2">
+<h4><span class="header-section-number">6.3.3.2</span> Imputing Missing Values<a href="datacleaning2.html#imputing-missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Imputing missing values involves replacing them with estimates such as mean, median, or mode. Let’s impute missing values in the <strong><code>age</code></strong> column with the mean age:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="datacleaning2.html#cb26-1" tabindex="-1"></a><span class="co"># Impute missing values in the age column with mean age</span></span>
+<span id="cb26-2"><a href="datacleaning2.html#cb26-2" tabindex="-1"></a>imputed_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="datacleaning2.html#cb26-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(age), <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), age))</span>
+<span id="cb26-4"><a href="datacleaning2.html#cb26-4" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="datacleaning2.html#cb26-5" tabindex="-1"></a><span class="fu">print</span>(imputed_data)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 3
+##       id   age gender
+##    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; 
+##  1     1  25   Male  
+##  2     2  29.9 Female
+##  3     3  30   Male  
+##  4     4  28   &lt;NA&gt;  
+##  5     5  35   Female
+##  6     6  29.9 Male  
+##  7     7  40   &lt;NA&gt;  
+##  8     8  22   Male  
+##  9     9  29.9 Female
+## 10    10  29   &lt;NA&gt;</code></pre>
+</div>
+</div>
+<div id="best-practices-and-considerations" class="section level3 hasAnchor" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> <strong>Best Practices and Considerations</strong><a href="datacleaning2.html#best-practices-and-considerations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When handling missing values, it’s important to adhere to best practices and consider the following:</p>
+<ul>
+<li><p>Document the handling of missing values in data preprocessing steps.</p></li>
+<li><p>Conduct sensitivity analyses to assess the robustness of results to different missing data handling approaches.</p></li>
+<li><p>Consider potential biases introduced by missing data and address them in the interpretation of results.</p></li>
+</ul>
+</div>
+<div id="summary-7" class="section level3 hasAnchor" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> <strong>Summary</strong><a href="datacleaning2.html#summary-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Handling missing values is a critical aspect of data preprocessing in psychological research. By using the tidyverse package in R, researchers can effectively identify and handle missing values, ensuring the integrity and validity of their data analysis. In this section, we’ve covered techniques for identifying missing values, strategies for handling them, and best practices for addressing missing data. Through practical examples and considerations, researchers can confidently manage missing values in their research studies.</p>
+</div>
+</div>
+<div id="merging-data-i.e.-joining-different-datasets-together" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Merging Data (i.e., Joining Different Datasets Together)<a href="datacleaning2.html#merging-data-i.e.-joining-different-datasets-together" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In psychological research, we’ll often encounter situations where data from multiple sources or studies need to be combined for analysis. We might have collected demographic information separately from participants answers on experimental tasks. We may have collected data using a variety of platforms (e.g., survey data using Qualtrics and response data using PsychoPy). Additionally, the research software tools we use might modulate the data. For example, if we run a study in Gorilla Research, then each separate task and questionnaire gets downloaded as separate files.</p>
+<p>Whatever the reason, you will often need to merge or join data together from different sources in order to conduct the analysis you need. Luckily, R is quite capable at facilitating data merging. In this subsection, we will look at ways you can merge different data frames together.</p>
+<div id="introduction-to-merging-data" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Introduction to Merging Data<a href="datacleaning2.html#introduction-to-merging-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Merging data involves combining data frames based on their common variables. Let’s image we have two data frames called <code>df_demographics</code> and <code>df_rt</code>. These data frames contain information on both participants demographic information and their reaction time on a specific task and which condition they were randomly assigned to. Let’s load both of these data frames into R (make sure you have downloaded them and put them into your working directory before running the following code).</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="datacleaning2.html#cb28-1" tabindex="-1"></a>df_demographics <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;demographics.csv&quot;</span>)</span>
+<span id="cb28-2"><a href="datacleaning2.html#cb28-2" tabindex="-1"></a>df_rt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;reaction_time.csv&quot;</span>)</span>
+<span id="cb28-3"><a href="datacleaning2.html#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="datacleaning2.html#cb28-4" tabindex="-1"></a><span class="fu">head</span>(df_demographics)</span>
+<span id="cb28-5"><a href="datacleaning2.html#cb28-5" tabindex="-1"></a><span class="fu">head</span>(df_rt)</span></code></pre></div>
+<pre><code>##           ID     gender age
+## 1 EoYncPX1QK     Female  24
+## 2 Zn1yzAeYA4 Non-Binary  21
+## 3 B4iCIhzgPi       Male  24
+## 4 9sJnqQM0lo     Female  23
+## 5 FPSgiOjwA7 Non-Binary  23
+## 6 0g0AFLyHCe       Male  24</code></pre>
+<pre><code>##           ID   condition mean_rt
+## 1 EoYncPX1QK no caffeine     269
+## 2 Zn1yzAeYA4 no caffeine     206
+## 3 B4iCIhzgPi no caffeine     187
+## 4 9sJnqQM0lo no caffeine     217
+## 5 FPSgiOjwA7 no caffeine     160
+## 6 0g0AFLyHCe no caffeine     255</code></pre>
+<p>Ideally, we would have one merged data frame that would contain a participant’s response on all our variables. Luckily, there are a multitude in ways we can do this through the <code>tidyverse package</code>.</p>
+</div>
+<div id="types-of-joins" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Types of Joins<a href="datacleaning2.html#types-of-joins" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When merging datasets, researchers typically use different types of joins to combine the data. These include:</p>
+<ul>
+<li><p><strong>Inner Join</strong>: Includes only the rows that have matching values in both datasets. This type of join retains only the observations that exist in both datasets, excluding unmatched rows.</p></li>
+<li><p><strong>Left Join</strong>: Includes all rows from the left dataset and matching rows from the right dataset. Unmatched rows from the right dataset are filled with NA values.</p></li>
+<li><p><strong>Right Join</strong>: Includes all rows from the right dataset and matching rows from the left dataset. Unmatched rows from the left dataset are filled with NA values.</p></li>
+<li><p><strong>Outer Join (or Full Join)</strong>: Includes all rows from both datasets, filling in missing values with NA where there are no matches.</p></li>
+</ul>
+<p>Each type of join offers different insights into the relationship between datasets and is chosen based on the specific research question and data structure.</p>
+<div id="key-variables-for-merging" class="section level4 hasAnchor" number="6.4.2.1">
+<h4><span class="header-section-number">6.4.2.1</span> Key Variables for Merging<a href="datacleaning2.html#key-variables-for-merging" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In merging data, researchers identify key variables or columns that serve as the basis for combining datasets. These key variables are typically common identifiers shared between datasets, such as participant ID, study ID, or other relevant identifiers. Ensuring consistency in key variables is crucial to accurately merge datasets and avoid errors in the analysis.</p>
+</div>
+<div id="methods-for-merging-data" class="section level4 hasAnchor" number="6.4.2.2">
+<h4><span class="header-section-number">6.4.2.2</span> Methods for Merging Data<a href="datacleaning2.html#methods-for-merging-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>R provides several methods or functions for merging data, each offering different capabilities and performance characteristics. These include the <strong><code>merge()</code></strong> function and various join functions available in the <strong><code>dplyr</code></strong> package, such as <strong><code>left_join()</code></strong>, <strong><code>right_join()</code></strong>, <strong><code>inner_join()</code></strong>, and <strong><code>full_join()</code></strong>.</p>
+<p>Researchers can choose the appropriate method based on factors such as the size of the datasets, the desired type of join, and personal preference. Experimenting with different merging techniques allows researchers to determine the most suitable approach for their specific research needs.</p>
+</div>
+<div id="example-merging-scenarios" class="section level4 hasAnchor" number="6.4.2.3">
+<h4><span class="header-section-number">6.4.2.3</span> Example Merging Scenarios<a href="datacleaning2.html#example-merging-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To illustrate the merging process in psychological research, consider the following scenarios:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Merging Survey Responses with Demographic Information</strong>: Researchers conducting a survey study may need to merge participants’ responses with demographic data, such as age, gender, and education level. This merging process enables researchers to analyze how demographic factors influence survey outcomes.</p></li>
+<li><p><strong>Combining Intervention Data from Multiple Studies</strong>: In a meta-analysis or systematic review, researchers may merge data from multiple intervention studies to evaluate the effectiveness of interventions across diverse populations. By combining intervention outcomes and participant characteristics, researchers can identify common trends or disparities in treatment effects.</p></li>
+</ol>
+</div>
+<div id="handling-missing-values-and-duplicates" class="section level4 hasAnchor" number="6.4.2.4">
+<h4><span class="header-section-number">6.4.2.4</span> Handling Missing Values and Duplicates<a href="datacleaning2.html#handling-missing-values-and-duplicates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>During the merging process, researchers should be mindful of handling missing values and duplicate records to ensure the integrity of the merged dataset. Strategies for addressing missing values and duplicates include imputation techniques, data cleaning procedures, and careful examination of merged data to identify inconsistencies.</p>
+</div>
+<div id="best-practices-and-tips" class="section level4 hasAnchor" number="6.4.2.5">
+<h4><span class="header-section-number">6.4.2.5</span> Best Practices and Tips<a href="datacleaning2.html#best-practices-and-tips" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To optimize the merging process, researchers should follow best practices such as:</p>
+<ul>
+<li><p>Checking for data consistency and completeness before merging.</p></li>
+<li><p>Documenting the merging process and rationale behind choosing specific join types.</p></li>
+<li><p>Testing the merged dataset to ensure it meets the requirements of downstream analysis.</p></li>
+</ul>
+</div>
+<div id="exercises-6" class="section level4 hasAnchor" number="6.4.2.6">
+<h4><span class="header-section-number">6.4.2.6</span> Exercises<a href="datacleaning2.html#exercises-6" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To reinforce understanding of data merging concepts, consider the following exercises:</p>
+<ol style="list-style-type: decimal">
+<li><p>Merge two datasets containing survey responses and demographic information using different join types (e.g., inner join, left join).</p></li>
+<li><p>Combine data from multiple experimental studies to compare intervention effects across different participant groups.</p></li>
+<li><p>Practice handling missing values and duplicates during the merging process and evaluate the impact on the merged dataset.</p></li>
+</ol>
+</div>
+</div>
 </div>
 <div id="dealing-with-tricky-character-data" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Dealing with Tricky Character Data<a href="datacleaning2.html#dealing-with-tricky-character-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
