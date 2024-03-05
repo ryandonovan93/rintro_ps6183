@@ -3664,15 +3664,16 @@ To make sure the following functions are working, run the following code to chec
 \end{verbatim}
 
 \begin{verbatim}
-## [1] "You are priceless!"
+## [1] "You are good!"
 \end{verbatim}
 
 \begin{verbatim}
 ## 
-## Soham: How to compute the p-value of a statistic generally?
-## Berton Gunter: runif(1)
-##    -- Soham and Berton Gunter
-##       R-help (May 2010)
+## I wish there was a better way for me to learn this stuff than constantly being
+## wrong in public.
+##    -- Hadley Wickham (in a discussion about efficient expansion of vectors and
+##       algorithmic complexity)
+##       R-help (July 2012)
 \end{verbatim}
 
 \begin{Shaded}
@@ -5323,8 +5324,8 @@ The Pipe is an extremely useful operator. But I actually encourage you to first 
 
 My advice, clean your data frames first using the approach we used here. Once it is clean, try and recreate it using pipes. After a while you should start to feel comfortable using pipes from the start - that's the time to make the transition.
 
-\hypertarget{activity-clean-the-flanker-dataset}{%
-\section{Activity: Clean the Flanker Dataset}\label{activity-clean-the-flanker-dataset}}
+\hypertarget{clean-activity}{%
+\section{Activity: Clean the Flanker Dataset}\label{clean-activity}}
 
 \hypertarget{cleaning-flanker-test-dataset}{%
 \subsection{\texorpdfstring{\textbf{Cleaning Flanker Test Dataset}}{Cleaning Flanker Test Dataset}}\label{cleaning-flanker-test-dataset}}
@@ -5497,9 +5498,98 @@ By the end of this session, you should be capable of the following:
   Know how to merge together separate data frames into one file that you can clean.
 \item
   Identifying and handling missing data (\texttt{NA} values).
-\item
-  Handle character data by knowing how to detect, substitute, or extract pattern in text.
 \end{itemize}
+
+\hypertarget{lets-get-set-up-1}{%
+\section{Let's Get Set Up}\label{lets-get-set-up-1}}
+
+Similar to the last chapter, first we need to set up RStudio and download some data files.
+
+\hypertarget{activity-1.1-set-up-your-wd-1}{%
+\subsection{Activity 1.1: Set up your WD}\label{activity-1.1-set-up-your-wd-1}}
+
+Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. In Chapter 2 I showed you how to do this using \protect\hyperlink{set_wd}{a button-and-click interface}.
+
+Using those instructions, create a folder called ``Week5'' in the \texttt{rintro} project folder (or whatever folder you created) and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \FunctionTok{setwd}\NormalTok{(}\StringTok{"C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro\_2024/week5"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{activity-1.2-import-your-csv-files-and-r-script-1}{%
+\subsection{Activity 1.2: Import your CSV files and R script}\label{activity-1.2-import-your-csv-files-and-r-script-1}}
+
+You need to import several files for this activity:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{background.csv}
+\item
+  \textbf{flanker\_task1.csv}
+\item
+  \textbf{flanker\_task2.csv}
+\item
+  \textbf{flanker\_task3.csv}
+\item
+  \textbf{demographics.csv}
+\item
+  \textbf{reaction\_time.csv}
+\end{enumerate}
+
+To download these files, navigate to the Teams channel for this course and access the ``Week 5 - Data Cleaning (Part II)'' channel. Once downloaded, use your file management system (File Explorer on Windows or Finder on Mac) to copy and paste these files into the ``Week5'' folder you created in Activity 1.1.
+
+If you're using RStudio, you should see these files in your working directory within the Files pane. Create an R script and save it as (\textbf{data\_cleaning\_ii\_script.R}).
+
+To import the raw\_remote\_associations.csv dataset into R, do the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{demographics.csv -\textgreater{}} change its name to \textbf{df\_dem}
+\item
+  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{flanker1.csv -\textgreater{}} change its name to \textbf{df\_flanker1}
+\item
+  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{flanker2.csv -\textgreater{}} change its name to \textbf{df\_flanker}
+\item
+  Follow the same instructions to import the \textbf{demographics.csv} and \textbf{reaction\_time.csv} files. Change their name to \textbf{df\_demographics} and \textbf{df\_rt} respectively.
+\item
+  \protect\hyperlink{importing}{See Chapter 4's section on importing data for more information}
+\end{enumerate}
+
+Alternatively, you can write and run the following commands within the \textbf{data\_cleaning\_ii\_script.R}. Just make sure they are in the week 5 folder and that you have set that folder as your working directory.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"=background.csv"}\NormalTok{) }
+
+\NormalTok{df\_flanker1 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"flanker\_task1.csv"}\NormalTok{)}
+
+\NormalTok{df\_flanker2 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"flanker\_task2.csv"}\NormalTok{)}
+
+\NormalTok{df\_flanker3 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"flanker\_task3.csv"}\NormalTok{)}
+
+\NormalTok{df\_demographics }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"demographics.csv"}\NormalTok{)}
+
+\NormalTok{df\_rt }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"reaction\_time.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{activity-1.3-load-the-tidyverse-package}{%
+\subsection{Activity 1.3: Load the tidyverse package}\label{activity-1.3-load-the-tidyverse-package}}
+
+A good practice in R is to load packages at the start of your script. Write the following in your R script to load in tidyverse.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+Okay, now we are ready to get cleaning!
 
 \hypertarget{data-formats-long-and-wide-data}{%
 \section{Data Formats (Long and Wide Data)}\label{data-formats-long-and-wide-data}}
@@ -5517,20 +5607,6 @@ In this section, we will first describe what constitutes \textbf{\texttt{wide}} 
 
 In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, I can see in one row of information that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.
 
-Table 6.1: Data in Wide Format
-
-\begin{longtable}[]{@{}lllll@{}}
-\toprule\noalign{}
-ID & Age & Height & Weight & BMI \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-1 & 30 & 175 & 76 & 24.8 \\
-2 & 25 & 165 & 60 & 22 \\
-3 & 35 & 185 & 80 & 23.4 \\
-\end{longtable}
-
 If you are like most psychologists, you are used to seeing data in wide formats in either Excel or SPSS. The advantage of this format is that it's easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because each participant is in a single row, repetition in the dataset is minimised, making it easier to read.
 
 In terms of statistical analysis, wide data is useful for calculating descriptive statistics (e.g., mean, standard deviations) on variables. Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R when the data is in wide format.
@@ -5538,29 +5614,6 @@ In terms of statistical analysis, wide data is useful for calculating descriptiv
 \textbf{Long Data}
 
 In long data, each row contains a participant's single response to a single variable. Table 6.2 illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant's response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.
-
-Table 6.2: Data in Long Format
-
-\begin{longtable}[]{@{}lll@{}}
-\toprule\noalign{}
-ID & Variable & Value \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-1 & Age & 30 \\
-1 & Height & 175 \\
-1 & Weight & 76 \\
-1 & BMI & 24.8 \\
-2 & Age & 25 \\
-2 & Height & 165 \\
-2 & Weight & 60 \\
-2 & BMI & 22 \\
-3 & Age & 35 \\
-3 & Height & 185 \\
-3 & Weight & 80 \\
-3 & BMI & 23.4 \\
-\end{longtable}
 
 Each row in Table 6.2 represents a participant's response to a single variable. If I look at row 1, I can see that participant 1 was asked their age (\texttt{Variable}) and their answer was 30 (\texttt{Value}). I have to scan other rows where ID is 1 to find out more information about this participant.
 
@@ -5589,8 +5642,8 @@ There is a lot of information that will appear in the help section. I want to dr
 There is a lot of potential inputs we can throw in, but I want to highlight the key arguments that you will use most of the time when you use this function
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7778}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argument
@@ -5707,7 +5760,7 @@ Now we have lost our record for identifying which participant contributed to whi
 \begin{figure}
 \centering
 \includegraphics{img/06-pivot-visualisation.png}
-\caption{\label{fig:unnamed-chunk-226}Visual representation of what is pivoted}
+\caption{\label{fig:unnamed-chunk-230}Visual representation of what is pivoted}
 \end{figure}
 
 \hypertarget{pivoting-our-remote-associations-data-frame}{%
@@ -5856,12 +5909,12 @@ Okay, so we know how to convert data frames from wide to long, but how can we co
 \begin{figure}
 \centering
 \includegraphics{img/06-pivotwider.png}
-\caption{\label{fig:unnamed-chunk-232}The arguments that we can pass to the pivot\_wider() function}
+\caption{\label{fig:unnamed-chunk-236}The arguments that we can pass to the pivot\_wider() function}
 \end{figure}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2639}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7361}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7778}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argument
@@ -5958,14 +6011,14 @@ Detecting missing values in datasets is the first step towards handling them eff
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Example dataset with missing values}
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+\NormalTok{missing\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
   \AttributeTok{id =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}
   \AttributeTok{age =} \FunctionTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{35}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{22}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{29}\NormalTok{),}
   \AttributeTok{gender =} \FunctionTok{c}\NormalTok{(}\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
 \NormalTok{)}
 
 \CommentTok{\# Check for missing values}
-\NormalTok{missing\_values }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{missing\_values }\OtherTok{\textless{}{-}}\NormalTok{ missing\_data }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{summarise\_all}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.)))}
 
 \FunctionTok{print}\NormalTok{(missing\_values)}
@@ -5973,28 +6026,21 @@ Detecting missing values in datasets is the first step towards handling them eff
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1 x 3
-##      id   age gender
-##   <int> <int>  <int>
-## 1     0     3      3
+##   id age gender
+## 1  0   3      3
 \end{verbatim}
 
-In this example, we've created a dataset \textbf{\texttt{data}} with variables \textbf{\texttt{age}} and \textbf{\texttt{gender}}, some of which contain missing values. We then used \textbf{\texttt{summarise\_all()}} along with \textbf{\texttt{is.na()}} to count the number of missing values in each column.
-
-\hypertarget{dealing-with-missing-values}{%
-\subsection{\texorpdfstring{\textbf{Dealing with Missing Values}}{Dealing with Missing Values}}\label{dealing-with-missing-values}}
-
-Once missing values are identified, we can employ various strategies to handle them effectively. Common approaches include removing rows or columns with missing values, imputing missing values with estimates, or using more advanced imputation methods.
+In this example, we've created a dataset \textbf{\texttt{missing\_data}} with variables \textbf{\texttt{age}} and \textbf{\texttt{gender}}, some of which contain missing values. We then used \textbf{\texttt{summarise\_all()}} along with \textbf{\texttt{is.na()}} to count the number of missing values in each column.
 
 \hypertarget{removing-missing-values}{%
-\subsubsection{Removing Missing Values}\label{removing-missing-values}}
+\subsection{Removing Missing Values}\label{removing-missing-values}}
 
 To remove rows or columns with missing values, we can use functions like \textbf{\texttt{drop\_na()}} or \textbf{\texttt{filter()}} in the tidyverse. Here's how we can remove rows with missing values in the \textbf{\texttt{age}} column:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Remove rows with missing values in the age column}
-\NormalTok{clean\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{clean\_data }\OtherTok{\textless{}{-}}\NormalTok{ missing\_data }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{drop\_na}\NormalTok{(age)}
 
 \FunctionTok{print}\NormalTok{(clean\_data)}
@@ -6002,16 +6048,14 @@ To remove rows or columns with missing values, we can use functions like \textbf
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 7 x 3
-##      id   age gender
-##   <int> <dbl> <chr> 
-## 1     1    25 Male  
-## 2     3    30 Male  
-## 3     4    28 <NA>  
-## 4     5    35 Female
-## 5     7    40 <NA>  
-## 6     8    22 Male  
-## 7    10    29 <NA>
+##   id age gender
+## 1  1  25   Male
+## 2  3  30   Male
+## 3  4  28   <NA>
+## 4  5  35 Female
+## 5  7  40   <NA>
+## 6  8  22   Male
+## 7 10  29   <NA>
 \end{verbatim}
 
 \begin{Shaded}
@@ -6027,8 +6071,8 @@ Imputing missing values involves replacing them with estimates such as mean, med
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Impute missing values in the age column with mean age}
-\NormalTok{imputed\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+\CommentTok{\# Change missing values in the age column with mean age}
+\NormalTok{imputed\_data }\OtherTok{\textless{}{-}}\NormalTok{ missing\_data }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age =} \FunctionTok{if\_else}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(age), }\FunctionTok{mean}\NormalTok{(age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), age))}
 
 \FunctionTok{print}\NormalTok{(imputed\_data)}
@@ -6036,39 +6080,18 @@ Imputing missing values involves replacing them with estimates such as mean, med
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 10 x 3
-##       id   age gender
-##    <int> <dbl> <chr> 
-##  1     1  25   Male  
-##  2     2  29.9 Female
-##  3     3  30   Male  
-##  4     4  28   <NA>  
-##  5     5  35   Female
-##  6     6  29.9 Male  
-##  7     7  40   <NA>  
-##  8     8  22   Male  
-##  9     9  29.9 Female
-## 10    10  29   <NA>
+##    id      age gender
+## 1   1 25.00000   Male
+## 2   2 29.85714 Female
+## 3   3 30.00000   Male
+## 4   4 28.00000   <NA>
+## 5   5 35.00000 Female
+## 6   6 29.85714   Male
+## 7   7 40.00000   <NA>
+## 8   8 22.00000   Male
+## 9   9 29.85714 Female
+## 10 10 29.00000   <NA>
 \end{verbatim}
-
-\hypertarget{best-practices-and-considerations}{%
-\subsection{\texorpdfstring{\textbf{Best Practices and Considerations}}{Best Practices and Considerations}}\label{best-practices-and-considerations}}
-
-When handling missing values, it's important to adhere to best practices and consider the following:
-
-\begin{itemize}
-\item
-  Document the handling of missing values in data preprocessing steps.
-\item
-  Conduct sensitivity analyses to assess the robustness of results to different missing data handling approaches.
-\item
-  Consider potential biases introduced by missing data and address them in the interpretation of results.
-\end{itemize}
-
-\hypertarget{summary-7}{%
-\subsection{\texorpdfstring{\textbf{Summary}}{Summary}}\label{summary-7}}
-
-Handling missing values is a critical aspect of data preprocessing in psychological research. By using the tidyverse package in R, researchers can effectively identify and handle missing values, ensuring the integrity and validity of their data analysis. In this section, we've covered techniques for identifying missing values, strategies for handling them, and best practices for addressing missing data. Through practical examples and considerations, researchers can confidently manage missing values in their research studies.
 
 \hypertarget{merging-data-i.e.-joining-different-datasets-together}{%
 \section{Merging Data (i.e., Joining Different Datasets Together)}\label{merging-data-i.e.-joining-different-datasets-together}}
@@ -6084,33 +6107,10 @@ Merging data involves combining data frames based on their common variables. Let
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_demographics }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"demographics.csv"}\NormalTok{)}
-\NormalTok{df\_rt }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"reaction\_time.csv"}\NormalTok{)}
-
 \FunctionTok{head}\NormalTok{(df\_demographics)}
 \FunctionTok{head}\NormalTok{(df\_rt)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##           ID     gender age
-## 1 EoYncPX1QK     Female  24
-## 2 Zn1yzAeYA4 Non-Binary  21
-## 3 B4iCIhzgPi       Male  24
-## 4 9sJnqQM0lo     Female  23
-## 5 FPSgiOjwA7 Non-Binary  23
-## 6 0g0AFLyHCe       Male  24
-\end{verbatim}
-
-\begin{verbatim}
-##           ID   condition mean_rt
-## 1 EoYncPX1QK no caffeine     269
-## 2 Zn1yzAeYA4 no caffeine     206
-## 3 B4iCIhzgPi no caffeine     187
-## 4 9sJnqQM0lo no caffeine     217
-## 5 FPSgiOjwA7 no caffeine     160
-## 6 0g0AFLyHCe no caffeine     255
-\end{verbatim}
 
 Ideally, we would have one merged data frame that would contain a participant's response on all our variables. However, there are some complications with these two data frames. If you check the number of rows in each data frame, we can see there are differing number of participants.
 
@@ -6437,13 +6437,560 @@ In the resulting \textbf{\texttt{df\_outer}} data frame, all rows from both \tex
 
 The outer join is particularly useful when you want to retain all information from both datasets, even if there are inconsistencies or missing values between them. This ensures that you have a complete dataset for analysis, with all available information from each source preserved.
 
-\hypertarget{summary-8}{%
-\subsection{Summary}\label{summary-8}}
+\hypertarget{summary-7}{%
+\subsection{Summary}\label{summary-7}}
 
 Your choice of join ultimately depends on your research questions, the nature of your data, and the analysis you intend to perform. But hopefully at this point you have an appreciation of the variety of ways you can merge data in R.
 
-\hypertarget{dealing-with-tricky-character-data}{%
-\section{Dealing with Tricky Character Data}\label{dealing-with-tricky-character-data}}
+\hypertarget{data-wrangling-example-demographic-and-flanker-task}{%
+\section{Data Wrangling Example (Demographic and Flanker Task)}\label{data-wrangling-example-demographic-and-flanker-task}}
+
+\protect\hyperlink{clean-activity}{In the last chapter, I asked you to clean a Flanker task}. However, this flanker task was actually composed of separate flanker.csv files. This week we are going to take those three separate flanker files (the \texttt{df\_flanker1}, \texttt{df\_flanker2}, and \texttt{df\_flanker3} data frames we created earlier) and merge them together. Additionally, we are going to clean the associated demographic file (\texttt{df\_background}).
+
+First let's clean the \texttt{df\_background\ file}, then we will clean the three \texttt{flanker\_files}. At the end then we will merge them all together.
+
+\hypertarget{part-i-cleaning-the-df_background-file}{%
+\subsection{\texorpdfstring{Part I: Cleaning the \texttt{df\_background} file}{Part I: Cleaning the df\_background file}}\label{part-i-cleaning-the-df_background-file}}
+
+First, let's have a look at the \texttt{df\_background} data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df\_background)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Event.Index UTC.Timestamp UTC.Date.and.Time Local.Timestamp Local.Timezone
+## 1           1      1.71e+12  23/01/2024 12:36        1.71e+12              0
+## 2           2      1.71e+12  23/01/2024 12:36        1.71e+12              0
+## 3           3      1.71e+12  23/01/2024 12:36        1.71e+12              0
+## 4           4      1.71e+12  23/01/2024 12:36        1.71e+12              0
+## 5           5      1.71e+12  23/01/2024 12:36        1.71e+12              0
+## 6           6      1.71e+12  23/01/2024 12:36        1.71e+12              0
+##   Local.Date.and.Time Experiment.ID Experiment.Version      Tree.Node.Key
+## 1    23/01/2024 12:36        161196                  3 questionnaire-ja96
+## 2    23/01/2024 12:36        161196                  3 questionnaire-ja96
+## 3    23/01/2024 12:36        161196                  3 questionnaire-ja96
+## 4    23/01/2024 12:36        161196                  3 questionnaire-ja96
+## 5    23/01/2024 12:36        161196                  3 questionnaire-ja96
+## 6    23/01/2024 12:36        161196                  3 questionnaire-ja96
+##   Repeat.Key Schedule.ID Participant.Public.ID Participant.Private.ID
+## 1         NA    34404119                 BLIND               10168827
+## 2         NA    34404119                 BLIND               10168827
+## 3         NA    34404119                 BLIND               10168827
+## 4         NA    34404119                 BLIND               10168827
+## 5         NA    34404119                 BLIND               10168827
+## 6         NA    34404119                 BLIND               10168827
+##   Participant.Starting.Group Participant.Status Participant.Completion.Code
+## 1                         NA           complete                          NA
+## 2                         NA           complete                          NA
+## 3                         NA           complete                          NA
+## 4                         NA           complete                          NA
+## 5                         NA           complete                          NA
+## 6                         NA           complete                          NA
+##   Participant.External.Session.ID Participant.Device.Type Participant.Device
+## 1                              NA                computer  Desktop or Laptop
+## 2                              NA                computer  Desktop or Laptop
+## 3                              NA                computer  Desktop or Laptop
+## 4                              NA                computer  Desktop or Laptop
+## 5                              NA                computer  Desktop or Laptop
+## 6                              NA                computer  Desktop or Laptop
+##   Participant.OS Participant.Browser Participant.Monitor.Size
+## 1     Windows 10    Chrome 120.0.0.0                 1280x720
+## 2     Windows 10    Chrome 120.0.0.0                 1280x720
+## 3     Windows 10    Chrome 120.0.0.0                 1280x720
+## 4     Windows 10    Chrome 120.0.0.0                 1280x720
+## 5     Windows 10    Chrome 120.0.0.0                 1280x720
+## 6     Windows 10    Chrome 120.0.0.0                 1280x720
+##   Participant.Viewport.Size Checkpoint Room.ID Room.Order    Task.Name
+## 1                  1280x559         NA      NA         NA Demographics
+## 2                  1280x559         NA      NA         NA Demographics
+## 3                  1280x559         NA      NA         NA Demographics
+## 4                  1280x559         NA      NA         NA Demographics
+## 5                  1280x559         NA      NA         NA Demographics
+## 6                  1280x559         NA      NA         NA Demographics
+##   Task.Version order.kx46 Randomise.questionnaire.elements.        Question.Key
+## 1            1        ABC                                No BEGIN QUESTIONNAIRE
+## 2            1        ABC                                No                 Sex
+## 3            1        ABC                                No       Sex-quantised
+## 4            1        ABC                                No            Sex-text
+## 5            1        ABC                                No                 Age
+## 6            1        ABC                                No       Age-quantised
+##   Response
+## 1         
+## 2   Female
+## 3        1
+## 4         
+## 5    18-24
+## 6        1
+\end{verbatim}
+
+Again, not exactly a data frame to write home to your parents about. There is a lot of cleaning we need to do here. Let's go through it step-by-step
+
+First thing we need to do is select our columns as most of the default columns are unnecessary. The columns we need are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Participant.Private.ID} - Participant's ID
+\item
+  \texttt{Question.Key} - The question they were being asked.
+\item
+  \texttt{Response} - Their response to that question.
+\end{itemize}
+
+Let's select those columns using \texttt{select()}. Remember that the syntax is: \texttt{select(dataframe,\ columns\ we\ want)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background\_select }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(df\_background,}
+\NormalTok{                               Participant.Private.ID,}
+\NormalTok{                               Question.Key,}
+\NormalTok{                               Response)}
+
+\CommentTok{\#remember to check it with head()}
+
+\FunctionTok{head}\NormalTok{(df\_background\_select)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Participant.Private.ID        Question.Key Response
+## 1               10168827 BEGIN QUESTIONNAIRE         
+## 2               10168827                 Sex   Female
+## 3               10168827       Sex-quantised        1
+## 4               10168827            Sex-text         
+## 5               10168827                 Age    18-24
+## 6               10168827       Age-quantised        1
+\end{verbatim}
+
+Okay that's a lot easier to look at. If you inspect the values in the \texttt{Participant.Private.ID} column, you'll notice that there is a lot of repeated values. This is because this data is in long format rather than wide.
+
+We are going to change that in a couple of steps. But the next thing we are going to do is fix our column names using the \texttt{rename()} function. Remember that the syntax is: \texttt{rename(df,\ new\_column\_name\ =\ old\_column\_name)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background\_rename }\OtherTok{\textless{}{-}} \FunctionTok{rename}\NormalTok{(df\_background\_select,}
+                               \AttributeTok{ID =}\NormalTok{ Participant.Private.ID,}
+                               \AttributeTok{Question =}\NormalTok{ Question.Key)}
+
+\FunctionTok{head}\NormalTok{(df\_background\_rename)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         ID            Question Response
+## 1 10168827 BEGIN QUESTIONNAIRE         
+## 2 10168827                 Sex   Female
+## 3 10168827       Sex-quantised        1
+## 4 10168827            Sex-text         
+## 5 10168827                 Age    18-24
+## 6 10168827       Age-quantised        1
+\end{verbatim}
+
+Using just two functions we have significantly cleaned up our data frame by reducing its size and enhancing its readability.
+
+Now we need to think about cleaning our rows. If you look at the values under the \texttt{Question} and \texttt{Response} columns, you will see relatively strange responses. Let's talk through the values in Question and their associated Response.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7778}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Question
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Response
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BEGIN QUESTIONNAIRE & This ``response'' is something Gorilla records in the data frame to help us quickly identify the start and end of participants' responses to a questionnaire. We do not need this response in our clean dataset, so we will be getting rid of it. \\
+Sex & Participants were asked to select a drop-down choice to identify their sex as either male or female. This records that selection. \\
+Sex-quantised & This translates the participant's response to a numerical value. The numbers correspond to the order in which they were displayed answers. Female was displayed first, so it gets recorded as a 1. Male was displayed second, so it gets recorded as a 2. We will get rid of this column because we just want the male or female response. \\
+Sex-text & No idea, to be honest. But we don't need it either way. \\
+Age & Participants asked to select a drop-down choice to identify their age across the categories 18-24, 25-30 up to 41-50. This records that selection. \\
+Age-quantised & Again, this translates the participant's response to a numerical value in relation to the order options were displayed. Not needed. \\
+Age-text & Again, no clue. But we do not need it. \\
+\end{longtable}
+
+We only need the rows where Question is equal to Age or Sex. Let's select only these rows by using the \texttt{filter()} function and the \texttt{\textbar{}} operator.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background\_filter }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(df\_background\_rename, Question }\SpecialCharTok{==} \StringTok{"Age"} \SpecialCharTok{|}\NormalTok{ Question }\SpecialCharTok{==} \StringTok{"Sex"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(df\_background\_filter)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         ID Question Response
+## 1 10168827      Sex   Female
+## 2 10168827      Age    18-24
+## 3 10192092      Sex   Female
+## 4 10192092      Age    31-40
+## 5 10205485      Sex         
+## 6 10205485      Age    18-24
+\end{verbatim}
+
+Now let's pivot our data frame from long to wide using our new friend the \texttt{pivot\_wider()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background\_wide }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_wider}\NormalTok{(df\_background\_filter,}
+                                   \AttributeTok{id\_cols =}\NormalTok{ ID,}
+                                   \AttributeTok{names\_from =}\NormalTok{ Question,}
+                                   \AttributeTok{values\_from =}\NormalTok{ Response)}
+
+\FunctionTok{head}\NormalTok{(df\_background\_wide)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##         ID Sex      Age  
+##      <int> <chr>    <chr>
+## 1 10168827 "Female" 18-24
+## 2 10192092 "Female" 31-40
+## 3 10205485 ""       18-24
+## 4 10208522 "Female" 18-24
+## 5 10218310 "Female" 18-24
+## 6 10225898 "Female" 18-24
+\end{verbatim}
+
+Okay, we are not quite done yet. You will have noticed that there is a missing value for participant \texttt{10205485}, but it is not turning up as an \texttt{NA}. What is going on here?
+
+To get a better idea, let's print out the values of both the \texttt{Sex} and \texttt{Age} columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background\_wide}\SpecialCharTok{$}\NormalTok{Sex}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Female" "Female" ""       "Female" "Female" "Female" "Female" "Female"
+##  [9] "Male"   "Male"   ""       "Female" "Female" "Male"   "Male"   "Female"
+## [17] "Male"   "Female" "Female" "Female" "Female" "Male"   "Female" "Female"
+## [25] "Male"   "Female" "Female" "Female" "Female" "Female" "Female" "Male"  
+## [33] "Female" "Female" "Female" "Female" "Female" "Female" "Female" "Female"
+## [41] "Female" "Female" "Female" "Female" "Male"   "Female" "Female" "Female"
+## [49] "Male"   "Female"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background\_wide}\SpecialCharTok{$}\NormalTok{Age}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "18-24" "31-40" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24"
+## [10] "41-50" "18-24" "18-24" "18-24" ""      "18-24" "18-24" "18-24" "18-24"
+## [19] "18-24" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24"
+## [28] "41-50" "31-40" "18-24" "18-24" "18-24" "31-40" "18-24" "18-24" "18-24"
+## [37] "25-30" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24" "18-24"
+## [46] "18-24" "18-24" "18-24" "18-24" "18-24"
+\end{verbatim}
+
+If you look at values {[}3{]} and {[}11{]} in our Sex vector and {[}14{]} in our Age vector, what's happened is that Gorilla saved these data points as an empty character data (``\,``). Even an empty character is still counted as a character in R. We can remove these values using the \texttt{filter()} function and the \& (AND) operator.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_background\_clean }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(df\_background\_wide, Age }\SpecialCharTok{!=} \StringTok{""} \SpecialCharTok{\&}\NormalTok{ Sex }\SpecialCharTok{!=} \StringTok{""}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(df\_background\_clean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##         ID Sex    Age  
+##      <int> <chr>  <chr>
+## 1 10168827 Female 18-24
+## 2 10192092 Female 31-40
+## 3 10208522 Female 18-24
+## 4 10218310 Female 18-24
+## 5 10225898 Female 18-24
+## 6 10228586 Female 18-24
+\end{verbatim}
+
+Grand job, our background data frame is clean. Let's move on to cleaning our \texttt{df\_flanker1}, \texttt{df\_flanker2}, and \texttt{df\_flanker3} data frames.
+
+\hypertarget{cleaning-our-flanker-tasks}{%
+\subsection{Cleaning our Flanker Tasks}\label{cleaning-our-flanker-tasks}}
+
+If you are cleaning multiple data frames in R, one way you can do this is to clean each one individually and then merge the clean ones together. However, if multiple data frames are very similar in structure, it's better to merge these data frames together first and then clean it all in one go.
+
+If you look at the structure of \texttt{df\_flanker1}, \texttt{df\_flanker2}, and \texttt{df\_flanker3} you will notice that they all have the same variable names and types.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(df\_flanker1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    376 obs. of  5 variables:
+##  $ participant..id: int  10168827 10168827 10168827 10168827 10168827 10168827 10168827 10168827 10192092 10192092 ...
+##  $ trial          : chr  "START" "Congruent" "Incongruent" "Congruent" ...
+##  $ reaction.time  : num  NA 627 621 604 287 ...
+##  $ stimulus       : chr  "positive" "positive" "positive" "positive" ...
+##  $ condition      : chr  "ABC" "ABC" "ABC" "ABC" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(df\_flanker2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    376 obs. of  5 variables:
+##  $ participant..id: int  10168827 10168827 10168827 10168827 10168827 10168827 10168827 10168827 10192092 10192092 ...
+##  $ trial          : chr  "START" "Congruent" "Incongruent" "Congruent" ...
+##  $ reaction.time  : num  NA -2.6 206.9 625.3 309.9 ...
+##  $ stimulus       : chr  "negative" "negative" "negative" "negative" ...
+##  $ condition      : chr  "ABC" "ABC" "ABC" "ABC" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(df\_flanker3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    376 obs. of  5 variables:
+##  $ participant..id: int  10168827 10168827 10168827 10168827 10168827 10168827 10168827 10168827 10192092 10192092 ...
+##  $ trial          : chr  "START" "Congruent" "Incongruent" "Congruent" ...
+##  $ reaction.time  : num  NA 889 748 547 910 ...
+##  $ stimulus       : chr  "neutral" "neutral" "neutral" "neutral" ...
+##  $ condition      : chr  "ABC" "ABC" "ABC" "ABC" ...
+\end{verbatim}
+
+Each data frame has the same number of columns (5 variables) with the same variable names and the same number of participants (rows). So rather than clean each one individually, let's combine them all into the one data frame and clean it there.
+
+We can do that using \texttt{full\_join()} since we want to keep all observations in each data frame. The only thing is that \texttt{full\_join} only allows us to merge two \texttt{dataframes} at a time, so we will need to first join \texttt{df\_flanker1} with \texttt{df\_flanker2} and call the result \texttt{df\_flanker\_proxy}. Then we will merge \texttt{df\_flanker\_proxy} with \texttt{df\_flanker\_total}.
+
+\begin{verbatim}
+## Joining with `by = join_by(participant..id, trial, reaction.time, stimulus,
+## condition)`
+## Joining with `by = join_by(participant..id, trial, reaction.time, stimulus,
+## condition)`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_flanker\_proxy }\OtherTok{\textless{}{-}} \FunctionTok{full\_join}\NormalTok{(df\_flanker1, df\_flanker2)}
+
+\NormalTok{df\_flanker\_total }\OtherTok{\textless{}{-}} \FunctionTok{full\_join}\NormalTok{(df\_flanker\_proxy, df\_flanker3)}
+\end{Highlighting}
+\end{Shaded}
+
+When you do this, you might get a scary-looking message like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Joining with }\StringTok{\textasciigrave{}}\AttributeTok{by = join\_by(participant..id, trial, reaction.time, task)}\StringTok{\textasciigrave{}}\NormalTok{Joining with }\StringTok{\textasciigrave{}}\AttributeTok{by = join\_by(participant..id, trial, reaction.time, task)}\StringTok{\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+That just means it is joining everything together.
+
+Now let's look at our \texttt{df\_flanker\_total}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df\_flanker\_total, }\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\CommentTok{\#n = 10, changes the number of rows printed out to 10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    participant..id       trial reaction.time stimulus condition
+## 1         10168827       START            NA positive       ABC
+## 2         10168827   Congruent       627.183 positive       ABC
+## 3         10168827 Incongruent       621.178 positive       ABC
+## 4         10168827   Congruent       604.430 positive       ABC
+## 5         10168827 Incongruent       287.365 positive       ABC
+## 6         10168827   Congruent       284.131 positive       ABC
+## 7         10168827 Incongruent       592.393 positive       ABC
+## 8         10168827         END            NA positive       ABC
+## 9         10192092       START            NA positive       ABC
+## 10        10192092   Congruent       661.832 positive       ABC
+\end{verbatim}
+
+Now, we can start cleaning the merged data frame. Here's a breakdown of the cleaning steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Rename Columns}: We start by renaming columns for clarity and consistency.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#We\textquotesingle{}re renaming some columns in our combined data frame to give them better names that make sense.}
+\CommentTok{\# For example, changing "participant..id" to just "ID" and "reaction.time" to "rt" for reaction time.}
+
+\NormalTok{df\_flank\_rename }\OtherTok{\textless{}{-}} \FunctionTok{rename}\NormalTok{(df\_flanker\_total,}
+                          \AttributeTok{ID =}\NormalTok{ participant..id,}
+                          \AttributeTok{rt =}\NormalTok{ reaction.time)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Filter Rows}: We remove unnecessary rows with the values \textbf{\texttt{START}} and \textbf{\texttt{END}}.Again these values are Gorillas way to indicate to us when a participant stated the task. But we do not need them in our clean data set.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# We\textquotesingle{}re only interested in rows where the trial is either "Congruent" or "Incongruent".}
+
+\NormalTok{df\_flank\_filter }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(df\_flank\_rename,}
+\NormalTok{                          trial }\SpecialCharTok{==} \StringTok{"Congruent"} \SpecialCharTok{|}\NormalTok{ trial }\SpecialCharTok{==} \StringTok{"Incongruent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Group Data}: We will need to calculate mean reaction times score for congruent and incongruent trials. But first we need to tell R that we want to group scores based on participants ID and the trial they were in
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_flank\_group }\OtherTok{\textless{}{-}} \FunctionTok{group\_by}\NormalTok{(df\_flank\_filter, ID, trial)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \textbf{Calculate Mean Reaction Time}: We calculate the mean reaction time for each participant-trial combination using the \texttt{mutate()} function.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Here, we\textquotesingle{}re calculating the average (mean) reaction time for each participant and trial type.}
+\CommentTok{\# This will give us a better idea of how participants performed in different trial conditions.}
+
+\NormalTok{df\_flank\_rt\_average }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(df\_flank\_group,}
+                              \AttributeTok{mean\_rt =} \FunctionTok{mean}\NormalTok{(rt),}
+                              \AttributeTok{.keep =} \StringTok{"unused"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  \textbf{Remove Duplicates}: Now, we're removing any duplicate rows in our data frame to make sure we're not double-counting any participants.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_flank\_distinct }\OtherTok{\textless{}{-}} \FunctionTok{distinct}\NormalTok{(df\_flank\_rt\_average)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  \textbf{Reshape Data to Wide Format}: We pivot the data frame from long to wide format to make it easier on the eye.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_flank\_wide }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_wider}\NormalTok{(df\_flank\_distinct,}
+  \AttributeTok{id\_cols =} \FunctionTok{c}\NormalTok{(ID, condition),}
+  \AttributeTok{names\_from =} \FunctionTok{c}\NormalTok{(trial, stimulus), }
+  \AttributeTok{values\_from =}\NormalTok{ mean\_rt,}
+  \AttributeTok{values\_fn =} \FunctionTok{list}\NormalTok{(}\AttributeTok{mean =}\NormalTok{ mean)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  \textbf{Calculate Flanker Effect}: Finally, we calculate the Flanker effect for each participant. We can use mutate again here. The flanker effect is the congruent trial minus the incongruent trials
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_flank\_effect }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(df\_flank\_wide,}
+                         \AttributeTok{flanker\_effect\_pos =}\NormalTok{ Congruent\_positive }\SpecialCharTok{{-}}\NormalTok{ Incongruent\_positive,}
+                         \AttributeTok{flanker\_effect\_neg =}\NormalTok{ Congruent\_negative }\SpecialCharTok{{-}}\NormalTok{ Incongruent\_negative,}
+                         \AttributeTok{flanker\_effect\_neut =}\NormalTok{ Congruent\_neutral }\SpecialCharTok{{-}}\NormalTok{ Incongruent\_neutral,}
+                         \AttributeTok{.keep =} \StringTok{"unused"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Remove \textbf{Missing Values (NA)}: If you \texttt{View(df\_flank\_clean)} you will see some missing values, we can remove them using the \texttt{na.omit()} function.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_flank\_clean }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(df\_flank\_effect)}
+\end{Highlighting}
+\end{Shaded}
+
+Boom, there we have it, the cleaned version of our \texttt{flanker} data frames.
+
+\hypertarget{merging-the-data-frames}{%
+\subsection{Merging the Data Frames}\label{merging-the-data-frames}}
+
+For our final step, we can merge our two data frames together into \texttt{clean\_df}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clean\_df }\OtherTok{\textless{}{-}} \FunctionTok{inner\_join}\NormalTok{(df\_background\_clean, df\_flank\_clean, }\AttributeTok{by =} \FunctionTok{join\_by}\NormalTok{(ID))}
+
+\FunctionTok{head}\NormalTok{(clean\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 7
+##         ID Sex    Age   condition flanker_effect_pos flanker_effect_neg
+##      <int> <chr>  <chr> <chr>                  <dbl>              <dbl>
+## 1 10168827 Female 18-24 ABC                   -35.2              -35.2 
+## 2 10192092 Female 31-40 ABC                     5.37               5.37
+## 3 10208522 Female 18-24 ABC                   116.               116.  
+## 4 10218310 Female 18-24 ABC                   -99.4              -99.4 
+## 5 10225898 Female 18-24 ABC                  -184.              -184.  
+## 6 10228586 Female 18-24 ABC                   -72.0              -72.0 
+## # i 1 more variable: flanker_effect_neut <dbl>
+\end{verbatim}
+
+\hypertarget{summary-8}{%
+\section{Summary}\label{summary-8}}
+
+That concludes our two sessions on data cleaning. You have covered a lot in these two sessions. The lessons you have learn here are applicable to cleaning the majority of the datasets you will encounter in your research. Well done.
+
+In the next session, we will learn how we can use R to create nice data visualisations. See you then.
 
 \hypertarget{appendix---understanding-boolean-operators-in-the-context-of-filter}{%
 \chapter{\texorpdfstring{Appendix - Understanding Boolean Operators in the Context of \texttt{filter()}}{Appendix - Understanding Boolean Operators in the Context of filter()}}\label{appendix---understanding-boolean-operators-in-the-context-of-filter}}
