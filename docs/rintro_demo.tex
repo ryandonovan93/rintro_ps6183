@@ -127,7 +127,7 @@
 
 \title{Introduction to R}
 \author{Ryan Donovan}
-\date{2024-02-28}
+\date{2024-03-05}
 
 \begin{document}
 \maketitle
@@ -3664,18 +3664,15 @@ To make sure the following functions are working, run the following code to chec
 \end{verbatim}
 
 \begin{verbatim}
-## [1] "You are primo!"
+## [1] "You are priceless!"
 \end{verbatim}
 
 \begin{verbatim}
 ## 
-## Usually (but not always) doing tests of normality reflect a lack of
-## understanding of the power of rank tests, and an assumption of high power for
-## the tests (qq plots don't always help with that because of their subjectivity).
-## When possible it's good to choose a robust method. Also, doing pre-testing for
-## normality can affect the type I error of the overall analysis.
-##    -- Frank Harrell
-##       R-help (April 2005)
+## Soham: How to compute the p-value of a statistic generally?
+## Berton Gunter: runif(1)
+##    -- Soham and Berton Gunter
+##       R-help (May 2010)
 \end{verbatim}
 
 \begin{Shaded}
@@ -4183,7 +4180,7 @@ Alternatively, you can run the following command within the \textbf{data\_cleani
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_raw }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"raw\_remote\_associations.csv"}\NormalTok{) }
+\NormalTok{df\_raw }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"datasets/raw\_remote\_associations.csv"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -4276,8 +4273,8 @@ The first step after importing a dataset is to check it to ensure that we have i
 Ouch! Now that is a data set only a parent could love. Here is what each column is telling us about each participant
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2394}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7606}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7500}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Column
@@ -4325,8 +4322,8 @@ However, several issues are evident in this dataset:
 The following functions are extremely useful for cleaning data frame in R. They all come from the \texttt{tidyverse} package. The following table defines each package and what it does. We will use each function in this chapter to clean the \texttt{remote\_associations} data frame, so you will get to practice each one.
 
 \begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6667}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3333}}@{}}
+  >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6620}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3380}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Function
@@ -5485,6 +5482,968 @@ Now that we've loaded the necessary package and imported our data, we can procee
 \section{Summary}\label{summary-5}}
 
 Well done. You have cleaned your first data sets in R. The functions that we used today will cover 70-80\% of the functions that you would need to handle most data cleaning problems. In the next chapter, we will look at situations where we need to transform the shape of our data, handle missing values, join together datasets, and identify problematic patterns in our data.
+
+\hypertarget{datacleaning2}{%
+\chapter{Data Wrangling and Cleaning (Part II)}\label{datacleaning2}}
+
+In this session, we are going to learn how to clean more challenging data than what we encountered in \protect\hyperlink{datacleaning1}{Chapter 5}. In contrast to the last chapter, this section is more of a reference guide than an end-to-end cleaning example. That's because the tools you learn here might not always pop-up, or at least are unlikely to all pop-up in the one data frame. Nonetheless, when you combine the functions you learn here to clean data with the functions from last week, you will be able to handle an impressive amount (probably around 80\%) of any data cleaning challenges you will encounter in your research.
+
+By the end of this session, you should be capable of the following:
+
+\begin{itemize}
+\item
+  Understand the concepts of \textbf{wide} and \textbf{long} data and be capable of \texttt{pivoting} (i.e., transforming) from one format to another.
+\item
+  Know how to merge together separate data frames into one file that you can clean.
+\item
+  Identifying and handling missing data (\texttt{NA} values).
+\item
+  Handle character data by knowing how to detect, substitute, or extract pattern in text.
+\end{itemize}
+
+\hypertarget{data-formats-long-and-wide-data}{%
+\section{Data Formats (Long and Wide Data)}\label{data-formats-long-and-wide-data}}
+
+The majority of data encountered in Psychological research exists in tables, also known as \textbf{\texttt{Data\ Frames}}. These tables can be structured in two primary formats: \textbf{\texttt{wide}} or \textbf{\texttt{long}}. Depending on the research software used, the raw data downloaded from a study might be in either \textbf{\texttt{wide}} or \textbf{\texttt{long}} table format.
+
+Understanding the differences between these formats is important because each format facilitates certain tasks more easily. Similarly, knowing how to effectively and efficiently \textbf{\texttt{pivot}} (i.e., transform or convert) between these formats is essential for performing specific tasks on the data. Fortunately, R and the tidyverse package are well-equipped to handle both types of data and to convert between them painlessly.
+
+In this section, we will first describe what constitutes \textbf{\texttt{wide}} and \textbf{\texttt{long}} data formats and the advantages of each format over its counterpart. We will then discuss how to pivot between these formats using R.
+
+\hypertarget{defining-long-and-wide-data}{%
+\subsection{Defining Long and Wide Data}\label{defining-long-and-wide-data}}
+
+\textbf{Wide Data}
+
+In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, I can see in one row of information that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.
+
+Table 6.1: Data in Wide Format
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+ID & Age & Height & Weight & BMI \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 30 & 175 & 76 & 24.8 \\
+2 & 25 & 165 & 60 & 22 \\
+3 & 35 & 185 & 80 & 23.4 \\
+\end{longtable}
+
+If you are like most psychologists, you are used to seeing data in wide formats in either Excel or SPSS. The advantage of this format is that it's easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because each participant is in a single row, repetition in the dataset is minimised, making it easier to read.
+
+In terms of statistical analysis, wide data is useful for calculating descriptive statistics (e.g., mean, standard deviations) on variables. Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R when the data is in wide format.
+
+\textbf{Long Data}
+
+In long data, each row contains a participant's single response to a single variable. Table 6.2 illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant's response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.
+
+Table 6.2: Data in Long Format
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+ID & Variable & Value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & Age & 30 \\
+1 & Height & 175 \\
+1 & Weight & 76 \\
+1 & BMI & 24.8 \\
+2 & Age & 25 \\
+2 & Height & 165 \\
+2 & Weight & 60 \\
+2 & BMI & 22 \\
+3 & Age & 35 \\
+3 & Height & 185 \\
+3 & Weight & 80 \\
+3 & BMI & 23.4 \\
+\end{longtable}
+
+Each row in Table 6.2 represents a participant's response to a single variable. If I look at row 1, I can see that participant 1 was asked their age (\texttt{Variable}) and their answer was 30 (\texttt{Value}). I have to scan other rows where ID is 1 to find out more information about this participant.
+
+It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data. This is one of the reasons why the concept of \texttt{Tidy\ Data} discussed in the previous chapter prefers data in the long format - every row contains the minimum amount of information needed rather than ``cluttering'' rows with lots of information.
+
+This preference for long data isn't only stylistic, long-data format is more suitable for certain forms of analyses. Long data is often more suitable if you are analyzing data in R that involves repeated measures or longitudinal designs, basically any test where we are interested in within-subject variability over time. Similarly, a lot of the packages/functions developed to enable high quality data visualizations were built with the assumption that your data is in long-format.
+
+\hypertarget{converting-the-format-of-our-data}{%
+\section{Converting the Format of Our Data}\label{converting-the-format-of-our-data}}
+
+While it's important to know the differences between wide and long data formats, do not feel you have to memories every detail. If you are running a statistical test it'll be pretty easy to find out what type of format your data needs to be in. If the data is not in the correct format, then the tidyverse package makes it straightforward to convert one format to another, thanks to two functions called: \textbf{\texttt{pivot\_longer()}} and \textbf{\texttt{pivot\_wider()}}.
+
+\hypertarget{pivoting-from-wide-to-long}{%
+\subsection{Pivoting from Wide to Long}\label{pivoting-from-wide-to-long}}
+
+The \textbf{\texttt{pivot\_longer()}} function converts a wide data frame into long format. Typing \textbf{\texttt{?pivot\_longer}} into the console provides detailed information about this function in RStudio through the Help tab in the Files Pane\footnote{You can use this syntax with every function in R. We haven't used so far in the course because I personally think the ``helpful information'' that R gives you is absolute GARBAGE if you are beginner. It tends to be highly technical, minimal, and will often confuse more people than it will help inform.}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?pivot\_longer}
+\end{Highlighting}
+\end{Shaded}
+
+There is a lot of information that will appear in the help section. I want to draw your attention to the \textbf{Usage} section, which contains the arguments (inputs) that we can specify in the \texttt{pivot\_longer()} function.
+
+There is a lot of potential inputs we can throw in, but I want to highlight the key arguments that you will use most of the time when you use this function
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Argument
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{data} & Here you specify the wide data frame that you want to convert to long format \\
+\texttt{cols} & The column(s) that will be moved or altered when you pivot the data frame. \\
+\texttt{names\_to} & The names of each variable identified in cols will be stored in a new column in our long data frame. The names\_to argument specifies the name(s) of that new column(s). \\
+\texttt{values\_to} & The values associated with each variable identified in cols will be stored in a new column in our long data frame. The values\_to argument specifies the name of that new column. \\
+& \\
+\end{longtable}
+
+Let's simulate an example data frame to use \texttt{pivot\_longer}. Copy and paste the code below to your R script and run it to create the data frame
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#set.seed(123) ensures that the data my R generates will be the same as the data your R generates. This is because the function rnorm() used below randomly generates numbers. }
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+
+
+\NormalTok{wide\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{ID =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}
+  \AttributeTok{Wellbeing =} \FunctionTok{round}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{, }\AttributeTok{mean =} \DecValTok{4}\NormalTok{, }\AttributeTok{sd =} \FloatTok{0.8}\NormalTok{), }\DecValTok{2}\NormalTok{),}
+  \AttributeTok{Extraversion =} \FunctionTok{round}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{, }\AttributeTok{mean =} \DecValTok{3}\NormalTok{, }\AttributeTok{sd =} \FloatTok{0.8}\NormalTok{), }\DecValTok{2}\NormalTok{),}
+  \AttributeTok{Neuroticism =} \FunctionTok{round}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{, }\AttributeTok{mean =} \DecValTok{3}\NormalTok{, }\AttributeTok{sd =} \FloatTok{0.8}\NormalTok{), }\DecValTok{2}\NormalTok{),}
+  \AttributeTok{Conscientiousness =} \FunctionTok{round}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{, }\AttributeTok{mean =} \DecValTok{3}\NormalTok{, }\AttributeTok{sd =} \FloatTok{0.8}\NormalTok{), }\DecValTok{2}\NormalTok{),}
+  \AttributeTok{Openness =} \FunctionTok{round}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{, }\AttributeTok{mean =} \DecValTok{3}\NormalTok{, }\AttributeTok{sd =} \FloatTok{0.8}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\#rnorm() randomly generates a set of numbers (n) that have a certain mean and standard deviation. I put this function inside round() to set the number of decimal places. }
+
+\FunctionTok{head}\NormalTok{(wide\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ID Wellbeing Extraversion Neuroticism Conscientiousness Openness
+## 1  1      3.55         3.98        2.15              3.34     2.44
+## 2  2      3.82         3.29        2.83              2.76     2.83
+## 3  3      5.25         3.32        2.18              3.72     1.99
+## 4  4      4.06         3.09        2.42              3.70     4.74
+## 5  5      4.10         2.56        2.50              3.66     3.97
+## 6  6      5.37         4.43        1.65              3.55     2.10
+\end{verbatim}
+
+So we've created a wide data frame with 10 participants (5 male, 5 female) with scores on each of the Big Five personality traits. We know the data frame is wide because every variable is a separate column and each row tells us a participant's response to each variable.
+
+Let's see how we can convert this data frame from wide to long using \texttt{pivot\_longer()}. We'll call the long data frame \texttt{long\_df}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{long\_df }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(}
+\NormalTok{  wide\_df,}
+  \AttributeTok{cols =}\NormalTok{ Wellbeing}\SpecialCharTok{:}\NormalTok{Openness, }\CommentTok{\#we will pivot everything except ID}
+  \AttributeTok{names\_to =} \StringTok{"Variable"}\NormalTok{,}
+  \AttributeTok{values\_to =} \StringTok{"Response"}
+\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(long\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##      ID Variable          Response
+##   <int> <chr>                <dbl>
+## 1     1 Wellbeing             3.55
+## 2     1 Extraversion          3.98
+## 3     1 Neuroticism           2.15
+## 4     1 Conscientiousness     3.34
+## 5     1 Openness              2.44
+## 6     2 Wellbeing             3.82
+\end{verbatim}
+
+Now we have the same data frame but in a different format.
+
+The figure below gives an example of the pivot process. We typically do not pivot the ID column, because that enables us to identify which participant's score each variable. Let's look at what happens if we do include \texttt{ID} in the \texttt{cols\ argument}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pivot\_longer}\NormalTok{(}
+\NormalTok{  wide\_df,}
+  \AttributeTok{cols =}\NormalTok{ ID}\SpecialCharTok{:}\NormalTok{Openness, }\CommentTok{\#pivot everything}
+  \AttributeTok{values\_to =} \StringTok{"Response"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 60 x 2
+##    name              Response
+##    <chr>                <dbl>
+##  1 ID                    1   
+##  2 Wellbeing             3.55
+##  3 Extraversion          3.98
+##  4 Neuroticism           2.15
+##  5 Conscientiousness     3.34
+##  6 Openness              2.44
+##  7 ID                    2   
+##  8 Wellbeing             3.82
+##  9 Extraversion          3.29
+## 10 Neuroticism           2.83
+## # i 50 more rows
+\end{verbatim}
+
+Now we have lost our record for identifying which participant contributed to which data point. This identifies a key about using \texttt{pivot\_longer()} in that not EVERYTHING needs to pivoted, it depends on our analytical needs. Let's go through a slightly more complicated data frame to illustrate what I mean by this.
+
+\begin{figure}
+\centering
+\includegraphics{img/06-pivot-visualisation.png}
+\caption{\label{fig:unnamed-chunk-226}Visual representation of what is pivoted}
+\end{figure}
+
+\hypertarget{pivoting-our-remote-associations-data-frame}{%
+\subsection{Pivoting our Remote Associations Data Frame}\label{pivoting-our-remote-associations-data-frame}}
+
+Last week, we cleaned the \texttt{raw\_remote\_associations.csv} data frame to a variable called \texttt{df\_clean.} If we used \texttt{head()}, we'll see that it is in wide format
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#if you do not have df\_clean in your environment, download the dataset \textasciigrave{}raw\_remote\_clean.csv\textasciigrave{} from the Teams channel, and put in the week 5 folder. }
+
+\CommentTok{\#Run the following code to load it in }
+\CommentTok{\#df\_clean \textless{}{-} read.csv("raw\_remote\_clean.csv") }
+
+\FunctionTok{head}\NormalTok{(df\_clean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         ID condition age gender remote_pos remote_neg remote_neut total_mood
+## 1 10229436       CAB  26   male          0          2           4         61
+## 2 10230533       CAB  36 female          0          4           4         62
+## 3 10230659       ABC  45 female          0          5           0         74
+## 4 10428518       BCA  37   male          0          9           9         68
+## 5 10229522       CAB  30 female          1          1           0         59
+## 6 10229414       ABC  36 female          1          1           1         63
+##   total_openness mean_openness
+## 1             16           3.2
+## 2             15           3.0
+## 3             17           3.4
+## 4             14           2.8
+## 5             16           3.2
+## 6             14           2.8
+\end{verbatim}
+
+Let's convert \texttt{df\_clean} to the long data format and let's call it \texttt{df\_clean\_long}. But we are not going to follow the same protocol as the last example, where we pivoted everything except \texttt{ID}. For this data frame, we are going put every variable inside the \texttt{cols} argument except for \texttt{ID}, \texttt{condition}, and \texttt{gender}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_clean\_long }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(df\_clean,}
+  \AttributeTok{cols =} \FunctionTok{c}\NormalTok{(age, remote\_pos}\SpecialCharTok{:}\NormalTok{mean\_openness), }\CommentTok{\#we select age, and then we select everything from remote\_pos to mean\_openness in df\_clean}
+  \AttributeTok{names\_to =} \StringTok{"Variable"}\NormalTok{, }\CommentTok{\#this creates a column called \textasciigrave{}variables\textasciigrave{} that will tell us the the variable the participant provided data for}
+  \AttributeTok{values\_to =} \StringTok{"Response"}\CommentTok{\#this creates a column called \textasciigrave{}answer\textasciigrave{} that will tell us participants actual answer to each variable}
+\NormalTok{)}
+
+
+\FunctionTok{print}\NormalTok{(df\_clean\_long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 266 x 5
+##          ID condition gender Variable       Response
+##       <int> <chr>     <chr>  <chr>             <dbl>
+##  1 10229436 CAB       male   age                26  
+##  2 10229436 CAB       male   remote_pos          0  
+##  3 10229436 CAB       male   remote_neg          2  
+##  4 10229436 CAB       male   remote_neut         4  
+##  5 10229436 CAB       male   total_mood         61  
+##  6 10229436 CAB       male   total_openness     16  
+##  7 10229436 CAB       male   mean_openness       3.2
+##  8 10230533 CAB       female age                36  
+##  9 10230533 CAB       female remote_pos          0  
+## 10 10230533 CAB       female remote_neg          4  
+## # i 256 more rows
+\end{verbatim}
+
+There we have it! Now our data is long-format. Each row contains a participant's individuals score on a particular variable. But this time, the participant's information on \texttt{condition} and \texttt{gender} also gets replicated for row created for that participant.
+
+But why did we not include the variables \texttt{condition} and \texttt{gender} in our conversion? There is both a technical reason and an data analysis reason for why we did not do this. Let's address the boring technical reason first.
+
+Technically, we actually can't create the \texttt{Answer} column by combining participants responses on variables like \texttt{condition} and \texttt{gender} with their answers on the other variables. This is because the data type for both \texttt{condition} and \texttt{gender} are \texttt{factors}, whereas the data type for every other variable is \texttt{numeric}. If you remember from our vector discussion (and remember everything that every column is just a lucky vector who found a home) we mentioned that vectors are lines of data where everything in the line is of the same data type. You can have character vectors, factor vectors, numerical vectors, logical vectors, integer vectors, but you cannot have a single vector with multiple data types.
+
+So if we try \texttt{pivot\_longer} on our \texttt{df\_clean} data frame, including the \texttt{gender} and \texttt{condition} columns, we get the following error:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pivot\_longer}\NormalTok{(df\_clean,}
+  \AttributeTok{cols =} \FunctionTok{c}\NormalTok{(condition}\SpecialCharTok{:}\NormalTok{mean\_openness), }\CommentTok{\#we try to select everything except ID}
+  \AttributeTok{names\_to =} \StringTok{"Variable"}\NormalTok{, }\CommentTok{\#this creates a column called \textasciigrave{}variables\textasciigrave{} that will tell us the the variable the participant provided data for}
+  \AttributeTok{values\_to =} \StringTok{"Response"}\CommentTok{\#this creates a column called \textasciigrave{}answer\textasciigrave{} that will tell us participants actual answer to each variable}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in `pivot_longer()`:
+## ! Can't combine `condition` <character> and `age` <integer>.
+\end{verbatim}
+
+If you're stubborn and you insist on pivoting everything, then you would need to convert all of our columns to the same data type. There is an argument in the \texttt{pivot\_longer()} function that enables us to do this and it is called \texttt{values\_transform}. The easiest solution would be to transform everything that will go in our \texttt{Answer} vector/column into a \texttt{character}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pivot\_longer}\NormalTok{(df\_clean,}
+  \AttributeTok{cols =}\NormalTok{ condition}\SpecialCharTok{:}\NormalTok{mean\_openness, }
+  \AttributeTok{names\_to =} \StringTok{"Variable"}\NormalTok{, }
+  \AttributeTok{values\_to =} \StringTok{"Response"}\NormalTok{,}
+  \AttributeTok{values\_transform =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Response =}\NormalTok{ as.character)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 342 x 3
+##          ID Variable       Response
+##       <int> <chr>          <chr>   
+##  1 10229436 condition      CAB     
+##  2 10229436 age            26      
+##  3 10229436 gender         male    
+##  4 10229436 remote_pos     0       
+##  5 10229436 remote_neg     2       
+##  6 10229436 remote_neut    4       
+##  7 10229436 total_mood     61      
+##  8 10229436 total_openness 16      
+##  9 10229436 mean_openness  3.2     
+## 10 10230533 condition      CAB     
+## # i 332 more rows
+\end{verbatim}
+
+That is an example of a long data frame, which looks neater on the eye than our earlier attempt. BUT - I really do not recommend this approach. Since everything inside \texttt{answer} is not a character, we actually can't conduct any quantitative analysis. So it defeats the purpose!
+
+This leads me on to the analytical reason why we don't want to pivot our \texttt{condition} and \texttt{gender} columns. Since \texttt{condition} and \texttt{gender} are factors, we will want to investigate the extent to which participants scores on \texttt{Wellbeing} and our Big Five traits are influenced by differences in each factor. In other words, we want to investigate the effect of our independent variables on our dependent variables. If you look at \texttt{df\_clean\_long}, the data frame keeps a record of a participant's score on each dependent variable in relation to our two independent variables. This sets us up nicely for conducting statistical analysis.
+
+\begin{verbatim}
+## # A tibble: 10 x 5
+##          ID condition gender Variable       Response
+##       <int> <chr>     <chr>  <chr>             <dbl>
+##  1 10229436 CAB       male   age                26  
+##  2 10229436 CAB       male   remote_pos          0  
+##  3 10229436 CAB       male   remote_neg          2  
+##  4 10229436 CAB       male   remote_neut         4  
+##  5 10229436 CAB       male   total_mood         61  
+##  6 10229436 CAB       male   total_openness     16  
+##  7 10229436 CAB       male   mean_openness       3.2
+##  8 10230533 CAB       female age                36  
+##  9 10230533 CAB       female remote_pos          0  
+## 10 10230533 CAB       female remote_neg          4
+\end{verbatim}
+
+\hypertarget{pivoting-from-long-to-wide}{%
+\subsection{Pivoting from Long to Wide}\label{pivoting-from-long-to-wide}}
+
+Okay, so we know how to convert data frames from wide to long, but how can we convert from long to wide? Well we can use the \texttt{pivot\_wider()} function. The figure below shows the results of typing \texttt{?pivot\_wider} into the console. The table below it shows the key arguments of this function.
+
+\begin{figure}
+\centering
+\includegraphics{img/06-pivotwider.png}
+\caption{\label{fig:unnamed-chunk-232}The arguments that we can pass to the pivot\_wider() function}
+\end{figure}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2639}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7361}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Argument
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{data} & The long data frame that you want to convert to wide format \\
+\texttt{id\_cols} & The columns that help identify each participant. This is often the values that are repeated in each row within a long data frame (e.g., like ID or any independent variables) \\
+\texttt{names\_from} & When we pivot from long to wide, we will be creating new columns for each variable that we collected data on. We need to tell R where to find the names for those variables. \\
+\texttt{values\_from} & We need to tell R where to find the values for the new columns that we are creating. \\
+\end{longtable}
+
+Let's convert our \texttt{long\_df} back into wide format.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pivot\_wider}\NormalTok{(long\_df, }
+            \AttributeTok{id\_cols =}\NormalTok{ ID, }
+            \AttributeTok{names\_from =}\NormalTok{ Variable,}
+            \AttributeTok{values\_from =}\NormalTok{ Response)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 6
+##       ID Wellbeing Extraversion Neuroticism Conscientiousness Openness
+##    <int>     <dbl>        <dbl>       <dbl>             <dbl>    <dbl>
+##  1     1      3.55         3.98        2.15              3.34     2.44
+##  2     2      3.82         3.29        2.83              2.76     2.83
+##  3     3      5.25         3.32        2.18              3.72     1.99
+##  4     4      4.06         3.09        2.42              3.7      4.74
+##  5     5      4.1          2.56        2.5               3.66     3.97
+##  6     6      5.37         4.43        1.65              3.55     2.1 
+##  7     7      4.37         3.4         3.67              3.44     2.68
+##  8     8      2.99         1.43        3.12              2.95     2.63
+##  9     9      3.45         3.56        2.09              2.76     3.62
+## 10    10      3.64         2.62        4                 2.7      2.93
+\end{verbatim}
+
+Look familiar? If you compare it to our original \texttt{wide\_df}, you'll notice they look exactly the same.
+
+Now let's do the same thing with the long version of \texttt{remote\_associations} data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_clean\_wide }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_wider}\NormalTok{(df\_clean\_long,}
+                             \AttributeTok{id\_cols =}\NormalTok{ ID}\SpecialCharTok{:}\NormalTok{gender,}
+                             \AttributeTok{names\_from =}\NormalTok{ Variable,}
+                             \AttributeTok{values\_from =}\NormalTok{ Response)}
+
+\FunctionTok{head}\NormalTok{(df\_clean\_wide)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 10
+##         ID condition gender   age remote_pos remote_neg remote_neut total_mood
+##      <int> <chr>     <chr>  <dbl>      <dbl>      <dbl>       <dbl>      <dbl>
+## 1 10229436 CAB       male      26          0          2           4         61
+## 2 10230533 CAB       female    36          0          4           4         62
+## 3 10230659 ABC       female    45          0          5           0         74
+## 4 10428518 BCA       male      37          0          9           9         68
+## 5 10229522 CAB       female    30          1          1           0         59
+## 6 10229414 ABC       female    36          1          1           1         63
+## # i 2 more variables: total_openness <dbl>, mean_openness <dbl>
+\end{verbatim}
+
+If you compare that to the head of \texttt{df\_clean}, you'll see that its back to the format we cleaned it to last week.
+
+\hypertarget{summary-6}{%
+\subsubsection{Summary}\label{summary-6}}
+
+That covers basic pivoting from long to wide and wide to long using \texttt{pivot\_long()} and \texttt{pivot\_wide()}. However, both functions enable you to handle much more complicated data frames and clean them up as you go. We won't cover that in this version of the textbook, but \href{https://dcl-wrangle.stanford.edu/pivot-advanced.html}{I highly recommend reading the \texttt{Advanced\ Pivoting} section from the \texttt{Data\ Wrangling} Standford ebook if your pivoting needs are more complicated than the examples here}.
+
+\hypertarget{handling-missing-values}{%
+\section{Handling Missing Values}\label{handling-missing-values}}
+
+In psychological research, dealing with missing data is a common challenge that requires careful consideration to ensure the integrity and validity of analyses. In this section, we'll explore how to handle missing values (NA) in R using the tidyverse package. We'll cover techniques for identifying missing values, strategies for handling them, and best practices for addressing missing data in psychological research studies.
+
+\hypertarget{introduction-to-missing-values}{%
+\subsection{\texorpdfstring{\textbf{Introduction to Missing Values}}{Introduction to Missing Values}}\label{introduction-to-missing-values}}
+
+Missing values, often represented as NA in R, occur when data is not available or cannot be recorded for certain observations. This can occur due to various reasons such as non-response in surveys, data entry errors, or incomplete data collection processes. It's essential to understand and address missing values appropriately to avoid biased or misleading results in data analysis.
+
+\hypertarget{identifying-missing-values}{%
+\subsection{\texorpdfstring{\textbf{Identifying Missing Values}}{Identifying Missing Values}}\label{identifying-missing-values}}
+
+Detecting missing values in datasets is the first step towards handling them effectively. In R, we can use functions like \textbf{\texttt{is.na()}} or \textbf{\texttt{complete.cases()}} to identify missing values. Let's illustrate this with an example using a hypothetical psychological research dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Example dataset with missing values}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{id =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}
+  \AttributeTok{age =} \FunctionTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{28}\NormalTok{, }\DecValTok{35}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{22}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{29}\NormalTok{),}
+  \AttributeTok{gender =} \FunctionTok{c}\NormalTok{(}\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Check for missing values}
+\NormalTok{missing\_values }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise\_all}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.)))}
+
+\FunctionTok{print}\NormalTok{(missing\_values)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##      id   age gender
+##   <int> <int>  <int>
+## 1     0     3      3
+\end{verbatim}
+
+In this example, we've created a dataset \textbf{\texttt{data}} with variables \textbf{\texttt{age}} and \textbf{\texttt{gender}}, some of which contain missing values. We then used \textbf{\texttt{summarise\_all()}} along with \textbf{\texttt{is.na()}} to count the number of missing values in each column.
+
+\hypertarget{dealing-with-missing-values}{%
+\subsection{\texorpdfstring{\textbf{Dealing with Missing Values}}{Dealing with Missing Values}}\label{dealing-with-missing-values}}
+
+Once missing values are identified, we can employ various strategies to handle them effectively. Common approaches include removing rows or columns with missing values, imputing missing values with estimates, or using more advanced imputation methods.
+
+\hypertarget{removing-missing-values}{%
+\subsubsection{Removing Missing Values}\label{removing-missing-values}}
+
+To remove rows or columns with missing values, we can use functions like \textbf{\texttt{drop\_na()}} or \textbf{\texttt{filter()}} in the tidyverse. Here's how we can remove rows with missing values in the \textbf{\texttt{age}} column:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Remove rows with missing values in the age column}
+\NormalTok{clean\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{drop\_na}\NormalTok{(age)}
+
+\FunctionTok{print}\NormalTok{(clean\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 3
+##      id   age gender
+##   <int> <dbl> <chr> 
+## 1     1    25 Male  
+## 2     3    30 Male  
+## 3     4    28 <NA>  
+## 4     5    35 Female
+## 5     7    40 <NA>  
+## 6     8    22 Male  
+## 7    10    29 <NA>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#filter}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{imputing-missing-values}{%
+\subsubsection{Imputing Missing Values}\label{imputing-missing-values}}
+
+Imputing missing values involves replacing them with estimates such as mean, median, or mode. Let's impute missing values in the \textbf{\texttt{age}} column with the mean age:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Impute missing values in the age column with mean age}
+\NormalTok{imputed\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age =} \FunctionTok{if\_else}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(age), }\FunctionTok{mean}\NormalTok{(age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), age))}
+
+\FunctionTok{print}\NormalTok{(imputed\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 3
+##       id   age gender
+##    <int> <dbl> <chr> 
+##  1     1  25   Male  
+##  2     2  29.9 Female
+##  3     3  30   Male  
+##  4     4  28   <NA>  
+##  5     5  35   Female
+##  6     6  29.9 Male  
+##  7     7  40   <NA>  
+##  8     8  22   Male  
+##  9     9  29.9 Female
+## 10    10  29   <NA>
+\end{verbatim}
+
+\hypertarget{best-practices-and-considerations}{%
+\subsection{\texorpdfstring{\textbf{Best Practices and Considerations}}{Best Practices and Considerations}}\label{best-practices-and-considerations}}
+
+When handling missing values, it's important to adhere to best practices and consider the following:
+
+\begin{itemize}
+\item
+  Document the handling of missing values in data preprocessing steps.
+\item
+  Conduct sensitivity analyses to assess the robustness of results to different missing data handling approaches.
+\item
+  Consider potential biases introduced by missing data and address them in the interpretation of results.
+\end{itemize}
+
+\hypertarget{summary-7}{%
+\subsection{\texorpdfstring{\textbf{Summary}}{Summary}}\label{summary-7}}
+
+Handling missing values is a critical aspect of data preprocessing in psychological research. By using the tidyverse package in R, researchers can effectively identify and handle missing values, ensuring the integrity and validity of their data analysis. In this section, we've covered techniques for identifying missing values, strategies for handling them, and best practices for addressing missing data. Through practical examples and considerations, researchers can confidently manage missing values in their research studies.
+
+\hypertarget{merging-data-i.e.-joining-different-datasets-together}{%
+\section{Merging Data (i.e., Joining Different Datasets Together)}\label{merging-data-i.e.-joining-different-datasets-together}}
+
+In psychological research, we'll often encounter situations where data from multiple sources or studies need to be combined for analysis. We might have collected demographic information separately from participants answers on experimental tasks. We may have collected data using a variety of platforms (e.g., survey data using Qualtrics and response data using PsychoPy). Additionally, the research software tools we use might modulate the data. For example, if we run a study in Gorilla Research, then each separate task and questionnaire gets downloaded as separate files.
+
+Whatever the reason, you will often need to merge or join data together from different sources in order to conduct the analysis you need. Luckily, R is quite capable at facilitating data merging. In this subsection, we will look at ways you can merge different data frames together.
+
+\hypertarget{introduction-to-merging-data}{%
+\subsection{Introduction to Merging Data}\label{introduction-to-merging-data}}
+
+Merging data involves combining data frames based on their common variables. Let's image we have two data frames called \texttt{df\_demographics} and \texttt{df\_rt}. These data frames contain information on both participants demographic information and their reaction time on a specific task and which condition they were randomly assigned to. Let's load both of these data frames into R (make sure you have downloaded them and put them into your working directory before running the following code).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_demographics }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"demographics.csv"}\NormalTok{)}
+\NormalTok{df\_rt }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"reaction\_time.csv"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(df\_demographics)}
+\FunctionTok{head}\NormalTok{(df\_rt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           ID     gender age
+## 1 EoYncPX1QK     Female  24
+## 2 Zn1yzAeYA4 Non-Binary  21
+## 3 B4iCIhzgPi       Male  24
+## 4 9sJnqQM0lo     Female  23
+## 5 FPSgiOjwA7 Non-Binary  23
+## 6 0g0AFLyHCe       Male  24
+\end{verbatim}
+
+\begin{verbatim}
+##           ID   condition mean_rt
+## 1 EoYncPX1QK no caffeine     269
+## 2 Zn1yzAeYA4 no caffeine     206
+## 3 B4iCIhzgPi no caffeine     187
+## 4 9sJnqQM0lo no caffeine     217
+## 5 FPSgiOjwA7 no caffeine     160
+## 6 0g0AFLyHCe no caffeine     255
+\end{verbatim}
+
+Ideally, we would have one merged data frame that would contain a participant's response on all our variables. However, there are some complications with these two data frames. If you check the number of rows in each data frame, we can see there are differing number of participants.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(df\_demographics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 60
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(df\_rt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 42
+\end{verbatim}
+
+There are 60 participants in the demographics data frame whereas there are only 42 participants in the reaction time data frame. If the study was online, maybe participants gave up after completing the demographic information, maybe there was connection issues, maybe the data did not save correctly. Whatever the reason for this mismatch in participants, we need to account for this when we merge these data frames together.
+
+Luckily, there are a multitude in ways we can do this through the \texttt{tidyverse\ package}.
+
+These types of join are:
+
+\begin{itemize}
+\item
+  \textbf{Inner Join}: Includes only the rows that have matching values in both datasets. This type of join retains only the observations that exist in both datasets, excluding unmatched rows.
+\item
+  \textbf{Left Join}: Includes all rows from the left dataset and matching rows from the right dataset. Unmatched rows from the right dataset are filled with NA values.
+\item
+  \textbf{Right Join}: Includes all rows from the right dataset and matching rows from the left dataset. Unmatched rows from the left dataset are filled with NA values.
+\item
+  \textbf{Outer Join (or Full Join)}: Includes all rows from both datasets, filling in missing values with NA where there are no matches.
+\end{itemize}
+
+Using our \texttt{df\_demographics} and \texttt{df\_rt} data frames, lets show you the result of each of these joins and why/when you would use them.
+
+\hypertarget{inner_join}{%
+\subsection{Inner\_Join}\label{inner_join}}
+
+The \texttt{inner\_join()} function joins together two data frames, but it will only keep the rows that have matching values in both data frames.
+
+When we use \texttt{inner\_join()} we need to specify the value(s) that we want to match across both data frames. Once we do, then in the case of the \texttt{df\_demographics} and \texttt{df\_rt} data frames, what this means is that only the participants who match on that specified value(s) in both data frames will merged together.
+
+Let's create a merged data frame using \texttt{inner\_join} and call it \texttt{df\_inner}. The syntax for inner\_join is: \texttt{inner\_join(df1,\ df2,\ by\ =\ join\_by(column(s))}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_inner }\OtherTok{\textless{}{-}} \FunctionTok{inner\_join}\NormalTok{(df\_demographics, df\_rt, }\AttributeTok{by =} \StringTok{"ID"}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(df\_inner)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           ID     gender age   condition mean_rt
+## 1 EoYncPX1QK     Female  24 no caffeine     269
+## 2 Zn1yzAeYA4 Non-Binary  21 no caffeine     206
+## 3 B4iCIhzgPi       Male  24 no caffeine     187
+## 4 9sJnqQM0lo     Female  23 no caffeine     217
+## 5 FPSgiOjwA7 Non-Binary  23 no caffeine     160
+## 6 0g0AFLyHCe       Male  24 no caffeine     255
+\end{verbatim}
+
+We can see that our \texttt{df\_inner} has combined the \texttt{gender} and \texttt{age} columns from \texttt{df\_demographics} with the \texttt{condition} and \texttt{mean\_rt} columns from \texttt{df\_rt}. When we use \texttt{inner\_join} the order in which specify the data frames is the order in which the columns will be added. So if we wanted the \texttt{condition} and \texttt{mean\_rt} columns to come first, then we can change the order:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{inner\_join}\NormalTok{(df\_rt, df\_demographics, }\AttributeTok{by =} \FunctionTok{join\_by}\NormalTok{(ID))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            ID     condition mean_rt     gender age
+## 1  EoYncPX1QK   no caffeine     269     Female  24
+## 2  Zn1yzAeYA4   no caffeine     206 Non-Binary  21
+## 3  B4iCIhzgPi   no caffeine     187       Male  24
+## 4  9sJnqQM0lo   no caffeine     217     Female  23
+## 5  FPSgiOjwA7   no caffeine     160 Non-Binary  23
+## 6  0g0AFLyHCe   no caffeine     255       Male  24
+## 7  hlmrG4AyLu   no caffeine     145     Female  22
+## 8  oOUz7EpZDf   no caffeine     240 Non-Binary  24
+## 9  QhvvMEVq1X   no caffeine     212       Male  24
+## 10 WHdme1YyZv   no caffeine     207     Female  22
+## 11 yFTywINVDl   no caffeine     236 Non-Binary  24
+## 12 E4TDInCFgc   no caffeine     157       Male  23
+## 13 w15ouKhYjX   no caffeine     139     Female  24
+## 14 PRHjvltTq9   no caffeine     185 Non-Binary  23
+## 15 T1INTYDoxW  low caffeine     261       Male  23
+## 16 wQgCowzLTF  low caffeine     229     Female  22
+## 17 gAPefpxFu2  low caffeine     314 Non-Binary  23
+## 18 kJRT78syM1  low caffeine     150       Male  24
+## 19 zigHVms3ZU  low caffeine     205     Female  23
+## 20 MdaNDDZypx  low caffeine     353 Non-Binary  24
+## 21 1kVtNcCJZR  low caffeine     201       Male  21
+## 22 vWP6tk42hT  low caffeine     245     Female  23
+## 23 uSbQmTf4hR  low caffeine     242 Non-Binary  24
+## 24 F5JS8n0pw8  low caffeine     281       Male  24
+## 25 GNNjyhr80i  low caffeine     203     Female  22
+## 26 gg587jx1wz  low caffeine     260 Non-Binary  22
+## 27 QG48CYj01m  low caffeine     113       Male  22
+## 28 QkyZzgywzF  low caffeine     162     Female  23
+## 29 t8x4iOKwnT high caffeine     204 Non-Binary  22
+## 30 fAazPW5qCz high caffeine     170       Male  23
+## 31 Aug70zOtfX high caffeine     211     Female  22
+## 32 DECqK4tIyT high caffeine     114 Non-Binary  23
+## 33 GbdjGe0yh2 high caffeine     227       Male  24
+## 34 yuSrPEfg8O high caffeine     175     Female  24
+## 35 Vq0SB0N0gt high caffeine     177 Non-Binary  23
+## 36 rCqGbWbmxW high caffeine     192       Male  22
+## 37 crbKl4mP8f high caffeine     171     Female  22
+## 38 PPL7VpIJAA high caffeine     114 Non-Binary  23
+## 39 I8wcEVbUwc high caffeine     230       Male  22
+## 40 i8MDEDiJHv high caffeine     201     Female  23
+## 41 5ROBC8QMSK high caffeine      48 Non-Binary  22
+## 42 QGslHuqlDI high caffeine     255       Male  23
+\end{verbatim}
+
+If we check the number of rows, we will see that it matches the number of rows in \texttt{df\_rt} rather than \texttt{df\_demographics}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(df\_inner)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 42
+\end{verbatim}
+
+\hypertarget{left_join}{%
+\subsection{Left\_join}\label{left_join}}
+
+The function \texttt{left\_join} keeps every participant (row) in the first data frame we feed it. It then matches participants responses in the second data frame and joins them together, once we specify a value that needs to be matched. If there is not a match on that column, then it fills the results with \texttt{NA} values.
+
+Let's create the data frame \texttt{df\_left} using \texttt{left\_join()}. The syntax for this function is: \texttt{left\_join(df1,\ df2,\ by\ =\ join\_by(ID))}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_left }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(df\_demographics, df\_rt, }\AttributeTok{by =} \FunctionTok{join\_by}\NormalTok{(ID))}
+
+
+\FunctionTok{head}\NormalTok{(df\_left)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           ID     gender age   condition mean_rt
+## 1 EoYncPX1QK     Female  24 no caffeine     269
+## 2 Zn1yzAeYA4 Non-Binary  21 no caffeine     206
+## 3 B4iCIhzgPi       Male  24 no caffeine     187
+## 4 9sJnqQM0lo     Female  23 no caffeine     217
+## 5 FPSgiOjwA7 Non-Binary  23 no caffeine     160
+## 6 0g0AFLyHCe       Male  24 no caffeine     255
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(df\_left) }\CommentTok{\#prints out the last six rows of a data frame}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            ID     gender age condition mean_rt
+## 55 TNfJ2PV63D     Female  24      <NA>      NA
+## 56 VZjyLYJOyd Non-Binary  23      <NA>      NA
+## 57 oZv0WxMU7K       Male  21      <NA>      NA
+## 58 T1UopshE5K     Female  24      <NA>      NA
+## 59 MZV79pikQY Non-Binary  24      <NA>      NA
+## 60 D8j28H49Lt       Male  23      <NA>      NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(df\_left)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 60
+\end{verbatim}
+
+We can see that every participant in the \texttt{df\_demographics} is included inside the \texttt{df\_left} data frame. If that participant does not have scores on \texttt{condition} and \texttt{mean\_rt}, then \texttt{NA} is substituted in.
+
+The function is called \texttt{left\_join()} because it joins whatever is put first (i.e., left) in the function is given priority over what comes second (i.e., right). The next merging function we'll discuss does the opposite.
+
+\hypertarget{right_join}{%
+\subsection{Right\_Join}\label{right_join}}
+
+The function \texttt{left\_join} keeps every participant (row) in the second data frame we feed it. It then matches participants responses in the first data frame and joins them together, once we specify a value that needs to be matched. If there is not a match on that column, then it fills the results with \texttt{NA} values.
+
+Let's create the data frame \texttt{df\_left} using \texttt{left\_join()}. The syntax for this function is: \texttt{right\_join(df1,\ df2,\ by\ =\ join\_by(ID))}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_right }\OtherTok{\textless{}{-}} \FunctionTok{right\_join}\NormalTok{(df\_demographics, df\_rt, }\AttributeTok{by =} \FunctionTok{join\_by}\NormalTok{(ID))}
+
+\FunctionTok{head}\NormalTok{(df\_right)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           ID     gender age   condition mean_rt
+## 1 EoYncPX1QK     Female  24 no caffeine     269
+## 2 Zn1yzAeYA4 Non-Binary  21 no caffeine     206
+## 3 B4iCIhzgPi       Male  24 no caffeine     187
+## 4 9sJnqQM0lo     Female  23 no caffeine     217
+## 5 FPSgiOjwA7 Non-Binary  23 no caffeine     160
+## 6 0g0AFLyHCe       Male  24 no caffeine     255
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(df\_right)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            ID     gender age     condition mean_rt
+## 37 crbKl4mP8f     Female  22 high caffeine     171
+## 38 PPL7VpIJAA Non-Binary  23 high caffeine     114
+## 39 I8wcEVbUwc       Male  22 high caffeine     230
+## 40 i8MDEDiJHv     Female  23 high caffeine     201
+## 41 5ROBC8QMSK Non-Binary  22 high caffeine      48
+## 42 QGslHuqlDI       Male  23 high caffeine     255
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(df\_right)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 42
+\end{verbatim}
+
+In this case, because every participant ID in \texttt{df\_rt} has a matching response in \texttt{df\_demographics}, we do not see any \texttt{NA} values.
+
+You might be wondering why the hell would you want both a \texttt{left\_join()} and a \texttt{right\_join()} function. Couldn't we have just the one function, and just specify which order we want to join things together?
+
+We could, but having the option of having \texttt{left\_join()} and \texttt{right\_join()} becomes handy when we have complicated and deeply nested code using the pipe \texttt{\%\textgreater{}\%} operator.
+
+But nonetheless you may never have a need for both functions, but in case you do, you know it's there.
+
+\hypertarget{outer-join}{%
+\subsection{Outer Join}\label{outer-join}}
+
+The \textbf{outer join}, also known as a \textbf{full join}, combines rows from both datasets, including all observations from both data frames and filling in missing values with NA where there are no matches. This type of join ensures that no data is lost, even if there are unmatched rows in either dataset.
+
+Let's demonstrate the outer join using two new data frames: \textbf{\texttt{df\_scores}} and \textbf{\texttt{df\_survey}}. These data frames contain information on participants' test scores and survey responses, respectively. The \textbf{\texttt{df\_scores}} data frame will have scores for participants 1-5, whereas the \textbf{\texttt{df\_survey}} data frame will have scores for participants 3-7. So there will be some overlap in data, but also some areas where there is not matching scores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Creating sample data frames}
+\NormalTok{df\_scores }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{ID =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{),}
+  \AttributeTok{Test\_Score =} \FunctionTok{c}\NormalTok{(}\DecValTok{85}\NormalTok{, }\DecValTok{92}\NormalTok{, }\DecValTok{78}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{df\_survey }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{ID =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{),}
+  \AttributeTok{Satisfaction =} \FunctionTok{c}\NormalTok{(}\StringTok{"High"}\NormalTok{, }\StringTok{"Medium"}\NormalTok{, }\StringTok{"Low"}\NormalTok{, }\StringTok{"High"}\NormalTok{, }\StringTok{"Medium"}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Displaying the sample data frames}
+\FunctionTok{head}\NormalTok{(df\_scores)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ID Test_Score
+## 1  1         85
+## 2  2         92
+## 3  3         78
+## 4  4         90
+## 5  5         88
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df\_survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ID Satisfaction
+## 1  3         High
+## 2  4       Medium
+## 3  5          Low
+## 4  6         High
+## 5  7       Medium
+\end{verbatim}
+
+Now, let's join them together. The syntax for \textbf{\texttt{full\_join()}} is: \textbf{\texttt{full\_join(df1,\ df2,\ by\ =\ join\_by(column))}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Performing outer join}
+\NormalTok{df\_outer }\OtherTok{\textless{}{-}} \FunctionTok{full\_join}\NormalTok{(df\_scores, df\_survey, }\AttributeTok{by =} \StringTok{"ID"}\NormalTok{)}
+
+
+\NormalTok{df\_outer}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   ID Test_Score Satisfaction
+## 1  1         85         <NA>
+## 2  2         92         <NA>
+## 3  3         78         High
+## 4  4         90       Medium
+## 5  5         88          Low
+## 6  6         NA         High
+## 7  7         NA       Medium
+\end{verbatim}
+
+In the resulting \textbf{\texttt{df\_outer}} data frame, all rows from both \textbf{\texttt{df\_scores}} and \textbf{\texttt{df\_survey}} are included, regardless of whether there was a match on the specified column (\textbf{\texttt{ID}}). Rows with no matching values are filled with NA.
+
+The outer join is particularly useful when you want to retain all information from both datasets, even if there are inconsistencies or missing values between them. This ensures that you have a complete dataset for analysis, with all available information from each source preserved.
+
+\hypertarget{summary-8}{%
+\subsection{Summary}\label{summary-8}}
+
+Your choice of join ultimately depends on your research questions, the nature of your data, and the analysis you intend to perform. But hopefully at this point you have an appreciation of the variety of ways you can merge data in R.
+
+\hypertarget{dealing-with-tricky-character-data}{%
+\section{Dealing with Tricky Character Data}\label{dealing-with-tricky-character-data}}
 
 \hypertarget{appendix---understanding-boolean-operators-in-the-context-of-filter}{%
 \chapter{\texorpdfstring{Appendix - Understanding Boolean Operators in the Context of \texttt{filter()}}{Appendix - Understanding Boolean Operators in the Context of filter()}}\label{appendix---understanding-boolean-operators-in-the-context-of-filter}}

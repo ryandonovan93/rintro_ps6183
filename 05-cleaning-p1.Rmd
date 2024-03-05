@@ -835,7 +835,7 @@ The Pipe is an extremely useful operator. But I actually encourage you to first 
 
 My advice, clean your data frames first using the approach we used here. Once it is clean, try and recreate it using pipes. After a while you should start to feel comfortable using pipes from the start - that's the time to make the transition.
 
-## Activity: Clean the Flanker Dataset
+## Activity: Clean the Flanker Dataset {#clean-activity}
 
 ### **Cleaning Flanker Test Dataset**
 
