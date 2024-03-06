@@ -127,7 +127,7 @@
 
 \title{Introduction to R}
 \author{Ryan Donovan}
-\date{2024-03-05}
+\date{2024-03-06}
 
 \begin{document}
 \maketitle
@@ -3664,16 +3664,16 @@ To make sure the following functions are working, run the following code to chec
 \end{verbatim}
 
 \begin{verbatim}
-## [1] "You are good!"
+## [1] "You are polished!"
 \end{verbatim}
 
 \begin{verbatim}
 ## 
-## I wish there was a better way for me to learn this stuff than constantly being
-## wrong in public.
-##    -- Hadley Wickham (in a discussion about efficient expansion of vectors and
-##       algorithmic complexity)
-##       R-help (July 2012)
+## I have mentioned several times on this list that I'm in the process of
+## developing a new and wonderful implementation of lme and I would prefer to
+## continue working on that rather than modifying old-style code.
+##    -- Douglas Bates
+##       R-help (March 2004)
 \end{verbatim}
 
 \begin{Shaded}
@@ -5487,17 +5487,17 @@ Well done. You have cleaned your first data sets in R. The functions that we use
 \hypertarget{datacleaning2}{%
 \chapter{Data Wrangling and Cleaning (Part II)}\label{datacleaning2}}
 
-In this session, we are going to learn how to clean more challenging data than what we encountered in \protect\hyperlink{datacleaning1}{Chapter 5}. In contrast to the last chapter, this section is more of a reference guide than an end-to-end cleaning example. That's because the tools you learn here might not always pop-up, or at least are unlikely to all pop-up in the one data frame. Nonetheless, when you combine the functions you learn here to clean data with the functions from last week, you will be able to handle an impressive amount (probably around 80\%) of any data cleaning challenges you will encounter in your research.
+In this session, we are going to learn how to clean more challenging data than what we encountered in \protect\hyperlink{datacleaning1}{Chapter 5}. In contrast to the last chapter, this section is more of a reference guide than an end-to-end cleaning example. That's because the tools you learn here might not always pop up, or at least are unlikely to all pop up in the one data frame. Nonetheless, when you combine the functions you learn here to clean data with the functions from last week, you will be able to handle an impressive amount (probably around 80\%) of any data cleaning challenges you will encounter in your research.
 
 By the end of this session, you should be capable of the following:
 
 \begin{itemize}
 \item
-  Understand the concepts of \textbf{wide} and \textbf{long} data and be capable of \texttt{pivoting} (i.e., transforming) from one format to another.
+  Understand the concepts of \textbf{wide} and \textbf{long} data and be capable of \textbf{\texttt{pivoting}} (i.e., transforming) from one format to another.
 \item
   Know how to merge together separate data frames into one file that you can clean.
 \item
-  Identifying and handling missing data (\texttt{NA} values).
+  Identifying and handling missing data (\textbf{\texttt{NA}} values).
 \end{itemize}
 
 \hypertarget{lets-get-set-up-1}{%
@@ -5508,9 +5508,9 @@ Similar to the last chapter, first we need to set up RStudio and download some d
 \hypertarget{activity-1.1-set-up-your-wd-1}{%
 \subsection{Activity 1.1: Set up your WD}\label{activity-1.1-set-up-your-wd-1}}
 
-Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. In Chapter 2 I showed you how to do this using \protect\hyperlink{set_wd}{a button-and-click interface}.
+Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. In Chapter 2, I showed you how to do this using \protect\hyperlink{set_wd}{a button-and-click interface}.
 
-Using those instructions, create a folder called ``Week5'' in the \texttt{rintro} project folder (or whatever folder you created) and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:
+Using those instructions, create a folder called ``Week5'' in the \textbf{\texttt{rintro}} project folder (or whatever folder you created) and set it as your working directory. Use the \textbf{\texttt{getwd()}} to check that it has been set as your working directory. Your output should be something like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5537,11 +5537,13 @@ You need to import several files for this activity:
   \textbf{demographics.csv}
 \item
   \textbf{reaction\_time.csv}
+\item
+  \textbf{raw\_remote\_clean.csv}
 \end{enumerate}
 
 To download these files, navigate to the Teams channel for this course and access the ``Week 5 - Data Cleaning (Part II)'' channel. Once downloaded, use your file management system (File Explorer on Windows or Finder on Mac) to copy and paste these files into the ``Week5'' folder you created in Activity 1.1.
 
-If you're using RStudio, you should see these files in your working directory within the Files pane. Create an R script and save it as (\textbf{data\_cleaning\_ii\_script.R}).
+f you're using RStudio, you should see these files in your working directory within the Files pane. Create an R script and save it as (\textbf{data\_cleaning\_ii\_script.R}).
 
 To import the raw\_remote\_associations.csv dataset into R, do the following:
 
@@ -5551,20 +5553,22 @@ To import the raw\_remote\_associations.csv dataset into R, do the following:
 \item
   Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{demographics.csv -\textgreater{}} change its name to \textbf{df\_dem}
 \item
-  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{flanker1.csv -\textgreater{}} change its name to \textbf{df\_flanker1}
+  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{flanker\_task1.csv -\textgreater{}} change its name to \textbf{df\_flanker1}
 \item
-  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{flanker2.csv -\textgreater{}} change its name to \textbf{df\_flanker}
+  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{flanker\_task2.csv -\textgreater{}} change its name to \textbf{df\_flanker2}
 \item
-  Follow the same instructions to import the \textbf{demographics.csv} and \textbf{reaction\_time.csv} files. Change their name to \textbf{df\_demographics} and \textbf{df\_rt} respectively.
+  Click Environment in the Environment Pane -\textgreater{} Import Dataset -\textgreater{} From Text(base) -\textgreater{} Select \textbf{flanker\_task3.csv -\textgreater{}} change its name to \textbf{df\_flanker3}
+\item
+  Follow the same instructions to import the \textbf{demographics.csv}, \textbf{reaction\_time.csv,} and \textbf{raw\_remote\_clean.csv} files. Change their name to \textbf{df\_demographics,} \textbf{df\_rt, and df\_clean} respectively.
 \item
   \protect\hyperlink{importing}{See Chapter 4's section on importing data for more information}
 \end{enumerate}
 
-Alternatively, you can write and run the following commands within the \textbf{data\_cleaning\_ii\_script.R}. Just make sure they are in the week 5 folder and that you have set that folder as your working directory.
+Alternatively, you can write and run the following commands within the \textbf{data\_cleaning\_ii\_script.R}. Just make sure they are in the Week 5 folder and that you have set that folder as your working directory.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_background }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"=background.csv"}\NormalTok{) }
+\NormalTok{df\_background }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"background.csv"}\NormalTok{) }
 
 \NormalTok{df\_flanker1 }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"flanker\_task1.csv"}\NormalTok{)}
 
@@ -5594,20 +5598,30 @@ Okay, now we are ready to get cleaning!
 \hypertarget{data-formats-long-and-wide-data}{%
 \section{Data Formats (Long and Wide Data)}\label{data-formats-long-and-wide-data}}
 
-The majority of data encountered in Psychological research exists in tables, also known as \textbf{\texttt{Data\ Frames}}. These tables can be structured in two primary formats: \textbf{\texttt{wide}} or \textbf{\texttt{long}}. Depending on the research software used, the raw data downloaded from a study might be in either \textbf{\texttt{wide}} or \textbf{\texttt{long}} table format.
+Psychological research often involves working with data stored in tables, commonly referred to as \textbf{\texttt{Data\ Frames}}. These tables can take two primary formats: \textbf{\texttt{wide}} or \textbf{\texttt{long}}. Depending on the research software used, the raw data downloaded from a study might be in either \textbf{\texttt{wide}} or \textbf{\texttt{long}} table format.
 
-Understanding the differences between these formats is important because each format facilitates certain tasks more easily. Similarly, knowing how to effectively and efficiently \textbf{\texttt{pivot}} (i.e., transform or convert) between these formats is essential for performing specific tasks on the data. Fortunately, R and the tidyverse package are well-equipped to handle both types of data and to convert between them painlessly.
+Understanding the differences between these formats is crucial because each format facilitates certain tasks more easily. Similarly, knowing how to effectively and efficiently \textbf{\texttt{pivot}} (i.e., transform or convert) between these formats is essential for performing specific tasks on the data. Fortunately, R and the tidyverse package are well-equipped to handle both types of data and to convert between them seamlessly.
 
-In this section, we will first describe what constitutes \textbf{\texttt{wide}} and \textbf{\texttt{long}} data formats and the advantages of each format over its counterpart. We will then discuss how to pivot between these formats using R.
+In this section, we will first define \textbf{\texttt{wide}} and \textbf{\texttt{long}} data formats and discuss the advantages of each format over its counterpart. We will then explore how to pivot between these formats using R.
 
 \hypertarget{defining-long-and-wide-data}{%
 \subsection{Defining Long and Wide Data}\label{defining-long-and-wide-data}}
 
 \textbf{Wide Data}
 
-In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, I can see in one row of information that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.
+In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, in one row of information, we can observe that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.
 
-If you are like most psychologists, you are used to seeing data in wide formats in either Excel or SPSS. The advantage of this format is that it's easy for humans to scan and read the data, particularly if the amount of variables you have collected is relatively small (if you collected a lot of variables, then you might have to scroll left or right in Excel/SPSS to see all the information on a participant). Additionally, because each participant is in a single row, repetition in the dataset is minimised, making it easier to read.
+\textless table\textgreater{}
+\textless caption\textgreater Table 6.1: Data in Wide Format\textless/caption\textgreater{}
+
+\textbar{} ID \textbar{} Age \textbar{} Height \textbar{} Weight \textbar{} BMI \textbar{}
+\textbar----\textbar--------\textbar-----\textbar--------\textbar--------\textbar{}
+\textbar{} 1 \textbar{} 30 \textbar{} 175 \textbar{} 76 \textbar{} 24.8 \textbar{}
+\textbar{} 2 \textbar{} 25 \textbar{} 165 \textbar{} 60 \textbar{} 22 \textbar{}
+\textbar{} 3 \textbar{} 35 \textbar{} 185 \textbar{} 80 \textbar{} 23.4 \textbar{}
+\textless/table\textgreater{}
+
+If you are like most psychologists, you are used to seeing data in wide formats. Data is often inputted in wide format in software like Excel or SPSS, as it easier for humans to read. We are used to scanning data horizontally (left-right) rather than vertically (up-down). Because each participant is in a single row, repetition in the data frame is minimized, again making it easier for us to read..
 
 In terms of statistical analysis, wide data is useful for calculating descriptive statistics (e.g., mean, standard deviations) on variables. Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R when the data is in wide format.
 
@@ -5615,7 +5629,27 @@ In terms of statistical analysis, wide data is useful for calculating descriptiv
 
 In long data, each row contains a participant's single response to a single variable. Table 6.2 illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant's response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.
 
-Each row in Table 6.2 represents a participant's response to a single variable. If I look at row 1, I can see that participant 1 was asked their age (\texttt{Variable}) and their answer was 30 (\texttt{Value}). I have to scan other rows where ID is 1 to find out more information about this participant.
+\textless table\textgreater{}
+\textless caption\textgreater Table 6.2: Data in Long Format\textless/caption\textgreater{}
+
+\textbar{} ID \textbar{} Variable \textbar{} Value \textbar{}
+\textbar----\textbar----------\textbar-------\textbar{}
+\textbar{} 1 \textbar{} Age \textbar{} 30 \textbar{}
+\textbar{} 1 \textbar{} Height \textbar{} 175 \textbar{}
+\textbar{} 1 \textbar{} Weight \textbar{} 76 \textbar{}
+\textbar{} 1 \textbar{} BMI \textbar{} 24.8 \textbar{}
+\textbar{} 2 \textbar{} Age \textbar{} 25 \textbar{}
+\textbar{} 2 \textbar{} Height \textbar{} 165 \textbar{}
+\textbar{} 2 \textbar{} Weight \textbar{} 60 \textbar{}
+\textbar{} 2 \textbar{} BMI \textbar{} 22 \textbar{}
+\textbar{} 3 \textbar{} Age \textbar{} 35 \textbar{}
+\textbar{} 3 \textbar{} Height \textbar{} 185 \textbar{}
+\textbar{} 3 \textbar{} Weight \textbar{} 80 \textbar{}
+\textbar{} 3 \textbar{} BMI \textbar{} 23.4 \textbar{}
+
+\textless/table\textgreater{}
+
+Each row in Table 6.2 represents a participant's response to a single variable. For example, in row 1, we see that participant 1 reported their age (\textbf{\texttt{Variable}}) as 30 (\textbf{\texttt{Value}}). But I have to look to other rows to see this participant's score on other variables.
 
 It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data. This is one of the reasons why the concept of \texttt{Tidy\ Data} discussed in the previous chapter prefers data in the long format - every row contains the minimum amount of information needed rather than ``cluttering'' rows with lots of information.
 
@@ -5642,8 +5676,8 @@ There is a lot of information that will appear in the help section. I want to dr
 There is a lot of potential inputs we can throw in, but I want to highlight the key arguments that you will use most of the time when you use this function
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2222}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7778}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2778}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7222}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argument
@@ -5661,7 +5695,7 @@ Meaning
 & \\
 \end{longtable}
 
-Let's simulate an example data frame to use \texttt{pivot\_longer}. Copy and paste the code below to your R script and run it to create the data frame
+Let's create an example data frame to use \texttt{pivot\_longer()}longer with. I recommend you copy and paste the code below to your R script and run it to create the data frame
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5755,7 +5789,7 @@ The figure below gives an example of the pivot process. We typically do not pivo
 ## # i 50 more rows
 \end{verbatim}
 
-Now we have lost our record for identifying which participant contributed to which data point. This identifies a key about using \texttt{pivot\_longer()} in that not EVERYTHING needs to pivoted, it depends on our analytical needs. Let's go through a slightly more complicated data frame to illustrate what I mean by this.
+Now we have lost our record for identifying which participant contributed to which data point. This identifies a key about using \texttt{pivot\_longer()} in that not EVERYTHING needs to pivoted, it depends on our analytical needs are. Let's go through a slightly more complicated data frame to illustrate what I mean by this.
 
 \begin{figure}
 \centering
@@ -5766,7 +5800,7 @@ Now we have lost our record for identifying which participant contributed to whi
 \hypertarget{pivoting-our-remote-associations-data-frame}{%
 \subsection{Pivoting our Remote Associations Data Frame}\label{pivoting-our-remote-associations-data-frame}}
 
-Last week, we cleaned the \texttt{raw\_remote\_associations.csv} data frame to a variable called \texttt{df\_clean.} If we used \texttt{head()}, we'll see that it is in wide format
+Last week, we cleaned the \textbf{\texttt{raw\_remote\_associations.csv}} data frame and stored it in a variable called \textbf{\texttt{df\_clean}}. If we use \textbf{\texttt{head()}}, we'll see that it's in wide format.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5796,7 +5830,7 @@ Last week, we cleaned the \texttt{raw\_remote\_associations.csv} data frame to a
 ## 6             14           2.8
 \end{verbatim}
 
-Let's convert \texttt{df\_clean} to the long data format and let's call it \texttt{df\_clean\_long}. But we are not going to follow the same protocol as the last example, where we pivoted everything except \texttt{ID}. For this data frame, we are going put every variable inside the \texttt{cols} argument except for \texttt{ID}, \texttt{condition}, and \texttt{gender}.
+Let's convert \textbf{\texttt{df\_clean}} to the long data format, and let's call it \textbf{\texttt{df\_clean\_long}}. However, we are not going to follow the same protocol as the last example, where we pivoted everything except ID. For this data frame, we are going to include every variable inside the \textbf{\texttt{cols}} argument except for ID, condition, and gender.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5828,11 +5862,13 @@ Let's convert \texttt{df\_clean} to the long data format and let's call it \text
 ## # i 256 more rows
 \end{verbatim}
 
-There we have it! Now our data is long-format. Each row contains a participant's individuals score on a particular variable. But this time, the participant's information on \texttt{condition} and \texttt{gender} also gets replicated for row created for that participant.
+There we have it! Now our data is in long format. Each row contains a participant's individual score on a particular variable. But this time, the participant's information on condition and gender also gets replicated for each row created for that participant.
 
-But why did we not include the variables \texttt{condition} and \texttt{gender} in our conversion? There is both a technical reason and an data analysis reason for why we did not do this. Let's address the boring technical reason first.
+But why did we not include the variables condition and gender in our conversion? There are both technical and analytical reasons for this decision. Let's address the technical reason first.
 
-Technically, we actually can't create the \texttt{Answer} column by combining participants responses on variables like \texttt{condition} and \texttt{gender} with their answers on the other variables. This is because the data type for both \texttt{condition} and \texttt{gender} are \texttt{factors}, whereas the data type for every other variable is \texttt{numeric}. If you remember from our vector discussion (and remember everything that every column is just a lucky vector who found a home) we mentioned that vectors are lines of data where everything in the line is of the same data type. You can have character vectors, factor vectors, numerical vectors, logical vectors, integer vectors, but you cannot have a single vector with multiple data types.
+Technically, we actually can't create the \texttt{Answer} column by combining participants responses on variables like \texttt{condition} and \texttt{gender} with their answers on the other variables. This is because the data type for both \texttt{condition} and \texttt{gender} are \texttt{factors}, whereas the data type for every other variable is \texttt{numeric}.
+
+If you remember from our vector discussion (and remember everything that every column is just a lucky vector who found a home) we mentioned that vectors are lines of data where everything in the line is of the same data type. You can have character vectors, factor vectors, numerical vectors, logical vectors, integer vectors, but you cannot have a single vector with multiple data types.
 
 So if we try \texttt{pivot\_longer} on our \texttt{df\_clean} data frame, including the \texttt{gender} and \texttt{condition} columns, we get the following error:
 
@@ -5851,7 +5887,7 @@ So if we try \texttt{pivot\_longer} on our \texttt{df\_clean} data frame, includ
 ## ! Can't combine `condition` <character> and `age` <integer>.
 \end{verbatim}
 
-If you're stubborn and you insist on pivoting everything, then you would need to convert all of our columns to the same data type. There is an argument in the \texttt{pivot\_longer()} function that enables us to do this and it is called \texttt{values\_transform}. The easiest solution would be to transform everything that will go in our \texttt{Answer} vector/column into a \texttt{character}.
+If you're stubborn and you insist on pivoting everything, then you would need to convert all of our columns to the same data type. There is an argument in the \textbf{\texttt{pivot\_longer()}} function that enables us to do this, called \textbf{\texttt{values\_transform}}. The easiest solution would be to transform everything that will go into our \textbf{\texttt{Response}} vector/column into a character.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5859,7 +5895,7 @@ If you're stubborn and you insist on pivoting everything, then you would need to
   \AttributeTok{cols =}\NormalTok{ condition}\SpecialCharTok{:}\NormalTok{mean\_openness, }
   \AttributeTok{names\_to =} \StringTok{"Variable"}\NormalTok{, }
   \AttributeTok{values\_to =} \StringTok{"Response"}\NormalTok{,}
-  \AttributeTok{values\_transform =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Response =}\NormalTok{ as.character)}
+  \AttributeTok{values\_transform =} \FunctionTok{list}\NormalTok{(}\AttributeTok{Response =}\NormalTok{ as.character) }\CommentTok{\#takes everything that will be put into the Response column and uses the \textasciigrave{}as.character()\textasciigrave{} function on it. }
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -5881,9 +5917,9 @@ If you're stubborn and you insist on pivoting everything, then you would need to
 ## # i 332 more rows
 \end{verbatim}
 
-That is an example of a long data frame, which looks neater on the eye than our earlier attempt. BUT - I really do not recommend this approach. Since everything inside \texttt{answer} is not a character, we actually can't conduct any quantitative analysis. So it defeats the purpose!
+That creates an example of a long data frame, which looks neater than our earlier attempt. However, I don't recommend this approach. Since everything inside \textbf{\texttt{Response}} is not a character, we can't conduct any quantitative analysis, defeating the purpose.
 
-This leads me on to the analytical reason why we don't want to pivot our \texttt{condition} and \texttt{gender} columns. Since \texttt{condition} and \texttt{gender} are factors, we will want to investigate the extent to which participants scores on \texttt{Wellbeing} and our Big Five traits are influenced by differences in each factor. In other words, we want to investigate the effect of our independent variables on our dependent variables. If you look at \texttt{df\_clean\_long}, the data frame keeps a record of a participant's score on each dependent variable in relation to our two independent variables. This sets us up nicely for conducting statistical analysis.
+This leads me on to the analytical reason why we don't want to pivot our \texttt{condition} and \texttt{gender} columns. Since \texttt{condition} and \texttt{gender} are factors, we'\,' want to investigate the extent to which participants scores on \texttt{Wellbeing} and our Big Five traits are influenced by that factor. In other words, we want to investigate the effect of our independent variables on our dependent variables. If you look at \texttt{df\_clean\_long}, the data frame keeps a record of a participant's score on each dependent variable in relation to our two independent variables. This sets us up nicely for conducting statistical analysis.
 
 \begin{verbatim}
 ## # A tibble: 10 x 5
@@ -5904,7 +5940,7 @@ This leads me on to the analytical reason why we don't want to pivot our \texttt
 \hypertarget{pivoting-from-long-to-wide}{%
 \subsection{Pivoting from Long to Wide}\label{pivoting-from-long-to-wide}}
 
-Okay, so we know how to convert data frames from wide to long, but how can we convert from long to wide? Well we can use the \texttt{pivot\_wider()} function. The figure below shows the results of typing \texttt{?pivot\_wider} into the console. The table below it shows the key arguments of this function.
+Now that we've covered converting data frames from wide to long, how can we convert from long to wide? We can use the \textbf{\texttt{pivot\_wider()}} function. The figure below shows the results of typing \textbf{\texttt{?pivot\_wider}} into the console. The table below it shows the key arguments of this function.
 
 \begin{figure}
 \centering
@@ -5913,8 +5949,8 @@ Okay, so we know how to convert data frames from wide to long, but how can we co
 \end{figure}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2222}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7778}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2778}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7222}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argument
@@ -5931,7 +5967,7 @@ Meaning
 \texttt{values\_from} & We need to tell R where to find the values for the new columns that we are creating. \\
 \end{longtable}
 
-Let's convert our \texttt{long\_df} back into wide format.
+Let's use \texttt{pivot\_wider()} to convert our \texttt{long\_df} back into wide format.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6006,7 +6042,7 @@ Missing values, often represented as NA in R, occur when data is not available o
 \hypertarget{identifying-missing-values}{%
 \subsection{\texorpdfstring{\textbf{Identifying Missing Values}}{Identifying Missing Values}}\label{identifying-missing-values}}
 
-Detecting missing values in datasets is the first step towards handling them effectively. In R, we can use functions like \textbf{\texttt{is.na()}} or \textbf{\texttt{complete.cases()}} to identify missing values. Let's illustrate this with an example using a hypothetical psychological research dataset:
+Detecting missing values in datasets is the first step towards handling them effectively. In R, we can use functions like \textbf{\texttt{is.na()}} to identify missing values.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6017,9 +6053,10 @@ Detecting missing values in datasets is the first step towards handling them eff
   \AttributeTok{gender =} \FunctionTok{c}\NormalTok{(}\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{, }\ConstantTok{NA}\NormalTok{)}
 \NormalTok{)}
 
-\CommentTok{\# Check for missing values}
-\NormalTok{missing\_values }\OtherTok{\textless{}{-}}\NormalTok{ missing\_data }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{summarise\_all}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.)))}
+\CommentTok{\#check for missing values}
+\NormalTok{missing\_values }\OtherTok{\textless{}{-}} \FunctionTok{summarise\_all}\NormalTok{(missing\_data, }\SpecialCharTok{\textasciitilde{}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(.)))}
+
+\CommentTok{\#inside summarise\_all, we tell R to pick the missing\_data and then to sum up the number of missing values inside that data frame. }
 
 \FunctionTok{print}\NormalTok{(missing\_values)}
 \end{Highlighting}
@@ -6032,18 +6069,19 @@ Detecting missing values in datasets is the first step towards handling them eff
 
 In this example, we've created a dataset \textbf{\texttt{missing\_data}} with variables \textbf{\texttt{age}} and \textbf{\texttt{gender}}, some of which contain missing values. We then used \textbf{\texttt{summarise\_all()}} along with \textbf{\texttt{is.na()}} to count the number of missing values in each column.
 
+We can see that there are three missing values in both the \textbf{\texttt{age}} and \textbf{\texttt{gender}}nder columns.
+
 \hypertarget{removing-missing-values}{%
 \subsection{Removing Missing Values}\label{removing-missing-values}}
 
-To remove rows or columns with missing values, we can use functions like \textbf{\texttt{drop\_na()}} or \textbf{\texttt{filter()}} in the tidyverse. Here's how we can remove rows with missing values in the \textbf{\texttt{age}} column:
+To remove rows or columns with missing values, we can use functions like \textbf{\texttt{drop\_na()}} or \textbf{\texttt{na.omit()}} in the tidyverse. Here's how we can remove rows with missing values in the \textbf{\texttt{age}} column:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Remove rows with missing values in the age column}
-\NormalTok{clean\_data }\OtherTok{\textless{}{-}}\NormalTok{ missing\_data }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{drop\_na}\NormalTok{(age)}
+\NormalTok{removed\_data }\OtherTok{\textless{}{-}} \FunctionTok{drop\_na}\NormalTok{(missing\_data)}
 
-\FunctionTok{print}\NormalTok{(clean\_data)}
+\FunctionTok{print}\NormalTok{(removed\_data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6051,46 +6089,26 @@ To remove rows or columns with missing values, we can use functions like \textbf
 ##   id age gender
 ## 1  1  25   Male
 ## 2  3  30   Male
-## 3  4  28   <NA>
-## 4  5  35 Female
-## 5  7  40   <NA>
-## 6  8  22   Male
-## 7 10  29   <NA>
+## 3  5  35 Female
+## 4  8  22   Male
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#filter}
-\end{Highlighting}
-\end{Shaded}
 
-\hypertarget{imputing-missing-values}{%
-\subsubsection{Imputing Missing Values}\label{imputing-missing-values}}
+\NormalTok{removed\_data }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(missing\_data)}
 
-Imputing missing values involves replacing them with estimates such as mean, median, or mode. Let's impute missing values in the \textbf{\texttt{age}} column with the mean age:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Change missing values in the age column with mean age}
-\NormalTok{imputed\_data }\OtherTok{\textless{}{-}}\NormalTok{ missing\_data }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{age =} \FunctionTok{if\_else}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(age), }\FunctionTok{mean}\NormalTok{(age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), age))}
-
-\FunctionTok{print}\NormalTok{(imputed\_data)}
+\FunctionTok{print}\NormalTok{(removed\_data)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##    id      age gender
-## 1   1 25.00000   Male
-## 2   2 29.85714 Female
-## 3   3 30.00000   Male
-## 4   4 28.00000   <NA>
-## 5   5 35.00000 Female
-## 6   6 29.85714   Male
-## 7   7 40.00000   <NA>
-## 8   8 22.00000   Male
-## 9   9 29.85714 Female
-## 10 10 29.00000   <NA>
+##   id age gender
+## 1  1  25   Male
+## 3  3  30   Male
+## 5  5  35 Female
+## 8  8  22   Male
 \end{verbatim}
 
 \hypertarget{merging-data-i.e.-joining-different-datasets-together}{%
@@ -6445,7 +6463,7 @@ Your choice of join ultimately depends on your research questions, the nature of
 \hypertarget{data-wrangling-example-demographic-and-flanker-task}{%
 \section{Data Wrangling Example (Demographic and Flanker Task)}\label{data-wrangling-example-demographic-and-flanker-task}}
 
-\protect\hyperlink{clean-activity}{In the last chapter, I asked you to clean a Flanker task}. However, this flanker task was actually composed of separate flanker.csv files. This week we are going to take those three separate flanker files (the \texttt{df\_flanker1}, \texttt{df\_flanker2}, and \texttt{df\_flanker3} data frames we created earlier) and merge them together. Additionally, we are going to clean the associated demographic file (\texttt{df\_background}).
+\protect\hyperlink{clean-activity}{In the last chapter, I asked you to clean a Flanker task}. However, this flanker task was actually composed of separate flanker.csv files. This week we are going to take those three separate flanker files (the \texttt{df\_flanker1}, \texttt{df\_flanker2}, and \texttt{df\_flanker3} data frames we loaded in earlier) and merge them together. Additionally, we are going to clean the associated demographic file (\texttt{df\_background}).
 
 First let's clean the \texttt{df\_background\ file}, then we will clean the three \texttt{flanker\_files}. At the end then we will merge them all together.
 
@@ -6594,8 +6612,8 @@ Using just two functions we have significantly cleaned up our data frame by redu
 Now we need to think about cleaning our rows. If you look at the values under the \texttt{Question} and \texttt{Response} columns, you will see relatively strange responses. Let's talk through the values in Question and their associated Response.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2222}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7778}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2778}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7222}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Question
