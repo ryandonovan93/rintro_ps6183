@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Data Visualisation in R {data-vis} | Introduction to R</title>
+  <meta name="description" content="This GitBook is for the R Workshops" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Data Visualisation in R {data-vis} | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook is for the R Workshops" />
+  <meta name="github-repo" content="ryandonovan93/rintro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Data Visualisation in R {data-vis} | Introduction to R" />
+  
+  <meta name="twitter:description" content="This GitBook is for the R Workshops" />
+  
+
+<meta name="author" content="Ryan Donovan" />
+
+
+<meta name="date" content="2024-03-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="datacleaning2.html"/>
+<link rel="next" href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R (University of Galway)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#who-is-this-resource-for"><i class="fa fa-check"></i><b>1.1</b> Who is this resource for?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#should-i-learn-r"><i class="fa fa-check"></i><b>1.2</b> Should I learn R?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-will-i-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.3</b> What will I learn to do in R?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-will-i-not-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.4</b> What will I not learn to do in R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#where-and-when-will-the-workshops-take-place"><i class="fa fa-check"></i><b>1.5</b> Where and when will the workshops take place?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#are-there-any-prerequisites-for-taking-this-course"><i class="fa fa-check"></i><b>1.6</b> Are there any prerequisites for taking this course?</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#do-i-need-to-bring-a-laptop-to-the-class"><i class="fa fa-check"></i><b>1.7</b> Do I need to bring a laptop to the class?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Getting Started with R and RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.1</b> What is R?</a></li>
+<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#create-a-posit-cloud-account."><i class="fa fa-check"></i><b>2.2</b> Create a Posit Cloud Account.</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-to-your-computer"><i class="fa fa-check"></i><b>2.3</b> Downloading R on to your Computer</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-windows"><i class="fa fa-check"></i><b>2.3.1</b> Downloading R on Windows</a></li>
+<li class="chapter" data-level="2.3.2" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-mac"><i class="fa fa-check"></i><b>2.3.2</b> Downloading R on Mac</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#install-and-open-r-studio"><i class="fa fa-check"></i><b>2.4</b> Install and Open R Studio</a></li>
+<li class="chapter" data-level="2.5" data-path="rstudio.html"><a href="rstudio.html#creating-an-r-project"><i class="fa fa-check"></i><b>2.5</b> Creating an R Project</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="rstudio.html"><a href="rstudio.html#navigating-rstudio"><i class="fa fa-check"></i><b>2.5.1</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rstudio.html"><a href="rstudio.html#checking-our-working-directory"><i class="fa fa-check"></i><b>2.5.2</b> Checking our Working Directory</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rstudio.html"><a href="rstudio.html#set_wd"><i class="fa fa-check"></i><b>2.5.3</b> Setting up a new Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#writing-our-first-r-code"><i class="fa fa-check"></i><b>2.6</b> Writing our first R Code</a></li>
+<li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.7</b> Console vs Source Script</a></li>
+<li class="chapter" data-level="2.8" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.8</b> Let’s write some statistical code</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="rstudio.html"><a href="rstudio.html#comments"><i class="fa fa-check"></i><b>2.8.1</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rstudio.html"><a href="rstudio.html#summary"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="rstudio.html"><a href="rstudio.html#glossary"><i class="fa fa-check"></i><b>2.10</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming1.html"><a href="programming1.html"><i class="fa fa-check"></i><b>3</b> <strong>R Programming (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#activity-1-set-up-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Activity 1: Set up your Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#using-the-console"><i class="fa fa-check"></i><b>3.2</b> Using the Console</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.2.1</b> Typing Commands in the Console</a></li>
+<li class="chapter" data-level="3.2.2" data-path="programming1.html"><a href="programming1.html#console-syntax-aka-im-ron-burgundy"><i class="fa fa-check"></i><b>3.2.2</b> Console Syntax (Aka “I’m Ron Burgundy?”)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="programming1.html"><a href="programming1.html#exercises"><i class="fa fa-check"></i><b>3.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#data-types"><i class="fa fa-check"></i><b>3.3</b> Data Types</a></li>
+<li class="chapter" data-level="3.4" data-path="programming1.html"><a href="programming1.html#basic-data-types-in-r"><i class="fa fa-check"></i><b>3.4</b> Basic Data types in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="programming1.html"><a href="programming1.html#character"><i class="fa fa-check"></i><b>3.4.1</b> Character</a></li>
+<li class="chapter" data-level="3.4.2" data-path="programming1.html"><a href="programming1.html#numeric-or-double"><i class="fa fa-check"></i><b>3.4.2</b> Numeric (or Double)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="programming1.html"><a href="programming1.html#integer"><i class="fa fa-check"></i><b>3.4.3</b> Integer</a></li>
+<li class="chapter" data-level="3.4.4" data-path="programming1.html"><a href="programming1.html#logical-otherwise-know-as-boolean"><i class="fa fa-check"></i><b>3.4.4</b> Logical (otherwise know as Boolean)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="programming1.html"><a href="programming1.html#exercises-1"><i class="fa fa-check"></i><b>3.4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.5.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="programming1.html"><a href="programming1.html#exercises-2"><i class="fa fa-check"></i><b>3.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.6</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.6.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.6.2</b> Data frames</a></li>
+<li class="chapter" data-level="3.6.3" data-path="programming1.html"><a href="programming1.html#exercises-3"><i class="fa fa-check"></i><b>3.6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#summary-1"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="programming1.html"><a href="programming1.html#glossary-1"><i class="fa fa-check"></i><b>3.8</b> Glossary</a></li>
+<li class="chapter" data-level="3.9" data-path="programming1.html"><a href="programming1.html#variable-name-table"><i class="fa fa-check"></i><b>3.9</b> Variable Name Table</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming2.html"><a href="programming2.html"><i class="fa fa-check"></i><b>4</b> <strong>R Programming (Part II)</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming2.html"><a href="programming2.html#functions"><i class="fa fa-check"></i><b>4.1</b> Functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming2.html"><a href="programming2.html#the-syntax-for-creating-a-function"><i class="fa fa-check"></i><b>4.1.1</b> The Syntax for Creating a Function</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming2.html"><a href="programming2.html#creating-a-simple-function-1-argument"><i class="fa fa-check"></i><b>4.1.2</b> Creating a Simple Function (1-Argument)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="programming2.html"><a href="programming2.html#creating-a-multi-argument-function"><i class="fa fa-check"></i><b>4.1.3</b> Creating a Multi-Argument Function</a></li>
+<li class="chapter" data-level="4.1.4" data-path="programming2.html"><a href="programming2.html#functions-inside-functions"><i class="fa fa-check"></i><b>4.1.4</b> Functions inside Functions</a></li>
+<li class="chapter" data-level="4.1.5" data-path="programming2.html"><a href="programming2.html#returning-multiple-objects-from-a-function"><i class="fa fa-check"></i><b>4.1.5</b> Returning Multiple Objects from a Function</a></li>
+<li class="chapter" data-level="4.1.6" data-path="programming2.html"><a href="programming2.html#some-important-features-about-functions"><i class="fa fa-check"></i><b>4.1.6</b> Some Important Features about Functions</a></li>
+<li class="chapter" data-level="4.1.7" data-path="programming2.html"><a href="programming2.html#exercises-4"><i class="fa fa-check"></i><b>4.1.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming2.html"><a href="programming2.html#the-factor-data-type"><i class="fa fa-check"></i><b>4.2</b> The Factor Data Type</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="programming2.html"><a href="programming2.html#creating-a-factor"><i class="fa fa-check"></i><b>4.2.1</b> Creating a Factor</a></li>
+<li class="chapter" data-level="4.2.2" data-path="programming2.html"><a href="programming2.html#using-factors-to-sort-character-data"><i class="fa fa-check"></i><b>4.2.2</b> Using Factors to Sort Character Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="programming2.html"><a href="programming2.html#exercises-5"><i class="fa fa-check"></i><b>4.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="programming2.html"><a href="programming2.html#the-list-data-structure"><i class="fa fa-check"></i><b>4.3</b> The List Data Structure</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="programming2.html"><a href="programming2.html#understanding-lists"><i class="fa fa-check"></i><b>4.3.1</b> Understanding Lists</a></li>
+<li class="chapter" data-level="4.3.2" data-path="programming2.html"><a href="programming2.html#creating-lists"><i class="fa fa-check"></i><b>4.3.2</b> Creating Lists</a></li>
+<li class="chapter" data-level="4.3.3" data-path="programming2.html"><a href="programming2.html#lists-within-lists-indexing"><i class="fa fa-check"></i><b>4.3.3</b> Lists within Lists (Indexing)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="programming2.html"><a href="programming2.html#summary-2"><i class="fa fa-check"></i><b>4.3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="programming2.html"><a href="programming2.html#r-packages"><i class="fa fa-check"></i><b>4.4</b> R Packages</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming2.html"><a href="programming2.html#understanding-r-packages"><i class="fa fa-check"></i><b>4.4.1</b> Understanding R Packages</a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming2.html"><a href="programming2.html#installing-and-loading-r-package"><i class="fa fa-check"></i><b>4.4.2</b> Installing and Loading R Package</a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming2.html"><a href="programming2.html#loading-packages"><i class="fa fa-check"></i><b>4.4.3</b> Loading Packages</a></li>
+<li class="chapter" data-level="4.4.4" data-path="programming2.html"><a href="programming2.html#testing-our-new-functions"><i class="fa fa-check"></i><b>4.4.4</b> Testing our New Functions</a></li>
+<li class="chapter" data-level="4.4.5" data-path="programming2.html"><a href="programming2.html#error-loading-packages"><i class="fa fa-check"></i><b>4.4.5</b> Error Loading Packages</a></li>
+<li class="chapter" data-level="4.4.6" data-path="programming2.html"><a href="programming2.html#package-conventions-if-using-code"><i class="fa fa-check"></i><b>4.4.6</b> Package Conventions if Using Code</a></li>
+<li class="chapter" data-level="4.4.7" data-path="programming2.html"><a href="programming2.html#summary-3"><i class="fa fa-check"></i><b>4.4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="programming2.html"><a href="programming2.html#importing"><i class="fa fa-check"></i><b>4.5</b> Importing and Exporting Data</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="programming2.html"><a href="programming2.html#importing-csv-files."><i class="fa fa-check"></i><b>4.5.1</b> Importing CSV files.</a></li>
+<li class="chapter" data-level="4.5.2" data-path="programming2.html"><a href="programming2.html#importing-spss-.sav-files."><i class="fa fa-check"></i><b>4.5.2</b> Importing SPSS (.sav files).</a></li>
+<li class="chapter" data-level="4.5.3" data-path="programming2.html"><a href="programming2.html#exporting-datasets-in-r"><i class="fa fa-check"></i><b>4.5.3</b> Exporting Datasets in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="programming2.html"><a href="programming2.html#summary-4"><i class="fa fa-check"></i><b>4.6</b> Summary</a></li>
+<li class="chapter" data-level="4.7" data-path="programming2.html"><a href="programming2.html#glossary-2"><i class="fa fa-check"></i><b>4.7</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datacleaning1.html"><a href="datacleaning1.html"><i class="fa fa-check"></i><b>5</b> <strong>Data Wrangling and Cleaning (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datacleaning1.html"><a href="datacleaning1.html#what-is-data-wrangling-and-cleaning"><i class="fa fa-check"></i><b>5.1</b> <strong>What is Data Wrangling and Cleaning?</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="datacleaning1.html"><a href="datacleaning1.html#naming-conventions-in-this-book"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Naming Conventions in this Book</strong></a></li>
+<li class="chapter" data-level="5.1.2" data-path="datacleaning1.html"><a href="datacleaning1.html#why-is-data-cleaning-important"><i class="fa fa-check"></i><b>5.1.2</b> <strong>Why is Data Cleaning Important?</strong></a></li>
+<li class="chapter" data-level="5.1.3" data-path="datacleaning1.html"><a href="datacleaning1.html#how-can-r-help-you-with-data-cleaning"><i class="fa fa-check"></i><b>5.1.3</b> <strong>How can R help you with Data Cleaning?</strong></a></li>
+<li class="chapter" data-level="5.1.4" data-path="datacleaning1.html"><a href="datacleaning1.html#tidyverse-and-base-r"><i class="fa fa-check"></i><b>5.1.4</b> Tidyverse (and Base R)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="datacleaning1.html"><a href="datacleaning1.html#lets-get-set-up"><i class="fa fa-check"></i><b>5.2</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.1-set-up-your-wd"><i class="fa fa-check"></i><b>5.2.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="5.2.2" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.2-import-your-csv-files-and-r-script"><i class="fa fa-check"></i><b>5.2.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="5.2.3" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.3-install-and-load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.2.3</b> Activity 1.3: Install and load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-the-remote-associates-data-set."><i class="fa fa-check"></i><b>5.3</b> Cleaning the Remote Associates Data set.</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datacleaning1.html"><a href="datacleaning1.html#context-and-viewing-it-in-rstudio"><i class="fa fa-check"></i><b>5.3.1</b> Context and Viewing it in RStudio</a></li>
+<li class="chapter" data-level="5.3.2" data-path="datacleaning1.html"><a href="datacleaning1.html#key-functions-that-will-help-you-clean-most-datasets"><i class="fa fa-check"></i><b>5.3.2</b> Key Functions That Will Help You Clean Most Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datacleaning1.html"><a href="datacleaning1.html#choosing-our-columns-of-interest-with-select"><i class="fa fa-check"></i><b>5.4</b> Choosing our Columns of Interest with <code>Select()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="datacleaning1.html"><a href="datacleaning1.html#renaming-our-columns-of-interest-with-rename"><i class="fa fa-check"></i><b>5.5</b> Renaming our Columns of Interest with <code>rename()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="datacleaning1.html"><a href="datacleaning1.html#creating-new-columns-using-the-mutate-function"><i class="fa fa-check"></i><b>5.6</b> Creating new Columns using the <code>mutate()</code> function</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="datacleaning1.html"><a href="datacleaning1.html#rewriting-existing-columns-using-mutate"><i class="fa fa-check"></i><b>5.6.1</b> Rewriting existing columns using <code>mutate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="datacleaning1.html"><a href="datacleaning1.html#checking-in-on-our-data-set"><i class="fa fa-check"></i><b>5.7</b> Checking in on our data set</a></li>
+<li class="chapter" data-level="5.8" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-duplicates-using-distinct"><i class="fa fa-check"></i><b>5.8</b> Removing Duplicates using <code>distinct()</code></a></li>
+<li class="chapter" data-level="5.9" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-the-filter-function"><i class="fa fa-check"></i><b>5.9</b> Removing Rows using the <code>filter()</code> Function</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-multiple-conditions-with-filter"><i class="fa fa-check"></i><b>5.9.1</b> Removing Rows Using Multiple Conditions with <code>filter()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="datacleaning1.html"><a href="datacleaning1.html#identifying-the-factors-in-our-data-frame"><i class="fa fa-check"></i><b>5.10</b> Identifying the Factors in our Data Frame</a></li>
+<li class="chapter" data-level="5.11" data-path="datacleaning1.html"><a href="datacleaning1.html#summarising-our-data-by-groups-using-group_by-and-summarise"><i class="fa fa-check"></i><b>5.11</b> Summarising our Data by Groups using <code>group_by()</code> and <code>summarise()</code></a></li>
+<li class="chapter" data-level="5.12" data-path="datacleaning1.html"><a href="datacleaning1.html#chaining-it-all-together-with-the-pipe-operator"><i class="fa fa-check"></i><b>5.12</b> Chaining it All Together with the Pipe Operator</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="datacleaning1.html"><a href="datacleaning1.html#using-a-pipe-operator-on-the-remote-associations-data-frame"><i class="fa fa-check"></i><b>5.12.1</b> Using a Pipe Operator on the Remote Associations Data Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="datacleaning1.html"><a href="datacleaning1.html#clean-activity"><i class="fa fa-check"></i><b>5.13</b> Activity: Clean the Flanker Dataset</a>
+<ul>
+<li class="chapter" data-level="5.13.1" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-flanker-test-dataset"><i class="fa fa-check"></i><b>5.13.1</b> <strong>Cleaning Flanker Test Dataset</strong></a></li>
+<li class="chapter" data-level="5.13.2" data-path="datacleaning1.html"><a href="datacleaning1.html#load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.13.2</b> <strong>Load the “Tidyverse” Package</strong></a></li>
+<li class="chapter" data-level="5.13.3" data-path="datacleaning1.html"><a href="datacleaning1.html#reset-your-environment"><i class="fa fa-check"></i><b>5.13.3</b> <strong>Reset Your Environment</strong></a></li>
+<li class="chapter" data-level="5.13.4" data-path="datacleaning1.html"><a href="datacleaning1.html#import-the-data"><i class="fa fa-check"></i><b>5.13.4</b> <strong>Import the Data</strong></a></li>
+<li class="chapter" data-level="5.13.5" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-instructions"><i class="fa fa-check"></i><b>5.13.5</b> Cleaning Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.14" data-path="datacleaning1.html"><a href="datacleaning1.html#summary-5"><i class="fa fa-check"></i><b>5.14</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="datacleaning2.html"><a href="datacleaning2.html"><i class="fa fa-check"></i><b>6</b> Data Wrangling and Cleaning (Part II)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#lets-get-set-up-1"><i class="fa fa-check"></i><b>6.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.1-set-up-your-wd-1"><i class="fa fa-check"></i><b>6.1.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="6.1.2" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.2-import-your-csv-files-and-r-script-1"><i class="fa fa-check"></i><b>6.1.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="6.1.3" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.3-load-the-tidyverse-package"><i class="fa fa-check"></i><b>6.1.3</b> Activity 1.3: Load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#data-formats-long-and-wide-data"><i class="fa fa-check"></i><b>6.2</b> Data Formats (Long and Wide Data)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="datacleaning2.html"><a href="datacleaning2.html#defining-long-and-wide-data"><i class="fa fa-check"></i><b>6.2.1</b> Defining Long and Wide Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#converting-the-format-of-our-data"><i class="fa fa-check"></i><b>6.3</b> Converting the Format of Our Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-wide-to-long"><i class="fa fa-check"></i><b>6.3.1</b> Pivoting from Wide to Long</a></li>
+<li class="chapter" data-level="6.3.2" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-our-remote-associations-data-frame"><i class="fa fa-check"></i><b>6.3.2</b> Pivoting our Remote Associations Data Frame</a></li>
+<li class="chapter" data-level="6.3.3" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-long-to-wide"><i class="fa fa-check"></i><b>6.3.3</b> Pivoting from Long to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="datacleaning2.html"><a href="datacleaning2.html#handling-missing-values"><i class="fa fa-check"></i><b>6.4</b> Handling Missing Values</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-missing-values"><i class="fa fa-check"></i><b>6.4.1</b> <strong>Introduction to Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.2" data-path="datacleaning2.html"><a href="datacleaning2.html#identifying-missing-values"><i class="fa fa-check"></i><b>6.4.2</b> <strong>Identifying Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.3" data-path="datacleaning2.html"><a href="datacleaning2.html#removing-missing-values"><i class="fa fa-check"></i><b>6.4.3</b> Removing Missing Values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-data-i.e.-joining-different-datasets-together"><i class="fa fa-check"></i><b>6.5</b> Merging Data (i.e., Joining Different Datasets Together)</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-merging-data"><i class="fa fa-check"></i><b>6.5.1</b> Introduction to Merging Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="datacleaning2.html"><a href="datacleaning2.html#inner_join"><i class="fa fa-check"></i><b>6.5.2</b> Inner_Join</a></li>
+<li class="chapter" data-level="6.5.3" data-path="datacleaning2.html"><a href="datacleaning2.html#left_join"><i class="fa fa-check"></i><b>6.5.3</b> Left_join</a></li>
+<li class="chapter" data-level="6.5.4" data-path="datacleaning2.html"><a href="datacleaning2.html#right_join"><i class="fa fa-check"></i><b>6.5.4</b> Right_Join</a></li>
+<li class="chapter" data-level="6.5.5" data-path="datacleaning2.html"><a href="datacleaning2.html#outer-join"><i class="fa fa-check"></i><b>6.5.5</b> Outer Join</a></li>
+<li class="chapter" data-level="6.5.6" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-7"><i class="fa fa-check"></i><b>6.5.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="datacleaning2.html"><a href="datacleaning2.html#data-wrangling-example-demographic-and-flanker-task"><i class="fa fa-check"></i><b>6.6</b> Data Wrangling Example (Demographic and Flanker Task)</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#part-i-cleaning-the-df_background-file"><i class="fa fa-check"></i><b>6.6.1</b> Part I: Cleaning the <code>df_background</code> file</a></li>
+<li class="chapter" data-level="6.6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#cleaning-our-flanker-tasks"><i class="fa fa-check"></i><b>6.6.2</b> Cleaning our Flanker Tasks</a></li>
+<li class="chapter" data-level="6.6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-the-data-frames"><i class="fa fa-check"></i><b>6.6.3</b> Merging the Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-8"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html"><i class="fa fa-check"></i><b>7</b> Data Visualisation in R {data-vis}</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#lets-get-set-up-2"><i class="fa fa-check"></i><b>7.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#activity-set-up-your-working-directory"><i class="fa fa-check"></i><b>7.1.1</b> Activity: Set Up Your Working Directory</a></li>
+<li class="chapter" data-level="7.1.2" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#activity-prepare-your-r-script"><i class="fa fa-check"></i><b>7.1.2</b> Activity: Prepare your R Script</a></li>
+<li class="chapter" data-level="7.1.3" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#activity-install-and-load-your-packages"><i class="fa fa-check"></i><b>7.1.3</b> Activity: Install and Load Your Packages</a></li>
+<li class="chapter" data-level="7.1.4" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#activity-download-and-import-your-files"><i class="fa fa-check"></i><b>7.1.4</b> Activity: Download and Import Your Files</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>7.2</b> Introduction to <code>ggplot2</code></a></li>
+<li class="chapter" data-level="7.3" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#how-to-draw-a-plot"><i class="fa fa-check"></i><b>7.3</b> How to Draw a Plot</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#first-we-set-up-the-canvas"><i class="fa fa-check"></i><b>7.3.1</b> First we set up the Canvas</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#creating-our-box-plot"><i class="fa fa-check"></i><b>7.3.2</b> Creating our Box Plot</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#changing-the-name-of-our-x-axis-and-y-axis"><i class="fa fa-check"></i><b>7.3.3</b> Changing the Name of Our X-Axis and Y-Axis</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#changing-the-look-theme-of-our-canvas"><i class="fa fa-check"></i><b>7.3.4</b> Changing the Look (Theme) of Our Canvas</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#the-real-power-of-ggplot---customisation"><i class="fa fa-check"></i><b>7.4</b> The Real Power of ggplot - Customisation</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#mapping-aesthetic-properties-like-colour-and-fill-to-our-variables"><i class="fa fa-check"></i><b>7.4.1</b> Mapping Aesthetic Properties (like Colour and Fill) to Our Variables</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#changing-the-value-of-our-y-axis"><i class="fa fa-check"></i><b>7.4.2</b> Changing the Value of Our Y-Axis</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#extra-stuff"><i class="fa fa-check"></i><b>7.4.3</b> Extra stuff</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#geoms"><i class="fa fa-check"></i><b>7.5</b> Geoms</a></li>
+<li class="chapter" data-level="7.6" data-path="data-visualisation-in-r-data-vis.html"><a href="data-visualisation-in-r-data-vis.html#themes"><i class="fa fa-check"></i><b>7.6</b> Themes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>8</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>8.1</b> How Boolean Operators Work:</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>8.1.1</b> Understanding R’s Evaluation Process:</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-visualisation-in-r-data-vis" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Data Visualisation in R {data-vis}<a href="data-visualisation-in-r-data-vis.html#data-visualisation-in-r-data-vis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this session, we are going to learn how to generate APA style plots in R. In particular, we are going to learn about the <code>ggplot2</code> package and it’s associated function <code>ggplot()</code>. This package has been used to create plots for publications like the BBC and the Economist. By the end of this session you should be capable of:</p>
+<ul>
+<li>Understanding the logic of the ggplot method for drawing plots.</li>
+<li>Generating and customising elegant Box Plots, Violin Plots, Bar Charts, Scatterplots, Histograms, and Line Charts.</li>
+<li>Making your plots APA ready.</li>
+<li>Arranging and faceting (grouping together) your plots.</li>
+<li>Export your plots to PDFs.</li>
+</ul>
+<div id="lets-get-set-up-2" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Let’s Get Set Up<a href="data-visualisation-in-r-data-vis.html#lets-get-set-up-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Open up RStudio or Posit Cloud and complete the following activities to get set up for today.</p>
+<div id="activity-set-up-your-working-directory" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Activity: Set Up Your Working Directory<a href="data-visualisation-in-r-data-vis.html#activity-set-up-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In your folder for this class, create a new folder called <code>week6</code>. Set this folder as your working directory. To do this, click <code>Session</code> -&gt; <code>Set Working Directory</code> -&gt; <code>Choose Directory</code>, then find your new folder, select it and click <code>Open</code>.</p>
+<p>In your console, the path to that folder should now be printed. It should look something like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-visualisation-in-r-data-vis.html#cb1-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro/week6&quot;</span>) <span class="co">#this specific path will differ based on your folder configuration, but make sure the end part is in `week6`</span></span></code></pre></div>
+</div>
+<div id="activity-prepare-your-r-script" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Activity: Prepare your R Script<a href="data-visualisation-in-r-data-vis.html#activity-prepare-your-r-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now in RStudio (or posit cloud), create an R script (try the keyboard shortcut: Ctrl-Shift-N on Windows, or command–shift–N on Mac) called <code>06-data-visualisation.R</code>.</p>
+</div>
+<div id="activity-install-and-load-your-packages" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Activity: Install and Load Your Packages<a href="data-visualisation-in-r-data-vis.html#activity-install-and-load-your-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will be using the <code>ggplot2</code>, <code>jtools</code>, and <code>patchwork</code> in today’s session. Luckily, ggplot2 comes with Tidyverse, so we won’t need to install it if you have installed Tidyverse already. We will need to install <code>patchwork</code>. Copy and paste the following code to your R script. Copy and paste the code (minus the #) <code>install.packages("patchwork")</code> into your console first and press enter. Once that is installed, you can run the following code.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-visualisation-in-r-data-vis.html#cb2-1" tabindex="-1"></a><span class="co">#install.packages(&quot;tidyverse&quot;) if tidyverse does not load for you, then you will need to run this command (minus the #) in your console first</span></span>
+<span id="cb2-2"><a href="data-visualisation-in-r-data-vis.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="data-visualisation-in-r-data-vis.html#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="data-visualisation-in-r-data-vis.html#cb2-4" tabindex="-1"></a><span class="co">#install.packages(c(&quot;jtools&quot;, &quot;patchwork&quot;)) </span></span>
+<span id="cb2-5"><a href="data-visualisation-in-r-data-vis.html#cb2-5" tabindex="-1"></a><span class="fu">library</span>(jtools) <span class="co">#this package enables us to make APA themed plots</span></span>
+<span id="cb2-6"><a href="data-visualisation-in-r-data-vis.html#cb2-6" tabindex="-1"></a><span class="fu">library</span>(patchwork) <span class="co">#this package enables us to arrange plots we have created</span></span></code></pre></div>
+</div>
+<div id="activity-download-and-import-your-files" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Activity: Download and Import Your Files<a href="data-visualisation-in-r-data-vis.html#activity-download-and-import-your-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We are going to need the following files for today’s session. You will find them in the <code>Teams Channel under Channel 6 - Data Visualisation</code>. The files are:</p>
+<ul>
+<li>File 1</li>
+<li>File 2</li>
+<li>File 3</li>
+</ul>
+<p>Download these files onto your computer.</p>
+<p>Now let’s load in our data files. Make sure all your files are in your <code>week6</code> folder. Once they are, copy and paste the following code.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-visualisation-in-r-data-vis.html#cb3-1" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;file1.csv&quot;</span>)</span>
+<span id="cb3-2"><a href="data-visualisation-in-r-data-vis.html#cb3-2" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;file2.csv&quot;</span>)</span>
+<span id="cb3-3"><a href="data-visualisation-in-r-data-vis.html#cb3-3" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;file3.csv&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="introduction-to-ggplot2" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Introduction to <code>ggplot2</code><a href="data-visualisation-in-r-data-vis.html#introduction-to-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We analysed the <code>sleep</code> data frame in our first session. We created and exported a plot using the <code>base R</code> <code>plot()</code> function</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-visualisation-in-r-data-vis.html#cb4-1" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra, </span>
+<span id="cb4-2"><a href="data-visualisation-in-r-data-vis.html#cb4-2" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Treatment Group&quot;</span>, </span>
+<span id="cb4-3"><a href="data-visualisation-in-r-data-vis.html#cb4-3" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>, </span>
+<span id="cb4-4"><a href="data-visualisation-in-r-data-vis.html#cb4-4" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Effect of Treament on Sleep Duration&quot;</span>)</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>This is a perfectly fine plot, but one of the major advantages of using R over other programming languages or other statistical software is that it enables you to develop customisable, elegant, and even interactive plots. This is thanks to the <code>ggplot</code> package and the <code>ggplot2()</code> function.</p>
+<p><strong>What does the gg in ggplot stand for?</strong></p>
+<p>The <code>gg</code> stands for the <em>G</em>rammar of <em>G</em>raphics. This is because ggplot is built upon a logical system of how to draw a plot. This system involves a logical order where you incrementally add different layers to your plot. By understanding these system, you’ll be able to create excellent plots in no-time. Luckily, this structure is relatively straightforward to understand.</p>
+</div>
+<div id="how-to-draw-a-plot" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> How to Draw a Plot<a href="data-visualisation-in-r-data-vis.html#how-to-draw-a-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We are going to recreate the plot we made in the first session using <code>ggplot</code>. After that, I am going to show you how we can use this function to make our plot more visually striking and informative using the same function. We will be using the <code>sleep</code> data frame again, but I am going to refer to as <code>df</code> for short.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-visualisation-in-r-data-vis.html#cb5-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> sleep </span></code></pre></div>
+<div id="first-we-set-up-the-canvas" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> First we set up the Canvas<a href="data-visualisation-in-r-data-vis.html#first-we-set-up-the-canvas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first thing we do when we want to create a plot is call the <code>ggplot()</code> function and tell it what data frame we are working from. In this case, we are using the <code>sleep</code> data frame. For short, I am going to refer it as <code>df</code> and tell call <code>ggplot()</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-visualisation-in-r-data-vis.html#cb6-1" tabindex="-1"></a><span class="fu">ggplot</span>(df)</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+This creates a grey canvas where we can draw our plot on. The default R canvas is grey, but we can the appearance of the canvas later on.</p>
+<p>Now that our canvas is set up, we will want to specify some aesthetic properties to our plot, like the y-axis and x-axis. To achieve this, we need to tell R to <em>map</em> a variable in our <code>df</code> to the <strong>x-axis</strong> and another variable to the <strong>y-axis</strong>. In ggplot, there is an argument called <code>mapping = aes()</code> that enables us to do this, where <code>aes</code> is short for aesthetics. Let’s may the <code>group</code> variable to the x-axis and the <code>extra</code> variable to the y-axis.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-visualisation-in-r-data-vis.html#cb7-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra))</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Now we can see that our x-axis is mapped to the two values in our <code>group</code> variable, whereas the y-axis is mapped to the range of values in the <code>extra</code> variable.</p>
+</div>
+<div id="creating-our-box-plot" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Creating our Box Plot<a href="data-visualisation-in-r-data-vis.html#creating-our-box-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This sets up the shape of our canvas, the next thing we need to do is specify what <strong>type</strong> of plot we want to create. In ggplot, this means draw a <code>geom</code> (i.e., geometrical shape) onto our plot. There are dozens of geoms (see table at end of the chapter) that we can draw to our plot and we can draw multiple at the same time.</p>
+<p>Since we are creating a boxplot, we’ll use the <code>geom_boxplot</code> geom.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-visualisation-in-r-data-vis.html#cb8-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="data-visualisation-in-r-data-vis.html#cb8-2" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+We can see that R has now drawn box plots for each of our groups. The default style in <code>ggplot()</code> is not to add the whiskey horizontal lines (e.g., the T) at the top and end of each boxplot. Generally, I am happy enough with the default option, but since we are recreating our first boxplot, let’s add these whisker lines.</p>
+<p>To do this, we need to tell R to create a shape based on statistical properties of our data. In particular, we need to create a statistical <code>errorbar</code> for a box plot. We can do this through adding the following line of code in our plot.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-visualisation-in-r-data-vis.html#cb9-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="data-visualisation-in-r-data-vis.html#cb9-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="data-visualisation-in-r-data-vis.html#cb9-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+Now we have our whisker lines. Now I am not perfeclty happy with the width of these error lines. We can change that by specifying <code>width</code> in our <code>stat_boxplot()</code> function</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-visualisation-in-r-data-vis.html#cb10-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="data-visualisation-in-r-data-vis.html#cb10-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="data-visualisation-in-r-data-vis.html#cb10-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="changing-the-name-of-our-x-axis-and-y-axis" class="section level3 hasAnchor" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> Changing the Name of Our X-Axis and Y-Axis<a href="data-visualisation-in-r-data-vis.html#changing-the-name-of-our-x-axis-and-y-axis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Okay, our plot is looking better. The next thing we will want to do is add informative labels to our x and y-axis. We can do this by using the ggplot functions <code>scale_x_discrete</code> and <code>scale_y_continous</code> to draw our labels.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-visualisation-in-r-data-vis.html#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="data-visualisation-in-r-data-vis.html#cb11-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="data-visualisation-in-r-data-vis.html#cb11-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="data-visualisation-in-r-data-vis.html#cb11-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb11-5"><a href="data-visualisation-in-r-data-vis.html#cb11-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>)</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+There now we have our x and y-labels. One thing that is bothering me is that our treatment group is labelled as <code>1</code> and <code>2</code>. The sleep data frame does not provide us with any information on what each treatment group received. So I am going to take artistic liberties and say that <code>1</code> means <code>Xanax</code> and <code>2</code> means <code>Ambien</code>.</p>
+<p>There are two aproaches we can take to add this to our plot.</p>
+<p>The first approach would be to add labels to the x-axis, in <code>scale_x_discrete()</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-visualisation-in-r-data-vis.html#cb12-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="data-visualisation-in-r-data-vis.html#cb12-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="data-visualisation-in-r-data-vis.html#cb12-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="data-visualisation-in-r-data-vis.html#cb12-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>,</span>
+<span id="cb12-5"><a href="data-visualisation-in-r-data-vis.html#cb12-5" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>  <span class="ot">=</span> <span class="st">&quot;Xanax&quot;</span>, <span class="co">#this changes the 1 in the x-axis to Xanax</span></span>
+<span id="cb12-6"><a href="data-visualisation-in-r-data-vis.html#cb12-6" tabindex="-1"></a>                              <span class="st">&quot;2&quot;</span> <span class="ot">=</span> <span class="st">&quot;Ambien&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb12-7"><a href="data-visualisation-in-r-data-vis.html#cb12-7" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>)</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>The second approach would be to first change the data frame itself. We can do this using our old friend <code>mutate()</code>. I am going to create a variable called <code>treatment</code> that <code>recode()</code> the values in the <code>group</code> variable.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-visualisation-in-r-data-vis.html#cb13-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df, <span class="at">treatment =</span> <span class="fu">recode</span>(group, <span class="co">#recode changes variable values</span></span>
+<span id="cb13-2"><a href="data-visualisation-in-r-data-vis.html#cb13-2" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Xanax&quot;</span>,</span>
+<span id="cb13-3"><a href="data-visualisation-in-r-data-vis.html#cb13-3" tabindex="-1"></a>                                    <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Ambien&quot;</span>))</span>
+<span id="cb13-4"><a href="data-visualisation-in-r-data-vis.html#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="data-visualisation-in-r-data-vis.html#cb13-5" tabindex="-1"></a>df<span class="sc">$</span>treatment</span></code></pre></div>
+<pre><code>##  [1] Xanax  Xanax  Xanax  Xanax  Xanax  Xanax  Xanax  Xanax  Xanax  Xanax 
+## [11] Ambien Ambien Ambien Ambien Ambien Ambien Ambien Ambien Ambien Ambien
+## Levels: Xanax Ambien</code></pre>
+<p>Now we can recreate our plot, but this time put <code>treatment</code> in the <code>x-axis</code> instead of group.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-visualisation-in-r-data-vis.html#cb15-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> <span class="co">#substitute treatment for group</span></span>
+<span id="cb15-2"><a href="data-visualisation-in-r-data-vis.html#cb15-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="data-visualisation-in-r-data-vis.html#cb15-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="data-visualisation-in-r-data-vis.html#cb15-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb15-5"><a href="data-visualisation-in-r-data-vis.html#cb15-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>)</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>This produces the same plot. In this example, I prefer the second method. But I will explain why a little bit later.</p>
+<p>Now, let’s change the look of our canvas.</p>
+</div>
+<div id="changing-the-look-theme-of-our-canvas" class="section level3 hasAnchor" number="7.3.4">
+<h3><span class="header-section-number">7.3.4</span> Changing the Look (Theme) of Our Canvas<a href="data-visualisation-in-r-data-vis.html#changing-the-look-theme-of-our-canvas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One of the nice features of ggplot() is can change the <code>theme</code> of our canvas. There are several themes that we can use (see table at the end of the chapter for more information). The current theme we are using is <code>theme_gray</code>, which is the default theme.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-visualisation-in-r-data-vis.html#cb16-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> <span class="co">#substitute treatment for group</span></span>
+<span id="cb16-2"><a href="data-visualisation-in-r-data-vis.html#cb16-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="data-visualisation-in-r-data-vis.html#cb16-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb16-4"><a href="data-visualisation-in-r-data-vis.html#cb16-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb16-5"><a href="data-visualisation-in-r-data-vis.html#cb16-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="data-visualisation-in-r-data-vis.html#cb16-6" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+That is perfectly fine, but I dislike the grey. We could also set it to <code>theme_bw</code> (white background and black gridlines).</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-visualisation-in-r-data-vis.html#cb17-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> <span class="co">#substitute treatment for group</span></span>
+<span id="cb17-2"><a href="data-visualisation-in-r-data-vis.html#cb17-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="data-visualisation-in-r-data-vis.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb17-4"><a href="data-visualisation-in-r-data-vis.html#cb17-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb17-5"><a href="data-visualisation-in-r-data-vis.html#cb17-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="data-visualisation-in-r-data-vis.html#cb17-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>We could set it to a dark theme, using <code>theme_dark()</code></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-visualisation-in-r-data-vis.html#cb18-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> <span class="co">#substitute treatment for group</span></span>
+<span id="cb18-2"><a href="data-visualisation-in-r-data-vis.html#cb18-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="data-visualisation-in-r-data-vis.html#cb18-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb18-4"><a href="data-visualisation-in-r-data-vis.html#cb18-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb18-5"><a href="data-visualisation-in-r-data-vis.html#cb18-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="data-visualisation-in-r-data-vis.html#cb18-6" tabindex="-1"></a>  <span class="fu">theme_dark</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Or we could remove the grid lines and have a more <code>classic</code> approach, using <code>theme_classic()</code></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-visualisation-in-r-data-vis.html#cb19-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> <span class="co">#substitute treatment for group</span></span>
+<span id="cb19-2"><a href="data-visualisation-in-r-data-vis.html#cb19-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="data-visualisation-in-r-data-vis.html#cb19-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb19-4"><a href="data-visualisation-in-r-data-vis.html#cb19-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb19-5"><a href="data-visualisation-in-r-data-vis.html#cb19-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="data-visualisation-in-r-data-vis.html#cb19-6" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+Since we are psychologists, we will mostly looking for plots in <code>APA</code> style. When you download <code>ggplot()</code> there is no pre-installed theme that matches this style. However, the <code>jtools</code> package we installed and loaded comes with an <code>apa_theme()</code>. Make sure that is loaded before running the following code:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-visualisation-in-r-data-vis.html#cb20-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> <span class="co">#substitute treatment for group</span></span>
+<span id="cb20-2"><a href="data-visualisation-in-r-data-vis.html#cb20-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="data-visualisation-in-r-data-vis.html#cb20-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb20-4"><a href="data-visualisation-in-r-data-vis.html#cb20-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb20-5"><a href="data-visualisation-in-r-data-vis.html#cb20-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="data-visualisation-in-r-data-vis.html#cb20-6" tabindex="-1"></a>  <span class="fu">theme_apa</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+And now we have a pretty nice looking plot. Let’s change the colour, to match our original plot we created in week 1 by adding <code>fill = "grey"</code> inside <code>geom_boxplot()</code>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-visualisation-in-r-data-vis.html#cb21-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> <span class="co">#substitute treatment for group</span></span>
+<span id="cb21-2"><a href="data-visualisation-in-r-data-vis.html#cb21-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="data-visualisation-in-r-data-vis.html#cb21-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="data-visualisation-in-r-data-vis.html#cb21-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb21-5"><a href="data-visualisation-in-r-data-vis.html#cb21-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="data-visualisation-in-r-data-vis.html#cb21-6" tabindex="-1"></a>  <span class="fu">theme_apa</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+</div>
+<div id="the-real-power-of-ggplot---customisation" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> The Real Power of ggplot - Customisation<a href="data-visualisation-in-r-data-vis.html#the-real-power-of-ggplot---customisation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You might be wondering right now how useful is <code>ggplot</code> really. I mean, if you compare the two code chunks to create essentially the same plot, you’ll notice that approach we took in week 1 is significantly shorter.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-visualisation-in-r-data-vis.html#cb22-1" tabindex="-1"></a><span class="co">#base R approach</span></span>
+<span id="cb22-2"><a href="data-visualisation-in-r-data-vis.html#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="data-visualisation-in-r-data-vis.html#cb22-3" tabindex="-1"></a><span class="fu">plot</span>(sleep<span class="sc">$</span>group, sleep<span class="sc">$</span>extra, </span>
+<span id="cb22-4"><a href="data-visualisation-in-r-data-vis.html#cb22-4" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Treatment Group&quot;</span>, </span>
+<span id="cb22-5"><a href="data-visualisation-in-r-data-vis.html#cb22-5" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>, </span>
+<span id="cb22-6"><a href="data-visualisation-in-r-data-vis.html#cb22-6" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Effect of Treament on Sleep Duration&quot;</span>)</span>
+<span id="cb22-7"><a href="data-visualisation-in-r-data-vis.html#cb22-7" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="data-visualisation-in-r-data-vis.html#cb22-8" tabindex="-1"></a><span class="co">#ggplot approach</span></span>
+<span id="cb22-9"><a href="data-visualisation-in-r-data-vis.html#cb22-9" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="data-visualisation-in-r-data-vis.html#cb22-10" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> </span>
+<span id="cb22-11"><a href="data-visualisation-in-r-data-vis.html#cb22-11" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="data-visualisation-in-r-data-vis.html#cb22-12" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb22-13"><a href="data-visualisation-in-r-data-vis.html#cb22-13" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb22-14"><a href="data-visualisation-in-r-data-vis.html#cb22-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-15"><a href="data-visualisation-in-r-data-vis.html#cb22-15" tabindex="-1"></a>  <span class="fu">theme_apa</span>()</span></code></pre></div>
+<p>The real power of ggplot is the ability to customize our graphs to make them more striking and informative. We have seen glimpses of this already with the ability to add labels, colour, and themes to our plots. In this section, I am going to show you more ways we can customise our plot.</p>
+<div id="mapping-aesthetic-properties-like-colour-and-fill-to-our-variables" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Mapping Aesthetic Properties (like Colour and Fill) to Our Variables<a href="data-visualisation-in-r-data-vis.html#mapping-aesthetic-properties-like-colour-and-fill-to-our-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the last section, I used the argument <code>fill = grey</code> to specify the colour of boxplots. If I wanted multiple colours, I could have used the <code>c()</code> function in that argument:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-visualisation-in-r-data-vis.html#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> </span>
+<span id="cb23-2"><a href="data-visualisation-in-r-data-vis.html#cb23-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="data-visualisation-in-r-data-vis.html#cb23-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb23-4"><a href="data-visualisation-in-r-data-vis.html#cb23-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb23-5"><a href="data-visualisation-in-r-data-vis.html#cb23-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="data-visualisation-in-r-data-vis.html#cb23-6" tabindex="-1"></a>  <span class="fu">theme_apa</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+This approach is okay if are only specifying a limited number of colours, but if there are several colours we need to specify, it is cumbersome. Luckily, we can ask R to map the colours of boxplot to specific values in our data frame. We do this through a similar approach used in <code>ggplot()</code> where we add the argument <code>mapping = aes()</code> to our <code>geom_boxplot()</code> function. This time inside the <code>aes()</code> argument, we specify that we want the <code>fill</code> (the colour inside our boxplots) to map to the variable <code>treatment</code>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-visualisation-in-r-data-vis.html#cb24-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="data-visualisation-in-r-data-vis.html#cb24-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="data-visualisation-in-r-data-vis.html#cb24-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> treatment)) <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="data-visualisation-in-r-data-vis.html#cb24-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb24-5"><a href="data-visualisation-in-r-data-vis.html#cb24-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="data-visualisation-in-r-data-vis.html#cb24-6" tabindex="-1"></a>  <span class="fu">theme_apa</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>R will choose colours that are visually distinct from each other. Additionally, it will add a legend to our graph. If you want to remove the legend, add <code>show.legend = FALSE</code> to the <code>geom_boxplot()</code> function.</p>
+</div>
+<div id="changing-the-value-of-our-y-axis" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Changing the Value of Our Y-Axis<a href="data-visualisation-in-r-data-vis.html#changing-the-value-of-our-y-axis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I can tell R to specify the number of breaks on the y-axis. At the moment, it is only showing breaks in increments of two. R will try find a straightforward solution to the number of points on the y-axis. We can override this by using the <code>breaks()</code> argument in <code>scale_y_continous</code>, which will add a break between each number specified.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-visualisation-in-r-data-vis.html#cb25-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="data-visualisation-in-r-data-vis.html#cb25-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="data-visualisation-in-r-data-vis.html#cb25-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> treatment)) <span class="sc">+</span> </span>
+<span id="cb25-4"><a href="data-visualisation-in-r-data-vis.html#cb25-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb25-5"><a href="data-visualisation-in-r-data-vis.html#cb25-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>, </span>
+<span id="cb25-6"><a href="data-visualisation-in-r-data-vis.html#cb25-6" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="co">#this will add a break for each value between -2 and +6</span></span>
+<span id="cb25-7"><a href="data-visualisation-in-r-data-vis.html#cb25-7" tabindex="-1"></a>                     ) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="data-visualisation-in-r-data-vis.html#cb25-8" tabindex="-1"></a>  <span class="fu">theme_apa</span>()</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+### Plotting our Data Points in the Graph</p>
+<p>What if I wanted to add individual data points to our graph? To provide more information on the scatter of scores? There are two options I can use. The first option is to the use the <code>geom_point()</code>, which will each participant’s data point to the graph. Since there are only two possible observations in the <code>x-axis</code>, all data points will be printed in a straight line for each observation.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-visualisation-in-r-data-vis.html#cb26-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> </span>
+<span id="cb26-2"><a href="data-visualisation-in-r-data-vis.html#cb26-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="data-visualisation-in-r-data-vis.html#cb26-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> treatment)) <span class="sc">+</span> </span>
+<span id="cb26-4"><a href="data-visualisation-in-r-data-vis.html#cb26-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="data-visualisation-in-r-data-vis.html#cb26-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>, </span>
+<span id="cb26-6"><a href="data-visualisation-in-r-data-vis.html#cb26-6" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="co">#this will add a break for each value between -2 and +6</span></span>
+<span id="cb26-7"><a href="data-visualisation-in-r-data-vis.html#cb26-7" tabindex="-1"></a>                     ) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="data-visualisation-in-r-data-vis.html#cb26-8" tabindex="-1"></a>  <span class="fu">theme_apa</span>() <span class="sc">+</span></span>
+<span id="cb26-9"><a href="data-visualisation-in-r-data-vis.html#cb26-9" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="co">#will add individual scores onto to the graph</span></span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+This is a perfectly legitimate approach to take. There is not a lot of data, so we can make our each individual point, even if there is some overlap. However, we can use another approach called <code>geom_jitter()</code>. This will plot each individual point just like <code>geom_point()</code> does, but it will add some random movement (i.e. a jitter) to each point. This can prevent overplotting of individual points.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-visualisation-in-r-data-vis.html#cb27-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> </span>
+<span id="cb27-2"><a href="data-visualisation-in-r-data-vis.html#cb27-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="data-visualisation-in-r-data-vis.html#cb27-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> treatment)) <span class="sc">+</span> </span>
+<span id="cb27-4"><a href="data-visualisation-in-r-data-vis.html#cb27-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb27-5"><a href="data-visualisation-in-r-data-vis.html#cb27-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>, </span>
+<span id="cb27-6"><a href="data-visualisation-in-r-data-vis.html#cb27-6" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="co">#this will add a break for each value between -2 and +6</span></span>
+<span id="cb27-7"><a href="data-visualisation-in-r-data-vis.html#cb27-7" tabindex="-1"></a>                     ) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="data-visualisation-in-r-data-vis.html#cb27-8" tabindex="-1"></a>  <span class="fu">theme_apa</span>() <span class="sc">+</span></span>
+<span id="cb27-9"><a href="data-visualisation-in-r-data-vis.html#cb27-9" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="co">#will add individual scores onto to the graph and give them space away from each other</span></span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+The added space left or right for each data point is randomly generated. But we can reduce the upper and lower bounds of that random generation. Let’s do that for our current plot.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-visualisation-in-r-data-vis.html#cb28-1" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> extra)) <span class="sc">+</span> </span>
+<span id="cb28-2"><a href="data-visualisation-in-r-data-vis.html#cb28-2" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="data-visualisation-in-r-data-vis.html#cb28-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> treatment)) <span class="sc">+</span> </span>
+<span id="cb28-4"><a href="data-visualisation-in-r-data-vis.html#cb28-4" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb28-5"><a href="data-visualisation-in-r-data-vis.html#cb28-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>, </span>
+<span id="cb28-6"><a href="data-visualisation-in-r-data-vis.html#cb28-6" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>) <span class="co">#this will add a break for each value between -2 and +6</span></span>
+<span id="cb28-7"><a href="data-visualisation-in-r-data-vis.html#cb28-7" tabindex="-1"></a>                     ) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="data-visualisation-in-r-data-vis.html#cb28-8" tabindex="-1"></a>  <span class="fu">theme_apa</span>() <span class="sc">+</span></span>
+<span id="cb28-9"><a href="data-visualisation-in-r-data-vis.html#cb28-9" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">20</span>) <span class="co">#changes the horizontal jitter</span></span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<div id="extra-stuff" class="section level3 hasAnchor" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Extra stuff<a href="data-visualisation-in-r-data-vis.html#extra-stuff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-visualisation-in-r-data-vis.html#cb29-1" tabindex="-1"></a><span class="do">### editing our x and y-labels</span></span>
+<span id="cb29-2"><a href="data-visualisation-in-r-data-vis.html#cb29-2" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="data-visualisation-in-r-data-vis.html#cb29-3" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="data-visualisation-in-r-data-vis.html#cb29-4" tabindex="-1"></a>  <span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">&#39;errorbar&#39;</span>, <span class="at">width =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="data-visualisation-in-r-data-vis.html#cb29-5" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> group)) <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="data-visualisation-in-r-data-vis.html#cb29-6" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Treatment Group&quot;</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="st">&quot;Placebo&quot;</span>,</span>
+<span id="cb29-7"><a href="data-visualisation-in-r-data-vis.html#cb29-7" tabindex="-1"></a>                                                        <span class="st">&quot;2&quot;</span> <span class="ot">=</span> <span class="st">&quot;Xanax&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb29-8"><a href="data-visualisation-in-r-data-vis.html#cb29-8" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of Extra Hours of Sleep&quot;</span>, </span>
+<span id="cb29-9"><a href="data-visualisation-in-r-data-vis.html#cb29-9" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)) </span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+</div>
+<div id="geoms" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Geoms<a href="data-visualisation-in-r-data-vis.html#geoms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="67%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Geom</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Similar Plot</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><code>geom_point()</code></strong></td>
+<td>Adds points to the plot. Useful for scatter plots to visualize the relationship between two continuous variables.</td>
+<td>Scatter Plot</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_line()</code></strong></td>
+<td>Connects points with lines. Often used to represent trends or changes over time in continuous data.</td>
+<td>Line Plot</td>
+</tr>
+<tr class="odd">
+<td><strong><code>geom_bar()</code></strong></td>
+<td>Displays bars representing counts or frequencies of categorical data. Useful for comparing categories.</td>
+<td>Bar Chart</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_histogram()</code></strong></td>
+<td>Similar to geom_bar(), but used for continuous data. Creates bins of data and displays bars showing frequency distribution.</td>
+<td>Histogram</td>
+</tr>
+<tr class="odd">
+<td><strong><code>geom_boxplot()</code></strong></td>
+<td>Represents the distribution of a continuous variable through quartiles, median, and outliers. Useful for identifying outliers and comparing distributions.</td>
+<td>Box Plot</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_area()</code></strong></td>
+<td>Fills the area below the line in a line plot. Useful for highlighting the cumulative effect of changes in a variable over time.</td>
+<td>Area Plot</td>
+</tr>
+<tr class="odd">
+<td><strong><code>geom_smooth()</code></strong></td>
+<td>Adds a smoothed line to the plot, often useful for visualizing trends or patterns in noisy data.</td>
+<td>Trend Line</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_text()</code></strong></td>
+<td>Adds text labels to the plot, allowing annotation of specific points or adding additional information.</td>
+<td>Text Annotation</td>
+</tr>
+<tr class="odd">
+<td><strong><code>geom_label()</code></strong></td>
+<td>Similar to geom_text(), but adds labels with a background, making them more prominent and readable.</td>
+<td>Labeled Text</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_hline()</code></strong></td>
+<td>Draws horizontal lines across the plot, useful for highlighting specific reference points or thresholds.</td>
+<td>Horizontal Line</td>
+</tr>
+<tr class="odd">
+<td><strong><code>geom_vline()</code></strong></td>
+<td>Draws vertical lines on the plot, similar to geom_hline(), but for vertical lines.</td>
+<td>Vertical Line</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_polygon()</code></strong></td>
+<td>Draws polygons based on provided coordinates, useful for creating custom shapes or highlighting areas on a plot.</td>
+<td>Polygon Plot</td>
+</tr>
+<tr class="odd">
+<td><strong><code>geom_errorbar()</code></strong></td>
+<td>Adds error bars to the plot, indicating uncertainty or variability in the data.</td>
+<td>Error Bar Plot</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_jitter()</code></strong></td>
+<td>Adds random noise to points, useful for avoiding overplotting in dense scatter plots.</td>
+<td>Jittered Scatter Plot</td>
+</tr>
+<tr class="odd">
+<td><strong><code>geom_tile()</code></strong></td>
+<td>Creates a heatmap by filling rectangles with color based on a continuous variable. Useful for visualizing patterns in 2D data.</td>
+<td>Heatmap</td>
+</tr>
+<tr class="even">
+<td><strong><code>geom_path()</code></strong></td>
+<td>Similar to geom_line(), but does not close the path, useful for plotting trajectories or paths.</td>
+<td>Path Plot</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="themes" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Themes<a href="data-visualisation-in-r-data-vis.html#themes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="84%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Theme</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><code>theme_gray()</code></strong></td>
+<td>Default theme with a gray background.</td>
+</tr>
+<tr class="even">
+<td><strong><code>theme_bw()</code></strong></td>
+<td>Theme with a white background and black gridlines.</td>
+</tr>
+<tr class="odd">
+<td><strong><code>theme_minimal()</code></strong></td>
+<td>Minimalistic theme with a light gray background and no gridlines.</td>
+</tr>
+<tr class="even">
+<td><strong><code>theme_light()</code></strong></td>
+<td>Theme with a light gray background and gridlines.</td>
+</tr>
+<tr class="odd">
+<td><strong><code>theme_dark()</code></strong></td>
+<td>Theme with a dark gray background and white gridlines.</td>
+</tr>
+<tr class="even">
+<td><strong><code>theme_classic()</code></strong></td>
+<td>Classic theme resembling base R plots.</td>
+</tr>
+<tr class="odd">
+<td><strong><code>theme_void()</code></strong></td>
+<td>Theme with no background, gridlines, or axis elements.</td>
+</tr>
+<tr class="even">
+<td><strong><code>theme_linedraw()</code></strong></td>
+<td>Theme resembling hand-drawn plots, with a white background and black gridlines.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="datacleaning2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/07-data-visualisation.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rintro_demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

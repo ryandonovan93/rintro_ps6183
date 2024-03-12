@@ -23,7 +23,7 @@
 <meta name="author" content="Ryan Donovan" />
 
 
-<meta name="date" content="2024-03-06" />
+<meta name="date" content="2024-03-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="datacleaning1.html"/>
-<link rel="next" href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"/>
+<link rel="next" href="data-vis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -341,11 +341,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6.7" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-8"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>7</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<li class="chapter" data-level="7" data-path="data-vis.html"><a href="data-vis.html"><i class="fa fa-check"></i><b>7</b> Data Visualisation in R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>7.1</b> How Boolean Operators Work:</a>
+<li class="chapter" data-level="7.1" data-path="data-vis.html"><a href="data-vis.html#lets-get-set-up-2"><i class="fa fa-check"></i><b>7.1</b> Let’s Get Set Up</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>7.1.1</b> Understanding R’s Evaluation Process:</a></li>
+<li class="chapter" data-level="7.1.1" data-path="data-vis.html"><a href="data-vis.html#activity-set-up-your-working-directory"><i class="fa fa-check"></i><b>7.1.1</b> Activity: Set Up Your Working Directory</a></li>
+<li class="chapter" data-level="7.1.2" data-path="data-vis.html"><a href="data-vis.html#activity-prepare-your-r-script"><i class="fa fa-check"></i><b>7.1.2</b> Activity: Prepare your R Script</a></li>
+<li class="chapter" data-level="7.1.3" data-path="data-vis.html"><a href="data-vis.html#activity-install-and-load-your-packages"><i class="fa fa-check"></i><b>7.1.3</b> Activity: Install and Load Your Packages</a></li>
+<li class="chapter" data-level="7.1.4" data-path="data-vis.html"><a href="data-vis.html#activity-download-and-import-your-files"><i class="fa fa-check"></i><b>7.1.4</b> Activity: Download and Import Your Files</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-vis.html"><a href="data-vis.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>7.2</b> Introduction to <code>ggplot2</code></a></li>
+<li class="chapter" data-level="7.3" data-path="data-vis.html"><a href="data-vis.html#how-to-draw-a-plot"><i class="fa fa-check"></i><b>7.3</b> How to Draw a Plot</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-vis.html"><a href="data-vis.html#first-we-set-up-the-canvas"><i class="fa fa-check"></i><b>7.3.1</b> First we set up the Canvas</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-vis.html"><a href="data-vis.html#creating-our-box-plot"><i class="fa fa-check"></i><b>7.3.2</b> Creating our Box Plot</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-vis.html"><a href="data-vis.html#changing-the-name-of-our-x-axis-and-y-axis"><i class="fa fa-check"></i><b>7.3.3</b> Changing the Name of Our X-Axis and Y-Axis</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-vis.html"><a href="data-vis.html#changing-the-look-theme-of-our-canvas"><i class="fa fa-check"></i><b>7.3.4</b> Changing the Look (Theme) of Our Canvas</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-vis.html"><a href="data-vis.html#the-real-power-of-ggplot---customisation"><i class="fa fa-check"></i><b>7.4</b> The Real Power of ggplot - Customisation</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="data-vis.html"><a href="data-vis.html#mapping-aesthetic-properties-like-colour-and-fill-to-our-variables"><i class="fa fa-check"></i><b>7.4.1</b> Mapping Aesthetic Properties (like Colour and Fill) to Our Variables</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-vis.html"><a href="data-vis.html#changing-the-value-of-our-y-axis"><i class="fa fa-check"></i><b>7.4.2</b> Changing the Value of Our Y-Axis</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-vis.html"><a href="data-vis.html#plotting-our-data-points-in-the-graph"><i class="fa fa-check"></i><b>7.4.3</b> Plotting our Data Points in the Graph</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-vis.html"><a href="data-vis.html#adding-statistical-information-to-our-plot"><i class="fa fa-check"></i><b>7.4.4</b> Adding Statistical Information to Our Plot</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-vis.html"><a href="data-vis.html#adding-text-to-our-plot"><i class="fa fa-check"></i><b>7.4.5</b> Adding Text to Our Plot</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-vis.html"><a href="data-vis.html#exporting-our-plot"><i class="fa fa-check"></i><b>7.4.6</b> Exporting our Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-vis.html"><a href="data-vis.html#drawing-a-scatter-plot"><i class="fa fa-check"></i><b>7.5</b> Drawing a Scatter Plot</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="data-vis.html"><a href="data-vis.html#context"><i class="fa fa-check"></i><b>7.5.1</b> Context</a></li>
+<li class="chapter" data-level="7.5.2" data-path="data-vis.html"><a href="data-vis.html#drawing-our-plot"><i class="fa fa-check"></i><b>7.5.2</b> Drawing our Plot</a></li>
+<li class="chapter" data-level="7.5.3" data-path="data-vis.html"><a href="data-vis.html#customising-our-scatterplot-based-on-gender"><i class="fa fa-check"></i><b>7.5.3</b> Customising our Scatterplot based on Gender</a></li>
+<li class="chapter" data-level="7.5.4" data-path="data-vis.html"><a href="data-vis.html#faceting"><i class="fa fa-check"></i><b>7.5.4</b> Faceting</a></li>
+<li class="chapter" data-level="7.5.5" data-path="data-vis.html"><a href="data-vis.html#combining-charts"><i class="fa fa-check"></i><b>7.5.5</b> Combining Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="data-vis.html"><a href="data-vis.html#violin-charts"><i class="fa fa-check"></i><b>7.6</b> Violin Charts</a></li>
+<li class="chapter" data-level="7.7" data-path="data-vis.html"><a href="data-vis.html#histograms"><i class="fa fa-check"></i><b>7.7</b> Histograms</a></li>
+<li class="chapter" data-level="7.8" data-path="data-vis.html"><a href="data-vis.html#line-chart"><i class="fa fa-check"></i><b>7.8</b> Line Chart</a></li>
+<li class="chapter" data-level="7.9" data-path="data-vis.html"><a href="data-vis.html#geoms"><i class="fa fa-check"></i><b>7.9</b> Geoms</a></li>
+<li class="chapter" data-level="7.10" data-path="data-vis.html"><a href="data-vis.html#themes"><i class="fa fa-check"></i><b>7.10</b> Themes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>8</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>8.1</b> How Boolean Operators Work:</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>8.1.1</b> Understanding R’s Evaluation Process:</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -438,35 +478,115 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.2.1</span> Defining Long and Wide Data<a href="datacleaning2.html#defining-long-and-wide-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Wide Data</strong></p>
 <p>In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, in one row of information, we can observe that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.</p>
-<p>&lt;table&gt;
-&lt;caption&gt;Table 6.1: Data in Wide Format&lt;/caption&gt;</p>
-<p>| ID | Age | Height | Weight | BMI |
-|—-|——–|—–|——–|——–|
-| 1 | 30 | 175 | 76 | 24.8 |
-| 2 | 25 | 165 | 60 | 22 |
-| 3 | 35 | 185 | 80 | 23.4 |
-&lt;/table&gt;</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">ID</th>
+<th align="center">Age</th>
+<th align="center">Height</th>
+<th align="center">Weight</th>
+<th align="center">BMI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">30</td>
+<td align="center">175</td>
+<td align="center">76</td>
+<td align="center">24.8</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">25</td>
+<td align="center">165</td>
+<td align="center">60</td>
+<td align="center">22</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">35</td>
+<td align="center">185</td>
+<td align="center">80</td>
+<td align="center">23.4</td>
+</tr>
+</tbody>
+</table>
 <p>If you are like most psychologists, you are used to seeing data in wide formats. Data is often inputted in wide format in software like Excel or SPSS, as it easier for humans to read. We are used to scanning data horizontally (left-right) rather than vertically (up-down). Because each participant is in a single row, repetition in the data frame is minimized, again making it easier for us to read..</p>
 <p>In terms of statistical analysis, wide data is useful for calculating descriptive statistics (e.g., mean, standard deviations) on variables. Certain statistical tests like ANOVA, Linear Regression, and Correlation are easier to compute in R when the data is in wide format.</p>
 <p><strong>Long Data</strong></p>
-<p>In long data, each row contains a participant’s single response to a single variable. Table 6.2 illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant’s response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.</p>
-<p>&lt;table&gt;
-&lt;caption&gt;Table 6.2: Data in Long Format&lt;/caption&gt;</p>
-<p>| ID | Variable | Value |
-|—-|———-|——-|
-| 1 | Age | 30 |
-| 1 | Height | 175 |
-| 1 | Weight | 76 |
-| 1 | BMI | 24.8 |
-| 2 | Age | 25 |
-| 2 | Height | 165 |
-| 2 | Weight | 60 |
-| 2 | BMI | 22 |
-| 3 | Age | 35 |
-| 3 | Height | 185 |
-| 3 | Weight | 80 |
-| 3 | BMI | 23.4 |</p>
-<p>&lt;/table&gt;</p>
+<p>In long data, each row contains a participant’s single response to a single variable. The table below illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant’s response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">ID</th>
+<th align="center">Variable</th>
+<th align="center">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Age</td>
+<td align="center">30</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Height</td>
+<td align="center">175</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Weight</td>
+<td align="center">76</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">BMI</td>
+<td align="center">24.8</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Age</td>
+<td align="center">25</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Height</td>
+<td align="center">165</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Weight</td>
+<td align="center">60</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">BMI</td>
+<td align="center">22</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">Age</td>
+<td align="center">35</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">Height</td>
+<td align="center">185</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">Weight</td>
+<td align="center">80</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">BMI</td>
+<td align="center">23.4</td>
+</tr>
+</tbody>
+</table>
 <p>Each row in Table 6.2 represents a participant’s response to a single variable. For example, in row 1, we see that participant 1 reported their age (<strong><code>Variable</code></strong>) as 30 (<strong><code>Value</code></strong>). But I have to look to other rows to see this participant’s score on other variables.</p>
 <p>It is more difficult to scan long data to quickly capture the information that we need. However, it is often easier for computers and programming languages to work with long data. This is one of the reasons why the concept of <code>Tidy Data</code> discussed in the previous chapter prefers data in the long format - every row contains the minimum amount of information needed rather than “cluttering” rows with lots of information.</p>
 <p>This preference for long data isn’t only stylistic, long-data format is more suitable for certain forms of analyses. Long data is often more suitable if you are analyzing data in R that involves repeated measures or longitudinal designs, basically any test where we are interested in within-subject variability over time. Similarly, a lot of the packages/functions developed to enable high quality data visualizations were built with the assumption that your data is in long-format.</p>
@@ -1370,7 +1490,7 @@ Figure 6.2: The arguments that we can pass to the pivot_wider() function
         </div>
       </div>
 <a href="datacleaning1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-vis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

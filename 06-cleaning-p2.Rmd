@@ -130,15 +130,11 @@ In this section, we will first define **`wide`** and **`long`** data formats and
 
 In wide data, each row represents a unique participant, and each column represents a separate variable. Table 6.1 shows an example of data in wide format. Each row contains all the information on a specific participant across each variable collected. For example, in one row of information, we can observe that participant 2 is 25 years old, 165 centimeters tall, weighs 60kg, and has a BMI score of 22.
 
-\<table\>
-\<caption\>Table 6.1: Data in Wide Format\</caption\>
-
-\| ID \| Age \| Height \| Weight \| BMI \|
-\|----\|--------\|-----\|--------\|--------\|
-\| 1 \| 30 \| 175 \| 76 \| 24.8 \|
-\| 2 \| 25 \| 165 \| 60 \| 22 \|
-\| 3 \| 35 \| 185 \| 80 \| 23.4 \|
-\</table\>
+| ID | Age | Height | Weight | BMI |
+|:--:|:---:|:------:|:------:|:---:|
+|  1 |  30 |   175  |   76   | 24.8 |
+|  2 |  25 |   165  |   60   |   22 |
+|  3 |  35 |   185  |   80   | 23.4 |
 
 If you are like most psychologists, you are used to seeing data in wide formats. Data is often inputted in wide format in software like Excel or SPSS, as it easier for humans to read. We are used to scanning data horizontally (left-right) rather than vertically (up-down). Because each participant is in a single row, repetition in the data frame is minimized, again making it easier for us to read..
 
@@ -146,27 +142,22 @@ In terms of statistical analysis, wide data is useful for calculating descriptiv
 
 **Long Data**
 
-In long data, each row contains a participant's single response to a single variable. Table 6.2 illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant's response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.
+In long data, each row contains a participant's single response to a single variable. The table below illustrates data in long format. Instead of having a column for each variable, there is one column that identifies the measured variable, and another column contains the participant's response to that variable. If multiple variables are collected, each participant has several rows, with each row representing a single response to a single variable.
 
-\<table\>
-\<caption\>Table 6.2: Data in Long Format\</caption\>
-
-\| ID \| Variable \| Value \|
-\|----\|----------\|-------\|
-\| 1 \| Age \| 30 \|
-\| 1 \| Height \| 175 \|
-\| 1 \| Weight \| 76 \|
-\| 1 \| BMI \| 24.8 \|
-\| 2 \| Age \| 25 \|
-\| 2 \| Height \| 165 \|
-\| 2 \| Weight \| 60 \|
-\| 2 \| BMI \| 22 \|
-\| 3 \| Age \| 35 \|
-\| 3 \| Height \| 185 \|
-\| 3 \| Weight \| 80 \|
-\| 3 \| BMI \| 23.4 \|
-
-\</table\>
+| ID | Variable | Value |
+|:--:|:--------:|:-----:|
+|  1 |   Age    |   30  |
+|  1 |  Height  |  175  |
+|  1 |  Weight  |   76  |
+|  1 |   BMI    |  24.8 |
+|  2 |   Age    |   25  |
+|  2 |  Height  |  165  |
+|  2 |  Weight  |   60  |
+|  2 |   BMI    |   22  |
+|  3 |   Age    |   35  |
+|  3 |  Height  |  185  |
+|  3 |  Weight  |   80  |
+|  3 |   BMI    |  23.4 |
 
 Each row in Table 6.2 represents a participant's response to a single variable. For example, in row 1, we see that participant 1 reported their age (**`Variable`**) as 30 (**`Value`**). But I have to look to other rows to see this participant's score on other variables.
 
