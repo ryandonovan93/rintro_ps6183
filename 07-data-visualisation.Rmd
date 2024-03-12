@@ -39,10 +39,29 @@ setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro/week6") #this sp
 
 ```
 
+### Activity: Download and Import Your Files
 
-### Activity: Prepare your R Script
+We are going to need the following files for today's session. 
 
-Now in RStudio (or posit cloud), create an R script (try the keyboard shortcut: Ctrl-Shift-N on Windows, or command–shift–N on Mac) called `06-data-visualisation.R`. 
+There are two files that you are going to downlaod for today's session. You will find them in the `Teams Channel under Channel 6 - Data Visualisation`. The files are:
+
+- `06-data-visualisation.R`
+- `personality_RD.csv`
+
+Download these files onto your computer. 
+
+Now let's load in our data file. Make sure all your files are in your `week6` folder. Once they are, copy and paste the following code.
+
+```{r eval = F}
+
+df_personality <- read.csv("personality_RD.csv")
+
+
+```
+
+### Activity: Open your R Script
+
+Now in RStudio (or posit cloud), open the R script called `06-data-visualisation.R`. 
 
 ### Activity: Install and Load Your Packages
 
@@ -62,28 +81,10 @@ library(patchwork) #this package enables us to arrange plots we have created
 
 ```
 
-### Activity: Download and Import Your Files
-
-We are going to need the following files for today's session. You will find them in the `Teams Channel under Channel 6 - Data Visualisation`. The files are:
-
-- `06-data-visualisation.R`
-- `personality_RD.csv`
-
-Download these files onto your computer. 
-
-Now let's load in our data file. Make sure all your files are in your `week6` folder. Once they are, copy and paste the following code.
-
-```{r eval = F}
-
-read.csv("personality_RD.csv")
-
-
-```
-
 
 ## Introduction to `ggplot2`
 
-We analysed the `sleep` data frame in our first session. We created and exported a plot using the `base R` `plot()` function
+In our first session, we analysed the `sleep` data frame. This involved creating and exporting a plot using the `base R` `plot()` function. The code looked like this:
 
 ```{r}
 
@@ -94,15 +95,15 @@ plot(sleep$group, sleep$extra,
 
 ```
 
-This is a perfectly fine plot, but one of the major advantages of using R over other programming languages or other statistical software is that it enables you to develop customisable, elegant, and even interactive plots. This is thanks to the `ggplot` package and the `ggplot2()` function. 
+This is a perfectly fine plot. But R is capable of making plots that are significantly nicer and elegant. This ability represents a significant advantage of using R over other programmning languages or statistical softwaere. This is thanks to the `ggplot2` package and the `ggplot()` function. 
 
 **What does the gg in ggplot stand for?**
 
-The `gg` stands for the *G*rammar of *G*raphics. This is because ggplot is built upon a logical system of how to draw a plot. This system involves a logical order where you incrementally add different layers to your plot. By understanding these system, you'll be able to create excellent plots in no-time. Luckily, this structure is relatively straightforward to understand. 
+The `gg` stands for the *G*rammar of *G*raphics. This is because ggplot is built upon a logical system of how to draw a plot. This system involves incrementally adding layers to your plot. If you can grasp the `ggplot` system, you will be able to create high-quality plots quickly. Luckily, this structure is relatively straightforward to understand. 
 
 ## How to Draw a Plot
 
-We are going to recreate the plot we made in the first session using `ggplot`. After that, I am going to show you how we can use this function to make our plot more visually striking and informative using the same function. We will be using the `sleep` data frame again, but I am going to refer to as `df` for short. 
+Let's recreate the plot we made in the first session using `ggplot` this time. Once we have done that, I will show zou how we can make the plot even better using this function. We will be using the `sleep` data frame again, but I am going to call it `df` for short. 
 
 ```{r}
 
@@ -113,16 +114,19 @@ df <- sleep
 
 ### First we set up the Canvas
 
-The first thing we do when we want to create a plot is call the `ggplot()` function and tell it what data frame we are working from. In this case, we are using the `sleep` data frame. For short, I am going to refer it as `df` and tell call `ggplot()`
+The first thing we do when we want to create a plot is call the `ggplot()` function and tell it what data frame we are using In this case, we are using the `sleep` data frame, that is stored in the variable `df`. Let's call the `ggplot()` function. 
 
 ```{r}
 
 ggplot(df)
 
 ```
-This creates a grey canvas where we can draw our plot on. The default R canvas is grey, but we can the appearance of the canvas later on. 
 
-Now that our canvas is set up, we will want to specify some aesthetic properties to our plot, like the y-axis and x-axis. To achieve this, we need to tell R to *map* a variable in our `df` to the **x-axis** and another variable to the **y-axis**. In ggplot, there is an argument called `mapping = aes()` that enables us to do this, where `aes` is short for aesthetics. Let's may the `group` variable to the x-axis and the `extra` variable to the y-axis. 
+This creates a grey canvas where we can draw our plot on. The default R canvas is grey, but we can change its appearance later. 
+
+Now that our canvas is set up, we will want to specify some aesthetic properties to our plot, like the y-axis and x-axis. 
+
+Now we will want to add properties to our canvas, like the x and y-axis. This properties are known as `aesthetic` properties in ggplot. To create them, we need tell R to `map` the **x-axis** and **y-axis** to variables in our data frame (e.g. df). In ggplot, there is an argument called `mapping = aes()` that enables this mapping. The part `aes` is short for aesthetics. Let's map the `group` variable to the x-axis and the `extra` variable to the y-axis. 
 
 ```{r}
 
@@ -130,13 +134,13 @@ ggplot(df, mapping = aes(x = group, y = extra))
 
 ```
 
-Now we can see that our x-axis is mapped to the two values in our `group` variable, whereas the y-axis is mapped to the range of values in the `extra` variable. 
+Now we can see that our x-axis is mapped to the two values in our `group` variable(1 and 2), whereas the y-axis is mapped to the range of values in the `extra` variable. 
 
 ### Creating our Box Plot
 
-This sets up the shape of our canvas, the next thing we need to do is specify what **type** of plot we want to create. In ggplot, this means draw a `geom` (i.e., geometrical shape) onto our plot. There are dozens of geoms (see table at end of the chapter) that we can draw to our plot and we can draw multiple at the same time. 
+This sets up the shape of our canvas, the next thing we need to do is specify what **type** of plot we want to create. In ggplot, this means draw a `geom` (i.e., geometrical shape) onto our plot. There are dozens of geoms (see table at end of the chapter) that we can draw to our plot. We can even draw multiple at the same time (more on that later). 
 
-Since we are creating a boxplot, we'll use the `geom_boxplot` geom. 
+For now, we will add a single geom. Since we are creating a boxplot, we'll add `geom_boxplot` 
 
 ```{r}
 
@@ -144,9 +148,22 @@ ggplot(df, mapping = aes(x = group, y = extra)) +
   geom_boxplot()
 
 ```
-We can see that R has now drawn box plots for each of our groups. The default style in `ggplot()` is not to add the whiskey horizontal lines (e.g., the T) at the top and end of each boxplot. Generally, I am happy enough with the default option, but since we are recreating our first boxplot, let's add these whisker lines.
 
-To do this, we need to tell R to create a shape based on statistical properties of our data. In particular, we need to create a statistical `errorbar` for a box plot. We can do this through adding the following line of code in our plot.  
+
+We can see that R has now drawn box plots for each of our groups. You'll notice that we used the `+` operator to add these parts together. This is because we are literally adding this boxplot shape to the canvas we created earlier. Whenever you add a separate element to your graph in ggplot, we always need to use the `+` operator. 
+
+In terms of syntax, it should always come at the end of line of code, not at the start of a new line. If it comes at the start of a new line, R will only use the code above that line. The `+`` is there to tell R "hey hold on, I am adding more things to my graph". 
+
+```{r error=TRUE}
+
+ggplot(df, mapping = aes(x = group, y = extra))
+  + geom_boxplot() #will not work, notice the error code
+
+```
+
+This plot is different from the plot we made in session 1. The default style in `ggplot()` is not to add the whiskey horizontal lines (e.g., the T) at the top and end of each boxplot. Generally, I am happy with the default option, but since we are recreating our first boxplot, let's add these whisker lines.
+
+To do this, we need to tell R to create a shape based on statistical properties of our data. In particular, we need to create a statistical `error bar` for a box plot. We can do this through adding the following line of code in our plot.  
 
 
 ```{r}
@@ -155,7 +172,8 @@ ggplot(df, mapping = aes(x = group, y = extra)) +
   stat_boxplot(geom ='errorbar') +
   geom_boxplot()
 ```
-Now we have our whisker lines. Now I am not perfeclty happy with the width of these error lines. We can change that by specifying `width` in our `stat_boxplot()` function
+
+Now we have our whisker lines. The error bar lines are slightly too large for me. We can change their `width` within the `stat_boxplot()` function. 
 
 ```{r}
 
@@ -178,11 +196,13 @@ ggplot(df, mapping = aes(x = group, y = extra)) +
   scale_y_continuous(name = "Number of Extra Hours of Sleep")
 
 ```
-There now we have our x and y-labels. One thing that is bothering me is that our treatment group is labelled as `1` and `2`. The sleep data frame does not provide us with any information on what each treatment group received. So I am going to take artistic liberties and say that `1` means `Xanax` and `2` means `Ambien`. 
 
-There are two aproaches we can take to add this to our plot. 
 
-The first approach would be to add labels to the x-axis, in `scale_x_discrete()`.
+There now we have our x and y-labels. The reason why the x-axis is `discrete` and the y-axis is `continuous` is because of the nature of the data. If we flipped the axes, then it would be scale_x_continuous and scale_y_discrete.  
+
+One thing that is bothering me is that our treatment group is labelled as `1` and `2`. The sleep data frame does not provide us with any meaningful information about what these values mean. So I am going to take artistic liberties and say that `1` means `Xanax` and `2` means `Ambien`. 
+
+There are two approaches we can take to add this to our plot. The first approach would be to add labels to the x-axis, in `scale_x_discrete()`.
 
 
 ```{r}
@@ -221,15 +241,12 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for 
 
 ```
 
-This produces the same plot. In this example, I prefer the second method. But I will explain why a little bit later. 
-
-Now, let's change the look of our canvas. 
-
+This produces the same plot. I prefer the second method over the first. But I will explain why a little bit later.
 
 ### Changing the Look (Theme) of Our Canvas
 
 
-One of the nice features of ggplot() is can change the `theme` of our canvas. There are several themes that we can use (see table at the end of the chapter for more information). The current theme we are using is `theme_gray`, which is the default theme. 
+One of the nice features of ggplot() is can change the `theme` of our canvas. There are several themes that we can use (see theme table at the end of the chapter). The current theme we are using is `theme_gray`, which is the default theme. 
 
 ```{r}
 
@@ -241,7 +258,8 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for 
   theme_gray()
 
 ```
-That is perfectly fine, but I dislike the grey. We could also set it to `theme_bw` (white background and black gridlines). 
+
+I personally dislike the grey colour, so let's change it to something else. We could set it to `theme_bw` (white background and black gridlines). 
 
 ```{r}
 
@@ -256,7 +274,6 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for 
 
 We could set it to a dark theme, using `theme_dark()`
 
-
 ```{r}
 
 ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for group
@@ -269,7 +286,7 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for 
 
 ```
 
-Or we could remove the grid lines and have a more `classic` approach, using `theme_classic()`
+We could remove the grid lines and have a more `classic` approach, using `theme_classic()`
 
 ```{r}
 
@@ -283,7 +300,8 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for 
 
 
 ```
-Since we are psychologists, we will mostly looking for plots in `APA` style. When you download `ggplot()` there is no pre-installed theme that matches this style. However, the `jtools` package we installed and loaded comes with an `apa_theme()`. Make sure that is loaded before running the following code:
+
+Since we are psychologists, we will mostly need plots in  `APA` style. The package `ggplot2` does not actually come with a pre-installed `APA` style. However, this is where the `jtools` package we installed and loaded comes in. It has an `apa_theme()`. Make sure that is loaded before running the following code:
 
 ```{r}
 
@@ -295,22 +313,23 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for 
   theme_apa()
 
 ```
-And now we have a pretty nice looking plot. Let's change the colour, to match our original plot we created in week 1 by adding `fill = "grey"` inside `geom_boxplot()`.
+And now we have a pretty nice looking plot. To more accurately match our original plot, let's change the colour inside the boxplots. We can do this by adding the code `fill = "grey"` inside `geom_boxplot()`.
 
 ```{r}
 
 ggplot(df, mapping = aes(x = treatment, y = extra)) + #substitute treatment for group
   stat_boxplot(geom ='errorbar', width = .3) +
-  geom_boxplot(fill = "grey") + 
+  geom_boxplot(fill = "grey") + #this will fill the inside of the boxplots with grey
   scale_x_discrete(name = "Treatment Group") + 
   scale_y_continuous(name = "Number of Extra Hours of Sleep") +
   theme_apa()
 
 ```
 
-## The Real Power of ggplot - Customisation 
+## The Real Power of the ggplot package - Customisation 
 
-You might be wondering right now how useful is `ggplot` really. I mean, if you compare the two code chunks to create essentially the same plot, you'll notice that approach we took in week 1 is significantly shorter. 
+You might be wondering right now how useful is `ggplot` really. If you compare our two code chunks from base R and ggplot, you'll notice that the base R approach is significantly shorter. 
+
 
 ```{r eval = F}
 
@@ -333,38 +352,58 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) +
 
 ```
 
-The real power of ggplot is the ability to customize our graphs to make them more striking and informative. We have seen glimpses of this already with the ability to add labels, colour, and themes to our plots. In this section, I am going to show you more ways we can customise our plot. 
+If we are making a base plot in R, then base R is fine for the job. However, the real power of ggplot is the ability to customize our graphs to make them more striking and informative. We have seen glimpses of this already with the ability to add labels, colour, and themes to our plots. Now I am going to show you more ways we can customise our plot. 
 
 ### Mapping Aesthetic Properties (like Colour and Fill) to Our Variables
 
-In the last section, I used the argument `fill = grey` to specify the colour of boxplots. If I wanted multiple colours, I could have used the `c()` function in that argument: 
+In the last section, we used the argument `fill = grey` to specify the colour of boxplots. If I wanted to specify different colours for each boxplot, I can use the `c()` function and specify each separate colour. 
 
 ```{r}
 
 
 ggplot(df, mapping = aes(x = treatment, y = extra)) + 
   stat_boxplot(geom ='errorbar', width = .3) +
-  geom_boxplot(fill = c("green", "orange")) + 
+  geom_boxplot(fill = c("pink", "orange")) + #this will colour the first box pink and the second box orange
   scale_x_discrete(name = "Treatment Group") + 
   scale_y_continuous(name = "Number of Extra Hours of Sleep") +
   theme_apa()
 
 ```
-This approach is okay if are only specifying a limited number of colours, but if there are several colours we need to specify, it is cumbersome. Luckily, we can ask R to map the colours of boxplot to specific values in our data frame. We do this through a similar approach used in `ggplot()` where we add the argument `mapping = aes()` to our `geom_boxplot()` function. This time inside the `aes()` argument, we specify that we want the `fill` (the colour inside our boxplots) to map to the variable `treatment`. 
+This approach is okay if are only specifying a limited number of colours, but if there are several colours we need to specify, it is cumbersome. 
+
+It is okay to manually specify the colours, particularly if you have a small number of box plots. However, one of the advantages of using R is getting it to do the work for you. In particular, we can ask R to map the colour of the boxplots to specific values in our data frame. 
+
+We can do this through a similar approach used in `ggplot()` where we add the argument `mapping = aes()` to our `geom_boxplot()` function. This time inside the `aes()` argument, we specify that we want the `fill` (the colour inside our boxplots) to map to the variable `treatment`. 
 
 ```{r}
 
 
 ggplot(df, mapping = aes(x = treatment, y = extra)) + 
   stat_boxplot(geom ='errorbar', width = .3) +
-  geom_boxplot(mapping = aes(fill = treatment)) + 
+  geom_boxplot(mapping = aes(fill = treatment)) + #R will automatically assign a new colour to each different value in treatment
   scale_x_discrete(name = "Treatment Group") + 
   scale_y_continuous(name = "Number of Extra Hours of Sleep") +
   theme_apa()
 
 ```
 
-R will choose colours that are visually distinct from each other. Additionally, it will add a legend to our graph. If you want to remove the legend, add `show.legend = FALSE` to the `geom_boxplot()` function. 
+Luckily, R will choose colours that are visually distinct from each other. Additionally, it will add a legend to our graph. This legend is why I preferred using `mutate` to create the treatment variable rather than relabelling the `x-axis`. If we want to keep the legend, but we relabel our x-axis, this is what happens
+
+```{r}
+
+#this is the first approach
+ggplot(df, mapping = aes(x = group, y = extra)) +
+  stat_boxplot(geom ='errorbar', width = .3) +
+  geom_boxplot(mapping = aes(fill = group)) + 
+  scale_x_discrete(name = "Treatment Group",
+                   labels = c("1"  = "Xanax", #this changes the 1 in the x-axis to Xanax
+                              "2" = "Ambien")) + 
+  scale_y_continuous(name = "Number of Extra Hours of Sleep")
+
+```
+When we relabel the x-axis values, then that is the only place it will be relabelled. This creates a disconnect between our scale and our legend. We would have to then try and change our legend title (which can be a pain in the ass). So it's much simpler to go with the `mutate` option. 
+
+If you want to remove the legend, add `show.legend = FALSE` to the `geom_boxplot()` function. 
 
 ### Changing the Value of Our Y-Axis
 
@@ -401,6 +440,7 @@ ggplot(df, mapping = aes(x = extra, y = treatment)) +
 
 
 ```
+
 This option is really handy if you have lots of different categorical groups and your struggling to fit your graph onto the page. Let me demonstrate with the `mpg` data set that is already installed when you download R.
 
 ```{r}
@@ -408,13 +448,13 @@ This option is really handy if you have lots of different categorical groups and
 #This first plot if really squished together on the x-axis
 
 ggplot(mpg, mapping = aes(x = manufacturer, y = cty)) + #cty = number of cylinders 
-  geom_boxplot()
+  geom_boxplot(mapping = aes(fill = manufacturer))
 
 
 #but if we pivot it, then it looks much nicer
 
 ggplot(mpg, mapping = aes(x = cty, y = manufacturer)) +
-  geom_boxplot()
+  geom_boxplot(mapping = aes(fill = manufacturer))
 
 ```
 
@@ -437,6 +477,7 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) +
 
 
 ```
+
 This is a perfectly legitimate approach to take. There is not a lot of data, so we can make our each individual point, even if there is some overlap. However, we can use another approach called `geom_jitter()`. This will plot each individual point just like `geom_point()` does, but it will add some random movement (i.e. a jitter) to each point. This can prevent overplotting of individual points. 
 
 ```{r}
@@ -499,6 +540,7 @@ ggplot(df, mapping = aes(x = treatment, y = extra)) +
   geom_point(stat = "summary", fun = "mean", size = 5, colour = "black") 
 
 ```
+
 This draws a dot exactly where the mean value falls for both the `Xanax` and `Ambien` treatment groups fall. I changed the size of the point to make it more visible salient than the other data points. We could have also change the colour (try it!)
 
 ### Adding Text to Our Plot
@@ -845,14 +887,22 @@ df_violin <- data.frame(
 
 # Create a violin plot
 ggplot(df_violin, aes(x = category, y = value, fill = category)) +
-  geom_violin() +
-  geom_boxplot(width = 0.1, fill = "white") +
+  geom_violin(trim = FALSE, 
+              show.legend = FALSE, 
+              alpha = .4) +
+  geom_boxplot(width = 0.2, 
+               show.legend = FALSE,
+               alpha = .7) +
   labs(
     x = "Category",
     y = "Value",
     title = "Violin Plot: Distribution of Values by Category"
   ) +
   theme_apa()
+
+
+
+
 ```
 
 Let's do this with the `df_personality` data frame. We will put `Gender` on the x-axis and `Agreeableness` on the `y-axis`
@@ -866,17 +916,22 @@ df_personality_binary <- df_personality %>%
   filter(Gender != "Non-Binary")
 
 ggplot(df_personality_binary, aes(x = Gender, y = Agreeableness, fill = Gender)) +
-  geom_violin() +
-  geom_boxplot(width = 0.1, fill = "white") +
-  labs(#this is another approach to naming x and y-axis, only use if you do not need to change anything about the values on each axis
+  geom_violin(trim = FALSE, 
+              show.legend = FALSE, 
+              alpha = .4) +
+  geom_boxplot(width = 0.2, 
+               show.legend = FALSE,
+               alpha = .7) +
+  labs(
     x = "Gender", 
     y = "Agreeableness",
-    title = "Violin Plot: Distribution of Agreeableness by Gender" #depending on APA style, you may want to remove this
+    title = "Violin Plot: Distribution of Agreeableness by Gender" 
   ) +
   theme_apa()
 
 
 ```
+
 ## Bar Chart
 
 A bar chart is great for displaying categorical data. It consists of rectangular bars with lengths proportional to the values they represent. Bar charts are effective for comparing the frequency, count, or proportion of different categories.
@@ -898,6 +953,7 @@ ggplot(df_bar, aes(x = category, fill = category)) +
   theme_apa()
 
 ```
+
 In `df_personality`, there is a variable called `Publication`. This variable captures whether participants were okay with having their recorded video and audio data potentially published in publications (for context, the participants facial expressions were recorded while they watched each video clip. After each video clip, they were asked to speak about their experiences and this was also recorded).  
 
 Let's use a `geom_bar` to visualise the count for each variable.  
@@ -905,7 +961,7 @@ Let's use a `geom_bar` to visualise the count for each variable.
 ```{r}
 
 ggplot(df_personality, aes(x = Publication, fill = Publication)) +
-  geom_bar() + #
+  geom_bar(show.legend = FALSE) + #
   labs(
     x = "Education Level",
     y = "Count",
@@ -936,6 +992,10 @@ We can change the bin width by specify it in the `geom_histogram()` function. Of
 
 ```{r}
 
+
+age_mean <- mean(df_personality$Age)
+age_sd <- sd(df_personality$Age)
+
 ggplot(df_personality, aes(x = Age)) +
   geom_histogram(binwidth = 2,
                  colour = "white")+ 
@@ -943,17 +1003,19 @@ ggplot(df_personality, aes(x = Age)) +
     x = "Age",
     y = "Count"
   ) +
-  theme_apa()
+  theme_apa() +
+  stat_function(fun = dnorm, 
+                args = list(mean = mean(df_personality$Age), 
+                            sd = sd(df_personality$Age)))
 
 
 ```
-If we want to fit a normal distribution line, then we need to calculate the mean and standard deviation first. 
 
 ## Line Chart
 
 Line charts are commonly used to visualize trends over time or any continuous variable. They are particularly useful for showing how a variable changes in relation to another variable, such as time.
 
-Creating a line chart in ggplot2 involves mapping a continuous variable to the x-axis and a dependent variable to the y-axis. Here's an example:
+Creating a line chart in ggplot2 involves mapping a continuous variable to the x-axis and a dependent variable to the y-axis. Here's an example with a dataset that comes with R called `economics` (type `?economics` into the console to get more information about it)
 
 
 ```{r}
@@ -965,7 +1027,39 @@ ggplot(data = economics, aes(x = date, y = unemploy)) +
   theme_apa()
 
 ```
+## Making our Plots more Inclusive 
+
+We can also specify options to make sure our plots are colour-blind friendly. 
+
+```{r}
+
+ggplot(df_personality_binary, aes(x = Gender, y = Agreeableness, fill = Gender)) +
+  geom_violin(trim = FALSE, 
+              show.legend = FALSE, 
+              alpha = .4) +
+  geom_boxplot(width = 0.2, 
+               show.legend = FALSE,
+               alpha = .7) +
+  labs(#this is another approach to naming x and y-axis, only use if you do not need to change anything about the values on each axis
+    x = "Gender", 
+    y = "Agreeableness",
+    title = "Violin Plot: Distribution of Agreeableness by Gender" #depending on APA style, you may want to remove this
+  ) +
+  theme_apa() +
+  scale_fill_viridis_d(option = "C")
+
+```
+
+The `scale_fill_viridis_d()` function uses colour palettes that are distinctive enough to those who suffer from colour-blind issues. There are several options in this function (A to E), feel free to change it and see which ones you like. 
+
+
 ## Summary
+
+That wraps up our data visualisation session. Hopefully you can see the value of using R for data visualisation. There is a lot we did not cover today, as data visualisation in R could be an entire workshop series in-of-itself. There are so many cool things you can do in R, like interactive graphs, annotating/highlighting individual points, combining data sets into one visualization. 
+
+Do not feel overwhelmed by the amount we have not covered. The main challenge in ggplot is getting used to concept of drawing layers of geoms, statistical summaries, and themes to the plot. Once you do, even if you have not used a particular geom before, it will be very quick and easy to create an excellent plot quickly.  
+
+
 
 ## Geoms
 
