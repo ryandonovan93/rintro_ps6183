@@ -101,7 +101,7 @@ This is a perfectly fine plot. But R is capable of making plots that are signifi
 
 The `gg` stands for the *G*rammar of *G*raphics. This is because ggplot is built upon a logical system of how to draw a plot. This system involves incrementally adding layers to your plot. If you can grasp the `ggplot` system, you will be able to create high-quality plots quickly. Luckily, this structure is relatively straightforward to understand. 
 
-## How to Draw a Plot
+## How to Draw a Plot (Box Plot)
 
 Let's recreate the plot we made in the first session using `ggplot` this time. Once we have done that, I will show zou how we can make the plot even better using this function. We will be using the `sleep` data frame again, but I am going to call it `df` for short. 
 
@@ -138,7 +138,7 @@ Now we can see that our x-axis is mapped to the two values in our `group` variab
 
 ### Creating our Box Plot
 
-This sets up the shape of our canvas, the next thing we need to do is specify what **type** of plot we want to create. In ggplot, this means draw a `geom` (i.e., geometrical shape) onto our plot. There are dozens of geoms (see table at end of the chapter) that we can draw to our plot. We can even draw multiple at the same time (more on that later). 
+This sets up the structure of our canvas, the next thing we need to do is specify what **type** of plot we want to create. In ggplot, this means draw a `geom` (i.e., geometrical shape) onto our plot. There are dozens of geoms (see table at end of the chapter) that we can draw to our plot. We can even draw multiple at the same time (more on that later). 
 
 For now, we will add a single geom. Since we are creating a boxplot, we'll add `geom_boxplot` 
 
@@ -856,7 +856,7 @@ p3 <- ggplot(df, mapping = aes(x = treatment, y = extra)) +
   geom_boxplot(mapping = aes(fill = treatment), show.legend = FALSE) + 
   scale_x_discrete(name = "Treatment Group") + 
   scale_y_continuous(name = "Number of Extra Hours of Sleep", 
-                     breaks = c(-2:6) #this will add a break for each value between -2 and +6
+                     breaks = c(-2:6) 
                      ) +
   theme_apa() +
   geom_jitter(width = .20) +
@@ -889,10 +889,10 @@ df_violin <- data.frame(
 ggplot(df_violin, aes(x = category, y = value, fill = category)) +
   geom_violin(trim = FALSE, 
               show.legend = FALSE, 
-              alpha = .4) +
-  geom_boxplot(width = 0.2, 
+              alpha = .6) +
+  geom_boxplot(width = 0.3, 
                show.legend = FALSE,
-               alpha = .7) +
+               alpha = .4) +
   labs(
     x = "Category",
     y = "Value",
@@ -904,6 +904,15 @@ ggplot(df_violin, aes(x = category, y = value, fill = category)) +
 
 
 ```
+Inside the `geom_violin` function, we specified three arguments: trim, show.legend, and alpha. If the `trim` argument is `TRUE`, then the tails of the violin plot are trimmed to match the exact range of the data. If the `trim` argument is `FALSE`, it will extend slightly past the range. 
+
+**Trim** - If the `trim` argument is `TRUE` (this is the default option), then the tails of the violin plot are trimmed to match the exact range of the data. If the `trim` argument is `FALSE`, it will extend slightly past the range. 
+
+**Show.legend** - If set to `TRUE` (this is the default option, then a legend will appear with the graph)
+
+**Alpha** - This determines the strength of the colour, higher scores mean the violin plot will appear darker in colour. 
+
+These arguments are all stylistic choice that you can play around with when creating your own plots. 
 
 Let's do this with the `df_personality` data frame. We will put `Gender` on the x-axis and `Agreeableness` on the `y-axis`
 
@@ -918,7 +927,7 @@ df_personality_binary <- df_personality %>%
 ggplot(df_personality_binary, aes(x = Gender, y = Agreeableness, fill = Gender)) +
   geom_violin(trim = FALSE, 
               show.legend = FALSE, 
-              alpha = .4) +
+              alpha = .6) +
   geom_boxplot(width = 0.2, 
                show.legend = FALSE,
                alpha = .7) +
@@ -1063,6 +1072,8 @@ Do not feel overwhelmed by the amount we have not covered. The main challenge in
 
 ## Geoms
 
+Below are a set of geometrical shapes that you can to your plots in `ggplot2`. 
+
 | **Geom**          | **Description**                                                                                                  | **Similar Plot**                   |
 |-------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------|
 | **`geom_point()`**  | Adds points to the plot. Useful for scatter plots to visualize the relationship between two continuous variables. | Scatter Plot                       |
@@ -1084,6 +1095,9 @@ Do not feel overwhelmed by the amount we have not covered. The main challenge in
 
 ## Themes
 
+Below are a set of can apply to your plots in `ggplot2`. 
+
+
 | **Theme**           | **Description**                                                                                                   |
 |---------------------|-------------------------------------------------------------------------------------------------------------------|
 | **`theme_gray()`**   | Default theme with a gray background.                                                                            |
@@ -1094,3 +1108,4 @@ Do not feel overwhelmed by the amount we have not covered. The main challenge in
 | **`theme_classic()`**| Classic theme resembling base R plots.                                                                           |
 | **`theme_void()`**   | Theme with no background, gridlines, or axis elements.                                                           |
 | **`theme_linedraw()`** | Theme resembling hand-drawn plots, with a white background and black gridlines.                                  |
+| **`theme_apa()`** | Theme consistent with APA style (note: you need to have installed and loaded the `jtools` package to use this)                                  |

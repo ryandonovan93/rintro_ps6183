@@ -127,7 +127,7 @@
 
 \title{Introduction to R}
 \author{Ryan Donovan}
-\date{2024-03-12}
+\date{2024-03-13}
 
 \begin{document}
 \maketitle
@@ -535,7 +535,7 @@ Ideally, you want the working directory to match the location of your R project.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "/Users/ryandonovan 1/Desktop/Teaching/R/rintro"
+## [1] "C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro"
 \end{verbatim}
 
 This will display the current working directory where R is operating. Your working directory will likely differ from mine, which is normal. Just confirm that it matches the location you specified when creating your project (\textbf{Option 2}).
@@ -3632,6 +3632,10 @@ We can use the same syntax from that R console output to load in packages there.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## Warning: package 'haven' was built under R version 4.3.2
+\end{verbatim}
+
 There is one significant difference between installing and loading packages through code. When you are installing packages, you can install multiple packages in one command. However, you can only load one package at a time
 
 \begin{Shaded}
@@ -3656,17 +3660,21 @@ There is one significant difference between installing and loading packages thro
 To make sure the following functions are working, run the following code to check:
 
 \begin{verbatim}
-## [1] "You are slick!"
+## Warning: package 'praise' was built under R version 4.3.2
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "You are delightful!"
 \end{verbatim}
 
 \begin{verbatim}
 ## 
-## What sort of editor would overlook this clear and demonstrable message leaping
-## out from the data in favour of some arcane argument about "types of sums of
-## squares"? Several answers come to mind: A power freak, a SAS afficianado, an
-## idiot.
-##    -- Bill Venables
-##       R-help (July 2007)
+## There's an informal tradition that those announcements [about R releases]
+## contain at least one mistake, but apparently I forgot this time, so users have
+## to make up their own....
+##    -- Peter Dalgaard (about an apparent non-bug report in his former R-announce
+##       message)
+##       R-help (December 2009)
 \end{verbatim}
 
 \begin{Shaded}
@@ -7111,8 +7119,8 @@ This is a perfectly fine plot. But R is capable of making plots that are signifi
 
 The \texttt{gg} stands for the \emph{G}rammar of \emph{G}raphics. This is because ggplot is built upon a logical system of how to draw a plot. This system involves incrementally adding layers to your plot. If you can grasp the \texttt{ggplot} system, you will be able to create high-quality plots quickly. Luckily, this structure is relatively straightforward to understand.
 
-\hypertarget{how-to-draw-a-plot}{%
-\section{How to Draw a Plot}\label{how-to-draw-a-plot}}
+\hypertarget{how-to-draw-a-plot-box-plot}{%
+\section{How to Draw a Plot (Box Plot)}\label{how-to-draw-a-plot-box-plot}}
 
 Let's recreate the plot we made in the first session using \texttt{ggplot} this time. Once we have done that, I will show zou how we can make the plot even better using this function. We will be using the \texttt{sleep} data frame again, but I am going to call it \texttt{df} for short.
 
@@ -7154,7 +7162,7 @@ Now we can see that our x-axis is mapped to the two values in our \texttt{group}
 \hypertarget{creating-our-box-plot}{%
 \subsection{Creating our Box Plot}\label{creating-our-box-plot}}
 
-This sets up the shape of our canvas, the next thing we need to do is specify what \textbf{type} of plot we want to create. In ggplot, this means draw a \texttt{geom} (i.e., geometrical shape) onto our plot. There are dozens of geoms (see table at end of the chapter) that we can draw to our plot. We can even draw multiple at the same time (more on that later).
+This sets up the structure of our canvas, the next thing we need to do is specify what \textbf{type} of plot we want to create. In ggplot, this means draw a \texttt{geom} (i.e., geometrical shape) onto our plot. There are dozens of geoms (see table at end of the chapter) that we can draw to our plot. We can even draw multiple at the same time (more on that later).
 
 For now, we will add a single geom. Since we are creating a boxplot, we'll add \texttt{geom\_boxplot}
 
@@ -8035,7 +8043,7 @@ One thing to note is that you may need to change the appearance of each graph to
   \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ treatment), }\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{scale\_x\_discrete}\NormalTok{(}\AttributeTok{name =} \StringTok{"Treatment Group"}\NormalTok{) }\SpecialCharTok{+} 
   \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{name =} \StringTok{"Number of Extra Hours of Sleep"}\NormalTok{, }
-                     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{:}\DecValTok{6}\NormalTok{) }\CommentTok{\#this will add a break for each value between {-}2 and +6}
+                     \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{:}\DecValTok{6}\NormalTok{) }
 \NormalTok{                     ) }\SpecialCharTok{+}
   \FunctionTok{theme\_apa}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{width =}\NormalTok{ .}\DecValTok{20}\NormalTok{) }\SpecialCharTok{+}
@@ -8107,10 +8115,10 @@ A violin plot is a method to depict the distribution of numeric data across diff
 \FunctionTok{ggplot}\NormalTok{(df\_violin, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ category, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ category)) }\SpecialCharTok{+}
   \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{trim =} \ConstantTok{FALSE}\NormalTok{, }
               \AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{, }
-              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{, }
+              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.3}\NormalTok{, }
                \AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{,}
-               \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{7}\NormalTok{) }\SpecialCharTok{+}
+               \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
     \AttributeTok{x =} \StringTok{"Category"}\NormalTok{,}
     \AttributeTok{y =} \StringTok{"Value"}\NormalTok{,}
@@ -8121,6 +8129,15 @@ A violin plot is a method to depict the distribution of numeric data across diff
 \end{Shaded}
 
 \includegraphics{rintro_demo_files/figure-latex/unnamed-chunk-321-1.pdf}
+Inside the \texttt{geom\_violin} function, we specified three arguments: trim, show.legend, and alpha. If the \texttt{trim} argument is \texttt{TRUE}, then the tails of the violin plot are trimmed to match the exact range of the data. If the \texttt{trim} argument is \texttt{FALSE}, it will extend slightly past the range.
+
+\textbf{Trim} - If the \texttt{trim} argument is \texttt{TRUE} (this is the default option), then the tails of the violin plot are trimmed to match the exact range of the data. If the \texttt{trim} argument is \texttt{FALSE}, it will extend slightly past the range.
+
+\textbf{Show.legend} - If set to \texttt{TRUE} (this is the default option, then a legend will appear with the graph)
+
+\textbf{Alpha} - This determines the strength of the colour, higher scores mean the violin plot will appear darker in colour.
+
+These arguments are all stylistic choice that you can play around with when creating your own plots.
 
 Let's do this with the \texttt{df\_personality} data frame. We will put \texttt{Gender} on the x-axis and \texttt{Agreeableness} on the \texttt{y-axis}
 
@@ -8134,7 +8151,7 @@ Let's do this with the \texttt{df\_personality} data frame. We will put \texttt{
 \FunctionTok{ggplot}\NormalTok{(df\_personality\_binary, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Gender, }\AttributeTok{y =}\NormalTok{ Agreeableness, }\AttributeTok{fill =}\NormalTok{ Gender)) }\SpecialCharTok{+}
   \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{trim =} \ConstantTok{FALSE}\NormalTok{, }
               \AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{, }
-              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+              \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{6}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.2}\NormalTok{, }
                \AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{,}
                \AttributeTok{alpha =}\NormalTok{ .}\DecValTok{7}\NormalTok{) }\SpecialCharTok{+}
@@ -8292,6 +8309,8 @@ Do not feel overwhelmed by the amount we have not covered. The main challenge in
 \hypertarget{geoms}{%
 \section{Geoms}\label{geoms}}
 
+Below are a set of geometrical shapes that you can to your plots in \texttt{ggplot2}.
+
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1124}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6746}}
@@ -8329,6 +8348,8 @@ Do not feel overwhelmed by the amount we have not covered. The main challenge in
 \hypertarget{themes}{%
 \section{Themes}\label{themes}}
 
+Below are a set of can apply to your plots in \texttt{ggplot2}.
+
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1544}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8456}}@{}}
@@ -8350,6 +8371,7 @@ Do not feel overwhelmed by the amount we have not covered. The main challenge in
 \textbf{\texttt{theme\_classic()}} & Classic theme resembling base R plots. \\
 \textbf{\texttt{theme\_void()}} & Theme with no background, gridlines, or axis elements. \\
 \textbf{\texttt{theme\_linedraw()}} & Theme resembling hand-drawn plots, with a white background and black gridlines. \\
+\textbf{\texttt{theme\_apa()}} & Theme consistent with APA style (note: you need to have installed and loaded the \texttt{jtools} package to use this) \\
 \end{longtable}
 
 \hypertarget{appendix---understanding-boolean-operators-in-the-context-of-filter}{%
