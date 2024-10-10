@@ -1,0 +1,77 @@
+# Data Visualisation in R {#data-vis}
+
+```{r setup-vis, include=FALSE}
+
+library(jmv) 
+library(pwr)
+library(tidyverse) 
+library(car)
+
+
+wellbeing_df <- read.csv("datasets/wellbeing.csv")
+
+knitr::opts_chunk$set(warning = F)
+
+```
+
+In this session, we are going to learn how to run descriptive statistics and conduct both independent and paired-samples t-tests. In our very first session, we looked at base-R methods for running descriptive statistics and t-tests, but today we will introduce more elegant and useful functions for doing both. We will also learn how to check parametric assumptions in R. By the end of this session you should be able to:
+
+- Use the `jmv` package to run descriptive statistics and check parametric assumptions
+- Run an independent samples test in R. 
+- Run a paired-samples t-test in R
+- Export your results to a csv file. 
+- Conduct apriori and post-hoc power analysis in R for t-tests. 
+
+We will also learning how to run correlations and ANOVAs in this week's session, but we will separate those chapters for sake of convenience. 
+
+## Let's Get Set Up
+
+Open up RStudio or Posit Cloud and complete the following activities to get set up for today. 
+
+### Activity: Set Up Your Working Directory
+
+In your folder for this class, create a new folder called `week7`. Set this folder as your working directory.  To do this, click `Session` -> `Set Working Directory` -> `Choose Directory`, then find your new folder, select it and click `Open`. 
+
+In your console, the path to that folder should now be printed. It should look something like this:
+
+```{r eval = F}
+
+
+setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro/week7") #this specific path will differ based on your folder configuration, but make sure the end part is in `week7`
+
+```
+
+### Activity: Download and Import Your Files
+
+We are going to need the following files for today's session. You will find them in the Microsoft Teams channel under the heading `Week 7 and 8 - Descriptive and Inferential Statistics`
+
+- `01-set-up.R`
+- `02-descriptives.R`
+- `03-t-tests.R`
+
+Download these files onto your computer and move each file to your `week7` folder.
+
+### Activity: Open the Set-Up R Script
+
+Now in RStudio (or posit cloud), open the R script called `01-set-up.R`. 
+
+### Activity: Install and Load Your Packages
+
+We will be using the `jmv`, `pwr`, `tidyverse`, and `car` packages in this session. In the `01-set-up.R` script, type the following code into your R script under `#Load in Our Packages`. Run each line of code. 
+
+**REMEMBER**: If you get an error message like `Error in library(package name): there is no packaged called `package name``, then you need to install the package first in the console using the function `install.packages("package name")`
+
+
+```{r}
+
+library(jmv) #this will help us run descriptive statistics
+library(pwr) #this will enable us to conduct power analysis 
+library(tidyverse) #this will help us clean data sets 
+library(car) #that runs the levenes test
+
+```
+
+### Activity: Load in the Wellbeing Dataset
+
+We will be using the `wellbeing.csv`, dataset in today's session. In the `01-set-up.R` script, type the following code into your R script under `#Load in Our Packages`. Run each line of code. 
+
