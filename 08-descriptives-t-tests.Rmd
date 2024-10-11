@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Descriptive Statistics and T-tests in R {#data-vis}
 
 ```{r setup-vis, include=FALSE}
@@ -202,7 +207,7 @@ You don’t need to write out all the arguments every time you use `descriptives
 
 ### Using the `jmv` function to generate descriptive statistics
 
-Let's use the `descriptives()` function to compute statistics for the `wellb` and `depr` variables:
+Open up script `02-descriptives.R`. In that script, let's use the `descriptives()` function to compute statistics for the `wellb` and `depr` variables:
 
 ```{r}
 
@@ -317,7 +322,7 @@ Let’s imagine we’re interested in investigating the effects of caffeine cons
 
 ### Cleaning our Data Set
 
-We’ll create a new data frame called `df_wellbeing_independent` by filtering out participants who were in the `No Caffeine` condition. The simplest way to do this is to tell R to exclude any rows where the `Condition` column is `No Caffeine`.
+Open up script `03-t-tests.R` In it, we’ll create a new data frame called `df_wellbeing_independent` by filtering out participants who were in the `No Caffeine` condition. The simplest way to do this is to tell R to exclude any rows where the `Condition` column is `No Caffeine`.
 
 ```{r}
 
