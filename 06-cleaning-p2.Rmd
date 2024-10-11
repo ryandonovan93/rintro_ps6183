@@ -116,7 +116,7 @@ library(tidyverse)
 
 Okay, now we are ready to get cleaning!
 
-## Data Formats (Long and Wide Data)
+## Data Formats (Long and Wide Data) {#dataformats}
 
 Psychological research often involves working with data stored in tables, commonly referred to as **`Data Frames`**. These tables can take two primary formats: **`wide`** or **`long`**. Depending on the research software used, the raw data downloaded from a study might be in either **`wide`** or **`long`** table format.
 

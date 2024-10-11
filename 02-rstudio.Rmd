@@ -323,7 +323,7 @@ R scripts are text files where we can write R code in a structured manner. Scrip
 
 From now on, whenever we write code, we are going to be using R scripts by default. For the times we will write code in the console, I will let you know beforehand.
 
-## Let's write some statistical code
+## Let's write some statistical code {#firstpieceofcode}
 
 Okay, we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you don't understand all of the code provided below. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click "File" -\> "New File" -\> "RScript"). Once you have created this script, save it as "01-paired-t-tests".
 

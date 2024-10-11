@@ -1,4 +1,4 @@
-# Data Visualisation in R {#data-vis}
+# Descriptive Statistics and T-tests in R {#data-vis}
 
 ```{r setup-vis, include=FALSE}
 
@@ -8,31 +8,32 @@ library(tidyverse)
 library(car)
 
 
-wellbeing_df <- read.csv("datasets/wellbeing.csv")
+df_wellbeing <- read.csv("datasets/wellbeing.csv")
+
+df_psycho <- read_csv("datasets/psycho.csv")
 
 knitr::opts_chunk$set(warning = F)
 
 ```
 
-In this session, we are going to learn how to run descriptive statistics and conduct both independent and paired-samples t-tests. In our very first session, we looked at base-R methods for running descriptive statistics and t-tests, but today we will introduce more elegant and useful functions for doing both. We will also learn how to check parametric assumptions in R. By the end of this session you should be able to:
+In this session, we are going to explore how to perform descriptive statistics and conduct both independent and paired-samples t-tests. Earlier in the course, we looked at using base-R for these tasks, but now we will introduce more intuitive and powerful functions that make these processes easier. Additionally, we will learn how to check parametric assumptions in R. By the end of this session, you will be able to:
 
-- Use the `jmv` package to run descriptive statistics and check parametric assumptions
-- Run an independent samples test in R. 
-- Run a paired-samples t-test in R
-- Export your results to a csv file. 
-- Conduct apriori and post-hoc power analysis in R for t-tests. 
+-   Use the jmv package to run descriptive statistics and check parametric assumptions.
+-   Conduct an independent samples t-test in R.
+-   Conduct a paired-samples t-test in R.
+-   Conduct apriori and post-hoc power analysis in R for t-tests.
 
-We will also learning how to run correlations and ANOVAs in this week's session, but we will separate those chapters for sake of convenience. 
+We’ll also cover correlations and ANOVAs this week, but to keep things organized, we’ll address those in separate chapters.
 
 ## Let's Get Set Up
 
-Open up RStudio or Posit Cloud and complete the following activities to get set up for today. 
+Let's begin by ensuring your working environment is ready for today’s session. Open RStudio or Posit Cloud and complete the following tasks to set everything up.
 
-### Activity: Set Up Your Working Directory
+### Set Up Your Working Directory
 
-In your folder for this class, create a new folder called `week7`. Set this folder as your working directory.  To do this, click `Session` -> `Set Working Directory` -> `Choose Directory`, then find your new folder, select it and click `Open`. 
+Create a folder called week7 in your class folder. This will be your working directory for today’s session. To set this folder as your working directory, click Session -\> Set Working Directory -\> Choose Directory, and select the newly created week7 folder. Click Open to set it as your working directory.
 
-In your console, the path to that folder should now be printed. It should look something like this:
+The path to your directory will be printed in the console, and it should look something like this:
 
 ```{r eval = F}
 
@@ -41,26 +42,40 @@ setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro/week7") #this sp
 
 ```
 
-### Activity: Download and Import Your Files
+Make sure the path ends with week7, although your exact path might differ depending on your folder structure.
+
+### Download and Import Your Files
 
 We are going to need the following files for today's session. You will find them in the Microsoft Teams channel under the heading `Week 7 and 8 - Descriptive and Inferential Statistics`
 
-- `01-set-up.R`
-- `02-descriptives.R`
-- `03-t-tests.R`
+-   `01-set-up.R`
+-   `02-descriptives.R`
+-   `03-t-tests.R`
+-   `wellbeing.csv`
+-   `psycho.csv`
 
 Download these files onto your computer and move each file to your `week7` folder.
 
-### Activity: Open the Set-Up R Script
+### Open the Set-Up R Script
 
-Now in RStudio (or posit cloud), open the R script called `01-set-up.R`. 
+Now in RStudio (or posit cloud), open the R script called `01-set-up.R`. This script will guide you through installing and loading the necessary packages and datasets for today’s exercises.
 
-### Activity: Install and Load Your Packages
+### Install and Load Your Packages
 
-We will be using the `jmv`, `pwr`, `tidyverse`, and `car` packages in this session. In the `01-set-up.R` script, type the following code into your R script under `#Load in Our Packages`. Run each line of code. 
+We’ll be using several R packages to make our analysis easier. The `jmv` package is particularly helpful for running descriptive statistics and t-tests, while `pwr` helps us calculate power for our tests. The `tidyverse` will assist with data cleaning, and `car` will allow us to check assumptions like homogeneity of variance.
 
-**REMEMBER**: If you get an error message like `Error in library(package name): there is no packaged called `package name``, then you need to install the package first in the console using the function `install.packages("package name")`
+In the `01-set-up.R` script, type and run the following code under the section labeled `#Load in Our Packages`:
 
+**REMEMBER**: If you encounter an error message like `Error in library(package name): there is no packaged called`package name\`\`, you'll need to install the package first by typing the following into your console:
+
+```{r eval = F}
+
+install.packages("package name") #replace "package name with the actual package!"
+
+
+```
+
+For example, if you need to install the `jmv` package, you would type `install.packages("jmv")` into the console.
 
 ```{r}
 
@@ -68,10 +83,686 @@ library(jmv) #this will help us run descriptive statistics
 library(pwr) #this will enable us to conduct power analysis 
 library(tidyverse) #this will help us clean data sets 
 library(car) #that runs the levenes test
+library(haven) #imports SPSS data
 
 ```
 
-### Activity: Load in the Wellbeing Dataset
+### Load in the Wellbeing Dataset
 
-We will be using the `wellbeing.csv`, dataset in today's session. In the `01-set-up.R` script, type the following code into your R script under `#Load in Our Packages`. Run each line of code. 
+We’ll be working with a datasets called `wellbeing.csv` and `psycho.csv`. In the `01-set-up.R` script, type the following code under the section labeled `#Load in Our Dataset` to load the datasets into R:
 
+```{r eval = F}
+
+df_wellbeing <- read.csv("wellbeing.csv")
+
+df_psycho <- read.csv("psycho.sav")
+```
+
+After loading the datasets, it’s always good practice to inspect it before doing any analyses. You can use the `head()` and `str()` functions to get an overview of the wellbeing dataset:
+
+```{r}
+
+head(df_wellbeing)
+
+str(df_wellbeing)
+
+```
+
+From this, you’ll see that our dataset contains 8 columns. We have two character columns (`gender` and `Condition`) and five integer columns (`id`, `age`, `pain`, `fatigue`, `depr`, and `wellb`). This data was collected from an experimental study investigating the effects of Caffeine (`No Caffeine`, `Low Caffeine`, and `High Caffeine`) on various outcome variables, including experiences of pain, fatigue, depression, and overall wellbeing. Additionally, participants' `age` and `Gender` were recorded recorded.
+
+As an exercise, try running the `head()` and `str()` functions on the `df_psycho` data set.
+
+Now that our environment is set up and our dataset is loaded, we are ready to dive into descriptive statistics.
+
+## Descriptive Statistics
+
+If you remember back to our first session [to our first session](#firstpieceofcode) we used the `summary` and `aggregate` functions to compute descriptive statistics. The `summary` function is useful for quick glance at your variables.
+
+```{r}
+
+summary(df_wellbeing)
+
+```
+
+However, the information we get from `summary` is limited. It doesn't provide important measures like the standard deviation or interquartile range, and it can’t be used to generate descriptive statistics for different groups. For that, we need the `aggregate` function:
+
+```{r}
+
+aggregate(df_wellbeing$age ~ df_wellbeing$Condition, FUN = mean)
+
+```
+
+The downside of `aggregate` is that it computes only one statistic at a time. If you want to calculate the mean, median, and standard deviation, you have to repeat the code for each:
+
+```{r}
+
+aggregate(df_wellbeing$age ~ df_wellbeing$Condition, FUN = mean)
+aggregate(df_wellbeing$age ~ df_wellbeing$Condition, FUN = median)
+aggregate(df_wellbeing$age ~ df_wellbeing$Condition, FUN = sd)
+
+
+```
+
+This approach is cumbersome, especially with larger data sets that contain many variables. Moreover, `aggregate` doesn’t handle more complex combinations of groups, such as the average age of males in the high-caffeine condition.
+
+## Introducing the `jmv` package
+
+The `jmv` package provides a powerful function, `descriptives()`, which makes descriptive statistics more flexible and comprehensive. It calculates a wide range of statistics across multiple variables and can easily account for different groups. You can even create quick plots as part of the output.
+
+You can get full details of the function by typing `?descriptives` in your console after loading the package. While the syntax might look complex, it’s actually quite straightforward when you break it down.
+
+```{r eval = F}
+
+descriptives(data,                      # The dataset you are using
+             vars,                      # The variables you want to calculate descriptives for
+             splitBy = NULL,            # Optional grouping variable; set to NULL if not grouping data
+             freq = FALSE,              # Whether to show frequency counts (useful for categorical variables)
+             desc = "columns",          # Orientation of the output (columns vs rows), defaults to columns
+             hist = FALSE,              # If TRUE, creates histograms for the variables
+             dens = FALSE,              # If TRUE, plots density estimates
+             bar = FALSE,               # If TRUE, generates bar charts for the variables
+             barCounts = FALSE,         # If TRUE, displays counts on the bar chart (only applicable if `bar` is TRUE)
+             box = FALSE,               # If TRUE, generates box plots for the variables
+             violin = FALSE,            # If TRUE, creates violin plots to visualize data distribution
+             dot = FALSE,               # If TRUE, adds dot plots
+             dotType = "jitter",        # Determines the type of dot plot (e.g., jitter to spread points out)
+             boxMean = FALSE,           # If TRUE, shows the mean in the box plot
+             boxLabelOutliers = TRUE,   # If TRUE, labels outliers in the box plot
+             qq = FALSE,                # If TRUE, generates Q-Q plots for checking normality
+             n = TRUE,                  # If TRUE, displays the sample size (n) for each variable
+             missing = TRUE,            # If TRUE, shows the number of missing values for each variable
+             mean = TRUE,               # If TRUE, displays the mean for each variable
+             median = TRUE,             # If TRUE, displays the median for each variable
+             mode = FALSE,              # If TRUE, displays the mode (most frequent value) for each variable
+             sum = FALSE,               # If TRUE, displays the sum of all values for each variable
+             sd = TRUE,                 # If TRUE, displays the standard deviation for each variable
+             variance = FALSE,          # If TRUE, displays the variance for each variable
+             range = FALSE,             # If TRUE, displays the range (max - min) for each variable
+             min = TRUE,                # If TRUE, displays the minimum value for each variable
+             max = TRUE,                # If TRUE, displays the maximum value for each variable
+             se = FALSE,                # If TRUE, displays the standard error for each variable
+             ci = FALSE,                # If TRUE, calculates and displays the confidence interval (CI) for each variable
+             ciWidth = 95,              # The width of the confidence interval, defaults to 95%
+             iqr = FALSE,               # If TRUE, displays the interquartile range (IQR) for each variable
+             skew = FALSE,              # If TRUE, displays the skewness of the distribution for each variable
+             kurt = FALSE,              # If TRUE, displays the kurtosis (tailedness) of the distribution for each variable
+             sw = FALSE,                # If TRUE, runs the Shapiro-Wilk test for normality on each variable
+             pcEqGr = FALSE,            # If TRUE, calculates percentiles based on equal groupings
+             pcNEqGr = 4,               # The number of equal groups for percentiles (defaults to quartiles)
+             pc = FALSE,                # If TRUE, calculates specific percentiles (e.g., 25th, 50th, 75th)
+             pcValues = "25,50,75",     # Specifies which percentiles to calculate (default: 25th, 50th, 75th percentiles)
+             extreme = FALSE,           # If TRUE, displays extreme values for each variable
+             extremeN = 5,              # The number of extreme values to display for each variable (defaults to 5)
+             formula)                   # Optional argument to specify a formula if using a model
+
+
+```
+
+You don’t need to write out all the arguments every time you use `descriptives()`. You can just specify the dataset and the variables you want to analyse, and everything else will use default settings. If you want to change those defaults, you can simply add the corresponding argument to your code.
+
+### Using the `jmv` function to generate descriptive statistics
+
+Let's use the `descriptives()` function to compute statistics for the `wellb` and `depr` variables:
+
+```{r}
+
+descriptives(data = df_wellbeing, 
+             vars = c("wellb", "depr"))
+
+
+```
+
+By default, this function displays the sample size (N), number of missing values, mean, median, standard deviation, minimum, and maximum for each variable. If you want to include additional statistics, like the mode, standard error (`se`) or confidence intervals (`ci`), you can set those options to `TRUE`:
+
+```{r}
+
+descriptives(data = df_wellbeing, 
+             vars = c("wellb", "depr"),
+             mode = TRUE,
+             se = TRUE,
+             ci = TRUE)
+
+```
+
+The `descriptives` function will by default assume you don't want to split the variables selected in `vars` by different groups. But we can easily achieve this by using the `splitBy` argument. In this example, let's split our descriptive statistics based on participants identified gender.
+
+```{r}
+
+descriptives(data = df_wellbeing, 
+             vars = c("wellb", "depr"),
+             splitBy = c("gender"), 
+             mode = TRUE,
+             se = TRUE,
+             ci = TRUE)
+
+
+```
+
+You can also split by multiple variables. For example, if you want to examine well-being and depression scores by both gender and caffeine conditions:
+
+```{r}
+
+descriptives(data = df_wellbeing, 
+             vars = c("wellb", "depr"),
+             splitBy = c("gender", "Condition"),
+             mode = TRUE,
+             se = TRUE,
+             ci = TRUE)
+
+```
+
+This flexibility makes the `descriptives()` function much more powerful than base R functions like `summary()` or `aggregate()`[^08-descriptives-t-tests-1].
+
+[^08-descriptives-t-tests-1]: In fairness, there are elegant ways around this using base R that are nice. But I am still using the \`descriptives\` function because it enables us to do other cool things, like create graphs.
+
+### Using the `jmv` function to generate graphs
+
+Another great feature of the `descriptives` package is that we can also generate plots like box plots, bar charts, or histograms. Let's use `descriptives` to calculate descriptive statistics for the `fatigue` variable based on `gender` and also generate each plot.
+
+```{r}
+descriptives(data = df_wellbeing, 
+             vars = c("fatigue"),
+             splitBy = c("gender"),
+             box = TRUE,
+             bar = TRUE,
+             hist = TRUE)
+```
+
+This ability to create plots using `descriptives` is really useful, particularly when conducting exploratory data analysis. The only downside is that you do not have control about how the plots look. That's where you will need to transition to using functions like [`ggplot`](#data-vis).
+
+### Exercises
+
+-   **Generate descriptive statistics** for the `pain` and `fatigue` variables, splitting by caffeine condition. Include the mode and standard error, but not confidence intervals.
+
+-   **Extend the previous exercise** to also display the range and variance for each variable. What arguments do you need to change?
+
+-   **Generate descriptive statistics** for `wellb` and `age` variables, split by both gender and caffeine condition. Display only the mean and sample size for each variable. Your output should look like the following
+
+```{r echo = F}
+
+
+descriptives(data = df_wellbeing, 
+             vars = c("wellb", "depr"),
+             splitBy = c("gender", "Condition"),
+             median = F,
+             sd = F,
+             missing = F,
+             min = F,
+             max = F)
+
+
+```
+
+-   **Modify the following code** to split by both gender and caffeine condition, and add density estimates (`dens = TRUE`). What changes in the plot?
+
+```{r eval = F}
+
+descriptives(df_wellbeing,
+             vars = "age",
+             splitBy = c("gender"),
+             hist = TRUE)
+
+
+```
+
+-   **Display skewness and kurtosis** for the `wellb` variable, split by caffeine condition. How do these statistics help you understand the data?
+
+-   **Examine the full syntax** of the `descriptives()` function. What arguments could you use to check parametric assumptions for a t-test? Is anything missing?
+
+Okay, that's enough for now on descriptive statistics. Let's move on to conducting our first set of inferential statistical tests in R, the independent and paired-samples t-test.
+
+## Independent Samples T-Test
+
+Let’s imagine we’re interested in investigating the effects of caffeine consumption on levels of fatigue. Specifically, we want to determine whether people in the *high caffeine* condition scored significantly differently from those in the *low caffeine* condition. Before we can investigate this question using t-tests, there are a couple of preliminary steps we need to take. First, since the caffeine condition currently has three levels (`No Caffeine`, `Low Caffeine`, and `High Caffeine`), we’ll need to clean our dataset by filtering out the condition we are not comparing. Second, we need to check the parametric assumptions required for an independent samples t-test.
+
+### Cleaning our Data Set
+
+We’ll create a new data frame called `df_wellbeing_independent` by filtering out participants who were in the `No Caffeine` condition. The simplest way to do this is to tell R to exclude any rows where the `Condition` column is `No Caffeine`.
+
+```{r}
+
+df_wellbeing_independent <- df_wellbeing %>% 
+  filter(Condition != "No Caffeine")
+
+```
+
+Alternatively, we could also tell R to select the rows where the value for the `Condition` column is `Low Caffeine` OR (designated by `|` in R) the value for the `Condition` column is `High Caffeine`.
+
+```{r}
+
+df_wellbeing_independent <- df_wellbeing %>% 
+  filter(Condition == "Low Caffeine" | Condition == "High Caffeine")
+
+```
+
+Whichever approach you choose, it’s always a good idea to check whether your data cleaning worked as intended. We can do this using the `table()` function, which provides a frequency count of the values in the `Condition` column:
+
+```{r}
+
+table(df_wellbeing_independent$Condition)
+
+```
+
+Great! We’ve successfully removed participants from the `No Caffeine` condition.
+
+### Checking our Parametric Assumptions
+
+There are several key assumptions for conducting an independent samples t-test:
+
+1.  The dependent variable should be measured on a continuous scale.
+
+2.  The independent variable should consist of two categorical, independent groups.
+
+3.  The groups should be independent of each other.
+
+4.  There should be no significant outliers.
+
+5.  The dependent variable should be approximately normally distributed for each group.
+
+6.  The dependent variable should exhibit homogeneity of variance.
+
+We don’t need R to check the first three assumptions. A quick visual inspection of the dataset will tell us whether these are met, and in this case, they are.
+
+#### Checking for Outliers
+
+Earlier, we saw that the `descriptives` function is able to product box plots. You may have noticed in the boxplot we produced earlier, it did identify several outliers. So we can use this tool again on our `df_wellbeing_independent` sample.I am setting all other default options to FALSE to reduce the amount of information printed on the screen.
+
+```{r}
+
+descriptives(df_wellbeing_independent, 
+             vars = "fatigue",
+             splitBy = "Condition",
+             missing = FALSE,
+             n = FALSE,
+             mean = FALSE,
+             min = FALSE,
+             median = FALSE,
+             max = FALSE,
+             sd = FALSE,
+             box = TRUE
+             )
+
+```
+
+From the box plot, we can see that participants in rows 42, 64, 146, 200, 209, and 260 are outliers for their respective conditions. There are several ways to handle outliers, such as removing them, capping them at boundary values, or transforming them. For this example, we’ll simply remove the outliers, but I’ll also show you how to cap or transform them.
+
+To remove the outliers, we can filter out any values that fall outside the interquartile range (IQR):
+
+```{r}
+
+
+Q1 <- quantile(df_wellbeing_independent$fatigue, 0.25)
+Q3 <- quantile(df_wellbeing_independent$fatigue, 0.75)
+IQR <- Q3 - Q1
+
+# Define lower and upper bounds
+lower_bound <- Q1 - 1.5 * IQR
+upper_bound <- Q3 + 1.5 * IQR
+
+# Remove outliers
+
+df_wellbeing_independent <- df_wellbeing_independent %>% 
+  filter(fatigue > lower_bound & fatigue < upper_bound)
+
+
+```
+
+This code calculates the interquartile range (IQR) for the fatigue variable in the df_wellbeing_independent dataset and uses it to identify and remove outliers.
+
+First, it computes the first quartile (Q1) and third quartile (Q3) of fatigue using the quantile() function. The IQR is then calculated as the difference between Q3 and Q1, representing the range of the middle 50% of the data.
+
+Next, the code defines the lower and upper bounds for identifying outliers. Any data points that fall more than 1.5 times the IQR below Q1 or above Q3 are considered outliers. These bounds are computed and stored in lower_bound and upper_bound.
+
+Finally, the code filters the dataset to remove any rows where the fatigue values fall outside these bounds (`fatigue > lower_bound & fatigue < upper_bound`). This step effectively removes the outliers from the df_wellbeing_independent dataset, leaving only values within the acceptable range.
+
+Now let's check to see whether we have removed these outliers by rerunning our descriptives function.
+
+```{r}
+
+descriptives(df_wellbeing_independent, 
+             vars = "fatigue",
+             splitBy = "Condition",
+             missing = FALSE,
+             n = FALSE,
+             mean = FALSE,
+             min = FALSE,
+             median = FALSE,
+             max = FALSE,
+             sd = FALSE,
+             box = TRUE
+             )
+
+```
+
+Perfect! The outliers have been removed. If you’re interested in learning how to cap or transform outliers, continue reading. Otherwise, feel free to skip ahead to the next section.
+
+***Capping Our Outliers***. To cap out outliers, we can convert all outliers to a value that is considered acceptable. For example, we can set them to be the value that marks our `upper_bound` (i.e., Q3 + 1.5 \* IQR) or the value that marks our `lower bound` (i.e., Q1 - 1.5 \* IQR).
+
+```{r}
+
+df_wellbeing_independent_capping <- df_wellbeing_independent %>% 
+  mutate(fatigue = case_when(
+    fatigue > upper_bound ~ upper_bound,
+    fatigue < lower_bound ~ lower_bound,
+    TRUE ~ fatigue  # If not an outlier, keep the original value
+  ))
+
+```
+
+The code here does the following:
+
+-   `mutate()` creates or modifies the `fatigue` variable in your dataset.
+
+-   `case_when()` applies different conditions to each row:
+
+    -   If `fatigue` is greater than the `upper_bound`, it sets it (\~) to the `upper_bound`.
+
+    -   If `fatigue` is lower than the `lower_bound`, it sets it (\~) to the `lower_bound`.
+
+    -   Otherwise, it keeps the original `fatigue` value (TRUE \~ fatigue)
+
+***Transforming Our Outliers***
+
+Alternatively, we can apply a log transformation to reduce the impact of outliers. Here’s how:
+
+```{r}
+
+df_wellbeing_independent_log <- df_wellbeing_independent #I am creating a new data frame, so we do not overwrite our other data frame with the log transformation
+
+df_wellbeing_independent_log$fatigue <- log(df_wellbeing_independent_log$fatigue) #this isolates the fatigue column, and then replaces it with the transformation (log) of that column. 
+
+```
+
+#### Checking for Normality
+
+You may have spotted this in the exercises earlier, but there is a way to check for normality using the `descriptives` function. In this function, there is an argument labelled `sw` that will run a Shapiro-wilks test on the variables we select for running descriptive statistics. By default, it is set to `FALSE`, so all we need to do is set it to `TRUE`. Once again, I will turn off some of the other default options to reduce the amount of information printed, but feel free to go with the other defaults options - just make sure `sw` is set to `TRUE`.
+
+```{r}
+
+descriptives(df_wellbeing_independent, 
+             vars = "fatigue",
+             splitBy = "Condition",
+             median = FALSE,
+             missing = FALSE,
+             min = FALSE,
+             max = FALSE,
+             sw = TRUE
+             )
+
+```
+
+We can see two new values in our descriptive table, the test statistic `Shapiro-Wilk W` and its corresponding p-value `Shapiro-Wilk p`. We can see that for both the High Caffeine and Low Caffeine condition, we have not met this assumption. In real life, we should do something about this, or at least run a non-parametric test. But I am going to pretend it's not a big deal for the time being.
+
+### Checking for Homogeneity of Variance
+
+Hopefully, you will also have spotted in the exercises earlier that `descriptives` does not compute a Levene's Test for measuring Homogeneity of Variance. To do that, we need to a function in the `car` package that is called `leveneTest`. The syntax for this function is as follows: \`\`
+
+```{r eval = F}
+
+leveneTest(DependentVariable ~ IndependentVariable, data = ourdataset)
+
+
+```
+
+Let’s use this to assess whether `fatigue` exhibits homogeneity of variance across the two caffeine conditions.
+
+```{r}
+
+leveneTest(fatigue ~ Condition, data = df_wellbeing_independent)
+
+```
+
+Luckily, we can see that our data has met this parametric assumption. So let's proceed on and run our t-test.
+
+### Running an Independent Sample T-Test
+
+We use the `t.test` function to perform the t-test. The syntax is:
+
+```{r eval = F}
+
+t.test(DV ~ IV, 
+       paired = FALSE,
+       alternative = c("two.sided", "less", "greater"),
+       data = ourdataset)
+
+```
+
+In this function:
+
+-   `DV ~ IV` specifies the dependent variable (DV) and independent variable (IV).
+
+-   `paired = FALSE` indicates that we are conducting an independent samples t-test. If we were comparing related groups (e.g., pre-test vs. post-test), we would set `paired = TRUE`.
+
+-   The `alternative` argument specifies the hypothesis test type:
+
+    -   `"two.sided"` tests for any difference between groups.
+
+    -   `"less"` tests whether the first group has a lower mean than the second.
+
+    -   `"greater"` tests whether the first group has a higher mean than the second.
+
+Let’s run the two-sided test on our `df_wellbeing_independent` dataset:
+
+```{r}
+
+t.test(fatigue ~ Condition, 
+       alternative = "two.sided",
+       data = df_wellbeing_independent)
+
+```
+
+The t-test results show no significant difference in fatigue levels between the High Caffeine and Low Caffeine groups.
+
+Here’s how we might write up the results in APA style:
+
+`A Welch two-sample t-test was conducted to compare fatigue levels between participants in the High Caffeine and Low Caffeine conditions. The test showed that there was no significant difference in the means of fatigue between the two groups, t(267.59) = -0.77, p = 0.44. One fails to reject the null hypothesis.`
+
+1.  Run an independent samples t-test investigating whether there is an effect of `No Caffeine` versus `High Caffeine` on `fatigue`. Remember to use the `filter` function and check parametric assumptions.
+
+2.  Run an independent samples t-test investigating whether there is an effect of `gender` on wellbeing (`wellb`). Remember to check parametric assumptions.
+
+## Paired-Samples T-Test
+
+The process for running a paired-samples t-test is very similar to an independent t-test, so this section will be relatively brief. We will use the `df_psycho` dataset, which was imported earlier in the set-up section.
+
+Let’s start by examining the dataset using the `head()` function.
+
+```{r}
+
+head(df_psycho)
+
+```
+
+This dataset comes from a study that evaluated the effect of psychoactive drugs (Treatment with three levels: DMT, Psilocybin, and Placebo) on total Neuroticism scores. The study used a within-subjects design, meaning that each participant took all three treatments (DMT, Psilocybin, and Placebo), and their Neuroticism score was measured the day after each treatment.
+
+In this section, we will investigate whether there is a significant difference in Neuroticism scores between the Psilocybin and DMT conditions.
+
+### Cleaning our Data Set
+
+We’ll create a data frame called `df_psycho_paired` by filtering out all observations from the Placebo condition. The easiest way to do this is by excluding rows where the value in the `Treatment` column is "Placebo".
+
+```{r}
+
+df_psycho_paired <- df_psycho %>% 
+  filter(Treatment != "Placebo")
+
+```
+
+Alternatively, we could also tell R to select the rows where the value for the `Treatment` column is `Psilocybin` OR (designated by `|` in R) the value for the `Treatment` column is `DMT`.
+
+```{r}
+
+df_psycho_paired <- df_psycho %>% 
+  filter(Treatment == "Psilocybin" | Treatment == "DMT")
+
+```
+
+Whichever approach you use, it’s important to check if your data cleaning worked as intended. We can do this with the `table()` function:
+
+```{r}
+
+table(df_psycho_paired$Treatment)
+
+```
+
+Great! We’ve successfully removed observations from the Placebo condition.
+
+### Checking our Parametric Assumptions
+
+There are several assumptions to the Paired Sample T-Test
+
+-   Our dependent variable should be measured on a continuous scale
+-   Our independent variable should consist of two categorical group that are related or have matched pairs.
+-   The groups should be independent from each
+-   There should be no significant outliers
+-   Our dependent variable should be normally distributed
+
+Again, it's only really the outliers and the normal distribution that needs to be evaluated using functions in R.
+
+#### Checking for Outliers and Normality.
+
+We can use the `descriptives` function to calculate descriptive statistics for the Neuroticism scores, check for outliers with a box plot, and assess normality using the Shapiro-Wilk test (`sw = TRUE`). To get a fuller picture, we’ll also produce a density (`dens = TRUE`) histogram (`hist = TRUE`) and a Q-Q plot (`qq = TRUE`).
+
+```{r}
+descriptives(df_psycho_paired, 
+             vars = "Neuroticism",
+             splitBy = "Treatment",
+             box = TRUE,
+             sw = TRUE,
+             hist = TRUE,
+             dens = TRUE,
+             qq = TRUE)
+```
+
+The dataset does not violate either assumption. Let's go ahead and run our paired-samples t-test.
+
+### Running the Test
+
+To run the paired-samples t-test, we use the `t.test` function, but this time we set the `paired` argument to `TRUE` to indicate that the two groups are related.
+
+```{r}
+
+t.test(Neuroticism ~ Treatment,
+       paired = TRUE,
+       alternative = "two.sided",
+       data = df_psycho_paired)
+
+```
+
+That’s it! We have successfully conducted a paired-samples t-test. Here’s how we would write up the results in APA style:
+
+A paired samples t-test was conducted to examine whether there was a significant difference in Neuroticism scores after participants took the psychoactive drugs Psilocybin and DMT. The test revealed a statistically significant reduction in Neuroticism after the DMT treatment compared to the Psilocybin treatment, t(19) = -4.30, p ≤ .001. This suggests that the treatment had a significant effect on neuroticism scores.
+
+### Exercises
+
+1.  Run a paired-samples t-test to investigate the effects of Psilocybin on Neuroticism compared to the Placebo. Ensure that you check your parametric assumptions.
+
+2.  Run a paired-samples t-test to investigate the effects of DMT on Neuroticism compared to the Placebo. Again, make sure to check the parametric assumptions.
+
+## Power Analysis
+
+We can also conduct power analysis in R when running t-tests via the `pwr` package we loaded in earlier.
+
+### Independent Samples (Apriori)
+
+The syntax for conducting an apriori statistical power analysis for an independent samples t-test is the following
+
+```{r eval = FALSE}
+
+# Load the pwr package
+library(pwr)
+
+# Conduct power analysis for an independent samples t-test
+pwr.t.test(d = 0.5,         # Your Expected effect size
+           sig.level = 0.05, # Significance level
+           power = 0.80,     # Desired power level
+           type = "two.sample",  # Indicates an independent t-test
+           alternative = "two.sided")  # Indicates a two-tailed test, #can be changed to "one.sided"
+
+```
+
+We can apply this syntax to `df_wellbeing_independent` data set. I am going to assume a large effect size (d = .70)
+
+```{r}
+
+# Conduct power analysis for an independent samples t-test
+pwr.t.test(d = 0.7,         
+           sig.level = 0.05, # Significance level
+           power = 0.80,     # Desired power level
+           type = "two.sample",  
+           alternative = "two.sided")  
+
+
+```
+
+### Paired Samples (Apriorio) 
+
+If we want to run a paired samples-test, then we can change the type from "two.sample" to "one.sample".
+
+```{r eval = FALSE}
+
+# Load the pwr package
+library(pwr)
+
+# Conduct power analysis for an independent samples t-test
+pwr.t.test(d = 0.5,         # Your Expected effect size
+           sig.level = 0.05, # Significance level
+           power = 0.80,     # Desired power level
+           type = "paired",  # Indicates an independent t-test
+           alternative = "two.sided")  # Indicates a two-tailed test, #can be changed to "one.sided"
+
+```
+
+We can apply this syntax to `df_psycho_paired` data set. I am going to assume a small effect size (d = .20)
+
+```{r}
+
+# Conduct power analysis for an independent samples t-test
+pwr.t.test(d = 0.2,         
+           sig.level = 0.05, # Significance level
+           power = 0.80,     # Desired power level
+           type = "paired",  
+           alternative = "two.sided")  
+
+
+```
+
+### Post-Hoc Tests
+
+To run a post-hoc power analysis, we need to set the `n` (sample size) instead of the `power` argument, and leave `power = NULL`. Here is how we can do that for an independent-samples t-test
+
+```{r}
+
+pwr.t.test(d = 0.7,         
+           sig.level = 0.05, # Significance level
+           n = 420,
+           type = "two.sample",  
+           alternative = "two.sided")  
+
+```
+
+And for a paired-samples t-test
+
+```{r}
+
+pwr.t.test(d = 0.2,         
+           sig.level = 0.05, # Significance level
+           n = 20,
+           type = "paired",  
+           alternative = "two.sided")  
+
+
+```
+
+### Exercises
+
+-   Run an *a priori* power analysis for the independent samples t-test you ran in the exercises. Set the expected effect size to *d* = 0.40.
+
+```{=html}
+<!-- -->
+```
+-   Run a *post-hoc* power analysis for the paired samples t-test you ran in the exercises. Use the observed effect size from your results and sample size to calculate the power of your study.
+
+## Summary
+
+Well done. We've learnt how to run descriptive statistics, paired-samples, and independent samples t-tests in R. You might have noticed how straightforward it is to actually run the tests themselves - it just took a couple of lines of code. This is nearly always the case when running inferential statistics in R. The hard part is cleaning and visualising the data, the tests themselves are quick and easy. In the next session, we'll learn how to run ANOVAs, before moving on to our final topics, correlation and regression. 
