@@ -1,7 +1,5 @@
 ---
-title: "Introduction to R"
-author: "Ryan Donovan"
-date: "`r Sys.Date()`"
+title: "Introduction to R for Advanced Research Methods (PS6183) "
 description: This GitBook is for the R Workshops
 documentclass: book
 github-repo: ryandonovan93/rintro
@@ -11,88 +9,110 @@ bibliography:
 - packages.bib
 site: bookdown::bookdown_site
 biblio-style: apalike
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
-# **Introduction**
+# **Overview**
 
-This series of workshops describes how to use R to import, clean, and process psychological data. All materials, data, and information in these workshops are used for educational purposes only. This document should only be shared within the University of Galway's School of Psychology and is not intended for widespread dissemination. The workshop's e-book is very much in its draft stages and will be updated and refined in the future. Several materials are adapted from various online resources on teaching R.
+**Authors:** Dr Ryan Donovan and Dr Ciara Egan.
 
-## Who is this resource for?
+This is the textbook for the Advanced Research Methods module (PS6183).
+This textbook will describe how to use R programming language to import, clean, process, and visualize psychological data.
+No prior knowledge of R or any other programming language or statistical software is required to successfully complete this module.
+All textbook materials are used for educational purposes only and should only be shared within the University of Galway's School of Psychology.
 
-These workshops are designed to help people who come from a psychology or social science background learn the necessary programming skills to use R effectively in their research. These workshops are intended for individuals with no programming experience whatsoever, teaching the necessary programming skills and ideas required to conduct statistical techniques in psychology (e.g., Power Analyses, Correlation, ANOVA, Regression, Mediation, Moderation).
+## What will I learn in R?
 
-These workshops are **not** for people interested in learning about statistical theory or the who, what, where's of any of the aforementioned statistical techniques. I want these workshops to focus entirely on how to perform statistical analyses in R; I assume you know the rest or know how to access that information.
+In terms of specific R skills, students will learn how to:
 
-## Should I learn R?
+-   Import, export, and create datasets.
 
-There are many reasons to learn R.
+-   Use basic programming concepts such as data types, functions, and loops.
 
-Psychological research is increasingly moving towards open-science practices. One of the key principles of open-science is that all aspects of data handling - including data wrangling, pre-processing, processing, and output generation - are openly accessible. This is not only an abstract want or desire; several top-tier journals require that you submit R scripts along with any manuscripts. If you don't know how to use R (or at least no one in your lab does), then this may put you at a disadvantage.
+-   Apply key techniques for data cleaning to enable statistical analysis.
 
-R enables you to import, clean, analyse, and publish manuscripts from R itself. You do not have to switch between SPSS, Excel, and Word or any other software. You can conduct your statistical analysis directly in R and have that "uploaded" directly to your manuscript. In the long run, this will save you so much time and energy.
+-   Run descriptive and inferential statistics.
 
-R is capable of more than statistical analysis. You can create websites, documents, and books in R. This e-book was developed in R! While these initial workshops will not be discussing how to do this (although it is something that I would like to do in the future), I wanted to mention it as an example of how powerful R can be.
+-   Create APA-standard graphs.
 
-## What will I learn to do in R?
-
-The following workshops will teach you how to conduct statistical analysis in R.
-
-R is a statistical programming language that enables you to wrangle, process, and analyse data. By the end of these workshops, you should be able to import a data file into R, do some processing and cleaning, compute descriptive and inferential statistics, generate nice visualisations, and output your results.
-
-The learning objectives of this course are:
-
--   Learn how to import and create datasets in R.
-
--   Learn and apply basic programming concepts such as data types, functions, and loops.
-
--   Learn key techniques for data cleaning in R to enable statistical analysis.
-
--   Learn how to create APA-standard graphs in R.
-
--   Learn how to deal with errors or bugs with R code.
-
--   Learn how to export data.
+-   Deal with errors or bugs with R code.
 
 ## What will I not learn to do in R?
 
-This is not an exhaustive introduction to R. Similar to human languages, programming languages like R are vast and will take years to master. After this course, you will still be considered a "newbie" in R. But the material covered here will at least provide you a solid foundation in R, enabling you to go ahead and pick up further skills if required as you go on.
+This is not an exhaustive introduction to R.
+Similar to human languages, programming languages like R are vast and will take years to master.
+After this course, you will still be considered a "newbie" in R.
+But the material covered here will at least provide you a solid foundation in R, enabling you to go ahead and pick up further skills if required as you go on.
 
-This course will teach you data cleaning and wrangling skills that will enable you to wrangle and clean a lot of data collected on Gorilla or Qualtrics. But you will not be able to easily handle all data cleaning problems you are likely to find out in the "wild" world of messy data. Such datasets can be uniquely messy, and even experienced R programmers will need to bash their head against the wall a few times to figure out a way to clean that dataset entirely in R. If you have a particularly messy dataset, you might still need to use other programmes (e.g., Excel) to clean it up first before importing it to R.
+This course will teach you data cleaning and wrangling skills that will enable you to wrangle and clean a lot of data collected on Gorilla or Qualtrics.
+But you will not be able to easily handle all data cleaning problems you are likely to find out in the "wild" world of messy data.
+Such datasets can be uniquely messy, and even experienced R programmers will need to bash their head against the desk a few times to figure out a way to clean that dataset entirely in R.
 
-Similarly, do not expect to be fluent in the concepts you learn here after these workshops. It will take practice to become fluent. You might need to refer to these materials or look up help repeatedly when using R on real-life datasets. That's normal.
+Similarly, do not expect to be fluent in the concepts you learn here after these workshops.
+It will take practice to become fluent.
+You might need to refer to these materials or look up help repeatedly when using R on real-life datasets.
+That's normal - so do not be discouraged when it happens.
 
-This workshop is heavily focused on the tidyverse approach to R. The tidyverse is a particular philosophical approach to how to use R (more on that later). The other approach would be to use base R. This can incite violent debates in R communities on which approach is better. We will focus mainly on tidyverse and use some base R.
+This textbook mainly uses the tidyverse approach to R.
+The tidyverse is a particular philosophical approach to how to use R (more on that later).
+The other approach would be to use base R.
+This can incite violent debates in R communities on which approach is better.
+We will focus mainly on tidyverse and use some base R.
 
-This workshop does not teach you how to use R Markdown. R Markdown is a package in R that enables you to write reproducible and dynamic reports with R that can be converted into Word documents, PDFs, websites, PowerPoint presentations, books, and much more. That will be covered in the intermediate workshop programme.
+This textbook does not teach you how to use R Markdown.
+R Markdown is a package in R that enables you to write reproducible and dynamic reports with R that can be converted into Word documents, PDFs, websites, PowerPoint presentations, books, and much more.
+There are a lot of excellent resources available to learn how to use R markdown, but it's far more important to learn how to use R first.
 
-## Where and when will the workshops take place?
+## Why are we learning R?
 
-The sessions will take place in **AMB-G035** (Psychology PC Suite). The schedule for the sessions is as follows:
+There are many reasons to learn R.
 
--   Feb 7th: Introduction to R and RStudio
+Psychological research is increasingly moving towards open-science practices.
+One of the key principles of open-science is that all aspects of data handling - including data wrangling, pre-processing, processing, and output generation - are openly accessible.
+This is not only an abstract want or desire; several top-tier journals require that you submit R scripts along with any manuscripts.
+If you don't know how to use R (or at least no one in your lab does), then this may put you at a disadvantage.
 
--   Feb 14th: R Programming (Part I)
+R enables you to import, clean, analyse, and publish manuscripts from R itself.
+You do not have to switch between SPSS, Excel, and Word or any other software.
+You can conduct your statistical analysis directly in R and have that "uploaded" directly to your manuscript.
+In the long run, this will save you so much time and energy.
 
--   Feb 21st: R Programming (Part II)
+R is capable of more than statistical analysis.
+You can create websites, documents, and books in R.
+This e-book was developed in R!
+We will talk more in class about the advantages of using R over existing propriety statistical software.
 
--   Feb 28th: Data Cleaning in R (Part I)
+## Where and when will the classes take place?
 
--   March 6th: Data Cleaning in R (Part II)
+The sessions will take place in **AMB-G035** (Psychology PC Suite).
+The schedule for the sessions is as follows:
 
--   March 13th: Data Visualization
-
--   March 20th: Running Inferential Statistical Tests in R (Part I)
-
--   March 27th: Running Inferential Statistical Tests in R (Part II)
-
-Each session is on a Wednesday and will run between 11:00 - 13:00.
-
-## Are there any prerequisites for taking this course?
-
-None at all. This course is beginner-friendly. You also do not need to purchase anything (e.g., textbooks or software).
+![](img/01-schedule.PNG)
 
 ## Do I need to bring a laptop to the class?
 
-If you have a laptop that you work on, I strongly encourage you to bring it. That way, we can get R and RStudio installed onto your laptop, and you'll be able to run R outside of the classroom.
+If you have a laptop that you work on, please bring it.
+That way, we can get R and RStudio installed onto your laptop, and you'll be able to run R outside of the classroom.
 
-If you work with a desktop, don't worry. The lab space will have computers that you can sign in and work on and use R.
+If you work with a desktop, don't worry.
+The lab space will have computers that you can sign in and work on and use R.
+
+## Office Hours (R Support - Ryan Donovan)
+
+Programming concepts can sometimes take a while to sink in.
+If you would like specific R support or help, then please feel free to see me during office hours.
+Do not be a silent martyr.
+
++-------------------------------------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Staff Member                        | Office Hours                                         | Location                                                                                                                                                                                                                                                                      |
++-------------------------------------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Ryan Donovan                        | Wednesdays, 2.30-3.30pm.                             | 2065A, which is on the top floor of the Psychology building. It is in the corridor right next to the elevator.                                                                                                                                                                |
+|                                     |                                                      |                                                                                                                                                                                                                                                                               |
+| ryan.donovan\@universityofgalway.ie | (In-person or online option).                        | Teams Link: [click here](https://teams.microsoft.com/l/meetup-join/19%3ameeting_NDQ1YjRiNmQtNDQ4MC00NjgzLWIwYTQtNWI5OTg3ZmE1NWRj%40thread.v2/0?context=%7b%22Tid%22%3a%2213e3b186-c446-4aab-9c6d-9ab9bb76816c%22%2c%22Oid%22%3a%22c088ea08-9d92-460e-8972-64cd26bc4899%22%7d) |
+|                                     |                                                      |                                                                                                                                                                                                                                                                               |
+|                                     | Time does not suit?                                  |                                                                                                                                                                                                                                                                               |
+|                                     |                                                      |                                                                                                                                                                                                                                                                               |
+|                                     | Just get in touch, we can arrange a different time.  |                                                                                                                                                                                                                                                                               |
++-------------------------------------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
