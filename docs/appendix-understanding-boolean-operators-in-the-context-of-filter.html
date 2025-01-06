@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Appendix: Understanding Boolean Operators in the Context of filter() | Introduction to R</title>
+  <meta name="description" content="This GitBook is for the R Workshops" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Appendix: Understanding Boolean Operators in the Context of filter() | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook is for the R Workshops" />
+  <meta name="github-repo" content="ryandonovan93/rintro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Appendix: Understanding Boolean Operators in the Context of filter() | Introduction to R" />
+  
+  <meta name="twitter:description" content="This GitBook is for the R Workshops" />
+  
+
+<meta name="author" content="Ryan Donovan" />
+
+
+<meta name="date" content="2024-02-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="programming2.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R (University of Galway)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#who-is-this-resource-for"><i class="fa fa-check"></i><b>1.1</b> Who is this resource for?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#should-i-learn-r"><i class="fa fa-check"></i><b>1.2</b> Should I learn R?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-will-i-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.3</b> What will I learn to do in R?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-will-i-not-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.4</b> What will I not learn to do in R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#where-and-when-will-the-workshops-take-place"><i class="fa fa-check"></i><b>1.5</b> Where and when will the workshops take place?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#are-there-any-prerequisites-for-taking-this-course"><i class="fa fa-check"></i><b>1.6</b> Are there any prerequisites for taking this course?</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#do-i-need-to-bring-a-laptop-to-the-class"><i class="fa fa-check"></i><b>1.7</b> Do I need to bring a laptop to the class?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Getting Started with R and RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.1</b> What is R?</a></li>
+<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#create-a-posit-cloud-account."><i class="fa fa-check"></i><b>2.2</b> Create a Posit Cloud Account.</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-to-your-computer"><i class="fa fa-check"></i><b>2.3</b> Downloading R on to your Computer</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-windows"><i class="fa fa-check"></i><b>2.3.1</b> Downloading R on Windows</a></li>
+<li class="chapter" data-level="2.3.2" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-mac"><i class="fa fa-check"></i><b>2.3.2</b> Downloading R on Mac</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#install-and-open-r-studio"><i class="fa fa-check"></i><b>2.4</b> Install and Open R Studio</a></li>
+<li class="chapter" data-level="2.5" data-path="rstudio.html"><a href="rstudio.html#creating-an-r-project"><i class="fa fa-check"></i><b>2.5</b> Creating an R Project</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="rstudio.html"><a href="rstudio.html#navigating-rstudio"><i class="fa fa-check"></i><b>2.5.1</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rstudio.html"><a href="rstudio.html#checking-our-working-directory"><i class="fa fa-check"></i><b>2.5.2</b> Checking our Working Directory</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rstudio.html"><a href="rstudio.html#set_wd"><i class="fa fa-check"></i><b>2.5.3</b> Setting up a new Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#writing-our-first-r-code"><i class="fa fa-check"></i><b>2.6</b> Writing our first R Code</a></li>
+<li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.7</b> Console vs Source Script</a></li>
+<li class="chapter" data-level="2.8" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.8</b> Let’s write some statistical code</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="rstudio.html"><a href="rstudio.html#comments"><i class="fa fa-check"></i><b>2.8.1</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rstudio.html"><a href="rstudio.html#summary"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="rstudio.html"><a href="rstudio.html#glossary"><i class="fa fa-check"></i><b>2.10</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming1.html"><a href="programming1.html"><i class="fa fa-check"></i><b>3</b> <strong>R Programming (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#activity-1-set-up-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Activity 1: Set up your Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#using-the-console"><i class="fa fa-check"></i><b>3.2</b> Using the Console</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.2.1</b> Typing Commands in the Console</a></li>
+<li class="chapter" data-level="3.2.2" data-path="programming1.html"><a href="programming1.html#console-syntax-aka-im-ron-burgundy"><i class="fa fa-check"></i><b>3.2.2</b> Console Syntax (Aka “I’m Ron Burgundy?”)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="programming1.html"><a href="programming1.html#exercises"><i class="fa fa-check"></i><b>3.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#data-types"><i class="fa fa-check"></i><b>3.3</b> Data Types</a></li>
+<li class="chapter" data-level="3.4" data-path="programming1.html"><a href="programming1.html#basic-data-types-in-r"><i class="fa fa-check"></i><b>3.4</b> Basic Data types in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="programming1.html"><a href="programming1.html#character"><i class="fa fa-check"></i><b>3.4.1</b> Character</a></li>
+<li class="chapter" data-level="3.4.2" data-path="programming1.html"><a href="programming1.html#numeric-or-double"><i class="fa fa-check"></i><b>3.4.2</b> Numeric (or Double)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="programming1.html"><a href="programming1.html#integer"><i class="fa fa-check"></i><b>3.4.3</b> Integer</a></li>
+<li class="chapter" data-level="3.4.4" data-path="programming1.html"><a href="programming1.html#logical-otherwise-know-as-boolean"><i class="fa fa-check"></i><b>3.4.4</b> Logical (otherwise know as Boolean)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="programming1.html"><a href="programming1.html#exercises-1"><i class="fa fa-check"></i><b>3.4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.5.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="programming1.html"><a href="programming1.html#exercises-2"><i class="fa fa-check"></i><b>3.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.6</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.6.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.6.2</b> Data frames</a></li>
+<li class="chapter" data-level="3.6.3" data-path="programming1.html"><a href="programming1.html#exercises-3"><i class="fa fa-check"></i><b>3.6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#summary-1"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="programming1.html"><a href="programming1.html#glossary-1"><i class="fa fa-check"></i><b>3.8</b> Glossary</a></li>
+<li class="chapter" data-level="3.9" data-path="programming1.html"><a href="programming1.html#variable-name-table"><i class="fa fa-check"></i><b>3.9</b> Variable Name Table</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming2.html"><a href="programming2.html"><i class="fa fa-check"></i><b>4</b> <strong>R Programming (Part II)</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming2.html"><a href="programming2.html#functions"><i class="fa fa-check"></i><b>4.1</b> Functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming2.html"><a href="programming2.html#the-syntax-for-creating-a-function"><i class="fa fa-check"></i><b>4.1.1</b> The Syntax for Creating a Function</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming2.html"><a href="programming2.html#creating-a-simple-function-1-argument"><i class="fa fa-check"></i><b>4.1.2</b> Creating a Simple Function (1-Argument)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="programming2.html"><a href="programming2.html#creating-a-multi-argument-function"><i class="fa fa-check"></i><b>4.1.3</b> Creating a Multi-Argument Function</a></li>
+<li class="chapter" data-level="4.1.4" data-path="programming2.html"><a href="programming2.html#functions-inside-functions"><i class="fa fa-check"></i><b>4.1.4</b> Functions inside Functions</a></li>
+<li class="chapter" data-level="4.1.5" data-path="programming2.html"><a href="programming2.html#returning-multiple-objects-from-a-function"><i class="fa fa-check"></i><b>4.1.5</b> Returning Multiple Objects from a Function</a></li>
+<li class="chapter" data-level="4.1.6" data-path="programming2.html"><a href="programming2.html#some-important-features-about-functions"><i class="fa fa-check"></i><b>4.1.6</b> Some Important Features about Functions</a></li>
+<li class="chapter" data-level="4.1.7" data-path="programming2.html"><a href="programming2.html#exercises-4"><i class="fa fa-check"></i><b>4.1.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming2.html"><a href="programming2.html#the-factor-data-type"><i class="fa fa-check"></i><b>4.2</b> The Factor Data Type</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="programming2.html"><a href="programming2.html#creating-a-factor"><i class="fa fa-check"></i><b>4.2.1</b> Creating a Factor</a></li>
+<li class="chapter" data-level="4.2.2" data-path="programming2.html"><a href="programming2.html#using-factors-to-sort-character-data"><i class="fa fa-check"></i><b>4.2.2</b> Using Factors to Sort Character Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="programming2.html"><a href="programming2.html#exercises-5"><i class="fa fa-check"></i><b>4.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="programming2.html"><a href="programming2.html#the-list-data-structure"><i class="fa fa-check"></i><b>4.3</b> The List Data Structure</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="programming2.html"><a href="programming2.html#understanding-lists"><i class="fa fa-check"></i><b>4.3.1</b> Understanding Lists</a></li>
+<li class="chapter" data-level="4.3.2" data-path="programming2.html"><a href="programming2.html#creating-lists"><i class="fa fa-check"></i><b>4.3.2</b> Creating Lists</a></li>
+<li class="chapter" data-level="4.3.3" data-path="programming2.html"><a href="programming2.html#lists-within-lists-indexing"><i class="fa fa-check"></i><b>4.3.3</b> Lists within Lists (Indexing)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="programming2.html"><a href="programming2.html#summary-2"><i class="fa fa-check"></i><b>4.3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="programming2.html"><a href="programming2.html#r-packages"><i class="fa fa-check"></i><b>4.4</b> R Packages</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming2.html"><a href="programming2.html#understanding-r-packages"><i class="fa fa-check"></i><b>4.4.1</b> Understanding R Packages</a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming2.html"><a href="programming2.html#installing-and-loading-r-package"><i class="fa fa-check"></i><b>4.4.2</b> Installing and Loading R Package</a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming2.html"><a href="programming2.html#loading-packages"><i class="fa fa-check"></i><b>4.4.3</b> Loading Packages</a></li>
+<li class="chapter" data-level="4.4.4" data-path="programming2.html"><a href="programming2.html#testing-our-new-functions"><i class="fa fa-check"></i><b>4.4.4</b> Testing our New Functions</a></li>
+<li class="chapter" data-level="4.4.5" data-path="programming2.html"><a href="programming2.html#error-loading-packages"><i class="fa fa-check"></i><b>4.4.5</b> Error Loading Packages</a></li>
+<li class="chapter" data-level="4.4.6" data-path="programming2.html"><a href="programming2.html#package-conventions-if-using-code"><i class="fa fa-check"></i><b>4.4.6</b> Package Conventions if Using Code</a></li>
+<li class="chapter" data-level="4.4.7" data-path="programming2.html"><a href="programming2.html#summary-3"><i class="fa fa-check"></i><b>4.4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="programming2.html"><a href="programming2.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>4.5</b> Importing and Exporting Data</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="programming2.html"><a href="programming2.html#importing-csv-files."><i class="fa fa-check"></i><b>4.5.1</b> Importing CSV files.</a></li>
+<li class="chapter" data-level="4.5.2" data-path="programming2.html"><a href="programming2.html#importing-spss-.sav-files."><i class="fa fa-check"></i><b>4.5.2</b> Importing SPSS (.sav files).</a></li>
+<li class="chapter" data-level="4.5.3" data-path="programming2.html"><a href="programming2.html#exporting-datasets-in-r"><i class="fa fa-check"></i><b>4.5.3</b> Exporting Datasets in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="programming2.html"><a href="programming2.html#summary-4"><i class="fa fa-check"></i><b>4.6</b> Summary</a></li>
+<li class="chapter" data-level="4.7" data-path="programming2.html"><a href="programming2.html#glossary-2"><i class="fa fa-check"></i><b>4.7</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="programming2.html"><a href="programming2.html#programming2"><i class="fa fa-check"></i><b>5</b> <strong>Data Wrangling and Cleaning (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="programming2.html"><a href="programming2.html#what-is-data-wrangling-and-cleaning"><i class="fa fa-check"></i><b>5.1</b> What is Data Wrangling and Cleaning?</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="programming2.html"><a href="programming2.html#naming-conventions-in-this-book"><i class="fa fa-check"></i><b>5.1.1</b> Naming Conventions in this Book</a></li>
+<li class="chapter" data-level="5.1.2" data-path="programming2.html"><a href="programming2.html#why-is-data-cleaning-important"><i class="fa fa-check"></i><b>5.1.2</b> Why is Data Cleaning Important?</a></li>
+<li class="chapter" data-level="5.1.3" data-path="programming2.html"><a href="programming2.html#how-can-r-help-you-with-data-cleaning"><i class="fa fa-check"></i><b>5.1.3</b> How can R help you with Data Cleaning?</a></li>
+<li class="chapter" data-level="5.1.4" data-path="programming2.html"><a href="programming2.html#tidyverse-and-base-r"><i class="fa fa-check"></i><b>5.1.4</b> Tidyverse (and Base R)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="programming2.html"><a href="programming2.html#lets-get-set-up"><i class="fa fa-check"></i><b>5.2</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="programming2.html"><a href="programming2.html#activity-1.1-set-up-your-wd"><i class="fa fa-check"></i><b>5.2.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="5.2.2" data-path="programming2.html"><a href="programming2.html#activity-1.3-import-your-csv-files-and-r-script"><i class="fa fa-check"></i><b>5.2.2</b> Activity 1.3: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="5.2.3" data-path="programming2.html"><a href="programming2.html#activity-1.2-install-and-load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.2.3</b> Activity 1.2: Install and load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="programming2.html"><a href="programming2.html#cleaning-the-remote-associates-data-set."><i class="fa fa-check"></i><b>5.3</b> Cleaning the Remote Associates Data set.</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="programming2.html"><a href="programming2.html#context-and-viewing-it-in-rstudio"><i class="fa fa-check"></i><b>5.3.1</b> Context and Viewing it in RStudio</a></li>
+<li class="chapter" data-level="5.3.2" data-path="programming2.html"><a href="programming2.html#cleaning-the-remote-associations-data-set"><i class="fa fa-check"></i><b>5.3.2</b> Cleaning the Remote Associations Data Set</a></li>
+<li class="chapter" data-level="5.3.3" data-path="programming2.html"><a href="programming2.html#choosing-our-columns-of-interest-with-select"><i class="fa fa-check"></i><b>5.3.3</b> Choosing our Columns of Interest with <code>Select()</code></a></li>
+<li class="chapter" data-level="5.3.4" data-path="programming2.html"><a href="programming2.html#renaming-our-columns-of-interest-with-rename"><i class="fa fa-check"></i><b>5.3.4</b> Renaming our Columns of Interest with <code>rename()</code></a></li>
+<li class="chapter" data-level="5.3.5" data-path="programming2.html"><a href="programming2.html#creating-new-columns-using-the-mutate-function"><i class="fa fa-check"></i><b>5.3.5</b> Creating new Columns using the <code>mutate()</code> function</a></li>
+<li class="chapter" data-level="5.3.6" data-path="programming2.html"><a href="programming2.html#rewriting-existing-columns-using-mutate"><i class="fa fa-check"></i><b>5.3.6</b> Rewriting existing columns using <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.3.7" data-path="programming2.html"><a href="programming2.html#checking-in-on-our-data-set"><i class="fa fa-check"></i><b>5.3.7</b> Checking in on our data set</a></li>
+<li class="chapter" data-level="5.3.8" data-path="programming2.html"><a href="programming2.html#removing-duplicates-using-distinct"><i class="fa fa-check"></i><b>5.3.8</b> Removing Duplicates using <code>distinct()</code></a></li>
+<li class="chapter" data-level="5.3.9" data-path="programming2.html"><a href="programming2.html#removing-rows-using-the-filter-function"><i class="fa fa-check"></i><b>5.3.9</b> Removing Rows using the <code>filter()</code> Function</a></li>
+<li class="chapter" data-level="5.3.10" data-path="programming2.html"><a href="programming2.html#removing-rows-using-multiple-conditions-with-filter"><i class="fa fa-check"></i><b>5.3.10</b> Removing Rows Using Multiple Conditions with <code>filter()</code></a></li>
+<li class="chapter" data-level="5.3.11" data-path="programming2.html"><a href="programming2.html#identifying-the-factors-in-our-data-frame"><i class="fa fa-check"></i><b>5.3.11</b> Identifying the Factors in our Data Frame</a></li>
+<li class="chapter" data-level="5.3.12" data-path="programming2.html"><a href="programming2.html#summarising-our-data-by-groups-using-group_by-and-summarise"><i class="fa fa-check"></i><b>5.3.12</b> Summarising our Data by Groups using <code>group_by()</code> and <code>summarise()</code></a></li>
+<li class="chapter" data-level="5.3.13" data-path="programming2.html"><a href="programming2.html#chaining-it-all-together-with-the-pipe-operator"><i class="fa fa-check"></i><b>5.3.13</b> Chaining it All Together with the Pipe Operator</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="appendix-understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix-understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>6</b> Appendix: Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="appendix-understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix-understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>6.1</b> How Boolean Operators Work:</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="appendix-understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix-understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>6.1.1</b> Understanding R’s Evaluation Process:</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-understanding-boolean-operators-in-the-context-of-filter" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> Appendix: Understanding Boolean Operators in the Context of <code>filter()</code><a href="appendix-understanding-boolean-operators-in-the-context-of-filter.html#appendix-understanding-boolean-operators-in-the-context-of-filter" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In the section X, I brushed over what the operators <code>&lt;</code> and <code>&amp;</code>, and <code>|</code> meant and what they were actually doing in R. Each of these operators are known as Boolean operators in R.</p>
+<p>Boolean operators are logical operators used in programming to combine or modify conditions, resulting in either <strong><code>TRUE</code></strong> or <strong><code>FALSE</code></strong> outcomes. In the context of data cleaning in R, Boolean operators help us construct conditions to select specific rows from a data frame based on certain criteria. When using <strong><code>filter()</code></strong>, R evaluates each row in the data frame against the specified conditions, determining whether each row meets the criteria and should be retained or not.</p>
+<div id="how-boolean-operators-work" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> How Boolean Operators Work:<a href="appendix-understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><strong>Logical AND (<code>&amp;</code>):</strong> The <strong><code>&amp;</code></strong> operator evaluates to <strong><code>TRUE</code></strong> only if both conditions on either side of the operator are <strong><code>TRUE</code></strong>. In the context of <strong><code>filter()</code></strong>, rows are retained if they satisfy <strong>all</strong> conditions joined by <strong><code>&amp;</code></strong>. For example, <strong><code>filter(df, x &gt; 5 &amp; y &lt; 10)</code></strong> will retain rows where <strong><code>x</code></strong> is greater than <strong><code>5</code></strong> <strong>and</strong> <strong><code>y</code></strong> is less than <strong><code>10</code></strong>.</p></li>
+<li><p><strong>Logical OR (<code>|</code>):</strong> The <strong><code>|</code></strong> operator evaluates to <strong><code>TRUE</code></strong> if <strong>at least one</strong> of the conditions on either side of the operator is <strong><code>TRUE</code></strong>. In the context of <strong><code>filter()</code></strong>, rows are retained if they satisfy <strong>any</strong> of the conditions joined by <strong><code>|</code></strong>. For example, <strong><code>filter(df, x &gt; 5 | y &lt; 10)</code></strong> will retain rows where <strong><code>x</code></strong> is greater than <strong><code>5</code></strong> <strong>or</strong> <strong><code>y</code></strong> is less than <strong><code>10</code></strong>.</p></li>
+<li><p><strong>Logical NOT (<code>!</code>):</strong> The <strong><code>!</code></strong> operator negates a condition, converting <strong><code>TRUE</code></strong> to <strong><code>FALSE</code></strong> and vice versa. In the context of <strong><code>filter()</code></strong>, <strong><code>!</code></strong> can be used to exclude rows that satisfy a particular condition. For example, <strong><code>filter(df, !(x == 5))</code></strong> will exclude rows where <strong><code>x</code></strong> equals <strong><code>5</code></strong>.</p></li>
+</ul>
+<div id="understanding-rs-evaluation-process" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Understanding R’s Evaluation Process:<a href="appendix-understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When applying <strong><code>filter()</code></strong> with Boolean operators, R sequentially evaluates each row in the data frame against the specified conditions. If a row satisfies <strong>all</strong> conditions joined by <strong><code>&amp;</code></strong>, or <strong>any</strong> condition joined by <strong><code>|</code></strong>, it is retained in the filtered data frame. Rows that do not meet the specified criteria are excluded from the output.</p>
+<p>The following table summarises the main Boolean operators we would use in R</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="56%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operator/Condition</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>Checks if two values are equal.</td>
+<td><code>x == 5</code> evaluates to <code>TRUE</code> if <code>x</code> equals <code>5</code>.</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Checks if two values are not equal.</td>
+<td><code>x != 5</code> evaluates to <code>TRUE</code> if <code>x</code> does not equal <code>5</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td>Checks if one value is greater than another.</td>
+<td><code>x &gt; 5</code> evaluates to <code>TRUE</code> if <code>x</code> is greater than <code>5</code>.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;</code></td>
+<td>Checks if one value is less than another.</td>
+<td><code>x &lt; 5</code> evaluates to <code>TRUE</code> if <code>x</code> is less than <code>5</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>&gt;=</code></td>
+<td>Checks if one value is greater than or equal to another.</td>
+<td><code>x &gt;= 5</code> evaluates to <code>TRUE</code> if <code>x</code> is greater than or equal to <code>5</code>.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td>Checks if one value is less than or equal to another.</td>
+<td><code>x &lt;= 5</code> evaluates to <code>TRUE</code> if <code>x</code> is less than or equal to <code>5</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>&amp;</code></td>
+<td>Logical AND operator; evaluates to <code>TRUE</code> only if both conditions are <code>TRUE</code>.</td>
+<td><code>(x &gt; 5) &amp; (y &lt; 10)</code> evaluates to <code>TRUE</code> if <code>x</code> is greater than <code>5</code> AND <code>y</code> is less than <code>10</code>.</td>
+</tr>
+<tr class="even">
+<td><code>|</code></td>
+<td>Logical OR operator; evaluates to <code>TRUE</code> if at least one condition is <code>TRUE</code>.</td>
+<td><code>(x &gt; 5) \| (y &lt; 10)</code> evaluates to <code>TRUE</code> if <code>x</code> is greater than <code>5</code> OR <code>y</code> is less than <code>10</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>!</code></td>
+<td>Logical NOT operator; negates a condition.</td>
+<td><code>!(x == 5)</code> evaluates to <code>TRUE</code> if <code>x</code> is not equal to <code>5</code>.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="programming2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/appendix_boolean.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rintro_demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

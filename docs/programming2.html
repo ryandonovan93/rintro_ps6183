@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 R Programming (Part II) | Introduction to R</title>
+  <meta name="description" content="This GitBook is for the R Workshops" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 R Programming (Part II) | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook is for the R Workshops" />
+  <meta name="github-repo" content="ryandonovan93/rintro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 R Programming (Part II) | Introduction to R" />
+  
+  <meta name="twitter:description" content="This GitBook is for the R Workshops" />
+  
+
+<meta name="author" content="Ryan Donovan" />
+
+
+<meta name="date" content="2024-03-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="programming1.html"/>
+<link rel="next" href="datacleaning1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R (University of Galway)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#who-is-this-resource-for"><i class="fa fa-check"></i><b>1.1</b> Who is this resource for?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#should-i-learn-r"><i class="fa fa-check"></i><b>1.2</b> Should I learn R?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-will-i-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.3</b> What will I learn to do in R?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-will-i-not-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.4</b> What will I not learn to do in R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#where-and-when-will-the-workshops-take-place"><i class="fa fa-check"></i><b>1.5</b> Where and when will the workshops take place?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#are-there-any-prerequisites-for-taking-this-course"><i class="fa fa-check"></i><b>1.6</b> Are there any prerequisites for taking this course?</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#do-i-need-to-bring-a-laptop-to-the-class"><i class="fa fa-check"></i><b>1.7</b> Do I need to bring a laptop to the class?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Getting Started with R and RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.1</b> What is R?</a></li>
+<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#create-a-posit-cloud-account."><i class="fa fa-check"></i><b>2.2</b> Create a Posit Cloud Account.</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-to-your-computer"><i class="fa fa-check"></i><b>2.3</b> Downloading R on to your Computer</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-windows"><i class="fa fa-check"></i><b>2.3.1</b> Downloading R on Windows</a></li>
+<li class="chapter" data-level="2.3.2" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-mac"><i class="fa fa-check"></i><b>2.3.2</b> Downloading R on Mac</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#install-and-open-r-studio"><i class="fa fa-check"></i><b>2.4</b> Install and Open R Studio</a></li>
+<li class="chapter" data-level="2.5" data-path="rstudio.html"><a href="rstudio.html#creating-an-r-project"><i class="fa fa-check"></i><b>2.5</b> Creating an R Project</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="rstudio.html"><a href="rstudio.html#navigating-rstudio"><i class="fa fa-check"></i><b>2.5.1</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rstudio.html"><a href="rstudio.html#checking-our-working-directory"><i class="fa fa-check"></i><b>2.5.2</b> Checking our Working Directory</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rstudio.html"><a href="rstudio.html#set_wd"><i class="fa fa-check"></i><b>2.5.3</b> Setting up a new Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#writing-our-first-r-code"><i class="fa fa-check"></i><b>2.6</b> Writing our first R Code</a></li>
+<li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.7</b> Console vs Source Script</a></li>
+<li class="chapter" data-level="2.8" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.8</b> Let’s write some statistical code</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="rstudio.html"><a href="rstudio.html#comments"><i class="fa fa-check"></i><b>2.8.1</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rstudio.html"><a href="rstudio.html#summary"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="rstudio.html"><a href="rstudio.html#glossary"><i class="fa fa-check"></i><b>2.10</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming1.html"><a href="programming1.html"><i class="fa fa-check"></i><b>3</b> <strong>R Programming (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#activity-1-set-up-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Activity 1: Set up your Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#using-the-console"><i class="fa fa-check"></i><b>3.2</b> Using the Console</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.2.1</b> Typing Commands in the Console</a></li>
+<li class="chapter" data-level="3.2.2" data-path="programming1.html"><a href="programming1.html#console-syntax-aka-im-ron-burgundy"><i class="fa fa-check"></i><b>3.2.2</b> Console Syntax (Aka “I’m Ron Burgundy?”)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="programming1.html"><a href="programming1.html#exercises"><i class="fa fa-check"></i><b>3.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#data-types"><i class="fa fa-check"></i><b>3.3</b> Data Types</a></li>
+<li class="chapter" data-level="3.4" data-path="programming1.html"><a href="programming1.html#basic-data-types-in-r"><i class="fa fa-check"></i><b>3.4</b> Basic Data types in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="programming1.html"><a href="programming1.html#character"><i class="fa fa-check"></i><b>3.4.1</b> Character</a></li>
+<li class="chapter" data-level="3.4.2" data-path="programming1.html"><a href="programming1.html#numeric-or-double"><i class="fa fa-check"></i><b>3.4.2</b> Numeric (or Double)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="programming1.html"><a href="programming1.html#integer"><i class="fa fa-check"></i><b>3.4.3</b> Integer</a></li>
+<li class="chapter" data-level="3.4.4" data-path="programming1.html"><a href="programming1.html#logical-otherwise-know-as-boolean"><i class="fa fa-check"></i><b>3.4.4</b> Logical (otherwise know as Boolean)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="programming1.html"><a href="programming1.html#exercises-1"><i class="fa fa-check"></i><b>3.4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.5.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="programming1.html"><a href="programming1.html#exercises-2"><i class="fa fa-check"></i><b>3.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.6</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.6.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.6.2</b> Data frames</a></li>
+<li class="chapter" data-level="3.6.3" data-path="programming1.html"><a href="programming1.html#exercises-3"><i class="fa fa-check"></i><b>3.6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#summary-1"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="programming1.html"><a href="programming1.html#glossary-1"><i class="fa fa-check"></i><b>3.8</b> Glossary</a></li>
+<li class="chapter" data-level="3.9" data-path="programming1.html"><a href="programming1.html#variable-name-table"><i class="fa fa-check"></i><b>3.9</b> Variable Name Table</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming2.html"><a href="programming2.html"><i class="fa fa-check"></i><b>4</b> <strong>R Programming (Part II)</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming2.html"><a href="programming2.html#functions"><i class="fa fa-check"></i><b>4.1</b> Functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming2.html"><a href="programming2.html#the-syntax-for-creating-a-function"><i class="fa fa-check"></i><b>4.1.1</b> The Syntax for Creating a Function</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming2.html"><a href="programming2.html#creating-a-simple-function-1-argument"><i class="fa fa-check"></i><b>4.1.2</b> Creating a Simple Function (1-Argument)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="programming2.html"><a href="programming2.html#creating-a-multi-argument-function"><i class="fa fa-check"></i><b>4.1.3</b> Creating a Multi-Argument Function</a></li>
+<li class="chapter" data-level="4.1.4" data-path="programming2.html"><a href="programming2.html#functions-inside-functions"><i class="fa fa-check"></i><b>4.1.4</b> Functions inside Functions</a></li>
+<li class="chapter" data-level="4.1.5" data-path="programming2.html"><a href="programming2.html#returning-multiple-objects-from-a-function"><i class="fa fa-check"></i><b>4.1.5</b> Returning Multiple Objects from a Function</a></li>
+<li class="chapter" data-level="4.1.6" data-path="programming2.html"><a href="programming2.html#some-important-features-about-functions"><i class="fa fa-check"></i><b>4.1.6</b> Some Important Features about Functions</a></li>
+<li class="chapter" data-level="4.1.7" data-path="programming2.html"><a href="programming2.html#exercises-4"><i class="fa fa-check"></i><b>4.1.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming2.html"><a href="programming2.html#the-factor-data-type"><i class="fa fa-check"></i><b>4.2</b> The Factor Data Type</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="programming2.html"><a href="programming2.html#creating-a-factor"><i class="fa fa-check"></i><b>4.2.1</b> Creating a Factor</a></li>
+<li class="chapter" data-level="4.2.2" data-path="programming2.html"><a href="programming2.html#using-factors-to-sort-character-data"><i class="fa fa-check"></i><b>4.2.2</b> Using Factors to Sort Character Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="programming2.html"><a href="programming2.html#exercises-5"><i class="fa fa-check"></i><b>4.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="programming2.html"><a href="programming2.html#the-list-data-structure"><i class="fa fa-check"></i><b>4.3</b> The List Data Structure</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="programming2.html"><a href="programming2.html#understanding-lists"><i class="fa fa-check"></i><b>4.3.1</b> Understanding Lists</a></li>
+<li class="chapter" data-level="4.3.2" data-path="programming2.html"><a href="programming2.html#creating-lists"><i class="fa fa-check"></i><b>4.3.2</b> Creating Lists</a></li>
+<li class="chapter" data-level="4.3.3" data-path="programming2.html"><a href="programming2.html#lists-within-lists-indexing"><i class="fa fa-check"></i><b>4.3.3</b> Lists within Lists (Indexing)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="programming2.html"><a href="programming2.html#summary-2"><i class="fa fa-check"></i><b>4.3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="programming2.html"><a href="programming2.html#r-packages"><i class="fa fa-check"></i><b>4.4</b> R Packages</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming2.html"><a href="programming2.html#understanding-r-packages"><i class="fa fa-check"></i><b>4.4.1</b> Understanding R Packages</a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming2.html"><a href="programming2.html#installing-and-loading-r-package"><i class="fa fa-check"></i><b>4.4.2</b> Installing and Loading R Package</a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming2.html"><a href="programming2.html#loading-packages"><i class="fa fa-check"></i><b>4.4.3</b> Loading Packages</a></li>
+<li class="chapter" data-level="4.4.4" data-path="programming2.html"><a href="programming2.html#testing-our-new-functions"><i class="fa fa-check"></i><b>4.4.4</b> Testing our New Functions</a></li>
+<li class="chapter" data-level="4.4.5" data-path="programming2.html"><a href="programming2.html#error-loading-packages"><i class="fa fa-check"></i><b>4.4.5</b> Error Loading Packages</a></li>
+<li class="chapter" data-level="4.4.6" data-path="programming2.html"><a href="programming2.html#package-conventions-if-using-code"><i class="fa fa-check"></i><b>4.4.6</b> Package Conventions if Using Code</a></li>
+<li class="chapter" data-level="4.4.7" data-path="programming2.html"><a href="programming2.html#summary-3"><i class="fa fa-check"></i><b>4.4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="programming2.html"><a href="programming2.html#importing"><i class="fa fa-check"></i><b>4.5</b> Importing and Exporting Data</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="programming2.html"><a href="programming2.html#importing-csv-files."><i class="fa fa-check"></i><b>4.5.1</b> Importing CSV files.</a></li>
+<li class="chapter" data-level="4.5.2" data-path="programming2.html"><a href="programming2.html#importing-spss-.sav-files."><i class="fa fa-check"></i><b>4.5.2</b> Importing SPSS (.sav files).</a></li>
+<li class="chapter" data-level="4.5.3" data-path="programming2.html"><a href="programming2.html#exporting-datasets-in-r"><i class="fa fa-check"></i><b>4.5.3</b> Exporting Datasets in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="programming2.html"><a href="programming2.html#summary-4"><i class="fa fa-check"></i><b>4.6</b> Summary</a></li>
+<li class="chapter" data-level="4.7" data-path="programming2.html"><a href="programming2.html#glossary-2"><i class="fa fa-check"></i><b>4.7</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datacleaning1.html"><a href="datacleaning1.html"><i class="fa fa-check"></i><b>5</b> <strong>Data Wrangling and Cleaning (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datacleaning1.html"><a href="datacleaning1.html#what-is-data-wrangling-and-cleaning"><i class="fa fa-check"></i><b>5.1</b> <strong>What is Data Wrangling and Cleaning?</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="datacleaning1.html"><a href="datacleaning1.html#naming-conventions-in-this-book"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Naming Conventions in this Book</strong></a></li>
+<li class="chapter" data-level="5.1.2" data-path="datacleaning1.html"><a href="datacleaning1.html#why-is-data-cleaning-important"><i class="fa fa-check"></i><b>5.1.2</b> <strong>Why is Data Cleaning Important?</strong></a></li>
+<li class="chapter" data-level="5.1.3" data-path="datacleaning1.html"><a href="datacleaning1.html#how-can-r-help-you-with-data-cleaning"><i class="fa fa-check"></i><b>5.1.3</b> <strong>How can R help you with Data Cleaning?</strong></a></li>
+<li class="chapter" data-level="5.1.4" data-path="datacleaning1.html"><a href="datacleaning1.html#tidyverse-and-base-r"><i class="fa fa-check"></i><b>5.1.4</b> Tidyverse (and Base R)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="datacleaning1.html"><a href="datacleaning1.html#lets-get-set-up"><i class="fa fa-check"></i><b>5.2</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.1-set-up-your-wd"><i class="fa fa-check"></i><b>5.2.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="5.2.2" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.2-import-your-csv-files-and-r-script"><i class="fa fa-check"></i><b>5.2.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="5.2.3" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.3-install-and-load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.2.3</b> Activity 1.3: Install and load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-the-remote-associates-data-set."><i class="fa fa-check"></i><b>5.3</b> Cleaning the Remote Associates Data set.</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datacleaning1.html"><a href="datacleaning1.html#context-and-viewing-it-in-rstudio"><i class="fa fa-check"></i><b>5.3.1</b> Context and Viewing it in RStudio</a></li>
+<li class="chapter" data-level="5.3.2" data-path="datacleaning1.html"><a href="datacleaning1.html#key-functions-that-will-help-you-clean-most-datasets"><i class="fa fa-check"></i><b>5.3.2</b> Key Functions That Will Help You Clean Most Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datacleaning1.html"><a href="datacleaning1.html#choosing-our-columns-of-interest-with-select"><i class="fa fa-check"></i><b>5.4</b> Choosing our Columns of Interest with <code>Select()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="datacleaning1.html"><a href="datacleaning1.html#renaming-our-columns-of-interest-with-rename"><i class="fa fa-check"></i><b>5.5</b> Renaming our Columns of Interest with <code>rename()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="datacleaning1.html"><a href="datacleaning1.html#creating-new-columns-using-the-mutate-function"><i class="fa fa-check"></i><b>5.6</b> Creating new Columns using the <code>mutate()</code> function</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="datacleaning1.html"><a href="datacleaning1.html#rewriting-existing-columns-using-mutate"><i class="fa fa-check"></i><b>5.6.1</b> Rewriting existing columns using <code>mutate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="datacleaning1.html"><a href="datacleaning1.html#checking-in-on-our-data-set"><i class="fa fa-check"></i><b>5.7</b> Checking in on our data set</a></li>
+<li class="chapter" data-level="5.8" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-duplicates-using-distinct"><i class="fa fa-check"></i><b>5.8</b> Removing Duplicates using <code>distinct()</code></a></li>
+<li class="chapter" data-level="5.9" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-the-filter-function"><i class="fa fa-check"></i><b>5.9</b> Removing Rows using the <code>filter()</code> Function</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-multiple-conditions-with-filter"><i class="fa fa-check"></i><b>5.9.1</b> Removing Rows Using Multiple Conditions with <code>filter()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="datacleaning1.html"><a href="datacleaning1.html#identifying-the-factors-in-our-data-frame"><i class="fa fa-check"></i><b>5.10</b> Identifying the Factors in our Data Frame</a></li>
+<li class="chapter" data-level="5.11" data-path="datacleaning1.html"><a href="datacleaning1.html#summarising-our-data-by-groups-using-group_by-and-summarise"><i class="fa fa-check"></i><b>5.11</b> Summarising our Data by Groups using <code>group_by()</code> and <code>summarise()</code></a></li>
+<li class="chapter" data-level="5.12" data-path="datacleaning1.html"><a href="datacleaning1.html#chaining-it-all-together-with-the-pipe-operator"><i class="fa fa-check"></i><b>5.12</b> Chaining it All Together with the Pipe Operator</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="datacleaning1.html"><a href="datacleaning1.html#using-a-pipe-operator-on-the-remote-associations-data-frame"><i class="fa fa-check"></i><b>5.12.1</b> Using a Pipe Operator on the Remote Associations Data Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="datacleaning1.html"><a href="datacleaning1.html#clean-activity"><i class="fa fa-check"></i><b>5.13</b> Activity: Clean the Flanker Dataset</a>
+<ul>
+<li class="chapter" data-level="5.13.1" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-flanker-test-dataset"><i class="fa fa-check"></i><b>5.13.1</b> <strong>Cleaning Flanker Test Dataset</strong></a></li>
+<li class="chapter" data-level="5.13.2" data-path="datacleaning1.html"><a href="datacleaning1.html#load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.13.2</b> <strong>Load the “Tidyverse” Package</strong></a></li>
+<li class="chapter" data-level="5.13.3" data-path="datacleaning1.html"><a href="datacleaning1.html#reset-your-environment"><i class="fa fa-check"></i><b>5.13.3</b> <strong>Reset Your Environment</strong></a></li>
+<li class="chapter" data-level="5.13.4" data-path="datacleaning1.html"><a href="datacleaning1.html#import-the-data"><i class="fa fa-check"></i><b>5.13.4</b> <strong>Import the Data</strong></a></li>
+<li class="chapter" data-level="5.13.5" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-instructions"><i class="fa fa-check"></i><b>5.13.5</b> Cleaning Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.14" data-path="datacleaning1.html"><a href="datacleaning1.html#summary-5"><i class="fa fa-check"></i><b>5.14</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="datacleaning2.html"><a href="datacleaning2.html"><i class="fa fa-check"></i><b>6</b> Data Wrangling and Cleaning (Part II)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#lets-get-set-up-1"><i class="fa fa-check"></i><b>6.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.1-set-up-your-wd-1"><i class="fa fa-check"></i><b>6.1.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="6.1.2" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.2-import-your-csv-files-and-r-script-1"><i class="fa fa-check"></i><b>6.1.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="6.1.3" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.3-load-the-tidyverse-package"><i class="fa fa-check"></i><b>6.1.3</b> Activity 1.3: Load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#data-formats-long-and-wide-data"><i class="fa fa-check"></i><b>6.2</b> Data Formats (Long and Wide Data)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="datacleaning2.html"><a href="datacleaning2.html#defining-long-and-wide-data"><i class="fa fa-check"></i><b>6.2.1</b> Defining Long and Wide Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#converting-the-format-of-our-data"><i class="fa fa-check"></i><b>6.3</b> Converting the Format of Our Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-wide-to-long"><i class="fa fa-check"></i><b>6.3.1</b> Pivoting from Wide to Long</a></li>
+<li class="chapter" data-level="6.3.2" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-our-remote-associations-data-frame"><i class="fa fa-check"></i><b>6.3.2</b> Pivoting our Remote Associations Data Frame</a></li>
+<li class="chapter" data-level="6.3.3" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-long-to-wide"><i class="fa fa-check"></i><b>6.3.3</b> Pivoting from Long to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="datacleaning2.html"><a href="datacleaning2.html#handling-missing-values"><i class="fa fa-check"></i><b>6.4</b> Handling Missing Values</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-missing-values"><i class="fa fa-check"></i><b>6.4.1</b> <strong>Introduction to Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.2" data-path="datacleaning2.html"><a href="datacleaning2.html#identifying-missing-values"><i class="fa fa-check"></i><b>6.4.2</b> <strong>Identifying Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.3" data-path="datacleaning2.html"><a href="datacleaning2.html#removing-missing-values"><i class="fa fa-check"></i><b>6.4.3</b> Removing Missing Values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-data-i.e.-joining-different-datasets-together"><i class="fa fa-check"></i><b>6.5</b> Merging Data (i.e., Joining Different Datasets Together)</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-merging-data"><i class="fa fa-check"></i><b>6.5.1</b> Introduction to Merging Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="datacleaning2.html"><a href="datacleaning2.html#inner_join"><i class="fa fa-check"></i><b>6.5.2</b> Inner_Join</a></li>
+<li class="chapter" data-level="6.5.3" data-path="datacleaning2.html"><a href="datacleaning2.html#left_join"><i class="fa fa-check"></i><b>6.5.3</b> Left_join</a></li>
+<li class="chapter" data-level="6.5.4" data-path="datacleaning2.html"><a href="datacleaning2.html#right_join"><i class="fa fa-check"></i><b>6.5.4</b> Right_Join</a></li>
+<li class="chapter" data-level="6.5.5" data-path="datacleaning2.html"><a href="datacleaning2.html#outer-join"><i class="fa fa-check"></i><b>6.5.5</b> Outer Join</a></li>
+<li class="chapter" data-level="6.5.6" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-7"><i class="fa fa-check"></i><b>6.5.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="datacleaning2.html"><a href="datacleaning2.html#data-wrangling-example-demographic-and-flanker-task"><i class="fa fa-check"></i><b>6.6</b> Data Wrangling Example (Demographic and Flanker Task)</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#part-i-cleaning-the-df_background-file"><i class="fa fa-check"></i><b>6.6.1</b> Part I: Cleaning the <code>df_background</code> file</a></li>
+<li class="chapter" data-level="6.6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#cleaning-our-flanker-tasks"><i class="fa fa-check"></i><b>6.6.2</b> Cleaning our Flanker Tasks</a></li>
+<li class="chapter" data-level="6.6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-the-data-frames"><i class="fa fa-check"></i><b>6.6.3</b> Merging the Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-8"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-vis.html"><a href="data-vis.html"><i class="fa fa-check"></i><b>7</b> Data Visualisation in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-vis.html"><a href="data-vis.html#lets-get-set-up-2"><i class="fa fa-check"></i><b>7.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-vis.html"><a href="data-vis.html#activity-set-up-your-working-directory"><i class="fa fa-check"></i><b>7.1.1</b> Activity: Set Up Your Working Directory</a></li>
+<li class="chapter" data-level="7.1.2" data-path="data-vis.html"><a href="data-vis.html#activity-download-and-import-your-files"><i class="fa fa-check"></i><b>7.1.2</b> Activity: Download and Import Your Files</a></li>
+<li class="chapter" data-level="7.1.3" data-path="data-vis.html"><a href="data-vis.html#activity-open-your-r-script"><i class="fa fa-check"></i><b>7.1.3</b> Activity: Open your R Script</a></li>
+<li class="chapter" data-level="7.1.4" data-path="data-vis.html"><a href="data-vis.html#activity-install-and-load-your-packages"><i class="fa fa-check"></i><b>7.1.4</b> Activity: Install and Load Your Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-vis.html"><a href="data-vis.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>7.2</b> Introduction to <code>ggplot2</code></a></li>
+<li class="chapter" data-level="7.3" data-path="data-vis.html"><a href="data-vis.html#how-to-draw-a-plot-box-plot"><i class="fa fa-check"></i><b>7.3</b> How to Draw a Plot (Box Plot)</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-vis.html"><a href="data-vis.html#first-we-set-up-the-canvas"><i class="fa fa-check"></i><b>7.3.1</b> First we set up the Canvas</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-vis.html"><a href="data-vis.html#creating-our-box-plot"><i class="fa fa-check"></i><b>7.3.2</b> Creating our Box Plot</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-vis.html"><a href="data-vis.html#changing-the-name-of-our-x-axis-and-y-axis"><i class="fa fa-check"></i><b>7.3.3</b> Changing the Name of Our X-Axis and Y-Axis</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-vis.html"><a href="data-vis.html#changing-the-look-theme-of-our-canvas"><i class="fa fa-check"></i><b>7.3.4</b> Changing the Look (Theme) of Our Canvas</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-vis.html"><a href="data-vis.html#the-real-power-of-the-ggplot-package---customisation"><i class="fa fa-check"></i><b>7.4</b> The Real Power of the ggplot package - Customisation</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="data-vis.html"><a href="data-vis.html#mapping-aesthetic-properties-like-colour-and-fill-to-our-variables"><i class="fa fa-check"></i><b>7.4.1</b> Mapping Aesthetic Properties (like Colour and Fill) to Our Variables</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-vis.html"><a href="data-vis.html#changing-the-value-of-our-y-axis"><i class="fa fa-check"></i><b>7.4.2</b> Changing the Value of Our Y-Axis</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-vis.html"><a href="data-vis.html#plotting-our-data-points-in-the-graph"><i class="fa fa-check"></i><b>7.4.3</b> Plotting our Data Points in the Graph</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-vis.html"><a href="data-vis.html#adding-statistical-information-to-our-plot"><i class="fa fa-check"></i><b>7.4.4</b> Adding Statistical Information to Our Plot</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-vis.html"><a href="data-vis.html#adding-text-to-our-plot"><i class="fa fa-check"></i><b>7.4.5</b> Adding Text to Our Plot</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-vis.html"><a href="data-vis.html#exporting-our-plot"><i class="fa fa-check"></i><b>7.4.6</b> Exporting our Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-vis.html"><a href="data-vis.html#drawing-a-scatter-plot"><i class="fa fa-check"></i><b>7.5</b> Drawing a Scatter Plot</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="data-vis.html"><a href="data-vis.html#context"><i class="fa fa-check"></i><b>7.5.1</b> Context</a></li>
+<li class="chapter" data-level="7.5.2" data-path="data-vis.html"><a href="data-vis.html#drawing-our-plot"><i class="fa fa-check"></i><b>7.5.2</b> Drawing our Plot</a></li>
+<li class="chapter" data-level="7.5.3" data-path="data-vis.html"><a href="data-vis.html#customising-our-scatterplot-based-on-gender"><i class="fa fa-check"></i><b>7.5.3</b> Customising our Scatterplot based on Gender</a></li>
+<li class="chapter" data-level="7.5.4" data-path="data-vis.html"><a href="data-vis.html#faceting"><i class="fa fa-check"></i><b>7.5.4</b> Faceting</a></li>
+<li class="chapter" data-level="7.5.5" data-path="data-vis.html"><a href="data-vis.html#combining-charts"><i class="fa fa-check"></i><b>7.5.5</b> Combining Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="data-vis.html"><a href="data-vis.html#violin-charts"><i class="fa fa-check"></i><b>7.6</b> Violin Charts</a></li>
+<li class="chapter" data-level="7.7" data-path="data-vis.html"><a href="data-vis.html#bar-chart"><i class="fa fa-check"></i><b>7.7</b> Bar Chart</a></li>
+<li class="chapter" data-level="7.8" data-path="data-vis.html"><a href="data-vis.html#histograms"><i class="fa fa-check"></i><b>7.8</b> Histograms</a></li>
+<li class="chapter" data-level="7.9" data-path="data-vis.html"><a href="data-vis.html#line-chart"><i class="fa fa-check"></i><b>7.9</b> Line Chart</a></li>
+<li class="chapter" data-level="7.10" data-path="data-vis.html"><a href="data-vis.html#summary-9"><i class="fa fa-check"></i><b>7.10</b> Summary</a></li>
+<li class="chapter" data-level="7.11" data-path="data-vis.html"><a href="data-vis.html#geoms"><i class="fa fa-check"></i><b>7.11</b> Geoms</a></li>
+<li class="chapter" data-level="7.12" data-path="data-vis.html"><a href="data-vis.html#themes"><i class="fa fa-check"></i><b>7.12</b> Themes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>8</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>8.1</b> How Boolean Operators Work:</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>8.1.1</b> Understanding R’s Evaluation Process:</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="programming2" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> <strong>R Programming (Part II)</strong><a href="programming2.html#programming2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Today, we are going to build upon the foundational concepts introduced last week and delve deeper into the world of R programming.</p>
+<p>By the end of this session, you should be capable of the following:</p>
+<ul>
+<li><p>Understanding the logic of functions, including how and why they are created.</p></li>
+<li><p>Creating the “factor” data type and the list data structure.</p></li>
+<li><p>Being capable of enhancing your RStudio experience by installing and loading packages.</p></li>
+<li><p>Importing a dataset into R using both code and button-click interfaces from CSV and SPSS files.</p></li>
+<li><p>Exporting data to CSV and SPSS files.</p></li>
+</ul>
+<div id="functions" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Functions<a href="programming2.html#functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the previous two sessions, we have used several functions including: <strong><code>print()</code></strong>, <strong><code>head()</code></strong>, <strong><code>View()</code></strong>, <strong><code>mean()</code></strong>, <strong><code>sd()</code></strong>, <strong><code>summary()</code></strong>, <strong><code>aggregate()</code></strong>, <strong><code>plot()</code></strong>, <strong><code>pdf()</code></strong>, <strong><code>t.test()</code></strong>, <strong><code>class()</code></strong>, and <strong><code>c()</code></strong>. Each of these functions has served a particular purpose. All of them have taken in an input object (e.g., a variable, data type, and/or data structure), performed some operation on it, and produced some output.</p>
+<p>But we haven’t really talked about what functions actually are. I have told you they are similar to verbs in that they are “words” that do things. This makes them sound like some magical words.</p>
+<p>You might assume that being good at programming is about learning as many functions as you can, and learning in detail what they can do, so that whenever you face a challenging situation in R, you know what tool to use.</p>
+<p>There is some truth to this. You will inevitably learn more functions as you get better and more comfortable with R. This will make you more adept at using them. But what actually predicts becoming good at programming is your ability to understand the logic of functions and how they are created. If you grasp that, you’ll be able to learn them quicker, use them more effectively, and even create your own functions.</p>
+<p>This final point is critical. You can create your own functions. Let’s create our own function to demonstrate what functions actually are.</p>
+<div id="the-syntax-for-creating-a-function" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> The Syntax for Creating a Function<a href="programming2.html#the-syntax-for-creating-a-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Functions are somewhat similar to variables. We create variable names as labels for information. That way when we want to access that information or perform operations on it we can use the variable name rather than recreating the information in R again.</p>
+<p>Similarly, functions are like labels for code. We come up with a name for a function (e.g., <strong><code>mean()</code></strong>) and we assign code instructions to that function. So when we call a function, we can give it information (e.g., variables), and it will take information and run that code on it. This way we don’t have to write out code instructions over and over again - we can just call the function. This increases the scalability of our code.</p>
+<p>The syntax for creating a function looks like this:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="programming2.html#cb157-1" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>(argument) {</span>
+<span id="cb157-2"><a href="programming2.html#cb157-2" tabindex="-1"></a>  instruction_1</span>
+<span id="cb157-3"><a href="programming2.html#cb157-3" tabindex="-1"></a>  instructions_2</span>
+<span id="cb157-4"><a href="programming2.html#cb157-4" tabindex="-1"></a>  ....</span>
+<span id="cb157-5"><a href="programming2.html#cb157-5" tabindex="-1"></a>  instruction_n</span>
+<span id="cb157-6"><a href="programming2.html#cb157-6" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb157-7"><a href="programming2.html#cb157-7" tabindex="-1"></a>}</span></code></pre></div>
+<p>What’s going on here?</p>
+<ol style="list-style-type: decimal">
+<li><p>First, we created a name, <strong><code>my_function</code></strong>, and used the assignment operator <strong><code>&lt;-</code></strong> to tell R we are going to be storing some piece of information to that name.</p></li>
+<li><p>Then, we wrote <strong><code>function()</code></strong> to tell R that we are going to be creating a function and storing it to our name <strong><code>my_function</code></strong>. Inside <strong><code>function()</code></strong>, we specified an <strong><code>argument</code></strong>, which is just a fancy word for <strong><code>input</code></strong>.</p></li>
+<li><p>Inside the curly brackets <strong><code>{}</code></strong>, we write the code for <strong><code>my_function</code></strong>. This code comprises instructions (i.e., operations) that R will execute on our argument (i.e., input). We could have 1 instruction here, or we could have several hundred lines of instructions. That depends on the complexity of the function we are creating.</p></li>
+<li><p>We want the function to provide us with some output information. To ensure that it does that, we tell R to <strong><code>return()</code></strong> the information (<strong><code>output</code></strong>) that we want.</p></li>
+</ol>
+</div>
+<div id="creating-a-simple-function-1-argument" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Creating a Simple Function (1-Argument)<a href="programming2.html#creating-a-simple-function-1-argument" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It may come as a shock to you to learn that I am not much of a chef. One of the reasons I’m not a chef is my irritation with reading recipes that include instructions like “1 cup,” “10 ounces,” or “17 eagle feet,” or require preheating the oven to “1000 degrees Fahrenheit.” What I could really use is a function that would help me convert those values automatically. Let’s take the cup example. Let’s create a function that will take in the number of cups we need and convert that to grams.</p>
+<p>To do this, let’s create a function called <strong><code>cups_to_grams</code></strong> (note: the naming conventions for functions are similar to the naming conventions for variables. The main rule is that your function name should describe the action it is carrying out.)</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="programming2.html#cb158-1" tabindex="-1"></a>cups_to_grams <span class="ot">&lt;-</span> <span class="cf">function</span>(cups) {</span>
+<span id="cb158-2"><a href="programming2.html#cb158-2" tabindex="-1"></a>  </span>
+<span id="cb158-3"><a href="programming2.html#cb158-3" tabindex="-1"></a>}</span></code></pre></div>
+<p>Inside the <strong><code>function()</code></strong>, I have given it the argument <strong><code>cups</code></strong>. In this scenario, <strong><code>cups</code></strong> acts as a placeholder variable. Inside the function, we are going to write instructions on what to do with that variable. But we have not yet defined what that variable is yet. We do that when we use the function. So don’t worry about that for now.</p>
+<p>Now inside our function (i.e., inside the <strong><code>{}</code></strong>), we need to write instructions to enable R to convert cups to grams. When I googled this, several different answers popped up. But I am just going to follow the first website I found which said: “According to the metric system, there are 250 grams in 1 cup.”</p>
+<p>Let’s write that instruction inside our function. We are going to save the result of that calculation to a variable called <strong><code>grams</code></strong>.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="programming2.html#cb159-1" tabindex="-1"></a>cups_to_grams <span class="ot">&lt;-</span> <span class="cf">function</span>(cups) {</span>
+<span id="cb159-2"><a href="programming2.html#cb159-2" tabindex="-1"></a>  grams <span class="ot">&lt;-</span> cups <span class="sc">*</span> <span class="dv">250</span></span>
+<span id="cb159-3"><a href="programming2.html#cb159-3" tabindex="-1"></a>}</span></code></pre></div>
+<p>Now we are nearly done. But if we want R to provide us with the result of this function, we need to ask it to <strong><code>return()</code></strong> it to us. We can do that easily by:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="programming2.html#cb160-1" tabindex="-1"></a>cups_to_grams <span class="ot">&lt;-</span> <span class="cf">function</span>(cups) {</span>
+<span id="cb160-2"><a href="programming2.html#cb160-2" tabindex="-1"></a>  grams <span class="ot">&lt;-</span> cups <span class="sc">*</span> <span class="dv">250</span></span>
+<span id="cb160-3"><a href="programming2.html#cb160-3" tabindex="-1"></a>  <span class="fu">return</span>(grams)</span>
+<span id="cb160-4"><a href="programming2.html#cb160-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>There we have it, we have created our first function! Now let’s see if it works. In programming lingo, we say that we <strong><code>call</code></strong> a function when we use it. To call <strong><code>cups_to_grams</code></strong> it is the same process as the other functions we have used, we type out the name and then we insert our input inside the parentheses.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="programming2.html#cb161-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 250</code></pre>
+<p>It works! We can see here what I mean that <strong><code>cups</code></strong> is a placeholder variable. We want our function to be generalizable, so we don’t tell it ahead of time what <strong><code>cups</code></strong> equals. All it knows is that it will receive some information that will equate to cups, and then it will multiply that information by 250.</p>
+<p>This enables us to call our function several times with several different values.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="programming2.html#cb163-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 1000</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="programming2.html#cb165-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 500</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="programming2.html#cb167-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> <span class="fl">1.5</span>)</span></code></pre></div>
+<pre><code>## [1] 375</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="programming2.html#cb169-1" tabindex="-1"></a><span class="fu">cups_to_grams</span>(<span class="at">cups =</span> 5L)</span></code></pre></div>
+<pre><code>## [1] 1250</code></pre>
+<p>We can also define what <code>cups</code> is outside of the function.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="programming2.html#cb171-1" tabindex="-1"></a>cups <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb171-2"><a href="programming2.html#cb171-2" tabindex="-1"></a><span class="fu">cups_to_grams</span>(cups)</span></code></pre></div>
+<pre><code>## [1] 500</code></pre>
+<p>This is an example of a 1-argument function, as it only takes in 1 input. But we can also create functions that have multiple arguments.</p>
+</div>
+<div id="creating-a-multi-argument-function" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Creating a Multi-Argument Function<a href="programming2.html#creating-a-multi-argument-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You might have noticed previously that sometimes we put additional information inside functions, like <strong><code>paired = TRUE</code></strong> in <strong><code>t.test()</code></strong>, or <strong><code>descending = FALSE</code></strong> in <strong><code>sort()</code></strong>. This additional information represents other arguments that we can insert inside a function.</p>
+<p>The process for creating a multi-argument function is the same as for a single-argument function. Let’s create a function called <strong><code>calculate_z_score</code></strong> that calculates the z-score of a value.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="programming2.html#cb173-1" tabindex="-1"></a>calculate_z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb173-2"><a href="programming2.html#cb173-2" tabindex="-1"></a>  <span class="co"># Calculate the z-score</span></span>
+<span id="cb173-3"><a href="programming2.html#cb173-3" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb173-4"><a href="programming2.html#cb173-4" tabindex="-1"></a>  </span>
+<span id="cb173-5"><a href="programming2.html#cb173-5" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb173-6"><a href="programming2.html#cb173-6" tabindex="-1"></a>  <span class="fu">return</span>(z_score)</span>
+<span id="cb173-7"><a href="programming2.html#cb173-7" tabindex="-1"></a>}</span></code></pre></div>
+<p>In this function:</p>
+<ul>
+<li><p><strong><code>x</code></strong> is the value for which we want to calculate the z-score.</p></li>
+<li><p><strong><code>mean_val</code></strong> is the mean score of the variable within our dataset.</p></li>
+<li><p><strong><code>sd_val</code></strong> is the standard deviation of the variable within our dataset.</p></li>
+</ul>
+<p>Inside the function, we calculate the z-score using the formula <strong><code>(x - mean_val) / sd_val</code></strong>. The calculated z-score is returned as the output of the function.</p>
+<p>Just like before, none of the placeholder arguments (<strong><code>x</code></strong>, <strong><code>mean_val</code></strong>, and <strong><code>sd_val</code></strong>) are defined beforehand. We will define them in our script or when we call our function.</p>
+<p>To test this function, let’s use an example of an IQ score since we know the population mean (100) and standard deviation (15). Let’s see what the z-score is for someone with an IQ of 130.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="programming2.html#cb174-1" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> <span class="dv">130</span>, <span class="at">mean_val =</span> <span class="dv">100</span>, <span class="at">sd_val =</span> <span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Just as we would expect, a person with an IQ of 130 is 2 standard deviations away from the mean. This shows that our function is working as expected.</p>
+<p>What if we had a vector of IQ scores? Could we use our function to calculate the z-score of each element in our vector? Absolutely!</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="programming2.html#cb176-1" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">130</span>, <span class="dv">85</span>), <span class="at">mean_val =</span> <span class="dv">100</span>, <span class="at">sd_val =</span> <span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## [1]  0  2 -1</code></pre>
+<p>Sticking with this example, let’s say we had a data frame with participant IDs, their age, and their IQ scores. We could feed the vector <strong><code>iq_scores</code></strong> into our <strong><code>calculate_z_score</code></strong> function, calculate their z-scores, and create a column based on those scores.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="programming2.html#cb178-1" tabindex="-1"></a><span class="co">#first let&#39;s make that data frame</span></span>
+<span id="cb178-2"><a href="programming2.html#cb178-2" tabindex="-1"></a></span>
+<span id="cb178-3"><a href="programming2.html#cb178-3" tabindex="-1"></a>iq_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb178-4"><a href="programming2.html#cb178-4" tabindex="-1"></a>  <span class="at">ID =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>),</span>
+<span id="cb178-5"><a href="programming2.html#cb178-5" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">41</span>, <span class="dv">45</span>, <span class="dv">18</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">45</span>),</span>
+<span id="cb178-6"><a href="programming2.html#cb178-6" tabindex="-1"></a>  <span class="at">iq =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">123</span>, <span class="dv">111</span>, <span class="dv">130</span>, <span class="dv">90</span>, <span class="dv">102</span>, <span class="dv">88</span>, <span class="dv">109</span>)</span>
+<span id="cb178-7"><a href="programming2.html#cb178-7" tabindex="-1"></a>)</span>
+<span id="cb178-8"><a href="programming2.html#cb178-8" tabindex="-1"></a></span>
+<span id="cb178-9"><a href="programming2.html#cb178-9" tabindex="-1"></a><span class="co">#now let&#39;s feed that IQ vector into our function and save it to a variable</span></span>
+<span id="cb178-10"><a href="programming2.html#cb178-10" tabindex="-1"></a></span>
+<span id="cb178-11"><a href="programming2.html#cb178-11" tabindex="-1"></a>iq_z_scores <span class="ot">&lt;-</span>  <span class="fu">calculate_z_score</span>(<span class="at">x =</span> iq_df<span class="sc">$</span>iq, <span class="at">mean_val =</span> <span class="dv">100</span>, <span class="at">sd_val =</span> <span class="dv">15</span>) <span class="co">#this will create a vector called iq_z_scores that is the output of our calculate_z_score</span></span>
+<span id="cb178-12"><a href="programming2.html#cb178-12" tabindex="-1"></a></span>
+<span id="cb178-13"><a href="programming2.html#cb178-13" tabindex="-1"></a></span>
+<span id="cb178-14"><a href="programming2.html#cb178-14" tabindex="-1"></a><span class="co">#if we want to add that column, we use the syntax </span></span>
+<span id="cb178-15"><a href="programming2.html#cb178-15" tabindex="-1"></a></span>
+<span id="cb178-16"><a href="programming2.html#cb178-16" tabindex="-1"></a><span class="co">#dataframe$newColumnName &lt;- #new_vector</span></span>
+<span id="cb178-17"><a href="programming2.html#cb178-17" tabindex="-1"></a></span>
+<span id="cb178-18"><a href="programming2.html#cb178-18" tabindex="-1"></a>iq_df<span class="sc">$</span>iq_z_scores <span class="ot">&lt;-</span> iq_z_scores</span>
+<span id="cb178-19"><a href="programming2.html#cb178-19" tabindex="-1"></a></span>
+<span id="cb178-20"><a href="programming2.html#cb178-20" tabindex="-1"></a></span>
+<span id="cb178-21"><a href="programming2.html#cb178-21" tabindex="-1"></a><span class="co">#now let&#39;s check our data frame</span></span>
+<span id="cb178-22"><a href="programming2.html#cb178-22" tabindex="-1"></a></span>
+<span id="cb178-23"><a href="programming2.html#cb178-23" tabindex="-1"></a><span class="fu">head</span>(iq_df)</span></code></pre></div>
+<pre><code>##   ID age  iq iq_z_scores
+## 1  1  22 100   0.0000000
+## 2  2  30 123   1.5333333
+## 3  3  41 111   0.7333333
+## 4  4  45 130   2.0000000
+## 5  5  18  90  -0.6666667
+## 6  6  21 102   0.1333333</code></pre>
+<p>While <strong><code>calculate_z_score</code></strong> is pretty handy, it’s not perfect. It requires us to calculate the mean and standard deviation functions separately and then feed that into our function. That’s okay if we are dealing with variables that have a known mean and standard deviation. Outside of those examples, we would need to do some extra work. But one of the virtues about functions is that it enables us to be lazy - we want to write functions that will automate boring tasks for us. So how could we improve this function? Well luckily, we can include functions inside functions.</p>
+</div>
+<div id="functions-inside-functions" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Functions inside Functions<a href="programming2.html#functions-inside-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s say that we add a column in our <strong><code>iq_df</code></strong> dataframe that contains participants’ mean scores on Beck’s Depression Inventory. We’ll call this column <strong><code>total_depression_beck</code></strong>.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="programming2.html#cb180-1" tabindex="-1"></a>iq_df<span class="sc">$</span>total_depression_beck <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">36</span>, <span class="dv">34</span>, <span class="dv">46</span>, </span>
+<span id="cb180-2"><a href="programming2.html#cb180-2" tabindex="-1"></a>                                <span class="dv">30</span>, <span class="dv">53</span>, <span class="dv">40</span>, <span class="dv">15</span>) <span class="co">#adds the mean_depression beck vector to our dataframe</span></span>
+<span id="cb180-3"><a href="programming2.html#cb180-3" tabindex="-1"></a></span>
+<span id="cb180-4"><a href="programming2.html#cb180-4" tabindex="-1"></a><span class="fu">head</span>(iq_df) <span class="co">#check to see if it was added correctly.</span></span></code></pre></div>
+<pre><code>##   ID age  iq iq_z_scores total_depression_beck
+## 1  1  22 100   0.0000000                    32
+## 2  2  30 123   1.5333333                    36
+## 3  3  41 111   0.7333333                    34
+## 4  4  45 130   2.0000000                    46
+## 5  5  18  90  -0.6666667                    30
+## 6  6  21 102   0.1333333                    53</code></pre>
+<p>Since we do not know the mean and standard deviation of the Beck Inventory, we will need to calculate them using the <strong><code>mean()</code></strong> and <strong><code>sd()</code></strong> functions. Luckily, we can use those functions within <strong><code>calculate_z_score</code></strong> to enable this for us. Let’s add this to our function and call it.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="programming2.html#cb182-1" tabindex="-1"></a>calculate_z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb182-2"><a href="programming2.html#cb182-2" tabindex="-1"></a>  <span class="co"># Calculate the z-score</span></span>
+<span id="cb182-3"><a href="programming2.html#cb182-3" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb182-4"><a href="programming2.html#cb182-4" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb182-5"><a href="programming2.html#cb182-5" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb182-6"><a href="programming2.html#cb182-6" tabindex="-1"></a>  </span>
+<span id="cb182-7"><a href="programming2.html#cb182-7" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb182-8"><a href="programming2.html#cb182-8" tabindex="-1"></a>  <span class="fu">return</span>(z_score)</span>
+<span id="cb182-9"><a href="programming2.html#cb182-9" tabindex="-1"></a>}</span>
+<span id="cb182-10"><a href="programming2.html#cb182-10" tabindex="-1"></a></span>
+<span id="cb182-11"><a href="programming2.html#cb182-11" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">110</span>))</span></code></pre></div>
+<pre><code>## Error in calculate_z_score(x = c(100, 90, 110)): object &#39;mean_val&#39; not found</code></pre>
+<p>Uh-oh! Why is it telling us that the object <strong><code>mean_val</code></strong> was not found? The reason for this is that the order of your code within a function matters. The order of your code is the order in which R will compute that instruction. Currently, I have asked R to compute <strong><code>z_score</code></strong> before defining what <strong><code>mean_val</code></strong> or <strong><code>sd_val</code></strong> are.</p>
+<p>So when R sees <strong><code>mean_val</code></strong>, it looks everywhere for what that value could mean, doesn’t find anything, and then panics and stops working. Again, humans have a theory of mind, so we would assume that we could provide this information. But R needs to do everything literally step-by-step.</p>
+<p>To rectify this, we just need to fix the order of our instructions inside R.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="programming2.html#cb184-1" tabindex="-1"></a>calculate_z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb184-2"><a href="programming2.html#cb184-2" tabindex="-1"></a>  <span class="co">#compute mean_val, and sd_val first</span></span>
+<span id="cb184-3"><a href="programming2.html#cb184-3" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb184-4"><a href="programming2.html#cb184-4" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb184-5"><a href="programming2.html#cb184-5" tabindex="-1"></a>  </span>
+<span id="cb184-6"><a href="programming2.html#cb184-6" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb184-7"><a href="programming2.html#cb184-7" tabindex="-1"></a>  </span>
+<span id="cb184-8"><a href="programming2.html#cb184-8" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb184-9"><a href="programming2.html#cb184-9" tabindex="-1"></a>  <span class="fu">return</span>(z_score)</span>
+<span id="cb184-10"><a href="programming2.html#cb184-10" tabindex="-1"></a>}</span>
+<span id="cb184-11"><a href="programming2.html#cb184-11" tabindex="-1"></a></span>
+<span id="cb184-12"><a href="programming2.html#cb184-12" tabindex="-1"></a><span class="fu">calculate_z_score</span>(<span class="at">x =</span> iq_df<span class="sc">$</span>total_depression_beck)</span></code></pre></div>
+<pre><code>## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491</code></pre>
+<p>Wahey, it worked! Try to add the z-scores for the <strong><code>total_depression_beck</code></strong> to the dataframe yourself (look at the end of the previous subsection for advice on how if you are stuck).</p>
+</div>
+<div id="returning-multiple-objects-from-a-function" class="section level3 hasAnchor" number="4.1.5">
+<h3><span class="header-section-number">4.1.5</span> Returning Multiple Objects from a Function<a href="programming2.html#returning-multiple-objects-from-a-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What if we wanted to return not only the <code>z_score</code> variable from calculate_z_score, but also <code>mean_val</code> and <code>sd_val</code> as well?</p>
+<p>Luckily, we can also tell our functions to return multiple different objects at the same time. We can do this by using lists.</p>
+<p>We will discuss lists in more detail later in this chapter. For now, all you need to know is that lists are versatile data structures in R that can hold elements of different types. We can create a list within a function, populate it with the values we want to return, and then return the list itself.</p>
+<p>We can create a variable within our function that is a list containing all the information we want to return. But since this changes the nature of the function, we are going to change its name to: `calculate_mean_sd_z`</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="programming2.html#cb186-1" tabindex="-1"></a>calculate_mean_sd_z <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb186-2"><a href="programming2.html#cb186-2" tabindex="-1"></a>  <span class="co">#compute mean_val, and sd_val first</span></span>
+<span id="cb186-3"><a href="programming2.html#cb186-3" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb186-4"><a href="programming2.html#cb186-4" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb186-5"><a href="programming2.html#cb186-5" tabindex="-1"></a>  </span>
+<span id="cb186-6"><a href="programming2.html#cb186-6" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb186-7"><a href="programming2.html#cb186-7" tabindex="-1"></a>  </span>
+<span id="cb186-8"><a href="programming2.html#cb186-8" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">list</span>(z_score, mean_val, sd_val)</span>
+<span id="cb186-9"><a href="programming2.html#cb186-9" tabindex="-1"></a>  </span>
+<span id="cb186-10"><a href="programming2.html#cb186-10" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb186-11"><a href="programming2.html#cb186-11" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb186-12"><a href="programming2.html#cb186-12" tabindex="-1"></a>}</span>
+<span id="cb186-13"><a href="programming2.html#cb186-13" tabindex="-1"></a></span>
+<span id="cb186-14"><a href="programming2.html#cb186-14" tabindex="-1"></a><span class="fu">calculate_mean_sd_z</span>(iq_df<span class="sc">$</span>total_depression_beck)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+## 
+## [[2]]
+## [1] 35.75
+## 
+## [[3]]
+## [1] 11.34838</code></pre>
+<p>This produces the results that we want, but the output leaves a lot to be desired. If someone else was calling our function, but was not aware of the instructions inside it, they might not know what each value from the output corresponds to. We can correct this by using the following syntax inside the list to label each value: <code>name_of_value = value</code></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="programming2.html#cb188-1" tabindex="-1"></a>calculate_mean_sd_z <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mean_val, sd_val) {</span>
+<span id="cb188-2"><a href="programming2.html#cb188-2" tabindex="-1"></a>  <span class="co">#compute mean_val, and sd_val first</span></span>
+<span id="cb188-3"><a href="programming2.html#cb188-3" tabindex="-1"></a>  mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb188-4"><a href="programming2.html#cb188-4" tabindex="-1"></a>  sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb188-5"><a href="programming2.html#cb188-5" tabindex="-1"></a>  </span>
+<span id="cb188-6"><a href="programming2.html#cb188-6" tabindex="-1"></a>  z_score <span class="ot">&lt;-</span> (x <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb188-7"><a href="programming2.html#cb188-7" tabindex="-1"></a>  </span>
+<span id="cb188-8"><a href="programming2.html#cb188-8" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">z =</span> z_score, <span class="at">mean =</span> mean_val, <span class="at">sd =</span> sd_val)</span>
+<span id="cb188-9"><a href="programming2.html#cb188-9" tabindex="-1"></a>  </span>
+<span id="cb188-10"><a href="programming2.html#cb188-10" tabindex="-1"></a>  <span class="co"># Return the z-score</span></span>
+<span id="cb188-11"><a href="programming2.html#cb188-11" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb188-12"><a href="programming2.html#cb188-12" tabindex="-1"></a>}</span>
+<span id="cb188-13"><a href="programming2.html#cb188-13" tabindex="-1"></a></span>
+<span id="cb188-14"><a href="programming2.html#cb188-14" tabindex="-1"></a><span class="fu">calculate_mean_sd_z</span>(iq_df<span class="sc">$</span>total_depression_beck)</span></code></pre></div>
+<pre><code>## $z
+## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491
+## 
+## $mean
+## [1] 35.75
+## 
+## $sd
+## [1] 11.34838</code></pre>
+<p>Now if we wanted to extract certain features from the function, we can use the `$` operator.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="programming2.html#cb190-1" tabindex="-1"></a>scores <span class="ot">&lt;-</span>  <span class="fu">calculate_mean_sd_z</span>(iq_df<span class="sc">$</span>total_depression_beck)</span>
+<span id="cb190-2"><a href="programming2.html#cb190-2" tabindex="-1"></a></span>
+<span id="cb190-3"><a href="programming2.html#cb190-3" tabindex="-1"></a>scores<span class="sc">$</span>mean</span></code></pre></div>
+<pre><code>## [1] 35.75</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="programming2.html#cb192-1" tabindex="-1"></a>scores<span class="sc">$</span>sd</span></code></pre></div>
+<pre><code>## [1] 11.34838</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="programming2.html#cb194-1" tabindex="-1"></a>scores<span class="sc">$</span>z</span></code></pre></div>
+<pre><code>## [1] -0.33044366  0.02202958 -0.15420704  0.90321267 -0.50668028  1.52004083
+## [7]  0.37450281 -1.82845491</code></pre>
+</div>
+<div id="some-important-features-about-functions" class="section level3 hasAnchor" number="4.1.6">
+<h3><span class="header-section-number">4.1.6</span> Some Important Features about Functions<a href="programming2.html#some-important-features-about-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are some important features about functions that you should know. Namely, the difference between Global and Local Variables and the ability to set and override Default Arguments.</p>
+<div id="global-vs-local-variables" class="section level4 hasAnchor" number="4.1.6.1">
+<h4><span class="header-section-number">4.1.6.1</span> Global vs Local Variables<a href="programming2.html#global-vs-local-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It is important to note that R treats variables you define in a function differently than variables you define outside of a function. Any variable you define within a function will only exist within the scope of that function. Variables defined in a function are called local variables whereas variables defined outside of a function are called global variables.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="programming2.html#cb196-1" tabindex="-1"></a>num1 <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co">#this is a global variable</span></span>
+<span id="cb196-2"><a href="programming2.html#cb196-2" tabindex="-1"></a></span>
+<span id="cb196-3"><a href="programming2.html#cb196-3" tabindex="-1"></a>local_global <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb196-4"><a href="programming2.html#cb196-4" tabindex="-1"></a>  num1 <span class="ot">&lt;-</span> <span class="dv">10</span><span class="co">#this is a local variable</span></span>
+<span id="cb196-5"><a href="programming2.html#cb196-5" tabindex="-1"></a>  <span class="fu">print</span>(num1)  <span class="co"># This will print 10</span></span>
+<span id="cb196-6"><a href="programming2.html#cb196-6" tabindex="-1"></a>}</span>
+<span id="cb196-7"><a href="programming2.html#cb196-7" tabindex="-1"></a></span>
+<span id="cb196-8"><a href="programming2.html#cb196-8" tabindex="-1"></a><span class="fu">local_global</span>()</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="programming2.html#cb198-1" tabindex="-1"></a><span class="fu">print</span>(num1)  <span class="co"># Error: object &#39;local_var&#39; not found</span></span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<p>We start this code chunk by assigning the value 20 to the variable <code>num1</code>. This is a global variable, it will exist across our R environment unless we change it to a different value.</p>
+<p>Within the <code>local_global()</code> function, we create another variable called <code>num1</code> and assign it the value of 10. But this is an example of a local variable, as it only exists inside of our function. When we run our function, it will print out 10, but the function will not change the global value of the variable.</p>
+</div>
+<div id="default-arguments" class="section level4 hasAnchor" number="4.1.6.2">
+<h4><span class="header-section-number">4.1.6.2</span> Default Arguments<a href="programming2.html#default-arguments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In R, functions can have default arguments, which are pre-defined values assigned to arguments in the function definition. Default arguments allow functions to be called with fewer arguments than specified in the function definition, as the default values are used when the arguments are not explicitly provided.</p>
+</div>
+<div id="syntax-for-default-arguments" class="section level4 hasAnchor" number="4.1.6.3">
+<h4><span class="header-section-number">4.1.6.3</span> Syntax for Default Arguments<a href="programming2.html#syntax-for-default-arguments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The syntax for defining default arguments in R functions is straightforward. When defining the function, you can assign default values to specific arguments using the <strong><code>argument = default_value</code></strong> format.</p>
+<p>Imagine I wanted to write a function that greeted someone. I could write the following function, <strong><code>greet</code></strong>:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="programming2.html#cb200-1" tabindex="-1"></a><span class="co"># Function with default argument</span></span>
+<span id="cb200-2"><a href="programming2.html#cb200-2" tabindex="-1"></a>greet <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">name =</span> <span class="st">&quot;World&quot;</span>) {</span>
+<span id="cb200-3"><a href="programming2.html#cb200-3" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Hello,&quot;</span>, name))</span>
+<span id="cb200-4"><a href="programming2.html#cb200-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>Within this function, I set the default value for the argument name as “World”. So if I were to call the function but not specify the argument, the following would happen:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="programming2.html#cb201-1" tabindex="-1"></a><span class="co"># Calling the function without providing arguments</span></span>
+<span id="cb201-2"><a href="programming2.html#cb201-2" tabindex="-1"></a><span class="fu">greet</span>() </span></code></pre></div>
+<pre><code>## [1] &quot;Hello, World&quot;</code></pre>
+<p>However, we can also override the default value of a function.</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="programming2.html#cb203-1" tabindex="-1"></a><span class="fu">greet</span>(<span class="at">name =</span> <span class="st">&quot;Ryan&quot;</span>) <span class="co">#please feel free to type in your own name</span></span></code></pre></div>
+<pre><code>## [1] &quot;Hello, Ryan&quot;</code></pre>
+<p>Having default values in a function enables them to be called with fewer arguments, making code more readable. But since default values can be overridden, it also provides them with a degree of combustibility.</p>
+</div>
+</div>
+<div id="exercises-4" class="section level3 hasAnchor" number="4.1.7">
+<h3><span class="header-section-number">4.1.7</span> Exercises<a href="programming2.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Create a function named <strong><code>fahrenheit_to_celsius</code></strong> that converts a temperature from Fahrenheit to Celsius.</p>
+<p>Instructions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Define the function <strong><code>fahrenheit_to_celsius</code></strong> with an argument named <strong><code>fahrenheit</code></strong>.</p></li>
+<li><p>Inside the function, create a variable named <strong><code>celsius</code></strong> to store the converted temperature.</p></li>
+<li><p>Calculate the Celsius temperature using the formula: <strong><code>(fahrenheit - 32) / 1.8</code></strong>.</p></li>
+<li><p>Return the <strong><code>celsius</code></strong> variable.</p></li>
+</ol></li>
+<li><p>Create a function called <strong><code>calculate_discount</code></strong> that calculates the discounted price of an item.</p>
+<ol style="list-style-type: decimal">
+<li><p>Define the function <strong><code>calculate_discount</code></strong> with two arguments: <strong><code>price</code></strong> and <strong><code>discount_percent</code></strong>.</p></li>
+<li><p>Inside the function, create a variable named <strong><code>discount_price</code></strong> to store the discounted price.</p></li>
+<li><p>Calculate the discounted price using the formula: <strong><code>price * (1 - discount_percent)</code></strong>.</p></li>
+<li><p>Return the <strong><code>discount_price</code></strong>.</p></li>
+</ol></li>
+<li><p>Add the z-scores for the Beck scale back into the iq_df data frame.</p>
+<p>Instructions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use the <strong><code>calculate_z_score</code></strong> function you created earlier to calculate the z-scores for the Beck scale.</p></li>
+<li><p>Add the calculated z-scores to the <strong><code>iq_df</code></strong> data frame as a new column.</p></li>
+</ol></li>
+<li><p>Look up help on the head() function - what is the default value for the number (n) of rows it prints argument?</p>
+<p>Instructions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use the <strong><code>?head</code></strong> command to access the documentation for the <strong><code>head()</code></strong> function.</p></li>
+<li><p>Identify the default value for the <strong><code>n</code></strong> argument in the documentation.</p></li>
+<li><p>Call the head() function on the sleep dataframe, but override the default argument with a different number</p></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="the-factor-data-type" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> The Factor Data Type<a href="programming2.html#the-factor-data-type" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In Chapter 3, we introduced the four fundamental data types in R: character, integer, numeric, and logical. We learned that these data types can constitute vectors, which can then be aggregated in data frames. These data types cover a significant proportion of the information we encounter in psychological research. In terms of NOIR data types in Psychology, nominal data can be represented through the character type, ordinal data can be represented through character or integer/numeric data types, and scale data (interval and ratio) can be represented through the integer/numeric data type. Additionally, the logical data type can handle either/or cases.</p>
+<p>However, there’s an additional consideration. When dealing with datasets common in psychological research, particularly experimental or differential research, we often encounter columns consisting of categorical data representing our independent variable(s). The responses in these columns signify differences in categories for each participant (e.g., whether they were assigned to the control or experimental group, whether they belong to different categories across some domain). In software like SPSS, we typically label this categorical data using normal language (e.g., “control” or “experimental”) or numerically (1 = “control”, 2 = “experimental”). While we could categorize it as character data or numerically/integer data in R, this approach doesn’t capture the fact that the data in this column represents something distinct - namely, that it is a <strong><em>factor</em></strong> used to understand differences across other variables.</p>
+<p>Fortunately, R offers a data type called <strong><em>factors</em></strong> to address this need.</p>
+<div id="creating-a-factor" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Creating a Factor<a href="programming2.html#creating-a-factor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s say we run an experimental study investigating the effect of caffeine on sleep duration. Participants are randomly assigned to three experimental conditions: <strong><code>No Caffeine</code></strong>, <strong><code>Low Caffeine (200 mg)</code></strong>, and <strong><code>High Caffeine (400 mg)</code></strong>. Our data frame might resemble the following, where <strong><code>1</code></strong> = <strong><code>No Caffeine</code></strong>, <strong><code>2 = Low Caffeine</code></strong>, and <strong><code>3 = High Caffeine</code></strong>:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="programming2.html#cb205-1" tabindex="-1"></a>caffeine_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb205-2"><a href="programming2.html#cb205-2" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb205-3"><a href="programming2.html#cb205-3" tabindex="-1"></a>  <span class="at">sleep_duration =</span> <span class="fu">c</span>(<span class="fl">7.89</span>, <span class="fl">8.37</span>, <span class="fl">7.46</span>, <span class="fl">5.86</span>, <span class="fl">5.25</span>, <span class="fl">7.23</span>, <span class="fl">6.05</span>, <span class="fl">5.78</span>, <span class="fl">6.77</span>, <span class="fl">2.13</span>, <span class="fl">5.78</span>,  <span class="fl">6.54</span>),</span>
+<span id="cb205-4"><a href="programming2.html#cb205-4" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb205-5"><a href="programming2.html#cb205-5" tabindex="-1"></a>)</span>
+<span id="cb205-6"><a href="programming2.html#cb205-6" tabindex="-1"></a></span>
+<span id="cb205-7"><a href="programming2.html#cb205-7" tabindex="-1"></a><span class="fu">head</span>(caffeine_df)</span></code></pre></div>
+<pre><code>##   id sleep_duration group
+## 1  1           7.89     1
+## 2  2           8.37     2
+## 3  3           7.46     3
+## 4  4           5.86     1
+## 5  5           5.25     2
+## 6  6           7.23     3</code></pre>
+<p>Although the <strong><code>group</code></strong> column is currently stored as numeric data, it actually represents categorical information. It wouldn’t make sense to compute the mean, median, or standard deviation for this column. However, since it’s numeric data, R allows us to do so.</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="programming2.html#cb207-1" tabindex="-1"></a><span class="fu">mean</span>(caffeine_df<span class="sc">$</span>group)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>While this might not cause immediate problems, it could lead to issues later when conducting inferential statistical tests like ANOVAs or regressions, where R expects a factor data type.</p>
+<p>To address this, we can use the <strong><code>factor</code></strong> function to convert the group column:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="programming2.html#cb209-1" tabindex="-1"></a><span class="fu">factor</span>(caffeine_df<span class="sc">$</span>group)</span></code></pre></div>
+<pre><code>##  [1] 1 2 3 1 2 3 1 2 3 1 2 3
+## Levels: 1 2 3</code></pre>
+<p>Now, R recognizes that each distinct value in the column represents a different level of our independent variable. If we attempt to calculate the mean now, it will result in an erro:</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="programming2.html#cb211-1" tabindex="-1"></a><span class="fu">mean</span>(caffeine_df<span class="sc">$</span>group)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Whoops! What’s wrong here? Well, when we called the <strong><code>factor()</code></strong> function, we never reassigned that information back to the ‘group’ vector in our <strong><code>caffeine_df</code></strong> data frame. So while R ran our command, it did not save it. To fix this, we just follow the syntax for creating a new column we learned last week <strong><code>data.frame$newcolumn &lt;- vector</code></strong>.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="programming2.html#cb213-1" tabindex="-1"></a>caffeine_df<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(caffeine_df<span class="sc">$</span>group)</span></code></pre></div>
+<p>Now, attempting to compute the mean will result in an error, as expected:</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="programming2.html#cb214-1" tabindex="-1"></a><span class="fu">mean</span>(caffeine_df<span class="sc">$</span>group)</span></code></pre></div>
+<pre><code>## Warning in mean.default(caffeine_df$group): argument is not numeric or logical:
+## returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>But I am not completely satisfied yet. Although right now we can remember that 1 = No Caffeine, 2 = Low Caffeine, and 3 = High Caffeine, we might forget that information in six months’ time if we return to our dataset.</p>
+<p>Luckily, we can label the levels of our factor through the <strong><code>levels()</code></strong> function.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="programming2.html#cb217-1" tabindex="-1"></a><span class="fu">levels</span>(caffeine_df<span class="sc">$</span>group) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;No Caffeine&quot;</span>, <span class="st">&quot;Low Caffeine&quot;</span>, <span class="st">&quot;High Caffeine&quot;</span>)</span>
+<span id="cb217-2"><a href="programming2.html#cb217-2" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="programming2.html#cb217-3" tabindex="-1"></a><span class="fu">print</span>(caffeine_df<span class="sc">$</span>group)</span></code></pre></div>
+<pre><code>##  [1] No Caffeine   Low Caffeine  High Caffeine No Caffeine   Low Caffeine 
+##  [6] High Caffeine No Caffeine   Low Caffeine  High Caffeine No Caffeine  
+## [11] Low Caffeine  High Caffeine
+## Levels: No Caffeine Low Caffeine High Caffeine</code></pre>
+<p>That’s better!</p>
+</div>
+<div id="using-factors-to-sort-character-data" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Using Factors to Sort Character Data<a href="programming2.html#using-factors-to-sort-character-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Factors also enable us to sort character data in an ordered manner that isn’t alphabetical. For example, consider a vector called <strong><code>degree</code></strong> that denotes participants’ highest level of education completed:</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="programming2.html#cb219-1" tabindex="-1"></a>degree <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;PhD&quot;</span>, <span class="st">&quot;Secondary School&quot;</span>, <span class="st">&quot;Masters&quot;</span>, <span class="st">&quot;Bachelors&quot;</span>, <span class="st">&quot;Bachelors&quot;</span>, <span class="st">&quot;Masters&quot;</span>, <span class="st">&quot;Bachelors&quot;</span>, <span class="st">&quot;Secondary School&quot;</span>, <span class="st">&quot;Secondary School&quot;</span>, <span class="st">&quot;Secondary School&quot;</span>)</span></code></pre></div>
+<p>Using the <strong><code>table()</code></strong> function, we can count the number of participants per category:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="programming2.html#cb220-1" tabindex="-1"></a>count <span class="ot">&lt;-</span> <span class="fu">table</span>(degree)</span>
+<span id="cb220-2"><a href="programming2.html#cb220-2" tabindex="-1"></a>count</span></code></pre></div>
+<pre><code>## degree
+##        Bachelors          Masters              PhD Secondary School 
+##                3                2                1                4</code></pre>
+<p>And we can use the <code>barplot()</code> function to visualize those counts.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="programming2.html#cb222-1" tabindex="-1"></a><span class="fu">barplot</span>(count)</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p>Now that gives us the information we need, but it’s not ordered in an intuitive manner. Ideally, we would want the order of the bar plots to match the hierarchical order of the data, so that it would be: “Secondary School”, “Bachelors”, “Masters”, and then “PhD”. However, unless you specify the order of your levels, R will specify their order alphabetically.</p>
+<p>There is an argument called <code>levels</code> in the <code>factor</code> function that we can use to rectify this. In the levels argument, we specify the order of the levels.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="programming2.html#cb223-1" tabindex="-1"></a>degree_ordered <span class="ot">&lt;-</span> <span class="fu">factor</span>(degree, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Secondary School&quot;</span>, <span class="st">&quot;Bachelors&quot;</span>, <span class="st">&quot;Masters&quot;</span>, <span class="st">&quot;PhD&quot;</span>))</span>
+<span id="cb223-2"><a href="programming2.html#cb223-2" tabindex="-1"></a>degree_ordered</span></code></pre></div>
+<pre><code>##  [1] PhD              Secondary School Masters          Bachelors       
+##  [5] Bachelors        Masters          Bachelors        Secondary School
+##  [9] Secondary School Secondary School
+## Levels: Secondary School Bachelors Masters PhD</code></pre>
+<p>That’s more like it. Now we can call the <code>table()</code> and <code>barplot()</code> functions again to visualise the number of participants per group.</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="programming2.html#cb225-1" tabindex="-1"></a>count_ordered <span class="ot">&lt;-</span> <span class="fu">table</span>(degree_ordered)</span>
+<span id="cb225-2"><a href="programming2.html#cb225-2" tabindex="-1"></a></span>
+<span id="cb225-3"><a href="programming2.html#cb225-3" tabindex="-1"></a><span class="fu">barplot</span>(count_ordered)</span></code></pre></div>
+<p><img src="rintro_demo_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<p>As you can see, our data looks much cleaner and more intuitive.</p>
+<p>There is a lot more we can do with factors, but this covers the main points. Now let’s talk about the last data type/structure we are going to be using in this course, which is the <code>list</code> data structure.</p>
+</div>
+<div id="exercises-5" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Exercises<a href="programming2.html#exercises-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Exercise 1 - Convert Numeric Data to Factor:</strong></p>
+<ul>
+<li><p>Create a vector called <strong><code>personality</code></strong> containing personality types: “Introverted”, “Extroverted”, “Introverted”, “Introverted”, “Extroverted”, “Extroverted”.</p></li>
+<li><p>Convert the <strong><code>personality</code></strong> vector to a factor and store it in a new variable called <strong><code>personality_factor</code></strong>.</p></li>
+<li><p>Display the levels of the <strong><code>personality_factor</code></strong> variable.</p></li>
+</ul>
+<p><strong>Exercise 2 - Count and Visualize Factor Levels:</strong></p>
+<ul>
+<li><p>Using the created <strong><code>personality</code></strong> vector from Exercise 1, create a table to count the number of occurrences of each Personality trait.</p></li>
+<li><p>Visualize the counts using a bar plot to show the distribution of genders.</p></li>
+</ul>
+<p><strong>Exercise 3 - Modify Factor Levels:</strong></p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="programming2.html#cb226-1" tabindex="-1"></a><span class="co"># Treatment conditions vector</span></span>
+<span id="cb226-2"><a href="programming2.html#cb226-2" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Therapy&quot;</span>, <span class="st">&quot;Medication&quot;</span>, <span class="st">&quot;Therapy&quot;</span>, <span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Medication&quot;</span>)</span></code></pre></div>
+<ul>
+<li><p>Reorder the levels of the <strong><code>treatment</code></strong> vector so that “Therapy” becomes the first level, followed by “Control”, “Placebo”, and “Medication”.</p></li>
+<li><p>Print the modified levels of the <strong><code>treatment</code></strong> variable to verify the order.</p></li>
+</ul>
+<p><strong>Exercise 4 - Factor Conversion with Levels:</strong></p>
+<ul>
+<li><p>Create a vector called <strong><code>coping_strategy</code></strong> with the following values: “Problem-focused”, “Emotion-focused”, “Avoidant”, “Problem-focused”, “Emotion-focused”, “Avoidant”, “Problem-focused”.</p></li>
+<li><p>Convert the <strong><code>coping_strategy</code></strong> vector to a factor with levels specified as “Problem-focused”, “Emotion-focused”, “Avoidant”, and store it in a new variable called <strong><code>coping_strategy_factor</code></strong>.</p></li>
+<li><p>Display the levels of the <strong><code>coping_strategy_factor</code></strong> variable.</p></li>
+</ul>
+</div>
+</div>
+<div id="the-list-data-structure" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> The List Data Structure<a href="programming2.html#the-list-data-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The two data structures we have discussed so far, vectors and data frames, are excellent ways to store data. However, each data structure has its limitations. Both vectors and data frames only allow us to store one object of data at a time.</p>
+<p>What do I mean by one object of data? Well, when we create a vector, we are only storing information for one single vector in R. While we can store multiple vectors in one place in R by combining them into a data frame, this is only possible if each vector has the same number of data points. Based on what I have taught you so far, there is no way to store two independent and separate vectors in the same place in R.</p>
+<p>Similarly, when I create a data frame, I am only storing information for one data frame. But sometimes we would want to keep multiple data frames saved in a similar location, similar to an Excel file that has multiple worksheets saved onto it.</p>
+<p>Finally, what if I wanted to store a vector and a data frame together? For example, imagine I had a data frame that was a cleaned data set, and I wanted to store a vector with results from the analysis. Based on what I have taught you so far, there is no way to store both a vector and a separate data frame in a single space in R.</p>
+<p>That’s where the list data structure comes into play.</p>
+<div id="understanding-lists" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Understanding Lists<a href="programming2.html#understanding-lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A list in R is a versatile data structure that can hold elements of different types, such as vectors, matrices, data frames, or even other lists. Think of it as a container that can store various objects together, similar to a bag where you can put in items of different shapes and sizes.</p>
+</div>
+<div id="creating-lists" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Creating Lists<a href="programming2.html#creating-lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we’re conducting a study where we collect various information about each participant, such as their demographic details, test scores, and responses to questionnaires. We can store this information for each participant in a list. Here’s how we can create a list for three participants:</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="programming2.html#cb227-1" tabindex="-1"></a>participant1 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb227-2"><a href="programming2.html#cb227-2" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">1</span>,</span>
+<span id="cb227-3"><a href="programming2.html#cb227-3" tabindex="-1"></a>  <span class="at">age =</span> <span class="dv">25</span>,</span>
+<span id="cb227-4"><a href="programming2.html#cb227-4" tabindex="-1"></a>  <span class="at">gender =</span> <span class="st">&quot;Male&quot;</span>,</span>
+<span id="cb227-5"><a href="programming2.html#cb227-5" tabindex="-1"></a>  <span class="at">test_scores =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">75</span>, <span class="dv">90</span>),</span>
+<span id="cb227-6"><a href="programming2.html#cb227-6" tabindex="-1"></a>  <span class="at">questionnaire_responses =</span> <span class="fu">c</span>(<span class="st">&quot;Agree&quot;</span>, <span class="st">&quot;Disagree&quot;</span>, <span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Agree&quot;</span>)</span>
+<span id="cb227-7"><a href="programming2.html#cb227-7" tabindex="-1"></a>)</span>
+<span id="cb227-8"><a href="programming2.html#cb227-8" tabindex="-1"></a></span>
+<span id="cb227-9"><a href="programming2.html#cb227-9" tabindex="-1"></a>participant2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb227-10"><a href="programming2.html#cb227-10" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">2</span>,</span>
+<span id="cb227-11"><a href="programming2.html#cb227-11" tabindex="-1"></a>  <span class="at">age =</span> <span class="dv">30</span>,</span>
+<span id="cb227-12"><a href="programming2.html#cb227-12" tabindex="-1"></a>  <span class="at">gender =</span> <span class="st">&quot;Female&quot;</span>,</span>
+<span id="cb227-13"><a href="programming2.html#cb227-13" tabindex="-1"></a>  <span class="at">test_scores =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">70</span>, <span class="dv">88</span>),</span>
+<span id="cb227-14"><a href="programming2.html#cb227-14" tabindex="-1"></a>  <span class="at">questionnaire_responses =</span> <span class="fu">c</span>(<span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Agree&quot;</span>, <span class="st">&quot;Disagree&quot;</span>, <span class="st">&quot;Strongly Disagree&quot;</span>)</span>
+<span id="cb227-15"><a href="programming2.html#cb227-15" tabindex="-1"></a>)</span>
+<span id="cb227-16"><a href="programming2.html#cb227-16" tabindex="-1"></a></span>
+<span id="cb227-17"><a href="programming2.html#cb227-17" tabindex="-1"></a>participant3 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb227-18"><a href="programming2.html#cb227-18" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">3</span>,</span>
+<span id="cb227-19"><a href="programming2.html#cb227-19" tabindex="-1"></a>  <span class="at">age =</span> <span class="dv">28</span>,</span>
+<span id="cb227-20"><a href="programming2.html#cb227-20" tabindex="-1"></a>  <span class="at">gender =</span> <span class="st">&quot;Non-binary&quot;</span>,</span>
+<span id="cb227-21"><a href="programming2.html#cb227-21" tabindex="-1"></a>  <span class="at">test_scores =</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">82</span>, <span class="dv">85</span>),</span>
+<span id="cb227-22"><a href="programming2.html#cb227-22" tabindex="-1"></a>  <span class="at">questionnaire_responses =</span> <span class="fu">c</span>(<span class="st">&quot;Disagree&quot;</span>, <span class="st">&quot;Neutral&quot;</span>, <span class="st">&quot;Agree&quot;</span>, <span class="st">&quot;Neutral&quot;</span>)</span>
+<span id="cb227-23"><a href="programming2.html#cb227-23" tabindex="-1"></a>)</span></code></pre></div>
+<p>The list for each participant is made up of separate vectors with varying lengths (e.g., there is only 1 element in ID, age, and gender, whereas there are 3 elements in test_scores and 4 in questionnaire_responses).</p>
+<p>Let’s print out the <strong><code>participant1</code></strong> list and break down the output:</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="programming2.html#cb228-1" tabindex="-1"></a><span class="fu">print</span>(participant1)</span></code></pre></div>
+<pre><code>## $ID
+## [1] 1
+## 
+## $age
+## [1] 25
+## 
+## $gender
+## [1] &quot;Male&quot;
+## 
+## $test_scores
+## [1] 80 75 90
+## 
+## $questionnaire_responses
+## [1] &quot;Agree&quot;    &quot;Disagree&quot; &quot;Neutral&quot;  &quot;Agree&quot;</code></pre>
+<p>When we print out the list, what R does in the console is print out the name of each object and then print out each element in that object. One thing that you might notice is the return of the <code>$</code> which we use to access elements from vectors or columns from data frames. Luckily, we can also use the <code>$</code> symbol to access objects and their elements from a list. So I wanted to extract <code>test_scores</code> from a list, I could type the following code:</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="programming2.html#cb230-1" tabindex="-1"></a>participant1<span class="sc">$</span>test_scores</span></code></pre></div>
+<pre><code>## [1] 80 75 90</code></pre>
+<p>I could also do this numerically using the [] notation we used when accessing vectors.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="programming2.html#cb232-1" tabindex="-1"></a>participant1[<span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## $test_scores
+## [1] 80 75 90</code></pre>
+<p>Because <code>test_scores</code> is the fourth object within the list (the first three are ID, age, and gender), <code>test_scores[4]</code> is needed to extract it.</p>
+<p>Regardless of which way you extract data, doesn’t the output should look familiar? It is essential the same output when we print out a vector. That’s not accidental, because we have in fact extracted a vector!</p>
+<p>So what could we do if wanted to access the 1st and 3rd element from this vector? We just follow the same convention that we used last week <code>vectorname[elementswewant]</code></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="programming2.html#cb234-1" tabindex="-1"></a>participant1<span class="sc">$</span>test_scores[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</span></code></pre></div>
+<pre><code>## [1] 80 90</code></pre>
+<p>This illustrates a key point about lists. Once you first access an object (e.g., vector or dataframe) within that list, then you can use the specific indexing criteria for accessing elements within that object. For example, let’s look at a list with a vector and a data frame.</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="programming2.html#cb236-1" tabindex="-1"></a>df_v <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb236-2"><a href="programming2.html#cb236-2" tabindex="-1"></a>  <span class="at">iq_df =</span> iq_df, </span>
+<span id="cb236-3"><a href="programming2.html#cb236-3" tabindex="-1"></a>  <span class="at">p_values =</span> <span class="fu">c</span>(.<span class="dv">001</span>, .<span class="dv">10</span>, .<span class="dv">05</span>)</span>
+<span id="cb236-4"><a href="programming2.html#cb236-4" tabindex="-1"></a>)</span>
+<span id="cb236-5"><a href="programming2.html#cb236-5" tabindex="-1"></a></span>
+<span id="cb236-6"><a href="programming2.html#cb236-6" tabindex="-1"></a><span class="fu">print</span>(df_v)</span></code></pre></div>
+<pre><code>## $iq_df
+##   ID age  iq iq_z_scores total_depression_beck
+## 1  1  22 100   0.0000000                    32
+## 2  2  30 123   1.5333333                    36
+## 3  3  41 111   0.7333333                    34
+## 4  4  45 130   2.0000000                    46
+## 5  5  18  90  -0.6666667                    30
+## 6  6  21 102   0.1333333                    53
+## 7  7  23  88  -0.8000000                    40
+## 8  8  45 109   0.6000000                    15
+## 
+## $p_values
+## [1] 0.001 0.100 0.050</code></pre>
+<p>We can see that the first object in our list is the iq_df data frame, and the second contains (totally made up) p-values. So if wanted to access the <code>iq</code> and <code>total_depression_beck</code> columns from this data frame, and the first five rows, we can use the same subsetting techniques we learned last week: <code>dataframe[rows_we_want, columns_we_want]</code></p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="programming2.html#cb238-1" tabindex="-1"></a>df_v<span class="sc">$</span>iq_df[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">c</span>(<span class="st">&quot;iq&quot;</span>, <span class="st">&quot;total_depression_beck&quot;</span>)]</span></code></pre></div>
+<pre><code>##    iq total_depression_beck
+## 1 100                    32
+## 2 123                    36
+## 3 111                    34
+## 4 130                    46
+## 5  90                    30</code></pre>
+</div>
+<div id="lists-within-lists-indexing" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Lists within Lists (Indexing)<a href="programming2.html#lists-within-lists-indexing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What happens if we combine lists together? Well, we can do that by putting lists inside lists. However, if we do that, the output might seem a bit overwhelming at first.</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="programming2.html#cb240-1" tabindex="-1"></a>participant_data <span class="ot">&lt;-</span> <span class="fu">list</span>(participant1, participant2, participant3)</span>
+<span id="cb240-2"><a href="programming2.html#cb240-2" tabindex="-1"></a> </span>
+<span id="cb240-3"><a href="programming2.html#cb240-3" tabindex="-1"></a><span class="fu">print</span>(participant_data)</span></code></pre></div>
+<pre><code>## [[1]]
+## [[1]]$ID
+## [1] 1
+## 
+## [[1]]$age
+## [1] 25
+## 
+## [[1]]$gender
+## [1] &quot;Male&quot;
+## 
+## [[1]]$test_scores
+## [1] 80 75 90
+## 
+## [[1]]$questionnaire_responses
+## [1] &quot;Agree&quot;    &quot;Disagree&quot; &quot;Neutral&quot;  &quot;Agree&quot;   
+## 
+## 
+## [[2]]
+## [[2]]$ID
+## [1] 2
+## 
+## [[2]]$age
+## [1] 30
+## 
+## [[2]]$gender
+## [1] &quot;Female&quot;
+## 
+## [[2]]$test_scores
+## [1] 85 70 88
+## 
+## [[2]]$questionnaire_responses
+## [1] &quot;Neutral&quot;           &quot;Agree&quot;             &quot;Disagree&quot;         
+## [4] &quot;Strongly Disagree&quot;
+## 
+## 
+## [[3]]
+## [[3]]$ID
+## [1] 3
+## 
+## [[3]]$age
+## [1] 28
+## 
+## [[3]]$gender
+## [1] &quot;Non-binary&quot;
+## 
+## [[3]]$test_scores
+## [1] 78 82 85
+## 
+## [[3]]$questionnaire_responses
+## [1] &quot;Disagree&quot; &quot;Neutral&quot;  &quot;Agree&quot;    &quot;Neutral&quot;</code></pre>
+<p>Right now your eyes might be glazing over and that SPSS icon on your desktop has never looked so good. But just relax, while what you might be seeing here is <strong>ugly</strong>, I promise you it’s not complicated.</p>
+<p>Let’s break down the first part of this output</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="programming2.html#cb242-1" tabindex="-1"></a>[[<span class="dv">1</span>]]</span></code></pre></div>
+<p>This notation <strong><code>[[1]]</code></strong> extracts and indicates the first list within our combined list <strong><code>participant_data</code></strong> (in this case participant1). Similarly, <strong><code>[[2]]</code></strong> would indicate the second list (participant2), and so on. It’s similar to how we index elements in vectors.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="programming2.html#cb243-1" tabindex="-1"></a>[[<span class="dv">1</span>]]<span class="sc">$</span>ID <span class="co">#this translates to from participant data, pick participant 1 and then extract ID</span></span>
+<span id="cb243-2"><a href="programming2.html#cb243-2" tabindex="-1"></a></span>
+<span id="cb243-3"><a href="programming2.html#cb243-3" tabindex="-1"></a>[[<span class="dv">1</span>]]<span class="sc">$</span>age <span class="co">#this translates to from participant data, pick participant 1 and then extract age</span></span>
+<span id="cb243-4"><a href="programming2.html#cb243-4" tabindex="-1"></a></span>
+<span id="cb243-5"><a href="programming2.html#cb243-5" tabindex="-1"></a>[[<span class="dv">1</span>]]<span class="sc">$</span>test_scores <span class="co">#this translates to from participant data, pick participant 1 and then extract test scores</span></span>
+<span id="cb243-6"><a href="programming2.html#cb243-6" tabindex="-1"></a></span>
+<span id="cb243-7"><a href="programming2.html#cb243-7" tabindex="-1"></a>[[<span class="dv">1</span>]]<span class="sc">$</span>questionnaire_responses <span class="co">#this translates to from participant data, pick participant 1 and then questionnaire_responses</span></span></code></pre></div>
+<p>Basically translates to “participant 1’s data for ID, age, test_scores and questionnaire_responses”.</p>
+<p>There is a way we can make this code output neater. When we are creating a list, we can specify the index term for that list. The syntax for doing is: new index term = current_list</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="programming2.html#cb244-1" tabindex="-1"></a>participant_data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">p1 =</span> participant1, <span class="co">#new index term = current list</span></span>
+<span id="cb244-2"><a href="programming2.html#cb244-2" tabindex="-1"></a>                         <span class="at">p2 =</span> participant2, <span class="co">#new index term = current list</span></span>
+<span id="cb244-3"><a href="programming2.html#cb244-3" tabindex="-1"></a>                         <span class="at">p3 =</span> participant3 <span class="co">#new index term = current list</span></span>
+<span id="cb244-4"><a href="programming2.html#cb244-4" tabindex="-1"></a>                         )</span>
+<span id="cb244-5"><a href="programming2.html#cb244-5" tabindex="-1"></a></span>
+<span id="cb244-6"><a href="programming2.html#cb244-6" tabindex="-1"></a><span class="fu">print</span>(participant_data)</span></code></pre></div>
+<pre><code>## $p1
+## $p1$ID
+## [1] 1
+## 
+## $p1$age
+## [1] 25
+## 
+## $p1$gender
+## [1] &quot;Male&quot;
+## 
+## $p1$test_scores
+## [1] 80 75 90
+## 
+## $p1$questionnaire_responses
+## [1] &quot;Agree&quot;    &quot;Disagree&quot; &quot;Neutral&quot;  &quot;Agree&quot;   
+## 
+## 
+## $p2
+## $p2$ID
+## [1] 2
+## 
+## $p2$age
+## [1] 30
+## 
+## $p2$gender
+## [1] &quot;Female&quot;
+## 
+## $p2$test_scores
+## [1] 85 70 88
+## 
+## $p2$questionnaire_responses
+## [1] &quot;Neutral&quot;           &quot;Agree&quot;             &quot;Disagree&quot;         
+## [4] &quot;Strongly Disagree&quot;
+## 
+## 
+## $p3
+## $p3$ID
+## [1] 3
+## 
+## $p3$age
+## [1] 28
+## 
+## $p3$gender
+## [1] &quot;Non-binary&quot;
+## 
+## $p3$test_scores
+## [1] 78 82 85
+## 
+## $p3$questionnaire_responses
+## [1] &quot;Disagree&quot; &quot;Neutral&quot;  &quot;Agree&quot;    &quot;Neutral&quot;</code></pre>
+</div>
+<div id="summary-2" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Summary<a href="programming2.html#summary-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In summary, the list data structure in R is incredibly useful for organizing and managing diverse types of data in psychological research. Whether it’s participant information, experimental conditions, or any other heterogeneous data, lists provide a flexible and efficient way to store and access this information.</p>
+</div>
+</div>
+<div id="r-packages" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> R Packages<a href="programming2.html#r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Throughout this course, we’ve been exploring the capabilities of base R, which offers a rich set of functions and data structures for data analysis and statistical computing. However, the power of R extends far beyond its base functionality, thanks to its vibrant ecosystem of user-contributed packages.</p>
+<div id="understanding-r-packages" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Understanding R Packages<a href="programming2.html#understanding-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R packages are collections of R functions, data, and documentation that extend the capabilities of R. These packages are developed and shared by the R community to address various needs in data analysis, visualization, machine learning, and more. By leveraging packages, R users can access a vast array of specialized tools and algorithms without reinventing the wheel.</p>
+</div>
+<div id="installing-and-loading-r-package" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Installing and Loading R Package<a href="programming2.html#installing-and-loading-r-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One of the most important things to know about R packages is that you first need to install them on your computer. Once installed, you will not need to install them again.</p>
+<p>However, if you want to use a package, then you will need to load it while you are in RStudio. Every time you open RStudio after closing it, you will need to load that package again if you want to use it.</p>
+<p>In this way, R packages are like applications on your phone. Once you download Spotify on your phone, then you won’t need to install it again. But every time you want to use Spotify, you will need to open the application.</p>
+<div id="installation" class="section level4 hasAnchor" number="4.4.2.1">
+<h4><span class="header-section-number">4.4.2.1</span> Installation<a href="programming2.html#installation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We are going to install three packages called Haven, praise, and fortunes. The praise package provides users with, well, praise. And the fortunes package will spit out statistic and programming quotes at you. Neither of them is particularly useful, other than demonstrating the process of loading packages.</p>
+<p>The Haven package enables you to load SPSS data into R.</p>
+</div>
+<div id="installation-using-rstudio-interface" class="section level4 hasAnchor" number="4.4.2.2">
+<h4><span class="header-section-number">4.4.2.2</span> Installation using RStudio Interface<a href="programming2.html#installation-using-rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In the Files pane on the bottom right-hand corner of R, you will see a tab called “Packages”. Click that tab. You will already see a list of packages that are currently installed. You will see three columns:</p>
+<ul>
+<li><p>Name (the name of the R package)</p></li>
+<li><p>Description (describes what the package does)</p></li>
+<li><p>Version (the version of the package currently installed on your computer)</p></li>
+</ul>
+<p>To install a package, click the “Install” button above the “Name” column. Once you click that, you should see a small pop-up window. In the textbox, type in the word Haven. Make sure the box “Install dependencies” is clicked. After that, you can click Install. You should get something like the following output in the console, which looks scary with all the red text, but means it has worked correctly.</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="programming2.html#cb246-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">&quot;Haven&quot;</span>)</span>
+<span id="cb246-2"><a href="programming2.html#cb246-2" tabindex="-1"></a>trying URL <span class="st">&#39;https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/rio_1.0.1.tgz&#39;</span></span>
+<span id="cb246-3"><a href="programming2.html#cb246-3" tabindex="-1"></a>Content type <span class="st">&#39;application/x-gzip&#39;</span> length <span class="dv">591359</span> <span class="fu">bytes</span> (<span class="dv">577</span> KB)</span>
+<span id="cb246-4"><a href="programming2.html#cb246-4" tabindex="-1"></a><span class="sc">==</span><span class="er">================================================</span></span>
+<span id="cb246-5"><a href="programming2.html#cb246-5" tabindex="-1"></a>downloaded <span class="dv">577</span> KB</span>
+<span id="cb246-6"><a href="programming2.html#cb246-6" tabindex="-1"></a></span>
+<span id="cb246-7"><a href="programming2.html#cb246-7" tabindex="-1"></a></span>
+<span id="cb246-8"><a href="programming2.html#cb246-8" tabindex="-1"></a>The downloaded binary packages are <span class="cf">in</span></span>
+<span id="cb246-9"><a href="programming2.html#cb246-9" tabindex="-1"></a>    <span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span>h8<span class="sc">/</span>8sb24v_x2lg51cg2z7q8fk3w0000gp<span class="sc">/</span>T<span class="sc">/</span><span class="er">/</span>RtmpvaY1Ue<span class="sc">/</span>downloaded_packages</span></code></pre></div>
+</div>
+<div id="installation-using-commands" class="section level4 hasAnchor" number="4.4.2.3">
+<h4><span class="header-section-number">4.4.2.3</span> Installation using Commands<a href="programming2.html#installation-using-commands" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>If we want to install packages using the console, you can use the <strong><code>install.packages()</code></strong> function followed by the name of the package you wish to install. The syntax would looks like this</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="programming2.html#cb247-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;package name&quot;</span>)</span></code></pre></div>
+<p>The important thing here is that whatever goes inside the parentheses is inside quotation marks. Let’s use this syntax to install the <code>praise</code> and <code>fortunes</code> packages.</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="programming2.html#cb248-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;praise&quot;</span>, <span class="st">&quot;fortunes&quot;</span>))</span>
+<span id="cb248-2"><a href="programming2.html#cb248-2" tabindex="-1"></a></span>
+<span id="cb248-3"><a href="programming2.html#cb248-3" tabindex="-1"></a></span>
+<span id="cb248-4"><a href="programming2.html#cb248-4" tabindex="-1"></a>trying URL <span class="st">&#39;https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/praise_1.0.0.tgz&#39;</span></span>
+<span id="cb248-5"><a href="programming2.html#cb248-5" tabindex="-1"></a>Content type <span class="st">&#39;application/x-gzip&#39;</span> length <span class="dv">16537</span> <span class="fu">bytes</span> (<span class="dv">16</span> KB)</span>
+<span id="cb248-6"><a href="programming2.html#cb248-6" tabindex="-1"></a><span class="sc">==</span><span class="er">================================================</span></span>
+<span id="cb248-7"><a href="programming2.html#cb248-7" tabindex="-1"></a>downloaded <span class="dv">16</span> KB</span>
+<span id="cb248-8"><a href="programming2.html#cb248-8" tabindex="-1"></a></span>
+<span id="cb248-9"><a href="programming2.html#cb248-9" tabindex="-1"></a>trying URL <span class="st">&#39;https://cran.rstudio.com/bin/macosx/big-sur-x86_64/contrib/4.3/fortunes_1.5-4.tgz&#39;</span></span>
+<span id="cb248-10"><a href="programming2.html#cb248-10" tabindex="-1"></a>Content type <span class="st">&#39;application/x-gzip&#39;</span> length <span class="dv">208808</span> <span class="fu">bytes</span> (<span class="dv">203</span> KB)</span>
+<span id="cb248-11"><a href="programming2.html#cb248-11" tabindex="-1"></a><span class="sc">==</span><span class="er">================================================</span></span>
+<span id="cb248-12"><a href="programming2.html#cb248-12" tabindex="-1"></a>downloaded <span class="dv">203</span> KB</span>
+<span id="cb248-13"><a href="programming2.html#cb248-13" tabindex="-1"></a></span>
+<span id="cb248-14"><a href="programming2.html#cb248-14" tabindex="-1"></a></span>
+<span id="cb248-15"><a href="programming2.html#cb248-15" tabindex="-1"></a>The downloaded binary packages are <span class="cf">in</span></span>
+<span id="cb248-16"><a href="programming2.html#cb248-16" tabindex="-1"></a>    <span class="sc">/</span>var<span class="sc">/</span>folders<span class="sc">/</span>h8<span class="sc">/</span>8sb24v_x2lg51cg2z7q8fk3w0000gp<span class="sc">/</span>T<span class="sc">/</span><span class="er">/</span>RtmpvaY1Ue<span class="sc">/</span>downloaded_packages</span></code></pre></div>
+<p>Again the output is rather scary but the sentences “package ‘praise’ successfully unpacked and MD5 sums checked” and “package ‘fortunes’ successfully unpacked and MD5 sums checked” mean that they are successfully installed onto your computer.</p>
+</div>
+</div>
+<div id="loading-packages" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Loading Packages<a href="programming2.html#loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Okay, now to actually use those packages, we will need to load them. Again, I will show you two ways to load packages.</p>
+<div id="loading-using-rstudio-interface" class="section level4 hasAnchor" number="4.4.3.1">
+<h4><span class="header-section-number">4.4.3.1</span> Loading using RStudio Interface<a href="programming2.html#loading-using-rstudio-interface" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Go back to the Packages tab in the File pane. On the left-hand side of the package name, you will see a tick box. If the box is ticked, that means the package is currently loaded. If it is unticked, it is not loaded.</p>
+<p>Scroll down to find the package “praise” and load it by ticking the box.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-152"></span>
+<img src="img/04-praise-loaded.png" alt="Loading Packages through RStudio Interface"  />
+<p class="caption">
+Figure 4.1: Loading Packages through RStudio Interface
+</p>
+</div>
+<p>You should see something like the following in your R console (don’t worry if you get a warning message like mine, or if you don’t receive a warning message)</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="programming2.html#cb249-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">library</span>(praise)</span>
+<span id="cb249-2"><a href="programming2.html#cb249-2" tabindex="-1"></a>Warning message<span class="sc">:</span></span>
+<span id="cb249-3"><a href="programming2.html#cb249-3" tabindex="-1"></a>package ‘praise’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span> </span></code></pre></div>
+</div>
+<div id="loading-using-the-r-console-command" class="section level4 hasAnchor" number="4.4.3.2">
+<h4><span class="header-section-number">4.4.3.2</span> Loading using the R Console Command<a href="programming2.html#loading-using-the-r-console-command" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can use the same syntax from that R console output to load in packages there. To load in the <code>fortunes</code> and <code>Haven</code> packages, you can type in the following into the console or script one at a time:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="programming2.html#cb250-1" tabindex="-1"></a><span class="fu">library</span>(fortunes)</span>
+<span id="cb250-2"><a href="programming2.html#cb250-2" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code></pre></div>
+<pre><code>## Warning: package &#39;haven&#39; was built under R version 4.3.2</code></pre>
+<p>There is one significant difference between installing and loading packages through code. When you are installing packages, you can install multiple packages in one command. However, you can only load one package at a time</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="programming2.html#cb252-1" tabindex="-1"></a><span class="co">#will work</span></span>
+<span id="cb252-2"><a href="programming2.html#cb252-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;package1&quot;</span>, <span class="st">&quot;package2&quot;</span>, <span class="st">&quot;package3&quot;</span>)) </span>
+<span id="cb252-3"><a href="programming2.html#cb252-3" tabindex="-1"></a></span>
+<span id="cb252-4"><a href="programming2.html#cb252-4" tabindex="-1"></a></span>
+<span id="cb252-5"><a href="programming2.html#cb252-5" tabindex="-1"></a><span class="co">#will not work</span></span>
+<span id="cb252-6"><a href="programming2.html#cb252-6" tabindex="-1"></a><span class="fu">library</span>(<span class="fu">c</span>(<span class="st">&quot;package1&quot;</span>, <span class="st">&quot;package2&quot;</span>, <span class="st">&quot;package3&quot;</span>)) </span>
+<span id="cb252-7"><a href="programming2.html#cb252-7" tabindex="-1"></a></span>
+<span id="cb252-8"><a href="programming2.html#cb252-8" tabindex="-1"></a><span class="co">#the following will work</span></span>
+<span id="cb252-9"><a href="programming2.html#cb252-9" tabindex="-1"></a><span class="fu">library</span>(package1)</span>
+<span id="cb252-10"><a href="programming2.html#cb252-10" tabindex="-1"></a><span class="fu">library</span>(package2)</span>
+<span id="cb252-11"><a href="programming2.html#cb252-11" tabindex="-1"></a><span class="fu">library</span>(package3)</span></code></pre></div>
+</div>
+</div>
+<div id="testing-our-new-functions" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Testing our New Functions<a href="programming2.html#testing-our-new-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To make sure the following functions are working, run the following code to check:</p>
+<pre><code>## Warning: package &#39;praise&#39; was built under R version 4.3.2</code></pre>
+<pre><code>## [1] &quot;You are wicked!&quot;</code></pre>
+<pre><code>## 
+## Ted Harding: But you can also do these with &#39;any&#39; and &#39;all&#39;, e.g. any(v==TRUE).
+## Thomas Lumley: or any( (v==TRUE)==TRUE), or any( ((v==TRUE)==TRUE)==TRUE)...
+## Or, perhaps, any(v). Lewis Carroll wrote a nice piece on this theme.
+##    -- Ted Harding and Thomas Lumley (about implementing an &#39;or&#39; of a logical
+##       vector)
+##       R-help (August 2004)</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="programming2.html#cb256-1" tabindex="-1"></a><span class="fu">praise</span>() <span class="co">#everytime you run this line of code it gives you a different line of praise</span></span>
+<span id="cb256-2"><a href="programming2.html#cb256-2" tabindex="-1"></a><span class="co">#so don&#39;t be worried if your result is different than mine</span></span>
+<span id="cb256-3"><a href="programming2.html#cb256-3" tabindex="-1"></a></span>
+<span id="cb256-4"><a href="programming2.html#cb256-4" tabindex="-1"></a><span class="fu">fortune</span>() <span class="co">#this will print out something so incredibly nerdy </span></span></code></pre></div>
+</div>
+<div id="error-loading-packages" class="section level3 hasAnchor" number="4.4.5">
+<h3><span class="header-section-number">4.4.5</span> Error Loading Packages<a href="programming2.html#error-loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you ever encounter the following error when trying to load a package:</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="programming2.html#cb257-1" tabindex="-1"></a><span class="fu">library</span>(madeuppackage)</span></code></pre></div>
+<pre><code>## Error in library(madeuppackage): there is no package called &#39;madeuppackage&#39;</code></pre>
+<p>This means that you have either made a typo in writing the name of the package or you have not installed the package. You need to install packages before R will be able to load them.</p>
+</div>
+<div id="package-conventions-if-using-code" class="section level3 hasAnchor" number="4.4.6">
+<h3><span class="header-section-number">4.4.6</span> Package Conventions if Using Code<a href="programming2.html#package-conventions-if-using-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are important rules to follow when writing code to install and load packages in R.</p>
+<p>Firstly, any packages you install and load onto R should be placed at the top of the R script you are working on. This way, anyone following your analysis can easily spot the packages they will need.</p>
+<p>Secondly, you should type the command <strong><code>install.packages("package_name")</code></strong> in the console rather than the script. If someone downloads your script and accidentally runs it, it will automatically install the packages on their computer. We want to avoid this as it might interfere with other aspects of their operating system (this is rare, but it’s better to be cautious).</p>
+<p>Thirdly, if you do include the command <strong><code>install.packages()</code></strong> in the script, make sure it is commented out. This way, if it is accidentally run, R won’t execute that command.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-159"></span>
+<img src="img/04-packages-convention.png" alt="Conventions for Installing and Loading Packages in R Script"  />
+<p class="caption">
+Figure 4.2: Conventions for Installing and Loading Packages in R Script
+</p>
+</div>
+</div>
+<div id="summary-3" class="section level3 hasAnchor" number="4.4.7">
+<h3><span class="header-section-number">4.4.7</span> Summary<a href="programming2.html#summary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There you have it. You have successfully installed and loaded your first packages in R. Are they particularly useful packages? No! In the rest of this course, we will be loading packages more regularly, and these packages will make our lives significantly easier than if they were not around. In fact, we will use the <code>haven</code> package in the next section that will enable us to import SPSS data.</p>
+</div>
+</div>
+<div id="importing" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Importing and Exporting Data<a href="programming2.html#importing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While creating data frames and lists in R is valuable, the majority of the data you’ll work with in R will likely come from external sources. Therefore, it’s essential to know how to import data into R. Similarly, once you’ve processed and analyzed your data in R, you’ll often need to export it for further use or sharing.</p>
+<p>In this section, we’ll explore how to import and export data using the graphical user interface (GUI) provided by RStudio. The GUI offers a user-friendly and intuitive way to manage data files without requiring you to write any code. Let’s delve into the process of importing and exporting data using the RStudio GUI.</p>
+<p>First, you’ll need to download two files: <code>psycho.csv</code> and <code>burnout.sav</code>. Both files are available in the rintro Teams channel. If you don’t have access to the Teams channel, please contact me at ryan.donovan@universityofgalway.ie.</p>
+<div id="importing-csv-files." class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Importing CSV files.<a href="programming2.html#importing-csv-files." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Comma-Separated Values (CSV) files are a prevalent format for storing tabular data. Similar to Excel files, data in CSV files is organized into rows and columns, with each row representing a single record and each column representing a different attribute or variable.</p>
+<p>CSV files are plain text files, making them easy to create, edit, and view using a simple text editor. This simplicity and universality make CSV files a popular choice for data exchange across various applications and platforms.</p>
+<p>In a CSV file, each value in the table is separated by a comma (,), hence the name “comma-separated values.” However, depending on locale settings, other delimiters such as semicolons (;) or tabs (\t) may be used instead.</p>
+<p>One of the key advantages of CSV files is their compatibility with a wide range of software and programming languages, including R. They can be effortlessly imported into statistical software for analysis, making them a versatile and widely adopted format for data storage and sharing.</p>
+<p>To import the “psycho.csv” file, please follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>Open RStudio.</p></li>
+<li><p>Navigate to the Environment pane (top right hand corner) and make sure the Environment tab is clicked.</p></li>
+<li><p>Click on the “Import Dataset” button.</p></li>
+<li><p>Select “From Text (base)”.</p></li>
+<li><p>Browse your folder and select the “psycho.csv” to import.</p></li>
+<li><p>Click “Open”.</p></li>
+<li><p>A pop-up window should now open. There is a lot of different information here, so let’s unpack it.</p>
+<ul>
+<li><p>The “Name” text box enables you to specify the variable name assigned to the data frame. Leave it as “psycho.”</p></li>
+<li><p>Most of the time, you can leave the options with the default settings.</p></li>
+<li><p>The “Input File” box shows a preview of the CSV file being imported.</p></li>
+<li><p>The “Data Frame” box displays a preview of how the data frame will look once the CSV is imported into R.</p></li>
+</ul></li>
+</ol>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="programming2.html#cb259-1" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb259-2"><a href="programming2.html#cb259-2" tabindex="-1"></a></span>
+<span id="cb259-3"><a href="programming2.html#cb259-3" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;img/04-import-csv.png&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-160"></span>
+<img src="img/04-import-csv.png" alt="Pop-up window for importing CSV files"  />
+<p class="caption">
+Figure 4.3: Pop-up window for importing CSV files
+</p>
+</div>
+<ol start="8" style="list-style-type: decimal">
+<li>Click Import. A tab in the source pane called “psycho” should now open showing the data frame. Additionally, you should also see the data frame in the Environment pane. You should see under value that it has “60 obs. of 3 variables” which means there are 60 rows of data and 3 columns of data.</li>
+<li>Once you have imported your data in R, it is always good practice to briefly check that it has been imported successfully and you have imported the correct data set. Two ways you can do this is by calling the <code>head()</code> and <code>summary()</code> functions on the data frame.</li>
+</ol>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="programming2.html#cb260-1" tabindex="-1"></a><span class="fu">head</span>(psycho) <span class="co">#this will print out the first six rows</span></span></code></pre></div>
+<pre><code>##   Participant_ID Treatment Neuroticism
+## 1              1   Placebo    39.39524
+## 2              2   Placebo    42.69823
+## 3              3   Placebo    60.58708
+## 4              4   Placebo    45.70508
+## 5              5   Placebo    46.29288
+## 6              6   Placebo    62.15065</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="programming2.html#cb262-1" tabindex="-1"></a><span class="fu">summary</span>(psycho) <span class="co">#print out summary stats for each column</span></span></code></pre></div>
+<pre><code>##  Participant_ID   Treatment          Neuroticism   
+##  Min.   : 1.00   Length:60          Min.   :25.33  
+##  1st Qu.:15.75   Class :character   1st Qu.:41.75  
+##  Median :30.50   Mode  :character   Median :49.44  
+##  Mean   :30.50                      Mean   :48.99  
+##  3rd Qu.:45.25                      3rd Qu.:54.61  
+##  Max.   :60.00                      Max.   :76.69</code></pre>
+<p>If your results match mine, it means you have correctly imported the data.</p>
+</div>
+<div id="importing-spss-.sav-files." class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Importing SPSS (.sav files).<a href="programming2.html#importing-spss-.sav-files." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>SPSS (Statistical Package for the Social Sciences) is another popular software used for statistical analysis, particularly in the social sciences. SPSS data files are typically saved with a <strong><code>.sav</code></strong> extension. These files can contain data, variable names, variable labels, and other metadata.</p>
+<p>To import an SPSS file (<strong><code>burnout.sav</code></strong>), follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>Open RStudio.</p></li>
+<li><p>Navigate to the Environment pane (top right-hand corner) and make sure the Environment tab is clicked.</p></li>
+<li><p>Click on the “Import Dataset” button.</p></li>
+<li><p>Select “From SPSS”.</p></li>
+<li><p>A pop-up window will open.</p></li>
+</ol>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="programming2.html#cb264-1" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="st">&quot;img/04-import-sav.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/04-import-sav.png" /><!-- --></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Browse your folder and select the <strong><code>burnout.sav</code></strong> file to import.</p></li>
+<li><p>Under Import Options, you can set the name of the data frame variable in R for the SPSS data set. Leave it as <code>burnout.sav</code>.</p></li>
+<li><p>The Code Preview shows you the written code commands that you could type out to import the data frame instead of using the RStudio interface.</p></li>
+<li><p>To import the dataframe, click “Import”.</p></li>
+</ol>
+<p>After importing, a tab in the source pane called “burnout” should open, displaying the data frame. Additionally, you should see the data frame in the Environment pane. Under the “value” column, it should indicate “467 obs. of 6 variables,” indicating there are 467 rows and 6 columns of data.</p>
+<p>Once imported, use the <strong><code>head()</code></strong> and <strong><code>summary()</code></strong> functions to check that the data has been imported correctly:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="programming2.html#cb265-1" tabindex="-1"></a><span class="fu">head</span>(Burnout)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   burnout             loc  cope teaching research pastoral
+##   &lt;dbl+lbl&gt;         &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 0 [Not Burnt Out]  7.65  9.16     32.7     87.5     31.5
+## 2 0 [Not Burnt Out]  6.47 13.0      52.7     66.7     68.5
+## 3 0 [Not Burnt Out]  8.82  9.16     49.1     60.4     53.7
+## 4 0 [Not Burnt Out] 20     9.16     52.7     62.5     50  
+## 5 0 [Not Burnt Out]  6.47 19.1      43.6     79.2     40.7
+## 6 0 [Not Burnt Out]  7.06 16.0      38.2     52.1     48.1</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="programming2.html#cb267-1" tabindex="-1"></a><span class="fu">summary</span>(Burnout)</span></code></pre></div>
+<pre><code>##     burnout            loc               cope            teaching     
+##  Min.   :0.0000   Min.   :  6.471   Min.   :  3.817   Min.   : 16.36  
+##  1st Qu.:0.0000   1st Qu.:  9.412   1st Qu.: 12.214   1st Qu.: 47.27  
+##  Median :0.0000   Median : 14.118   Median : 19.084   Median : 54.55  
+##  Mean   :0.2548   Mean   : 17.900   Mean   : 23.919   Mean   : 55.43  
+##  3rd Qu.:1.0000   3rd Qu.: 22.353   3rd Qu.: 31.298   3rd Qu.: 61.82  
+##  Max.   :1.0000   Max.   :100.000   Max.   :100.000   Max.   :100.00  
+##     research         pastoral     
+##  Min.   : 20.83   Min.   : 18.52  
+##  1st Qu.: 52.08   1st Qu.: 46.30  
+##  Median : 62.50   Median : 53.70  
+##  Mean   : 61.91   Mean   : 55.25  
+##  3rd Qu.: 72.92   3rd Qu.: 62.96  
+##  Max.   :100.00   Max.   :100.00</code></pre>
+<p>If your results match mine, then you have successfully imported the SPSS data into R.</p>
+</div>
+<div id="exporting-datasets-in-r" class="section level3 hasAnchor" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Exporting Datasets in R<a href="programming2.html#exporting-datasets-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After analyzing and processing your data in R, you may need to export the results to share them with others or use them in other applications. R provides several functions for exporting data to various file formats, including CSV, Excel, and R data files. In this section, we’ll explore how to export datasets using these functions.</p>
+<div id="exporting-to-csv-files" class="section level4 hasAnchor" number="4.5.3.1">
+<h4><span class="header-section-number">4.5.3.1</span> Exporting to CSV Files<a href="programming2.html#exporting-to-csv-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To export a dataset to a CSV file, you can use the write.csv() function:</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="programming2.html#cb269-1" tabindex="-1"></a><span class="co"># Export dataset to a CSV file using the following syntax</span></span>
+<span id="cb269-2"><a href="programming2.html#cb269-2" tabindex="-1"></a><span class="fu">write.csv</span>(my_dataset, <span class="at">file =</span> <span class="st">&quot;output.csv&quot;</span>)</span></code></pre></div>
+<p>The argument <code>file</code> will create the name of the file and enable you to change the location of the file. The way this is currently written, it will save your file to your working directory. If you need a reminder on how to set and check your working directory <a href="rstudio.html#set_wd">click here</a>. Make sure it is set to the location you want your file to go.</p>
+<p>Let’s write the <code>iq_df</code> as a CSV file.</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="programming2.html#cb270-1" tabindex="-1"></a><span class="fu">write.csv</span>(iq_df, <span class="at">file =</span> <span class="st">&quot;iq_df.csv&quot;</span>)</span></code></pre></div>
+<p>In your working directory (check the Files pane), you should see the file <code>iq_df.csv</code>. If you go to your file manager system on your computer, find the file, and open it, the file should open in either a text or Excel file.</p>
+</div>
+<div id="exporting-to-spss-files" class="section level4 hasAnchor" number="4.5.3.2">
+<h4><span class="header-section-number">4.5.3.2</span> Exporting to SPSS Files<a href="programming2.html#exporting-to-spss-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To export a dataset to an SPSS file, you can use the <strong><code>write.foreign()</code></strong> function from the <strong><code>foreign</code></strong> package. First, make sure you have installed and loaded the <strong><code>foreign</code></strong> package:</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="programming2.html#cb271-1" tabindex="-1"></a><span class="co">#install.packages(&quot;foreign&quot;)</span></span>
+<span id="cb271-2"><a href="programming2.html#cb271-2" tabindex="-1"></a><span class="fu">library</span>(foreign)</span></code></pre></div>
+<p>Then, use the following syntax to export data frames to SPSS:</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="programming2.html#cb272-1" tabindex="-1"></a><span class="fu">write.foreign</span>(my_dataset, <span class="co">#the dataset you are exporting</span></span>
+<span id="cb272-2"><a href="programming2.html#cb272-2" tabindex="-1"></a>              <span class="at">datafile =</span> <span class="st">&quot;output.sav&quot;</span>, <span class="co">#the location you will export your data</span></span>
+<span id="cb272-3"><a href="programming2.html#cb272-3" tabindex="-1"></a>              <span class="at">codefile =</span> <span class="st">&quot;output.sps&quot;</span>, <span class="co">#this creates the syntax for converting your file to SPSS</span></span>
+<span id="cb272-4"><a href="programming2.html#cb272-4" tabindex="-1"></a>              <span class="at">package =</span> <span class="st">&quot;SPSS&quot;</span>) <span class="co">#this specifies the package the exported file will work for</span></span></code></pre></div>
+<p>You might be wondering why there is both a datafile and a codefile argument. Let’s break each down:</p>
+<ul>
+<li><p>datafile: This argument specifies the file path where the data will be saved in the desired format (e.g., SPSS data file). The datafile argument is used to store the actual data values from the R dataset.</p></li>
+<li><p>codefile: This is where the instructions on how to use your data are saved. When you specify a file path for the codefile argument, R will create a file containing commands or instructions that another program (like SPSS) can use to understand and import your data correctly. It’s like writing down step-by-step directions for SPSS to follow.</p></li>
+</ul>
+<p>So, in simple terms, the datafile is where your data is saved, while the codefile contains the instructions for using that data in another program. They work together to make sure your data can be easily used in different software programs.</p>
+<p>Now let’s export the <code>psycho</code> data frame (we imported from CSV) to SPSS!</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="programming2.html#cb273-1" tabindex="-1"></a><span class="fu">write.foreign</span>(psycho, <span class="co">#the dataset you are exporting</span></span>
+<span id="cb273-2"><a href="programming2.html#cb273-2" tabindex="-1"></a>              <span class="at">datafile =</span> <span class="st">&quot;psycho.sav&quot;</span>, <span class="co">#the location you will export your data</span></span>
+<span id="cb273-3"><a href="programming2.html#cb273-3" tabindex="-1"></a>              <span class="at">codefile =</span> <span class="st">&quot;psycho.sps&quot;</span>, <span class="co">#this creates the syntax for converting your file to SPSS</span></span>
+<span id="cb273-4"><a href="programming2.html#cb273-4" tabindex="-1"></a>              <span class="at">package =</span> <span class="st">&quot;SPSS&quot;</span>) <span class="co">#this specifies the package the exported file will work for</span></span></code></pre></div>
+<p>Again this will save the file in your working directory. If you go to your file explorer system and open up the file, it should open SPSS for you.</p>
+</div>
+</div>
+</div>
+<div id="summary-4" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Summary<a href="programming2.html#summary-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Congratulations, you’ve made it through Programming Part I and II! We’ve covered a lot of useful (but let’s be honest, not exactly riveting) concepts in programming with R. Throughout these sections, we’ve learned how R categorizes data, stores it in data structures, converts data types, and creates variables and functions. Additionally, we’ve explored how to install and load packages to enhance R’s capabilities, and how to import and export data.</p>
+<p>With this foundation, we’re now well-equipped to move on to the next phase: data processing. In the upcoming week, we’ll dive into methods for cleaning our data, setting the stage for more advanced analyses.</p>
+</div>
+<div id="glossary-2" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Glossary<a href="programming2.html#glossary-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="88%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Term</strong></th>
+<th><strong>Definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CSV</td>
+<td>Comma-Separated Values: a common file format for storing tabular data, where each value is separated by a comma.</td>
+</tr>
+<tr class="even">
+<td>SPSS</td>
+<td>Statistical Package for the Social Sciences: software commonly used for statistical analysis, often associated with .sav files.</td>
+</tr>
+<tr class="odd">
+<td>Dataframe</td>
+<td>A two-dimensional data structure in R that resembles a table with rows and columns. It can store mixed data types.</td>
+</tr>
+<tr class="even">
+<td>Importing</td>
+<td>The process of bringing data from external sources into R for analysis or manipulation.</td>
+</tr>
+<tr class="odd">
+<td>Exporting</td>
+<td>The process of saving data from R to external files or formats for use in other applications.</td>
+</tr>
+<tr class="even">
+<td>write.csv()</td>
+<td>A function in R used to export a dataset to a CSV file.</td>
+</tr>
+<tr class="odd">
+<td>write.foreign()</td>
+<td>A function in R used to export a dataset to other formats, such as SPSS files.</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="programming1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datacleaning1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/04-programming-p2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rintro_demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

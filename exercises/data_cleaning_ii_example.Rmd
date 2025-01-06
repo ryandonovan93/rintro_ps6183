@@ -1,0 +1,124 @@
+---
+title: "Data Cleaning Example"
+author: "Ryan Donovan"
+date: "`r Sys.Date()`"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setupd, include=FALSE}
+
+
+library(tidyverse)
+library(knitr)
+
+df_clean <- read.csv("datasets/raw_remote_clean.csv")
+
+df_clean <- df_clean %>% select(-X)
+
+```
+
+In this session, we are going to learn how to clean more challenging data than what we encountered in [Chapter 5](#datacleaning1). In contrast to the last chapter, this section is more of a reference guide than an end-to-end cleaning example. That's because the tools you learn here might not always pop up, or at least are unlikely to all pop up in the one data frame. Nonetheless, when you combine the functions you learn here to clean data with the functions from last week, you will be able to handle an impressive amount (probably around 80%) of any data cleaning challenges you will encounter in your research.
+
+By the end of this session, you should be capable of the following:
+
+-   Understand the concepts of **wide** and **long** data and be capable of **`pivoting`** (i.e., transforming) from one format to another.
+
+-   Know how to merge together separate data frames into one file that you can clean.
+
+-   Identifying and handling missing data (**`NA`** values).
+
+## Let's Get Set Up
+
+Similar to the last chapter, first we need to set up RStudio and download some data files.
+
+### Activity 1.1: Set up your WD
+
+Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. In Chapter 2, I showed you how to do this using [a button-and-click interface](#set_wd).
+
+Using those instructions, create a folder called "Week5" in the **`rintro`** project folder (or whatever folder you created) and set it as your working directory. Use the **`getwd()`** to check that it has been set as your working directory. Your output should be something like this:
+
+```{r eval = F}
+
+> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week5")
+
+```
+
+### Activity 1.2: Import your CSV files and R script
+
+You need to import several files for this activity:
+
+1.  **background.csv**
+
+2.  **flanker_task1.csv**
+
+3.  **flanker_task2.csv**
+
+4.  **flanker_task3.csv**
+
+5.  **demographics.csv**
+
+6.  **reaction_time.csv**
+
+7.  **raw_remote_clean.csv**
+
+To download these files, navigate to the Teams channel for this course and access the "Week 5 - Data Cleaning (Part II)" channel. Once downloaded, use your file management system (File Explorer on Windows or Finder on Mac) to copy and paste these files into the "Week5" folder you created in Activity 1.1.
+
+f you're using RStudio, you should see these files in your working directory within the Files pane. Create an R script and save it as (**data_cleaning_ii_script.R**).
+
+To import the raw_remote_associations.csv dataset into R, do the following:
+
+1.  Click Environment in the Environment Pane -\> Import Dataset -\> From Text(base) -\> Select **demographics.csv -\>** change its name to **df_dem**
+2.  Click Environment in the Environment Pane -\> Import Dataset -\> From Text(base) -\> Select **flanker_task1.csv -\>** change its name to **df_flanker1**
+3.  Click Environment in the Environment Pane -\> Import Dataset -\> From Text(base) -\> Select **flanker_task2.csv -\>** change its name to **df_flanker2**
+4.  Click Environment in the Environment Pane -\> Import Dataset -\> From Text(base) -\> Select **flanker_task3.csv -\>** change its name to **df_flanker3**
+5.  Follow the same instructions to import the **demographics.csv**, **reaction_time.csv,** and **raw_remote_clean.csv** files. Change their name to **df_demographics,** **df_rt, and df_clean** respectively.
+6.  [See Chapter 4's section on importing data for more information](#importing)
+
+Alternatively, you can write and run the following commands within the **data_cleaning_ii_script.R**. Just make sure they are in the Week 5 folder and that you have set that folder as your working directory.
+
+```{r eval = F}
+
+df_background <- read.csv("background.csv") 
+
+df_flanker1 <- read.csv("flanker_task1.csv")
+
+df_flanker2 <- read.csv("flanker_task2.csv")
+
+df_flanker3 <- read.csv("flanker_task3.csv")
+
+df_demographics <- read.csv("demographics.csv")
+
+df_rt <- read.csv("reaction_time.csv")
+
+  
+```
+
+```{r echo = F}
+
+df_demographics <- read.csv("datasets/demographics.csv")
+
+df_rt <- read.csv("datasets/reaction_time.csv")
+
+df_background <- read.csv("datasets/background.csv") 
+  
+  df_flanker1 <- read.csv("datasets/flanker_task1.csv")
+  
+  df_flanker2 <- read.csv("datasets/flanker_task2.csv")
+  
+  df_flanker3 <- read.csv("datasets/flanker_task3.csv")
+
+```
+
+### Activity 1.3: Load the tidyverse package
+
+A good practice in R is to load packages at the start of your script. Write the following in your R script to load in tidyverse.
+
+```{r eval = FALSE}
+
+library(tidyverse)
+
+```
+
+Okay, now we are ready to get cleaning!

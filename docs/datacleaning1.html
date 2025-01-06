@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Data Wrangling and Cleaning (Part I) | Introduction to R</title>
+  <meta name="description" content="This GitBook is for the R Workshops" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Data Wrangling and Cleaning (Part I) | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook is for the R Workshops" />
+  <meta name="github-repo" content="ryandonovan93/rintro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Data Wrangling and Cleaning (Part I) | Introduction to R" />
+  
+  <meta name="twitter:description" content="This GitBook is for the R Workshops" />
+  
+
+<meta name="author" content="Ryan Donovan" />
+
+
+<meta name="date" content="2024-03-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="programming2.html"/>
+<link rel="next" href="datacleaning2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R (University of Galway)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#who-is-this-resource-for"><i class="fa fa-check"></i><b>1.1</b> Who is this resource for?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#should-i-learn-r"><i class="fa fa-check"></i><b>1.2</b> Should I learn R?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-will-i-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.3</b> What will I learn to do in R?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-will-i-not-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.4</b> What will I not learn to do in R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#where-and-when-will-the-workshops-take-place"><i class="fa fa-check"></i><b>1.5</b> Where and when will the workshops take place?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#are-there-any-prerequisites-for-taking-this-course"><i class="fa fa-check"></i><b>1.6</b> Are there any prerequisites for taking this course?</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#do-i-need-to-bring-a-laptop-to-the-class"><i class="fa fa-check"></i><b>1.7</b> Do I need to bring a laptop to the class?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Getting Started with R and RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.1</b> What is R?</a></li>
+<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#create-a-posit-cloud-account."><i class="fa fa-check"></i><b>2.2</b> Create a Posit Cloud Account.</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-to-your-computer"><i class="fa fa-check"></i><b>2.3</b> Downloading R on to your Computer</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-windows"><i class="fa fa-check"></i><b>2.3.1</b> Downloading R on Windows</a></li>
+<li class="chapter" data-level="2.3.2" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-mac"><i class="fa fa-check"></i><b>2.3.2</b> Downloading R on Mac</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#install-and-open-r-studio"><i class="fa fa-check"></i><b>2.4</b> Install and Open R Studio</a></li>
+<li class="chapter" data-level="2.5" data-path="rstudio.html"><a href="rstudio.html#creating-an-r-project"><i class="fa fa-check"></i><b>2.5</b> Creating an R Project</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="rstudio.html"><a href="rstudio.html#navigating-rstudio"><i class="fa fa-check"></i><b>2.5.1</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rstudio.html"><a href="rstudio.html#checking-our-working-directory"><i class="fa fa-check"></i><b>2.5.2</b> Checking our Working Directory</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rstudio.html"><a href="rstudio.html#set_wd"><i class="fa fa-check"></i><b>2.5.3</b> Setting up a new Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#writing-our-first-r-code"><i class="fa fa-check"></i><b>2.6</b> Writing our first R Code</a></li>
+<li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.7</b> Console vs Source Script</a></li>
+<li class="chapter" data-level="2.8" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.8</b> Let’s write some statistical code</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="rstudio.html"><a href="rstudio.html#comments"><i class="fa fa-check"></i><b>2.8.1</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rstudio.html"><a href="rstudio.html#summary"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="rstudio.html"><a href="rstudio.html#glossary"><i class="fa fa-check"></i><b>2.10</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming1.html"><a href="programming1.html"><i class="fa fa-check"></i><b>3</b> <strong>R Programming (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#activity-1-set-up-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Activity 1: Set up your Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#using-the-console"><i class="fa fa-check"></i><b>3.2</b> Using the Console</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.2.1</b> Typing Commands in the Console</a></li>
+<li class="chapter" data-level="3.2.2" data-path="programming1.html"><a href="programming1.html#console-syntax-aka-im-ron-burgundy"><i class="fa fa-check"></i><b>3.2.2</b> Console Syntax (Aka “I’m Ron Burgundy?”)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="programming1.html"><a href="programming1.html#exercises"><i class="fa fa-check"></i><b>3.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#data-types"><i class="fa fa-check"></i><b>3.3</b> Data Types</a></li>
+<li class="chapter" data-level="3.4" data-path="programming1.html"><a href="programming1.html#basic-data-types-in-r"><i class="fa fa-check"></i><b>3.4</b> Basic Data types in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="programming1.html"><a href="programming1.html#character"><i class="fa fa-check"></i><b>3.4.1</b> Character</a></li>
+<li class="chapter" data-level="3.4.2" data-path="programming1.html"><a href="programming1.html#numeric-or-double"><i class="fa fa-check"></i><b>3.4.2</b> Numeric (or Double)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="programming1.html"><a href="programming1.html#integer"><i class="fa fa-check"></i><b>3.4.3</b> Integer</a></li>
+<li class="chapter" data-level="3.4.4" data-path="programming1.html"><a href="programming1.html#logical-otherwise-know-as-boolean"><i class="fa fa-check"></i><b>3.4.4</b> Logical (otherwise know as Boolean)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="programming1.html"><a href="programming1.html#exercises-1"><i class="fa fa-check"></i><b>3.4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.5.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="programming1.html"><a href="programming1.html#exercises-2"><i class="fa fa-check"></i><b>3.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.6</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.6.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.6.2</b> Data frames</a></li>
+<li class="chapter" data-level="3.6.3" data-path="programming1.html"><a href="programming1.html#exercises-3"><i class="fa fa-check"></i><b>3.6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#summary-1"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="programming1.html"><a href="programming1.html#glossary-1"><i class="fa fa-check"></i><b>3.8</b> Glossary</a></li>
+<li class="chapter" data-level="3.9" data-path="programming1.html"><a href="programming1.html#variable-name-table"><i class="fa fa-check"></i><b>3.9</b> Variable Name Table</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming2.html"><a href="programming2.html"><i class="fa fa-check"></i><b>4</b> <strong>R Programming (Part II)</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming2.html"><a href="programming2.html#functions"><i class="fa fa-check"></i><b>4.1</b> Functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming2.html"><a href="programming2.html#the-syntax-for-creating-a-function"><i class="fa fa-check"></i><b>4.1.1</b> The Syntax for Creating a Function</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming2.html"><a href="programming2.html#creating-a-simple-function-1-argument"><i class="fa fa-check"></i><b>4.1.2</b> Creating a Simple Function (1-Argument)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="programming2.html"><a href="programming2.html#creating-a-multi-argument-function"><i class="fa fa-check"></i><b>4.1.3</b> Creating a Multi-Argument Function</a></li>
+<li class="chapter" data-level="4.1.4" data-path="programming2.html"><a href="programming2.html#functions-inside-functions"><i class="fa fa-check"></i><b>4.1.4</b> Functions inside Functions</a></li>
+<li class="chapter" data-level="4.1.5" data-path="programming2.html"><a href="programming2.html#returning-multiple-objects-from-a-function"><i class="fa fa-check"></i><b>4.1.5</b> Returning Multiple Objects from a Function</a></li>
+<li class="chapter" data-level="4.1.6" data-path="programming2.html"><a href="programming2.html#some-important-features-about-functions"><i class="fa fa-check"></i><b>4.1.6</b> Some Important Features about Functions</a></li>
+<li class="chapter" data-level="4.1.7" data-path="programming2.html"><a href="programming2.html#exercises-4"><i class="fa fa-check"></i><b>4.1.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming2.html"><a href="programming2.html#the-factor-data-type"><i class="fa fa-check"></i><b>4.2</b> The Factor Data Type</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="programming2.html"><a href="programming2.html#creating-a-factor"><i class="fa fa-check"></i><b>4.2.1</b> Creating a Factor</a></li>
+<li class="chapter" data-level="4.2.2" data-path="programming2.html"><a href="programming2.html#using-factors-to-sort-character-data"><i class="fa fa-check"></i><b>4.2.2</b> Using Factors to Sort Character Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="programming2.html"><a href="programming2.html#exercises-5"><i class="fa fa-check"></i><b>4.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="programming2.html"><a href="programming2.html#the-list-data-structure"><i class="fa fa-check"></i><b>4.3</b> The List Data Structure</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="programming2.html"><a href="programming2.html#understanding-lists"><i class="fa fa-check"></i><b>4.3.1</b> Understanding Lists</a></li>
+<li class="chapter" data-level="4.3.2" data-path="programming2.html"><a href="programming2.html#creating-lists"><i class="fa fa-check"></i><b>4.3.2</b> Creating Lists</a></li>
+<li class="chapter" data-level="4.3.3" data-path="programming2.html"><a href="programming2.html#lists-within-lists-indexing"><i class="fa fa-check"></i><b>4.3.3</b> Lists within Lists (Indexing)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="programming2.html"><a href="programming2.html#summary-2"><i class="fa fa-check"></i><b>4.3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="programming2.html"><a href="programming2.html#r-packages"><i class="fa fa-check"></i><b>4.4</b> R Packages</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming2.html"><a href="programming2.html#understanding-r-packages"><i class="fa fa-check"></i><b>4.4.1</b> Understanding R Packages</a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming2.html"><a href="programming2.html#installing-and-loading-r-package"><i class="fa fa-check"></i><b>4.4.2</b> Installing and Loading R Package</a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming2.html"><a href="programming2.html#loading-packages"><i class="fa fa-check"></i><b>4.4.3</b> Loading Packages</a></li>
+<li class="chapter" data-level="4.4.4" data-path="programming2.html"><a href="programming2.html#testing-our-new-functions"><i class="fa fa-check"></i><b>4.4.4</b> Testing our New Functions</a></li>
+<li class="chapter" data-level="4.4.5" data-path="programming2.html"><a href="programming2.html#error-loading-packages"><i class="fa fa-check"></i><b>4.4.5</b> Error Loading Packages</a></li>
+<li class="chapter" data-level="4.4.6" data-path="programming2.html"><a href="programming2.html#package-conventions-if-using-code"><i class="fa fa-check"></i><b>4.4.6</b> Package Conventions if Using Code</a></li>
+<li class="chapter" data-level="4.4.7" data-path="programming2.html"><a href="programming2.html#summary-3"><i class="fa fa-check"></i><b>4.4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="programming2.html"><a href="programming2.html#importing"><i class="fa fa-check"></i><b>4.5</b> Importing and Exporting Data</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="programming2.html"><a href="programming2.html#importing-csv-files."><i class="fa fa-check"></i><b>4.5.1</b> Importing CSV files.</a></li>
+<li class="chapter" data-level="4.5.2" data-path="programming2.html"><a href="programming2.html#importing-spss-.sav-files."><i class="fa fa-check"></i><b>4.5.2</b> Importing SPSS (.sav files).</a></li>
+<li class="chapter" data-level="4.5.3" data-path="programming2.html"><a href="programming2.html#exporting-datasets-in-r"><i class="fa fa-check"></i><b>4.5.3</b> Exporting Datasets in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="programming2.html"><a href="programming2.html#summary-4"><i class="fa fa-check"></i><b>4.6</b> Summary</a></li>
+<li class="chapter" data-level="4.7" data-path="programming2.html"><a href="programming2.html#glossary-2"><i class="fa fa-check"></i><b>4.7</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datacleaning1.html"><a href="datacleaning1.html"><i class="fa fa-check"></i><b>5</b> <strong>Data Wrangling and Cleaning (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datacleaning1.html"><a href="datacleaning1.html#what-is-data-wrangling-and-cleaning"><i class="fa fa-check"></i><b>5.1</b> <strong>What is Data Wrangling and Cleaning?</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="datacleaning1.html"><a href="datacleaning1.html#naming-conventions-in-this-book"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Naming Conventions in this Book</strong></a></li>
+<li class="chapter" data-level="5.1.2" data-path="datacleaning1.html"><a href="datacleaning1.html#why-is-data-cleaning-important"><i class="fa fa-check"></i><b>5.1.2</b> <strong>Why is Data Cleaning Important?</strong></a></li>
+<li class="chapter" data-level="5.1.3" data-path="datacleaning1.html"><a href="datacleaning1.html#how-can-r-help-you-with-data-cleaning"><i class="fa fa-check"></i><b>5.1.3</b> <strong>How can R help you with Data Cleaning?</strong></a></li>
+<li class="chapter" data-level="5.1.4" data-path="datacleaning1.html"><a href="datacleaning1.html#tidyverse-and-base-r"><i class="fa fa-check"></i><b>5.1.4</b> Tidyverse (and Base R)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="datacleaning1.html"><a href="datacleaning1.html#lets-get-set-up"><i class="fa fa-check"></i><b>5.2</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.1-set-up-your-wd"><i class="fa fa-check"></i><b>5.2.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="5.2.2" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.2-import-your-csv-files-and-r-script"><i class="fa fa-check"></i><b>5.2.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="5.2.3" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.3-install-and-load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.2.3</b> Activity 1.3: Install and load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-the-remote-associates-data-set."><i class="fa fa-check"></i><b>5.3</b> Cleaning the Remote Associates Data set.</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datacleaning1.html"><a href="datacleaning1.html#context-and-viewing-it-in-rstudio"><i class="fa fa-check"></i><b>5.3.1</b> Context and Viewing it in RStudio</a></li>
+<li class="chapter" data-level="5.3.2" data-path="datacleaning1.html"><a href="datacleaning1.html#key-functions-that-will-help-you-clean-most-datasets"><i class="fa fa-check"></i><b>5.3.2</b> Key Functions That Will Help You Clean Most Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datacleaning1.html"><a href="datacleaning1.html#choosing-our-columns-of-interest-with-select"><i class="fa fa-check"></i><b>5.4</b> Choosing our Columns of Interest with <code>Select()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="datacleaning1.html"><a href="datacleaning1.html#renaming-our-columns-of-interest-with-rename"><i class="fa fa-check"></i><b>5.5</b> Renaming our Columns of Interest with <code>rename()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="datacleaning1.html"><a href="datacleaning1.html#creating-new-columns-using-the-mutate-function"><i class="fa fa-check"></i><b>5.6</b> Creating new Columns using the <code>mutate()</code> function</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="datacleaning1.html"><a href="datacleaning1.html#rewriting-existing-columns-using-mutate"><i class="fa fa-check"></i><b>5.6.1</b> Rewriting existing columns using <code>mutate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="datacleaning1.html"><a href="datacleaning1.html#checking-in-on-our-data-set"><i class="fa fa-check"></i><b>5.7</b> Checking in on our data set</a></li>
+<li class="chapter" data-level="5.8" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-duplicates-using-distinct"><i class="fa fa-check"></i><b>5.8</b> Removing Duplicates using <code>distinct()</code></a></li>
+<li class="chapter" data-level="5.9" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-the-filter-function"><i class="fa fa-check"></i><b>5.9</b> Removing Rows using the <code>filter()</code> Function</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-multiple-conditions-with-filter"><i class="fa fa-check"></i><b>5.9.1</b> Removing Rows Using Multiple Conditions with <code>filter()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="datacleaning1.html"><a href="datacleaning1.html#identifying-the-factors-in-our-data-frame"><i class="fa fa-check"></i><b>5.10</b> Identifying the Factors in our Data Frame</a></li>
+<li class="chapter" data-level="5.11" data-path="datacleaning1.html"><a href="datacleaning1.html#summarising-our-data-by-groups-using-group_by-and-summarise"><i class="fa fa-check"></i><b>5.11</b> Summarising our Data by Groups using <code>group_by()</code> and <code>summarise()</code></a></li>
+<li class="chapter" data-level="5.12" data-path="datacleaning1.html"><a href="datacleaning1.html#chaining-it-all-together-with-the-pipe-operator"><i class="fa fa-check"></i><b>5.12</b> Chaining it All Together with the Pipe Operator</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="datacleaning1.html"><a href="datacleaning1.html#using-a-pipe-operator-on-the-remote-associations-data-frame"><i class="fa fa-check"></i><b>5.12.1</b> Using a Pipe Operator on the Remote Associations Data Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="datacleaning1.html"><a href="datacleaning1.html#clean-activity"><i class="fa fa-check"></i><b>5.13</b> Activity: Clean the Flanker Dataset</a>
+<ul>
+<li class="chapter" data-level="5.13.1" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-flanker-test-dataset"><i class="fa fa-check"></i><b>5.13.1</b> <strong>Cleaning Flanker Test Dataset</strong></a></li>
+<li class="chapter" data-level="5.13.2" data-path="datacleaning1.html"><a href="datacleaning1.html#load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.13.2</b> <strong>Load the “Tidyverse” Package</strong></a></li>
+<li class="chapter" data-level="5.13.3" data-path="datacleaning1.html"><a href="datacleaning1.html#reset-your-environment"><i class="fa fa-check"></i><b>5.13.3</b> <strong>Reset Your Environment</strong></a></li>
+<li class="chapter" data-level="5.13.4" data-path="datacleaning1.html"><a href="datacleaning1.html#import-the-data"><i class="fa fa-check"></i><b>5.13.4</b> <strong>Import the Data</strong></a></li>
+<li class="chapter" data-level="5.13.5" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-instructions"><i class="fa fa-check"></i><b>5.13.5</b> Cleaning Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.14" data-path="datacleaning1.html"><a href="datacleaning1.html#summary-5"><i class="fa fa-check"></i><b>5.14</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="datacleaning2.html"><a href="datacleaning2.html"><i class="fa fa-check"></i><b>6</b> Data Wrangling and Cleaning (Part II)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#lets-get-set-up-1"><i class="fa fa-check"></i><b>6.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.1-set-up-your-wd-1"><i class="fa fa-check"></i><b>6.1.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="6.1.2" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.2-import-your-csv-files-and-r-script-1"><i class="fa fa-check"></i><b>6.1.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="6.1.3" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.3-load-the-tidyverse-package"><i class="fa fa-check"></i><b>6.1.3</b> Activity 1.3: Load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#data-formats-long-and-wide-data"><i class="fa fa-check"></i><b>6.2</b> Data Formats (Long and Wide Data)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="datacleaning2.html"><a href="datacleaning2.html#defining-long-and-wide-data"><i class="fa fa-check"></i><b>6.2.1</b> Defining Long and Wide Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#converting-the-format-of-our-data"><i class="fa fa-check"></i><b>6.3</b> Converting the Format of Our Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-wide-to-long"><i class="fa fa-check"></i><b>6.3.1</b> Pivoting from Wide to Long</a></li>
+<li class="chapter" data-level="6.3.2" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-our-remote-associations-data-frame"><i class="fa fa-check"></i><b>6.3.2</b> Pivoting our Remote Associations Data Frame</a></li>
+<li class="chapter" data-level="6.3.3" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-long-to-wide"><i class="fa fa-check"></i><b>6.3.3</b> Pivoting from Long to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="datacleaning2.html"><a href="datacleaning2.html#handling-missing-values"><i class="fa fa-check"></i><b>6.4</b> Handling Missing Values</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-missing-values"><i class="fa fa-check"></i><b>6.4.1</b> <strong>Introduction to Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.2" data-path="datacleaning2.html"><a href="datacleaning2.html#identifying-missing-values"><i class="fa fa-check"></i><b>6.4.2</b> <strong>Identifying Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.3" data-path="datacleaning2.html"><a href="datacleaning2.html#removing-missing-values"><i class="fa fa-check"></i><b>6.4.3</b> Removing Missing Values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-data-i.e.-joining-different-datasets-together"><i class="fa fa-check"></i><b>6.5</b> Merging Data (i.e., Joining Different Datasets Together)</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-merging-data"><i class="fa fa-check"></i><b>6.5.1</b> Introduction to Merging Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="datacleaning2.html"><a href="datacleaning2.html#inner_join"><i class="fa fa-check"></i><b>6.5.2</b> Inner_Join</a></li>
+<li class="chapter" data-level="6.5.3" data-path="datacleaning2.html"><a href="datacleaning2.html#left_join"><i class="fa fa-check"></i><b>6.5.3</b> Left_join</a></li>
+<li class="chapter" data-level="6.5.4" data-path="datacleaning2.html"><a href="datacleaning2.html#right_join"><i class="fa fa-check"></i><b>6.5.4</b> Right_Join</a></li>
+<li class="chapter" data-level="6.5.5" data-path="datacleaning2.html"><a href="datacleaning2.html#outer-join"><i class="fa fa-check"></i><b>6.5.5</b> Outer Join</a></li>
+<li class="chapter" data-level="6.5.6" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-7"><i class="fa fa-check"></i><b>6.5.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="datacleaning2.html"><a href="datacleaning2.html#data-wrangling-example-demographic-and-flanker-task"><i class="fa fa-check"></i><b>6.6</b> Data Wrangling Example (Demographic and Flanker Task)</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#part-i-cleaning-the-df_background-file"><i class="fa fa-check"></i><b>6.6.1</b> Part I: Cleaning the <code>df_background</code> file</a></li>
+<li class="chapter" data-level="6.6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#cleaning-our-flanker-tasks"><i class="fa fa-check"></i><b>6.6.2</b> Cleaning our Flanker Tasks</a></li>
+<li class="chapter" data-level="6.6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-the-data-frames"><i class="fa fa-check"></i><b>6.6.3</b> Merging the Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-8"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-vis.html"><a href="data-vis.html"><i class="fa fa-check"></i><b>7</b> Data Visualisation in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-vis.html"><a href="data-vis.html#lets-get-set-up-2"><i class="fa fa-check"></i><b>7.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-vis.html"><a href="data-vis.html#activity-set-up-your-working-directory"><i class="fa fa-check"></i><b>7.1.1</b> Activity: Set Up Your Working Directory</a></li>
+<li class="chapter" data-level="7.1.2" data-path="data-vis.html"><a href="data-vis.html#activity-download-and-import-your-files"><i class="fa fa-check"></i><b>7.1.2</b> Activity: Download and Import Your Files</a></li>
+<li class="chapter" data-level="7.1.3" data-path="data-vis.html"><a href="data-vis.html#activity-open-your-r-script"><i class="fa fa-check"></i><b>7.1.3</b> Activity: Open your R Script</a></li>
+<li class="chapter" data-level="7.1.4" data-path="data-vis.html"><a href="data-vis.html#activity-install-and-load-your-packages"><i class="fa fa-check"></i><b>7.1.4</b> Activity: Install and Load Your Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-vis.html"><a href="data-vis.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>7.2</b> Introduction to <code>ggplot2</code></a></li>
+<li class="chapter" data-level="7.3" data-path="data-vis.html"><a href="data-vis.html#how-to-draw-a-plot-box-plot"><i class="fa fa-check"></i><b>7.3</b> How to Draw a Plot (Box Plot)</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-vis.html"><a href="data-vis.html#first-we-set-up-the-canvas"><i class="fa fa-check"></i><b>7.3.1</b> First we set up the Canvas</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-vis.html"><a href="data-vis.html#creating-our-box-plot"><i class="fa fa-check"></i><b>7.3.2</b> Creating our Box Plot</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-vis.html"><a href="data-vis.html#changing-the-name-of-our-x-axis-and-y-axis"><i class="fa fa-check"></i><b>7.3.3</b> Changing the Name of Our X-Axis and Y-Axis</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-vis.html"><a href="data-vis.html#changing-the-look-theme-of-our-canvas"><i class="fa fa-check"></i><b>7.3.4</b> Changing the Look (Theme) of Our Canvas</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-vis.html"><a href="data-vis.html#the-real-power-of-the-ggplot-package---customisation"><i class="fa fa-check"></i><b>7.4</b> The Real Power of the ggplot package - Customisation</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="data-vis.html"><a href="data-vis.html#mapping-aesthetic-properties-like-colour-and-fill-to-our-variables"><i class="fa fa-check"></i><b>7.4.1</b> Mapping Aesthetic Properties (like Colour and Fill) to Our Variables</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-vis.html"><a href="data-vis.html#changing-the-value-of-our-y-axis"><i class="fa fa-check"></i><b>7.4.2</b> Changing the Value of Our Y-Axis</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-vis.html"><a href="data-vis.html#plotting-our-data-points-in-the-graph"><i class="fa fa-check"></i><b>7.4.3</b> Plotting our Data Points in the Graph</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-vis.html"><a href="data-vis.html#adding-statistical-information-to-our-plot"><i class="fa fa-check"></i><b>7.4.4</b> Adding Statistical Information to Our Plot</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-vis.html"><a href="data-vis.html#adding-text-to-our-plot"><i class="fa fa-check"></i><b>7.4.5</b> Adding Text to Our Plot</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-vis.html"><a href="data-vis.html#exporting-our-plot"><i class="fa fa-check"></i><b>7.4.6</b> Exporting our Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-vis.html"><a href="data-vis.html#drawing-a-scatter-plot"><i class="fa fa-check"></i><b>7.5</b> Drawing a Scatter Plot</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="data-vis.html"><a href="data-vis.html#context"><i class="fa fa-check"></i><b>7.5.1</b> Context</a></li>
+<li class="chapter" data-level="7.5.2" data-path="data-vis.html"><a href="data-vis.html#drawing-our-plot"><i class="fa fa-check"></i><b>7.5.2</b> Drawing our Plot</a></li>
+<li class="chapter" data-level="7.5.3" data-path="data-vis.html"><a href="data-vis.html#customising-our-scatterplot-based-on-gender"><i class="fa fa-check"></i><b>7.5.3</b> Customising our Scatterplot based on Gender</a></li>
+<li class="chapter" data-level="7.5.4" data-path="data-vis.html"><a href="data-vis.html#faceting"><i class="fa fa-check"></i><b>7.5.4</b> Faceting</a></li>
+<li class="chapter" data-level="7.5.5" data-path="data-vis.html"><a href="data-vis.html#combining-charts"><i class="fa fa-check"></i><b>7.5.5</b> Combining Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="data-vis.html"><a href="data-vis.html#violin-charts"><i class="fa fa-check"></i><b>7.6</b> Violin Charts</a></li>
+<li class="chapter" data-level="7.7" data-path="data-vis.html"><a href="data-vis.html#bar-chart"><i class="fa fa-check"></i><b>7.7</b> Bar Chart</a></li>
+<li class="chapter" data-level="7.8" data-path="data-vis.html"><a href="data-vis.html#histograms"><i class="fa fa-check"></i><b>7.8</b> Histograms</a></li>
+<li class="chapter" data-level="7.9" data-path="data-vis.html"><a href="data-vis.html#line-chart"><i class="fa fa-check"></i><b>7.9</b> Line Chart</a></li>
+<li class="chapter" data-level="7.10" data-path="data-vis.html"><a href="data-vis.html#summary-9"><i class="fa fa-check"></i><b>7.10</b> Summary</a></li>
+<li class="chapter" data-level="7.11" data-path="data-vis.html"><a href="data-vis.html#geoms"><i class="fa fa-check"></i><b>7.11</b> Geoms</a></li>
+<li class="chapter" data-level="7.12" data-path="data-vis.html"><a href="data-vis.html#themes"><i class="fa fa-check"></i><b>7.12</b> Themes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>8</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>8.1</b> How Boolean Operators Work:</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>8.1.1</b> Understanding R’s Evaluation Process:</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="datacleaning1" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> <strong>Data Wrangling and Cleaning (Part I)</strong><a href="datacleaning1.html#datacleaning1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this session, we are going to learn how to use key packages and functions that enable you to conduct data cleaning in R.</p>
+<p>By the end of this session, you should be capable of the following:</p>
+<ul>
+<li><p>Understand the concept of <strong><code>tidy data</code></strong> and <strong><code>tidy principles</code></strong></p></li>
+<li><p>Using the functions <strong><code>select()</code></strong>, <strong><code>mutate()</code></strong>, <strong><code>rename()</code></strong>, and <strong><code>relocate</code></strong> to perform key operations on columns.</p></li>
+<li><p>Using the functions <strong><code>filter()</code></strong>, <strong><code>arrange()</code></strong>, and <strong><code>distinct()</code></strong> to perform key operations on rows</p></li>
+<li><p>Understand how to group information and perform calculations on those groupings.</p></li>
+<li><p>Understand how to pipe together functions to enable efficient data cleaning analysis.</p></li>
+</ul>
+<div id="what-is-data-wrangling-and-cleaning" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> <strong>What is Data Wrangling and Cleaning?</strong><a href="datacleaning1.html#what-is-data-wrangling-and-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If you read the literature on data science and data analytics, you will see terms like <strong><code>data cleaning</code></strong>, <strong><code>data munging</code></strong>, <strong><code>data wrangling</code></strong>, <strong><code>data transformation</code></strong>, <strong><code>data preprocessing</code></strong>, and <strong><code>data transponding</code></strong>. Often, when I see these words, I feel like Monica Bing in that one episode of Friends and scream <a href="https://youtu.be/uYM1uQ7QrTc?si=ZPZp2h3CiruqHh-m&amp;t=93">“THAT’S NOT EVEN A WORD!”</a>.</p>
+<p>I am going to break down three of these terms:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Data cleaning</strong> refers to the process of identifying and correcting errors in your data set. This could involve fixing errors such as duplicates or typos, correcting formatting errors, and handling missing values.</p></li>
+<li><p><strong>Data wrangling</strong> refers to preparing raw data for statistical analysis. It includes data cleaning but also may involve changing the structure of your data, merging different data sets together, creating new variables, and getting your data in a structure that enables you to conduct whatever statistical analysis you intend to carry out.</p></li>
+<li><p><strong>Data munging</strong> is mostly synonymous with data wrangling. You “munge” data when you take it from a raw form and transform it into a format that enables data analysis.</p></li>
+<li><p><strong>Data preprocessing</strong> is an umbrella term for each of these processes. It encompasses anything you do to your data before you analyze it.</p></li>
+</ol>
+<p>To give you a concrete example: If you download data from Qualtrics or Gorilla Research, it is not ready for statistical analysis right away. It will have rows and columns that you won’t need and will interfere with your data analysis (e.g., when you download SPSS data from Qualtrics, it will contain both data collected from when you previewed the study and when it went live).</p>
+<p>The process of changing that data into a format that you can use (e.g., by removing preview rows, removing columns, changing column names) is data wrangling. However, if you run your descriptive and inferential statistical analysis and you notice that you have missing data in columns, or some rows are duplicated, or there are typos (e.g., Mal instead of Male) and you fix those errors, then that is data cleaning.</p>
+<p>Data wrangling takes raw materials and builds a specific structure (e.g., like taking wood and cement and building a house you can live in). Data cleaning ensures that structure looks its absolute best.</p>
+<div id="naming-conventions-in-this-book" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> <strong>Naming Conventions in this Book</strong><a href="datacleaning1.html#naming-conventions-in-this-book" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I will often say <strong><code>data cleaning</code></strong> as a catch-all term for any process involved in getting data ready for statistical analysis. While it’s good to know the different meanings of these words when you are searching for specific information, it doesn’t affect your day-to-day analysis if you use them <strong><code>incorrectly</code></strong>. This might make a heretic in the data science community, but I can live with that.</p>
+<p>So we will use <strong><code>data cleaning</code></strong> from this point out.</p>
+</div>
+<div id="why-is-data-cleaning-important" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> <strong>Why is Data Cleaning Important?</strong><a href="datacleaning1.html#why-is-data-cleaning-important" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It’s estimated that 80% of your time working with data is actually focused on data cleaning. That’s partially because once your data is ready for statistical analysis, it only takes a few lines of code/button clicks to run the analysis. Since most of your time working with data will be on cleaning it, it’s really worthwhile to do it effectively and efficiently. By doing so, you will decrease the amount of time cleaning data (which let’s be honest, is dull) and spend more time on the interesting part - interpreting your results.</p>
+</div>
+<div id="how-can-r-help-you-with-data-cleaning" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> <strong>How can R help you with Data Cleaning?</strong><a href="datacleaning1.html#how-can-r-help-you-with-data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before I learned R, I used to clean my data manually in Excel. This was not ideal for two reasons, namely:</p>
+<ol style="list-style-type: decimal">
+<li><p>Mistakes were easy to make but difficult to spot. It’s easy to accidentally overwrite a value in a cell, delete rows, or make some small mistake when doing it by hand - and not even notice it.</p></li>
+<li><p>I would need to repeat the process over and over again whenever I reran the study, collected more data, or noticed a mistake in my data but could not identify when or how I made the mistake.</p></li>
+</ol>
+<p>This made the process excruciating time-consuming and stressful.</p>
+<p>R can significantly increase the speed at which you can conduct data cleaning. You can write code instructions to import the raw data (e.g., from Gorilla or Qualtrics), clean it step-by-step, and save the cleaned data in a consistent manner. This significantly reduces the number of errors you can make. Additionally, if you collect any more participants, you don’t even need to look at the Excel files. Just download them into your working directory, run the same R script, and you will have your cleaned data. Finally, in times you notice that you did make a mistake (e.g., you excluded an important variable column) you just make that change in your R script and rerun the analysis.</p>
+</div>
+<div id="tidyverse-and-base-r" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Tidyverse (and Base R)<a href="datacleaning1.html#tidyverse-and-base-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong><code>tidyverse</code></strong> package is a comprehensive collection of R packages designed to facilitate consistent and intuitive data cleaning. At its core are three fundamental principles known as <strong><code>tidy data</code></strong> principles:</p>
+<ol style="list-style-type: decimal">
+<li><p>Every variable should occupy a separate column.</p></li>
+<li><p>Every observation (e.g., participant) should occupy a separate row.</p></li>
+<li><p>Each value in the dataset should have its own cell.</p></li>
+</ol>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-170"></span>
+<img src="img/05-tidy-principles.PNG" alt="Tidy Data principles "  />
+<p class="caption">
+Figure 5.1: Tidy Data principles
+</p>
+</div>
+<p>Tidyverse is probably the most well-known package in the R community, but there is controversy behind it. High-profile people in the R community debate about whether <strong><code>tidyverse</code></strong> is actually appropriate for beginners to learn and whether it really is more effective and efficient than base R. Similarly, some of the R community dislike the idea that the <strong><code>tidyverse</code></strong> is the only “real” way to conduct data cleaning.</p>
+<p>We will be using both base R and tidyverse in this course. The main thing that you should know is that tidyverse and Base R are like two different dialects in R. If in the future you search for help on R code, the code might be written from one perspective or the other. If the code looks more like what you saw in Chapters 2-4, then it is in base R. If you search for help and looks more like the code in the rest of the course, it’s probably tidyverse.</p>
+<p>Understanding both approaches will empower you to choose the one that aligns with your preferences and needs, ensuring you can find the right solution more effectively. Whether you are more comfortable with base R or tidyverse, knowing both approaches will enable you to navigate and utilize the wealth of resources available in the R community.</p>
+</div>
+</div>
+<div id="lets-get-set-up" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Let’s Get Set Up<a href="datacleaning1.html#lets-get-set-up" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Okay, that’s enough conceptual information for now - let’s learn how to actually clean some data. First, we are going to need to get our RStudio or PositCloud environment ready. We’ll do this by setting up our working directory, downloading and importing our data files, and then installing and loading the <code>tidyverse</code> packages.</p>
+<div id="activity-1.1-set-up-your-wd" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Activity 1.1: Set up your WD<a href="datacleaning1.html#activity-1.1-set-up-your-wd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Remember that the working directory is the location where we want to store any resulting data files or scripts that you’ll work on in a session. In Chapter 2 I showed you how to do this using <a href="rstudio.html#set_wd">a button-and-click interface</a>.</p>
+<p>Using those instructions, create a folder called “Week4” in the <code>rintro</code> project folder (or whatever folder you created) and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="datacleaning1.html#cb274-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">setwd</span>(<span class="st">&quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week4&quot;</span>)</span></code></pre></div>
+</div>
+<div id="activity-1.2-import-your-csv-files-and-r-script" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Activity 1.2: Import your CSV files and R script<a href="datacleaning1.html#activity-1.2-import-your-csv-files-and-r-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You need to import several files for this activity:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>raw_remote_associations.csv</strong></p></li>
+<li><p><strong>data_cleaning_script.R</strong></p></li>
+</ol>
+<p>To download these files, navigate to the Teams channel for this course and access the “Week 4 - Data Cleaning (Part I)” channel. Once downloaded, use your file management system (File Explorer on Windows or Finder on Mac) to copy and paste these files into the “Week4” folder you created in Activity 1.1.</p>
+<p>If you’re using RStudio, you should see these files in your working directory within the Files pane. Open the R script (<strong>data_cleaning_script.R</strong>).</p>
+<p>To import the raw_remote_associations.csv dataset into R, do the following:</p>
+<ol style="list-style-type: decimal">
+<li>Click Environment in the Environment Pane -&gt; Import Dataset -&gt; From Text(base) -&gt; Select <strong>raw_remote_associations.csv -&gt;</strong> change its name to <strong>df_raw</strong></li>
+<li><a href="programming2.html#importing">See last week’s section on importing data for more information</a></li>
+</ol>
+<p>Alternatively, you can run the following command within the <strong>data_cleaning_script.R</strong></p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="datacleaning1.html#cb275-1" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;datasets/raw_remote_associations.csv&quot;</span>) </span></code></pre></div>
+</div>
+<div id="activity-1.3-install-and-load-the-tidyverse-package" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Activity 1.3: Install and load the tidyverse package<a href="datacleaning1.html#activity-1.3-install-and-load-the-tidyverse-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A good practice in R is to load packages at the start of your script. In the downloaded R script, you’ll find the following lines commented out. Copy and paste the code <strong><code>install.packages("tidyverse")</code></strong> into your console and press enter to download the tidyverse package.</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="datacleaning1.html#cb276-1" tabindex="-1"></a><span class="co">#install.packages(&quot;tidyverse&quot;)</span></span>
+<span id="cb276-2"><a href="datacleaning1.html#cb276-2" tabindex="-1"></a><span class="co">#library(tidyverse)</span></span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-175"></span>
+<img src="img/05-tidyverse-install.PNG" alt="Tidyverse Installation"  />
+<p class="caption">
+Figure 5.2: Tidyverse Installation
+</p>
+</div>
+<p>Once installed, uncomment and run the <strong><code>library(tidyverse)</code></strong> in your script to load the package. If installed correctly, you should see the tidyverse package and its dependencies listed in the console. Since tidyverse contains multiple packages, it will load them all at once. So if you see the following then you are good to go.</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="datacleaning1.html#cb277-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p><img src="img/05-tidyverse-message.PNG" /><!-- --></p>
+<p>You might also get the following warnings when you load in R. If you do, that just means you are using an older version of R. At the beginning of the class, we downloaded version 4.2 onto our own computers, but in the meantime version 4.3 has been released. We can stick with our current version for now.</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="datacleaning1.html#cb278-1" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘tidyverse’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-2"><a href="datacleaning1.html#cb278-2" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘ggplot2’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-3"><a href="datacleaning1.html#cb278-3" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘tibble’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-4"><a href="datacleaning1.html#cb278-4" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘tidyr’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-5"><a href="datacleaning1.html#cb278-5" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘readr’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-6"><a href="datacleaning1.html#cb278-6" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘purrr’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-7"><a href="datacleaning1.html#cb278-7" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘dplyr’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-8"><a href="datacleaning1.html#cb278-8" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘stringr’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-9"><a href="datacleaning1.html#cb278-9" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘forcats’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span>
+<span id="cb278-10"><a href="datacleaning1.html#cb278-10" tabindex="-1"></a>Warning<span class="sc">:</span> package ‘lubridate’ was built under R version <span class="dv">4</span>.<span class="fl">3.2</span></span></code></pre></div>
+</div>
+</div>
+<div id="cleaning-the-remote-associates-data-set." class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Cleaning the Remote Associates Data set.<a href="datacleaning1.html#cleaning-the-remote-associates-data-set." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="context-and-viewing-it-in-rstudio" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Context and Viewing it in RStudio<a href="datacleaning1.html#context-and-viewing-it-in-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The dataset we imported and are cleaning today comes from a study investigating the effect of mood induction on convergent thinking. Participants were required to read three emotional vignettes (one positive, one negative, and one neutral) before completing a remote associations test. In this test, 41 participants had to identify the link between given words (e.g., Square / Cardboard / Open, with the answer being “Box”). The order of the vignettes was counterbalanced across participants. Additionally, participants completed five items on Openness from the Big Five Aspects, as it is known to positively correlate with convergent thinking.</p>
+<p>The first step after importing a dataset is to check it to ensure that we have imported the correct data. We can do this using the <strong><code>head()</code></strong> function:</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="datacleaning1.html#cb279-1" tabindex="-1"></a><span class="co">#View(df_raw) to open a new tab in Source and look at the entire dataset</span></span>
+<span id="cb279-2"><a href="datacleaning1.html#cb279-2" tabindex="-1"></a><span class="fu">head</span>(df_raw) <span class="co">#this will load the first six rows into the console</span></span></code></pre></div>
+<pre><code>##   X Participant.Private.ID Local.Timestamp Experiment.Status
+## 1 1               10168827     1.70601e+12           preview
+## 2 2               10192092     1.70601e+12           preview
+## 3 3               10205485     1.70601e+12           preview
+## 4 4               10208522     1.70601e+12           preview
+## 5 5               10218310     1.70601e+12           preview
+## 6 6               10225898     1.70601e+12           preview
+##   remote.assocotations.1 remote.assocotations.2 order Remote.association.3
+## 1                      6                     13   ABC                   22
+## 2                      9                     18   ABC                   27
+## 3                      6                      6   BCA                    6
+## 4                      3                     10   ABC                   18
+## 5                      9                     18   CAB                   27
+## 6                      3                      7   ABC                   11
+##   Response Participant.OS response1 open1 open2 open3 open4 open5 age gender
+## 1      END     Windows 10        50     3     3     3     3     3  34   male
+## 2    BEGIN     Windows 10        63     3     4     3     3     3  34 female
+## 3     bank     Windows 10        73     2     4     4     3     3  18   male
+## 4      day     Windows 10        58     3     3     2     2     3  29 female
+## 5    black     Windows 10        68     3     3     2     3     2  46   male
+## 6   common     Windows 10        54     2     3     3     2     3  40 female</code></pre>
+<p>Ouch! Now that is a data set only a parent could love. Here is what each column is telling us about each participant</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>X</td>
+<td>An empty column that counts the row number.</td>
+</tr>
+<tr class="even">
+<td>Participant.Private.ID</td>
+<td>Experiment ID.</td>
+</tr>
+<tr class="odd">
+<td>Local.Timestamp</td>
+<td>Timestamp indicating when participants took part in the study.</td>
+</tr>
+<tr class="even">
+<td>Experiment.Status</td>
+<td>Indicates whether the study was published (live) or not (preview) for each participant.</td>
+</tr>
+<tr class="odd">
+<td>Remote-Associations1-3</td>
+<td>Scores on each remote associations task.</td>
+</tr>
+<tr class="even">
+<td>order</td>
+<td>Order of watching the vignettes (A = “positive”, B = “negative”, C = “neutral”).</td>
+</tr>
+<tr class="odd">
+<td>Response</td>
+<td>Participants’ answers on the remote associations task.</td>
+</tr>
+<tr class="even">
+<td>Participant.OS</td>
+<td>Operating system used by participants.</td>
+</tr>
+<tr class="odd">
+<td>response1</td>
+<td>Aggregated mood score.</td>
+</tr>
+<tr class="even">
+<td>open1-open5</td>
+<td>Scores on Openness items.</td>
+</tr>
+<tr class="odd">
+<td>age and gender</td>
+<td>Participants’ age and gender.</td>
+</tr>
+</tbody>
+</table>
+<p>However, several issues are evident in this dataset:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Pointless columns:</strong> Columns such as “Local.Timestamp” and “Participant.OS” are unnecessary for our analysis.</p></li>
+<li><p><strong>Awkward, inconsistent, or misspelled column names:</strong> Columns like “Participant.Private.ID” and “remote.assocotations.2” have awkward or misspelled names.</p></li>
+<li><p><strong>Column order:</strong> The order of columns is not ideal, with important columns scattered throughout the dataset.</p></li>
+<li><p><strong>Improper scoring:</strong> The maximum score on each remote association task in this study was 9. However, we have several scores that exceed this maximum value.</p></li>
+<li><p><strong>Mismatch in participant count:</strong> The dataset reports a different number of participants who completed the experiment (52) than what was expected (41).</p></li>
+<li><p><strong>Presence of preview data:</strong> The dataset contains responses from both the preview and live phases of the study, which need to be addressed by removing preview data.</p></li>
+</ol>
+</div>
+<div id="key-functions-that-will-help-you-clean-most-datasets" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Key Functions That Will Help You Clean Most Datasets<a href="datacleaning1.html#key-functions-that-will-help-you-clean-most-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following functions are extremely useful for cleaning data frame in R. They all come from the <code>tidyverse</code> package. The following table defines each package and what it does. We will use each function in this chapter to clean the <code>remote_associations</code> data frame, so you will get to practice each one.</p>
+<table>
+<colgroup>
+<col width="66%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Function</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a></td>
+<td align="left">Include or exclude certain variables (columns)</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="https://dplyr.tidyverse.org/reference/filter.html"><code>filter()</code></a></td>
+<td align="left">Include or exclude certain observations (rows)</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>mutate()</code></a></td>
+<td align="left">Create new variables (columns)</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a></td>
+<td align="left">Change the order of observations (rows)</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a></td>
+<td align="left">Organize the observations (rows) into groups</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise()</code></a></td>
+<td align="left">Create summary variables for groups of observations</td>
+</tr>
+<tr class="odd">
+<td align="center"><a href="https://dplyr.tidyverse.org/articles/base.html?q=distinct#distinct-select-distinctunique-rows">disinct()</a></td>
+<td align="left">Select unique observations (rows)</td>
+</tr>
+<tr class="even">
+<td align="center"><a href="https://dplyr.tidyverse.org/articles/base.html?q=rename#rename-rename-variables-by-name">rename()</a></td>
+<td align="left">Rename variables (columns)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="choosing-our-columns-of-interest-with-select" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Choosing our Columns of Interest with <code>Select()</code><a href="datacleaning1.html#choosing-our-columns-of-interest-with-select" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When you are first cleaning a data set, the first thing you should do is identify the columns that you might need in your analysis or hold important information. In our cases, these columns would be <code>Participant.Private.ID</code>, <code>Experiment.Status</code>, the response, remote associations, openness, and demographic columns. We can select those columns by using the <code>select()</code> function.</p>
+<p>The formula for this function is: <code>select(dataframe, c(col1name, col2name, col3name))</code></p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="datacleaning1.html#cb281-1" tabindex="-1"></a>df_select <span class="ot">&lt;-</span> <span class="fu">select</span>(df_raw, <span class="fu">c</span>(Participant.Private.ID, Experiment.Status, order,</span>
+<span id="cb281-2"><a href="datacleaning1.html#cb281-2" tabindex="-1"></a>                              remote.assocotations<span class="fl">.1</span>, remote.assocotations<span class="fl">.2</span>,   Remote.association<span class="fl">.3</span>, Response, response1, open1<span class="sc">:</span> gender))</span>
+<span id="cb281-3"><a href="datacleaning1.html#cb281-3" tabindex="-1"></a></span>
+<span id="cb281-4"><a href="datacleaning1.html#cb281-4" tabindex="-1"></a><span class="fu">head</span>(df_select)</span></code></pre></div>
+<pre><code>##   Participant.Private.ID Experiment.Status order remote.assocotations.1
+## 1               10168827           preview   ABC                      6
+## 2               10192092           preview   ABC                      9
+## 3               10205485           preview   BCA                      6
+## 4               10208522           preview   ABC                      3
+## 5               10218310           preview   CAB                      9
+## 6               10225898           preview   ABC                      3
+##   remote.assocotations.2 Remote.association.3 Response response1 open1 open2
+## 1                     13                   22      END        50     3     3
+## 2                     18                   27    BEGIN        63     3     4
+## 3                      6                    6     bank        73     2     4
+## 4                     10                   18      day        58     3     3
+## 5                     18                   27    black        68     3     3
+## 6                      7                   11   common        54     2     3
+##   open3 open4 open5 age gender
+## 1     3     3     3  34   male
+## 2     3     3     3  34 female
+## 3     4     3     3  18   male
+## 4     2     2     3  29 female
+## 5     2     3     2  46   male
+## 6     3     2     3  40 female</code></pre>
+<p>Instantly, that is immediately better. Now there is a couple of things you might have noticed in my code.</p>
+<p>The first is that the order in which I put columns in <code>select()</code> is the order in which the columns appear in the <code>df_select</code>. This is a very useful feature of <code>select()</code> as it means we can reorder our dataframe and select the columns at the same time. Just to demonstrate this further.</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="datacleaning1.html#cb283-1" tabindex="-1"></a>df_select <span class="ot">&lt;-</span> <span class="fu">select</span>(df_select, Participant.Private.ID, Experiment.Status, age, gender, order, remote.assocotations<span class="fl">.1</span><span class="sc">:</span>open5)</span>
+<span id="cb283-2"><a href="datacleaning1.html#cb283-2" tabindex="-1"></a></span>
+<span id="cb283-3"><a href="datacleaning1.html#cb283-3" tabindex="-1"></a><span class="fu">head</span>(df_select)</span></code></pre></div>
+<pre><code>##   Participant.Private.ID Experiment.Status age gender order
+## 1               10168827           preview  34   male   ABC
+## 2               10192092           preview  34 female   ABC
+## 3               10205485           preview  18   male   BCA
+## 4               10208522           preview  29 female   ABC
+## 5               10218310           preview  46   male   CAB
+## 6               10225898           preview  40 female   ABC
+##   remote.assocotations.1 remote.assocotations.2 Remote.association.3 Response
+## 1                      6                     13                   22      END
+## 2                      9                     18                   27    BEGIN
+## 3                      6                      6                    6     bank
+## 4                      3                     10                   18      day
+## 5                      9                     18                   27    black
+## 6                      3                      7                   11   common
+##   response1 open1 open2 open3 open4 open5
+## 1        50     3     3     3     3     3
+## 2        63     3     4     3     3     3
+## 3        73     2     4     4     3     3
+## 4        58     3     3     2     2     3
+## 5        68     3     3     2     3     2
+## 6        54     2     3     3     2     3</code></pre>
+<p>The second thing you might notice is that inside the <code>c</code> function I go from naming each column one at a time to using the <code>:</code> operator. If you remember from Chapters 3 &amp; 4, when you are selecting elements from a data structure, the <code>:</code> operator enables you to select anything between those elements. So the code <code>remote.assoctations.1:open5</code> selects every column starting from <code>remote.assoctations1</code> and ending with <code>open5</code>. This saves us from having to type out every column.</p>
+<p>What if we wanted to remove one or two columns? Is there an easier way to remove them then by specifying the columns we want? Yes! We can use <code>select()</code> to remove columns. All we need to do is put the <code>-</code> operator before the column we want to remove.</p>
+<p>If you look at the <code>Response</code> column, it doesn’t really provide us with any genuinely useful information - we already have their performance on the task. So let’s get rid of it.</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="datacleaning1.html#cb285-1" tabindex="-1"></a>df_select <span class="ot">&lt;-</span> <span class="fu">select</span>(df_select, <span class="sc">-</span>Response) <span class="co">#this will remove the #response column</span></span>
+<span id="cb285-2"><a href="datacleaning1.html#cb285-2" tabindex="-1"></a><span class="fu">head</span>(df_select)</span></code></pre></div>
+<pre><code>##   Participant.Private.ID Experiment.Status age gender order
+## 1               10168827           preview  34   male   ABC
+## 2               10192092           preview  34 female   ABC
+## 3               10205485           preview  18   male   BCA
+## 4               10208522           preview  29 female   ABC
+## 5               10218310           preview  46   male   CAB
+## 6               10225898           preview  40 female   ABC
+##   remote.assocotations.1 remote.assocotations.2 Remote.association.3 response1
+## 1                      6                     13                   22        50
+## 2                      9                     18                   27        63
+## 3                      6                      6                    6        73
+## 4                      3                     10                   18        58
+## 5                      9                     18                   27        68
+## 6                      3                      7                   11        54
+##   open1 open2 open3 open4 open5
+## 1     3     3     3     3     3
+## 2     3     4     3     3     3
+## 3     2     4     4     3     3
+## 4     3     3     2     2     3
+## 5     3     3     2     3     2
+## 6     2     3     3     2     3</code></pre>
+</div>
+<div id="renaming-our-columns-of-interest-with-rename" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Renaming our Columns of Interest with <code>rename()</code><a href="datacleaning1.html#renaming-our-columns-of-interest-with-rename" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Our data set is definitely looking cleaner after having shedding those columns, but good grief are those names still ugly. Luckily, we can change their name using the <code>rename()</code> function. The syntax for this function is slightly counter intuitive in its order, as it goes like this: <code>rename(df, newcolumnane = oldcolumnname)</code></p>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="datacleaning1.html#cb287-1" tabindex="-1"></a>df_rename <span class="ot">&lt;-</span> <span class="fu">rename</span>(df_select, </span>
+<span id="cb287-2"><a href="datacleaning1.html#cb287-2" tabindex="-1"></a>                    <span class="at">ID =</span> Participant.Private.ID, <span class="co">#newcolname = oldcolname</span></span>
+<span id="cb287-3"><a href="datacleaning1.html#cb287-3" tabindex="-1"></a>                    <span class="at">status =</span> Experiment.Status,</span>
+<span id="cb287-4"><a href="datacleaning1.html#cb287-4" tabindex="-1"></a>                    <span class="at">remote_pos =</span> remote.assocotations<span class="fl">.1</span>,</span>
+<span id="cb287-5"><a href="datacleaning1.html#cb287-5" tabindex="-1"></a>                    <span class="at">remote_neg =</span> remote.assocotations<span class="fl">.2</span>,</span>
+<span id="cb287-6"><a href="datacleaning1.html#cb287-6" tabindex="-1"></a>                    <span class="at">remote_neut =</span> Remote.association<span class="fl">.3</span>,</span>
+<span id="cb287-7"><a href="datacleaning1.html#cb287-7" tabindex="-1"></a>                    <span class="at">total_mood =</span> response1,</span>
+<span id="cb287-8"><a href="datacleaning1.html#cb287-8" tabindex="-1"></a>                    <span class="at">condition =</span> order)</span>
+<span id="cb287-9"><a href="datacleaning1.html#cb287-9" tabindex="-1"></a></span>
+<span id="cb287-10"><a href="datacleaning1.html#cb287-10" tabindex="-1"></a><span class="fu">head</span>(df_rename)</span></code></pre></div>
+<pre><code>##         ID  status age gender condition remote_pos remote_neg remote_neut
+## 1 10168827 preview  34   male       ABC          6         13          22
+## 2 10192092 preview  34 female       ABC          9         18          27
+## 3 10205485 preview  18   male       BCA          6          6           6
+## 4 10208522 preview  29 female       ABC          3         10          18
+## 5 10218310 preview  46   male       CAB          9         18          27
+## 6 10225898 preview  40 female       ABC          3          7          11
+##   total_mood open1 open2 open3 open4 open5
+## 1         50     3     3     3     3     3
+## 2         63     3     4     3     3     3
+## 3         73     2     4     4     3     3
+## 4         58     3     3     2     2     3
+## 5         68     3     3     2     3     2
+## 6         54     2     3     3     2     3</code></pre>
+</div>
+<div id="creating-new-columns-using-the-mutate-function" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Creating new Columns using the <code>mutate()</code> function<a href="datacleaning1.html#creating-new-columns-using-the-mutate-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Okay, so we have gotten rid of superfluous columns and cleaned up the names of the ones we have left. But there is still a column “missing”. At the moment, we have participants’ scores on individual items for Openness to Experience. But unless we are running a reliability or factor analysis, we actually want participants’ total level of openness.</p>
+<p>The <strong><code>mutate()</code></strong> function will help us create that column. This function takes existing column(s) and performs operations on them to create new columns in our data set.</p>
+<p>Let’s use <strong><code>mutate()</code></strong> to create a column called <strong><code>total_openness</code></strong>. The syntax for this function is: <strong><code>mutate(df, new_column_name = instructions on what to do with current columns)</code></strong></p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="datacleaning1.html#cb289-1" tabindex="-1"></a>df_mutate <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_rename, </span>
+<span id="cb289-2"><a href="datacleaning1.html#cb289-2" tabindex="-1"></a>                    <span class="at">total_openness =</span> open1 <span class="sc">+</span> open2 <span class="sc">+</span> open3 <span class="sc">+</span> open4 <span class="sc">+</span> open5)</span>
+<span id="cb289-3"><a href="datacleaning1.html#cb289-3" tabindex="-1"></a>                    <span class="co">#new_col_name = operation on current columns</span></span>
+<span id="cb289-4"><a href="datacleaning1.html#cb289-4" tabindex="-1"></a></span>
+<span id="cb289-5"><a href="datacleaning1.html#cb289-5" tabindex="-1"></a>df_mutate<span class="sc">$</span>total_openness</span></code></pre></div>
+<pre><code>##  [1] 15 16 16 13 13 13 16 14 14 14 14 15 14 15 14 14 16 14 15 15 18 14 17 14 16
+## [26] 15 16 15 16 15 16 16 15 15 16 17 15 17 15 15 15 17 16 14 13 15 17 14 14 14
+## [51] 17</code></pre>
+<p>If we wanted to calculate the mean of these items, then the process is slightly more complicated. First, we would need to tell R that we want the mean per observation rather than per column (e.g., we need the mean score of open1 to open5 per participant, rather than across the entire dataset) by using the <strong><code>rowMeans()</code></strong> function. Then we would need to <strong><code>select()</code></strong> the columns that we want the row means from.</p>
+<p>Let’s do this and save the operation to a new column called <strong><code>mean_openness</code></strong></p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="datacleaning1.html#cb291-1" tabindex="-1"></a>df_mutate <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_mutate, </span>
+<span id="cb291-2"><a href="datacleaning1.html#cb291-2" tabindex="-1"></a>                    <span class="co">#we use `select()` to pick the columns we want</span></span>
+<span id="cb291-3"><a href="datacleaning1.html#cb291-3" tabindex="-1"></a>                    <span class="at">mean_openness =</span> <span class="fu">rowMeans</span>(<span class="fu">select</span>(df_mutate, </span>
+<span id="cb291-4"><a href="datacleaning1.html#cb291-4" tabindex="-1"></a>                                                    <span class="fu">c</span>(open1, open2, open3,</span>
+<span id="cb291-5"><a href="datacleaning1.html#cb291-5" tabindex="-1"></a>                                                      open4, open5))))</span>
+<span id="cb291-6"><a href="datacleaning1.html#cb291-6" tabindex="-1"></a>                    </span>
+<span id="cb291-7"><a href="datacleaning1.html#cb291-7" tabindex="-1"></a></span>
+<span id="cb291-8"><a href="datacleaning1.html#cb291-8" tabindex="-1"></a><span class="fu">head</span>(df_mutate)</span></code></pre></div>
+<pre><code>##         ID  status age gender condition remote_pos remote_neg remote_neut
+## 1 10168827 preview  34   male       ABC          6         13          22
+## 2 10192092 preview  34 female       ABC          9         18          27
+## 3 10205485 preview  18   male       BCA          6          6           6
+## 4 10208522 preview  29 female       ABC          3         10          18
+## 5 10218310 preview  46   male       CAB          9         18          27
+## 6 10225898 preview  40 female       ABC          3          7          11
+##   total_mood open1 open2 open3 open4 open5 total_openness mean_openness
+## 1         50     3     3     3     3     3             15           3.0
+## 2         63     3     4     3     3     3             16           3.2
+## 3         73     2     4     4     3     3             16           3.2
+## 4         58     3     3     2     2     3             13           2.6
+## 5         68     3     3     2     3     2             13           2.6
+## 6         54     2     3     3     2     3             13           2.6</code></pre>
+<p>If we do not need the individual items, then there is an argument in <strong><code>mutate()</code></strong> called <strong><code>.keep</code></strong>. This specifies what should be done with the columns that were operated on to create the new column. If this argument is set to <strong><code>unused</code></strong>, then R will only keep columns that were not used to create the new column. In other words, it will remove any columns used to calculate the new column.</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="datacleaning1.html#cb293-1" tabindex="-1"></a>df_mutate <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_rename, </span>
+<span id="cb293-2"><a href="datacleaning1.html#cb293-2" tabindex="-1"></a>                    <span class="at">total_openness =</span> open1 <span class="sc">+</span> open2 <span class="sc">+</span> open3 <span class="sc">+</span> open4 <span class="sc">+</span> open5,</span>
+<span id="cb293-3"><a href="datacleaning1.html#cb293-3" tabindex="-1"></a>                    <span class="at">.keep =</span> <span class="st">&quot;unused&quot;</span>)</span>
+<span id="cb293-4"><a href="datacleaning1.html#cb293-4" tabindex="-1"></a></span>
+<span id="cb293-5"><a href="datacleaning1.html#cb293-5" tabindex="-1"></a><span class="fu">head</span>(df_mutate)</span></code></pre></div>
+<pre><code>##         ID  status age gender condition remote_pos remote_neg remote_neut
+## 1 10168827 preview  34   male       ABC          6         13          22
+## 2 10192092 preview  34 female       ABC          9         18          27
+## 3 10205485 preview  18   male       BCA          6          6           6
+## 4 10208522 preview  29 female       ABC          3         10          18
+## 5 10218310 preview  46   male       CAB          9         18          27
+## 6 10225898 preview  40 female       ABC          3          7          11
+##   total_mood total_openness
+## 1         50             15
+## 2         63             16
+## 3         73             16
+## 4         58             13
+## 5         68             13
+## 6         54             13</code></pre>
+<div id="rewriting-existing-columns-using-mutate" class="section level3 hasAnchor" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> Rewriting existing columns using <code>mutate()</code><a href="datacleaning1.html#rewriting-existing-columns-using-mutate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we have a column that contains mistakes, we can use <strong><code>mutate()</code></strong> to rewrite that column’s values. The syntax for this is the same as when you are creating new columns with <strong><code>mutate</code></strong>: <strong><code>mutate(df, existing_column_name = instructions on what to do with current columns)</code></strong></p>
+<p>If you look at our columns <strong><code>remote_pos</code></strong>, <strong><code>remote_neg</code></strong>, and <strong><code>remote_neut</code></strong>, there is a mistake. Each column should represent the participants’ scores (out of a maximum score of 9) on the remote associations task after engaging with either positive, negative, or neutral stimuli. However, while <strong><code>remote_pos</code></strong> scoring looks correct, the scores for <strong><code>remote_neg</code></strong> are going up to 18, and the scores for <strong><code>remote_neut</code></strong> are going up to 27. So what is going on?</p>
+<p>What happened here is that Gorilla Research added participants’ scores on each task to each other. So the <strong><code>remote_neg</code></strong> column is really the participants’ correct answers on <strong><code>remote_pos</code></strong> plus their correct answers on <strong><code>remote_neg</code></strong>. Similarly, the <strong><code>remote_neut</code></strong> contains their scores on the <strong><code>remote_neg</code></strong> column plus their scores on the <strong><code>remote_neut</code></strong> task.</p>
+<p>To fix this, the formula we need to use is the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>remote_neg = remote_neg - remote_pos</p></li>
+<li><p>remote_neut = remote_neut - remote_neg</p></li>
+</ol>
+<p>We can fix this error using the <strong><code>mutate()</code></strong> function</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="datacleaning1.html#cb295-1" tabindex="-1"></a>df_mutate_ra <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_mutate, </span>
+<span id="cb295-2"><a href="datacleaning1.html#cb295-2" tabindex="-1"></a>                    <span class="at">remote_neg =</span> remote_neg <span class="sc">-</span> remote_pos,</span>
+<span id="cb295-3"><a href="datacleaning1.html#cb295-3" tabindex="-1"></a>                    <span class="at">remote_neut =</span> remote_neut <span class="sc">-</span> remote_neg)</span>
+<span id="cb295-4"><a href="datacleaning1.html#cb295-4" tabindex="-1"></a></span>
+<span id="cb295-5"><a href="datacleaning1.html#cb295-5" tabindex="-1"></a><span class="fu">head</span>(df_mutate_ra)</span></code></pre></div>
+<pre><code>##         ID  status age gender condition remote_pos remote_neg remote_neut
+## 1 10168827 preview  34   male       ABC          6          7          15
+## 2 10192092 preview  34 female       ABC          9          9          18
+## 3 10205485 preview  18   male       BCA          6          0           6
+## 4 10208522 preview  29 female       ABC          3          7          11
+## 5 10218310 preview  46   male       CAB          9          9          18
+## 6 10225898 preview  40 female       ABC          3          4           7
+##   total_mood total_openness
+## 1         50             15
+## 2         63             16
+## 3         73             16
+## 4         58             13
+## 5         68             13
+## 6         54             13</code></pre>
+<p>Hold on, what happened here? The <strong><code>remote_neut</code></strong> scores are still 9+? Well, we first changed the column <strong><code>remote_neg</code></strong> to get our correct scores on this task. However, the new values of <strong><code>remote_neg</code></strong> are then inserted on the next line of the formula. To fix for this error, we need to put <strong><code>remote_neut</code></strong> first</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="datacleaning1.html#cb297-1" tabindex="-1"></a>df_mutate_ra_fixed <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_mutate,</span>
+<span id="cb297-2"><a href="datacleaning1.html#cb297-2" tabindex="-1"></a>                    <span class="at">remote_neut =</span>  remote_neut <span class="sc">-</span> remote_neg,</span>
+<span id="cb297-3"><a href="datacleaning1.html#cb297-3" tabindex="-1"></a>                    <span class="at">remote_neg =</span> remote_neg <span class="sc">-</span> remote_pos)</span>
+<span id="cb297-4"><a href="datacleaning1.html#cb297-4" tabindex="-1"></a></span>
+<span id="cb297-5"><a href="datacleaning1.html#cb297-5" tabindex="-1"></a>df_mutate_ra_fixed<span class="sc">$</span>remote_neut</span></code></pre></div>
+<pre><code>##  [1]  9  9  0  8  9  4  9  5  9  2  1  9  6  7  9 28  4  8  9  7  0  4  9  9  9
+## [26]  8  5  9  6  6  0  9  0  4  5  0  7  1  1  5  6  9  9  0  8  3  0  9  8  9
+## [51]  1</code></pre>
+<p>Better!</p>
+</div>
+</div>
+<div id="checking-in-on-our-data-set" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Checking in on our data set<a href="datacleaning1.html#checking-in-on-our-data-set" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’ve done a good bit of cleaning so far. We have removed unnecessary columns, we have fixed their names and their order, we have created new columns, and we have fixed errors in existing columns. Our data set is looking nearly ready for analysis.</p>
+<p>However, there is still data that needs to be removed. We should only have 41 participants in our sample, but if you look at your dataframe, we actually have 51 participants.</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="datacleaning1.html#cb299-1" tabindex="-1"></a><span class="fu">nrow</span>(df_mutate_ra_fixed)</span></code></pre></div>
+<pre><code>## [1] 51</code></pre>
+<p>So where are these extra 10 participants coming from? If you look in the <strong><code>status</code></strong> column in our data set, you’ll notice that there exists both <strong><code>preview</code></strong> and <strong><code>live</code></strong> data. We can use the <strong><code>table()</code></strong> function to count the number of participants who contributed <strong><code>preview</code></strong> versus <strong><code>live</code></strong> data.</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="datacleaning1.html#cb301-1" tabindex="-1"></a><span class="fu">table</span>(df_mutate_ra_fixed<span class="sc">$</span>status)</span></code></pre></div>
+<pre><code>## 
+##    live preview 
+##      42       9</code></pre>
+<p>Okay, so 9 of our extra 10 participants are coming from preview data. That means we have one extra participant than we should have from when we published the study. The first thing we should do is check what is going on here.</p>
+<p>After that, we’ll need to remove the 9 preview participants from the dataframe.</p>
+<p>The following operations will enable us to clean our datasets based on participant scores on a row-by-row basis rather than on a column basis.</p>
+</div>
+<div id="removing-duplicates-using-distinct" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> Removing Duplicates using <code>distinct()</code><a href="datacleaning1.html#removing-duplicates-using-distinct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What could explain the extra participant? Well, there may have been an error when we downloaded the data and rows got duplicated. Luckily, there is a relatively easy way to do this through the <strong><code>duplicated()</code></strong> function. We call the function and give it the dataframe we want to check. The function then checks each row to see if it is a duplicate of another row.</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="datacleaning1.html#cb303-1" tabindex="-1"></a><span class="fu">duplicated</span>(df_mutate_ra_fixed)</span></code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [49] FALSE FALSE  TRUE</code></pre>
+<p>The function prints out logical data types <strong><code>TRUE</code></strong> or <strong><code>FALSE</code></strong>. Each answer corresponds to a row in the <strong><code>df_mutate_ra_fixed</code></strong> data frame. We can see that the last row is the only one with a value of <strong><code>TRUE</code></strong>, which means it is a duplicate of another row. If we want to extract and see the duplicated rows, we can follow the syntax we discussed in Chapter 3 about extracting values from a dataframe: <strong><code>dataframe[rows_we_want, columns_we_want]</code></strong></p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="datacleaning1.html#cb305-1" tabindex="-1"></a>df_mutate_ra_fixed[<span class="fu">duplicated</span>(df_mutate_ra_fixed), ]</span></code></pre></div>
+<pre><code>##          ID status age gender condition remote_pos remote_neg remote_neut
+## 51 10230547   live  28 female       CAB          1          1           1
+##    total_mood total_openness
+## 51         64             17</code></pre>
+<p>We can see that the participant with the <strong><code>ID = 10230547</code></strong> has a duplicated value. To remove these values we can use the <strong><code>distinct()</code></strong> function. This function takes in a data frame or a column and only keeps the rows that are unique.</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="datacleaning1.html#cb307-1" tabindex="-1"></a>df_distinct <span class="ot">&lt;-</span> <span class="fu">distinct</span>(df_mutate_ra_fixed)</span></code></pre></div>
+<p>We can use the <strong><code>table()</code></strong> function to check whether we have removed the extra participant.</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="datacleaning1.html#cb308-1" tabindex="-1"></a><span class="fu">table</span>(df_distinct<span class="sc">$</span>status)</span></code></pre></div>
+<pre><code>## 
+##    live preview 
+##      41       9</code></pre>
+<p>It looks like we have. We can also double-check this by calling the Similarly, if we used the <strong><code>duplicated()</code></strong> function again to see if any values return as <strong><code>TRUE</code></strong></p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="datacleaning1.html#cb310-1" tabindex="-1"></a><span class="fu">duplicated</span>(df_distinct)</span></code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [49] FALSE FALSE</code></pre>
+<p>There we go, we have successfully removed the duplicate from our data frame. Now let’s handle the data that was collected when the study was being <code>previewed</code>.</p>
+</div>
+<div id="removing-rows-using-the-filter-function" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> Removing Rows using the <code>filter()</code> Function<a href="datacleaning1.html#removing-rows-using-the-filter-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can use the <strong><code>filter()</code></strong> function to selectively retain or discard rows in a dataset based on specified conditions. Its syntax is structured as follows: <strong><code>filter(dataframe, condition)</code></strong>, where the condition specifies which rows to retain.</p>
+<p>In the case of our status column, suppose we want to retain only the rows where the status is “live” and remove those where it is “preview”. We achieve this with the following code:</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="datacleaning1.html#cb312-1" tabindex="-1"></a>df_filter <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_distinct, status <span class="sc">==</span> <span class="st">&quot;live&quot;</span>)</span></code></pre></div>
+<p>The condition <strong><code>status == "live"</code></strong> instructs R to retain rows where the status column equals <strong><code>"live"</code></strong>. Rows that do not meet this condition are filtered out (e.g., where <strong><code>status == "preview"</code></strong>). We can use the <strong><code>table()</code></strong> function to check that we only have rows where <strong><code>status == "live"</code></strong></p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="datacleaning1.html#cb313-1" tabindex="-1"></a><span class="fu">table</span>(df_filter<span class="sc">$</span>status)</span></code></pre></div>
+<pre><code>## 
+## live 
+##   41</code></pre>
+<p>We can also use negative conditions in <strong><code>filter()</code></strong>. By that, I mean we can tell R to keep rows that <strong><em>do not</em></strong> meet a certain condition. For example, I will get the same resulting data set if I tell R to keep rows that are not equal to <strong><code>preview</code></strong> in the <strong><code>status</code></strong> column.</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="datacleaning1.html#cb315-1" tabindex="-1"></a>df_filter_neg <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_distinct, status <span class="sc">!=</span> <span class="st">&quot;preview&quot;</span>)</span>
+<span id="cb315-2"><a href="datacleaning1.html#cb315-2" tabindex="-1"></a></span>
+<span id="cb315-3"><a href="datacleaning1.html#cb315-3" tabindex="-1"></a><span class="fu">table</span>(df_filter_neg<span class="sc">$</span>status)</span></code></pre></div>
+<pre><code>## 
+## live 
+##   41</code></pre>
+<p>Here, <strong><code>!=</code></strong> denotes “not equal to”, allowing us to exclude rows where the status is <strong><code>"preview"</code></strong>. This can be really useful if you have multiple answers within a column and it’s easier to tell R what not to keep rather than specify everything it needs to keep.</p>
+<p>Since we have removed the <strong><code>preview</code></strong> scores from our <strong><code>status</code></strong> column, do we actually need it anymore? Probably not as it won’t be used in our final analysis. So let’s remove it using the <strong><code>select()</code></strong> function and <strong><code>-</code></strong> operator.</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="datacleaning1.html#cb317-1" tabindex="-1"></a>df_filter <span class="ot">&lt;-</span> <span class="fu">select</span>(df_filter, <span class="sc">-</span>status)</span></code></pre></div>
+<div id="removing-rows-using-multiple-conditions-with-filter" class="section level3 hasAnchor" number="5.9.1">
+<h3><span class="header-section-number">5.9.1</span> Removing Rows Using Multiple Conditions with <code>filter()</code><a href="datacleaning1.html#removing-rows-using-multiple-conditions-with-filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can also use <strong><code>filter()</code></strong> to check whether rows meet several conditions at the same time. For example, let’s look at our columns <strong><code>remote_pos</code></strong>, <strong><code>remote_neg</code></strong>, and <strong><code>remote_neut</code></strong> which corresponds to different times they completed the remote associations task. Participants could score a maximum of 9 and a minimum of 0 on each task.</p>
+<p>We might expect that it is reasonable that any participant could score a 0 on a single remote association task. Similarly, we might conclude that it is reasonable that a participant scored a 0 on two remote associations tasks. But we might be suspicious if they scored 0 on all three remote associations tasks. This could be evidence that the participant wasn’t paying attention and was just motoring through the study as quickly as possible.</p>
+<p>We can use the <strong><code>arrange()</code></strong> function to check whether participants scored <strong><code>0</code></strong> on these columns. To use the <strong><code>arrange()</code></strong> function you specify the data frame, and then you specify the column or columns that you want to arrange by. The syntax is: <strong><code>arrange(df, col1, col2, col3)</code></strong></p>
+<p>The function arranges in ascending fashion by default (this can be overridden). If you specify multiple columns, it will arrange in the order of the columns you enter. The following code will arrange our dataframe first by the values of <strong><code>remote_pos</code></strong>, then by <strong><code>remote_neg</code></strong>, and then by <strong><code>remote_neut</code></strong>.</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="datacleaning1.html#cb318-1" tabindex="-1"></a>df_filter <span class="ot">&lt;-</span> <span class="fu">arrange</span>(df_filter, remote_pos, remote_neg, remote_neut)</span>
+<span id="cb318-2"><a href="datacleaning1.html#cb318-2" tabindex="-1"></a></span>
+<span id="cb318-3"><a href="datacleaning1.html#cb318-3" tabindex="-1"></a><span class="fu">head</span>(df_filter)</span></code></pre></div>
+<pre><code>##         ID age gender condition remote_pos remote_neg remote_neut total_mood
+## 1 10229575  47 female       BCA          0          0           0         70
+## 2 10230546  43 female       ABC          0          0           0         88
+## 3 10230541  46   male       BCA          0          0           0         63
+## 4 10229436  26   male       CAB          0          2           4         61
+## 5 10230533  36 female       CAB          0          4           4         62
+## 6 10230659  45 female       ABC          0          5           0         74
+##   total_openness
+## 1             15
+## 2             17
+## 3             14
+## 4             16
+## 5             15
+## 6             17</code></pre>
+<p>We can see that there are three participants scored a <strong><code>0</code></strong> on all three tasks. How could we remove these participants? Well, we can use <strong><code>filter()</code></strong> to individually check whether participants’ scores on the relevant column were greater than 0 using the sign <strong><code>&gt;</code></strong>. We could then save the results to different data frames.</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="datacleaning1.html#cb320-1" tabindex="-1"></a>df_filter_pos <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_filter, remote_pos <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="co">#it will only keep rows in remote_pos that are greater than 0</span></span>
+<span id="cb320-2"><a href="datacleaning1.html#cb320-2" tabindex="-1"></a></span>
+<span id="cb320-3"><a href="datacleaning1.html#cb320-3" tabindex="-1"></a>df_filter_neg <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_filter_pos, remote_neg <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="co">#this code will only keeps row in remote_neg that are greater than 0</span></span>
+<span id="cb320-4"><a href="datacleaning1.html#cb320-4" tabindex="-1"></a></span>
+<span id="cb320-5"><a href="datacleaning1.html#cb320-5" tabindex="-1"></a>df_filter_neut <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_filter_neg, remote_neut <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="co">#this code will only keep rows in the remote_neg that are greater than 0 </span></span></code></pre></div>
+<p>This gets the job done, but it is a tedious approach as we need to type out the same command three times. It makes it significantly more likely we will make a mistake somewhere too.</p>
+<p>Luckily, we can do this all in the one line using the | operator. The | operator translates to the logical condition <strong><code>OR</code></strong>.</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="datacleaning1.html#cb321-1" tabindex="-1"></a>df_filter_multi <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_filter, remote_pos <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> remote_neg <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> remote_neg <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<p>This code translates to “Create a new variable called <strong><code>df_filter_multi</code></strong> by taking the <strong><code>df_filter</code></strong> dataframe and keep only the rows where participants score higher than 0 on either remote_pos, remote_neg, and remote_neut. If a participant scores 0 on ALL of these columns, please remove them.”</p>
+<p>This removes any participants from our dataset that did not get a single correct answer on any of the three remote associations tasks. The <strong><code>nrow()</code></strong> function shows us that our manipulation was successful.</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="datacleaning1.html#cb322-1" tabindex="-1"></a><span class="fu">nrow</span>(df_filter_multi)</span></code></pre></div>
+<pre><code>## [1] 38</code></pre>
+<p>What if we wanted to be more strict? What if we wanted to remove any participant that scored a <strong><code>0</code></strong> on <strong><em>any</em></strong> of <strong><code>remote_pos</code></strong>, <strong><code>remote_neg</code></strong>, <strong><code>remote_neut</code></strong>? In this case, we can use the <strong><code>&amp;</code></strong> operator, which translates to the logical condition <strong><code>AND</code></strong>.</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="datacleaning1.html#cb324-1" tabindex="-1"></a>df_filter_multi_strict <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_filter, remote_pos <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> remote_neg <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> remote_neg <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<p>This code translates to: “Create a new variable called <strong><code>df_filter_multi_strict</code></strong> by taking the <strong><code>df_filter</code></strong> dataframe and keeping only the rows that have a score that is greater than or equal (&gt;=) to 0 on remote_pos, remote_neg, and remote_neut. If a participant has a score of 0 on ANY of these columns, please remove them.”</p>
+<p>If we check the number of rows again, we can see that our data frame has shrunk.</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="datacleaning1.html#cb325-1" tabindex="-1"></a><span class="fu">nrow</span>(df_filter_multi_strict)</span></code></pre></div>
+<pre><code>## [1] 33</code></pre>
+<p>What if we wanted to be stricter again and say that we want to remove participants if they scored less than a 2 on any of the remote association columns? Well, we use the less than or equal to operator <strong><code>&gt;=</code></strong></p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="datacleaning1.html#cb327-1" tabindex="-1"></a>df_filter_multi_stricter <span class="ot">&lt;-</span> <span class="fu">filter</span>(df_filter, remote_pos <span class="sc">&gt;=</span> <span class="dv">2</span> <span class="sc">&amp;</span> remote_neg <span class="sc">&gt;=</span> <span class="dv">2</span> <span class="sc">&amp;</span> remote_neg <span class="sc">&gt;=</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>This code will only keep participants who scored a 2 or higher in all three columns. If we check <strong><code>nrow()</code></strong>, we will see that our data frame has shrunk even further</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="datacleaning1.html#cb328-1" tabindex="-1"></a><span class="fu">nrow</span>(df_filter_multi_stricter)</span></code></pre></div>
+<pre><code>## [1] 26</code></pre>
+<p>I am not a big fan of either the <code>df_filter_multi_strict</code> or <code>df_filter_multi_stricter</code> columns. So let’s carry the <code>df_filter_multi</code> data frame to the next section.</p>
+</div>
+</div>
+<div id="identifying-the-factors-in-our-data-frame" class="section level2 hasAnchor" number="5.10">
+<h2><span class="header-section-number">5.10</span> Identifying the Factors in our Data Frame<a href="datacleaning1.html#identifying-the-factors-in-our-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the last chapter, we talked about the <strong><code>factor</code></strong> data type, which enables us to identify different levels of a variable. This would be the equivalent of identifying which variables are <strong><code>nominal</code></strong> or <strong><code>ordinal</code></strong> in SPSS. It is important to specify which of your columns are factors when you are cleaning your data, as certain inferential tests require the factor data type as an input. If we look at our current columns, none of them are the <strong><code>factors</code></strong>.</p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="datacleaning1.html#cb330-1" tabindex="-1"></a><span class="fu">glimpse</span>(df_filter_multi)</span></code></pre></div>
+<pre><code>## Rows: 38
+## Columns: 9
+## $ ID             &lt;int&gt; 10229436, 10230533, 10230659, 10428518, 10229522, 10229…
+## $ age            &lt;int&gt; 26, 36, 45, 37, 30, 36, 28, 47, 46, 35, 18, 20, 33, 28,…
+## $ gender         &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;female&quot;,…
+## $ condition      &lt;chr&gt; &quot;CAB&quot;, &quot;CAB&quot;, &quot;ABC&quot;, &quot;BCA&quot;, &quot;CAB&quot;, &quot;ABC&quot;, &quot;CAB&quot;, &quot;ABC&quot;,…
+## $ remote_pos     &lt;int&gt; 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4…
+## $ remote_neg     &lt;int&gt; 2, 4, 5, 9, 1, 1, 1, 1, 1, 2, 5, 0, 6, 8, 3, 5, 7, 4, 4…
+## $ remote_neut    &lt;int&gt; 4, 4, 0, 9, 0, 1, 1, 1, 2, 28, 6, 0, 6, 8, 3, 5, 7, 4, …
+## $ total_mood     &lt;int&gt; 61, 62, 74, 68, 59, 63, 64, 75, 48, 52, 65, 70, 64, 48,…
+## $ total_openness &lt;int&gt; 16, 15, 17, 14, 16, 14, 17, 15, 14, 14, 15, 18, 14, 14,…</code></pre>
+<p>Let’s say for this study, we were interested in investigating the effect of <strong><code>gender</code></strong> and <strong><code>condition</code></strong> on participants’ performance. We would need to convert these two columns to factors. How could we do this? Well, if you remember, we can use <strong><code>as.factor()</code></strong> to convert a vector into a factor, and we can use <strong><code>mutate()</code></strong> to rewrite existing columns. Let’s combine these two approaches now to turn <strong><code>gender</code></strong> and <strong><code>condition</code></strong> into factors.</p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="datacleaning1.html#cb332-1" tabindex="-1"></a>df_factor <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_filter_multi,</span>
+<span id="cb332-2"><a href="datacleaning1.html#cb332-2" tabindex="-1"></a>                    <span class="at">gender =</span> <span class="fu">as.factor</span>(gender),</span>
+<span id="cb332-3"><a href="datacleaning1.html#cb332-3" tabindex="-1"></a>                    <span class="at">condition =</span> <span class="fu">as.factor</span>(condition))</span></code></pre></div>
+<p>Now if we call <strong><code>glimpse()</code></strong>, we will see that these columns are now factors.</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="datacleaning1.html#cb333-1" tabindex="-1"></a><span class="fu">glimpse</span>(df_factor)</span></code></pre></div>
+<pre><code>## Rows: 38
+## Columns: 9
+## $ ID             &lt;int&gt; 10229436, 10230533, 10230659, 10428518, 10229522, 10229…
+## $ age            &lt;int&gt; 26, 36, 45, 37, 30, 36, 28, 47, 46, 35, 18, 20, 33, 28,…
+## $ gender         &lt;fct&gt; male, female, female, male, female, female, female, mal…
+## $ condition      &lt;fct&gt; CAB, CAB, ABC, BCA, CAB, ABC, CAB, ABC, CAB, CAB, ABC, …
+## $ remote_pos     &lt;int&gt; 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4…
+## $ remote_neg     &lt;int&gt; 2, 4, 5, 9, 1, 1, 1, 1, 1, 2, 5, 0, 6, 8, 3, 5, 7, 4, 4…
+## $ remote_neut    &lt;int&gt; 4, 4, 0, 9, 0, 1, 1, 1, 2, 28, 6, 0, 6, 8, 3, 5, 7, 4, …
+## $ total_mood     &lt;int&gt; 61, 62, 74, 68, 59, 63, 64, 75, 48, 52, 65, 70, 64, 48,…
+## $ total_openness &lt;int&gt; 16, 15, 17, 14, 16, 14, 17, 15, 14, 14, 15, 18, 14, 14,…</code></pre>
+</div>
+<div id="summarising-our-data-by-groups-using-group_by-and-summarise" class="section level2 hasAnchor" number="5.11">
+<h2><span class="header-section-number">5.11</span> Summarising our Data by Groups using <code>group_by()</code> and <code>summarise()</code><a href="datacleaning1.html#summarising-our-data-by-groups-using-group_by-and-summarise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now our data frame is looking substantially nicer than when we first started.</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="datacleaning1.html#cb335-1" tabindex="-1"></a><span class="fu">head</span>(df_filter_multi)</span></code></pre></div>
+<pre><code>##         ID age gender condition remote_pos remote_neg remote_neut total_mood
+## 1 10229436  26   male       CAB          0          2           4         61
+## 2 10230533  36 female       CAB          0          4           4         62
+## 3 10230659  45 female       ABC          0          5           0         74
+## 4 10428518  37   male       BCA          0          9           9         68
+## 5 10229522  30 female       CAB          1          1           0         59
+## 6 10229414  36 female       ABC          1          1           1         63
+##   total_openness
+## 1             16
+## 2             15
+## 3             17
+## 4             14
+## 5             16
+## 6             14</code></pre>
+<p>At this point, I am happy to say that the data is cleaned. We do not have any superfluous columns or rows. Our variable names are clear. We have created important new columns and fixed incorrect values in original columns. At this point, I would rename the dataframe to something like <strong><code>df_clean</code></strong> to make it clear to future me (or to others), which data frame is ready for analysis.</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="datacleaning1.html#cb337-1" tabindex="-1"></a>df_clean <span class="ot">&lt;-</span> df_factor</span></code></pre></div>
+<p>Now we can actually start summarizing our data. There are two key functions that enable us to do this: <strong><code>summarise()</code></strong> and <strong><code>group_by()</code></strong> functions.</p>
+<p>The <strong><code>summarise()</code></strong> function enables you to calculate specific descriptive statistics for columns in your data frame. The syntax for summarise is: <strong><code>summarise(df, output_statistic = statistic function(column))</code></strong>. On the left-hand side of <strong><code>=</code></strong>, you name the column that you will be creating and on the right-hand side, you specify the descriptive statistic function that you want to call.</p>
+<p>Let’s use <strong><code>summarise()</code></strong> to display the number of participants and the mean and SD scores for our numeric variables.</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="datacleaning1.html#cb338-1" tabindex="-1"></a>sum_df <span class="ot">&lt;-</span> <span class="fu">summarise</span>(df_clean, </span>
+<span id="cb338-2"><a href="datacleaning1.html#cb338-2" tabindex="-1"></a>          </span>
+<span id="cb338-3"><a href="datacleaning1.html#cb338-3" tabindex="-1"></a>          <span class="at">n =</span> <span class="fu">n</span>(), <span class="co">#the n() function counts the number of rows in your sample</span></span>
+<span id="cb338-4"><a href="datacleaning1.html#cb338-4" tabindex="-1"></a>          </span>
+<span id="cb338-5"><a href="datacleaning1.html#cb338-5" tabindex="-1"></a>          <span class="at">mean_remote_pos =</span> <span class="fu">mean</span>(remote_pos),</span>
+<span id="cb338-6"><a href="datacleaning1.html#cb338-6" tabindex="-1"></a>          <span class="at">sd_remote_pos =</span> <span class="fu">sd</span>(remote_pos),</span>
+<span id="cb338-7"><a href="datacleaning1.html#cb338-7" tabindex="-1"></a>          </span>
+<span id="cb338-8"><a href="datacleaning1.html#cb338-8" tabindex="-1"></a>          <span class="at">mean_remote_neg =</span> <span class="fu">mean</span>(remote_neg),</span>
+<span id="cb338-9"><a href="datacleaning1.html#cb338-9" tabindex="-1"></a>          <span class="at">sd_remote_neg =</span> <span class="fu">sd</span>(remote_neg),</span>
+<span id="cb338-10"><a href="datacleaning1.html#cb338-10" tabindex="-1"></a>          </span>
+<span id="cb338-11"><a href="datacleaning1.html#cb338-11" tabindex="-1"></a>          <span class="at">mean_remote_neut =</span> <span class="fu">mean</span>(remote_neut),</span>
+<span id="cb338-12"><a href="datacleaning1.html#cb338-12" tabindex="-1"></a>          <span class="at">sd_remote_neut =</span> <span class="fu">sd</span>(remote_neut),</span>
+<span id="cb338-13"><a href="datacleaning1.html#cb338-13" tabindex="-1"></a>          </span>
+<span id="cb338-14"><a href="datacleaning1.html#cb338-14" tabindex="-1"></a>          <span class="at">mean_openness =</span> <span class="fu">mean</span>(total_openness),</span>
+<span id="cb338-15"><a href="datacleaning1.html#cb338-15" tabindex="-1"></a>          <span class="at">sd_openness =</span> <span class="fu">sd</span>(total_openness),</span>
+<span id="cb338-16"><a href="datacleaning1.html#cb338-16" tabindex="-1"></a>          </span>
+<span id="cb338-17"><a href="datacleaning1.html#cb338-17" tabindex="-1"></a>          <span class="at">mean_mood =</span> <span class="fu">mean</span>(total_mood),</span>
+<span id="cb338-18"><a href="datacleaning1.html#cb338-18" tabindex="-1"></a>          <span class="at">sd_mood =</span> <span class="fu">sd</span>(total_mood))</span>
+<span id="cb338-19"><a href="datacleaning1.html#cb338-19" tabindex="-1"></a></span>
+<span id="cb338-20"><a href="datacleaning1.html#cb338-20" tabindex="-1"></a>sum_df</span></code></pre></div>
+<pre><code>##    n mean_remote_pos sd_remote_pos mean_remote_neg sd_remote_neg
+## 1 38        4.210526      3.129268        5.710526      2.967462
+##   mean_remote_neut sd_remote_neut mean_openness sd_openness mean_mood  sd_mood
+## 1         6.526316       4.717631      15.15789    1.127694  61.55263 8.916118</code></pre>
+<p>The output of the <strong><code>summarise()</code></strong> function is a data frame. It’s somewhat useful to use when you are calculating descriptive statistics for your entire sample, but we’ll learn quicker and easier ways to compute these statistics later on in the course. Where <strong><code>summarise()</code></strong> really shines is when you use it in conjunction with <strong><code>group_by()</code></strong>.</p>
+<p>The <strong><code>group_by()</code></strong> function enables you to group together observations in your data frame based on different categories within a column(s). If you combine <strong><code>group_by</code></strong> with <strong><code>summarise</code></strong>, then you can calculate specific statistics per each group within your data frame.</p>
+<p>Let’s first do this with gender.</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="datacleaning1.html#cb340-1" tabindex="-1"></a>group_gender <span class="ot">&lt;-</span> <span class="fu">group_by</span>(df_clean, gender)</span>
+<span id="cb340-2"><a href="datacleaning1.html#cb340-2" tabindex="-1"></a></span>
+<span id="cb340-3"><a href="datacleaning1.html#cb340-3" tabindex="-1"></a>sum_gen_df <span class="ot">&lt;-</span> <span class="fu">summarise</span>(group_gender, </span>
+<span id="cb340-4"><a href="datacleaning1.html#cb340-4" tabindex="-1"></a>                        <span class="at">n =</span> <span class="fu">n</span>(), </span>
+<span id="cb340-5"><a href="datacleaning1.html#cb340-5" tabindex="-1"></a>                        </span>
+<span id="cb340-6"><a href="datacleaning1.html#cb340-6" tabindex="-1"></a>                        <span class="at">mean_remote_pos =</span> <span class="fu">mean</span>(remote_pos),</span>
+<span id="cb340-7"><a href="datacleaning1.html#cb340-7" tabindex="-1"></a>                        <span class="at">sd_remote_pos =</span> <span class="fu">sd</span>(remote_pos),</span>
+<span id="cb340-8"><a href="datacleaning1.html#cb340-8" tabindex="-1"></a>          </span>
+<span id="cb340-9"><a href="datacleaning1.html#cb340-9" tabindex="-1"></a>                        <span class="at">mean_remote_neg =</span> <span class="fu">mean</span>(remote_neg),</span>
+<span id="cb340-10"><a href="datacleaning1.html#cb340-10" tabindex="-1"></a>                        <span class="at">sd_remote_neg =</span> <span class="fu">sd</span>(remote_neg),</span>
+<span id="cb340-11"><a href="datacleaning1.html#cb340-11" tabindex="-1"></a>          </span>
+<span id="cb340-12"><a href="datacleaning1.html#cb340-12" tabindex="-1"></a>                        <span class="at">mean_remote_neut =</span> <span class="fu">mean</span>(remote_neut),</span>
+<span id="cb340-13"><a href="datacleaning1.html#cb340-13" tabindex="-1"></a>                        <span class="at">sd_remote_neut =</span> <span class="fu">sd</span>(remote_neut))</span>
+<span id="cb340-14"><a href="datacleaning1.html#cb340-14" tabindex="-1"></a></span>
+<span id="cb340-15"><a href="datacleaning1.html#cb340-15" tabindex="-1"></a>sum_gen_df</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 8
+##   gender     n mean_remote_pos sd_remote_pos mean_remote_neg sd_remote_neg
+##   &lt;fct&gt;  &lt;int&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 female    20            4             2.94            5.55          2.84
+## 2 male      18            4.44          3.40            5.89          3.18
+## # ℹ 2 more variables: mean_remote_neut &lt;dbl&gt;, sd_remote_neut &lt;dbl&gt;</code></pre>
+<p>We could also do it based on the <strong><code>condition</code></strong>.</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="datacleaning1.html#cb342-1" tabindex="-1"></a>group_condition <span class="ot">&lt;-</span> <span class="fu">group_by</span>(df_clean, condition)</span>
+<span id="cb342-2"><a href="datacleaning1.html#cb342-2" tabindex="-1"></a></span>
+<span id="cb342-3"><a href="datacleaning1.html#cb342-3" tabindex="-1"></a>sum_condition_df <span class="ot">&lt;-</span> <span class="fu">summarise</span>(group_condition, </span>
+<span id="cb342-4"><a href="datacleaning1.html#cb342-4" tabindex="-1"></a>                        <span class="at">n =</span> <span class="fu">n</span>(), </span>
+<span id="cb342-5"><a href="datacleaning1.html#cb342-5" tabindex="-1"></a>                        </span>
+<span id="cb342-6"><a href="datacleaning1.html#cb342-6" tabindex="-1"></a>                        <span class="at">mean_remote_pos =</span> <span class="fu">mean</span>(remote_pos),</span>
+<span id="cb342-7"><a href="datacleaning1.html#cb342-7" tabindex="-1"></a>                        <span class="at">sd_remote_pos =</span> <span class="fu">sd</span>(remote_pos),</span>
+<span id="cb342-8"><a href="datacleaning1.html#cb342-8" tabindex="-1"></a>          </span>
+<span id="cb342-9"><a href="datacleaning1.html#cb342-9" tabindex="-1"></a>                        <span class="at">mean_remote_neg =</span> <span class="fu">mean</span>(remote_neg),</span>
+<span id="cb342-10"><a href="datacleaning1.html#cb342-10" tabindex="-1"></a>                        <span class="at">sd_remote_neg =</span> <span class="fu">sd</span>(remote_neg),</span>
+<span id="cb342-11"><a href="datacleaning1.html#cb342-11" tabindex="-1"></a>          </span>
+<span id="cb342-12"><a href="datacleaning1.html#cb342-12" tabindex="-1"></a>                        <span class="at">mean_remote_neut =</span> <span class="fu">mean</span>(remote_neut),</span>
+<span id="cb342-13"><a href="datacleaning1.html#cb342-13" tabindex="-1"></a>                        <span class="at">sd_remote_neut =</span> <span class="fu">sd</span>(remote_neut))</span>
+<span id="cb342-14"><a href="datacleaning1.html#cb342-14" tabindex="-1"></a></span>
+<span id="cb342-15"><a href="datacleaning1.html#cb342-15" tabindex="-1"></a>sum_condition_df</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 8
+##   condition     n mean_remote_pos sd_remote_pos mean_remote_neg sd_remote_neg
+##   &lt;fct&gt;     &lt;int&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 ABC          13            3.92          3.25            5.38          3.15
+## 2 BCA          11            4.55          2.66            7.09          1.92
+## 3 CAB          14            4.21          3.53            4.93          3.27
+## # ℹ 2 more variables: mean_remote_neut &lt;dbl&gt;, sd_remote_neut &lt;dbl&gt;</code></pre>
+<p>In each example, the <strong><code>group_by()</code></strong> function tells R to pay attention to the participant’s score on the specified columns when calculating descriptive statistics. We can also tell R to <strong><code>group_by</code></strong> two variables at the same time.</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="datacleaning1.html#cb344-1" tabindex="-1"></a>group_multi <span class="ot">&lt;-</span> <span class="fu">group_by</span>(df_clean, condition, gender)</span>
+<span id="cb344-2"><a href="datacleaning1.html#cb344-2" tabindex="-1"></a></span>
+<span id="cb344-3"><a href="datacleaning1.html#cb344-3" tabindex="-1"></a>multi_df <span class="ot">&lt;-</span> <span class="fu">summarise</span>(group_multi,</span>
+<span id="cb344-4"><a href="datacleaning1.html#cb344-4" tabindex="-1"></a>                      <span class="at">n =</span> <span class="fu">n</span>(), </span>
+<span id="cb344-5"><a href="datacleaning1.html#cb344-5" tabindex="-1"></a>                        </span>
+<span id="cb344-6"><a href="datacleaning1.html#cb344-6" tabindex="-1"></a>                        <span class="at">mean_remote_pos =</span> <span class="fu">mean</span>(remote_pos),</span>
+<span id="cb344-7"><a href="datacleaning1.html#cb344-7" tabindex="-1"></a>                        <span class="at">sd_remote_pos =</span> <span class="fu">sd</span>(remote_pos),</span>
+<span id="cb344-8"><a href="datacleaning1.html#cb344-8" tabindex="-1"></a>          </span>
+<span id="cb344-9"><a href="datacleaning1.html#cb344-9" tabindex="-1"></a>                        <span class="at">mean_remote_neg =</span> <span class="fu">mean</span>(remote_neg),</span>
+<span id="cb344-10"><a href="datacleaning1.html#cb344-10" tabindex="-1"></a>                        <span class="at">sd_remote_neg =</span> <span class="fu">sd</span>(remote_neg),</span>
+<span id="cb344-11"><a href="datacleaning1.html#cb344-11" tabindex="-1"></a>          </span>
+<span id="cb344-12"><a href="datacleaning1.html#cb344-12" tabindex="-1"></a>                        <span class="at">mean_remote_neut =</span> <span class="fu">mean</span>(remote_neut),</span>
+<span id="cb344-13"><a href="datacleaning1.html#cb344-13" tabindex="-1"></a>                        <span class="at">sd_remote_neut =</span> <span class="fu">sd</span>(remote_neut))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;condition&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="datacleaning1.html#cb346-1" tabindex="-1"></a>multi_df</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
+## # Groups:   condition [3]
+##   condition gender     n mean_remote_pos sd_remote_pos mean_remote_neg
+##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
+## 1 ABC       female     6            4             3.74            5.67
+## 2 ABC       male       7            3.86          3.08            5.14
+## 3 BCA       female     6            5.17          2.14            7.33
+## 4 BCA       male       5            3.8           3.27            6.8 
+## 5 CAB       female     8            3.12          2.85            4.12
+## 6 CAB       male       6            5.67          4.08            6   
+## # ℹ 3 more variables: sd_remote_neg &lt;dbl&gt;, mean_remote_neut &lt;dbl&gt;,
+## #   sd_remote_neut &lt;dbl&gt;</code></pre>
+<p>Running this block of code will produce the warning: <strong><code>summarise() has grouped output by 'condition'. You can override using the .groups argument.</code></strong> This basically means that R will summarize by <strong><code>condition</code></strong> first. That’s why in the output you see the groups clumped together (e.g., ABC - female, ABC - male; BCA - female…).</p>
+<p>There we have it! We have successfully cleaned our first data frame in R. Well done.</p>
+</div>
+<div id="chaining-it-all-together-with-the-pipe-operator" class="section level2 hasAnchor" number="5.12">
+<h2><span class="header-section-number">5.12</span> Chaining it All Together with the Pipe Operator<a href="datacleaning1.html#chaining-it-all-together-with-the-pipe-operator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The way we cleaned our data so far is perfectly legitimate. The only annoying thing is that it does clutter up your environment tab, as we needed to create several intermediate data frames on the way to getting to <code>df_clean</code>. This process of creating intermediate data frames is (ironically) a bit of a messy workflow. If you come back to this data frame in a few months time, you might forget the difference between <code>df_factor</code>, <code>df_mutate_ra_fixed</code>, <code>df_filter</code>. You might wonder if there is a cleaner way to clean data.</p>
+<p>Yes! We can streamline our cleaning process by using tidyverse’s pipe operator (%&gt;%), which enables us to chain together multiple functions into a single, cohesive block of code. The pipe operator functions as a “AND THEN” connector, allowing us to sequentially apply different data manipulation functions to our data frame. By using the pipe operator, we can avoid the need to create multiple intermediate data frames and instead perform all cleaning steps in one concise code block.</p>
+<p>Let’s say I wanted to create a data frame (<code>df_demo</code>) with only demographic information and with variable <code>gender</code> changed to <code>sex</code>. In the way I have shown you so far, I would need to do this:</p>
+<p>I want to rename the <code>gender</code> column to <code>sex</code>, instead of doing this:</p>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="datacleaning1.html#cb348-1" tabindex="-1"></a>df_demo_raw <span class="ot">&lt;-</span> <span class="fu">select</span>(df_clean, ID, age, gender)</span>
+<span id="cb348-2"><a href="datacleaning1.html#cb348-2" tabindex="-1"></a><span class="fu">head</span>(df_demo_raw)</span></code></pre></div>
+<pre><code>##         ID age gender
+## 1 10229436  26   male
+## 2 10230533  36 female
+## 3 10230659  45 female
+## 4 10428518  37   male
+## 5 10229522  30 female
+## 6 10229414  36 female</code></pre>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="datacleaning1.html#cb350-1" tabindex="-1"></a>df_demo <span class="ot">&lt;-</span> <span class="fu">rename</span>(df_demo_raw, <span class="at">sex =</span> gender)</span>
+<span id="cb350-2"><a href="datacleaning1.html#cb350-2" tabindex="-1"></a><span class="fu">head</span>(df_demo)</span></code></pre></div>
+<pre><code>##         ID age    sex
+## 1 10229436  26   male
+## 2 10230533  36 female
+## 3 10230659  45 female
+## 4 10428518  37   male
+## 5 10229522  30 female
+## 6 10229414  36 female</code></pre>
+<p>I can use the pipe operator to connect these functions into one code chunk, like this</p>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="datacleaning1.html#cb352-1" tabindex="-1"></a>df_demo_pipe <span class="ot">&lt;-</span> df_clean <span class="sc">%&gt;%</span> <span class="co">#create a variable called df_demo_pipe. To create it, take the df_clean data frame AND THEN (%&gt;%)</span></span>
+<span id="cb352-2"><a href="datacleaning1.html#cb352-2" tabindex="-1"></a>  <span class="fu">select</span>(ID, age, gender) <span class="sc">%&gt;%</span>  <span class="co">#select its columns ID, age, gender AND THEN</span></span>
+<span id="cb352-3"><a href="datacleaning1.html#cb352-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">sex =</span> gender) <span class="co">#rename gender to sex</span></span>
+<span id="cb352-4"><a href="datacleaning1.html#cb352-4" tabindex="-1"></a></span>
+<span id="cb352-5"><a href="datacleaning1.html#cb352-5" tabindex="-1"></a><span class="fu">head</span>(df_demo_pipe)</span></code></pre></div>
+<pre><code>##         ID age    sex
+## 1 10229436  26   male
+## 2 10230533  36 female
+## 3 10230659  45 female
+## 4 10428518  37   male
+## 5 10229522  30 female
+## 6 10229414  36 female</code></pre>
+<p>Using the pipe operator, we can chain together the functions select() and rename() in one code block. This makes our code more concise and readable compared to the traditional approach of creating separate intermediate data frames.</p>
+<div id="using-a-pipe-operator-on-the-remote-associations-data-frame" class="section level3 hasAnchor" number="5.12.1">
+<h3><span class="header-section-number">5.12.1</span> Using a Pipe Operator on the Remote Associations Data Frame<a href="datacleaning1.html#using-a-pipe-operator-on-the-remote-associations-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we wanted to clean our <code>remote_associations</code> data frame using <code>%&gt;%</code>, we can run the following code:</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="datacleaning1.html#cb354-1" tabindex="-1"></a>df_clean_pipe <span class="ot">&lt;-</span> df_raw <span class="sc">%&gt;%</span>  <span class="co">#we take our raw dataframe AND THEN ( %&gt;% )</span></span>
+<span id="cb354-2"><a href="datacleaning1.html#cb354-2" tabindex="-1"></a>  <span class="fu">select</span>(Participant.Private.ID, Experiment.Status, age, gender, order, response1, remote.assocotations<span class="fl">.1</span><span class="sc">:</span>Remote.association<span class="fl">.3</span>, open1<span class="sc">:</span>open5) <span class="sc">%&gt;%</span>  <span class="co">#we select the columns we want AND THEN </span></span>
+<span id="cb354-3"><a href="datacleaning1.html#cb354-3" tabindex="-1"></a>  </span>
+<span id="cb354-4"><a href="datacleaning1.html#cb354-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ID =</span> Participant.Private.ID, <span class="co">#newcolname = oldcolname</span></span>
+<span id="cb354-5"><a href="datacleaning1.html#cb354-5" tabindex="-1"></a>         <span class="at">status =</span> Experiment.Status,</span>
+<span id="cb354-6"><a href="datacleaning1.html#cb354-6" tabindex="-1"></a>         <span class="at">remote_pos =</span> remote.assocotations<span class="fl">.1</span>,</span>
+<span id="cb354-7"><a href="datacleaning1.html#cb354-7" tabindex="-1"></a>         <span class="at">remote_neg =</span> remote.assocotations<span class="fl">.2</span>,</span>
+<span id="cb354-8"><a href="datacleaning1.html#cb354-8" tabindex="-1"></a>         <span class="at">remote_neut =</span> Remote.association<span class="fl">.3</span>,</span>
+<span id="cb354-9"><a href="datacleaning1.html#cb354-9" tabindex="-1"></a>         <span class="at">total_mood =</span> response1,</span>
+<span id="cb354-10"><a href="datacleaning1.html#cb354-10" tabindex="-1"></a>         <span class="at">condition =</span> order) <span class="sc">%&gt;%</span> <span class="co">#We RENAME our columns AND THEN</span></span>
+<span id="cb354-11"><a href="datacleaning1.html#cb354-11" tabindex="-1"></a>  </span>
+<span id="cb354-12"><a href="datacleaning1.html#cb354-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_openness =</span> open1 <span class="sc">+</span> open2 <span class="sc">+</span> open3 <span class="sc">+</span> open4 <span class="sc">+</span> open5,</span>
+<span id="cb354-13"><a href="datacleaning1.html#cb354-13" tabindex="-1"></a>                    <span class="at">.keep =</span> <span class="st">&quot;unused&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#we create the total_openess column and fix the remote columns AND THEN</span></span>
+<span id="cb354-14"><a href="datacleaning1.html#cb354-14" tabindex="-1"></a>  </span>
+<span id="cb354-15"><a href="datacleaning1.html#cb354-15" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">remote_neut =</span> remote_neut <span class="sc">-</span> remote_neg,</span>
+<span id="cb354-16"><a href="datacleaning1.html#cb354-16" tabindex="-1"></a>         <span class="at">remote_neg =</span> remote_neg <span class="sc">-</span> remote_pos,) <span class="sc">%&gt;%</span> </span>
+<span id="cb354-17"><a href="datacleaning1.html#cb354-17" tabindex="-1"></a>  </span>
+<span id="cb354-18"><a href="datacleaning1.html#cb354-18" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span>  <span class="co">#remove duplicates</span></span>
+<span id="cb354-19"><a href="datacleaning1.html#cb354-19" tabindex="-1"></a>  </span>
+<span id="cb354-20"><a href="datacleaning1.html#cb354-20" tabindex="-1"></a>  <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">&quot;live&quot;</span> <span class="sc">&amp;</span> (remote_pos <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> remote_neg <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">|</span> remote_neg <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb354-21"><a href="datacleaning1.html#cb354-21" tabindex="-1"></a>  </span>
+<span id="cb354-22"><a href="datacleaning1.html#cb354-22" tabindex="-1"></a>  </span>
+<span id="cb354-23"><a href="datacleaning1.html#cb354-23" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">as.factor</span>(gender),</span>
+<span id="cb354-24"><a href="datacleaning1.html#cb354-24" tabindex="-1"></a>         <span class="at">condition =</span> <span class="fu">as.factor</span>(condition)) </span>
+<span id="cb354-25"><a href="datacleaning1.html#cb354-25" tabindex="-1"></a>  </span>
+<span id="cb354-26"><a href="datacleaning1.html#cb354-26" tabindex="-1"></a>  </span>
+<span id="cb354-27"><a href="datacleaning1.html#cb354-27" tabindex="-1"></a>  </span>
+<span id="cb354-28"><a href="datacleaning1.html#cb354-28" tabindex="-1"></a>df_clean_pipe <span class="sc">%&gt;%</span> </span>
+<span id="cb354-29"><a href="datacleaning1.html#cb354-29" tabindex="-1"></a>  <span class="fu">group_by</span>(condition, gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb354-30"><a href="datacleaning1.html#cb354-30" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb354-31"><a href="datacleaning1.html#cb354-31" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>(), </span>
+<span id="cb354-32"><a href="datacleaning1.html#cb354-32" tabindex="-1"></a>                        </span>
+<span id="cb354-33"><a href="datacleaning1.html#cb354-33" tabindex="-1"></a>            <span class="at">mean_remote_pos =</span> <span class="fu">mean</span>(remote_pos),</span>
+<span id="cb354-34"><a href="datacleaning1.html#cb354-34" tabindex="-1"></a>            <span class="at">sd_remote_pos =</span> <span class="fu">sd</span>(remote_pos),</span>
+<span id="cb354-35"><a href="datacleaning1.html#cb354-35" tabindex="-1"></a>          </span>
+<span id="cb354-36"><a href="datacleaning1.html#cb354-36" tabindex="-1"></a>            <span class="at">mean_remote_neg =</span> <span class="fu">mean</span>(remote_neg),</span>
+<span id="cb354-37"><a href="datacleaning1.html#cb354-37" tabindex="-1"></a>            <span class="at">sd_remote_neg =</span> <span class="fu">sd</span>(remote_neg),</span>
+<span id="cb354-38"><a href="datacleaning1.html#cb354-38" tabindex="-1"></a>          </span>
+<span id="cb354-39"><a href="datacleaning1.html#cb354-39" tabindex="-1"></a>            <span class="at">mean_remote_neut =</span> <span class="fu">mean</span>(remote_neut),</span>
+<span id="cb354-40"><a href="datacleaning1.html#cb354-40" tabindex="-1"></a>            <span class="at">sd_remote_neut =</span> <span class="fu">sd</span>(remote_neut))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;condition&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 6 × 9
+## # Groups:   condition [3]
+##   condition gender     n mean_remote_pos sd_remote_pos mean_remote_neg
+##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;           &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;
+## 1 ABC       female     6            4             3.74            5.67
+## 2 ABC       male       7            3.86          3.08            5.14
+## 3 BCA       female     6            5.17          2.14            7.33
+## 4 BCA       male       5            3.8           3.27            6.8 
+## 5 CAB       female     8            3.12          2.85            4.12
+## 6 CAB       male       6            5.67          4.08            6   
+## # ℹ 3 more variables: sd_remote_neg &lt;dbl&gt;, mean_remote_neut &lt;dbl&gt;,
+## #   sd_remote_neut &lt;dbl&gt;</code></pre>
+<p>The pipe operator enables us to produce the same output as before, but with significantly cleaner code. By chaining together commands, we reduce the need for intermediate data frames and make our data cleaning process more efficient.</p>
+<p>The Pipe is an extremely useful operator. But I actually encourage you to first clean your data frames the first way by creating intermediate data frames and calling each function separately. Even though it is more cumbersome, there are two advantages to this approach when you are a beginner. Firstly, it forces you to test each line of code that you run when you are cleaning a data frame, thereby encouraging you to think about what cleaning steps you are taking. Secondly, if you make a mistake in using a function, you will get immediate feedback from R on what the error is. When you use the pipe, R will run the entire code chunk at once and the error message might not tell you exactly where your code broke down. Fixing this can be very frustrating for any programmer, but it can be incredibly disheartening when you are just starting out.</p>
+<p>My advice, clean your data frames first using the approach we used here. Once it is clean, try and recreate it using pipes. After a while you should start to feel comfortable using pipes from the start - that’s the time to make the transition.</p>
+</div>
+</div>
+<div id="clean-activity" class="section level2 hasAnchor" number="5.13">
+<h2><span class="header-section-number">5.13</span> Activity: Clean the Flanker Dataset<a href="datacleaning1.html#clean-activity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cleaning-flanker-test-dataset" class="section level3 hasAnchor" number="5.13.1">
+<h3><span class="header-section-number">5.13.1</span> <strong>Cleaning Flanker Test Dataset</strong><a href="datacleaning1.html#cleaning-flanker-test-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This exercise involves cleaning the Flanker Test Dataset, which was collected as part of a study investigating the effect of alcohol consumption on inhibiting incongruent responses (e.g., flanker effect). The dataset includes responses from 50 participants who took part in the study when it was made live. Participants answered questions related to their age, gender, and neuroticism. Additionally, participants were split into two conditions: control (no alcohol) and experiment (high alcohol).</p>
+<p>Download the files <code>cleaning-exercise.R</code> and <code>flanker.csv</code> to run this exercise.</p>
+</div>
+<div id="load-the-tidyverse-package" class="section level3 hasAnchor" number="5.13.2">
+<h3><span class="header-section-number">5.13.2</span> <strong>Load the “Tidyverse” Package</strong><a href="datacleaning1.html#load-the-tidyverse-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="datacleaning1.html#cb357-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+</div>
+<div id="reset-your-environment" class="section level3 hasAnchor" number="5.13.3">
+<h3><span class="header-section-number">5.13.3</span> <strong>Reset Your Environment</strong><a href="datacleaning1.html#reset-your-environment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before starting, it’s recommended to clear your environment to prevent any accidental use of variables from previous tasks. You can do this by clicking the brush icon in the environment tab.</p>
+</div>
+<div id="import-the-data" class="section level3 hasAnchor" number="5.13.4">
+<h3><span class="header-section-number">5.13.4</span> <strong>Import the Data</strong><a href="datacleaning1.html#import-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="datacleaning1.html#cb358-1" tabindex="-1"></a>df_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;flanker.csv&quot;</span>) <span class="co">#make sure you have this in your working directory  </span></span>
+<span id="cb358-2"><a href="datacleaning1.html#cb358-2" tabindex="-1"></a><span class="co"># Check the structure and first few rows of the dataframe </span></span>
+<span id="cb358-3"><a href="datacleaning1.html#cb358-3" tabindex="-1"></a></span>
+<span id="cb358-4"><a href="datacleaning1.html#cb358-4" tabindex="-1"></a><span class="fu">View</span>(df_raw) </span>
+<span id="cb358-5"><a href="datacleaning1.html#cb358-5" tabindex="-1"></a></span>
+<span id="cb358-6"><a href="datacleaning1.html#cb358-6" tabindex="-1"></a><span class="fu">head</span>(df_raw)  </span>
+<span id="cb358-7"><a href="datacleaning1.html#cb358-7" tabindex="-1"></a></span>
+<span id="cb358-8"><a href="datacleaning1.html#cb358-8" tabindex="-1"></a>(df_raw)</span></code></pre></div>
+<p>Now that we’ve loaded the necessary package and imported our data, we can proceed with cleaning the data set.</p>
+</div>
+<div id="cleaning-instructions" class="section level3 hasAnchor" number="5.13.5">
+<h3><span class="header-section-number">5.13.5</span> Cleaning Instructions<a href="datacleaning1.html#cleaning-instructions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Instructions</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Select Relevant Columns:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_select</code></strong>.</p></li>
+<li><p>Use the <strong><code>select()</code></strong> function to choose the columns relating to participant ID, experiment status (live or preview), age, gender, study condition (control versus experiment), the flanker tasks, and neuroticism items.</p></li>
+</ul></li>
+<li><p><strong>Rename Columns:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_rename</code></strong>.</p></li>
+<li><p>Rename the messy columns to the following names:</p>
+<ul>
+<li><p>ID</p></li>
+<li><p>status</p></li>
+<li><p>age</p></li>
+<li><p>gender</p></li>
+<li><p>condition</p></li>
+<li><p>flanker_congruent</p></li>
+<li><p>neuro1</p></li>
+<li><p>neuro2</p></li>
+<li><p>neuro3</p></li>
+<li><p>neuro4</p></li>
+<li><p>neuro5</p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Create Total Neuroticism Score:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_mutate</code></strong>.</p></li>
+<li><p>Use the <strong><code>mutate()</code></strong> function to create a variable called <strong><code>neuro_total</code></strong> that is the sum of each neuroticism item. Remove the neuro items using <strong><code>.keep = "unused"</code></strong>.</p></li>
+</ul></li>
+<li><p><strong>Calculate Flanker Effect:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_mutate_flanker</code></strong>.</p></li>
+<li><p>Use the <strong><code>mutate()</code></strong> function to create a variable called <strong><code>flanker_effect</code></strong>. The formula for the flanker effect is: <strong><code>flanker_effect = flanker_congruent - flanker_incongruent</code></strong>.</p></li>
+</ul></li>
+<li><p><strong>Filter Participants:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_filter</code></strong>.</p></li>
+<li><p>Use the <strong><code>filter()</code></strong> function to select only the participants that took the live experiment AND (&amp;) are older than 18.</p></li>
+</ul></li>
+<li><p><strong>Remove Duplicates:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_distinct</code></strong>.</p></li>
+<li><p>Use the <strong><code>distinct()</code></strong> function to remove any duplicate participants.</p></li>
+</ul></li>
+<li><p><strong>Convert Factors:</strong></p>
+<ul>
+<li><p>Create a variable called <strong><code>df_factor</code></strong>.</p></li>
+<li><p>Use the <strong><code>mutate()</code></strong> function to convert the columns relating to experimental condition and gender to factors using <strong><code>as.factor()</code></strong>.</p></li>
+</ul></li>
+<li><p><strong>Finalize Cleaning:</strong></p>
+<ul>
+<li>Create a variable called <strong><code>df_clean</code></strong> with the following code: <strong><code>df_clean &lt;- df_factor</code></strong>.</li>
+</ul></li>
+<li><p><strong>Chaining with Pipe Operator:</strong></p>
+<ul>
+<li>Create a variable called <strong><code>df_clean_pipe</code></strong> and chain your code together using the pipe operator (<strong><code>%&gt;%</code></strong>).</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="summary-5" class="section level2 hasAnchor" number="5.14">
+<h2><span class="header-section-number">5.14</span> Summary<a href="datacleaning1.html#summary-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Well done. You have cleaned your first data sets in R. The functions that we used today will cover 70-80% of the functions that you would need to handle most data cleaning problems. In the next chapter, we will look at situations where we need to transform the shape of our data, handle missing values, join together datasets, and identify problematic patterns in our data.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="programming2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datacleaning2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/05-cleaning-p1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rintro_demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

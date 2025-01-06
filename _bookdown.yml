@@ -1,0 +1,14 @@
+book_filename: "rintro_demo"
+rmd_files: ["index.Rmd",
+            "02-rstudio.Rmd",
+            "03-programming-p1.Rmd",
+            "04-programming-p2.Rmd",
+            "05-cleaning-p1.Rmd",
+            "06-cleaning-p2.Rmd",
+            "07-data-visualisation.Rmd",
+            "08-descriptives-t-tests.Rmd",
+            "appendix_boolean.Rmd"]
+output_dir: "docs"
+language:
+  ui:
+delete_merged_file: true

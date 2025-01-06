@@ -1,0 +1,276 @@
+# Basic R Programming (Part I) {#programming1}
+
+Today we are going to learn some basic programming concepts. By the end of the session, you should be able to:
+
+-   Run and troubleshoot commands in the R console.
+
+-   Write comments to your code to better structure it.
+
+-   Understand the different data types and when they are used.
+
+-   Create and use variables.
+
+-   Create and use functions.
+
+-   Install R packages.
+
+-   To use the help function in R.
+
+### Activity 1: Set up your Working Directory
+
+It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in this session. Last week I showed you how to do this using [a button-and-click interface](#set_wd).
+
+Using those instructions, create a folder called "Week2" in the `rintro` project folder and set it as your working directory. Once you have done that, check to make sure it is your working directory (i.e., type `getwd()` into the console). Your should see something similar to this.
+
+```{r eval = F}
+
+> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week2")
+
+```
+
+## Using the Console
+
+In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running "dirty" quick code to test ideas, or code that we would run one.
+
+That distinction is kinda true, but it's not completely true. In reality, when we write a script we are preparing ***commands*** for R to ***execute*** in the console. When we "run" a script, we are feeding that script to the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).
+
+So even though we will primarily not use the R console in this class, it's important to know how to work with it. We do not want the chef spitting in our food.
+
+### Typing Commands in the Console
+
+The R console uses the operator "\>" to indicate that it is ready for a new command. We enter in our code after this operator and press enter to compute it.
+
+We can command the R console to compute calculations.
+
+```{r eval=FALSE}
+
+> 10 + 20
+
+[1] 30
+
+```
+
+```{r eval=FALSE}
+
+> 20 / 10
+
+[1] 2
+
+```
+
+If you are performing calculations in R, it's important to know that it follows the usual arithmetic convention of order of operations (remember [BIMDAS - Bracets, Indices, Multiplication, Division, Addition, and Subtraction?](https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction)).
+
+```{r eval = FALSE}
+
+
+> (20 + 10 / 10) * 4 
+
+[1] 84
+
+> ((20 + 10) / 10) * 4
+
+[1] 12
+
+```
+
+Now you'll have noticed that the output of every line of code we entered starts with a **`[1]`** before our actual result. What does this mean?
+
+Think of the square brackets with a number as a way for R to label and organize its responses. Imagine you have a conversation with R, and every time you ask it something, it gives you an answer. The square brackets with a number, like **`[1]`**, are like labels on each response, telling you which answer corresponds to which question. This is R ***indexing*** its answer.
+
+In each of the above examples, we asked R one question ***per each*** command, which is why the answer is always **`[1]`**. If we entered longer code with multiple questions, then we could multiple answers. We could tell which answer related to which question through the index. This is really useful when we ask R long and more complicated questions.
+
+### Console Syntax (Aka "I'm Ron Burgundy?")
+
+One of the most important concepts you need to understand when you are programming, is that you need to type exactly what you want R to do. If you make a mistake (e.g., a typo), R will not try and understand what you actually meant. For example, see what happens if you make the following mistake:
+
+```{r eval=F}
+
+> 10 = 20
+
+```
+
+```{r error = TRUE, echo = FALSE}
+
+10 = 20
+
+```
+
+R sees this as you making the claim that 10 is equal or equivalent to 20, panics, and refuses to run your command. Obviously, any person looking at this code would make the assumption that the `=` is a typo. Given that `+` and `=` are on the same key, we would make the assumption that the person probably meant to type `10 + 20`. To bring it back to Psychological terms, we can say that programming languages like R do not have a theory of mind. So be sure to be exact when you are typing out your commands. Otherwise, we will end up with [a Ron Burgundy situation.](https://www.youtube.com/watch?v=X3zfP14pLxc)
+
+This type of mistakes are pretty benign, as R will tell us immediately that something is wrong. However, there can be a more silent type of mistake that can be more damaging. Let's image that you typed in `-` instead of `+` by mistake.
+
+```{r eval= FALSE}
+
+> 10 - 20
+
+[1] -10
+
+```
+
+In this scenario, R will run this code and output the result. This is because the code still makes sense - it is perfectly legitimate to subtract 20 away from 10. R can't read your mind, so it sees three symbols in a perfectly logical order, and carries out the command. It assumes you're the adult here, which is rather terrifying at times.
+
+In short calculations like this, it will clear what you typed wrong. However, if you run a long-block of connected code and made a typo like this somewhere, the result you get be significantly different from the intended result. The main way to check for this is to always view the output of your code. If it looks significantly different from what you expected, then this type of silent error might be causing it.
+
+I have been pretty mean to the console, but there are rare times it will be a good Samaritan. For example, if R thinks you haven't finished a command it will print out `+` to allow you to finish it.
+
+```{r eval = FALSE}
+
+> (20 + 10
+ 
++ )
+
+[1] 30
+
+```
+
+So when you see "+" in the console, this is R telling you that something is missing. If nothing is missing, then this indicates that your code might not be correctly formatted. Overall, the moral of this section can be summarized as: proofread your code!
+
+### Comments
+
+When you are using either scripts or the console, one of the most important tools in writing intelligent code is the use of comments.
+
+Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). Last week, you already saw several examples of comments. We indicate comments by using the `#` symbol. This symbol tells R to ignore whatever comes directly ***afterwards***.
+
+There are various reasons for using comments.
+
+```{r fig.cap = "Four Examples of Comments Use", echo = FALSE, warning = FALSE}
+
+library(knitr)
+
+include_graphics("img/03-comments.png")
+
+
+```
+
+In the above figure, you'll see four different types of comments.
+
+1.  The first type of comment provides a quick introduction to the R script. It can be really useful here to provide a clear information on what this script is trying to do (e.g., run a paired samples t-test), what data it is working on (the sleep dataset), and who wrote or developed this script. This makes it significantly easier for anyone who might be reviewing your work or trying to apply your code to their own work to understand what is going on.
+
+2.  The second type of comment structures the format of the script by providing headings or steps. Again, this just makes it easier to understand what is going on.
+
+3.  The third type of comment is placed before the summary. This means that code `summary(sleep)` will not be executed in R. Why would we do this? If you remember last week, we wanted to compute the mean per each of our two treatment groups, which the summary function does not enable us to do, so it's not part of our main analysis. So why keep it? Well it still provides us with valuable information (e.g., mean, median, min, max for the entire sample), so rather than delete it, we'll just put a comment in front of it. And if anytime we want to check these descriptives, we can just remove the `#` and run that line of code.
+
+4.  The fourth type of comment provides some context or information on what a specific line of code is doing, namely, what the `aggregate()` function does. Again, this is really useful, particularly if you are using functions that are now well known.
+
+Comments are extremely useful for orientating yourself to code. My advice would be to comment as much as your code as you. Anyone who has coded will have experience the following situation - You spend days/weeks writing a piece of code to clean a messy data set and run a specialized type of analysis. Several months go by and you need to return to your data set (pesky reviewer #2 wants you change something). You open up your R script and you are ***completely lost***. You have written no comments, so you have to spend days trying to remember what each piece of code was trying to do.
+
+If you comment a lot, it will save you so much heartache in the future. And it will help you understand various code concepts better if you can explain them while you are using them. So comment, comment, comment!
+
+Okay, that's a lot about using the console. Let's move on to other programming concepts.
+
+## Variables
+
+The code we have been using so far has been single-use code. Once we have typed out code, there is nothing else we can do but look at their output. But programming languages enable us to store information to objects called ***variables***.
+
+Variables are labels for pieces of information. If we want to use that information or recall later on, instead of running the same code that produced the information, we can just refer to its label.
+
+```{r}
+
+my_name <- "Ryan"
+
+```
+
+To create a variable, we first type the name of the variable (\`my_name`). We use the assignment operator to tell R that we will be assigning (i.e., storing) information to`my_name`. This information is the string "Ryan". Once we run this code, then whenever R sees the variable`my_name\` it will replace it with Ryan.
+
+```{r}
+
+print(my_name)
+
+```
+
+Now many of you who have seen my email will think *"Hold on a second, isn't your first name Brendan? You fraud!"*. Now before you grab your pitchforks, yes, you are technically correct. And for the sake of civility, we can correct for this mistake. Thankfully, once we have set up a variable, it is not locked forever. We can reassign it to another piece of information. All we have to do is write out the variable label again and assign it to a different piece of information.
+
+```{r}
+
+my_name <- "Brendan" #please don't call me this
+
+print(my_name)
+
+```
+
+We can store multiple different types of information to variables, including integers and decimals.
+
+```{r}
+
+my_age <- 30
+
+my_height <- 5.9 #foot.inches
+
+print(my_age)
+
+print(my_height)
+
+```
+
+### What's in a name? (Conventions for Naming Variables)
+
+There are hard and soft rules for naming variables that you should know.
+
+**Hard Rules (Follow these, otherwise R won't create the variable for you)**
+
+Variable names can only include upper case alphabetic characters A-Z, lower-case a-z, numeric characters 0-9, as well period `.` and underscores `_`. Variables names must start with either a letter or a period (1st_name or \_1stname is wrong. first_name or .firstname is right) Do not use spaces in variable names (`my name` is not okay. Use either `my_name` or \``my.name`) Variable names are case sensitive (`my_name` is not the same as `My_name`) Variable names cannot include special words that R reserves (e.g., if, else, repeat, while, function, for, in, TRUE, FALSE). You don't need to memories this, but it is worth remembering this if an error with your variable name comes up. After some time, you'll gain a strong intuition for what is a valid name and what is not.
+
+**Soft Rules (you should follow these, otherwise your scripts and code will be messy)**
+
+*Choose informative variable names that clearly describe the information they represent.* Someone should be able to look at your variable name and be able to reasonably guess what type of information it is storing. Variable names like "income", "grades", "height" are clear, whereas variables names like "money", "performance", or "cm" are ambiguous (e.g., what money - money received, spent, owed? performance on what? what was being measured in cm, height, width?). And for the love of God don't name your variables "variable1", "variable2", "variable3"!
+
+*Choose short variable names whenever possible.* Concise names like `dob` or `iq` are better than `date_of_birth` or `intelligence_quotient`. It's much easier to work with shorter names as it avoids unnecessary and tedious typing thereby reducing the chance for making typos.
+
+*But you should choose a long variable name that is clear over a short variable name that is unclear*. A long variable name like `total_exam_marks` is significantly better than a cryptic acronym like `tem`.
+
+*Do not start your variables with a capital letter.* A standard convention in the R programming language is to use lowercase letters when naming variables or functions. So you could start your variable names with a capital letter, but it would look and sound strange to other R users [^03-programming_p1-1].
+
+[^03-programming_p1-1]: This rule is the most arbitrary, but it does bear similarity with conventions in spoken languages. For example, German and English native-speakers tend to emphasize time at different points in a sentence. English speakers tend to specify the time at the end of the sentence "I will drive to Dublin on Friday", whereas German speakers tend to specify time near the beginning of the sentence "I will on Friday drive to Dublin " (Ich werde am Freitag nach Dublin fahren.). Of course, you could say it the German way in English, or the English way in German, but it would sound a bit unnatural.
+
+*Use a conventional naming style and be consistent with it*. There are three conventional styles for handling variables that contain multiple words.
+
+1.  The first style separates each word with an underscore (e.g., my**\_**age***,*** my**\_**name, my_height). This is called `Snake_case`.
+
+2.  The second style separates each word with a period `.` (e.g., my.age, my.name, my.height).This is called `dot.notation`. 
+
+3.  The third style capitalizes every additional word after\*\* the first word (e.g., myAge, myName, myHeight). This is called `camelCase`.
+
+I recommend that you use the `Snake_case` during this course, because it will keep your code consistent with my code. Additionally, this case is consistent with other programming languages, whereas `dot.notation` is not. 
+
+Outside of this course, feel free to pick whichever style you prefer. Just be consistent with it.
+
+### Test Yourself! Are these examples of good or bad variable names?
+
+```{r variable-test, echo = FALSE}
+
+library(learnr)
+
+question("Which of these are examples of bad variable names? Click all that apply",
+         answer("1stname", correct = TRUE),
+         answer("dog_type"),
+         answer("first-name", correct = TRUE))
+
+```
+
+
+
+## Data Types[^03-programming_p1-2]
+
+[^03-programming_p1-2]: Including the "\>" is a pain when formatting this book, so I won't include "\>" in examples of code from this point onwards.
+
+## 
+
+### Integers
+
+### Doubles
+
+### Characters ("strings")
+
+### Boolean
+
+### Vectors
+
+### Lists
+
+### Dataframes
+
+## Packages
+
+
+
+

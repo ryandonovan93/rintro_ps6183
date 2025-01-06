@@ -1,0 +1,32 @@
+
+# Appendix - Understanding Boolean Operators in the Context of `filter()`
+
+In the Chapter 5, I brushed over what the operators `<` and `&`, and `|` meant and what they were actually doing in R. Each of these operators are known as Boolean operators in R.
+
+Boolean operators are logical operators used in programming to combine or modify conditions, resulting in either **`TRUE`** or **`FALSE`** outcomes. In the context of data cleaning in R, Boolean operators help us construct conditions to select specific rows from a data frame based on certain criteria. When using **`filter()`**, R evaluates each row in the data frame against the specified conditions, determining whether each row meets the criteria and should be retained or not.
+
+## How Boolean Operators Work:
+
+-   **Logical AND (`&`):** The **`&`** operator evaluates to **`TRUE`** only if both conditions on either side of the operator are **`TRUE`**. In the context of **`filter()`**, rows are retained if they satisfy **all** conditions joined by **`&`**. For example, **`filter(df, x > 5 & y < 10)`** will retain rows where **`x`** is greater than **`5`** **and** **`y`** is less than **`10`**.
+
+-   **Logical OR (`|`):** The **`|`** operator evaluates to **`TRUE`** if **at least one** of the conditions on either side of the operator is **`TRUE`**. In the context of **`filter()`**, rows are retained if they satisfy **any** of the conditions joined by **`|`**. For example, **`filter(df, x > 5 | y < 10)`** will retain rows where **`x`** is greater than **`5`** **or** **`y`** is less than **`10`**.
+
+-   **Logical NOT (`!`):** The **`!`** operator negates a condition, converting **`TRUE`** to **`FALSE`** and vice versa. In the context of **`filter()`**, **`!`** can be used to exclude rows that satisfy a particular condition. For example, **`filter(df, !(x == 5))`** will exclude rows where **`x`** equals **`5`**.
+
+### Understanding R's Evaluation Process:
+
+When applying **`filter()`** with Boolean operators, R sequentially evaluates each row in the data frame against the specified conditions. If a row satisfies **all** conditions joined by **`&`**, or **any** condition joined by **`|`**, it is retained in the filtered data frame. Rows that do not meet the specified criteria are excluded from the output.
+
+The following table summarises the main Boolean operators we would use in R
+
+| Operator/Condition | Description                                                                   | Example                                                                                        |
+|----------------|-----------------------------------------|----------------|
+| `==`               | Checks if two values are equal.                                               | `x == 5` evaluates to `TRUE` if `x` equals `5`.                                                |
+| `!=`               | Checks if two values are not equal.                                           | `x != 5` evaluates to `TRUE` if `x` does not equal `5`.                                        |
+| `>`                | Checks if one value is greater than another.                                  | `x > 5` evaluates to `TRUE` if `x` is greater than `5`.                                        |
+| `<`                | Checks if one value is less than another.                                     | `x < 5` evaluates to `TRUE` if `x` is less than `5`.                                           |
+| `>=`               | Checks if one value is greater than or equal to another.                      | `x >= 5` evaluates to `TRUE` if `x` is greater than or equal to `5`.                           |
+| `<=`               | Checks if one value is less than or equal to another.                         | `x <= 5` evaluates to `TRUE` if `x` is less than or equal to `5`.                              |
+| `&`                | Logical AND operator; evaluates to `TRUE` only if both conditions are `TRUE`. | `(x > 5) & (y < 10)` evaluates to `TRUE` if `x` is greater than `5` AND `y` is less than `10`. |
+| `|`                | Logical OR operator; evaluates to `TRUE` if at least one condition is `TRUE`. | `(x > 5) \| (y < 10)` evaluates to `TRUE` if `x` is greater than `5` OR `y` is less than `10`. |
+| `!`                | Logical NOT operator; negates a condition.                                    | `!(x == 5)` evaluates to `TRUE` if `x` is not equal to `5`.                                    |

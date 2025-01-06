@@ -1,0 +1,2063 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Introduction to R},
+  pdfauthor={Ryan Donovan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Introduction to R}
+\author{Ryan Donovan}
+\date{2024-01-30}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+This set of workshops describes how to use R to import, clean, and process psychological data. All materials, data, and information in these workshops are used for educational purposes only. This document should only be shared within the University of Galway's School of Psychology and is not intended for widespread dissemination. The workshop's e-book is very much in its draft stages and will be updated and fine-tuned in the future. Several materials are adapted from various online resources on teaching R.
+
+\hypertarget{who-is-this-resource-for}{%
+\section{Who is this resource for?}\label{who-is-this-resource-for}}
+
+These workshops are designed to help people who come from a psychology or social science background learn the necessary programming skills to use R effectively in their research. These workshops are intended for individuals with no programming experience whatsoever, teaching the necessary programming skills and ideas required to conduct statistical techniques in psychology (e.g., Power Analyses, Correlation, ANOVA, Regression, Mediation, Moderation).
+
+These workshops are \textbf{not} for people interested in learning about statistical theory or the who, what, where's of any of the aforementioned statistical techniques. I want these workshops to focus entirely on how to perform statistical analyses in R; I assume you know the rest or know how to access that information.
+
+\hypertarget{should-i-learn-r}{%
+\section{Should I learn R?}\label{should-i-learn-r}}
+
+There are many reasons to learn R.
+
+Psychological research is increasingly moving towards open-science practices. One of the key principles of open-science is that all aspects of data handling - including data wrangling, pre-processing, processing, and output generation - are openly accessible. This is not only an abstract want or desire; several top-tier journals require that you submit R scripts along with any manuscripts. If you don't know how to use R (or at least no one in your lab does), then this will put you at a disadvantage.
+
+R enables you to import, clean, analyze, and publish manuscripts from R itself. You do not have to switch between SPSS, Excel, and Word or any other software. You can conduct your statistical analysis directly in R and have that ``uploaded'' directly to your manuscript. In the long run, this will save you so much time and energy.
+
+R is capable of more than statistical analysis. You can create websites, documents, and books in R. This workshop textbook was developed in R! While these initial workshops will not be discussing how to do this (although it is something that I would like to do in the future), I wanted to mention it as an example of how powerful R can be.
+
+\hypertarget{what-will-i-learn-to-do-in-r}{%
+\section{What will I learn to do in R?}\label{what-will-i-learn-to-do-in-r}}
+
+The following workshops will teach you how to conduct statistical analysis in R.
+
+R is a statistical programming language that enables you to wrangle, process, and analyze data. By the end of these workshops, you should be able to import a data file into R, do some processing and cleaning, compute descriptive and inferential statistics, generate nice visualizations, and output your results.
+
+The learning objectives of this course are:
+
+\begin{itemize}
+\tightlist
+\item
+  Learn how to import and create datasets in R.
+\item
+  Learn and apply basic programming concepts such as data types, functions, and loops.
+\item
+  Learn key techniques for data cleaning in R to enable statistical analysis.
+\item
+  Learn how to create APA-standard graphs in R.
+\item
+  Learn how to deal with errors or bugs with R code.
+\item
+  Learn how to export data.
+\end{itemize}
+
+\hypertarget{what-will-i-not-learn-to-do-in-r}{%
+\section{What will I not learn to do in R?}\label{what-will-i-not-learn-to-do-in-r}}
+
+This is not an exhaustive introduction to R. Similar to human languages, programming languages like R are vast and will take years to master. After this course, you will still be considered a ``newbie'' in R. But the material covered here will at least provide you a solid foundation in R, enabling you to go ahead and pick up further skills if required as you go on.
+
+This course will teach you data cleaning and wrangling skills that will enable you to wrangle and clean a lot of data collected on Gorilla or Qualtrics. But you will not be able to easily handle all data cleaning problems you are likely to find out in the ``wild'' world of messy data. Such datasets can be uniquely messy, and even experienced R programmers will need to bash their head against the wall a few times to figure out a way to clean that dataset entirely in R. If you have a particularly messy dataset, you might still need to use other programs (e.g., Excel) to clean it up first before importing it to R.
+
+Similarly, do not expect to be fluent in the concepts you learn here after these workshops. It will take practice to become fluent. You might need to refer to these materials or look up help repeatedly when using R on real-life datasets. That's normal.
+
+This workshop is heavily focused on the tidyverse approach to R. The tidyverse is a particular philosophical approach to how to use R (more on that later). The other approach would be to use base R. This can incite violent debates in R communities on which approach is better. We will focus mainly on tidyverse and use some base R.
+
+This workshop does not teach you how to use R Markdown. R Markdown is a package in R that enables you to write reproducible and dynamic reports with R that can be converted into Word documents, PDFs, websites, PowerPoint presentations, books, and much more. That will be covered in the intermediate workshop program.
+
+\hypertarget{where-and-when-will-the-workshops-take-place}{%
+\section{Where and when will the workshops take place?}\label{where-and-when-will-the-workshops-take-place}}
+
+The sessions will take place in \textbf{AMB-G035} (Psychology PC Suite). The schedule for the sessions is as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  Feb 7th: Introduction to R and RStudio
+\item
+  Feb 14th: Basic Programming (Part I)
+\item
+  Feb 21st: Basic Programming (Part II)
+\item
+  Feb 28th: Data Cleaning in R (Part I)
+\item
+  March 6th: Data Cleaning in R (Part II)
+\item
+  March 13th: Data Visualization
+\item
+  March 20th: Running Inferential Statistical Tests in R (Part I)
+\item
+  March 27th: Running Inferential Statistical Tests in R (Part II)
+\end{itemize}
+
+Each session is on a Wednesday and will run between 11:00 - 13:00.
+
+\hypertarget{are-there-any-prerequisites-for-taking-this-course}{%
+\section{Are there any prerequisites for taking this course?}\label{are-there-any-prerequisites-for-taking-this-course}}
+
+None at all. This course is beginner-friendly. You also do not need to purchase anything (e.g., textbooks or software).
+
+\hypertarget{do-i-need-to-bring-a-laptop-to-the-class}{%
+\section{Do I need to bring a laptop to the class?}\label{do-i-need-to-bring-a-laptop-to-the-class}}
+
+If you have a laptop that you work on, I strongly encourage you to bring it. That way, we can get R and RStudio installed onto your laptop, and you'll be able to run R outside of the classroom.
+
+If you work with a desktop, don't worry. The lab space will have computers that you can sign in and work on and use R.
+
+\hypertarget{rstudio}{%
+\chapter{Getting Started with R and RStudio}\label{rstudio}}
+
+This workshop introduces the programming language R and the RStudio application. Today, we will download both R and RStudio, set up our RStudio environment, and write and run our first piece of R Code. This will set us up for the rest of the workshops.
+
+\hypertarget{what-actually-is-r}{%
+\section{What actually is R?}\label{what-actually-is-r}}
+
+R is a statistical programming language that enables us to directly ask our computer to carry out tasks. Typically, when we use our computers, we do not speak to it directly; instead we interact with ``translators'' (i.e., applications like SPSS), via button-click interfaces, to speak to our computer on our behalf. Such interfaces record and translate our instructions to our computers, who then carry out the instructions and return the results to the application, which then translates those results back to us.
+
+Applications like SPSS are convenient. They usually have a user-friendly button-click based interface and take away the heavy lifting of communicating with our computer. This makes them significantly easier to learn in the short term compared to programming languages.
+
+However, these apps also limit what we can do. For example, base SPSS is functional when it comes to creating visualizations, but it is difficult make major changes to your graph (e.g., making it interactive). If we want to create such visualizations, we will likely need to look elsewhere for it. Similarly, we might also be financially limited in our ability to use such apps, as proprietary software like SPSS is not cheap (\href{https://www.ibm.com/products/spss-statistics/pricing}{it can cost between \$3830 - 25200 for a single licence depending on the version})!
+
+In contrast, R is a free, open-source statistical programming language that enables us to conduct comprehensive statistical analysis and create highly elegant visualizations. By learning R we can cut out the middle man.
+
+\begin{figure}
+\centering
+\includegraphics{img/01-bbc.png}
+\caption{\label{fig:unnamed-chunk-1}BBC graphs created in R.}
+\end{figure}
+
+But why should we learn R and not a different programming language? In contrast to other programming languages (Python, JavaScript, C), R was developed by statisticians. Consequently, R contains an extensive vocabulary to enable us to carry out sophisticated and precise statistical analysis. I have used R and Python to conduct statistical analysis and anytime I wanted to use a less frequently used statistical test, there was significantly more support and information on how to conduct that analysis in R than in Python. For such reasons, R is typically used among statisticians, social scientists, data miners, and bioinformaticians - and will be used in this course\footnote{There are always tradeoffs in selecting a language. Many programming concepts are easier to grasp in Python than in R. Similarly, there is a lot of resources available for conducting machine-learning analysis in Python.
+
+  But if you are goal is conduct data cleaning, analysis, visualization, and reporting, then R is a excellent choice. The good thing is that once you achieve a certain level of competency in one programming language, you will find it significantly easier to pick up a following one.}.
+
+\hypertarget{downloading-r}{%
+\section{Downloading R}\label{downloading-r}}
+
+Please follow the following instructions to download R on either Windows or Mac.
+
+\hypertarget{downloading-r-on-windows}{%
+\subsection{Downloading R on Windows}\label{downloading-r-on-windows}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Go to the website: \url{https://cran.r-project.org/}
+\item
+  Under the heading \emph{Download and Install R,} click \emph{Download R for Windows} \includegraphics[width=29.20833in,height=\textheight]{img/01-cran.png}
+\item
+  Click the hyperlink \textbf{\emph{base}} or \textbf{\emph{install R for the first Time}}\includegraphics{img/01-base.png}
+\item
+  Click Download R-4.3.2 for Windows (depending on the date you accessed this, the version of R might have been been updated. That's okay, you can download newer versions). Let the file download. \includegraphics{img/01-download.png}
+\item
+  Once the file has been downloaded, open it, and click ``Yes'' if you are asked to allow this app to make changes to your device. Then choose English as your setup language. The file name should be something like ``R-4.3.2.-win''. The numbers will differ depending on the specific version that was downloaded.
+\item
+  Agree to the terms and conditions and select a place to install R. It is perfectly fine to go with the default option.
+\end{enumerate}
+
+\hypertarget{downloading-r-on-mac}{%
+\subsection{Downloading R on Mac}\label{downloading-r-on-mac}}
+
+The instructions are largely the same for Windows. Please see this guide for more information \url{https://teacherscollege.screenstepslive.com/a/1135059-install-r-and-r-studio-for-mac}
+
+\hypertarget{install-and-open-r-studio}{%
+\section{Install and Open R Studio}\label{install-and-open-r-studio}}
+
+Once R is installed, we will install RStudio.
+
+RStudio is a front-end program that makes it it much more user-friendly to use R without sacrificing our ability to code in R. R Studio will enable us to write and save R code, generate plots, manage our files, and do other useful things. RStudio relationship to R is similar to the relationship between a basic text editor and Microsoft Word. We could write a paper in a text editor, but it is much quicker and more efficient to use Word.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{NB:} Make sure that R is installed \textbf{\emph{before}} trying to install R Studio.
+\item
+  Go to the RStudio website: \url{https://posit.co/download/rstudio-desktop/}
+\item
+  The website should automatically detect your operating system. Click the \textbf{\emph{Download RStudio Desktop}} button. \includegraphics[width=7.1875in,height=\textheight]{img/01-rstudiodownload.png}
+\end{enumerate}
+
+Once the file is downloaded, open it and allow it to make changes to your device. Then follow the instructions to download the program. I recommend going with all default options here.
+
+After downloading both R and RStudio, open RStudio on your computer. You do not have to open R as RStudio will work with R (if everything is working correctly).
+
+When you first open RStudio, you will see three panes or ``windows'' in R Studio: ``Console'' (left) ``Environment'' (top right), and ``Files'' (bottom right).
+
+\includegraphics{img/rstudio_first.png}
+
+\hypertarget{creating-an-r-project}{%
+\section{Creating an R Project}\label{creating-an-r-project}}
+
+The first thing we will do in RStudio is create a \emph{R Project}. R Projects are environments that will group together input files (e.g., data sets), analyses on those files (e.g., code), and any outputs (e.g., results or plots). Creating an R Project will set up a new directory (folder) on your computer. Any time you open that project, you are telling R to work within this particular directory.
+
+\textbf{\emph{Activity}}
+
+Let's create an R Project that we will use during these workshops.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Click ``File'' in the top left hand corner of RStudio-\textgreater{} then click new ``New Project''
+\item
+  The ``New Project Wizard'' screen will pop up. Click ``New Directory'' -\textgreater{} ``New Project''
+\item
+  In the ``Create New Project'' screen, there are four options.
+\end{enumerate}
+
+\textbf{Option 1}: The ``Directory name'' options sets the name of the project and associated folder.
+
+\begin{itemize}
+\item
+  You can set this to whatever you want. \textbf{\emph{Just don't set it to ``R'',}} as this can create problems down the line.
+\item
+  I \textbf{\emph{recommend}} that you set the same directory name as me - \textbf{\emph{introR\_2024}}
+\end{itemize}
+
+\textbf{Option 2}: The ``Create project as sub-directory of'' option selects a place to store this project on your computer.
+
+\begin{itemize}
+\item
+  You can save this anywhere else you like (e.g., your Desktop). Just make sure to save somewhere you can find and somewhere that will not change location (e.g., if you save folders to your desktop, but then tend to move them elsewhere once it gets cluttered, then do not save it to your desktop).
+\item
+  My recommendation would be to create a folder called ``R\_Programming'' on your desktop. And then save your project in this folder.
+\item
+  Regardless of where you save your project, copy the location and paste it somewhere you can check (e.g., into a text file)
+\end{itemize}
+
+\textbf{Option 3}: The ``Use renv with this project'' option enables you to create a virtual environment for this project that will be separate to other R projects. Don't worry for now about what that means, it will be explained later on.
+
+\begin{itemize}
+\tightlist
+\item
+  Tick this option.
+\end{itemize}
+
+\textbf{Option 4:} The ``Open in new session'' just opens a new window on RStudio for this project.
+
+\begin{itemize}
+\tightlist
+\item
+  Tick this option.
+\end{itemize}
+
+You can see my example below. Once you're happy with your input for each option, click ``Create Project'' This will open up the project introR\_2024.
+
+\begin{figure}
+\centering
+\includegraphics{img/01-newproject.png}
+\caption{\label{fig:unnamed-chunk-2}New Project Set Up}
+\end{figure}
+
+\hypertarget{navigating-rstudio}{%
+\subsection{Navigating RStudio}\label{navigating-rstudio}}
+
+In our new project, introR\_2024, we are going to open the ``Source'' pane, which we will often use for writing code, and viewing datasets.
+
+There are a variety of ways to open the Source pane.
+
+\textbf{Button approach}: Click the ``File'' tab in the top-left hand corner (not the File pane) -\textgreater{} Click ``New File'' -\textgreater{} ``R Script''
+
+\includegraphics{img/rstudio_create_file.png}
+
+\textbf{\emph{Button Shortcut}}: directly underneath the \emph{File} tab, there is an icon of a white sheet with a green and white addition symbol. You can click that too.
+
+\textbf{Keyboard Shortcut:} You can press ``Ctrl'' + ``Shift'' and ``N'' on Windows. Or ``Cmd'' + ``Shift'' + ``N'' on Mac.
+
+Now you should see your four panes: Source, Console, Environment, and Files.
+
+\includegraphics{img/01-four-panes.png}
+
+\hypertarget{the-rstudio-workspace}{%
+\subsubsection{The RStudio Workspace}\label{the-rstudio-workspace}}
+
+Now that we have each pane opened, let's briefly describe what each pane is for.
+
+\begin{itemize}
+\item
+  The \textbf{\emph{Source Pane}} is where you will write R scripts. R scripts enable you to write, save, and run R code in a structured format. For example, you might have an R script titled ``Descriptive'' which contains the code you need to compute descriptive statistics on your data set. Similarly, you might have another R script titled ``Regression'' that contains the code for computing your regression analyses in R.
+\item
+  The \textbf{\emph{Console Pane}} is where you can write R code or enter commands into R. The console is also where you can find several outputs from your R scripts. For example, if you create a script for running a t-test in R, then the results can be found in the Console Pane. You will also find any error or warning messages about any code that you run (e.g., if you make a mistake in your R code) highlighted in the console. In short, the console is where R is actually running.
+\item
+  The \textbf{\emph{Environment Pane}} is where you will find information on any data sets and variables that you import or create in R within a bespoke R project. The ``History'' tab will contain a history of any R code that you run during the project. This pane is really useful for getting a bird-eye's view of a project (which can be really useful if you are returning to a project after a long period of time or you are looking at someone's else code).
+\item
+  The \textbf{\emph{Files Pane}} is where you find your R project files (in the Files tab), the output of any plots that you create (Plots tab), the status of any downloaded packages (Packages tab), and information and helpful information about R functions and packages (Help).
+\end{itemize}
+
+Each pane will be used extensively during these workshops.
+
+\hypertarget{checking-our-working-directory}{%
+\subsection{Checking our Working Directory}\label{checking-our-working-directory}}
+
+Everytime you open up a project or file in RStudio, it is good practice to check the working directory. The working directory is the environment on our computer that R is currently operating in.
+
+You want the working directory to be in the same location as your R project. That way any files you import into RStudio or any files you export (datasets, results, graphs) can easily be found in your R project folder. A lot of problems can be avoided in R by making sure that you check the working directory. To check the working directory, type the following into the console pane
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C:/Users/0131045s/Desktop/Programming/R/Workshops/rintro"
+\end{verbatim}
+
+What you get in return is the current working directory R is working in. Your working directory will not be the same as mine, that's perfectly normal. Just check to make sure that is in the same location you specified when you created your project (\textbf{Option 2}).
+
+\hypertarget{set_wd}{%
+\subsection{Setting up a new Working Directory}\label{set_wd}}
+
+We are going to slightly change our working directory. In our R Project, we are going to create a folder for week1 of the workshop. Anything that we create in R will then be saved into this week1 folder.
+
+\begin{itemize}
+\tightlist
+\item
+  Click ``Session'' on your RStudio toolbar -\textgreater{} Set Working Directory -\textgreater{} Choose Directory
+\end{itemize}
+
+\includegraphics{img/01-wd.png}
+
+\begin{itemize}
+\item
+  By default you should be in your R Project (e.g., Rintro\_2024).
+\item
+  Within this R Project, create a new folder and call it ``week1''
+\item
+  Click ``week1'' and then click Open
+\end{itemize}
+
+\includegraphics{img/01-new_wd.png}
+
+You should see something like the following in your console
+
+\begin{verbatim}
+> setwd("C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week1")
+\end{verbatim}
+
+Check whether this is actually the location you want to store your files for this course. If it is, we are good to go. If not, then let me know.
+
+\hypertarget{writing-our-first-r-code}{%
+\section{Writing our first R Code}\label{writing-our-first-r-code}}
+
+Let's write our first line of R code in the \textbf{\emph{console}}. The R console uses the operator ``\textgreater{}'' to indicate that it is ready for a new line of code.
+
+Type in the each of the following instructions (after the ´\textgreater´ operator) and press enter. Feel free to change the second line of code to add your own name.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"Hello World"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Hello World"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"My name is Ryan and I am learning to code in R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "My name is Ryan and I am learning to code in R"
+\end{verbatim}
+
+Congratulations, you've written your first piece of code!
+
+Let's describe what is going on here. We used a function called \texttt{print()} to print the words ``Hello World'' and ``My name is Ryan and I am learning to code in R'' in the console. Functions are equivalent to verbs in English language - they describe doing things. In this case, R sees the function print - then it looks inside the bracket to see what we want to print, and then it goes ahead and prints it. Pretty straightforward.
+
+Functions are a very important programming concept, and there is a lot more going on under the hood than I have described so far - so we will be returning to functions repeatedly and filling you in with more information. But in essence functions are verbs that enable us to tell our computer to carry out specific actions on objects.
+
+\hypertarget{console-vs-source-script}{%
+\section{Console vs Source Script}\label{console-vs-source-script}}
+
+You might have noticed that I asked you to write code in the console rather than in the source pane. It's worth discussing here what the differences are between the console and the script when it comes to writing code.
+
+The console is like the immediate chat with R. It's where you can type and execute single lines of code instantly. Imagine it as a friendly conversation where you ask R to do something, and it responds right away. The console is great for experimenting and getting instant feedback. It's your interactive playground, perfect for spontaneous interactions with R.
+
+The console is also really useful for performing quick calculations, testing functions or pieces of code, and for running code that should run once and only once.
+
+However, the console is cumbersome to use if we want to write code that is several lines long and/or when we want to structure or save our code. This is where R scripts come in.
+
+R scripts are text files where we can write R code in a structured manner. Scripts enable us to structure our code (e.g., with headings and instructions), write several pieces of code, and save and rerun code easily. If you think of your console as a draft, then your script is for the code that you want to keep.
+
+From now on, whenever we write code, we are going to be using R scripts by default. For the times we will write code in the console, I will let you know beforehand.
+
+\hypertarget{lets-write-some-statistical-code}{%
+\section{Let's write some statistical code}\label{lets-write-some-statistical-code}}
+
+Okay we have talked a lot about R and RStudio. To finish off this session, let's write code that will take a data set, calculate some descriptive statistics, run an inferential test, generate a graph, and save our results. Don't worry if you do not understand any of the following code. Just follow along and type it yourself in the R script we opened up earlier (if it's not open, click ``File'' -\textgreater{} ``New File'' -\textgreater{} ``RScript''). Once you have created this script, save it as ``01-paired-t-tests''.
+
+When you download R, you will have automatic access to several functions (e.g., print) and data sets. One of these data sets are called sleep, which we are going to use right now. To learn more about the sleep data set, type \texttt{?sleep} into the console. You will find more information on the data sets in the Files pane, under the Help tab.
+
+First let's have a look at the sleep data set by writing the following code in the R script. To run scripts in R, select the code you have written and click the Run button with the green arrow in the top right corner of the script.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(sleep) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    extra group ID
+## 1    0.7     1  1
+## 2   -1.6     1  2
+## 3   -0.2     1  3
+## 4   -1.2     1  4
+## 5   -0.1     1  5
+## 6    3.4     1  6
+## 7    3.7     1  7
+## 8    0.8     1  8
+## 9    0.0     1  9
+## 10   2.0     1 10
+## 11   1.9     2  1
+## 12   0.8     2  2
+## 13   1.1     2  3
+## 14   0.1     2  4
+## 15  -0.1     2  5
+## 16   4.4     2  6
+## 17   5.5     2  7
+## 18   1.6     2  8
+## 19   4.6     2  9
+## 20   3.4     2 10
+\end{verbatim}
+
+The \texttt{print()} function here prints out the sleep data set in the console. There are also other ways to view a data set, such as using the functions \texttt{head()}, \texttt{tail()} \texttt{View()}, and \texttt{str()}. Type these in the console (make sure to put \texttt{sleep} inside the brackets) and see what results you get.
+
+The result of \texttt{print(sleep)} shows us there are 20 observations in the dataset (rows), with three difference variables (columns): extra (hours of extra sleep each participant had), group (which treatment they were taken), and ID (their participant ID).
+
+Now let's calculate some descriptive statistics. One we can do this is by using the summary() function. This function takes in an an object (e.g., like a data set) and summaries the data. Write the following in your R script and press run.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(sleep) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      extra        group        ID   
+##  Min.   :-1.600   1:10   1      :2  
+##  1st Qu.:-0.025   2:10   2      :2  
+##  Median : 0.950          3      :2  
+##  Mean   : 1.540          4      :2  
+##  3rd Qu.: 3.400          5      :2  
+##  Max.   : 5.500          6      :2  
+##                          (Other):8
+\end{verbatim}
+
+Running \texttt{summary(sleep)} shows us descriptive statistics for each of our variables. We can see that the mean change in hours of sleep were +1.5, and that there was 10 participants within both the control and experimental condition.
+
+But it's not exactly what we need. Firstly, we don't need summary descriptive on the participant ID. Secondly, it only tells us the mean the entire sample, whereas we want the mean score per each treatment group. To get this information we can use the \texttt{aggregate()} function, which enables us to split our data into subset and then compute summary statistics per group. Remember to press run after you written your code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#The code inside the aggregate bracket tells our computer to: }
+\CommentTok{\# data = sleep {-}\textgreater{} Go to the sleep data set}
+
+\CommentTok{\#extra \textasciitilde{} group {-}\textgreater{} Take the variable "extra" and split it into subsets based on the variable "group"}
+
+\CommentTok{\# FUN = mean {-}\textgreater{} Apply the mean() function (FUN) on each subset }
+
+\FunctionTok{aggregate}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sleep, extra }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group, }\AttributeTok{FUN =}\NormalTok{ mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   group extra
+## 1     1  0.75
+## 2     2  2.33
+\end{verbatim}
+
+That's more like it. Now we can see that there does seem to a difference between treatment1 and treatment2. Participants slept an extra 2.33 hours on average when taking treatment 2, whereas they only slept .75 hours (e.g., 45 minutes) more on average when taking treatment 1. So treatment 2 does seem more effective.
+
+Let's run a paired-samples t-test to see if those differences are significant (I have assumed all parametric assumptions are correct).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(sleep}\SpecialCharTok{$}\NormalTok{extra[sleep}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \DecValTok{1}\NormalTok{], }\CommentTok{\#this code extracts the group 1 scores}
+\NormalTok{       sleep}\SpecialCharTok{$}\NormalTok{extra[sleep}\SpecialCharTok{$}\NormalTok{group }\SpecialCharTok{==} \DecValTok{2}\NormalTok{], }\CommentTok{\# this code extracts group 2 scores}
+       \AttributeTok{paired =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\#this code tells R to run a paired t{-}test, not between/independent t{-}test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Paired t-test
+## 
+## data:  sleep$extra[sleep$group == 1] and sleep$extra[sleep$group == 2]
+## t = -4.0621, df = 9, p-value = 0.002833
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -2.4598858 -0.7001142
+## sample estimates:
+## mean difference 
+##           -1.58
+\end{verbatim}
+
+Boom! We can see there is a statistically significant difference between the two groups. I know the code within the t-test might look a bit complicated, but we will break it down and explain it as we go on in further weeks.
+
+Finally let's visualize our data with the plot() function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(sleep}\SpecialCharTok{$}\NormalTok{group, sleep}\SpecialCharTok{$}\NormalTok{extra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{gitbook-demo_files/figure-latex/unnamed-chunk-8-1.pdf}
+\caption{\label{fig:unnamed-chunk-8}Generic Boxplot}
+\end{figure}
+
+The plot() function is an example of a generic function, which means it's a function that will try to adapt to our code. In this case, the plot() function looks at the variables we wants to plot, and identifies that the box plot is the most appropriate way to plot it.
+
+Now this plot is perfectly adequate for a first viewing, but let's make it a bit more instructive by adding labels to the x and y axis, and by adding a title to it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#xlab = creates a label for the x{-}axis  }
+
+\CommentTok{\#ylab = creates a title for the y{-}axis  }
+
+\CommentTok{\#main = creates a title for the plot  }
+
+
+
+\FunctionTok{plot}\NormalTok{(sleep}\SpecialCharTok{$}\NormalTok{group, sleep}\SpecialCharTok{$}\NormalTok{extra, }\AttributeTok{xlab =} \StringTok{"Treatment"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Hours of Sleep"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Effect of Treament on Sleep Duration"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{gitbook-demo_files/figure-latex/unnamed-chunk-9-1.pdf}
+\caption{\label{fig:unnamed-chunk-9}Generic Boxplot with appropriate labelling}
+\end{figure}
+
+Now let's take this plot and save it to a PDF so that we could share our results with others. The standard way of doing this in R is a bit cumbersome. We have to tell R that we are about to create a plot that we want to make into a PDF. Then we have to generate the plot. Then we have to tell R we are done with creating the PDF. We'll learn a MUCH simpler way to do this in future weeks, but this will do for now.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pdf}\NormalTok{(}\AttributeTok{file =} \StringTok{"myplot.pdf"}\NormalTok{) }\CommentTok{\#Tells R that we will create a pdf file called "my\_plot" in our working directory}
+
+\FunctionTok{plot}\NormalTok{(sleep}\SpecialCharTok{$}\NormalTok{group, sleep}\SpecialCharTok{$}\NormalTok{extra, }\AttributeTok{xlab =} \StringTok{"Treatment"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Hours of Sleep"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Effect of Treament on Sleep Duration"}\NormalTok{)  }\CommentTok{\#this will save the plot to our pdf}
+
+
+\FunctionTok{dev.off}\NormalTok{() }\CommentTok{\#this tells R that we are done with adding stuff to our PDF}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## pdf 
+##   2
+\end{verbatim}
+
+Go to the files pane, and open up the pdf ``myplot.pdf''. It should be in your working directory. Open it up the PDF and have a look at your graph\footnote{This is a fairly generic type of graph offered by base R. During the course we will looking at ways we can create ``sexier'' and more APA friendly type of graphs. But for one line of code, it's not bad!}.
+
+\hypertarget{comments}{%
+\subsection{Comments}\label{comments}}
+
+Last concept before we finish. You might have noticed that I wrote several things with a \texttt{\#} before them. These are known as comments. Comments are any piece of text that will be ignored by R (i.e., they will not be executed within the console). They are fundamental to writing clear code.
+
+We create comments using \texttt{\#} symbol. This symbol tells R to ignore whatever comes directly \textbf{\emph{afterwards}}.
+
+There are various reasons for using comments.
+
+\begin{figure}
+\centering
+\includegraphics{img/03-comments.png}
+\caption{\label{fig:unnamed-chunk-11}Four Examples of Comments Use}
+\end{figure}
+
+In the above figure, you'll see four different types of comments.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The first type of comment provides a quick introduction to the R script. It can be really useful here to provide a clear information on what this script is trying to do (e.g., run a paired samples t-test), what data it is working on (the sleep dataset), and who wrote or developed this script. This makes it significantly easier for anyone who might be reviewing your work or trying to apply your code to their own work to understand what is going on.
+\item
+  The second type of comment structures the format of the script by providing headings or steps. Again, this just makes it easier to understand what is going on.
+\item
+  The third type of comment is placed before the summary. This means that code \texttt{summary(sleep)} will not be executed in R. Why would we do this? If you remember last week, we wanted to compute the mean per each of our two treatment groups, which the summary function does not enable us to do, so it's not part of our main analysis. So why keep it? Well it still provides us with valuable information (e.g., mean, median, min, max for the entire sample), so rather than delete it, we'll just put a comment in front of it. And if anytime we want to check these descriptives, we can just remove the \texttt{\#} and run that line of code.
+\item
+  The fourth type of comment provides some context or information on what a specific line of code is doing, namely, what the \texttt{aggregate()} function does. Again, this is really useful, particularly if you are using functions that are now well known.
+\end{enumerate}
+
+Comments are extremely useful for orientating yourself to code. My advice would be to comment as much as your code as you. Anyone who has coded will have experience the following situation - You spend days/weeks writing a piece of code to clean a messy data set and run a specialized type of analysis. Several months go by and you need to return to your data set (pesky reviewer \#2 wants you change something). You open up your R script and you are \textbf{\emph{completely lost}}. You have written no comments, so you have to spend days trying to remember what each piece of code was trying to do.
+
+If you comment a lot, it will save you so much heartache in the future. And it will help you understand various code concepts better if you can explain them while you are using them. So comment, comment, comment!
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+There we have it! That completes our first session with R and RStudio. Today was more about getting to grips with the software R and RStudio, but we still got our first pieces of code written. Hopefully it's given you a tiny glimpse into what R can do.
+
+In the next two sessions, we will learn basic programming concepts and how to import data in R.
+
+\hypertarget{programming1}{%
+\chapter{Basic R Programming (Part I)}\label{programming1}}
+
+Today, we are going to explore fundamental programming concepts in R. By the end of this session, you should be capable of the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Running and troubleshooting commands in the R console.
+\item
+  Understanding different data types and when to use them.
+\item
+  Creating and using variables, and understanding best practices in naming variables.
+\item
+  Grasping data structures and how to construct them.
+\end{itemize}
+
+\hypertarget{activity-1-set-up-your-working-directory}{%
+\section{Activity 1: Set up your Working Directory}\label{activity-1-set-up-your-working-directory}}
+
+It's good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you'll work on in a session. Last week I showed you how to do this using \protect\hyperlink{set_wd}{a button-and-click interface}.
+
+Using those instructions, create a folder called ``Week2'' in the \texttt{rintro} project folder and set it as your working directory. Use the ´getwd()´ to check that it has been set as your working directory. Your output should be something like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \FunctionTok{setwd}\NormalTok{(}\StringTok{"C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro\_2024/week2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{using-the-console}{%
+\section{Using the Console}\label{using-the-console}}
+
+In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running ``dirty'' quick code to test ideas, or code that we would run once.
+
+That distinction is kinda true, but it's not completely true. In reality, when we write a script we are preparing \textbf{\emph{commands}} for R to \textbf{\emph{execute}} in the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).
+
+It's important to know how to work the R console, even if we mostly use scripts in these workshops. We don't want the chef to spit on our food.
+
+\hypertarget{typing-commands-in-the-console}{%
+\subsection{Typing Commands in the Console}\label{typing-commands-in-the-console}}
+
+We can command the R console to perform calculations. When following along in RStudio, there's no need to type the \texttt{\textgreater{}} operator; it simply indicates that R is ready to execute a new command, which can be omitted for clarity.\footnote{Including the ``\textgreater{}'' is a pain when formatting this book, so I won't include ``\textgreater{}'' in examples of code from this point forward.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \DecValTok{10} \SpecialCharTok{+} \DecValTok{20}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{30}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \DecValTok{20} \SpecialCharTok{/} \DecValTok{10}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+When performing calculations in R, it's important to know that it follows the usual arithmetic convention of the order of operations (remember \href{https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272\#:~:text=\%E2\%80\%A2\%20BIMDAS\%20\%2D\%20Brackets\%2C\%20Indices\%2C,Multiplication\%2C\%20Division\%2C\%20Addition\%2C\%20Subtraction}{BIMDAS - Bracets, Indices, Multiplication, Division, Addition, and Subtraction?}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}}\NormalTok{ (}\DecValTok{20} \SpecialCharTok{+} \DecValTok{10} \SpecialCharTok{/} \DecValTok{10}\NormalTok{) }\SpecialCharTok{*} \DecValTok{4} 
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{84}
+
+\SpecialCharTok{\textgreater{}}\NormalTok{ ((}\DecValTok{20} \SpecialCharTok{+} \DecValTok{10}\NormalTok{) }\SpecialCharTok{/} \DecValTok{10}\NormalTok{) }\SpecialCharTok{*} \DecValTok{4}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+You may have noticed that the output of each code line we entered starts with a \textbf{\texttt{{[}1{]}}} before the actual result. What does this mean?
+
+This is how R labels and organizes its responses. Think of it as having a conversation with R, where every question you ask gets an answer. The square brackets with a number, like \textbf{\texttt{{[}1{]}}}, serve as labels on each response, indicating which answer corresponds to which question. This is R \textbf{\emph{indexing}} its answer.
+
+In all the examples above, we asked R questions that have only 1 answer, which is why the output is always \textbf{\texttt{{[}1{]}}}. Look what happens when I ask R to print out multiple answers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(sleep}\SpecialCharTok{$}\NormalTok{extra) }\CommentTok{\#this will print out the extra sleep column in the sleep dataset we used last week}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  0.7 -1.6 -0.2 -1.2 -0.1  3.4  3.7  0.8  0.0  2.0  1.9  0.8  1.1  0.1 -0.1
+## [16]  4.4  5.5  1.6  4.6  3.4
+\end{verbatim}
+
+Here R tells us that the first answer (i.e., value) corresponds to \texttt{0.1}. The next label is \texttt{{[}16{]}}. which tells us that the 16th answer corresponds to 5.5.
+
+But why does it only show the \texttt{{[}1{]}} and \texttt{{[}16{]}}th index? If you run this code in your console, you might actually see a different number than \texttt{{[}16{]}} depending on wide your console is on your device.
+
+This is because R only prints out the index when a new row of data is needed in the console. If there were indexes for every single answer, it would clutter the console with unnecessary information. So R uses new rows as a method for deciding when to show us another index.
+
+We'll delve deeper into indexing later in this session; it's a highly useful concept in R.
+
+\hypertarget{console-syntax-aka-im-ron-burgundy}{%
+\subsection{Console Syntax (Aka ``I'm Ron Burgundy?'')}\label{console-syntax-aka-im-ron-burgundy}}
+
+\hypertarget{r-console-and-typos}{%
+\subsubsection{R Console and Typos}\label{r-console-and-typos}}
+
+One of the most important things you need to know when you are programming, is that you need to type \emph{exactly} what you want R to do. If you make a mistake (e.g., a typo), R won't attempt to decipher your intention. For instance, consider the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \DecValTok{10} \OtherTok{=} \DecValTok{20}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in 10 = 20: invalid (do_set) left-hand side to assignment
+\end{verbatim}
+
+R interprets this as you claiming that 10 equals 20, which is not true. Consequently, R panics and refuses to execute your command. Now any person looking at your code would guess that since \texttt{+} and \texttt{=} are on the same key on our keyboards, you probably meant to type \texttt{10\ +\ 20}. But that's because we have a strong theory of mind, whereas programming languages do not.
+
+So be exact with your code or else be \href{https://www.youtube.com/watch?v=X3zfP14pLxc}{Ron Burgundy?}.
+
+On the grand scheme of mistakes though, this type of mistake is relatively harmless because R will tell us immediately that something is wrong and stop us from doing anything.
+
+However, there are silent types of mistakes that are more challenging to resolve. Imagine you typed \texttt{-} instead of \texttt{+}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}} \DecValTok{10} \SpecialCharTok{{-}} \DecValTok{20}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{{-}}\DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+In this scenario, R will runs the code and produces the output. This is because the code still makes sense; it is perfectly legitimate to subtract 20 away from 10. R doesn't know you actually meant to add \texttt{10} to \texttt{20}. All it can see is three objects \texttt{10}, \texttt{-}, and \texttt{20} in a logical order, so it executes the command. In this relationship, you're the one in charge.
+
+In short calculations like this, it's clear what you've typed wrong. However, if you have a long block of connected code with a typo like this, the result can significantly differ from what you intended, and it might be hard to spot.
+
+The primary way to check for these errors is to always review the output of your code. If it looks significantly different from what you expected, then this silent error may be the cause.
+
+I am not highlighting these issues to scare you, it's just important to know that big problems (R code not running or inaccurate results) can often be easily fixed by tiny changes.
+
+\hypertarget{r-console-and-incomplete-commands}{%
+\subsubsection{R Console and Incomplete Commands}\label{r-console-and-incomplete-commands}}
+
+I've been pretty mean to the console, but there are rare times it will be a good Samaritan. For example, if R thinks you haven't finished a command it will print out \texttt{+} to allow you to finish it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}}\NormalTok{ (}\DecValTok{20} \SpecialCharTok{+} \DecValTok{10}
+ 
+\SpecialCharTok{+}\NormalTok{ )}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{30}
+\end{Highlighting}
+\end{Shaded}
+
+So when you see ``+'' in the console, this is R telling you that something is missing. R won't let you enter a new command until you have finished with it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{20} \SpecialCharTok{+} \DecValTok{10}
+
+\SpecialCharTok{+} \CommentTok{\#if I press enter, it will keep appearing until I finish the code}
+\SpecialCharTok{+}
+\SpecialCharTok{+}
+\SpecialCharTok{+}
+\SpecialCharTok{+}
+\end{Highlighting}
+\end{Shaded}
+
+If nothing is missing, then this indicates that your code might not be correctly formatted. To break out of the endless loops of ``+'', press the \textbf{\emph{Esc}} key on your keyboard.
+
+\hypertarget{exercises}{%
+\subsection{Exercises}\label{exercises}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Practice performing basic calculations in R console. Calculate the following:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    25 multiplied by 4
+  \item
+    72 divided by 8 3
+  \item
+    0 multiplied by 4, and then divided by 2
+  \end{enumerate}
+\item
+  Imagine you want to calculate the average/mean of the following 5 numbers 15, 22, 18, 30, and 25. Use the R console to find the average.
+\item
+  If I type the following code, then I get the \texttt{+} operator, how can I fix it?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{\textgreater{}}\NormalTok{ (}\DecValTok{60} \SpecialCharTok{/} \DecValTok{100}
+   
+\SpecialCharTok{+}   
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-types}{%
+\section{Data Types}\label{data-types}}
+
+Our overarching goal for this course is to enable you to import your data into R, select the most relevant subset of data for analysis, conduct descriptive and statistical analysis, and create nice data visualizations. But it's important to consider \textbf{\emph{What is data and how is it stored in R?}}
+
+Data comes in various forms: numeric (integers and decimal values) or alphabetical (characters or lines of text). R has developed a system for categorizing this range of data into different data types.
+
+\hypertarget{basic-data-types-in-r}{%
+\section{Basic Data types in R}\label{basic-data-types-in-r}}
+
+R has 4 basic data types that are used 99\% of the time:
+
+\hypertarget{character}{%
+\subsection{Character}\label{character}}
+
+A character is anything enclosed within quotation marks. It is often referred to as a \emph{string}. Strings can contain any text within single or double quotation marks.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#we can use the class() function to check the data type of an object in R}
+
+\FunctionTok{class}\NormalTok{(}\StringTok{"a"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\StringTok{"cat"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+Numbers enclosed in quotation marks are also recognised as character types in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\StringTok{"3.14"}\NormalTok{) }\CommentTok{\#recognized as a character}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\StringTok{"2"}\NormalTok{) }\CommentTok{\#recognized as a character}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\FloatTok{2.13}\NormalTok{) }\CommentTok{\#not recognised as a character}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\hypertarget{numeric-or-double}{%
+\subsection{Numeric (or Double)}\label{numeric-or-double}}
+
+In R, the numeric data type represents all real numbers, with or without decimal value, such as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\DecValTok{33}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\FloatTok{33.33}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\hypertarget{integer}{%
+\subsection{Integer}\label{integer}}
+
+An integer is any real whole number without decimal points. We tell R to specify something as an integer by adding a capital ``L'' at the end.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(33L)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{1L)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(0L)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+You might wonder why R has a separate data type for integers when numeric/double data types can also represent integers. The very techincal and boring answer is that integers consume less memory in your computer compared to the numeric or double data types. `\texttt{33\ contains\ less\ information\ than\ 33.00}`. So, when dealing with very large datasets (in the millions) consisting exclusively of integers, using the integer data type can save substantial storage space.
+
+It's unlikely that you will need to use integers over numeric/doubles for your own research, but its good to be aware of just in case.
+
+\hypertarget{logical-otherwise-know-as-boolean}{%
+\subsection{Logical (otherwise know as Boolean)}\label{logical-otherwise-know-as-boolean}}
+
+The Logical data type has two possible values: \textbf{\texttt{TRUE}} and \textbf{\texttt{FALSE}}. In programming, we frequently need to handle conditions and make decisions based on whether specific conditions are true or false. For instance, did a student pass the exam? Is a p-value below 0.05?
+
+The Logical data type in R allows us to represent and work with these true or false values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "logical"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "logical"
+\end{verbatim}
+
+One important note is that it is case-sensitive, so typing any of the following will result in errors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(True)   }\CommentTok{\# Error: object \textquotesingle{}True\textquotesingle{} not found}
+\FunctionTok{class}\NormalTok{(False)  }\CommentTok{\# Error: object \textquotesingle{}False\textquotesingle{} not found}
+\FunctionTok{class}\NormalTok{(true)   }\CommentTok{\# Error: object \textquotesingle{}true\textquotesingle{} not found}
+\FunctionTok{class}\NormalTok{(false)  }\CommentTok{\# Error: object \textquotesingle{}false\textquotesingle{} not found}
+\end{Highlighting}
+\end{Shaded}
+
+The distinction between data types in programming is crucial because some operations are only applicable to specific data types. For example, mathematical operations like addition, subtraction, multiplication, and division are only meaningful for numeric and integer data types.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FloatTok{11.00} \SpecialCharTok{+} \FloatTok{3.23} \CommentTok{\#will work}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\FloatTok{14.23}
+
+
+\DecValTok{11} \SpecialCharTok{*} \DecValTok{10} \CommentTok{\#will work}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{120}
+
+\StringTok{"11"} \SpecialCharTok{+} \DecValTok{3} \CommentTok{\# gives error}
+
+\NormalTok{Error }\ControlFlowTok{in} \StringTok{"11"} \SpecialCharTok{+} \DecValTok{3} \SpecialCharTok{:}\NormalTok{ non}\SpecialCharTok{{-}}\NormalTok{numeric argument to binary operator}
+\end{Highlighting}
+\end{Shaded}
+
+This is an important consideration when debugging errors in R. It's not uncommon to encounter datasets where a column that should be numeric is incorrectly saved as a character. If you intend to perform a statistical operation on such a column (e.g., calculating the mean), you would first need to convert it to the numeric data type using the \textbf{\texttt{as.numeric()}} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.numeric}\NormalTok{(}\StringTok{"22"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 22
+\end{verbatim}
+
+The following functions enable you to convert one data type to another:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{as.character}\NormalTok{()  }\CommentTok{\# Converts to character}
+\FunctionTok{as.integer}\NormalTok{()    }\CommentTok{\# Converts to integer}
+\FunctionTok{as.logical}\NormalTok{()    }\CommentTok{\# Converts to logical}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{variables}{%
+\section{Variables}\label{variables}}
+
+Until now, the code we've used has been disposable; once you type it, you can only view its output. However, programming languages allow us to store information in objects called \textbf{\emph{variables.}}
+
+Variables are labels for pieces of information. Instead of running the same code to produce information each time, we can assign it to a variable. Let's say I have a character object that contains my name. I can save that character object to a variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name }\OtherTok{\textless{}{-}} \StringTok{"Ryan"}
+\end{Highlighting}
+\end{Shaded}
+
+To create a variable, we specify the variable's name (\textbf{\texttt{name}}), use the assignment operator (\textbf{\texttt{\textless{}-}}) to inform R that we're storing information in \textbf{\texttt{name}}, and finally, provide the data (in this case, the string ``Ryan''). Once we execute this code, every time R encounters the variable \textbf{\texttt{name}}, it will substitute it with ``Ryan.''
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Ryan"
+\end{verbatim}
+
+Some of you might have seen my email and thought, \emph{``Wait a minute, isn't your first name Brendan? You fraud!''} Before you grab your pitchforks, yes, you're technically correct. Fortunately, we can reassign our variable labels to new information.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{name }\OtherTok{\textless{}{-}} \StringTok{"Brendan"} \CommentTok{\#please don\textquotesingle{}t call me this}
+
+\FunctionTok{print}\NormalTok{(name)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Brendan"
+\end{verbatim}
+
+We can use variables to store information for each data types.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OtherTok{\textless{}{-}}\NormalTok{ 30L}
+
+\NormalTok{height }\OtherTok{\textless{}{-}} \DecValTok{175} \CommentTok{\#centimetre }
+
+\NormalTok{live\_in\_hot\_country }\OtherTok{\textless{}{-}} \ConstantTok{FALSE}
+
+\FunctionTok{print}\NormalTok{(age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(height)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 175
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(live\_in\_hot\_country)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{paste}\NormalTok{(}\StringTok{"My name is"}\NormalTok{, name, }\StringTok{"I am"}\NormalTok{, age, }\StringTok{"years old and I am"}\NormalTok{, height, }\StringTok{"cm tall. It is"}\NormalTok{, live\_in\_hot\_country, }\StringTok{"that I was born in a hot country"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "My name is Brendan I am 30 years old and I am 175 cm tall. It is FALSE that I was born in a hot country"
+\end{verbatim}
+
+We can use variables to perform calculations with their information. Suppose I have several variables representing my scores on five items measuring Extraversion (labeled \textbf{\texttt{extra1}} to \textbf{\texttt{extra5}}). I can use these variable names to calculate my total Extraversion score.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{extra1 }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{extra2 }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{extra3 }\OtherTok{\textless{}{-}} \DecValTok{4}
+\NormalTok{extra4 }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{extra5 }\OtherTok{\textless{}{-}} \DecValTok{3}
+
+\NormalTok{total\_extra }\OtherTok{\textless{}{-}}\NormalTok{ extra1 }\SpecialCharTok{+}\NormalTok{ extra2 }\SpecialCharTok{+}\NormalTok{ extra3 }\SpecialCharTok{+}\NormalTok{ extra4 }\SpecialCharTok{+}\NormalTok{ extra5}
+
+\FunctionTok{print}\NormalTok{(total\_extra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean\_extra }\OtherTok{\textless{}{-}}\NormalTok{  total\_extra}\SpecialCharTok{/}\DecValTok{5}
+
+\FunctionTok{print}\NormalTok{(mean\_extra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.4
+\end{verbatim}
+
+Variables are a powerful tool in programming, allowing us to create code that works across various situations.
+
+\hypertarget{whats-in-a-name-conventions-for-naming-variables}{%
+\subsection{What's in a name? (Conventions for Naming Variables)}\label{whats-in-a-name-conventions-for-naming-variables}}
+
+There are strict and recommended rules for naming variables that you should be aware of.
+
+\textbf{Strict Rules (Must follow to create a variable in R)}
+
+\begin{itemize}
+\item
+  Variable names can only contain uppercase alphabetic characters A-Z, lowercase a-z, numeric characters 0-9, periods \textbf{\texttt{.}}, and underscores \textbf{\texttt{\_}}.
+\item
+  Variable names must begin with a letter or a period (e.g., \textbf{\texttt{1st\_name}} or \textbf{\texttt{\_1stname}} is incorrect, while \textbf{\texttt{first\_name}} or \textbf{\texttt{.firstname}} is correct).
+\item
+  Avoid using spaces in variable names (\textbf{\texttt{my\ name}} is not allowed; use either \textbf{\texttt{my\_name}} or \textbf{\texttt{my.name}}).
+\item
+  Variable names are case-sensitive (\textbf{\texttt{my\_name}} is not the same as \textbf{\texttt{My\_name}}).
+\item
+  Variable names cannot include special words reserved by R (e.g., if, else, repeat, while, function, for, in, TRUE, FALSE). While you don't need to memorize this list, it's helpful to know if an error involving your variable name arises. With experience, you'll develop an intuition for valid names.
+\end{itemize}
+
+\textbf{Recommended Rules (Best practices for clean and readable code):}
+
+\begin{itemize}
+\item
+  Choose informative variable names that clearly describe the information they represent. Variable names should be self-explanatory, aiding in code comprehension. For example, use names like ``income,'' ``grades,'' or ``height'' instead of ambiguous names like ``money,'' ``performance,'' or ``cm.''
+\item
+  Opt for short variable names when possible. Concise names such as \textbf{\texttt{dob}} (date of birth) or \textbf{\texttt{iq}} (intelligence quotient) are better than lengthy alternatives like \textbf{\texttt{date\_of\_birth}} or \textbf{\texttt{intelligence\_quotient}}. Shorter names reduce the chances of typos and make the code more manageable.
+\item
+  However, prioritize clarity over brevity. A longer but descriptive variable name, like \textbf{\texttt{total\_exam\_marks}}, is preferable to a cryptic acronym like \textbf{\texttt{tem}}.
+\item
+  Avoid starting variable names with a capital letter. While technically allowed, it's a standard convention in R to use lowercase letters for variable and function names. Starting a variable name with a capital letter may confuse other R users.
+\item
+  Choose a consistent naming style and stick to it. There are three common styles for handling variables with multiple words:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    \textbf{snake\_case}: Words are separated by underscores (e.g., \textbf{\texttt{my\_age}}, \textbf{\texttt{my\_name}}, \textbf{\texttt{my\_height}}). This is the preferred style for this course as it aligns with other programming languages.
+  \item
+    \textbf{dot.notation}: Words are separated by periods (e.g., \textbf{\texttt{my.age}}, \textbf{\texttt{my.name}}, \textbf{\texttt{my.height}}).
+  \item
+    \textbf{camelCase}: Every word, except the first, is capitalized (e.g., \textbf{\texttt{myAge}}, \textbf{\texttt{myName}}, \textbf{\texttt{myHeight}}).
+  \end{enumerate}
+\end{itemize}
+
+For the purposes of this course, I recommend using \textbf{\texttt{snake\_case}} to maintain consistency with my code. Feel free to choose your preferred style outside of this course, but always maintain consistency.
+
+\hypertarget{data-structures}{%
+\section{Data Structures}\label{data-structures}}
+
+So we've talked about the different types of data that we experience in the world and how R classifies them. We've also talked about how we can store this type of data into variables. But in data analysis, we rarely work with individual variables. Typically we work with large collections of variables that have a particular order. For example, data sets are organised by rows and columns
+
+This also holds true in R, which has several different types of \textbf{\emph{data structures}} that organise and group together variables. Each data structure has specific rules and methods for creating or interacting with them. I'll briefly mention each data structure first, before we focus on two main data structures we'll use in this course: \texttt{vectors} and \texttt{data\ frames}.
+
+\hypertarget{vectors}{%
+\subsection{Vectors}\label{vectors}}
+
+The most basic and (probably) important data structure in R are \textbf{\emph{vectors}}. You can think of vectors as a list of data of R that are of the same data type.
+
+For example, I could create a character vector with names of people in the class.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Gerry"}\NormalTok{, }\StringTok{"Aoife"}\NormalTok{, }\StringTok{"Liam"}\NormalTok{, }\StringTok{"Eva"}\NormalTok{, }\StringTok{"Owen"}\NormalTok{, }\StringTok{"Ciara"}\NormalTok{)}
+
+
+\FunctionTok{print}\NormalTok{(rintro\_names)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Gerry" "Aoife" "Liam"  "Eva"   "Owen"  "Ciara"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.vector}\NormalTok{(rintro\_names) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+And I can create a numeric vector with their performance on the module.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 87 91 87 90 88 89
+\end{verbatim}
+
+And I can create a logical vectors that describes whether or not they like R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_satisfied }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, T, F, F, T) }\CommentTok{\#you can use T or F as shortcuts}
+
+\FunctionTok{print}\NormalTok{(rintro\_satisfied)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE
+\end{verbatim}
+
+Technically, we have been using vectors the entire class. Vectors can have as little as 1 piece of data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{instructor }\OtherTok{\textless{}{-}} \StringTok{"Ryan/Brendan"}
+
+\FunctionTok{is.vector}\NormalTok{(instructor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\emph{Activity}: Try create a vector with only integers. Call it ``int\_vector''. Check whether you have successfully created this vector with the code \texttt{class(int\_vector)}
+
+However, we can't include multiple data types in the one vector. Going back to our numeric grades vector, look what happens when we try mix in grades as characters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\StringTok{"A1"}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+
+
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "87" "A1" "87" "90" "88" "89"
+\end{verbatim}
+
+R has converted every element within the \texttt{rintro\_marks} vector into a character. If R sees an object that is a vector, but sees that its elements belong to different data types, it will try and convert every element to one data type. This is a strict rule in R - a vector can only be created if ever single element (i.e., thing) inside that vector is of the same data type.
+
+If we were to check the class of the \texttt{rintro\_marks}, it will show us this conversion
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{) }\CommentTok{\#original numeric vector}
+
+
+\FunctionTok{class}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\StringTok{"A1"}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{)}
+
+
+\FunctionTok{class}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+Remember how I mentioned that you might download a dataset with a column that has numeric data, but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When reads this column, it sees the text, and then R converts the entire column into characters.
+
+\hypertarget{working-with-vectors}{%
+\subsubsection{Working with Vectors}\label{working-with-vectors}}
+
+We can perform several types of operations on vectors to gain useful information.
+
+\textbf{Numeric and Integer Vectors}
+
+We can run functions on vectors. For example, we can run functions like \texttt{mean()}, \texttt{median}, or \texttt{sd()} to calculate descriptive statistics on numeric or integer-based vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{87}\NormalTok{, }\DecValTok{91}\NormalTok{, }\DecValTok{87}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{88}\NormalTok{, }\DecValTok{89}\NormalTok{) }\CommentTok{\#original numeric vector}
+
+\FunctionTok{mean}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 88.66667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 88.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(rintro\_marks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.632993
+\end{verbatim}
+
+A useful feature is that I can sort my numeric and integer vectors based on their scores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(rintro\_marks) }\CommentTok{\#this will take the original vector and arrange from lowest to highest scores}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 87 87 88 89 90 91
+\end{verbatim}
+
+The \texttt{sort()} function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(rintro\_marks, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91 90 89 88 87 87
+\end{verbatim}
+
+\textbf{Character and Logical Vectors}
+
+We are more limited when it comes to operators with character and logical vectors. But we can use functions like \texttt{summary()} to describe properties of character or logical vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(rintro\_names)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Length     Class      Mode 
+##         6 character character
+\end{verbatim}
+
+The \texttt{summary()} functions tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.
+
+\hypertarget{vector-indexing-and-subsetting}{%
+\subsubsection{Vector Indexing and Subsetting}\label{vector-indexing-and-subsetting}}
+
+A vector in R is like a list of items. To be more specifc, vectors in R are actually \emph{ordered} list of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list.
+
+\begin{figure}
+\centering
+\includegraphics{img/03-index_numeric.png}
+\caption{\label{fig:unnamed-chunk-52}Indexing for Numeric Vector}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{img/03-index-character.png}
+\caption{\label{fig:unnamed-chunk-53}Indexing for Character Vector}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{img/03-index-logical.png}
+\caption{\label{fig:unnamed-chunk-54}Indexing for Logical Vector}
+\end{figure}
+
+This property in vectors mean we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using \texttt{{[}{]}} brackets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Gerry"
+\end{verbatim}
+
+Similarly, I could extract the 3rd element.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 87
+\end{verbatim}
+
+Or I could extract the last element.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_satisfied[}\DecValTok{8}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements.
+
+I can ask R even to subset several elements from my vector based on their position. Let's say I want to subset the 2nd, 4th, and 8th elements. I just need to use \texttt{c()} to tell R that I am subsetting several elements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Aoife" "Eva"   NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_marks[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91 90 NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_satisfied[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE    NA
+\end{verbatim}
+
+If the elements you are positioned right next to each other on a vector, you can use \texttt{:} as a shortcut.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rintro\_names[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)] }\CommentTok{\#this will extract the elements in index 1, 2, 3, 4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Gerry" "Aoife" "Liam"  "Eva"
+\end{verbatim}
+
+It's important to know however that when you perform an operation on a vector or you subset it, it does not actually change the original vector. For example, if you wanted to save the top three \texttt{rintro\_marks}, the following code would not work:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(rintro\_marks, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{91} \DecValTok{90} \DecValTok{89} \DecValTok{88} \DecValTok{87} \DecValTok{87}
+
+\NormalTok{rintro\_marks[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{)]}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87}
+\FunctionTok{print}\NormalTok{(rintro\_marks)}
+
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\DecValTok{87} \DecValTok{91} \DecValTok{87} \DecValTok{90} \DecValTok{88} \DecValTok{89}
+\end{Highlighting}
+\end{Shaded}
+
+You can see that neither the \texttt{sort()} function or subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.
+
+Here's how I would extract and save the top three exam marks.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{marks\_sorted }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(rintro\_marks, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{marks\_top }\OtherTok{\textless{}{-}}\NormalTok{ marks\_sorted[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)]}
+
+\FunctionTok{print}\NormalTok{(marks\_top)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91 90 89
+\end{verbatim}
+
+Over to you! How could we extract and save the bottom 3 results from the \texttt{rintro\_marks}` vector? Give it a go.
+
+Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.
+
+\hypertarget{vectors---making-it-a-little-less-abstract.}{%
+\subsubsection{Vectors - making it a little less abstract.}\label{vectors---making-it-a-little-less-abstract.}}
+
+You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was was learning R. While the list analogy is helpful, it only works for so long - there's another data structure called \texttt{lists} (we'll talk it more next week). That confused me.
+
+But what helped me understand vectors was the realization that a vector is simply a ``line of data''. Let's say I was running a study and collected data on participants age. When I open the excel file, there will be a column called ``age'' will all the ages of my participants. That column is a vector of data with the variable label ``age''.
+
+Creating that vector is the equivalent of creating a column in excel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{18}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{43}\NormalTok{, }\DecValTok{23}\NormalTok{, }\DecValTok{44}\NormalTok{,}\DecValTok{32}\NormalTok{, }\DecValTok{56}\NormalTok{, }\DecValTok{67}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{23}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{img/03-column-vector.png}
+
+Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am create a new row (line) of data. In R this is the equivalent of doing this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p11 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DecValTok{175}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{img/03-row-vector.png}
+
+So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row.
+
+So what happens we combine different vectors (columns and rows) together? We create a \texttt{data\ frame}.
+
+\hypertarget{data-frames}{%
+\subsection{Data frames}\label{data-frames}}
+
+Data frames is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in excel.
+
+\begin{figure}
+\centering
+\includegraphics{img/03-dataframes_vectors.png}
+\caption{\label{fig:unnamed-chunk-68}The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors}
+\end{figure}
+
+Data frames are an excellent way to store and manage data in R because it can store different types data (e.g., character, numeric, integer) all within the same structure. Let's create such a data frame using the \texttt{data.frame()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Alice"}\NormalTok{, }\StringTok{"Bob"}\NormalTok{, }\StringTok{"Charlie"}\NormalTok{), }\CommentTok{\#a character vector}
+  \AttributeTok{Age =} \FunctionTok{c}\NormalTok{(25L, 30L, 22L), }\CommentTok{\#an integer vector}
+  \AttributeTok{Score =} \FunctionTok{c}\NormalTok{(}\FloatTok{95.65}\NormalTok{, }\FloatTok{88.12}\NormalTok{, }\FloatTok{75.33}\NormalTok{) }\CommentTok{\#a numeric vector}
+\NormalTok{)}
+
+\NormalTok{my\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score
+## 1   Alice  25 95.65
+## 2     Bob  30 88.12
+## 3 Charlie  22 75.33
+\end{verbatim}
+
+\hypertarget{selecting-data-from-a-data-frame}{%
+\subsubsection{Selecting Data from a Data Frame}\label{selecting-data-from-a-data-frame}}
+
+Once you have created or imported a data frame, you'll often need to access it and perform various tasks and analyses. Let's explore how to access data within a data frame effectively.
+
+\hypertarget{selecting-columns}{%
+\paragraph{Selecting Columns}\label{selecting-columns}}
+
+Columns in a data frame represent different variables or attributes of your data. Often in data analysis we want to select a specific column and then perform analyses on it. So how can we individual select columns? Well In a data frame, every column has a name, similar to how each column in an excel spreadsheet has a header. These columns names enable you to access and manipulate specific columns or variables within your data frame.
+
+We select columns based on their names via two tools:
+
+The \textbf{\$} Notation: You can use a dollar sign (\$) followed by the column to select \textbf{\emph{an individual column}} in a data frame. For example, let's select the \texttt{Name} column in the \texttt{my\_df} data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df}\SpecialCharTok{$}\NormalTok{Name}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Alice"   "Bob"     "Charlie"
+\end{verbatim}
+
+\textbf{Square Brackets} \texttt{{[}{]}}: This is similar approach to accessing elements from a vector. Inside the brackets you can specify both the row and columns that you want to extract. The syntax for selecting rows and columns is: \texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}.
+
+So if we wanted to access the ``Age'' column of my\_df, we could run the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[, }\StringTok{"Age"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 25 30 22
+\end{verbatim}
+
+You'll notice that we left the ``rows'' part empty in the square brackets. This tells R ``keep all the rows for this column''.
+
+We can also use this approach to access multiple columns using the \texttt{c()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[, }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Score"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Score
+## 1  25 95.65
+## 2  30 88.12
+## 3  22 75.33
+\end{verbatim}
+
+\hypertarget{selecting-rows}{%
+\paragraph{Selecting Rows}\label{selecting-rows}}
+
+Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve, following the syntax: \texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}.
+
+To get the first row of your data frame (my\_df), you can type the following.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\DecValTok{1}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Name Age Score
+## 1 Alice  25 95.65
+\end{verbatim}
+
+This time I left the columns part blank, this tells R ``please keep all the columns for each row''.
+
+To access the third row:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\DecValTok{3}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score
+## 3 Charlie  22 75.33
+\end{verbatim}
+
+If you want multiple rows, you can use the `c()` function to select multiple rows. Let's select the 1st and 3rd row.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{), ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score
+## 1   Alice  25 95.65
+## 3 Charlie  22 75.33
+\end{verbatim}
+
+If you wanted to select a range of rows, you can use the `:` operator:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Name Age Score
+## 2      Bob  30 88.12
+## 3  Charlie  22 75.33
+## NA    <NA>  NA    NA
+\end{verbatim}
+
+These methods allow you to extract specific rows or subsets of rows from your data frame.
+
+\hypertarget{selecting-rows-and-columns}{%
+\paragraph{Selecting Rows and Columns}\label{selecting-rows-and-columns}}
+
+We can also select both rows and columns using \texttt{{[}{]}} and our syntax: \texttt{the\ dataframe{[}the\ rows\ we\ want,\ the\ columns\ we\ want{]}}.
+
+For example we could select the first and third rows for the \texttt{Age} and \texttt{Score} columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Score"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Score
+## 1  25 95.65
+## 3  22 75.33
+\end{verbatim}
+
+Similar to when we indexed vectors, this won't change the underlying data frame. To do that, we would need to assign the selection to a variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df2 }\OtherTok{\textless{}{-}}\NormalTok{ my\_df[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\StringTok{"Age"}\NormalTok{, }\StringTok{"Score"}\NormalTok{)]}
+
+\NormalTok{my\_df2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age Score
+## 1  25 95.65
+## 3  22 75.33
+\end{verbatim}
+
+\hypertarget{adding-data-to-your-data-frame}{%
+\subsubsection{Adding Data to your Data Frame}\label{adding-data-to-your-data-frame}}
+
+\hypertarget{adding-columns}{%
+\paragraph{Adding Columns}\label{adding-columns}}
+
+You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of \texttt{Gender} on the \texttt{Score} variable. The syntax for creating a new data frame is very straight forward
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{existing\_df}\SpecialCharTok{$}\NormalTok{NewColumn }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(Value1, Value2, Value3)}
+\end{Highlighting}
+\end{Shaded}
+
+Using this syntax, let's add a Gender column to our \texttt{my\_df} dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df}\SpecialCharTok{$}\NormalTok{Gender }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Non{-}binary"}\NormalTok{, }\StringTok{"Male"}\NormalTok{)}
+
+\CommentTok{\#let\textquotesingle{}s see if we have successfully added a new column in}
+
+\NormalTok{my\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12 Non-binary
+## 3 Charlie  22 75.33       Male
+\end{verbatim}
+
+Let's say I noticed I mixed up the genders, and that Bob is Male and Charlie is Non-Binary. Just like we can rewrite a variable, we can also rewrite a column using this approach.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df}\SpecialCharTok{$}\NormalTok{Gender }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Female"}\NormalTok{, }\StringTok{"Male"}\NormalTok{, }\StringTok{"Non{-}binary"}\NormalTok{)}
+
+\CommentTok{\#let\textquotesingle{}s see if we have successfully rewritten the Gender Column}
+
+\NormalTok{my\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary
+\end{verbatim}
+
+\hypertarget{adding-rows}{%
+\paragraph{Adding Rows}\label{adding-rows}}
+
+What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!) This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.
+
+What we need to do is actually creating a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new\_row }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Name =} \StringTok{"John"}\NormalTok{, }\AttributeTok{Age =} \DecValTok{30}\NormalTok{, }\AttributeTok{Score =} \FloatTok{77.34}\NormalTok{, }\AttributeTok{Gender =} \StringTok{"Male"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then we can use the \texttt{rbind()} function to add the new row to your original data frame. \texttt{rbind} takes in two data frames and combines them together. The syntax is as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_df }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(my\_df, new\_row)}
+
+\NormalTok{my\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary
+## 4    John  30 77.34       Male
+\end{verbatim}
+
+\hypertarget{exercises---data-structures}{%
+\subsection{Exercises - Data Structures}\label{exercises---data-structures}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Create one vector of each data type:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    Create a character vector called \texttt{friends} with the name of 3 of your friends.
+  \item
+    Create an integer vector called \texttt{years} that describes the amount of years you have been friends (if it's less than 1 year, put 1).
+  \item
+    Create a numeric vector called \texttt{extra} with their extraversion scores (out of 5).
+  \item
+    Create a logical vector called \texttt{galway} that describes whether they live (\texttt{TRUE}) or don't live (\texttt{FALSE}) in Galway.
+  \item
+    Once you have created each vector, check whether it is the correct data type using the \texttt{class()} function.
+  \end{enumerate}
+\item
+  Index the 2th, 4th, and 6th element for each of the following vectors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vect1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Not this"}\NormalTok{, }\StringTok{"This"}\NormalTok{, }\StringTok{"Not This"}\NormalTok{, }\StringTok{"This"}\NormalTok{, }\StringTok{"Not This"}\NormalTok{, }\StringTok{"This"}\NormalTok{)}
+
+\NormalTok{vect2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+
+\NormalTok{vect3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"FALSE"}\NormalTok{, }\StringTok{"TRUE"}\NormalTok{, }\StringTok{"FALSE"}\NormalTok{, }\StringTok{"TRUE"}\NormalTok{, }\StringTok{"FALSE"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Write code that adds a column to the \texttt{my\_df} data frame called \texttt{Nationality}. The values for the column should be \texttt{"Irish"}, \texttt{"American"}, \texttt{"English"}, \texttt{"Irish"}.
+\item
+  Check whether that Nationality column has been successfully added by using the `\$` notation. The output should look like this.
+\end{enumerate}
+
+\begin{verbatim}
+## [1] "English"  "American" "Irish"    "Irish"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  What code could you write that would take the `my\_df` data frame and give you this output?
+\end{enumerate}
+
+\begin{verbatim}
+##      Name Age Nationality
+## 1   Alice  25     English
+## 3 Charlie  22       Irish
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Write code that adds a row to the \texttt{my\_df} data frame with your information for each of the columns (e.g., my data would be: \texttt{"Ryan"}, \texttt{30L}, \texttt{100}, \texttt{"Male"}). The \texttt{score} variable is a fake exam, so give yourself whatever score you want!
+\end{enumerate}
+
+\begin{verbatim}
+##      Name Age Nationality
+## 1   Alice  25     English
+## 3 Charlie  22       Irish
+\end{verbatim}
+
+\hypertarget{summary-1}{%
+\section{Summary}\label{summary-1}}
+
+That concludes this session. Well done, we did a lot of work today. We learnt more about the relationship between the console and the script, and how we need to be precise when writing commands. We introduced the different types of data that R stores and how those data types can be stored in single lines of data in vectors or combined together to a table in a \texttt{data\ frame}.
+
+Don't feel like you need to have mastered or even remember all the material that we covered today. Even though these concepts are labelled as ``basic'', that does not mean they are intuitive. It will take time for them to sink in and that's normal. We'll drill these concepts a bit further next week. We'll also learn how to import \texttt{data\ frames}, which will set us up nicely for working with real-life data sets.
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}

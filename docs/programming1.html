@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 R Programming (Part I) | Introduction to R</title>
+  <meta name="description" content="This GitBook is for the R Workshops" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 R Programming (Part I) | Introduction to R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook is for the R Workshops" />
+  <meta name="github-repo" content="ryandonovan93/rintro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 R Programming (Part I) | Introduction to R" />
+  
+  <meta name="twitter:description" content="This GitBook is for the R Workshops" />
+  
+
+<meta name="author" content="Ryan Donovan" />
+
+
+<meta name="date" content="2024-03-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rstudio.html"/>
+<link rel="next" href="programming2.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R (University of Galway)</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#who-is-this-resource-for"><i class="fa fa-check"></i><b>1.1</b> Who is this resource for?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#should-i-learn-r"><i class="fa fa-check"></i><b>1.2</b> Should I learn R?</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#what-will-i-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.3</b> What will I learn to do in R?</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#what-will-i-not-learn-to-do-in-r"><i class="fa fa-check"></i><b>1.4</b> What will I not learn to do in R?</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#where-and-when-will-the-workshops-take-place"><i class="fa fa-check"></i><b>1.5</b> Where and when will the workshops take place?</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#are-there-any-prerequisites-for-taking-this-course"><i class="fa fa-check"></i><b>1.6</b> Are there any prerequisites for taking this course?</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#do-i-need-to-bring-a-laptop-to-the-class"><i class="fa fa-check"></i><b>1.7</b> Do I need to bring a laptop to the class?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2</b> <strong>Getting Started with R and RStudio</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rstudio.html"><a href="rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.1</b> What is R?</a></li>
+<li class="chapter" data-level="2.2" data-path="rstudio.html"><a href="rstudio.html#create-a-posit-cloud-account."><i class="fa fa-check"></i><b>2.2</b> Create a Posit Cloud Account.</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-to-your-computer"><i class="fa fa-check"></i><b>2.3</b> Downloading R on to your Computer</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-windows"><i class="fa fa-check"></i><b>2.3.1</b> Downloading R on Windows</a></li>
+<li class="chapter" data-level="2.3.2" data-path="rstudio.html"><a href="rstudio.html#downloading-r-on-mac"><i class="fa fa-check"></i><b>2.3.2</b> Downloading R on Mac</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="rstudio.html"><a href="rstudio.html#install-and-open-r-studio"><i class="fa fa-check"></i><b>2.4</b> Install and Open R Studio</a></li>
+<li class="chapter" data-level="2.5" data-path="rstudio.html"><a href="rstudio.html#creating-an-r-project"><i class="fa fa-check"></i><b>2.5</b> Creating an R Project</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="rstudio.html"><a href="rstudio.html#navigating-rstudio"><i class="fa fa-check"></i><b>2.5.1</b> Navigating RStudio</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rstudio.html"><a href="rstudio.html#checking-our-working-directory"><i class="fa fa-check"></i><b>2.5.2</b> Checking our Working Directory</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rstudio.html"><a href="rstudio.html#set_wd"><i class="fa fa-check"></i><b>2.5.3</b> Setting up a new Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rstudio.html"><a href="rstudio.html#writing-our-first-r-code"><i class="fa fa-check"></i><b>2.6</b> Writing our first R Code</a></li>
+<li class="chapter" data-level="2.7" data-path="rstudio.html"><a href="rstudio.html#console-vs-source-script"><i class="fa fa-check"></i><b>2.7</b> Console vs Source Script</a></li>
+<li class="chapter" data-level="2.8" data-path="rstudio.html"><a href="rstudio.html#lets-write-some-statistical-code"><i class="fa fa-check"></i><b>2.8</b> Let’s write some statistical code</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="rstudio.html"><a href="rstudio.html#comments"><i class="fa fa-check"></i><b>2.8.1</b> Comments</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rstudio.html"><a href="rstudio.html#summary"><i class="fa fa-check"></i><b>2.9</b> Summary</a></li>
+<li class="chapter" data-level="2.10" data-path="rstudio.html"><a href="rstudio.html#glossary"><i class="fa fa-check"></i><b>2.10</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="programming1.html"><a href="programming1.html"><i class="fa fa-check"></i><b>3</b> <strong>R Programming (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="programming1.html"><a href="programming1.html#activity-1-set-up-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Activity 1: Set up your Working Directory</a></li>
+<li class="chapter" data-level="3.2" data-path="programming1.html"><a href="programming1.html#using-the-console"><i class="fa fa-check"></i><b>3.2</b> Using the Console</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="programming1.html"><a href="programming1.html#typing-commands-in-the-console"><i class="fa fa-check"></i><b>3.2.1</b> Typing Commands in the Console</a></li>
+<li class="chapter" data-level="3.2.2" data-path="programming1.html"><a href="programming1.html#console-syntax-aka-im-ron-burgundy"><i class="fa fa-check"></i><b>3.2.2</b> Console Syntax (Aka “I’m Ron Burgundy?”)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="programming1.html"><a href="programming1.html#exercises"><i class="fa fa-check"></i><b>3.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="programming1.html"><a href="programming1.html#data-types"><i class="fa fa-check"></i><b>3.3</b> Data Types</a></li>
+<li class="chapter" data-level="3.4" data-path="programming1.html"><a href="programming1.html#basic-data-types-in-r"><i class="fa fa-check"></i><b>3.4</b> Basic Data types in R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="programming1.html"><a href="programming1.html#character"><i class="fa fa-check"></i><b>3.4.1</b> Character</a></li>
+<li class="chapter" data-level="3.4.2" data-path="programming1.html"><a href="programming1.html#numeric-or-double"><i class="fa fa-check"></i><b>3.4.2</b> Numeric (or Double)</a></li>
+<li class="chapter" data-level="3.4.3" data-path="programming1.html"><a href="programming1.html#integer"><i class="fa fa-check"></i><b>3.4.3</b> Integer</a></li>
+<li class="chapter" data-level="3.4.4" data-path="programming1.html"><a href="programming1.html#logical-otherwise-know-as-boolean"><i class="fa fa-check"></i><b>3.4.4</b> Logical (otherwise know as Boolean)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="programming1.html"><a href="programming1.html#exercises-1"><i class="fa fa-check"></i><b>3.4.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="programming1.html"><a href="programming1.html#variables"><i class="fa fa-check"></i><b>3.5</b> Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="programming1.html"><a href="programming1.html#whats-in-a-name-conventions-for-naming-variables"><i class="fa fa-check"></i><b>3.5.1</b> What’s in a name? (Conventions for Naming Variables)</a></li>
+<li class="chapter" data-level="3.5.2" data-path="programming1.html"><a href="programming1.html#exercises-2"><i class="fa fa-check"></i><b>3.5.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="programming1.html"><a href="programming1.html#data-structures"><i class="fa fa-check"></i><b>3.6</b> Data Structures</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="programming1.html"><a href="programming1.html#vectors"><i class="fa fa-check"></i><b>3.6.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.6.2" data-path="programming1.html"><a href="programming1.html#data-frames"><i class="fa fa-check"></i><b>3.6.2</b> Data frames</a></li>
+<li class="chapter" data-level="3.6.3" data-path="programming1.html"><a href="programming1.html#exercises-3"><i class="fa fa-check"></i><b>3.6.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="programming1.html"><a href="programming1.html#summary-1"><i class="fa fa-check"></i><b>3.7</b> Summary</a></li>
+<li class="chapter" data-level="3.8" data-path="programming1.html"><a href="programming1.html#glossary-1"><i class="fa fa-check"></i><b>3.8</b> Glossary</a></li>
+<li class="chapter" data-level="3.9" data-path="programming1.html"><a href="programming1.html#variable-name-table"><i class="fa fa-check"></i><b>3.9</b> Variable Name Table</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="programming2.html"><a href="programming2.html"><i class="fa fa-check"></i><b>4</b> <strong>R Programming (Part II)</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="programming2.html"><a href="programming2.html#functions"><i class="fa fa-check"></i><b>4.1</b> Functions</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="programming2.html"><a href="programming2.html#the-syntax-for-creating-a-function"><i class="fa fa-check"></i><b>4.1.1</b> The Syntax for Creating a Function</a></li>
+<li class="chapter" data-level="4.1.2" data-path="programming2.html"><a href="programming2.html#creating-a-simple-function-1-argument"><i class="fa fa-check"></i><b>4.1.2</b> Creating a Simple Function (1-Argument)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="programming2.html"><a href="programming2.html#creating-a-multi-argument-function"><i class="fa fa-check"></i><b>4.1.3</b> Creating a Multi-Argument Function</a></li>
+<li class="chapter" data-level="4.1.4" data-path="programming2.html"><a href="programming2.html#functions-inside-functions"><i class="fa fa-check"></i><b>4.1.4</b> Functions inside Functions</a></li>
+<li class="chapter" data-level="4.1.5" data-path="programming2.html"><a href="programming2.html#returning-multiple-objects-from-a-function"><i class="fa fa-check"></i><b>4.1.5</b> Returning Multiple Objects from a Function</a></li>
+<li class="chapter" data-level="4.1.6" data-path="programming2.html"><a href="programming2.html#some-important-features-about-functions"><i class="fa fa-check"></i><b>4.1.6</b> Some Important Features about Functions</a></li>
+<li class="chapter" data-level="4.1.7" data-path="programming2.html"><a href="programming2.html#exercises-4"><i class="fa fa-check"></i><b>4.1.7</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="programming2.html"><a href="programming2.html#the-factor-data-type"><i class="fa fa-check"></i><b>4.2</b> The Factor Data Type</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="programming2.html"><a href="programming2.html#creating-a-factor"><i class="fa fa-check"></i><b>4.2.1</b> Creating a Factor</a></li>
+<li class="chapter" data-level="4.2.2" data-path="programming2.html"><a href="programming2.html#using-factors-to-sort-character-data"><i class="fa fa-check"></i><b>4.2.2</b> Using Factors to Sort Character Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="programming2.html"><a href="programming2.html#exercises-5"><i class="fa fa-check"></i><b>4.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="programming2.html"><a href="programming2.html#the-list-data-structure"><i class="fa fa-check"></i><b>4.3</b> The List Data Structure</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="programming2.html"><a href="programming2.html#understanding-lists"><i class="fa fa-check"></i><b>4.3.1</b> Understanding Lists</a></li>
+<li class="chapter" data-level="4.3.2" data-path="programming2.html"><a href="programming2.html#creating-lists"><i class="fa fa-check"></i><b>4.3.2</b> Creating Lists</a></li>
+<li class="chapter" data-level="4.3.3" data-path="programming2.html"><a href="programming2.html#lists-within-lists-indexing"><i class="fa fa-check"></i><b>4.3.3</b> Lists within Lists (Indexing)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="programming2.html"><a href="programming2.html#summary-2"><i class="fa fa-check"></i><b>4.3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="programming2.html"><a href="programming2.html#r-packages"><i class="fa fa-check"></i><b>4.4</b> R Packages</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="programming2.html"><a href="programming2.html#understanding-r-packages"><i class="fa fa-check"></i><b>4.4.1</b> Understanding R Packages</a></li>
+<li class="chapter" data-level="4.4.2" data-path="programming2.html"><a href="programming2.html#installing-and-loading-r-package"><i class="fa fa-check"></i><b>4.4.2</b> Installing and Loading R Package</a></li>
+<li class="chapter" data-level="4.4.3" data-path="programming2.html"><a href="programming2.html#loading-packages"><i class="fa fa-check"></i><b>4.4.3</b> Loading Packages</a></li>
+<li class="chapter" data-level="4.4.4" data-path="programming2.html"><a href="programming2.html#testing-our-new-functions"><i class="fa fa-check"></i><b>4.4.4</b> Testing our New Functions</a></li>
+<li class="chapter" data-level="4.4.5" data-path="programming2.html"><a href="programming2.html#error-loading-packages"><i class="fa fa-check"></i><b>4.4.5</b> Error Loading Packages</a></li>
+<li class="chapter" data-level="4.4.6" data-path="programming2.html"><a href="programming2.html#package-conventions-if-using-code"><i class="fa fa-check"></i><b>4.4.6</b> Package Conventions if Using Code</a></li>
+<li class="chapter" data-level="4.4.7" data-path="programming2.html"><a href="programming2.html#summary-3"><i class="fa fa-check"></i><b>4.4.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="programming2.html"><a href="programming2.html#importing"><i class="fa fa-check"></i><b>4.5</b> Importing and Exporting Data</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="programming2.html"><a href="programming2.html#importing-csv-files."><i class="fa fa-check"></i><b>4.5.1</b> Importing CSV files.</a></li>
+<li class="chapter" data-level="4.5.2" data-path="programming2.html"><a href="programming2.html#importing-spss-.sav-files."><i class="fa fa-check"></i><b>4.5.2</b> Importing SPSS (.sav files).</a></li>
+<li class="chapter" data-level="4.5.3" data-path="programming2.html"><a href="programming2.html#exporting-datasets-in-r"><i class="fa fa-check"></i><b>4.5.3</b> Exporting Datasets in R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="programming2.html"><a href="programming2.html#summary-4"><i class="fa fa-check"></i><b>4.6</b> Summary</a></li>
+<li class="chapter" data-level="4.7" data-path="programming2.html"><a href="programming2.html#glossary-2"><i class="fa fa-check"></i><b>4.7</b> Glossary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="datacleaning1.html"><a href="datacleaning1.html"><i class="fa fa-check"></i><b>5</b> <strong>Data Wrangling and Cleaning (Part I)</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="datacleaning1.html"><a href="datacleaning1.html#what-is-data-wrangling-and-cleaning"><i class="fa fa-check"></i><b>5.1</b> <strong>What is Data Wrangling and Cleaning?</strong></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="datacleaning1.html"><a href="datacleaning1.html#naming-conventions-in-this-book"><i class="fa fa-check"></i><b>5.1.1</b> <strong>Naming Conventions in this Book</strong></a></li>
+<li class="chapter" data-level="5.1.2" data-path="datacleaning1.html"><a href="datacleaning1.html#why-is-data-cleaning-important"><i class="fa fa-check"></i><b>5.1.2</b> <strong>Why is Data Cleaning Important?</strong></a></li>
+<li class="chapter" data-level="5.1.3" data-path="datacleaning1.html"><a href="datacleaning1.html#how-can-r-help-you-with-data-cleaning"><i class="fa fa-check"></i><b>5.1.3</b> <strong>How can R help you with Data Cleaning?</strong></a></li>
+<li class="chapter" data-level="5.1.4" data-path="datacleaning1.html"><a href="datacleaning1.html#tidyverse-and-base-r"><i class="fa fa-check"></i><b>5.1.4</b> Tidyverse (and Base R)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="datacleaning1.html"><a href="datacleaning1.html#lets-get-set-up"><i class="fa fa-check"></i><b>5.2</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.1-set-up-your-wd"><i class="fa fa-check"></i><b>5.2.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="5.2.2" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.2-import-your-csv-files-and-r-script"><i class="fa fa-check"></i><b>5.2.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="5.2.3" data-path="datacleaning1.html"><a href="datacleaning1.html#activity-1.3-install-and-load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.2.3</b> Activity 1.3: Install and load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-the-remote-associates-data-set."><i class="fa fa-check"></i><b>5.3</b> Cleaning the Remote Associates Data set.</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="datacleaning1.html"><a href="datacleaning1.html#context-and-viewing-it-in-rstudio"><i class="fa fa-check"></i><b>5.3.1</b> Context and Viewing it in RStudio</a></li>
+<li class="chapter" data-level="5.3.2" data-path="datacleaning1.html"><a href="datacleaning1.html#key-functions-that-will-help-you-clean-most-datasets"><i class="fa fa-check"></i><b>5.3.2</b> Key Functions That Will Help You Clean Most Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="datacleaning1.html"><a href="datacleaning1.html#choosing-our-columns-of-interest-with-select"><i class="fa fa-check"></i><b>5.4</b> Choosing our Columns of Interest with <code>Select()</code></a></li>
+<li class="chapter" data-level="5.5" data-path="datacleaning1.html"><a href="datacleaning1.html#renaming-our-columns-of-interest-with-rename"><i class="fa fa-check"></i><b>5.5</b> Renaming our Columns of Interest with <code>rename()</code></a></li>
+<li class="chapter" data-level="5.6" data-path="datacleaning1.html"><a href="datacleaning1.html#creating-new-columns-using-the-mutate-function"><i class="fa fa-check"></i><b>5.6</b> Creating new Columns using the <code>mutate()</code> function</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="datacleaning1.html"><a href="datacleaning1.html#rewriting-existing-columns-using-mutate"><i class="fa fa-check"></i><b>5.6.1</b> Rewriting existing columns using <code>mutate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="datacleaning1.html"><a href="datacleaning1.html#checking-in-on-our-data-set"><i class="fa fa-check"></i><b>5.7</b> Checking in on our data set</a></li>
+<li class="chapter" data-level="5.8" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-duplicates-using-distinct"><i class="fa fa-check"></i><b>5.8</b> Removing Duplicates using <code>distinct()</code></a></li>
+<li class="chapter" data-level="5.9" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-the-filter-function"><i class="fa fa-check"></i><b>5.9</b> Removing Rows using the <code>filter()</code> Function</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="datacleaning1.html"><a href="datacleaning1.html#removing-rows-using-multiple-conditions-with-filter"><i class="fa fa-check"></i><b>5.9.1</b> Removing Rows Using Multiple Conditions with <code>filter()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="datacleaning1.html"><a href="datacleaning1.html#identifying-the-factors-in-our-data-frame"><i class="fa fa-check"></i><b>5.10</b> Identifying the Factors in our Data Frame</a></li>
+<li class="chapter" data-level="5.11" data-path="datacleaning1.html"><a href="datacleaning1.html#summarising-our-data-by-groups-using-group_by-and-summarise"><i class="fa fa-check"></i><b>5.11</b> Summarising our Data by Groups using <code>group_by()</code> and <code>summarise()</code></a></li>
+<li class="chapter" data-level="5.12" data-path="datacleaning1.html"><a href="datacleaning1.html#chaining-it-all-together-with-the-pipe-operator"><i class="fa fa-check"></i><b>5.12</b> Chaining it All Together with the Pipe Operator</a>
+<ul>
+<li class="chapter" data-level="5.12.1" data-path="datacleaning1.html"><a href="datacleaning1.html#using-a-pipe-operator-on-the-remote-associations-data-frame"><i class="fa fa-check"></i><b>5.12.1</b> Using a Pipe Operator on the Remote Associations Data Frame</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="datacleaning1.html"><a href="datacleaning1.html#clean-activity"><i class="fa fa-check"></i><b>5.13</b> Activity: Clean the Flanker Dataset</a>
+<ul>
+<li class="chapter" data-level="5.13.1" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-flanker-test-dataset"><i class="fa fa-check"></i><b>5.13.1</b> <strong>Cleaning Flanker Test Dataset</strong></a></li>
+<li class="chapter" data-level="5.13.2" data-path="datacleaning1.html"><a href="datacleaning1.html#load-the-tidyverse-package"><i class="fa fa-check"></i><b>5.13.2</b> <strong>Load the “Tidyverse” Package</strong></a></li>
+<li class="chapter" data-level="5.13.3" data-path="datacleaning1.html"><a href="datacleaning1.html#reset-your-environment"><i class="fa fa-check"></i><b>5.13.3</b> <strong>Reset Your Environment</strong></a></li>
+<li class="chapter" data-level="5.13.4" data-path="datacleaning1.html"><a href="datacleaning1.html#import-the-data"><i class="fa fa-check"></i><b>5.13.4</b> <strong>Import the Data</strong></a></li>
+<li class="chapter" data-level="5.13.5" data-path="datacleaning1.html"><a href="datacleaning1.html#cleaning-instructions"><i class="fa fa-check"></i><b>5.13.5</b> Cleaning Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.14" data-path="datacleaning1.html"><a href="datacleaning1.html#summary-5"><i class="fa fa-check"></i><b>5.14</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="datacleaning2.html"><a href="datacleaning2.html"><i class="fa fa-check"></i><b>6</b> Data Wrangling and Cleaning (Part II)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#lets-get-set-up-1"><i class="fa fa-check"></i><b>6.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.1-set-up-your-wd-1"><i class="fa fa-check"></i><b>6.1.1</b> Activity 1.1: Set up your WD</a></li>
+<li class="chapter" data-level="6.1.2" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.2-import-your-csv-files-and-r-script-1"><i class="fa fa-check"></i><b>6.1.2</b> Activity 1.2: Import your CSV files and R script</a></li>
+<li class="chapter" data-level="6.1.3" data-path="datacleaning2.html"><a href="datacleaning2.html#activity-1.3-load-the-tidyverse-package"><i class="fa fa-check"></i><b>6.1.3</b> Activity 1.3: Load the tidyverse package</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#data-formats-long-and-wide-data"><i class="fa fa-check"></i><b>6.2</b> Data Formats (Long and Wide Data)</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="datacleaning2.html"><a href="datacleaning2.html#defining-long-and-wide-data"><i class="fa fa-check"></i><b>6.2.1</b> Defining Long and Wide Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#converting-the-format-of-our-data"><i class="fa fa-check"></i><b>6.3</b> Converting the Format of Our Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-wide-to-long"><i class="fa fa-check"></i><b>6.3.1</b> Pivoting from Wide to Long</a></li>
+<li class="chapter" data-level="6.3.2" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-our-remote-associations-data-frame"><i class="fa fa-check"></i><b>6.3.2</b> Pivoting our Remote Associations Data Frame</a></li>
+<li class="chapter" data-level="6.3.3" data-path="datacleaning2.html"><a href="datacleaning2.html#pivoting-from-long-to-wide"><i class="fa fa-check"></i><b>6.3.3</b> Pivoting from Long to Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="datacleaning2.html"><a href="datacleaning2.html#handling-missing-values"><i class="fa fa-check"></i><b>6.4</b> Handling Missing Values</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-missing-values"><i class="fa fa-check"></i><b>6.4.1</b> <strong>Introduction to Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.2" data-path="datacleaning2.html"><a href="datacleaning2.html#identifying-missing-values"><i class="fa fa-check"></i><b>6.4.2</b> <strong>Identifying Missing Values</strong></a></li>
+<li class="chapter" data-level="6.4.3" data-path="datacleaning2.html"><a href="datacleaning2.html#removing-missing-values"><i class="fa fa-check"></i><b>6.4.3</b> Removing Missing Values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-data-i.e.-joining-different-datasets-together"><i class="fa fa-check"></i><b>6.5</b> Merging Data (i.e., Joining Different Datasets Together)</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="datacleaning2.html"><a href="datacleaning2.html#introduction-to-merging-data"><i class="fa fa-check"></i><b>6.5.1</b> Introduction to Merging Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="datacleaning2.html"><a href="datacleaning2.html#inner_join"><i class="fa fa-check"></i><b>6.5.2</b> Inner_Join</a></li>
+<li class="chapter" data-level="6.5.3" data-path="datacleaning2.html"><a href="datacleaning2.html#left_join"><i class="fa fa-check"></i><b>6.5.3</b> Left_join</a></li>
+<li class="chapter" data-level="6.5.4" data-path="datacleaning2.html"><a href="datacleaning2.html#right_join"><i class="fa fa-check"></i><b>6.5.4</b> Right_Join</a></li>
+<li class="chapter" data-level="6.5.5" data-path="datacleaning2.html"><a href="datacleaning2.html#outer-join"><i class="fa fa-check"></i><b>6.5.5</b> Outer Join</a></li>
+<li class="chapter" data-level="6.5.6" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-7"><i class="fa fa-check"></i><b>6.5.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="datacleaning2.html"><a href="datacleaning2.html#data-wrangling-example-demographic-and-flanker-task"><i class="fa fa-check"></i><b>6.6</b> Data Wrangling Example (Demographic and Flanker Task)</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="datacleaning2.html"><a href="datacleaning2.html#part-i-cleaning-the-df_background-file"><i class="fa fa-check"></i><b>6.6.1</b> Part I: Cleaning the <code>df_background</code> file</a></li>
+<li class="chapter" data-level="6.6.2" data-path="datacleaning2.html"><a href="datacleaning2.html#cleaning-our-flanker-tasks"><i class="fa fa-check"></i><b>6.6.2</b> Cleaning our Flanker Tasks</a></li>
+<li class="chapter" data-level="6.6.3" data-path="datacleaning2.html"><a href="datacleaning2.html#merging-the-data-frames"><i class="fa fa-check"></i><b>6.6.3</b> Merging the Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="datacleaning2.html"><a href="datacleaning2.html#summary-8"><i class="fa fa-check"></i><b>6.7</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="data-vis.html"><a href="data-vis.html"><i class="fa fa-check"></i><b>7</b> Data Visualisation in R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="data-vis.html"><a href="data-vis.html#lets-get-set-up-2"><i class="fa fa-check"></i><b>7.1</b> Let’s Get Set Up</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="data-vis.html"><a href="data-vis.html#activity-set-up-your-working-directory"><i class="fa fa-check"></i><b>7.1.1</b> Activity: Set Up Your Working Directory</a></li>
+<li class="chapter" data-level="7.1.2" data-path="data-vis.html"><a href="data-vis.html#activity-download-and-import-your-files"><i class="fa fa-check"></i><b>7.1.2</b> Activity: Download and Import Your Files</a></li>
+<li class="chapter" data-level="7.1.3" data-path="data-vis.html"><a href="data-vis.html#activity-open-your-r-script"><i class="fa fa-check"></i><b>7.1.3</b> Activity: Open your R Script</a></li>
+<li class="chapter" data-level="7.1.4" data-path="data-vis.html"><a href="data-vis.html#activity-install-and-load-your-packages"><i class="fa fa-check"></i><b>7.1.4</b> Activity: Install and Load Your Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="data-vis.html"><a href="data-vis.html#introduction-to-ggplot2"><i class="fa fa-check"></i><b>7.2</b> Introduction to <code>ggplot2</code></a></li>
+<li class="chapter" data-level="7.3" data-path="data-vis.html"><a href="data-vis.html#how-to-draw-a-plot-box-plot"><i class="fa fa-check"></i><b>7.3</b> How to Draw a Plot (Box Plot)</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="data-vis.html"><a href="data-vis.html#first-we-set-up-the-canvas"><i class="fa fa-check"></i><b>7.3.1</b> First we set up the Canvas</a></li>
+<li class="chapter" data-level="7.3.2" data-path="data-vis.html"><a href="data-vis.html#creating-our-box-plot"><i class="fa fa-check"></i><b>7.3.2</b> Creating our Box Plot</a></li>
+<li class="chapter" data-level="7.3.3" data-path="data-vis.html"><a href="data-vis.html#changing-the-name-of-our-x-axis-and-y-axis"><i class="fa fa-check"></i><b>7.3.3</b> Changing the Name of Our X-Axis and Y-Axis</a></li>
+<li class="chapter" data-level="7.3.4" data-path="data-vis.html"><a href="data-vis.html#changing-the-look-theme-of-our-canvas"><i class="fa fa-check"></i><b>7.3.4</b> Changing the Look (Theme) of Our Canvas</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="data-vis.html"><a href="data-vis.html#the-real-power-of-the-ggplot-package---customisation"><i class="fa fa-check"></i><b>7.4</b> The Real Power of the ggplot package - Customisation</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="data-vis.html"><a href="data-vis.html#mapping-aesthetic-properties-like-colour-and-fill-to-our-variables"><i class="fa fa-check"></i><b>7.4.1</b> Mapping Aesthetic Properties (like Colour and Fill) to Our Variables</a></li>
+<li class="chapter" data-level="7.4.2" data-path="data-vis.html"><a href="data-vis.html#changing-the-value-of-our-y-axis"><i class="fa fa-check"></i><b>7.4.2</b> Changing the Value of Our Y-Axis</a></li>
+<li class="chapter" data-level="7.4.3" data-path="data-vis.html"><a href="data-vis.html#plotting-our-data-points-in-the-graph"><i class="fa fa-check"></i><b>7.4.3</b> Plotting our Data Points in the Graph</a></li>
+<li class="chapter" data-level="7.4.4" data-path="data-vis.html"><a href="data-vis.html#adding-statistical-information-to-our-plot"><i class="fa fa-check"></i><b>7.4.4</b> Adding Statistical Information to Our Plot</a></li>
+<li class="chapter" data-level="7.4.5" data-path="data-vis.html"><a href="data-vis.html#adding-text-to-our-plot"><i class="fa fa-check"></i><b>7.4.5</b> Adding Text to Our Plot</a></li>
+<li class="chapter" data-level="7.4.6" data-path="data-vis.html"><a href="data-vis.html#exporting-our-plot"><i class="fa fa-check"></i><b>7.4.6</b> Exporting our Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="data-vis.html"><a href="data-vis.html#drawing-a-scatter-plot"><i class="fa fa-check"></i><b>7.5</b> Drawing a Scatter Plot</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="data-vis.html"><a href="data-vis.html#context"><i class="fa fa-check"></i><b>7.5.1</b> Context</a></li>
+<li class="chapter" data-level="7.5.2" data-path="data-vis.html"><a href="data-vis.html#drawing-our-plot"><i class="fa fa-check"></i><b>7.5.2</b> Drawing our Plot</a></li>
+<li class="chapter" data-level="7.5.3" data-path="data-vis.html"><a href="data-vis.html#customising-our-scatterplot-based-on-gender"><i class="fa fa-check"></i><b>7.5.3</b> Customising our Scatterplot based on Gender</a></li>
+<li class="chapter" data-level="7.5.4" data-path="data-vis.html"><a href="data-vis.html#faceting"><i class="fa fa-check"></i><b>7.5.4</b> Faceting</a></li>
+<li class="chapter" data-level="7.5.5" data-path="data-vis.html"><a href="data-vis.html#combining-charts"><i class="fa fa-check"></i><b>7.5.5</b> Combining Charts</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="data-vis.html"><a href="data-vis.html#violin-charts"><i class="fa fa-check"></i><b>7.6</b> Violin Charts</a></li>
+<li class="chapter" data-level="7.7" data-path="data-vis.html"><a href="data-vis.html#bar-chart"><i class="fa fa-check"></i><b>7.7</b> Bar Chart</a></li>
+<li class="chapter" data-level="7.8" data-path="data-vis.html"><a href="data-vis.html#histograms"><i class="fa fa-check"></i><b>7.8</b> Histograms</a></li>
+<li class="chapter" data-level="7.9" data-path="data-vis.html"><a href="data-vis.html#line-chart"><i class="fa fa-check"></i><b>7.9</b> Line Chart</a></li>
+<li class="chapter" data-level="7.10" data-path="data-vis.html"><a href="data-vis.html#summary-9"><i class="fa fa-check"></i><b>7.10</b> Summary</a></li>
+<li class="chapter" data-level="7.11" data-path="data-vis.html"><a href="data-vis.html#geoms"><i class="fa fa-check"></i><b>7.11</b> Geoms</a></li>
+<li class="chapter" data-level="7.12" data-path="data-vis.html"><a href="data-vis.html#themes"><i class="fa fa-check"></i><b>7.12</b> Themes</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><i class="fa fa-check"></i><b>8</b> Appendix - Understanding Boolean Operators in the Context of <code>filter()</code></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#how-boolean-operators-work"><i class="fa fa-check"></i><b>8.1</b> How Boolean Operators Work:</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="appendix---understanding-boolean-operators-in-the-context-of-filter.html"><a href="appendix---understanding-boolean-operators-in-the-context-of-filter.html#understanding-rs-evaluation-process"><i class="fa fa-check"></i><b>8.1.1</b> Understanding R’s Evaluation Process:</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="programming1" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> <strong>R Programming (Part I)</strong><a href="programming1.html#programming1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Today, we are going to explore fundamental programming concepts in R. By the end of this session, you should be capable of the following:</p>
+<ul>
+<li>Running and troubleshooting commands in the R console.</li>
+<li>Understanding different data types and when to use them.</li>
+<li>Creating and using variables, and understanding best practices in naming variables.</li>
+<li>Grasping key data structures and how to construct them.</li>
+</ul>
+<div id="activity-1-set-up-your-working-directory" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Activity 1: Set up your Working Directory<a href="programming1.html#activity-1-set-up-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s good practice to set your working directory when you first open RStudio. Remember that the working directory is the location where we want to store any resulting data files or scripts that you’ll work on in a session. Last week I showed you how to do this using <a href="rstudio.html#set_wd">a button-and-click interface</a>.</p>
+<p>Using those instructions, create a folder called “Week2” in the <code>rintro</code> project folder and set it as your working directory. Your output should be something like this:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="programming1.html#cb20-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">setwd</span>(<span class="st">&quot;C:/Users/0131045s/Desktop/Programming/R/Workshops/Example/Rintro_2024/week2&quot;</span>)</span></code></pre></div>
+<p>Use the ´getwd()´ to check that it has been set as your working directory.</p>
+</div>
+<div id="using-the-console" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Using the Console<a href="programming1.html#using-the-console" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the previous chapter, I made a distinction between the script and the console. I said that the script was an environment where we would write and run polished code, and the R console is an environment for writing and running “dirty” quick code to test ideas, or code that we would run once.</p>
+<p>That distinction is kinda true, but it’s not completely true. In reality, when we write a script we are preparing <strong><em>commands</em></strong> for R to <strong><em>execute</em></strong> in the console. In this sense, the R script is equivalent to a waiter. We tell the waiter (script) what we want to order, and then the waiter hands that order to the chef (console).</p>
+<p>It’s important to know how to work the R console, even if we mostly use scripts in these workshops. We don’t want the chef to spit on our food.</p>
+<div id="typing-commands-in-the-console" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Typing Commands in the Console<a href="programming1.html#typing-commands-in-the-console" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can command the R console to perform calculations. When following along in RStudio, there’s no need to type the <code>&gt;</code> operator; it simply indicates that R is ready to execute a new command, which can be omitted for clarity.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="programming1.html#cb21-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">20</span></span>
+<span id="cb21-2"><a href="programming1.html#cb21-2" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="programming1.html#cb21-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="programming1.html#cb22-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">20</span> <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb22-2"><a href="programming1.html#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="programming1.html#cb22-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
+<p>When performing calculations in R, it’s important to know that it follows the usual arithmetic convention of the order of operations (remember <a href="https://www.tes.com/en-ie/teaching-resource/bidmas-bodmas-bedmas-bimdas-pemdas-permdas-11154272#:~:text=%E2%80%A2%20BIMDAS%20%2D%20Brackets%2C%20Indices%2C,Multiplication%2C%20Division%2C%20Addition%2C%20Subtraction">BEDMAS - Bracets, Exponents, Division, Multiplication, Addition, and Subtraction?</a>).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="programming1.html#cb23-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span> <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span> </span>
+<span id="cb23-2"><a href="programming1.html#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="programming1.html#cb23-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">84</span></span>
+<span id="cb23-4"><a href="programming1.html#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="programming1.html#cb23-5" tabindex="-1"></a><span class="sc">&gt;</span> ((<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span>) <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb23-6"><a href="programming1.html#cb23-6" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="programming1.html#cb23-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">12</span></span></code></pre></div>
+<p>You may have noticed that the output of each code line we entered starts with a <strong><code>[1]</code></strong> before the actual result. What does this mean?</p>
+<p>This is how R labels and organizes its responses. Think of it as having a conversation with R, where every question you ask gets an answer. The square brackets with a number, like <strong><code>[1]</code></strong>, serve as labels on each response, indicating which answer corresponds to which question. This is R <strong><em>indexing</em></strong> its answer.</p>
+<p>In all the examples above, we asked R questions that have only 1 answer, which is why the output is always <strong><code>[1]</code></strong>. Look what happens when I ask R to print out multiple answers.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="programming1.html#cb24-1" tabindex="-1"></a><span class="fu">print</span>(sleep<span class="sc">$</span>extra) <span class="co">#this will print out the extra sleep column in the sleep dataset we used last week</span></span></code></pre></div>
+<pre><code>##  [1]  0.7 -1.6 -0.2 -1.2 -0.1  3.4  3.7  0.8  0.0  2.0  1.9  0.8  1.1  0.1 -0.1
+## [16]  4.4  5.5  1.6  4.6  3.4</code></pre>
+<p>Here R tells us that the first answer (i.e., value) corresponds to <code>0.1</code>. The next label is <code>[16]</code>. which tells us that the 16th answer corresponds to 4.4.</p>
+<p>But why does it only show the <code>[1]</code> and <code>[16]</code>th index? If you run this code in your console, you might actually see a different number than <code>[16]</code> depending on wide your console is on your device.</p>
+<p>This is because R only prints out the index when a new row of data is needed in the console. If there were indexes for every single answer, it would clutter the console with unnecessary information. So R uses new rows as a method for deciding when to show us another index.</p>
+<p>We’ll delve deeper into indexing later in this session; it’s a highly useful concept in R.</p>
+</div>
+<div id="console-syntax-aka-im-ron-burgundy" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Console Syntax (Aka “I’m Ron Burgundy?”)<a href="programming1.html#console-syntax-aka-im-ron-burgundy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="r-console-and-typos" class="section level4 hasAnchor" number="3.2.2.1">
+<h4><span class="header-section-number">3.2.2.1</span> R Console and Typos<a href="programming1.html#r-console-and-typos" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>One of the most important things you need to know when you are programming, is that you need to type <em>exactly</em> what you want R to do. If you make a mistake (e.g., a typo), R won’t attempt to decipher your intention. For instance, consider the following code:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="programming1.html#cb26-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="ot">=</span> <span class="dv">20</span></span></code></pre></div>
+<pre><code>## Error in 10 = 20: invalid (do_set) left-hand side to assignment</code></pre>
+<p>R interprets this as you claiming that 10 equals 20, which is not true. Consequently, R panics and refuses to execute your command. Now any person looking at your code would guess that since <code>+</code> and <code>=</code> are on the same key on our keyboards, you probably meant to type <code>10 + 20</code>. But that’s because we have a strong theory of mind, whereas programming languages do not.</p>
+<p>So be exact with your code or else be <a href="https://www.youtube.com/watch?v=X3zfP14pLxc">Ron Burgundy?</a>.</p>
+<p>On the grand scheme of mistakes though, this type of mistake is relatively harmless because R will tell us immediately that something is wrong and stop us from doing anything.</p>
+<p>However, there are silent types of mistakes that are more challenging to resolve. Imagine you typed <code>-</code> instead of <code>+</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="programming1.html#cb28-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">-</span> <span class="dv">20</span></span>
+<span id="cb28-2"><a href="programming1.html#cb28-2" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="programming1.html#cb28-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="dv">10</span></span></code></pre></div>
+<p>In this scenario, R will runs the code and produces the output. This is because the code still makes sense; it is perfectly legitimate to subtract 20 away from 10. R doesn’t know you actually meant to add <code>10</code> to <code>20</code>. All it can see is three objects <code>10</code>, <code>-</code>, and <code>20</code> in a logical order, so it executes the command. In this relationship, you’re the one in charge.</p>
+<p>In short calculations like this, it’s clear what you’ve typed wrong. However, if you have a long block of connected code with a typo like this, the result can significantly differ from what you intended, and it might be hard to spot.</p>
+<p>The primary way to check for these errors is to always review the output of your code. If it looks significantly different from what you expected, then this silent error may be the cause.</p>
+<p>I am not highlighting these issues to scare you, it’s just important to know that big problems (R code not running or inaccurate results) can often be easily fixed by tiny changes.</p>
+</div>
+<div id="r-console-and-incomplete-commands" class="section level4 hasAnchor" number="3.2.2.2">
+<h4><span class="header-section-number">3.2.2.2</span> R Console and Incomplete Commands<a href="programming1.html#r-console-and-incomplete-commands" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>I’ve been pretty mean to the console, but there are rare times it will be a good Samaritan. For example, if R thinks you haven’t finished a command it will print out <code>+</code> to allow you to finish it.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="programming1.html#cb29-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span></span>
+<span id="cb29-2"><a href="programming1.html#cb29-2" tabindex="-1"></a> </span>
+<span id="cb29-3"><a href="programming1.html#cb29-3" tabindex="-1"></a><span class="sc">+</span> )</span>
+<span id="cb29-4"><a href="programming1.html#cb29-4" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="programming1.html#cb29-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
+<p>So when you see “+” in the console, this is R telling you that something is missing. R won’t let you enter a new command until you have finished with it.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="programming1.html#cb30-1" tabindex="-1"></a>(<span class="dv">20</span> <span class="sc">+</span> <span class="dv">10</span></span>
+<span id="cb30-2"><a href="programming1.html#cb30-2" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="programming1.html#cb30-3" tabindex="-1"></a><span class="sc">+</span> <span class="co">#if I press enter, it will keep appearing until I finish the code</span></span>
+<span id="cb30-4"><a href="programming1.html#cb30-4" tabindex="-1"></a><span class="sc">+</span></span>
+<span id="cb30-5"><a href="programming1.html#cb30-5" tabindex="-1"></a><span class="sc">+</span></span>
+<span id="cb30-6"><a href="programming1.html#cb30-6" tabindex="-1"></a><span class="sc">+</span></span>
+<span id="cb30-7"><a href="programming1.html#cb30-7" tabindex="-1"></a><span class="sc">+</span></span></code></pre></div>
+<p>If nothing is missing, then this indicates that your code might not be correctly formatted. To break out of the endless loops of “+”, press the <strong><em>Esc</em></strong> key on your keyboard.</p>
+</div>
+</div>
+<div id="exercises" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Exercises<a href="programming1.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Practice performing basic calculations in R console. Calculate the following:
+<ol style="list-style-type: decimal">
+<li>25 multiplied by 4</li>
+<li>72 divided by 8 3</li>
+<li>0 multiplied by 4, and then divided by 2</li>
+</ol></li>
+<li>Imagine you want to calculate the average/mean of the following 5 numbers 15, 22, 18, 30, and 25. Use the R console to find the average.</li>
+<li>If I type the following code, then I get the <code>+</code> operator, how can I fix it?</li>
+</ol>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="programming1.html#cb31-1" tabindex="-1"></a><span class="sc">&gt;</span> (<span class="dv">60</span> <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb31-2"><a href="programming1.html#cb31-2" tabindex="-1"></a>   </span>
+<span id="cb31-3"><a href="programming1.html#cb31-3" tabindex="-1"></a><span class="sc">+</span>   </span></code></pre></div>
+</div>
+</div>
+<div id="data-types" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Data Types<a href="programming1.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Our overarching goal for this course is to enable you to import your data into R, select the most relevant subset of data for analysis, conduct descriptive and statistical analysis, and create nice data visualizations. But it’s important to consider <strong><em>What is data and how is it stored in R?</em></strong></p>
+<p>Data comes in various forms: numeric (integers and decimal values) or alphabetical (characters or lines of text). R has developed a system for categorizing this range of data into different data types.</p>
+</div>
+<div id="basic-data-types-in-r" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Basic Data types in R<a href="programming1.html#basic-data-types-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R has 4 basic data types that are used 99% of the time:</p>
+<div id="character" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Character<a href="programming1.html#character" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A character is anything enclosed within quotation marks. It is often referred to as a <em>string</em>. Strings can contain any text within single or double quotation marks.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="programming1.html#cb32-1" tabindex="-1"></a><span class="co">#we can use the class() function to check the data type of an object in R</span></span>
+<span id="cb32-2"><a href="programming1.html#cb32-2" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="programming1.html#cb32-3" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;a&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="programming1.html#cb34-1" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;cat&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Numbers enclosed in quotation marks are also recognised as character types in R.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="programming1.html#cb36-1" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;3.14&quot;</span>) <span class="co">#recognized as a character</span></span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="programming1.html#cb38-1" tabindex="-1"></a><span class="fu">class</span>(<span class="st">&quot;2&quot;</span>) <span class="co">#recognized as a character</span></span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="programming1.html#cb40-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">2.13</span>) <span class="co">#not recognised as a character</span></span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="numeric-or-double" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Numeric (or Double)<a href="programming1.html#numeric-or-double" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In R, the numeric data type represents all real numbers, with or without decimal value, such as:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="programming1.html#cb42-1" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">33</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="programming1.html#cb44-1" tabindex="-1"></a><span class="fu">class</span>(<span class="fl">33.33</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="programming1.html#cb46-1" tabindex="-1"></a><span class="fu">class</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="integer" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Integer<a href="programming1.html#integer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An integer is any real whole number without decimal points. We tell R to specify something as an integer by adding a capital “L” at the end.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="programming1.html#cb48-1" tabindex="-1"></a><span class="fu">class</span>(33L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="programming1.html#cb50-1" tabindex="-1"></a><span class="fu">class</span>(<span class="sc">-</span>1L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="programming1.html#cb52-1" tabindex="-1"></a><span class="fu">class</span>(0L)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>You might wonder why R has a separate data type for integers when numeric/double data types can also represent integers. The very techincal and boring answer is that integers consume less memory in your computer compared to the numeric or double data types. `<code>33 contains less information than 33.00</code>`. So, when dealing with very large datasets (in the millions) consisting exclusively of integers, using the integer data type can save substantial storage space.</p>
+<p>It’s unlikely that you will need to use integers over numeric/doubles for your own research, but its good to be aware of just in case.</p>
+</div>
+<div id="logical-otherwise-know-as-boolean" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Logical (otherwise know as Boolean)<a href="programming1.html#logical-otherwise-know-as-boolean" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Logical data type has two possible values: <strong><code>TRUE</code></strong> and <strong><code>FALSE</code></strong>. In programming, we frequently need to handle conditions and make decisions based on whether specific conditions are true or false. For instance, did a student pass the exam? Is a p-value below 0.05?</p>
+<p>The Logical data type in R allows us to represent and work with these true or false values.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="programming1.html#cb54-1" tabindex="-1"></a><span class="fu">class</span>(<span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="programming1.html#cb56-1" tabindex="-1"></a><span class="fu">class</span>(<span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<p>One important note is that it is case-sensitive, so typing any of the following will result in errors:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="programming1.html#cb58-1" tabindex="-1"></a><span class="fu">class</span>(True)   <span class="co"># Error: object &#39;True&#39; not found</span></span>
+<span id="cb58-2"><a href="programming1.html#cb58-2" tabindex="-1"></a><span class="fu">class</span>(False)  <span class="co"># Error: object &#39;False&#39; not found</span></span>
+<span id="cb58-3"><a href="programming1.html#cb58-3" tabindex="-1"></a><span class="fu">class</span>(true)   <span class="co"># Error: object &#39;true&#39; not found</span></span>
+<span id="cb58-4"><a href="programming1.html#cb58-4" tabindex="-1"></a><span class="fu">class</span>(false)  <span class="co"># Error: object &#39;false&#39; not found</span></span></code></pre></div>
+<p>The distinction between data types in programming is crucial because some operations are only applicable to specific data types. For example, mathematical operations like addition, subtraction, multiplication, and division are only meaningful for numeric and integer data types.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="programming1.html#cb59-1" tabindex="-1"></a><span class="fl">11.00</span> <span class="sc">+</span> <span class="fl">3.23</span> <span class="co">#will work</span></span>
+<span id="cb59-2"><a href="programming1.html#cb59-2" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="programming1.html#cb59-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">14.23</span></span>
+<span id="cb59-4"><a href="programming1.html#cb59-4" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="programming1.html#cb59-5" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="programming1.html#cb59-6" tabindex="-1"></a><span class="dv">11</span> <span class="sc">*</span> <span class="dv">10</span> <span class="co">#will work</span></span>
+<span id="cb59-7"><a href="programming1.html#cb59-7" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="programming1.html#cb59-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">120</span></span>
+<span id="cb59-9"><a href="programming1.html#cb59-9" tabindex="-1"></a></span>
+<span id="cb59-10"><a href="programming1.html#cb59-10" tabindex="-1"></a><span class="st">&quot;11&quot;</span> <span class="sc">+</span> <span class="dv">3</span> <span class="co"># gives error</span></span>
+<span id="cb59-11"><a href="programming1.html#cb59-11" tabindex="-1"></a></span>
+<span id="cb59-12"><a href="programming1.html#cb59-12" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">&quot;11&quot;</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">:</span> non<span class="sc">-</span>numeric argument to binary operator</span></code></pre></div>
+<p>This is an important consideration when debugging errors in R. It’s not uncommon to encounter datasets where a column that should be numeric is incorrectly saved as a character. If you intend to perform a statistical operation on such a column (e.g., calculating the mean), you would first need to convert it to the numeric data type using the <strong><code>as.numeric()</code></strong> function.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="programming1.html#cb60-1" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">&quot;22&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 22</code></pre>
+<p>The following functions enable you to convert one data type to another:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="programming1.html#cb62-1" tabindex="-1"></a><span class="fu">as.character</span>()  <span class="co"># Converts to character</span></span>
+<span id="cb62-2"><a href="programming1.html#cb62-2" tabindex="-1"></a><span class="fu">as.integer</span>()    <span class="co"># Converts to integer</span></span>
+<span id="cb62-3"><a href="programming1.html#cb62-3" tabindex="-1"></a><span class="fu">as.logical</span>()    <span class="co"># Converts to logical</span></span></code></pre></div>
+</div>
+<div id="exercises-1" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> Exercises<a href="programming1.html#exercises-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Have a look at each of the following pieces of code and guess what data type it is. Check whether you are correct by using the <code>class()</code> function.
+<ol style="list-style-type: decimal">
+<li><code>"Hello World!"</code></li>
+<li><code>43</code></li>
+<li><code>"42.34"</code></li>
+<li><code>FALSE</code></li>
+<li><code>44.4</code></li>
+</ol></li>
+<li>The following data types have been erroneously entered in R. Use the appropriate converting function to correct for it.
+<ol style="list-style-type: decimal">
+<li>Convert “42.34” from character to numeric.</li>
+<li>Convert “FALSE” from logical to character.</li>
+<li>Convert 2024 from numeric to string.</li>
+<li>Convert 1 from integer to logical (see what happens!). For bonus points, convert 0 from numerical to logical as well.</li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="variables" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Variables<a href="programming1.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Until now, the code we’ve used has been disposable; once you type it, you can only view its output. However, programming languages allow us to store information in objects called <strong><em>variables.</em></strong></p>
+<p>Variables are labels for pieces of information. Instead of running the same code to produce information each time, we can assign it to a variable. Let’s say I have a character object that contains my name. I can save that character object to a variable.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="programming1.html#cb63-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Ryan&quot;</span></span></code></pre></div>
+<p>To create a variable, we specify the variable’s name (<strong><code>name</code></strong>), use the assignment operator (<strong><code>&lt;-</code></strong>) to inform R that we’re storing information in <strong><code>name</code></strong>, and finally, provide the data (in this case, the string “Ryan”). Once we execute this code, every time R encounters the variable <strong><code>name</code></strong>, it will substitute it with “Ryan.”</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="programming1.html#cb64-1" tabindex="-1"></a><span class="fu">print</span>(name)</span></code></pre></div>
+<pre><code>## [1] &quot;Ryan&quot;</code></pre>
+<p>Some of you might have seen my email and thought, <em>“Wait a minute, isn’t your first name Brendan? You fraud!”</em> Before you grab your pitchforks, yes, you’re technically correct. Fortunately, we can reassign our variable labels to new information.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="programming1.html#cb66-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Brendan&quot;</span> <span class="co">#please don&#39;t call me this</span></span>
+<span id="cb66-2"><a href="programming1.html#cb66-2" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="programming1.html#cb66-3" tabindex="-1"></a><span class="fu">print</span>(name)</span></code></pre></div>
+<pre><code>## [1] &quot;Brendan&quot;</code></pre>
+<p>We can use variables to store information for each data types.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="programming1.html#cb68-1" tabindex="-1"></a>age <span class="ot">&lt;-</span> 30L</span>
+<span id="cb68-2"><a href="programming1.html#cb68-2" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="programming1.html#cb68-3" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="dv">175</span> <span class="co">#centimetre </span></span>
+<span id="cb68-4"><a href="programming1.html#cb68-4" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="programming1.html#cb68-5" tabindex="-1"></a>live_in_hot_country <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb68-6"><a href="programming1.html#cb68-6" tabindex="-1"></a></span>
+<span id="cb68-7"><a href="programming1.html#cb68-7" tabindex="-1"></a><span class="fu">print</span>(age)</span></code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="programming1.html#cb70-1" tabindex="-1"></a><span class="fu">print</span>(height)</span></code></pre></div>
+<pre><code>## [1] 175</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="programming1.html#cb72-1" tabindex="-1"></a><span class="fu">print</span>(live_in_hot_country)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="programming1.html#cb74-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;My name is&quot;</span>, name, <span class="st">&quot;I am&quot;</span>, age, <span class="st">&quot;years old and I am&quot;</span>, height, <span class="st">&quot;cm tall. It is&quot;</span>, live_in_hot_country, <span class="st">&quot;that I was born in a hot country&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;My name is Brendan I am 30 years old and I am 175 cm tall. It is FALSE that I was born in a hot country&quot;</code></pre>
+<p>We can use variables to perform calculations with their information. Suppose I have several variables representing my scores on five items measuring Extraversion (labeled <strong><code>extra1</code></strong> to <strong><code>extra5</code></strong>). I can use these variable names to calculate my total Extraversion score.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="programming1.html#cb76-1" tabindex="-1"></a>extra1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb76-2"><a href="programming1.html#cb76-2" tabindex="-1"></a>extra2 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb76-3"><a href="programming1.html#cb76-3" tabindex="-1"></a>extra3 <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb76-4"><a href="programming1.html#cb76-4" tabindex="-1"></a>extra4 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb76-5"><a href="programming1.html#cb76-5" tabindex="-1"></a>extra5 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb76-6"><a href="programming1.html#cb76-6" tabindex="-1"></a></span>
+<span id="cb76-7"><a href="programming1.html#cb76-7" tabindex="-1"></a>total_extra <span class="ot">&lt;-</span> extra1 <span class="sc">+</span> extra2 <span class="sc">+</span> extra3 <span class="sc">+</span> extra4 <span class="sc">+</span> extra5</span>
+<span id="cb76-8"><a href="programming1.html#cb76-8" tabindex="-1"></a></span>
+<span id="cb76-9"><a href="programming1.html#cb76-9" tabindex="-1"></a><span class="fu">print</span>(total_extra)</span></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="programming1.html#cb78-1" tabindex="-1"></a>mean_extra <span class="ot">&lt;-</span>  total_extra<span class="sc">/</span><span class="dv">5</span></span>
+<span id="cb78-2"><a href="programming1.html#cb78-2" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="programming1.html#cb78-3" tabindex="-1"></a><span class="fu">print</span>(mean_extra)</span></code></pre></div>
+<pre><code>## [1] 2.4</code></pre>
+<p>Variables are a powerful tool in programming, allowing us to create code that works across various situations.</p>
+<div id="whats-in-a-name-conventions-for-naming-variables" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> What’s in a name? (Conventions for Naming Variables)<a href="programming1.html#whats-in-a-name-conventions-for-naming-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are strict and recommended rules for naming variables that you should be aware of.</p>
+<p><strong>Strict Rules (Must follow to create a variable in R)</strong></p>
+<ul>
+<li><p>Variable names can only contain uppercase alphabetic characters A-Z, lowercase a-z, numeric characters 0-9, periods <strong><code>.</code></strong>, and underscores <strong><code>_</code></strong>.</p></li>
+<li><p>Variable names must begin with a letter or a period (e.g., <strong><code>1st_name</code></strong> or <strong><code>_1stname</code></strong> is incorrect, while <strong><code>first_name</code></strong> or <strong><code>.firstname</code></strong> is correct).</p></li>
+<li><p>Avoid using spaces in variable names (<strong><code>my name</code></strong> is not allowed; use either <strong><code>my_name</code></strong> or <strong><code>my.name</code></strong>).</p></li>
+<li><p>Variable names are case-sensitive (<strong><code>my_name</code></strong> is not the same as <strong><code>My_name</code></strong>).</p></li>
+<li><p>Variable names cannot include special words reserved by R (e.g., if, else, repeat, while, function, for, in, TRUE, FALSE). While you don’t need to memorize this list, it’s helpful to know if an error involving your variable name arises. With experience, you’ll develop an intuition for valid names.</p></li>
+</ul>
+<p><strong>Recommended Rules (Best practices for clean and readable code):</strong></p>
+<ul>
+<li><p>Choose informative variable names that clearly describe the information they represent. Variable names should be self-explanatory, aiding in code comprehension. For example, use names like “income,” “grades,” or “height” instead of ambiguous names like “money,” “performance,” or “cm.”</p></li>
+<li><p>Opt for short variable names when possible. Concise names such as <strong><code>dob</code></strong> (date of birth) or <strong><code>iq</code></strong> (intelligence quotient) are better than lengthy alternatives like <strong><code>date_of_birth</code></strong> or <strong><code>intelligence_quotient</code></strong>. Shorter names reduce the chances of typos and make the code more manageable.</p></li>
+<li><p>However, prioritize clarity over brevity. A longer but descriptive variable name, like <strong><code>total_exam_marks</code></strong>, is preferable to a cryptic acronym like <strong><code>tem</code></strong>.</p></li>
+<li><p>Avoid starting variable names with a capital letter. While technically allowed, it’s a standard convention in R to use lowercase letters for variable and function names. Starting a variable name with a capital letter may confuse other R users.</p></li>
+<li><p>Choose a consistent naming style and stick to it. There are three common styles for handling variables with multiple words:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>snake_case</strong>: Words are separated by underscores (e.g., <strong><code>my_age</code></strong>, <strong><code>my_name</code></strong>, <strong><code>my_height</code></strong>). This is the preferred style for this course as it aligns with other programming languages.</p></li>
+<li><p><strong>dot.notation</strong>: Words are separated by periods (e.g., <strong><code>my.age</code></strong>, <strong><code>my.name</code></strong>, <strong><code>my.height</code></strong>).</p></li>
+<li><p><strong>camelCase</strong>: Every word, except the first, is capitalized (e.g., <strong><code>myAge</code></strong>, <strong><code>myName</code></strong>, <strong><code>myHeight</code></strong>).</p></li>
+</ol></li>
+</ul>
+<p>For the purposes of this course, I recommend using <strong><code>snake_case</code></strong> to maintain consistency with my code. Feel free to choose your preferred style outside of this course, but always maintain consistency.</p>
+</div>
+<div id="exercises-2" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Exercises<a href="programming1.html#exercises-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Create a variable called <code>favourite_colour</code> and assign your favourite colour to this <code>favourite_colour</code>. What data type is this variable? Check it with <code>class()</code>.</p></li>
+<li><p>Create two numeric variables, <code>num1</code> and <code>num2</code>, and assign them any two different numeric values.</p></li>
+<li><p>Calculate the sum of <code>num1</code> and <code>num2</code> and store it in a new variable called <code>sum_result</code></p></li>
+<li><p>Print the value of <code>sum_result</code>.</p></li>
+<li><p>Create a variable named <code>height_cm</code> and assign it your height in centimeters (a numeric value).</p></li>
+<li><p>Create another variable named <code>height_m</code> and assign it the height in meters by dividing <code>height_cm</code> by 100.</p></li>
+<li><p>Print the value of <code>height_m.</code></p></li>
+</ol>
+</div>
+</div>
+<div id="data-structures" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Data Structures<a href="programming1.html#data-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>So, we’ve talked about the different types of data that we encounter in the world and how R classifies them. We’ve also discussed how we can store this type of data in variables. However, in data analysis, we rarely work with individual variables. Typically, we work with large collections of variables that have a particular order. For example, datasets are organized by rows and columns.</p>
+<p>This also holds true in R, which has several different types of <strong>data structures</strong> that organize and group together variables. Each data structure has specific rules and methods for creating or interacting with them. Today we are going to focus on the two main data structures we’ll use in this course: <strong><code>vectors</code></strong> and <strong><code>data frames</code></strong>.</p>
+<div id="vectors" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Vectors<a href="programming1.html#vectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The most basic and (probably) important data structure in R is <strong><em>vectors</em></strong>. You can think of vectors as a list of data in R that are of the same data type.</p>
+<p>For example, I could create a character vector with names of people in the class:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="programming1.html#cb80-1" tabindex="-1"></a>rintro_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Gerry&quot;</span>, <span class="st">&quot;Aoife&quot;</span>, <span class="st">&quot;Liam&quot;</span>, <span class="st">&quot;Eva&quot;</span>, <span class="st">&quot;Helena&quot;</span>, <span class="st">&quot;Ciara&quot;</span>, <span class="st">&quot;Niamh&quot;</span>, <span class="st">&quot;Owen&quot;</span>)</span>
+<span id="cb80-2"><a href="programming1.html#cb80-2" tabindex="-1"></a></span>
+<span id="cb80-3"><a href="programming1.html#cb80-3" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="programming1.html#cb80-4" tabindex="-1"></a><span class="fu">print</span>(rintro_names)</span></code></pre></div>
+<pre><code>## [1] &quot;Gerry&quot;  &quot;Aoife&quot;  &quot;Liam&quot;   &quot;Eva&quot;    &quot;Helena&quot; &quot;Ciara&quot;  &quot;Niamh&quot;  &quot;Owen&quot;</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="programming1.html#cb82-1" tabindex="-1"></a><span class="fu">is.vector</span>(rintro_names) </span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>And I can create a numeric vector with their (totally randomly generated!)<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="programming1.html#cb84-1" tabindex="-1"></a>rintro_marks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">69</span>, <span class="dv">65</span>, <span class="dv">80</span>, <span class="dv">77</span>, <span class="dv">86</span>, <span class="dv">88</span>, <span class="dv">92</span>, <span class="dv">71</span>)</span>
+<span id="cb84-2"><a href="programming1.html#cb84-2" tabindex="-1"></a></span>
+<span id="cb84-3"><a href="programming1.html#cb84-3" tabindex="-1"></a><span class="fu">print</span>(rintro_marks)</span></code></pre></div>
+<pre><code>## [1] 69 65 80 77 86 88 92 71</code></pre>
+<p>And I can create a logical vectors that describes whether or not they were satisfied with the course (again randomly generated!):</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="programming1.html#cb86-1" tabindex="-1"></a>rintro_satisfied <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>) </span>
+<span id="cb86-2"><a href="programming1.html#cb86-2" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="programming1.html#cb86-3" tabindex="-1"></a><span class="fu">print</span>(rintro_satisfied)</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE FALSE</code></pre>
+<p>Technically, we have been using vectors the entire class. Vectors can have as little as 1 piece of data:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="programming1.html#cb88-1" tabindex="-1"></a>instructor <span class="ot">&lt;-</span> <span class="st">&quot;Ryan/Brendan&quot;</span></span>
+<span id="cb88-2"><a href="programming1.html#cb88-2" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="programming1.html#cb88-3" tabindex="-1"></a><span class="fu">is.vector</span>(instructor)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>However, we can’t include multiple data types in the same vector. Going back to our numeric grades vector, look what happens when we try to mix in grades as characters:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="programming1.html#cb90-1" tabindex="-1"></a>rintro_grades <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">69</span>, <span class="dv">65</span>, <span class="dv">80</span>, <span class="dv">77</span>, <span class="dv">86</span>, <span class="dv">88</span>, <span class="st">&quot;A1&quot;</span>, <span class="dv">71</span>)</span>
+<span id="cb90-2"><a href="programming1.html#cb90-2" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="programming1.html#cb90-3" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="programming1.html#cb90-4" tabindex="-1"></a><span class="fu">print</span>(rintro_grades)</span></code></pre></div>
+<pre><code>## [1] &quot;69&quot; &quot;65&quot; &quot;80&quot; &quot;77&quot; &quot;86&quot; &quot;88&quot; &quot;A1&quot; &quot;71&quot;</code></pre>
+<p>R has converted every element within the <code>rintro_grades</code> vector into a character. If R sees an object that is a vector but sees that its elements belong to different data types, it will try to convert every element to one data type. This is a strict rule in R - a vector can only be created if every single element (i.e., thing) inside that vector is of the same data type.</p>
+<p>If we were to check the class of <code>rintro_marks</code> and <code>rintro_grades</code>, it will show us this conversion</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="programming1.html#cb92-1" tabindex="-1"></a><span class="fu">class</span>(rintro_marks) </span>
+<span id="cb92-2"><a href="programming1.html#cb92-2" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="programming1.html#cb92-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;numeric&quot;</span></span>
+<span id="cb92-4"><a href="programming1.html#cb92-4" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="programming1.html#cb92-5" tabindex="-1"></a></span>
+<span id="cb92-6"><a href="programming1.html#cb92-6" tabindex="-1"></a><span class="fu">class</span>(rintro_grades)</span>
+<span id="cb92-7"><a href="programming1.html#cb92-7" tabindex="-1"></a></span>
+<span id="cb92-8"><a href="programming1.html#cb92-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;character&quot;</span></span></code></pre></div>
+<p>Remember how I mentioned that you might download a dataset with a column that has numeric data but is actually recognized as characters in R? This is one scenario where that could happen. The person entering the data might have accidentally entered text into a cell within a data column. When R reads this column, it sees the text, and then R converts the entire column into characters.</p>
+<div id="working-with-vectors" class="section level4 hasAnchor" number="3.6.1.1">
+<h4><span class="header-section-number">3.6.1.1</span> Working with Vectors<a href="programming1.html#working-with-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can perform several types of operations on vectors to gain useful information.</p>
+<p><strong>Numeric and Integer Vectors</strong></p>
+<p>We can run functions on vectors. For example, we can run functions like <strong><code>mean()</code></strong>, <strong><code>median</code></strong>, or <strong><code>sd()</code></strong> to calculate descriptive statistics on numeric or integer-based vectors:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="programming1.html#cb93-1" tabindex="-1"></a><span class="fu">mean</span>(rintro_marks)</span></code></pre></div>
+<pre><code>## [1] 78.5</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="programming1.html#cb95-1" tabindex="-1"></a><span class="fu">median</span>(rintro_marks)</span></code></pre></div>
+<pre><code>## [1] 78.5</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="programming1.html#cb97-1" tabindex="-1"></a><span class="fu">sd</span>(rintro_marks)</span></code></pre></div>
+<pre><code>## [1] 9.724784</code></pre>
+<p>A useful feature is that I can sort my numeric and integer vectors based on their scores:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="programming1.html#cb99-1" tabindex="-1"></a><span class="fu">sort</span>(rintro_marks) <span class="co">#this will take the original vector and arrange from lowest to highest scores</span></span></code></pre></div>
+<pre><code>## [1] 65 69 71 77 80 86 88 92</code></pre>
+<p>The <strong><code>sort()</code></strong> function by default arranges from lowest to highest, but we can also tell it to arrange from highest to lowest.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="programming1.html#cb101-1" tabindex="-1"></a><span class="fu">sort</span>(rintro_marks, <span class="at">decreasing =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<pre><code>## [1] 92 88 86 80 77 71 69 65</code></pre>
+<p><strong>Character and Logical Vectors</strong></p>
+<p>We are more limited when it comes to operators with character and logical vectors. But we can use functions like <code>summary()</code> to describe properties of character or logical vectors.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="programming1.html#cb103-1" tabindex="-1"></a><span class="fu">summary</span>(rintro_names)</span></code></pre></div>
+<pre><code>##    Length     Class      Mode 
+##         8 character character</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="programming1.html#cb105-1" tabindex="-1"></a><span class="fu">summary</span>(rintro_satisfied)</span></code></pre></div>
+<pre><code>##    Mode   FALSE    TRUE 
+## logical       4       4</code></pre>
+<p>The <strong><code>summary()</code></strong> function tells me how many elements are in the character vector (there are six names), whereas it gives me a breakdown of results for the logical vector.</p>
+</div>
+<div id="vector-indexing-and-subsetting" class="section level4 hasAnchor" number="3.6.1.2">
+<h4><span class="header-section-number">3.6.1.2</span> Vector Indexing and Subsetting<a href="programming1.html#vector-indexing-and-subsetting" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A vector in R is like a list of items. To be more specific, vectors in R are actually <em>ordered</em> lists of items. Each item in that list will have a position (known as its index). When you create that list (i.e., vector), the order in which you input the items (elements) determines its position (index). So the first item is at index 1, the second at index 2, and so on. Think of it like numbering items in a shopping list:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-67"></span>
+<img src="img/03-index_numeric.png" alt="Indexing for Numeric Vector"  />
+<p class="caption">
+Figure 3.1: Indexing for Numeric Vector
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-68"></span>
+<img src="img/03-index-character.png" alt="Indexing for Character Vector"  />
+<p class="caption">
+Figure 3.2: Indexing for Character Vector
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-69"></span>
+<img src="img/03-index-logical.png" alt="Indexing for Logical Vector"  />
+<p class="caption">
+Figure 3.3: Indexing for Logical Vector
+</p>
+</div>
+<p>This property in vectors means we are capable of extracting specific items from a vector based on their position. If I wanted to extract the first item in my list, I can do this by using <strong><code>[]</code></strong> brackets:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="programming1.html#cb107-1" tabindex="-1"></a>rintro_names[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;Gerry&quot;</code></pre>
+<p>Similarly, I could extract the 3rd element.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="programming1.html#cb109-1" tabindex="-1"></a>rintro_marks[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 80</code></pre>
+<p>Or I could extract the last element.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="programming1.html#cb111-1" tabindex="-1"></a>rintro_satisfied[<span class="dv">8</span>]</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>This process is called subsetting. I am taking an original vector and taking a sub-portion of its original elements.</p>
+<p>I can ask R even to subset several elements from my vector based on their position. Let’s say I want to subset the 2nd, 4th, and 6th elements. I just need to use <strong><code>c()</code></strong> to tell R that I am subsetting several elements:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="programming1.html#cb113-1" tabindex="-1"></a>rintro_names[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot;Aoife&quot; &quot;Eva&quot;   &quot;Owen&quot;</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="programming1.html#cb115-1" tabindex="-1"></a>rintro_marks[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>)]</span></code></pre></div>
+<pre><code>## [1] 65 77 71</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="programming1.html#cb117-1" tabindex="-1"></a>rintro_satisfied[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>)]</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE</code></pre>
+<p>If the elements you are positioned right next to each other on a vector, you can use <strong><code>:</code></strong> as a shortcut:</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="programming1.html#cb119-1" tabindex="-1"></a>rintro_names[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)] <span class="co">#this will extract the elements in index 1, 2, 3, 4</span></span></code></pre></div>
+<pre><code>## [1] &quot;Gerry&quot; &quot;Aoife&quot; &quot;Liam&quot;  &quot;Eva&quot;</code></pre>
+<p>It’s important to know, however, that when you perform an operation on a vector or you subset it, it does not actually change the original vector. None of these following code will actually change rintro_marks.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="programming1.html#cb121-1" tabindex="-1"></a><span class="fu">sort</span>(rintro_marks, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb121-2"><a href="programming1.html#cb121-2" tabindex="-1"></a></span>
+<span id="cb121-3"><a href="programming1.html#cb121-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">91</span> <span class="dv">90</span> <span class="dv">89</span> <span class="dv">88</span> <span class="dv">87</span> <span class="dv">87</span></span>
+<span id="cb121-4"><a href="programming1.html#cb121-4" tabindex="-1"></a></span>
+<span id="cb121-5"><a href="programming1.html#cb121-5" tabindex="-1"></a><span class="fu">print</span>(rintro_marks)</span>
+<span id="cb121-6"><a href="programming1.html#cb121-6" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">69</span> <span class="dv">65</span> <span class="dv">80</span> <span class="dv">77</span> <span class="dv">86</span> <span class="dv">88</span> <span class="dv">92</span> <span class="dv">71</span></span>
+<span id="cb121-7"><a href="programming1.html#cb121-7" tabindex="-1"></a></span>
+<span id="cb121-8"><a href="programming1.html#cb121-8" tabindex="-1"></a>rintro_marks[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]</span>
+<span id="cb121-9"><a href="programming1.html#cb121-9" tabindex="-1"></a></span>
+<span id="cb121-10"><a href="programming1.html#cb121-10" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">87</span> <span class="dv">91</span> <span class="dv">87</span></span>
+<span id="cb121-11"><a href="programming1.html#cb121-11" tabindex="-1"></a></span>
+<span id="cb121-12"><a href="programming1.html#cb121-12" tabindex="-1"></a><span class="fu">print</span>(rintro_marks)</span>
+<span id="cb121-13"><a href="programming1.html#cb121-13" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">69</span> <span class="dv">65</span> <span class="dv">80</span> <span class="dv">77</span> <span class="dv">86</span> <span class="dv">88</span> <span class="dv">92</span> <span class="dv">71</span></span></code></pre></div>
+<p>You can see that neither the <strong><code>sort()</code></strong> function nor subsetting actually changed the original vector. They just outputted a result to the R console. If I wanted to actually save their results, then I would need to assign them to a variable label.</p>
+<p>Here’s how I would extract and save the top three exam marks:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="programming1.html#cb122-1" tabindex="-1"></a>marks_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(rintro_marks, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-2"><a href="programming1.html#cb122-2" tabindex="-1"></a></span>
+<span id="cb122-3"><a href="programming1.html#cb122-3" tabindex="-1"></a>marks_top <span class="ot">&lt;-</span> marks_sorted[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)]</span>
+<span id="cb122-4"><a href="programming1.html#cb122-4" tabindex="-1"></a></span>
+<span id="cb122-5"><a href="programming1.html#cb122-5" tabindex="-1"></a><span class="fu">print</span>(marks_top)</span></code></pre></div>
+<pre><code>## [1] 92 88 86</code></pre>
+</div>
+<div id="vectors---making-it-a-little-less-abstract." class="section level4 hasAnchor" number="3.6.1.3">
+<h4><span class="header-section-number">3.6.1.3</span> Vectors - making it a little less abstract.<a href="programming1.html#vectors---making-it-a-little-less-abstract." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>You might find the discussion of vectors, elements, and operations very abstract. I certainly did when I was learning R. While the list analogy is helpful, it only works for so long - there’s another data structure called <strong><code>lists</code></strong> (we’ll talk more about it next week). That confused me.</p>
+<p>But what helped me understand vectors was the realization that a vector is simply a “line of data.” Let’s say I was running a study and collected data on participants’ age. When I open the Excel file, there will be a column called “age” with all the ages of my participants. That column is a vector of data with the variable label “age.”</p>
+<p>Creating that vector is the equivalent of creating a column in Excel:</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="programming1.html#cb124-1" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">23</span>, <span class="dv">43</span>, <span class="dv">23</span>, <span class="dv">44</span>,<span class="dv">32</span>, <span class="dv">56</span>, <span class="dv">67</span>, <span class="dv">32</span>, <span class="dv">23</span>)</span></code></pre></div>
+<p><img src="img/03-column-vector.png" /><!-- --></p>
+<p>Similarly, rows are also lines of data going horizontally. If I add data to columns in Excel to a dataset, I am creating a new row (line) of data. In R, this is the equivalent of doing this:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="programming1.html#cb125-1" tabindex="-1"></a>p11 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">175</span>)</span></code></pre></div>
+<p><img src="img/03-row-vector.png" /><!-- --></p>
+<p>So whenever you think of a vector, just remember that it refers to a line of data that would either be a column or a row.</p>
+<p>So what happens when we combine different vectors (columns and rows) together? We create a <strong><code>data frame</code></strong>.</p>
+</div>
+</div>
+<div id="data-frames" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Data frames<a href="programming1.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A data frame is a rectangular data structure that is composed of rows and columns. A data frame in R is like a virtual table or a spreadsheet in Excel:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-83"></span>
+<img src="img/03-dataframes_vectors.png" alt="The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors"  />
+<p class="caption">
+Figure 3.4: The relationship between data frames and vectors. The different colours in the data frame indicate they are composed of independent vectors
+</p>
+</div>
+<p>Data frames are an excellent way to store and manage data in R because they can store different types of data (e.g., character, numeric, integer) all within the same structure. Let’s create such a data frame using the <strong><code>data.frame()</code></strong> function:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="programming1.html#cb126-1" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb126-2"><a href="programming1.html#cb126-2" tabindex="-1"></a>  <span class="at">Name =</span> <span class="fu">c</span>(<span class="st">&quot;Alice&quot;</span>, <span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Charlie&quot;</span>), <span class="co">#a character vector</span></span>
+<span id="cb126-3"><a href="programming1.html#cb126-3" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(25L, 30L, 22L), <span class="co">#an integer vector</span></span>
+<span id="cb126-4"><a href="programming1.html#cb126-4" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="fl">95.65</span>, <span class="fl">88.12</span>, <span class="fl">75.33</span>) <span class="co">#a numeric vector</span></span>
+<span id="cb126-5"><a href="programming1.html#cb126-5" tabindex="-1"></a>)</span>
+<span id="cb126-6"><a href="programming1.html#cb126-6" tabindex="-1"></a></span>
+<span id="cb126-7"><a href="programming1.html#cb126-7" tabindex="-1"></a>my_df</span></code></pre></div>
+<pre><code>##      Name Age Score
+## 1   Alice  25 95.65
+## 2     Bob  30 88.12
+## 3 Charlie  22 75.33</code></pre>
+<div id="selecting-data-from-a-data-frame" class="section level4 hasAnchor" number="3.6.2.1">
+<h4><span class="header-section-number">3.6.2.1</span> Selecting Data from a Data Frame<a href="programming1.html#selecting-data-from-a-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Once you have created or imported a data frame, you’ll often need to access it and perform various tasks and analyses. Let’s explore how to access data within a data frame effectively.</p>
+<div id="selecting-columns" class="section level5 hasAnchor" number="3.6.2.1.1">
+<h5><span class="header-section-number">3.6.2.1.1</span> Selecting Columns<a href="programming1.html#selecting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Columns in a data frame represent different variables or attributes of your data. Often in data analysis, we want to select a specific column and then perform analyses on it. So how can we individually select columns? Well, in a data frame, every column has a name, similar to how each column in an Excel spreadsheet has a header. These column names enable you to access and manipulate specific columns or variables within your data frame.</p>
+<p>We select columns based on their names via two tools:</p>
+<p>The <strong>$</strong> Notation: You can use a dollar sign ($) followed by the column name to select <strong>an individual column</strong> in a data frame. For example, let’s select the <strong><code>Name</code></strong> column in the <strong><code>my_df</code></strong> data frame:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="programming1.html#cb128-1" tabindex="-1"></a>my_df<span class="sc">$</span>Name</span></code></pre></div>
+<pre><code>## [1] &quot;Alice&quot;   &quot;Bob&quot;     &quot;Charlie&quot;</code></pre>
+<p><strong>Square Brackets</strong> <strong><code>[]</code></strong>: This is a similar approach to accessing elements from a vector. Inside the brackets, you can specify both the row and columns that you want to extract. The syntax for selecting rows and columns is: <strong><code>the dataframe[the rows we want, the columns we want]</code></strong>.</p>
+<p>So if we wanted to access the “Age” column of <strong><code>my_df</code></strong>, we could run the following code:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="programming1.html#cb130-1" tabindex="-1"></a>my_df[, <span class="st">&quot;Age&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] 25 30 22</code></pre>
+<p>You’ll notice that we left the “rows” part empty in the square brackets. This tells R “keep all the rows for this column.”</p>
+<p>We can also use this approach to access multiple columns using the <strong><code>c()</code></strong> function:</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="programming1.html#cb132-1" tabindex="-1"></a>my_df[, <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Score&quot;</span>)]</span></code></pre></div>
+<pre><code>##   Age Score
+## 1  25 95.65
+## 2  30 88.12
+## 3  22 75.33</code></pre>
+</div>
+<div id="selecting-rows" class="section level5 hasAnchor" number="3.6.2.1.2">
+<h5><span class="header-section-number">3.6.2.1.2</span> Selecting Rows<a href="programming1.html#selecting-rows" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Rows in a data frame represent individual observations or records. You can access rows using indexing, specifying the row number you want to retrieve, following the syntax: <strong><code>the dataframe[the rows we want, the columns we want]</code></strong>.</p>
+<p>To get the first row of your data frame (<strong><code>my_df</code></strong>), you can type the following:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="programming1.html#cb134-1" tabindex="-1"></a>my_df[<span class="dv">1</span>, ]</span></code></pre></div>
+<pre><code>##    Name Age Score
+## 1 Alice  25 95.65</code></pre>
+<p>This time I left the columns part blank; this tells R “please keep all the columns for each row.”</p>
+<p>To access the third row:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="programming1.html#cb136-1" tabindex="-1"></a>my_df[<span class="dv">3</span>, ]</span></code></pre></div>
+<pre><code>##      Name Age Score
+## 3 Charlie  22 75.33</code></pre>
+<p>If you want multiple rows, you can use the <strong><code>c()</code></strong> function to select multiple rows. Let’s select the 1st and 3rd rows:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="programming1.html#cb138-1" tabindex="-1"></a>my_df[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), ]</span></code></pre></div>
+<pre><code>##      Name Age Score
+## 1   Alice  25 95.65
+## 3 Charlie  22 75.33</code></pre>
+<p>If you wanted to select a range of rows, you can use the : operator:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="programming1.html#cb140-1" tabindex="-1"></a>my_df[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code></pre></div>
+<pre><code>##       Name Age Score
+## 2      Bob  30 88.12
+## 3  Charlie  22 75.33
+## NA    &lt;NA&gt;  NA    NA</code></pre>
+<p>These methods allow you to extract specific rows or subsets of rows from your data frame.</p>
+</div>
+<div id="selecting-rows-and-columns" class="section level5 hasAnchor" number="3.6.2.1.3">
+<h5><span class="header-section-number">3.6.2.1.3</span> Selecting Rows and Columns<a href="programming1.html#selecting-rows-and-columns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>We can also select both rows and columns using <strong><code>[]</code></strong> and our syntax: <strong><code>the dataframe[the rows we want, the columns we want]</code></strong>.</p>
+<p>For example, we could select the first and third rows for the <strong><code>Age</code></strong> and <strong><code>Score</code></strong> columns:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="programming1.html#cb142-1" tabindex="-1"></a>my_df[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Score&quot;</span>)]</span></code></pre></div>
+<pre><code>##   Age Score
+## 1  25 95.65
+## 3  22 75.33</code></pre>
+<p>Similar to when we indexed vectors, this won’t change the underlying data frame. To do that, we would need to assign the selection to a variable:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="programming1.html#cb144-1" tabindex="-1"></a>my_df2 <span class="ot">&lt;-</span> my_df[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Score&quot;</span>)]</span>
+<span id="cb144-2"><a href="programming1.html#cb144-2" tabindex="-1"></a></span>
+<span id="cb144-3"><a href="programming1.html#cb144-3" tabindex="-1"></a>my_df2</span></code></pre></div>
+<pre><code>##   Age Score
+## 1  25 95.65
+## 3  22 75.33</code></pre>
+</div>
+</div>
+<div id="adding-data-to-your-data-frame" class="section level4 hasAnchor" number="3.6.2.2">
+<h4><span class="header-section-number">3.6.2.2</span> Adding Data to your Data Frame<a href="programming1.html#adding-data-to-your-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="adding-columns" class="section level5 hasAnchor" number="3.6.2.2.1">
+<h5><span class="header-section-number">3.6.2.2.1</span> Adding Columns<a href="programming1.html#adding-columns" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>You may often need to add new information to your data frame. For example, we might be interested in investigating the effect of <strong><code>Gender</code></strong> on the <strong><code>Score</code></strong> variable. The syntax for creating a new data frame is very straightforward:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="programming1.html#cb146-1" tabindex="-1"></a>existing_df<span class="sc">$</span>NewColumn <span class="ot">&lt;-</span> <span class="fu">c</span>(Value1, Value2, Value3)</span></code></pre></div>
+<p>Using this syntax, let’s add a <strong><code>Gender</code></strong> column to our <strong><code>my_df</code></strong> dataframe:.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="programming1.html#cb147-1" tabindex="-1"></a>my_df<span class="sc">$</span>Gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Non-binary&quot;</span>, <span class="st">&quot;Male&quot;</span>)</span>
+<span id="cb147-2"><a href="programming1.html#cb147-2" tabindex="-1"></a></span>
+<span id="cb147-3"><a href="programming1.html#cb147-3" tabindex="-1"></a><span class="co">#let&#39;s see if we have successfully added a new column in</span></span>
+<span id="cb147-4"><a href="programming1.html#cb147-4" tabindex="-1"></a></span>
+<span id="cb147-5"><a href="programming1.html#cb147-5" tabindex="-1"></a>my_df</span></code></pre></div>
+<pre><code>##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12 Non-binary
+## 3 Charlie  22 75.33       Male</code></pre>
+<p>Let’s say I noticed I mixed up the genders, and that Bob is Male and Charlie is Non-Binary. Just like we can rewrite a variable, we can also rewrite a column using this approach:</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="programming1.html#cb149-1" tabindex="-1"></a>my_df<span class="sc">$</span>Gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Non-binary&quot;</span>)</span>
+<span id="cb149-2"><a href="programming1.html#cb149-2" tabindex="-1"></a></span>
+<span id="cb149-3"><a href="programming1.html#cb149-3" tabindex="-1"></a><span class="co">#let&#39;s see if we have successfully rewritten the Gender Column</span></span>
+<span id="cb149-4"><a href="programming1.html#cb149-4" tabindex="-1"></a></span>
+<span id="cb149-5"><a href="programming1.html#cb149-5" tabindex="-1"></a>my_df</span></code></pre></div>
+<pre><code>##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary</code></pre>
+</div>
+<div id="adding-rows" class="section level5 hasAnchor" number="3.6.2.2.2">
+<h5><span class="header-section-number">3.6.2.2.2</span> Adding Rows<a href="programming1.html#adding-rows" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>What about if we recruited more participants and wanted to add them to our data frame (it is pretty small at the moment!)? This is slightly more complicated, especially when we are dealing with data frames where each column (vector) is of a different data type.</p>
+<p>What we need to do is actually create a new data frame that has the same columns as our original data frame. This new data frame will contain the new row(s) we want to add.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="programming1.html#cb151-1" tabindex="-1"></a>new_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">Age =</span> <span class="dv">30</span>, <span class="at">Score =</span> <span class="fl">77.34</span>, <span class="at">Gender =</span> <span class="st">&quot;Male&quot;</span>)</span></code></pre></div>
+<p>Then we can use the <strong><code>rbind()</code></strong> function to add the new row to your original data frame. <strong><code>rbind</code></strong> takes in two data frames and combines them together. The syntax is as follows:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="programming1.html#cb152-1" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(my_df, new_row)</span>
+<span id="cb152-2"><a href="programming1.html#cb152-2" tabindex="-1"></a></span>
+<span id="cb152-3"><a href="programming1.html#cb152-3" tabindex="-1"></a>my_df</span></code></pre></div>
+<pre><code>##      Name Age Score     Gender
+## 1   Alice  25 95.65     Female
+## 2     Bob  30 88.12       Male
+## 3 Charlie  22 75.33 Non-binary
+## 4    John  30 77.34       Male</code></pre>
+</div>
+</div>
+</div>
+<div id="exercises-3" class="section level3 hasAnchor" number="3.6.3">
+<h3><span class="header-section-number">3.6.3</span> Exercises<a href="programming1.html#exercises-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Create one vector of each data type:</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a character vector called <code>friends</code> with the name of 3 of your friends.</p></li>
+<li><p>Create an integer vector called <code>years</code> that describes the amount of years you have been friends (if it’s less than 1 year, put 1).</p></li>
+<li><p>Create a numeric vector called <code>extra</code> with their extraversion scores (out of 5).</p></li>
+<li><p>Create a logical vector called <code>galway</code> that describes whether they live (<code>TRUE</code>) or don’t live (<code>FALSE</code>) in Galway.</p></li>
+<li><p>Once you have created each vector, check whether it is the correct data type using the <code>class()</code> function.</p></li>
+</ol></li>
+<li><p>Index the 2th, 4th, and 6th element for each of the following vectors.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="programming1.html#cb154-1" tabindex="-1"></a>vect1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Not this&quot;</span>, <span class="st">&quot;This&quot;</span>, <span class="st">&quot;Not This&quot;</span>, <span class="st">&quot;This&quot;</span>, <span class="st">&quot;Not This&quot;</span>, <span class="st">&quot;This&quot;</span>)</span>
+<span id="cb154-2"><a href="programming1.html#cb154-2" tabindex="-1"></a></span>
+<span id="cb154-3"><a href="programming1.html#cb154-3" tabindex="-1"></a>vect2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb154-4"><a href="programming1.html#cb154-4" tabindex="-1"></a></span>
+<span id="cb154-5"><a href="programming1.html#cb154-5" tabindex="-1"></a>vect3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>)</span></code></pre></div></li>
+<li><p>How could we extract and save the bottom 3 results from the <code>rintro_marks</code>vector? Bonus Points: Calculate the mean of both the top 3 marks and bottom 3 marks.</p></li>
+<li><p>Write code that adds a column to the <code>my_df</code> data frame called <code>Nationality</code>. The values for the column should be <code>"Irish"</code>, <code>"American"</code>, <code>"English"</code>, <code>"Irish"</code>.</p></li>
+<li><p>Check whether that Nationality column has been successfully added by using the `$` notation. The output should look like this.</p></li>
+</ol>
+<pre><code>## [1] &quot;English&quot;  &quot;American&quot; &quot;Irish&quot;    &quot;Irish&quot;</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>What code could you write that would take the `my_df` data frame and give you this output?</li>
+</ol>
+<pre><code>##      Name Age Nationality
+## 1   Alice  25     English
+## 3 Charlie  22       Irish</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Write code that adds a row to the <code>my_df</code> data frame with your information for each of the columns (e.g., my data would be: <code>"Ryan"</code>, <code>30L</code>, <code>100</code>, <code>"Male"</code>). The <code>score</code> variable is a fake exam, so give yourself whatever score you want!</li>
+</ol>
+</div>
+</div>
+<div id="summary-1" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Summary<a href="programming1.html#summary-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>That concludes this session. Well done, we did a lot of work today. We learned more about the relationship between the console and the script and how we need to be precise when writing commands. We introduced the different types of data that R stores and how those data types can be stored in single lines of data in vectors or combined together in a table in a <strong><code>data frame</code></strong>.</p>
+<p>Don’t feel like you need to have mastered or even remember all the material that we covered today. Even though these concepts are labeled as “basic,” that does not mean they are intuitive. It will take time for them to sink in, and that’s normal. We’ll drill these concepts a bit further next week. We’ll also learn how to import <strong><code>data frames</code></strong>, which will set us up nicely for working with the type of data sets we see in Psychological research.</p>
+</div>
+<div id="glossary-1" class="section level2 hasAnchor" number="3.8">
+<h2><span class="header-section-number">3.8</span> Glossary<a href="programming1.html#glossary-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This glossary defines key terms introduced in Chapter 3.</p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Assignment</td>
+<td>The process of assigning a value to a variable using the assignment operator (<code>&lt;-</code> or <code>=</code>).</td>
+</tr>
+<tr class="even">
+<td>Character</td>
+<td>A data type representing text or strings of characters.</td>
+</tr>
+<tr class="odd">
+<td>Data Frame</td>
+<td>A two-dimensional data structure in R that resembles a table with rows and columns. It can store mixed data types.</td>
+</tr>
+<tr class="even">
+<td>Data Type</td>
+<td>The classification of data values into categories, such as numeric, logical, integer, or character.</td>
+</tr>
+<tr class="odd">
+<td>Element</td>
+<td>An individual item or value within a data structure, such as a character in a vector.</td>
+</tr>
+<tr class="even">
+<td>Index</td>
+<td>A numerical position or identifier used to access elements within a vector or other data structures.</td>
+</tr>
+<tr class="odd">
+<td>Indexing</td>
+<td>The process of selecting specific elements from a data structure using their index values.</td>
+</tr>
+<tr class="even">
+<td>Integer</td>
+<td>A data type representing whole numbers without decimals.</td>
+</tr>
+<tr class="odd">
+<td>Logical</td>
+<td>A data type representing binary values (TRUE or FALSE), often used for conditions and logical operations.</td>
+</tr>
+<tr class="even">
+<td>Numeric</td>
+<td>A data type representing numeric values, including real numbers and decimals.</td>
+</tr>
+<tr class="odd">
+<td>Object</td>
+<td>A fundamental data structure in R that can store data or values. Objects can include vectors, data frames, and more.</td>
+</tr>
+<tr class="even">
+<td>Subsetting</td>
+<td>The technique of selecting a subset of elements from a data structure, such as a vector or data frame, based on specific criteria.</td>
+</tr>
+<tr class="odd">
+<td>Variable</td>
+<td>A named storage location in R that holds data or values. It can represent different types of information.</td>
+</tr>
+<tr class="even">
+<td>Vector</td>
+<td>A one-dimensional data structure in R that can hold multiple elements of the same data type.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="variable-name-table" class="section level2 hasAnchor" number="3.9">
+<h2><span class="header-section-number">3.9</span> Variable Name Table<a href="programming1.html#variable-name-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="14%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rule</th>
+<th>Type</th>
+<th>Incorrect Example</th>
+<th>Correct Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variable names can only contain uppercase alphabetic characters A-Z, lowercase a-z, numeric characters 0-9, periods ., and underscores _.</td>
+<td>Strict</td>
+<td>1st_name</td>
+<td>first_name</td>
+</tr>
+<tr class="even">
+<td>Variable names must begin with a letter or a period.</td>
+<td>Strict</td>
+<td>_1stname</td>
+<td>.firstname</td>
+</tr>
+<tr class="odd">
+<td>Avoid using spaces in variable names.</td>
+<td>Strict</td>
+<td>my name</td>
+<td>my_name</td>
+</tr>
+<tr class="even">
+<td>Variable names are case-sensitive.</td>
+<td>Strict</td>
+<td>my_name == my_Name</td>
+<td>my_Name == my_Name</td>
+</tr>
+<tr class="odd">
+<td>Variable names cannot include special words reserved by R.</td>
+<td>Strict</td>
+<td>print</td>
+<td>to_print</td>
+</tr>
+<tr class="even">
+<td>Choose informative variable names that clearly describe the information they represent.</td>
+<td>Recommended</td>
+<td>money</td>
+<td>income</td>
+</tr>
+<tr class="odd">
+<td>Opt for short variable names when possible.</td>
+<td>Recommended</td>
+<td>date_of_birth</td>
+<td>dob</td>
+</tr>
+<tr class="even">
+<td>Prioritize clarity over brevity.</td>
+<td>Recommended</td>
+<td>tem</td>
+<td>total_exam_marks</td>
+</tr>
+<tr class="odd">
+<td>Avoid starting variable names with a capital letter.</td>
+<td>Recommended</td>
+<td>FirstName</td>
+<td>firstName</td>
+</tr>
+<tr class="even">
+<td>Choose a consistent naming style and stick to it.</td>
+<td>Recommended</td>
+<td>myName, last_Name</td>
+<td>my_name, last_name or myName and lastName</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Including the “&gt;” is a pain when formatting this book, so I won’t include “&gt;” in examples of code from this point forward.<a href="programming1.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>I used the function <code>rnorm()</code> to generate these values. If you want to read more about this very handy function, type <code>?rnorm</code> into the console, or follow this <a href="https://www.statology.org/r-runif-vs-rnorm/">link</a>.<a href="programming1.html#fnref4" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjvanlissa/gitbook-demo/edit/master/03-programming-p1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["rintro_demo.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
