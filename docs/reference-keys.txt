@@ -249,3 +249,15 @@ summary-10
 independent-samples-apriori
 paired-samples-apriorio
 post-hoc-tests
+overview
+what-will-i-learn-in-r
+why-are-we-learning-r
+where-and-when-will-the-classes-take-place
+office-hours-r-support---ryan-donovan
+fig:unnamed-chunk-1
+fig:unnamed-chunk-7
+fig:unnamed-chunk-10
+fig:unnamed-chunk-14
+fig:unnamed-chunk-24
+fig:unnamed-chunk-25
+fig:unnamed-chunk-27
