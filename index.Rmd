@@ -21,7 +21,9 @@ editor_options:
 This is the textbook for the Advanced Research Methods module (PS6183).
 This textbook will describe how to use R programming language to import, clean, process, and visualize psychological data.
 No prior knowledge of R or any other programming language or statistical software is required to successfully complete this module.
-All textbook materials are used for educational purposes only and should only be shared within the University of Galway's School of Psychology.
+This textbook is still undergoing development and is not the final product.
+Consequently, all textbook materials are used for educational purposes only and should only be shared within the University of Galway's School of Psychology.
+Any issues or errors with the textbook should be reported to Ryan Donovan (ryan.donovan\@universityofgalway.ie).
 
 ## What will I learn in R?
 
